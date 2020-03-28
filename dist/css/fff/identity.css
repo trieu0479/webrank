@@ -1,0 +1,13 @@
+.topbar .top-navbar{
+    background: #2d2a52 !important;
+}
+.topbar .top-navbar .navbar-header:nth-child(2){
+    background: #2d2a52 !important;
+}
+.topbar .top-navbar .navbar-header a{
+    background: #2d2a52 !important;
+}
+
+.topbar .top-navbar .navbar-collapse .navbar-nav .nav-item.active {
+    background-color: #2d2a52;
+}

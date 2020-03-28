@@ -1,0 +1,171 @@
+.btn-clean i,
+.btn-clean {
+    border-color: #93a2dd solid 1px;
+    background: #fff;
+    color: #444!important;
+}
+.btn-clean:hover i,
+.btn-clean:hover{
+    color: #fff!important;
+    background: #666cfe;
+    transition: all 0.3s;
+}
+.fixWithSelectBox{
+    max-width: 120px!important;
+}
+.fixWithSelectBox1{ 
+    max-width: 50px!important;
+}
+.bg-keyword {
+     background: #edf1f5;
+    /* background: linear-gradient(to bottom right,#48486b,#131327); */
+}
+.dataTables_wrapper .dataTables_paginate{
+    justify-content: flex-end!important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    color: white !important;
+    border: 1px solid#1e1d2d !important;
+    background: #1e1d2d !important;;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+    background: #13131d !important;
+    border: 1px solid#1e1d2d !important;
+    color: white !important;
+}
+.dataTables_wrapper th{
+    text-align: left!important;
+}
+.customTabColor {
+    background: #343a40;
+    color: #fff !important;
+    line-height: 30px;
+}
+.customTabColor .nav-link strong{
+    color:#fff;
+}
+.customTabColor .active strong{
+    color:#4f5467;
+}
+.bg-danger{
+    color: #fff;
+    background: #5578eb!important;
+}
+.bg-warning{
+    color: #fff;
+    background: #fd397a!important;
+}
+.bg-success{
+    color: #fff;
+    background: #0abb87!important;
+}
+.bg-info{
+    color: #fff;
+    background: #5578eb!important;
+}
+.text-danger{
+    color:#fd397a!important
+}
+.text-warning{
+    color:#ffb822!important;
+}
+.text-success{
+    color:#0abb87!important
+}
+.text-info{
+    color:#5578eb!important
+}
+#getKeywordsSuggestion th strong{
+    font-size: 11px;
+}
+.dt-buttons{
+    float: left!important;
+    padding-top:0px;
+}
+.dt-buttons .buttons-excel{
+    display: inline-block!important;
+    margin-left:5px;
+    background-color:#fff !important;
+    border-radius: 5px!important;
+    border: 1px solid #e8ecfa!important;
+    color:#444;
+    font-weight: 500;
+    padding:7px 20px!important;
+}
+.dt-buttons .buttons-excel:hover{
+    color: #fff!important;
+    background: #666cfe!important;
+    transition: all 0.3s;
+}
+#getKeywordsSuggestion_filter label{
+    padding-top:15px;
+    max-width: 600px;
+    width: 600px;
+}
+#getKeywordsSuggestion_filter label input{
+    width:85%;
+}
+.resultDomain {
+    color:#1e1d2d;
+    font-size: 11px;
+}
+.table-striped tbody tr:nth-of-type(odd){
+    background-color: #fff;
+}
+.pointer{
+    cursor: pointer;
+}
+.keywordSearchBox .iptKeyword{
+    border-radius: 0.25rem!important;
+}
+.keywordSearchBox .selectNetwork{
+    width:80px!important;
+}
+.keywordSearchBox .dropdown-menu{
+    padding:0px!important;
+}
+.keywordSearchBox select,
+.keywordSearchBox input[type='text']{
+    height: 42px;
+}
+@media only screen and (max-width: 768px) {
+    .keywordSearchBox .input-group-append, 
+    .keywordSearchBox .input-group-prepend{
+        display: block;
+        width: 100%;
+    }
+    .keywordSearchBox input,
+    .keywordSearchBox select,
+    .keywordSearchBox button{
+        width:100%!important;
+    }
+    .keywordSearchBox .iptKeyword{
+        margin-left:0px!important;
+        
+    }
+    .keywordSearchBox .selectNetwork{
+        width:100%!important;
+        margin: 10px 0px 5px 0px!important;
+    }
+    .keywordSearchBox .fixWithSelectBox{
+        width:100%!important;
+        max-width: 100%!important;
+        
+        margin: 5px 0px 5px 0px!important;
+    }
+    .keywordSearchBox .btnSubmitKeyword{
+        width: 100%!important;
+        display: block;
+        margin-top:5px!important;
+    }
+    .fontsize-32 {
+        font-size: 22px;
+    }
+    .hiddenMobile{
+        display: none;
+    }
+    #getKeywordsSuggestion_wrapper{
+        overflow-x: auto;
+    }
+}

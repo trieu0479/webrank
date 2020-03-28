@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="dist/css/pages/pagespeed/pagespeed.css?<?=$version?>">  

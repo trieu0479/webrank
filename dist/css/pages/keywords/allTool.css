@@ -1,0 +1,112 @@
+
+#allTool ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0 -5px;
+  }
+  #allTool ul li{
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 5px 10px 5px;
+  }
+  #allTool ul li .fad:after{
+    color: #34a853;
+    transition: .2s all ease-in-out
+  }
+  #allTool ul li .fad:before{
+    color: #34a853;
+    transition: .2s all ease-in-out
+  }
+  #allTool ul li+li .fad:after{
+    color: #4285f4;
+    transition: .2s all ease-in-out
+  }
+  #allTool ul li+li .fad:before{
+    color: #4285f4;
+    transition: .2s all ease-in-out
+  }
+  #allTool ul+ul li .fad:after{
+    color: #fbbc05;
+    transition: .2s all ease-in-out
+  }
+  #allTool ul+ul li .fad:before{
+    color: #fbbc05;
+    transition: .2s all ease-in-out
+  }
+  #allTool ul+ul li+li .fad:after{
+    color: #ea4335;
+    transition: .2s all ease-in-out
+  }
+  #allTool ul+ul li+li .fad:before{
+    color: #ea4335;
+    transition: .2s all ease-in-out
+  }
+  #allTool ul li h3{
+    color: #333;
+    transition: .2s all ease-in-out;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+  }
+  #allTool ul li p{
+    color: #3333336b;
+    transition: .2s all ease-in-out
+  }
+  #allTool ul li a{
+    display: block;
+    height: 100%;
+    padding: 15px 10px; 
+    border-radius: 5px;
+    border: 1px solid #34a85347;
+    transition: .2s all ease-in-out
+  }
+  #allTool ul li+li a{
+    border: 1px solid #4285f447;
+  }
+  #allTool ul+ul li a{
+    border: 1px solid #fbbc0547;
+  }
+  #allTool ul+ul li+li a{
+    border: 1px solid #ea433547;
+  }
+  #allTool ul li a:hover{
+    background: #34a853;
+    box-shadow: 0 0 10px 0px #34a853;
+  }
+  #allTool ul li+li a:hover{
+    background: #4285f4;
+    box-shadow: 0 0 10px 0px #4285f4;
+  }
+  #allTool ul+ul li a:hover{
+    background: #fbbc05;
+    box-shadow: 0 0 10px 0px #fbbc05;
+  }
+  #allTool ul+ul li+li a:hover{
+    background: #ea4335;
+    box-shadow: 0 0 10px 0px #ea4335;
+  }
+  
+  #allTool ul li a:hover .fad:after{
+    color: #fff
+  }
+  #allTool ul li a:hover .fad:before{
+    color: #fff
+  }
+  #allTool ul li a:hover h3{
+    color: #fff
+  }
+  #allTool ul li a:hover p{
+    color: #fff
+  }
+  /* .allToolsImg{
+    border-radius: 50%;
+    padding-bottom: 20px;
+  } */
+  #allTool i{
+    font-size:45px;
+    padding-bottom: 5px;
+  }
+  

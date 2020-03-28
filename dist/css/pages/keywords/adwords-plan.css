@@ -1,0 +1,29 @@
+h1, h2, h3, h4, h5, h6, p {
+    margin-bottom: 0;
+}
+.page-content{
+    margin-left: 0 !important;
+}
+.header{
+    position: relative;
+}
+#index-congculapkehoach .header{
+    padding: 0 !important;
+}
+.mini-sidebar .page-wrapper{
+    padding-bottom: 0 !important;
+}
+#index-congculapkehoach .dataTables_paginate{
+    align-items: center !important
+}
+#index-congculapkehoach .card{
+    /* padding: 0; */
+    overflow: hidden;
+}
+#index-congculapkehoach .card-info span{
+    display: flex !important;
+    align-items: center !important;
+}
+#home .card {
+    margin-bottom: 0 !important;
+}

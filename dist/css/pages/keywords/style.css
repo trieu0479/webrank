@@ -1,0 +1,378 @@
+.dataTable .table-striped tbody tr:nth-of-type(odd) {
+    background: #f8f9fa;
+}
+
+.ps {
+    -ms-touch-action: auto;
+    touch-action: auto;
+    overflow: hidden !important;
+    -ms-overflow-style: none;
+}
+
+.flex-row {
+    -ms-flex-direction: row !important;
+    flex-direction: row !important;
+}
+
+.d-flex {
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+
+/* -----------------------footer------------------------------- */
+.footer {
+    position: absolute;
+    text-align: center;
+    bottom: -59px;
+}
+
+/* ------------------- page 2 + page 3 sem --------------------- */
+.alert-dark {
+    background: #c4d4dc00 !important;
+
+}
+
+.negative:before {
+    content: "\f175";
+    color: red !important;
+}
+
+/* .text-danger {
+    color:red!important;
+} */
+.arrow_compare {
+    font-size: 1rem !important;
+    /* color: red!important; */
+}
+
+span.positive:before {
+    content: "\f176";
+    color: green !important;
+}
+
+.table-bordered th {
+    border: .1px solid #e9ecef !important;
+}
+
+.btn-success-2 {
+    background-color: rgba(10, 187, 135, .1) !important;
+    color: #0abb87 !important;
+    border-color: transparent !important;
+    transition: all .2s linear !important;
+}
+
+.buttons-html5 {
+    width: 135px !important;
+    /* margin-bottom: 8px!important; */
+}
+
+.btn-rounded {
+    border-radius: 60px !important;
+    padding: 7px 18px !important;
+}
+
+/* ------border pagination co page 3 trong day lun----------- */
+a#KeywordAnalysisPaidTable_previous,
+div#KeywordAnalysisPaidTable_paginate a,
+a#KeywordAnalysisOrganicTable_previous,
+a#KeywordAnalysisOrganicTable_next,
+a#KeywordRecommendationsPhraseMatch_previous,
+a#KeywordRecommendationsPhraseMatch_next,
+a#KeywordRecommendationsRelated_previous,
+a#KeywordRecommendationsRelated_next,
+a#getLastKeywords_previous,
+a#getLastKeywords_next,
+a#getTopSearchKeywords_previous,
+a#getTopSearchKeywords_next,
+a#getLongTailKeyWords_previous,
+a#getLongTailKeyWords_next {
+    /* color: #6c757d;
+    pointer-events: none;
+    cursor: auto; */
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+#KeywordAnalysisOrganicTable_paginate span a {
+    /* color: #6c757d;
+    pointer-events: none;
+    cursor: auto; */
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    margin-left: -4px;
+}
+
+/* .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background:white!important;
+    color:black;
+} */
+#KeywordRecommendationsRelated_paginate span a,
+#KeywordRecommendationsPhraseMatch_paginate span a {
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+table.dataTable thead th,
+table.dataTable tfoot th {
+    font-weight: 500 !important;
+}
+
+#getLastKeywords_paginate span a,
+#getTopSearchKeywords_paginate span a,
+#getLongTailKeyWords_paginate span a {
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+a#getKeywordsSuggestionV1_previous,
+a#getKeywordsSuggestionV1_next,
+#getKeywordsSuggestionV1_paginate span a {
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.kt-iconbox__icon i {
+    font-size: 2.9em;
+    height: 60px;
+}
+
+/* ------------------- ###############page 2 sem --------------------- */
+th.sorting_disabled.font-10.border-top-0.border-bottom.text-muted {
+    height: 22px;
+}
+
+td {
+    height: 29px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #0984e3 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #0984e3 !important;
+}
+
+a {
+    color: #0984e3 !important;
+}
+
+/* /***************************************** */
+#tag_tren,
+#sem_tren,
+#seo_tren {
+    cursor: pointer;
+}
+
+/* .page-content {
+    /* margin-left: 5rem !important; */
+} */
+
+/* 
+=================================================================Reponsive=========================================
+===================================================================================================================
+=================================================================================================================== */
+@media screen and (max-width: 767px) {
+
+    .your_score {
+        margin-left: -160px;
+        line-height: 16px;
+        height: 40px;
+        width: 132px !important;
+    }
+
+    ._rating {
+        margin-left: -164px;
+        margin-top: -27px !important;
+    }
+
+    .page-content {
+        margin-left: 0rem !important;
+    }
+
+    .score_ratio {
+        margin-left: -1em !important;
+        margin-top: 15px;
+    }
+
+    div#getKeywordsSuggestionV1_2 {
+        height: 179px !important;
+        width: 140% !important;
+        margin: -9px -8px;
+    }
+
+    .pr_reponsive {
+        margin-bottom: 14px !important;
+    }
+
+    .text_top_chart_header {
+        margin-top: 2rem !important;
+        margin-left: 1rem !important;
+        font-size: 14px !important;
+    }
+
+    ._loc {
+        width: 35% !important;
+        height: 43px !important;
+        margin-left: 6px !important;
+        padding: 0px 10px !important;
+        margin-bottom: 10px !important;
+    }
+
+    #dokho__chart {
+        margin-top: -1rem;
+    }
+
+}
+
+
+@media screen and (min-width:768px) and (max-width:1024px) {
+    .page-content {
+        margin-left: 5rem !important;
+    }
+
+    .your_score {
+        margin-left: -118px;
+        line-height: 16px;
+        height: 40px;
+        width: 132px !important;
+    }
+
+    ._rating {
+        margin-left: -164px;
+        margin-top: -27px !important;
+    }
+
+    .score_ratio {
+        margin-left: 4em !important;
+        margin-top: 2rem !important;
+    }
+
+    .card__external-link {
+        margin-left: 9.6em !important;
+    }
+
+    #iconBackBtn_1 {
+        left: 0;
+        margin-right: 40rem !important;
+        width: 13% !important;
+
+    }
+
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+
+@media screen and (width: 768px) {
+    .card__external-link {
+        margin-left: 36em !important;
+    }
+}
+
+@media screen and (width: 320px) {
+    .card__external-link {
+        margin-left: 12em !important;
+    }
+}
+
+.dokho__chart {
+    font-size: 14px;
+    /* margin-left: 14.2em; */
+    text-align: center;
+    margin-top: -3em;
+
+}
+
+.hard_score_ {
+    font-size: 14px;
+}
+
+.text_top_chart_header {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    font-size: 16px;
+}
+
+.progress {
+    background: #dddddd5c;
+}
+
+#filter_dropdown>.my-select {
+    /* margin-left: 25px; */
+    /* width: 11.5rem; */
+    /* margin-top: 0rem; */
+}
+
+
+/* #filter2_dropdown>.my-select {
+    margin-left: 25px;
+    width: 6.5rem;
+    margin-top: 0rem;
+} */
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder {
+    color: #21b7c5;
+}
+
+button.btn.dropdown-toggle.btn-light.bs-placeholder {
+    height: 31px;
+    text-align: center;
+    padding: 0px 16px;
+}
+
+.inner.show {
+    max-height: 251.438px !important;
+}
+
+._loc {
+    width:104px;
+    height: 43px;
+    margin-left: -2px;
+    padding: 0px 10px;
+}
+
+#filter_dropdown {
+    margin-top: 1.5rem;
+    /* margin-left: 27rem; */
+}
+
+#filter2_dropdown {
+    margin-top: 1.5rem;
+}
+
+.BendmarksTool .backtop {
+    right: 27px;
+    bottom: 96px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    display: inline-table !important;
+}
+
+#iconBackBtn_1 {
+    left: 0;
+    /* margin-right: 70rem; */
+    width: 8%;
+    /* color: #065999!important; */
+}
+.bagPrimary:hover {
+    background: #5a79bc !important;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.bagDanger:hover {
+    background: #fd397a !important;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+.row:before {
+    display: table;
+    content: "";
+}

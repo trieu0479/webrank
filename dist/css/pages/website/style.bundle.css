@@ -1,0 +1,55 @@
+.btn.btn-label-success {
+    background-color: rgba(10,187,135,.1);
+    color: #0abb87;
+    cursor: text!important;
+}
+.btn.btn-label-primary {
+    background-color: rgba(88,103,221,.1);
+    color: #5867dd;
+    cursor: text!important;
+}
+.btn.btn-label-info {
+    background-color: rgba(85,120,235,.1);
+    color: #5578eb;
+    cursor: text!important;
+}
+.btn.btn-label-danger {
+    background-color: rgba(253,57,122,.1);
+    color: #fd397a;
+    cursor: text!important;
+}
+.btn.btn-label-warning {
+    background-color: rgba(255,184,34,.1);
+    color: #ffb822;
+    cursor: text!important;
+}
+.btn.btn-pill {
+    border-radius: 2rem;
+}
+.btn.btn-brand.btn-elevate {
+    -webkit-box-shadow: 0 4px 16px 0 rgba(93,120,255,.15);
+    box-shadow: 0 4px 16px 0 rgba(93,120,255,.15);
+}
+.btn.btn-icon.btn-circle {
+    border-radius: 50%;
+}
+.btn.btn-icon {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 0;
+}
+.btn.btn-icon {
+    height: 3rem;
+    width: 3rem;
+}
+.btn.btn-elevate {
+    -webkit-transition: all .3s ease 0s;
+    transition: all .3s ease 0s;
+}
