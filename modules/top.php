@@ -5,7 +5,7 @@
         <!-- ============================================================== -->
         <div class="navbar-header">
             <a class="navbar-brand" href="./index.php?userToken=<?=$userToken?>">
-                 <img width="40px" src="assets/images/icon/favicon-196x196.png">
+                 <img width="40px" src="<?=$rootURL?>/assets/images/icon/favicon-196x196.png">
             </a>
         </div>
         <!--mobile-->

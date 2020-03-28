@@ -1,6 +1,12 @@
 var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
-var domain = url.searchParams.get("domain");
-
+var domain = "";
+if (location.href.indexOf("/rank/") > 1){
+    var domainTmp = location.href.split("/");
+    domain = domainTmp[4];
+}else{
+    domain = url.searchParams.get("domain");
+}
+console.log(domain);
 const datatableLanguage = {
     searchPlaceholder: 'Nhập từ khóa',
     processing: 'Đang xử lý...',
@@ -44,6 +50,7 @@ const initDatatable = function(select, tableOptions) {
 $(document).ready(() => {
     window.localDomain = domain;
     window.createAWidgets = function createAWidgets(input) {
+        if (input.headerIcon == undefined) input.headerIcon = `<i class="text-primary fad fa-check-circle"></i>`;
         var html = `
             <div class="bg-white shadow-sm rounded">
                 <!-- widget header -->
@@ -70,6 +77,7 @@ $(document).ready(() => {
         return true;
     }
     window.createADataTable = function createATable(input) {
+        if (input.headerIcon == undefined) input.headerIcon = `<i class="text-primary fad fa-check-circle"></i>`;
         var html = `
             <div class="bg-white shadow-sm rounded">
                 <!-- widget header -->
