@@ -428,7 +428,7 @@ const adwordsMonthlyFullTrend = async(data, method) => {
 
                 myChart.setOption(option);
                 new ResizeSensor($(`#EstimateChart`), function() {
-                    chart.resize();
+                    myChart.resize();
                 });
 
                 $(`#myTabContent`).removeClass('is-loading');

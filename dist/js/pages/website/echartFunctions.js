@@ -326,7 +326,7 @@ const api = async (task, domain, reload = 0) => {
 
     try {
         return await $.ajax({
-            url: `//localapi.trazk.com/webdata/websiteapi.php?task=${task}&domain=${domain}&reload=${reload}`,
+            url: `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&userToken=${userToken}&reload=${reload}`,
             type: "GET"
         })
             .then(data => {
@@ -2323,7 +2323,7 @@ const getTrafficSocial = async (task, data, domain) => {
             let TotalDesktopTraffic = SearchTotal / VolumeTotal;
 
             $("#TotalSocialVisits").removeClass("is-loading");
-            $("#TotalSocialVisits").html(`Tổng ${numeral(SearchTotal).format("0,0")}`);
+            // $("#TotalSocialVisits").html(`Tổng ${numeral(SearchTotal).format("0,0")}`);
 
             // Tổng Số Lượt Truy Cập Xã Hội 
             $('.trafficSocial').html('').html(numeral(SearchTotal).format("0.0a"))
@@ -2479,7 +2479,8 @@ const getTrafficSocial = async (task, data, domain) => {
                 $.each(Volumes, (name, data) => {
                     dataChart.values.push(data[0]);
                 })
-
+                console.log(dataChart,'data');
+                
                 let ele = document.getElementById("getSocialVisits");
 
                 let myChart = echarts.init(ele, "light");

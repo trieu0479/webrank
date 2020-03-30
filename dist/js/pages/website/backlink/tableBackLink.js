@@ -50,7 +50,7 @@ $(document).ready(() => {
     initDatatable(
         'getDataContry', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/semrush.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
+                url: `https://localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
                     let dataContry = json.data.backlinksOverview.geodomains;
                     let columns = [];
@@ -114,7 +114,7 @@ $(document).ready(() => {
         'getDataZones',
         {
             ajax: {
-                url: `//localapi.trazk.com/webdata/semrush.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
                     let getDataZones = json.data.backlinksOverview.zones;
                     let columns = [];
@@ -152,6 +152,59 @@ $(document).ready(() => {
             columns: [
                 { title: 'TLD', data: data => `<div style="width:200px" class="text-left">.${data.contry.icon}</div>` },
                 { title: '<div class="text-right font-weight-500">Tên miền</div>', data: data => `<div class="text-right"><span class="pr-3">${numeral(data.contry.value / data.contry.total).format('0.0%')}</span><span class="text-info">${numeral(data.contry.value).format('0,0')}</span></div>` },
+            ],
+            "order": [1, 'desc'],
+            language,
+            info: false,
+            autoWidth: true,
+            searching: false,
+            scrollY: "260px",
+            scrollCollapse: true,
+            paging: false,
+            processing: true,
+            initComplete: function (settings, json) {
+                $(`.dataTables_scrollBody`).perfectScrollbar();
+                $(`.dataTables_scrollHeadInner`).attr('style', 'width:100% !important;padding-right:0;border-bottom: 1px solid #ddd');
+                $('.getDataContry .dataTables_empty').text("").addClass('empty-state');
+                $('.parent-getDataZones #DataTables_Table_1_processing').addClass('mt-n5');
+            }
+        }
+    )
+
+
+    initDatatable(
+        'topBackLinks',
+        {
+            ajax: {
+                url: `https://localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksDetail]=true&userToken=${userToken}`,
+                dataSrc: (json) => {
+                    let topBackLinks = json.data.backlinksDetail;
+                    console.log(topBackLinks);
+                    
+                    if (json && topBackLinks) {
+                        $(`#getDataZones_wrapper .dataTables_scrollHead table.dataTable`).addClass('d-block').removeClass('d-none');
+                        $(`#DataTables_Table_0_processing.dataTables_processing`).css('display', 'none').addClass('d-none')
+                        return topBackLinks
+                    }
+                    else {
+                        $('.topBackLinks thead').addClass('d-none')
+                        return topBackLinks;
+                    }
+
+                },
+            },
+            drawCallback: function (settings) {
+                $('.topBackLinks-container').removeClass('is-loading').unblock();
+                $('.topBackLinks').find('.fa-spin').removeClass('fa-spin');
+
+            },
+            columns: [
+                { title: 'Page AS', data: data => `<div style="width:200px" class="text-left">${data.response_code}</div>` },
+                { title: 'Source Page Title and URL', data: data => `<div class="text-right">${data.source_title}</div>
+                <div class="text-right">${data.source_url}</div>
+                ` },
+                {title: 'Ext Links', data:data=>`<div class="text-right">${data.external_link_num}</div>`},
+                {title: 'Ext Links', data:data=>`<div class="text-right">${data.external_link_num}</div>`}
             ],
             "order": [1, 'desc'],
             language,
