@@ -14,7 +14,7 @@
             </div>
             <div class="row">
                 <div class="col-12 col-md-4 pr-0">
-                    <div style="height:300px;">
+                    <div style="height:300px;" class="getWebsiteGeography-col-maptbale">
                         <table  class="table table-striped getWebsiteGeography-table"
                             style="width:100%;height:100%;"></table>
                     </div>

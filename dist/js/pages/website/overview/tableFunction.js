@@ -46,9 +46,9 @@ $(document).ready(() => {
                     dataSrc: json => {
                         // console.log(json);
                         if (!json.data || !json.data.data) {
+                            $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
                             return [];
                         } else {
-                            // console.log(json.data.data.filter(item => item.Country != null));
                             return json.data.data.filter(item => item.Country != null);
                         }
                     }
@@ -126,9 +126,11 @@ $(document).ready(() => {
                     url: `//localapi.trazk.com/keywords/keywords.php?task=keywordPlannerDomain&limit=20&domain=${localDomain}`,
                     dataSrc: (json) => {
                         if (json.data.keywords == null) {
-                            $('.table_getKeywords').addClass('d-none')
+                            $('.parent-getKeywords').html('').addClass('empty-state')
+                            return []
+                        } else {
+                            return json.data.keywords;
                         }
-                        return json.data.keywords;
 
                     },
                 },

@@ -41,8 +41,12 @@
                     <?php require_once(__DIR__."/modules/backlink.wighetBacklinkTypes.php")?>
                 </div>
 
+                <div class="col-12 col-lg-12">
+                    <div class="widget-topBackLinks"></div>
+                </div>
 
             </div>
+
 
         </div>
     </div>
