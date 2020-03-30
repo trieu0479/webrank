@@ -733,11 +733,13 @@ width: 100%;
     float: right!important;
 }
 
-#DataTables_Table_2_wrapper {
-    overflow: scroll;
-}
+
 
 @media screen and (max-width:1200px) {
+.parent-PublicSherTable #DataTables_Table_2_wrapper {
+    overflow: scroll;
+    white-space: nowrap;
+}    
 #PaidPageTable tbody tr td {
     white-space: nowrap;
     overflow: hidden;

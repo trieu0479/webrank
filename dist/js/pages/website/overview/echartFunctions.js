@@ -116,8 +116,6 @@ const getHeader = async data => {
         similarTags.map(tag => `<span><a href="./index.php?view=keywords&action=keywords-overview&keyword=${tag}"  data-type="keyword" class="changeURL" data-input="${tag}" class="text-muted"><i class="far fa-search"></i> ${tag}</a></span>`).join("")
     );
 
-    var metaTitle = " - xếp hạng " + numeral(similarCountryRank).format('0,0') + "/98,000 website tại Việt Nam";
-    updateMetaTitle(metaTitle);
 
     $(".similarHeader .similarRelatedAppsTitle").html(
         '<i class="far fa-mobile font-14"></i> Ứng dụng liên quan<br/><span class="font-12 text-muted">CH Play & AppStore</span>'
@@ -463,8 +461,6 @@ const api = async(task, domain, reload = 0) => {
 const estmatedWorth = async(task, data) => {
         if (data.status == "success") {
             $('.money-website-price').html(`${numeral(data.data).format('0,0')}<span>USD</span>`);
-            var giaWebsite = numeral(data.data).format('0,0') + " USD";
-            updateMetaTitle("Domain "+ domain_name + "được định giá "+giaWebsite + " ")
         }
     }
     //sử dung truy cập theo tháng
@@ -2415,7 +2411,7 @@ const getWebsiteGeography = async(task, data) => {
         };
         await $(`.${task}`).removeClass('is-loading');
         //* update v7*/
-        $.getJSON('assets/mapworld.geo.json', function(usaJson) {
+        $.getJSON(rootURL +'/assets/mapworld.geo.json', function(usaJson) {
             // console.log(usaJson)
             chart.hideLoading();
             echarts.registerMap('World', usaJson, {});

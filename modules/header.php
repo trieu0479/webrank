@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="utf-8">
@@ -32,6 +32,10 @@
 
 
     <title><?=$meta['title']?></title>
+    <meta property="og:title"              content="<?=$meta['title']?>" />
+    <meta property="og:description"        content="<?=$meta['description']?>" />
+    <meta property="og:image"              content="<?=$meta['image']?>" />
+
     <!-- Custom CSS -->
     <link href="<?=$rootURL?>/dist/css/font.min.css" rel="stylesheet">
     <link href="<?=$rootURL?>/dist/css/bootstrap/style.min.css" rel="stylesheet">
