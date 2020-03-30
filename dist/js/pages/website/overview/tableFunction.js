@@ -256,7 +256,7 @@ $(document).ready(() => {
                 },
                 {
                     title: 'Type',
-                    "data": data => `<div>${(data.nofollow == true) ? '<div class="bg-nofoll px-2 py-1 rounded-pill font-weight-bold">nofollow</div>' : '<div class="bg-foll px-2 py-1 rounded-pill font-weight-bold">follow</div>'}</div>`
+                    "data": data => `<div>${(data.nofollow == true) ? '<div class="bg-warning px-2 py-1 rounded-pill font-weight-bold">nofollow</div>' : '<div class="bg-info px-2 py-1 rounded-pill font-weight-bold">follow</div>'}</div>`
                 },
             ],
             language,
@@ -280,9 +280,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
-                    if (res.data.adwordsCompetitors) {
-                        console.log(res.data.adwordsCompetitors.length);
-
+                    if (res.data.adwordsCompetitors && res.data.adwordsCompetitors != '') {
                         let columns = [];
                         $.each(res.data.adwordsCompetitors, function(k, v) {
                             let output = {};
@@ -294,7 +292,7 @@ $(document).ready(() => {
                         })
                         return columns;
                     } else {
-                        $('.parent-getAdvertisingSearchDetail .dataTables_scrollBody').html('').addClass('empty-state')
+                        $('.parent-getAdvertisingSearchDetail').html('').addClass('empty-state')
                         return [];
                     }
                 },
@@ -338,7 +336,7 @@ $(document).ready(() => {
                 // $(".dataTables_scrollBody table.getAdvertisingSearchDetail thead").html('')
                 $(".getAdvertisingSearchDetail tbody tr td").css("padding", "15px 10px!important");
                 $(".getAdvertisingSearchDetail tbody tr td:first-child").attr("style", "width:60px!important");
-                $(".parent-getAdvertisingSearchDetail .dataTables_scrollBody ").attr("style", "height:325px!important");
+                // $(".parent-getAdvertisingSearchDetail .dataTables_scrollBody ").attr("style", "height:325px!important");
 
             }
         }
@@ -352,6 +350,7 @@ $(document).ready(() => {
                 dataSrc: (json) => {
                     $('.similarDates-organickeyno').html(`${moment(json.data.lastUpdate).format("DD-MM-YYYY")}`)
                     if (!json.data || !json.data.data) {
+                        $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state')
                         return [];
                     } else {
                         let website = json.data.website;
@@ -412,7 +411,7 @@ $(document).ready(() => {
                 $(`table.getOrganicKeywordsBrandedTable  tbody`).addClass('text-left')
                 $(`table.getOrganicKeywordsBrandedTable`).attr('style', 'width:100% !important')
                 $(`.dataTables_scrollHeadInner`).attr('style', 'width:100% !important;padding-right:0;')
-                $(`.parent-getOrganicKeywordsBrandedTable`).attr('style', 'height:295px!important')
+                    // $(`.parent-getOrganicKeywordsBrandedTable`).attr('style', 'height:295px!important')
             }
         }
     )

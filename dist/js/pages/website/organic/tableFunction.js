@@ -15,6 +15,7 @@ $(document).ready(() => {
             next: 'Tiếp theo'
         }
     };
+
     //init datatable
     const initDatatable = function(select, tableOptions) {
         const table = $(`.${select}`).DataTable(tableOptions);
@@ -41,7 +42,7 @@ $(document).ready(() => {
     initDatatable(
             'getOrganicKeywordsBrandedTable', {
                 ajax: {
-                    url: `//localapi.trazk.com/webdata/websiteapi.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}`,
+                    url: `//localapi.trazk.com/webdata/websiteapi.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
                         if (!json.data || !json.data.data) {
                             $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state').attr('style', 'height: 300px;')
@@ -106,7 +107,6 @@ $(document).ready(() => {
                     $(`table.getOrganicKeywordsBrandedTable`).attr('style', 'width:100% !important')
                     $(`.dataTables_scrollHeadInner`).attr('style', 'width:100% !important;padding-right:0;border-bottom: 1px solid #ddd')
                         // $(`.parent-getOrganicKeywordsBrandedTable .dataTables_scrollBody `).attr('style', 'height: 257px !important')
-
                 }
             }
         )
@@ -114,7 +114,7 @@ $(document).ready(() => {
     initDatatable(
         'getOrganicKeywordsNonBrandedTable', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/websiteapi.php?task=getOrganicKeywordsNonBrandedTable&domain=${localDomain}`,
+                url: `//localapi.trazk.com/webdata/websiteapi.php?task=getOrganicKeywordsNonBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
                     if (!json.data || !json.data.data) {
                         $('.parent-getOrganicKeywordsNonBrandedTable').html('').addClass('empty-state').attr('style', 'height: 292px;')
@@ -237,7 +237,7 @@ $(document).ready(() => {
                 url: `//localapi.trazk.com/webdata/v2.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.data);
-                    if (res.data.organicCompetitors) {
+                    if (res.data.organicCompetitors && res.data.organicCompetitors != '') {
                         let columns = [];
                         $.each(res.data.organicCompetitors, function(k, v) {
                             let output = {
@@ -248,6 +248,7 @@ $(document).ready(() => {
                             };
                             columns.push(output)
                         })
+                        console.log(columns);
                         return columns;
                     } else {
                         $('.parent-organicCompetitors').html('').addClass('empty-state').attr('style', 'height: 292px;')
@@ -261,11 +262,11 @@ $(document).ready(() => {
                 },
                 {
                     title: 'Từ khóa phổ biến',
-                    "data": "commonKeywords"
+                    "data": data => `<span class="badge  ${data.commonKeywords <= 5000 ? data.commonKeywords <= 3000 ? 'bg-success' : 'bg-warning' : 'bg-danger'}">${$.number(data.commonKeywords)}</span>`
                 },
                 {
                     title: 'Từ khóa SE',
-                    "data": "organicKeywords"
+                    "data": data => `<span class="badge  ${data.organicKeywords <= 5000 ? data.organicKeywords <= 3000 ? 'bg-success' : 'bg-warning' : 'bg-danger'}">${$.number(data.organicKeywords)}</span>`
                 },
                 {
                     title: 'Cạnh tranh',
