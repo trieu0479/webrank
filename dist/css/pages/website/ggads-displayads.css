@@ -733,6 +733,9 @@ width: 100%;
     float: right!important;
 }
 
+#DataTables_Table_2_wrapper {
+    overflow: scroll;
+}
 
 @media screen and (max-width:1200px) {
 #PaidPageTable tbody tr td {

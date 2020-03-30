@@ -428,7 +428,7 @@ const adwordsMonthlyFullTrend = async(data, method) => {
 
                 myChart.setOption(option);
                 new ResizeSensor($(`#EstimateChart`), function() {
-                    myChart.resize();
+                    chart.resize();
                 });
 
                 $(`#myTabContent`).removeClass('is-loading');
@@ -991,7 +991,7 @@ const CompetitorMapChart = async(data, method) => {
                 }
             };
             new ResizeSensor($(`.CompetitorMapChart`), function() {
-                myChart.resize();
+                chart.resize();
             });
             // await $(`.similarReloadTask[data-task="CompetitorMapChart"]`).find('i').removeClass('fa-spin');
             await $(`.CompetitorMapChart`).removeClass('is-loading');
