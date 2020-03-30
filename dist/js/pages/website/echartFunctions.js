@@ -2612,7 +2612,10 @@ const getTrafficSourcesSocial = async (task, data) => {
             let {
                 data: traffic
             } = data.data;
-
+            
+            $(`.${task}`).css('height','235px')
+            $(`.widget-${task} .bg-white `).addClass('h-100')
+            $(`.widget-${task} .widgetBody `).addClass('pt-5 pb-4')
             // console.log(traffic);
 
             if (traffic != null) {

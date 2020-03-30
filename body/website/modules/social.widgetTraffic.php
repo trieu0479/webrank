@@ -1,18 +1,35 @@
-<div class="shadow-sm rounded">
-    <div class="d-flex">
-        <div class="p-2 w-100 bg-white">
-            <div class="text-capitalize font-14 font-weight-500 text-center">Backlinks 
-            </div>
-            <div id="totalBacklinks" class="font-weight-bold fontsize-32 text-center text-info"></div>
-        </div>
-        <div class="p-2 w-100 bg-white">
-            <div class="text-capitalize font-14 font-weight-500 text-center">Keywords</div>
-            <div id="keyWordBackLinks" class="font-weight-bold fontsize-32 text-center text-info"></div>
-        </div>
-        <div class="p-2 w-100 bg-white">
-            <div class="text-capitalize font-14 font-weight-500 text-center">Monthly Visits</div>
-            <div id="trafficBackLinks" class="font-weight-bold fontsize-32 text-center text-info"></div>
+<div class="row ggAdsOverview">                
+                   
+<div class="col-12 col-lg-4 vc ">
+<div class="text-center bg-white p-3 align-items-center rounded">
+    <div class="pt-5 pb-5">
+        <div class="fontsize-14 ">Traffic</div>
+        <div class="font-weight-bold text-danger fontsize-44">$42.2k<span>USD</span></div>
+    </div>
+</div>
+</div> 
+   
+
+
+
+<div class="col-12 col-lg-4 ">
+    <div class="bg-white p-3 align-items-center text-center rounded">
+        <div class="pt-5 pb-5">
+            <div class="fontsize-14 ">Social Channel</div>
+            <div class="font-weight-bold text-success  fontsize-44">66.7k</div>
         </div>
     </div>
+</div>
+
+<div class="col-12 col-lg-4">
+<div class="bg-white p-3 align-items-center text-center rounded">
+    <div class="pt-5 pb-5">
+        <div class="fontsize-14 ">Keywords</div>
+        <div class="font-weight-bold text-info fontsize-44">8k</div>
+    </div>
+</div>
+</div>
+
+
 
 </div>

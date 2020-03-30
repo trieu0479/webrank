@@ -60,7 +60,7 @@
     <link href="<?=$rootURL?>/dist/css/new-reset.css?v=1.0" rel="stylesheet">
     <link href="<?=$rootURL?>/dist/css/fff/identity.css" rel="stylesheet">
     <script src="<?=$rootURL?>/assets/js/jquery.min.js"></script>
-
+    <link href="<?=$rootURL?>/dist/css/fff/reset.css?v=1.0" rel="stylesheet">
     <script src="<?=$rootURL?>/dist/js/default/controlGlobalValule.js"></script>
     <link rel="stylesheet" href="<?=$rootURL?>/dist/dist/js/pages/gridstack.min.css"/>
     <script type="text/javascript" src='<?=$rootURL?>/dist/dist/js/pages/gridstack.js'></script>
@@ -68,6 +68,7 @@
     <script type="text/javascript" src='<?=$rootURL?>/dist/dist/js/pages/jquery-ui.js'></script>
     <script src="<?=$rootURL?>/dist/js/jquery-3.4.1.min.js"></script>
     <link href="<?=$rootURL?>/dist/css/swiper.min.css" rel="stylesheet">
+    
     <link href="<?=$rootURL?>/dist/css/swiper.css" rel="stylesheet">
 
 <!-- -------------------------csss rieng cho gg ads va display ads----------------------------- -->
@@ -80,7 +81,7 @@
 <link href="<?=$rootURL?>/dist/css/pages/website/style.bundle.css" rel="stylesheet">
 <link href="<?=$rootURL?>/dist/css/pages/website/ggads-displayads.css" rel="stylesheet">
 
-<link href="<?=$rootURL?>/dist/css/fff/reset.css?v=1.0" rel="stylesheet">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
