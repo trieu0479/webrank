@@ -51,6 +51,7 @@ $(document).ready(() => {
 
 
             let { Data: newData } = json.data.data;
+            
             $(`#DataTables_Table_0_wrapper .dataTables_scrollHead table.dataTable`).addClass('d-block').removeClass('d-none')
             $(`#DataTables_Table_0_processing.dataTables_processing`).css('display', 'none').addClass('d-none')
             return newData.Records.filter(item => item.Page != "grid.upgrade")
@@ -106,7 +107,18 @@ $(document).ready(() => {
       }
     }
   )
+// Social Chanel
+$.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDetail&domain=${localDomain}`,function(res){
 
+  let socialChanel = res.data.data.Data.Records.filter(item => item.Page != "grid.upgrade")
+  let total = 0;
+  for (const key in socialChanel) {
+    total+=socialChanel[key].Visits
+  }
+  $('.socialChannel').html('').html(numeral(total).format('0,0a'))
+  console.log(numeral(total).format('0,0a'));
+  
+})
 
   // Quảng Cáo Khu Vực Tương Tự
 
@@ -362,6 +374,5 @@ $(document).ready(() => {
       console.log('khsdas');
     }
   })
-
   // Quảng Cáo Khu Vực Tương Tự
 })
