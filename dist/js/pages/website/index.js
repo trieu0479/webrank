@@ -63,9 +63,18 @@ $(document).ready(function () {
     </button>  
     </a>
     `;
+    list = `
+      <a href="?view=website&action=index">
+            <div id="" class="kt-widget6__item">
+            <span class="pr-2"><i class="fad fa-globe-asia text-info"></i></span>
+            <span>Toàn bộ</span>
+           </div>
+         </a>
+       `;
     $('.catalogPTMB').append(all)
     datawebsite.forEach((ele, index) => {
       // <a href="${ele.targetHref.replace("[userToken]", userToken)}">
+      
       list += `
        <a href="?view=website&action=index&name=${ele.name}">
              <div id="${ele.name}" class="kt-widget6__item">
@@ -122,7 +131,7 @@ $(document).ready(function () {
               var output = {};
               output.stt = stt;
               domainWithIcon = `
-                          <a href="?view=traffic-website&action=result&domain=${v.domain}">
+                          <a href="${rootURL}/rank/${v.domain}">
                           <img class='mr-2' src='https://www.google.com/s2/favicons?domain=${v.domain}'>
                           ${v.domain}
                           </a>
@@ -168,7 +177,7 @@ $(document).ready(function () {
             var output = {};
             output.stt = stt;
             domainWithIcon = `
-                          <a href="?view=traffic-website&action=result&domain=${v.domain}">
+                          <a href="${rootURL}/rank/${v.domain}">
                           <img class='mr-2' src='https://www.google.com/s2/favicons?domain=${v.domain}'>
                           ${v.domain}
                           </a>
@@ -208,6 +217,7 @@ $(document).ready(function () {
       },
     },
     drawCallback: function (settings) {
+      
       $.get("//localapi.trazk.com/webdata/websiteapicat.php?task=getCategories", function (res) {
         res.data.forEach(ele => {
           // console.log(ele.name)
@@ -218,7 +228,7 @@ $(document).ready(function () {
           })
         });
       })
-
+      
     },
     columns: [{
       title: "STT",
@@ -274,7 +284,7 @@ $(document).ready(function () {
       $(`#tablePTDT`).attr('style', 'margin-top:0!important')
         .find('thead').addClass('bg-primary-2')
         .find('th').each(function (i) {
-          $(this).addClass('text-dark text-left font-gg border-0 font-11 bg-primary-2')
+          $(this).addClass('text-white text-left font-gg border-0 font-12 bg-dark')
         });
       $('#tablePTDT_wrapper').attr('style', 'overflow: auto;')
       $('.dataTables_wrapper .dataTables_paginate').attr('style', 'margin-top: 0')
