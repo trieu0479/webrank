@@ -25,7 +25,7 @@
                                 <?php require_once(__DIR__."/modules/master.topbox.php")?>
                             </div>
 
-                            <div class="col-12 mx-auto mb-3 mt-3">
+                            <div class="col-12 mx-auto mb-3 mt-3 maxWidthPc-1280">
                                 <div class="row">
                                     <div class="col-12 col-md-2 col-lg-2 px-lg-2 px-md-0 px-0 px-md-2">
 
@@ -47,16 +47,16 @@
                                         </div>
 
                                         <!-- menu mobi -->
-                                        <div class="dropdown d-block d-md-none mb-3 position-relative">
-                                            <button class="btn bg-white dropdown-toggle w-100" type="button"
-                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false"> Danh mục
-                                            </button>
-                                            <ul class="dropdown-menu catalogPTMB w-100 p-0" style="max-height:300px;overflow-y: scroll;" 
-                                                aria-labelledby="dropdownMenuButton" x-placement="top-start">
-                                                
-                                            </ul>
-                                        </div>
+                                            <div class="dropdown d-block d-md-none mb-3 position-relative">
+                                                <button class="btn bg-white dropdown-toggle w-100" type="button"
+                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"> Danh mục
+                                                </button>
+                                                <ul class="dropdown-menu catalogPTMB w-100 p-0" style="max-height:300px;overflow-y: scroll;" 
+                                                    aria-labelledby="dropdownMenuButton" x-placement="top-start">
+                                                    
+                                                </ul>
+                                            </div>
 
 
                                     </div>

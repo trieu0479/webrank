@@ -181,8 +181,8 @@ $(document).ready(function () {
             output.GlobalRank = numeral(v.globalRank).format("0,0");
             output.LocalRank = numeral(v.localRank).format("0,0");
             output.DesktopVsMobile = `
-                        <div class="d-flex no-block" style="width: 100%;justify-content: center; align-items: center;">
-                            <h6 class="mr-2">${Math.ceil(desktop)}%</h6>
+                        <div class="no-block" style="width: 100%;justify-content: center; align-items: center;">
+                            <h6 class="percentMobilePC">${Math.ceil(desktop)}%</h6>
                             <div class="progress" style="flex: 0 0 60px; height:5px">
                                 <div class="progress-bg-xanh" style="width:${desktop}%">
                                     <div class="progress-bar bg-xanh" aria-label="pro" role="progressbar" style="width:100%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
@@ -191,7 +191,7 @@ $(document).ready(function () {
                                     <div class="progress-bar bg-do" role="progressbar" style="width:100%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <h6 class="ml-2">${Math.ceil(mobile)}%</h6>
+                            
                         </div>
                       `;
             output.TotalTraffic = numeral(v.totalTraffic).format("0,0");
@@ -226,7 +226,7 @@ $(document).ready(function () {
     },
     {
       title: "Website",
-      "data": data => `<div class="font-gg text-dark font-weight-500" style="width: 120px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">${data.domain.replace("?view=traffic-website&action=result&domain", "?view=website&action=overview&domain")}</div>`
+      "data": data => `<div class="font-gg text-dark font-weight-500" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1;">${data.domain.replace("?view=traffic-website&action=result&domain", "?view=website&action=overview&domain")}</div>`
     },
     {
       title: "Danh Mục",
@@ -235,41 +235,40 @@ $(document).ready(function () {
       }
     },
     {
-      title: "Xếp hàng toàn cầu",
+      title: "Hạng thế giới ",
       "data": "GlobalRank"
     },
     {
-      title: "Xếp hạng địa phương",
+      title: "Hạng VN",
       "data": "LocalRank"
     },
     {
       title: "PC vs Mobile",
-      "data": "DesktopVsMobile"
+      "data": "DesktopVsMobile",
+      width: '150',
     },
     {
-      title: "Tổng Traffic",
+      title: "Traffic",
       "data": data => `<div class="pl-3 ">${data.TotalTraffic}</div>`
     },
     {
-      title: `Traffic kiếm tiền <i class="fad fa-question-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Lưu lượng có thể kiếm tiền được"></i>`,
+      title: `Money Traffic <i class="fad fa-question-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Lưu lượng có thể kiếm tiền được"></i>`,
       "data": data => `<div>${data.TrafficMonetization}</div>`
     },
     {
       title: "GDN",
       "data": data => {
-        return (data.TrafficMonetization == 0) ? "<span class='px-3 py-1 text-white' style='background: #fd397a; border-radius: 5px;font-weight: 600; font-size: 12px;'>Không<span>" : "<span class='px-3 py-1 text-white' style='background: #0abb87; border-radius: 5px;font-weight: 600; font-size: 12px;'>Có<span>";
+        return (data.TrafficMonetization == 0) ? "<span class='px-3 py-1 text-white' style='background: #fd397a; border-radius: 5px;font-weight: 600; font-size: 12px;'>No<span>" : "<span class='px-3 py-1 text-white' style='background: #5867dd; border-radius: 5px;font-weight: 600; font-size: 12px;'>Yes<span>";
       }
     },
     ],
-    "ordering": true,
     language,
+    ordering:false,
     info: false,
-    autoWidth: true,
     rowId: 'trId',
     processing: true,
-    responsive: true,
     pageLength: 50,
-    "lengthChange": false,
+    lengthChange: false,
     initComplete: function (settings, json) {
       // $(`#dataTable_Topsite .dataTables_scrollBody`).addClass("border-0")
       $(`#tablePTDT`).attr('style', 'margin-top:0!important')
