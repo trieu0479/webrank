@@ -2761,49 +2761,6 @@ const getTrafficSourcesSocial = async (task, data) => {
 
 
                 await $(`.${task}`).removeClass('is-loading');
-                
-                new ResizeSensor($(`.getTrafficSourcesSocial`), function () {
-                    myChart.resize();
-                });
-
-                // new ResizeSensor($(`.getTrafficSourcesSocial`), function () {
-                //     myChart.resize();
-                //     setTimeout(function () {
-                //         myChart.dispatchAction({
-                //             type: 'highlight',
-                //             seriesIndex: 0,
-                //             dataIndex: 0
-                //         });
-    
-                //         myChart.on('mouseover', function (params) {
-                //             if (params.name == dataChart[0].name) {
-                //                 myChart.dispatchAction({
-                //                     type: 'highlight',
-                //                     seriesIndex: 0,
-                //                     dataIndex: 0
-                //                 });
-                //             } else {
-                //                 myChart.dispatchAction({
-                //                     type: 'downplay',
-                //                     seriesIndex: 0,
-                //                     dataIndex: 0
-                //                 });
-                //             }
-                //         });
-    
-                //         myChart.on('mouseout', function (params) {
-                //             myChart.dispatchAction({
-                //                 type: 'highlight',
-                //                 seriesIndex: 0,
-                //                 dataIndex: 0
-                //             });
-                //         });
-                //     }, 1000);
-                // });
-
-               
-
-                await $(`#${task}`).removeClass('is-loading');
                 await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
             } else {
                 $('#Parent-getTrafficDisplayAdvertisingAds').addClass('empty-state')
