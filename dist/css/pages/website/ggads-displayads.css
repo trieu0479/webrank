@@ -724,9 +724,14 @@ width: 100%;
     background: #666cfe!important;
     transition: all 0.3s;
 }
+.resize-dl {
+    display: flex;
+    margin: 5px 10px;
+}
 
-
-
+#DataTables_Table_2_paginate,#TopPaidKeyword_paginate,#MainCompetitor_paginate,#PaidPageTable_paginate {
+    float: right!important;
+}
 
 
 @media screen and (max-width:1200px) {

@@ -177,7 +177,9 @@ function compareNumbers(a, b) {
 }
 
 const adwordsMonthlyFullTrend = async(data, method) => {
-
+    $('.widget-PublicSherTable .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
+    <a class="similarReloadTask text-muted" data-task="PublicSherTable" href="javascript:;"><i class="fal fa-sync"></i></a>
+</div>`)
     if (data.status == "success") {
         if (data && data.data && data.data.adwordsMonthlyFullTrend) {
             var res = data.data.adwordsMonthlyFullTrend;
@@ -205,15 +207,19 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                 dataChart = dataChart.slice(28, 40);
                 let dataChart_1 = {
                     keys: [],
-                    values: [],
+                    values: [],                    
                     positionsTrend: []
                 }
                 dataChart.forEach(val => {
+                    let x;                    
                     dataChart_1.keys.push(val.keys)
                     dataChart_1.values.push(val.values);
-                    dataChart_1.positionsTrend.push(val.positionsTrend);
+                    dataChart_1.positionsTrend.push(val.positionsTrend);                   
+                     console.log(dataChart_1);
                 })
-                console.log('rr',dataChart_1)
+              console.log( dataChart_1);
+              
+               
                 let series = [{
                     name: name,
                     type: 'bar',
@@ -221,6 +227,14 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                     smooth: true,
                     areaStyle: {
                         color: masterColor
+                    },
+                    label: {
+                        show: name != "KeywordsChart" ? true:false,
+                        position: 'top',
+                        color: 'red',
+                        formatter: function (params) {                                                                                           
+                            return kFormatter(params.value)
+                        },
                     },
                     // symbol: "none",
                     symbolSize: 10,
@@ -244,9 +258,9 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                             show: true,
                             position: 'top',
                             color: 'red',
-                            // formatter: function (params) {                                    
-                            //     return numeral(params.value).format('0,0');
-                            // },
+                            formatter: function (params) {                                                                                           
+                                return kFormatter(params.value)
+                            },
                         },
                         data: dataChart_1.values
                     })
@@ -262,7 +276,7 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                         borderWidth: 1,
                         extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
                         formatter: params => {
-                            console.log('params', params);
+
                             let {
                                 name,
                                 value,
@@ -309,9 +323,9 @@ const adwordsMonthlyFullTrend = async(data, method) => {
 
                                             }
                                         })
-                                        console.log(top4);
-                                        console.log(top9);
-                                        console.log(total);
+                                        // console.log(top4);
+                                        // console.log(top9);
+                                        // console.log(total);
                                         content = `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
                                       <div class="text-dark pt-2">
                                       <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:rgb(250,187,50)"></span> Top 3  <span style="color:${color};" class="ml-4">${top3}</span> <br>
@@ -324,7 +338,7 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                                 })
                                 return content;
                             } else {
-                                console.log(seriesName);
+                                // console.log(seriesName);
                                 return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
                                 <div class="text-dark pt-2">
                                     ${ marker + " " + seriesName } <span style="color:${color};font-weight:bold">${numeral(value).format('0,0')}</span> 
@@ -471,7 +485,6 @@ const TopPaidKeyword = async(data, method) => {
                     let columns = [];
                     $.each(res, function(k, v) {
 
-                        console.log(v);
                         let output = {};
                         output.phrase = v.phrase;
                         output.position = v.position;
@@ -481,8 +494,6 @@ const TopPaidKeyword = async(data, method) => {
                         columns.push(output)
 
                     })
-
-                    console.log(columns);
                     return columns;
                 },
             },
@@ -752,7 +763,7 @@ const MainCompetitor = async(data, method) => {
                     var res = data.data.adwordsCompetitors;
                     let columns = [];
                     $.each(res, function(k, v) {
-                        console.log(v);
+                       
                         let output = {};
                         output.domain = v.domain;
                         output.competitionLvl = v.competitionLvl;
@@ -761,8 +772,6 @@ const MainCompetitor = async(data, method) => {
                         columns.push(output)
 
                     })
-
-                    console.log(columns);
                     return columns;
                 },
             },
@@ -845,7 +854,7 @@ const CompetitorMapChart = async(data, method) => {
                     obj.traffic = item.traffic
                     obj.commonKeywords = item.commonKeywords
                     myarr.push(obj)
-                    console.log(obj);
+                    
                 }
             })
             var filterArr = myarr.filter(function(myarr) {
@@ -1019,7 +1028,6 @@ const PaidPageTable = async(data, method) => {
                     let columns = [];
                     var stt = 1;
                     $.each(res, function(k, v) {
-                        console.log(v);
                         let output = {};
                         output.stt = stt;
                         output.url = v.url;

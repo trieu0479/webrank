@@ -112,7 +112,7 @@ $( document ).ready(function() {
     createADataTable(input);   
     
     var input = {};
-    input.headerTitle = "Bảng Hiển Thị Quảng Cáo";
+    input.headerTitle = "Trang Landing Page Quảng Cáo";
     input.headerTime = "12.2019 - 02.2020";
     input.widgetTask = "PublicSherTable";
     input.widgetContainer = "widget-PublicSherTable";
