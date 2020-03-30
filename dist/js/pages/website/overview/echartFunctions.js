@@ -347,9 +347,9 @@ const api = async(task, domain, reload = 0) => {
 
     if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail') {
         // taskname = task;
-        url = `//localapi.trazk.com/webdata/semrush.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}`
+        url = `//localapi.trazk.com/webdata/semrush.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
     } else {
-        url = `//localapi.trazk.com/webdata/websiteapi.php?task=${task}&domain=${domain}&reload=${reload}`
+        url = `//localapi.trazk.com/webdata/websiteapi.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`
     }
     try {
         return await $.ajax({
@@ -465,7 +465,7 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                 if (data.data.data.Data.AvgMonthVisits) {
                     TrafficAndEngagementOverviewMonthly = data.data.data.Data;
                 } else {
-                    TrafficAndEngagementOverviewMonthly = data.data.data.Data.Data[0];
+                    TrafficAndEngagementOverviewMonthly = data.data.data.Data;
                 }
                 let MonthlyVisits = numeral(TrafficAndEngagementOverviewMonthly.AvgMonthVisits).format("0,0");
                 let html = `
@@ -504,8 +504,8 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                 $(`.getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
 
             } else {
-                // // $(`#getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
-                // // $(`#getTrafficAndEngagementOverviewMonthly`).addClass('empty-state');
+                // $(`#getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
+                // $(`#getTrafficAndEngagementOverviewMonthly`).addClass('empty-state');
                 // await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
             }
         } else {
@@ -1866,8 +1866,11 @@ const getWebDemographicsAge = async(task, data) => {
 };
 // SỬ DỤNG NGUỒN KHÁCH HÀNG
 const getTrafficSourcesOverview = async(task, data) => {
+    console.log(data.data.haveData)
     $('.getTrafficSourcesOverview ').attr('style', 'min-height:300px')
     if (data.status == "success" && data.data.data) {
+        console.log("Ddddd");
+
         let {
             data: traffic
         } = data.data;
@@ -1892,7 +1895,7 @@ const getTrafficSourcesOverview = async(task, data) => {
             dataChart.push(obj);
             dataChartname.key.push(key);
         });
-        console.log(traffic.Social);
+        // console.log(traffic.Social);
         $('.precent-organicoverview').html(`${numeral((traffic.Social).toFixed(2)).format("0,0")}/${numeral(total).format("0,0")}`)
             // render chart
         let data_params_legend;
@@ -1970,12 +1973,12 @@ const getTrafficSourcesOverview = async(task, data) => {
         //* update v7*/
         await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
     } else {
-        $(`#${task}`).removeClass('is-loading').addClass('empty-state');;
+        $(`.${task}`).removeClass('is-loading').addClass('empty-state');
     }
 };
 // SỬ DỤNG
 const getWebDemographicsGender = async(task, data) => {
-    console.log(data);
+    // console.log(data);
     if (data.status == "success") {
         // console.log("ddd");
         let {
@@ -2117,8 +2120,6 @@ const getWebDemographicsGender = async(task, data) => {
 };
 // SỬ DỤNG
 const getDesktopVsMobileVisits = async(task, data) => {
-
-
     if (data.status == "success") {
         let {
             data: visits
@@ -2274,6 +2275,7 @@ const getDesktopVsMobileVisits = async(task, data) => {
 };
 // SỬ DỤNG
 const getSimilarSites = async(task, data) => {
+
     $(`.${task}`).addClass('row');
     $(`.${task}`).attr('style', 'min-height:300px !important');
     // console.log("sssss");
@@ -2293,7 +2295,7 @@ const getSimilarSites = async(task, data) => {
             $(`.${task}`).append('<div class="similarSites col-12 col-md-4"></div>')
         }
         var compareNode = $(`<span  data-domain="${site.Domain}" class="changeWebSite text-primary bg-info-2 rounded-pill px-2 font-10 align-self-center ml-auto text-uppercase">+ so sánh</span>`);
-        $(`<a title="${site.Domain}" class="d-flex align-items-center" href='?view=traffic-website&action=result&domain=${site.Domain}'">
+        $(`<a title="${site.Domain}" class="d-flex align-items-center" href='./index.php?view=website&action=overview&domain=${site.Domain}'">
             <img class="p-1 mr-2 border rounded bg-secondary" src="${site.Favicon}" />
             <span  data-type="website" data-input="${site.Domain}" >${site.Domain}</span>
         </a>`).appendTo(`.${task} .similarSites:last-child`)
@@ -2524,7 +2526,7 @@ const getDomainBackLinkDetail = async(task, data) => {
     }
     //done
 const getScrapedSearchAds = async(task, data) => {
-    console.log(data);
+    // console.log(data);
     if (data.status == "success") {
         var SearchAds = null;
         var domain = url.searchParams.get("domain");
@@ -3371,6 +3373,9 @@ const getMarketingMixOverview = async(task, data) => {
     // DISPLAY ADS
 const SampleAdsasImage = async(task, data) => {
     $('.footer--bt-view').remove()
+    if (data.data.bannerAds == "") {
+        $('.sample-image-ads').addClass('empty-state')
+    }
     data.data.bannerAds.forEach((val, index) => {
         if (index < 5) {
             $(".sample-image-ads").append(`<div class="box-all">
@@ -3391,6 +3396,9 @@ const SampleAdsasImage = async(task, data) => {
 }
 const SampleAdsasHTML = async(task, data) => {
     $('.footer--bt-view').remove()
+    if (data.data.htmlAds == '') {
+        $('.sample-html-ads').addClass('empty-state')
+    }
     data.data.htmlAds.forEach((val, index) => {
         if (index < 5) {
             $(".sample-html-ads").append(`<div class="box-all">
@@ -3412,6 +3420,9 @@ const SampleAdsasHTML = async(task, data) => {
 }
 const SampleAdsasText = async(task, data) => {
     $('.footer--bt-view').remove()
+    if (data.data.textAds == '') {
+        $('.sample-text-ads').addClass('empty-state')
+    }
     data.data.textAds.forEach((val, index) => {
         if (index < 5) {
             $(".sample-text-ads").append(` <div class="box-text-all">

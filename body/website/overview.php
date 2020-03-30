@@ -59,7 +59,7 @@
                             <div>Báo cáo Google Search Ads cung cấp thông tin mẫu quảng cáo, từ khóa, đối thủ cạnh tranh của website</div>
                         </div>
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a target="blank" class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0" href="./index.php?view=website&action=googleads&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
+                            <a  class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0" href="./index.php?view=website&action=organic&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@
                             <div>Báo cáo Google Search Ads cung cấp thông tin mẫu quảng cáo, từ khóa, đối thủ cạnh tranh của website</div>
                         </div>
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a target="blank" class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0" href="./index.php?view=website&action=googleads&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
+                            <a  class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0" href="./index.php?view=website&action=googleads&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
 
@@ -114,7 +114,7 @@
                             <div>Google Display Ads - hình thức quảng cáo hiển thị banner (hoặc text) lên các website khác</div>
                         </div>
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a target="blank" class="font-gg font-13 font-weight-500 bagDanger ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="https://ads.google.com/" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
+                            <a  class="font-gg font-13 font-weight-500 bagDanger ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="./index.php?view=website&action=displayads&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
                     <div class="row">
@@ -134,7 +134,7 @@
                             <div>Social Ads - ghi nhận quảng cáo từ các kênh Social như: facebook, youtube, linkedin ...</div>
                         </div>
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a target="blank" class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="https://ads.google.com/" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
+                            <a  class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="./index.php?view=website&action=social&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
                     <!-- SOCIAL -->
@@ -164,7 +164,7 @@
                             <div>Backlink - báo cáo link từ website khác trỏ về website của bạn</div>
                         </div>
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a target="blank" class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="https://ads.google.com/" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
+                            <a  class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="./index.php?view=website&action=backlink&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
                       <!-- backlink-->
@@ -200,11 +200,11 @@
             </div>
     </div>
 </div>
-<script src="<?=$ROOT?>/assets/js/wordcloud2.js"></script>
-<script src="<?=$ROOT?>/assets/js/ResizeSensor.js"></script>
-<script src="<?=$ROOT?>/dist/js/pages/my-function/init-function.js"></script>
+<script src="<?=$rootURL?>/assets/js/wordcloud2.js"></script>
+<script src="<?=$rootURL?>/assets/js/ResizeSensor.js"></script>
+<script src="<?=$rootURL?>/dist/js/pages/my-function/init-function.js"></script>
 
-<script type="module" src="<?=$ROOT?>/dist/js/pages/website/master.js?v=<?=$version?>"></script>
-<script type="module" src="<?=$ROOT?>/dist/js/pages/website/overview/index.js?v=<?=$version?>"></script>
-<script type="module" src="<?=$ROOT?>/dist/js/pages/website/overview/tableFunction.js?v=<?=$version?>"></script>
+<script type="module" src="<?=$rootURL?>/dist/js/pages/website/master.js?v=<?=$version?>"></script>
+<script type="module" src="<?=$rootURL?>/dist/js/pages/website/overview/index.js?v=<?=$version?>"></script>
+<script type="module" src="<?=$rootURL?>/dist/js/pages/website/overview/tableFunction.js?v=<?=$version?>"></script>
  

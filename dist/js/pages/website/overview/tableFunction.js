@@ -140,7 +140,7 @@ $(document).ready(() => {
                         title: 'Từ khoá',
                         data: data => `
             <div class="d-flex no-block flex-row">
-              <a href="?view=keywords&action=keywords-overview&keyword=${data.keyword}&language=vn"  data-type="keyword" class="changeURL" data-input="${data.keyword}"><i class="child-hover far fa-search mr-1"></i> ${data.keyword}</a>
+              <a href="./index.php?view=keyword-planner&action=result&keywords=${data.keyword}&language=vn&country=vn&network=web"  data-type="keyword" class="changeURL" data-input="${data.keyword}"><i class="child-hover far fa-search mr-1"></i> ${data.keyword}</a>
               <div class="lichsuHienThi d-none d-md-flex sparkline ml-auto" data-sparkline="[${data.lichsutimkiemtrungbinh}]"></div>
             </div>`,
                         // width: '180px'
@@ -154,7 +154,7 @@ $(document).ready(() => {
                         title: 'Độ khó',
                         data: 'dokho',
                         render: (data) =>
-                            `<div class="round round-sm align-self-center ${data <= 70 ? data <= 30 ? 'round-success' : 'round-warning text-dark' : 'round-danger'}">${data ? data : 0}</a>`,
+                            `<div class="round round-sm align-self-center ${data <= 70 ? data <= 30 ? 'bg-success' : 'bg-war text-dark' : 'bg-warning'}">${data ? data : 0}</a>`,
                         width: '100px'
                     },
                     {
@@ -256,7 +256,7 @@ $(document).ready(() => {
                 },
                 {
                     title: 'Type',
-                    "data": data => `<div>${(data.nofollow == true) ? '<div class="bg-nofoll px-2 py-1 rounded-pill font-weight-bold">nofollow</div>' :'<div class="bg-foll px-2 py-1 rounded-pill font-weight-bold">follow</div>'}</div>`
+                    "data": data => `<div>${(data.nofollow == true) ? '<div class="bg-nofoll px-2 py-1 rounded-pill font-weight-bold">nofollow</div>' : '<div class="bg-foll px-2 py-1 rounded-pill font-weight-bold">follow</div>'}</div>`
                 },
             ],
             language,
@@ -280,23 +280,29 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
-                    // var res = data.data.adwordsCompetitors;
-                    let columns = [];
-                    $.each(res.data.adwordsCompetitors, function(k, v) {
-                        let output = {};
-                        output.domain = v.domain;
-                        output.competitionLvl = v.competitionLvl;
-                        output.commonKeywords = v.commonKeywords;
-                        output.adwordsKeywords = v.adwordsKeywords;
-                        columns.push(output)
-                    })
-                    return columns;
+                    if (res.data.adwordsCompetitors) {
+                        console.log(res.data.adwordsCompetitors.length);
+
+                        let columns = [];
+                        $.each(res.data.adwordsCompetitors, function(k, v) {
+                            let output = {};
+                            output.domain = v.domain;
+                            output.competitionLvl = v.competitionLvl;
+                            output.commonKeywords = v.commonKeywords;
+                            output.adwordsKeywords = v.adwordsKeywords;
+                            columns.push(output)
+                        })
+                        return columns;
+                    } else {
+                        $('.parent-getAdvertisingSearchDetail .dataTables_scrollBody').html('').addClass('empty-state')
+                        return [];
+                    }
                 },
             },
             drawCallback: function(settings) {},
             columns: [{
                     title: "Competitor",
-                    "data": data => `<a href="${data.domain}"><div class="dot-table-a">${data.domain}</div></a>`,
+                    "data": data => `<a href="./index.php?view=website&action=overview&domain=${data.domain}"><div class="dot-table-a">${data.domain}</div></a>`,
                     class: 'text-left'
                 },
                 {
@@ -370,7 +376,7 @@ $(document).ready(() => {
                     title: 'Từ khoá',
                     data: data => {
                         const keyWork = data.SearchTerm.length > 15 ? data.SearchTerm.substring(0, 15) : data.SearchTerm;
-                        return `<div style="width:100px;word-wrap: break-word;"><a href="?view=keywords&action=keywords-overview&keyword=${keyWork}&language=vn"  data-type="keyword" class="changeURL" data-input="${data.SearchTerm}">${keyWork}</a></div>`
+                        return `<div style="width:100px;word-wrap: break-word;"><a href="./index.php?view=keyword-planner&action=result&keywords=${keyWork}&language=vn&country=vn&network=web"  data-type="keyword" class="changeURL" data-input="${data.SearchTerm}">${keyWork}</a></div>`
                     }
                 },
                 {

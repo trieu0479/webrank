@@ -55,7 +55,7 @@
                                                 <span class="d-none d-md-inline">Tỷ lệ thoát</span></a> </li>
                                         <li class="nav-item ">
 
-                                            <a class="similarReloadTask text-muted nav-link" data-task="getMarketingMixOverviewDaily"
+                                            <a style="border-bottom: 2px solid #fd397a;background: #fd397a14;" class="similarReloadTask text-muted nav-link" data-task="getMarketingMixOverviewDaily"
                                                 href="javascript:;"><i class="fal fa-sync"></i> Cập nhập</a>
                                     
                                         </li>
