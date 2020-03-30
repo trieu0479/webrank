@@ -70,7 +70,7 @@
                             <div class="precent-organicoverview bg-white shadow-sm text-center font-16 text-info font-weight-bold pb-4 d-none"></div>
                         </div>
                         <div class="col-12 col-lg-7">
-                            <div class="widget-getOrganicKeywordsBrandedTable"></div>
+                            <div style="height:100%" class="widget-getOrganicKeywordsBrandedTable"></div>
                         </div>
                     </div>
                    <!-- Organic -->
@@ -98,7 +98,7 @@
                                 <?php require_once(__DIR__ . "/modules/googleads.widgetgetScrapedSearchAds.php")?>               
                         </div>    
                         <div class="col-12 col-lg-6">
-                                <div class="widget-getAdvertisingSearchDetail"></div>               
+                                <div style="height:100%" class="widget-getAdvertisingSearchDetail"></div>               
                         </div>    
                     </div>
                     

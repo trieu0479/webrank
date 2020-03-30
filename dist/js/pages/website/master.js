@@ -1,9 +1,9 @@
 var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 var domain = "";
-if (location.href.indexOf("/rank/") > 1){
+if (location.href.indexOf("/rank/") > 1) {
     var domainTmp = location.href.split("/");
     domain = domainTmp[4];
-}else{
+} else {
     domain = url.searchParams.get("domain");
 }
 console.log(domain);
@@ -79,7 +79,7 @@ $(document).ready(() => {
     window.createADataTable = function createATable(input) {
         if (input.headerIcon == undefined) input.headerIcon = `<i class="text-primary fad fa-check-circle"></i>`;
         var html = `
-            <div class="bg-white shadow-sm rounded">
+            <div class="bg-white shadow-sm rounded" style="height:100%">
                 <!-- widget header -->
                 <div class="row border-bottom m-0 py-2 widgetHeader">
                     <div class="col-auto d-flex no-block align-items-center mx-1">${input.headerIcon}</div>

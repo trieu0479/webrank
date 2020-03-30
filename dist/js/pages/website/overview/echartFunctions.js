@@ -2295,41 +2295,50 @@ const getDesktopVsMobileVisits = async(task, data) => {
 };
 // SỬ DỤNG
 const getSimilarSites = async(task, data) => {
-
-    $(`.${task}`).addClass('row');
-    $(`.${task}`).attr('style', 'min-height:300px !important');
-    // console.log("sssss");
-    $(`.${task}`).html('');
-    let {
-        data: SimilarSites,
-        website: domain
-    } = data.data;
-    let domain2;
-    $.each(SimilarSites, (index, site) => {
-        let temp = {
-            Domain: site.Domain,
-            Favicon: site.Favicon
-        }
-        arrDomain.push(temp);
-        if ((index % 7) == 0) {
-            $(`.${task}`).append('<div class="similarSites col-12 col-md-4"></div>')
-        }
-        var compareNode = $(`<span  data-domain="${site.Domain}" class="changeWebSite text-primary bg-info-2 rounded-pill px-2 font-10 align-self-center ml-auto text-uppercase">+ so sánh</span>`);
-        $(`<a title="${site.Domain}" class="d-flex align-items-center" href='./index.php?view=website&action=overview&domain=${site.Domain}'">
+    if (data.status == 'success') {
+        if (data.data.data && data.data.haveData == true) {
+            $(`.${task}`).addClass('row');
+            $(`.${task}`).attr('style', 'min-height:300px !important');
+            // console.log("sssss");
+            $(`.${task}`).html('');
+            let {
+                data: SimilarSites,
+                website: domain
+            } = data.data;
+            let domain2;
+            $.each(SimilarSites, (index, site) => {
+                let temp = {
+                    Domain: site.Domain,
+                    Favicon: site.Favicon
+                }
+                arrDomain.push(temp);
+                if ((index % 7) == 0) {
+                    $(`.${task}`).append('<div class="similarSites col-12 col-md-4"></div>')
+                }
+                var compareNode = $(`<span  data-domain="${site.Domain}" class="changeWebSite text-primary bg-info-2 rounded-pill px-2 font-10 align-self-center ml-auto text-uppercase">+ so sánh</span>`);
+                $(`<a title="${site.Domain}" class="d-flex align-items-center" href='./index.php?view=website&action=overview&domain=${site.Domain}'">
             <img class="p-1 mr-2 border rounded bg-secondary" src="${site.Favicon}" />
             <span  data-type="website" data-input="${site.Domain}" >${site.Domain}</span>
         </a>`).appendTo(`.${task} .similarSites:last-child`)
-            .append(compareNode);
-        compareNode.click(function(e) {
-            e.preventDefault();
-            domain2 = $(this).data('domain');
-            if (domain_name && domain2) {
-                location.href = `?view=traffic-website&action=compare&domain1=${domain_name.toLowerCase()}&domain2=${domain2.toLowerCase()}`;
-            }
-        });
-    })
-    await $(`.${task}`).removeClass('is-loading');
-    await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+                    .append(compareNode);
+                compareNode.click(function(e) {
+                    e.preventDefault();
+                    domain2 = $(this).data('domain');
+                    if (domain_name && domain2) {
+                        location.href = `?view=traffic-website&action=compare&domain1=${domain_name.toLowerCase()}&domain2=${domain2.toLowerCase()}`;
+                    }
+                });
+            })
+            await $(`.${task}`).removeClass('is-loading');
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+        } else {
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+            await $(`.${task}`).removeClass('is-loading').addClass('empty-state');
+        }
+    } else {
+        console.log(`${task} failed`);
+    }
+
 }
 const getWebsiteGeography = async(task, data) => {
         // console.log(data);

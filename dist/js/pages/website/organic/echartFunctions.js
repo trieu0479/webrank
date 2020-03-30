@@ -496,9 +496,13 @@ const getSearchOrganicPaidOverview = async(task, data) => {
     let task2 = 'getSearchOrganicPaidOverviewpaid';
     // console.log(task2);
     if (data.status == "success") {
-        if (data.data.data == null) {
-            await $(`.${task}`).removeClass('is-loading').addClass('empty-state');
+        if (data.data.data == null || data.data.haveData == false) {
+            console.log("sssss");
+            let task = 'getSearchOrganicPaidOverviewpaid'
+            let task2 = 'getSearchOrganicPaidOverview'
             await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+            $(`#${task}`).removeClass('is-loading').addClass('empty-state').attr('style', 'height:100% !important');
+            $(`#${task2}`).removeClass('is-loading').addClass('empty-state');
         } else {
             let website = data.data.website;
             let Data = data.data.data;
@@ -1163,74 +1167,75 @@ function kFormatter(num) {
     return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
 }
 const getAdvertisingSearchDetail = async(task, data) => {
-    if (data.status == "success" && data.data.adwordsCompetitors || data.data.adwordsCompetitors != []) {
-        let data_traffic = [];
-        let series = [];
-        let myarrChartName = [];
-        data.data.adwordsCompetitors.forEach((v) => {
-            data_traffic.push(v.traffic)
-        })
-        data_traffic.sort(function(a, b) {
-            { return b - a }
-        });
-        data_traffic.length = 10;
-        const outputs = data.data.adwordsCompetitors.filter((element, indexOfElement) => {
-                for (let i = 0; i < data_traffic.length; i++) {
-                    if (element.traffic == data_traffic[i]) {
-                        return data.data.adwordsCompetitors
-                    }
-                }
+    if (data.status == "success") {
+        if (data.data.adwordsCompetitors != "" && data.data.adwordsCompetitors != null) {
+            let data_traffic = [];
+            let series = [];
+            let myarrChartName = [];
+            data.data.adwordsCompetitors.forEach((v) => {
+                data_traffic.push(v.traffic)
             })
-            // phan getCompetitorReportChart
-        $.each(outputs, (index, item) => {
-            myarrChartName.push(item.domain)
-        })
-        outputs.forEach((v, i) => {
-            let obj = {}
-            obj.name = v.domain,
-                obj.type = 'scatter',
-                obj.symbolSize = function(data) {
-                    return kFormatter(data[2]);
-                },
-                obj.emphasis = {
-                    label: {
-                        show: false,
-                        formatter: function(param) {
-                            return kFormatter(param.data[3]);
-                        },
+            data_traffic.sort(function(a, b) {
+                { return b - a }
+            });
+            data_traffic.length = 10;
+            const outputs = data.data.adwordsCompetitors.filter((element, indexOfElement) => {
+                    for (let i = 0; i < data_traffic.length; i++) {
+                        if (element.traffic == data_traffic[i]) {
+                            return data.data.adwordsCompetitors
+                        }
+                    }
+                })
+                // phan getCompetitorReportChart
+            $.each(outputs, (index, item) => {
+                myarrChartName.push(item.domain)
+            })
+            outputs.forEach((v, i) => {
+                let obj = {}
+                obj.name = v.domain,
+                    obj.type = 'scatter',
+                    obj.symbolSize = function(data) {
+                        return kFormatter(data[2]);
                     },
-                    top: '40%'
-                },
-                obj.itemStyle = {
-                    shadowBlur: 10,
-                    shadowColor: 'rgba(120, 36, 50, 0.5)',
-                    shadowOffsetY: 5,
-                    top: '40%'
-                },
-                obj.data = [
-                    [v.adwordsKeywords, v.traffic, v.commonKeywords, v.domain]
-                ]
+                    obj.emphasis = {
+                        label: {
+                            show: false,
+                            formatter: function(param) {
+                                return kFormatter(param.data[3]);
+                            },
+                        },
+                        top: '40%'
+                    },
+                    obj.itemStyle = {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(120, 36, 50, 0.5)',
+                        shadowOffsetY: 5,
+                        top: '40%'
+                    },
+                    obj.data = [
+                        [v.adwordsKeywords, v.traffic, v.commonKeywords, v.domain]
+                    ]
 
-            series.push(obj)
-        });
-        let option = {
-            color: customColors,
-            tooltip: {
-                trigger: "axis",
-                backgroundColor: 'rgb(255, 255, 255, 1)',
-                borderColor: 'rgb(101,155,250)',
-                borderWidth: 1,
-                extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                formatter: params => {
-                    let {
-                        name,
-                        value,
-                        seriesName,
-                        marker,
-                        color
-                    } = params[0];
-                    // name = moment(name).format('DD MMMM YYYY');
-                    return `
+                series.push(obj)
+            });
+            let option = {
+                color: customColors,
+                tooltip: {
+                    trigger: "axis",
+                    backgroundColor: 'rgb(255, 255, 255, 1)',
+                    borderColor: 'rgb(101,155,250)',
+                    borderWidth: 1,
+                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                    formatter: params => {
+                        let {
+                            name,
+                            value,
+                            seriesName,
+                            marker,
+                            color
+                        } = params[0];
+                        // name = moment(name).format('DD MMMM YYYY');
+                        return `
                         <div class="text-dark text-left">
                         <div class="text-dark  border-bottom pb-1">${ marker + " " + seriesName} <span style="color:${color};font-weight:bold;opacity:.8"></span> <br> </div>
                             ${ 'Keywords'} <span style="color:${color};font-weight:bold">${kFormatter(value[0])}</span> <br>
@@ -1238,57 +1243,65 @@ const getAdvertisingSearchDetail = async(task, data) => {
                             ${ 'Common Keywords'} <span style="color:${color};font-weight:bold">${kFormatter(value[2])}</span> <br>
                         </div> 
                         `;
-                }
-            },
-            xAxis: {
-                splitLine: {
-                    lineStyle: {
-                        type: 'category'
-                    },
-                    axisTick: {
-                        show: false
-                    },
+                    }
                 },
-                axisLabel: {
-                    formatter: (value, index) => (value = kFormatter(value)),
-                },
-            },
-            yAxis: {
-                splitLine: {
-                    lineStyle: {
-                        type: 'value'
+                xAxis: {
+                    splitLine: {
+                        lineStyle: {
+                            type: 'category'
+                        },
+                        axisTick: {
+                            show: false
+                        },
                     },
-                    axisTick: {
-                        show: false
+                    axisLabel: {
+                        formatter: (value, index) => (value = kFormatter(value)),
                     },
                 },
-                axisLabel: {
-                    formatter: (value, index) => (value = kFormatter(value)),
+                yAxis: {
+                    splitLine: {
+                        lineStyle: {
+                            type: 'value'
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                    },
+                    axisLabel: {
+                        formatter: (value, index) => (value = kFormatter(value)),
+                    },
+                    scale: true
                 },
-                scale: true
-            },
-            legend: {
-                left: 30,
-                data: myarrChartName,
-                width: 800
-            },
-            series: series
-        };
-        var containers = document.getElementsByClassName(task);
-        var charts = [];
-        for (var i = 0; i < containers.length; i++) {
-            var chart = echarts.init(containers[i]);
-            chart.setOption(option);
-            charts.push(chart);
-        }
-        window.onresize = function() {
-            for (var i = 0; i < charts.length; ++i) {
-                charts[i].resize();
+                legend: {
+                    left: 30,
+                    data: myarrChartName,
+                    width: 800
+                },
+                series: series
+            };
+            var containers = document.getElementsByClassName(task);
+            var charts = [];
+            for (var i = 0; i < containers.length; i++) {
+                var chart = echarts.init(containers[i]);
+                chart.setOption(option);
+                charts.push(chart);
             }
-        };
-        await $(`.${task}`).removeClass('is-loading');
-        await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+            window.onresize = function() {
+                for (var i = 0; i < charts.length; ++i) {
+                    charts[i].resize();
+                }
+            };
+            await $(`.${task}`).removeClass('is-loading');
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+        } else {
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+            await $(`.${task}`).removeClass('is-loading').addClass('empty-state');
+            console.log(`${task} failed`);
+        }
+
     } else {
+        console.log("sudfgvybsvuiyb");
+
         await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
         await $(`.${task}`).removeClass('is-loading').addClass('empty-state');
         console.log(`${task} failed`);
