@@ -2,15 +2,20 @@
 // import counterUp from '../../../../js/pages/keywords/counterup2/index.js';
 
 // const counter = document.querySelector('.counter');
-
-var domain = '';
+var domain = "";
+var domain_name = "";
+if (location.href.indexOf("/rank/") > 1){
+    var domainTmp = location.href.split("/");
+    domain_name = domainTmp[4];
+}else{
+    domain_name = url.searchParams.get("domain");
+}
 var arrDomain = [];
 var selectWebsite = "";
 
 // const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 
-var domain_name = url.searchParams.get("domain");
 $('body').on('click', '.btn-compare', function(event) {
     Swal.fire({
         title: 'Hãy nhập website để so sánh',
@@ -50,7 +55,12 @@ $('body').on('click', '.btn-compare', function(event) {
         }
     })
 })
+function updateMetaTitle(text){
+    var metaTitle = text + document.title;
+    document.title = metaTitle;
+    $('meta[name="og:title"]').attr("content", metaTitle);
 
+}
 const getHeader = async data => {
     // Get value Header  
     const {
@@ -106,9 +116,8 @@ const getHeader = async data => {
         similarTags.map(tag => `<span><a href="./index.php?view=keywords&action=keywords-overview&keyword=${tag}"  data-type="keyword" class="changeURL" data-input="${tag}" class="text-muted"><i class="far fa-search"></i> ${tag}</a></span>`).join("")
     );
 
-    var metaTitle = "Website " + similarDomain + " được xếp hạng " + numeral(similarCountryRank).format('0,0') + "/98.000 website tại Việt Nam";
-    document.title = metaTitle;
-    $('meta[name="og:title"]').attr("content", metaTitle);
+    var metaTitle = " - xếp hạng " + numeral(similarCountryRank).format('0,0') + "/98,000 website tại Việt Nam";
+    updateMetaTitle(metaTitle);
 
     $(".similarHeader .similarRelatedAppsTitle").html(
         '<i class="far fa-mobile font-14"></i> Ứng dụng liên quan<br/><span class="font-12 text-muted">CH Play & AppStore</span>'
@@ -453,7 +462,9 @@ const api = async(task, domain, reload = 0) => {
 };
 const estmatedWorth = async(task, data) => {
         if (data.status == "success") {
-            $('.money-website-price').html(`${numeral(data.data).format('0,0')}<span>USD</span>`)
+            $('.money-website-price').html(`${numeral(data.data).format('0,0')}<span>USD</span>`);
+            var giaWebsite = numeral(data.data).format('0,0') + " USD";
+            updateMetaTitle("Domain "+ domain_name + "được định giá "+giaWebsite + " ")
         }
     }
     //sử dung truy cập theo tháng
@@ -502,6 +513,15 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                 `;
                 $('.getTrafficAndEngagementOverviewMonthly').html(html)
                 $(`.getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
+
+                let AvgVisitDuration = numeral(TrafficAndEngagementOverviewMonthly.AvgVisitDuration).format("0:00:00");
+                let PagesperVisit = numeral(TrafficAndEngagementOverviewMonthly.PagesPerVisit).format("0.00");
+                let BounceRate = numeral(TrafficAndEngagementOverviewMonthly.BounceRate).format("00.00%");
+
+                
+                var newDescription = "Website " + data.data.website + " có lượng người cập hàng tháng vào khoảng " + MonthlyVisits + " visitors và thời gian truy cập trung bình: " + AvgVisitDuration + " giây. Tỉ lệ thoát trang (bounce rate) hiện là "+ BounceRate + "...";
+                $('meta[name="description"]').attr("content", newDescription);
+                $('meta[name="og:description"]').attr("content", newDescription);
 
             } else {
                 // $(`#getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
@@ -2275,41 +2295,94 @@ const getDesktopVsMobileVisits = async(task, data) => {
 };
 // SỬ DỤNG
 const getSimilarSites = async(task, data) => {
-
-    $(`.${task}`).addClass('row');
-    $(`.${task}`).attr('style', 'min-height:300px !important');
-    // console.log("sssss");
-    $(`.${task}`).html('');
-    let {
-        data: SimilarSites,
-        website: domain
-    } = data.data;
-    let domain2;
-    $.each(SimilarSites, (index, site) => {
-        let temp = {
-            Domain: site.Domain,
-            Favicon: site.Favicon
-        }
-        arrDomain.push(temp);
-        if ((index % 7) == 0) {
-            $(`.${task}`).append('<div class="similarSites col-12 col-md-4"></div>')
-        }
-        var compareNode = $(`<span  data-domain="${site.Domain}" class="changeWebSite text-primary bg-info-2 rounded-pill px-2 font-10 align-self-center ml-auto text-uppercase">+ so sánh</span>`);
-        $(`<a title="${site.Domain}" class="d-flex align-items-center" href='./index.php?view=website&action=overview&domain=${site.Domain}'">
+    if (data.status == 'success') {
+        if (data.data.data && data.data.haveData == true) {
+            $(`.${task}`).addClass('row');
+            $(`.${task}`).attr('style', 'min-height:300px !important');
+            // console.log("sssss");
+            $(`.${task}`).html('');
+            let {
+                data: SimilarSites,
+                website: domain
+            } = data.data;
+            let domain2;
+            $.each(SimilarSites, (index, site) => {
+                let temp = {
+                    Domain: site.Domain,
+                    Favicon: site.Favicon
+                }
+                arrDomain.push(temp);
+                if ((index % 7) == 0) {
+                    $(`.${task}`).append('<div class="similarSites col-12 col-md-4"></div>')
+                }
+                var compareNode = $(`<span  data-domain="${site.Domain}" class="changeWebSite text-primary bg-info-2 rounded-pill px-2 font-10 align-self-center ml-auto text-uppercase">+ so sánh</span>`);
+                $(`<a title="${site.Domain}" class="d-flex align-items-center" href='./index.php?view=website&action=overview&domain=${site.Domain}'">
             <img class="p-1 mr-2 border rounded bg-secondary" src="${site.Favicon}" />
             <span  data-type="website" data-input="${site.Domain}" >${site.Domain}</span>
         </a>`).appendTo(`.${task} .similarSites:last-child`)
-            .append(compareNode);
-        compareNode.click(function(e) {
-            e.preventDefault();
-            domain2 = $(this).data('domain');
-            if (domain_name && domain2) {
-                location.href = `?view=traffic-website&action=compare&domain1=${domain_name.toLowerCase()}&domain2=${domain2.toLowerCase()}`;
-            }
-        });
-    })
-    await $(`.${task}`).removeClass('is-loading');
-    await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+                    .append(compareNode);
+                compareNode.click(function(e) {
+                    e.preventDefault();
+                    domain2 = $(this).data('domain');
+                    // if (domain_name && domain2) {
+                    //     location.href = `?view=traffic-website&action=compare&domain1=${domain_name.toLowerCase()}&domain2=${domain2.toLowerCase()}`;
+                    // }
+                    Swal.fire({
+                        title: 'Hãy nhập website để so sánh',
+                        html: `<input id="swal-input1" class="swal2-input text-lowercase" value=${domain_name} placeholder="Nhập website của bạn">` +
+                            `<div class="text-white font-16 bg-dark m-auto shadow-sm" style="height: 60px; width: 60px; line-height: 60px;border-radius: 60px">VS</div>` +
+                            `<input id="swal-input2" value="${domain2}" class="swal2-input text-lowercase"  placeholder="Nhập website của đối thủ">`,
+                        focusConfirm: false,
+                        showCloseButton: true,
+                        confirmButtonText: 'So Sánh',
+                        width: 600,
+                        padding: '4em',
+                        onOpen: () => {
+                            $('#swal-input2').focus()
+                            $('#swal-input2').keypress(event => {
+                                if (event.which == 13) {
+                                    $('.swal2-confirm').click();
+                                }
+                            })
+                        },
+                        preConfirm: () => {
+                            if ($('#swal-input1').val() == "" || $('#swal-input2').val() == "") {
+                                Swal.showValidationMessage(`Vui lòng nhập đủ website`)
+                            } else {
+                                if ($('#swal-input1').val() == $('#swal-input2').val()) {
+                                    Swal.showValidationMessage(`Hai website không được trùng`)
+                                }
+                            }
+                            return [
+                                $('#swal-input1').val(),
+                                $('#swal-input2').val()
+                            ]
+                        }
+                    }).then((result) => {
+                        // console.log(result);
+                        if (result.value) {
+                            location.href = `?view=traffic-website&action=compare&domain1=${result.value[0].toLowerCase()}&domain2=${result.value[1].toLowerCase()}`;
+                        }
+                    })
+                });
+            })
+
+
+
+
+
+
+
+            await $(`.${task}`).removeClass('is-loading');
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+        } else {
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+            await $(`.${task}`).removeClass('is-loading').addClass('empty-state');
+        }
+    } else {
+        console.log(`${task} failed`);
+    }
+
 }
 const getWebsiteGeography = async(task, data) => {
         // console.log(data);

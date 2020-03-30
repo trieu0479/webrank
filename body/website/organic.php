@@ -49,13 +49,13 @@
                     <div class="widget-getSearchBrandedKeywords"></div>
                 </div>
                 <div class="col-12 col-lg-7">
-                    <div class="widget-getOrganicKeywordsBrandedTable"></div>
+                    <div style="height:100%" class="widget-getOrganicKeywordsBrandedTable"></div>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <div class="widget-getOrganicKeywordsNonBrandedTable"></div>
+                    <div style="height:100%" class="widget-getOrganicKeywordsNonBrandedTable"></div>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <div class="widget-organicCompetitors"></div>
+                    <div style="height:100%" class="widget-organicCompetitors"></div>
                 </div>
             </div>
             <div class="row">

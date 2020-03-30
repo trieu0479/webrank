@@ -14,9 +14,9 @@
                 <div class="text-capitalize font-weight-bold"><?= _("Mẫu Quảng Cáo") ?></div>
                 <div class="text-muted similarDates font-10">12.2019 - 02.2020</div>
             </div>
-            <!-- <div class="ml-auto d-flex no-block align-items-center pr-3">
-                <a class="similarReloadTask text-muted" data-task="" href="javascript:;"><i class="fal fa-sync"></i></a>
-            </div> -->
+            <div class="ml-auto d-flex no-block align-items-center pr-3">
+                <a class="similarReloadTask text-muted" data-task="SampleAds" href="javascript:;"><i class="fal fa-sync"></i></a>
+            </div>
         </div>
         <div class="col-12 col-lg-12 bg-white shadow-sm rounded w-100" style="min-height:300px">
             <!-- -----------------pop up Image ---------------- -->
