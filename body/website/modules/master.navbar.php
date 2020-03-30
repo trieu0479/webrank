@@ -14,7 +14,7 @@
             if ($k == $_GET['action']) $active = "active"; else $active = "";
         ?>
             <li class="nav-item">
-            <a class="nav-link <?=$active?>" href="./index.php?view=website&action=<?=$k?>&domain=<?=$_GET['domain']?>"><?=$v?></a>
+            <a class="nav-link <?=$active?>" href="<?=$rootDomain?>/index.php?view=website&action=<?=$k?>&domain=<?=$_GET['domain']?>"><?=$v?></a>
             </li>
         <?}?>
        
