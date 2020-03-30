@@ -4,10 +4,10 @@
 // const counter = document.querySelector('.counter');
 var domain = "";
 var domain_name = "";
-if (location.href.indexOf("/rank/") > 1){
+if (location.href.indexOf("/rank/") > 1) {
     var domainTmp = location.href.split("/");
     domain_name = domainTmp[4];
-}else{
+} else {
     domain_name = url.searchParams.get("domain");
 }
 var arrDomain = [];
@@ -55,7 +55,8 @@ $('body').on('click', '.btn-compare', function(event) {
         }
     })
 })
-function updateMetaTitle(text){
+
+function updateMetaTitle(text) {
     var metaTitle = text + document.title;
     document.title = metaTitle;
     $('meta[name="og:title"]').attr("content", metaTitle);
@@ -484,7 +485,7 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-table-kh px-3 border-top">
+                        <div class="col-table-kh px-3 border-top text-left">
                             <div class="row padding-y-12 border-bottom ">
                                 <div class="col h6 m-0 align-self-center text-muted">
                                     Thời gian truy cập trung bình</div>
@@ -492,14 +493,14 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                                     <span class="AvgVisitDuration h5 font-gg text-favorite ">${numeral(TrafficAndEngagementOverviewMonthly.AvgVisitDuration).format("0:00:00")}</span>
                                 </div>
                             </div>
-                            <div class="row padding-y-12 border-bottom">
+                            <div class="row padding-y-12 border-bottom text-left">
                                 <div class="col h6 m-0 align-self-center text-muted"> Số trang/Lượt truy cập
                                 </div>
                                 <div class="col-4 text-right">
                                     <span class="PagesperVisit h5 font-gg text-favorite ">${numeral(TrafficAndEngagementOverviewMonthly.PagesPerVisit).format("0.00")}</span>
                                 </div>
                             </div>
-                            <div class="row padding-y-12">
+                            <div class="row padding-y-12 text-left">
                                 <div class="col h6 m-0 align-self-center text-muted"> Tỷ lệ thoát</div>
                                 <div class="col-4 text-right">
                                     <span class="BounceRate h5 font-gg text-favorite ">${numeral(TrafficAndEngagementOverviewMonthly.BounceRate).format("00.00%")}</span>
@@ -514,8 +515,8 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                 let PagesperVisit = numeral(TrafficAndEngagementOverviewMonthly.PagesPerVisit).format("0.00");
                 let BounceRate = numeral(TrafficAndEngagementOverviewMonthly.BounceRate).format("00.00%");
 
-                
-                var newDescription = "Website " + data.data.website + " có lượng người cập hàng tháng vào khoảng " + MonthlyVisits + " visitors và thời gian truy cập trung bình: " + AvgVisitDuration + " giây. Tỉ lệ thoát trang (bounce rate) hiện là "+ BounceRate + "...";
+
+                var newDescription = "Website " + data.data.website + " có lượng người cập hàng tháng vào khoảng " + MonthlyVisits + " visitors và thời gian truy cập trung bình: " + AvgVisitDuration + " giây. Tỉ lệ thoát trang (bounce rate) hiện là " + BounceRate + "...";
                 $('meta[name="description"]').attr("content", newDescription);
                 $('meta[name="og:description"]').attr("content", newDescription);
 
@@ -1407,11 +1408,7 @@ const getTrafficSourcesSearch = async(task, data) => {
             let option = {
                 color: masterColor,
                 legend: {
-                    top: "30%",
-                    left: '70%',
-                    itemWidth: 20,
-                    itemHeight: 14,
-                    width: 10,
+                    bottom: "5%",
                     textStyle: {
                         fontFamily: 'Arial',
                     },
@@ -1421,7 +1418,7 @@ const getTrafficSourcesSearch = async(task, data) => {
                     legendHoverLink: false,
                     minAngle: 20,
                     radius: ["40%", "60%"],
-                    center: ["30%", "50%"],
+                    center: ["50%", "40%"],
                     avoidLabelOverlap: false,
                     itemStyle: {
                         normal: {
@@ -2411,7 +2408,7 @@ const getWebsiteGeography = async(task, data) => {
         };
         await $(`.${task}`).removeClass('is-loading');
         //* update v7*/
-        $.getJSON(rootURL +'/assets/mapworld.geo.json', function(usaJson) {
+        $.getJSON(rootURL + '/assets/mapworld.geo.json', function(usaJson) {
             // console.log(usaJson)
             chart.hideLoading();
             echarts.registerMap('World', usaJson, {});
@@ -2748,9 +2745,7 @@ const getScrapedSearchAds = async(task, data) => {
 
 // Lượt Truy Cập Xã Hội
 const getTrafficSocial = async(task, data, domain) => {
-
         if (data.status == "success") {
-
             if (data && data.data && data.data.data) {
                 let TrafficSocial = data.data.data;
 
@@ -3455,7 +3450,7 @@ const SampleAdsasImage = async(task, data) => {
                     </div>
                 </div>
                 <div class="text-sample pt-2">
-                    <span class="dayseen">Days seen:<span class="seen-img pl-1 font-12">${val.daysSeen}</span> </span>
+                    <span class="dayseen">Xuất hiện:<span class="seen-img pl-1 font-12">${val.daysSeen}</span> ngày</span>
                     <span class="image-w-h"> <small class="image-width">${val.width}</small><small class="vs"> x </small> <small class="image-height">${val.height}</small></span>
                 </div>
             </div>
@@ -3479,7 +3474,7 @@ const SampleAdsasHTML = async(task, data) => {
 
                 </div>
                 <div class="text-sample pt-2">
-                    <span class="dayseen">Days seen:<span class="seen-img pl-1 font-12">${val.daysSeen}</span> </span>
+                    <span class="dayseen">Xuất hiện:<span class="seen-img pl-1 font-12">${val.daysSeen}</span> ngày</span>
                     <span class="image-w-h"> <small class="image-width">${val.width}</small><small class="vs"> x </small> <small class="image-height">${val.height}</small></span>
                 </div>
             </div>
@@ -3506,7 +3501,7 @@ const SampleAdsasText = async(task, data) => {
                 </div>
                 <div class="footer-text mt-2">
                     <a href="#" class="content-small font-12">${val.advertiser}</a>          
-                    <p class="tseen">Days seen: <small class="font-12">1</small>${val.daysSeen}</p>
+                    <p class="tseen">Xuất hiện: <small class="font-12">1</small>${val.daysSeen} ngày</p>
                 </div>
             </div>
         </div>`)

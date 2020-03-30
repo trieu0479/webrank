@@ -283,7 +283,7 @@ const api = async (task, domain,reload=0) => {
 
     try {
         return await $.ajax({
-                url: `//localapi.trazk.com/webdata/websiteapi.php?task=${task}&domain=${domain}&reload=${reload}`,
+                url: `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`,
                 type: "GET"
             })
             .then(data => {

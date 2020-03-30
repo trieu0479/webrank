@@ -8,11 +8,7 @@
                     <?php require_once(__DIR__."/modules/master.navbar.php")?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                        <?require_once(__DIR__."/modules/overivew.widgetHeader.php")?>
-                </div>
-            </div>
+ 
             <div class="row">
                 <div class="col-12 ">
                     <div class="widget-getDomainOrganicDetail"></div>

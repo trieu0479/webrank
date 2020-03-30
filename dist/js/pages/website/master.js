@@ -87,7 +87,9 @@ $(document).ready(() => {
                         <div class="text-capitalize font-weight-bold">${input.headerTitle}</div>
                         <div class="text-muted font-10">${input.headerTime}</div>
                     </div>
-                    
+                    <div class="ml-auto d-flex no-block align-items-center pr-3">
+                        <span class="similarReloadTaskaaaaa" data-task="${input.widgetTask}"><i class="fal fa-sync"></i></span>
+                    </div>
                 </div>
                 <div class="widgetBody text-center">
                     <div class="parent-${input.widgetTask}">
