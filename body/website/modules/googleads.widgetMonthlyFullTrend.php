@@ -1,7 +1,7 @@
 <!-- <div class="row mt-3 p-10"> -->
                     <div class="col-12 col-lg-12">
                         <div class="bg-white shadow-sm rounded">
-                            <div class="row m-0 pt-2 mb-2">
+                            <div class="row m-0 pt-2 mb-2 widget-PublicSherTable">
                                 <div class="col-auto d-flex no-block align-items-center mx-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

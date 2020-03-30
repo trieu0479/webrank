@@ -177,8 +177,8 @@ function compareNumbers(a, b) {
 }
 
 const adwordsMonthlyFullTrend = async(data, method) => {
-    $('.widget-PublicSherTable .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
-    <a class="similarReloadTask text-muted" data-task="PublicSherTable" href="javascript:;"><i class="fal fa-sync"></i></a>
+    $('.widget-PublicSherTable').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
+    <a class="similarReloadTask text-muted" data-task="adwordsMonthlyFullTrend" href="javascript:;"><i class="fal fa-sync"></i></a>
 </div>`)
     if (data.status == "success") {
         if (data && data.data && data.data.adwordsMonthlyFullTrend) {
@@ -460,8 +460,7 @@ const adwordsMonthlyFullTrend = async(data, method) => {
     }
 }
 
-const TopPaidKeyword = async(data, method) => {
-    console.log(data);
+const TopPaidKeyword = async(data, method) => {    
     if (!data.data.length) {
         $('#TopPaidKeyword_wrapper').addClass('empty-state');
         $('#TopPaidKeyword_wrapper').css('min-height', '361px')
@@ -539,6 +538,8 @@ const TopPaidKeyword = async(data, method) => {
             }
         }
     )
+    // await $(`#${task}`).removeClass('is-loading');
+    // await $(`.similarReloadTask[data-task="TopPaidKeyword"]`).find('i').addClass('fa-spin');
 }
 
 

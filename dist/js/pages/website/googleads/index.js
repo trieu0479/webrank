@@ -39,13 +39,28 @@ $( document ).ready(function() {
         api('CompetitorMapChart',localDomain)      
     }
 
-    $(".similarReloadTask").click(function() {
-        if ($(this).find('i').hasClass('fa-spin')) {$(this).find('i').removeClass('fa-spin'); return; }
-        let task = $(this).data("task");
-        console.log('ww',task);        
-        $(this).find('i').addClass('fa-spin');
-        api(task, localDomain);
-    })
-
+    // $(".similarReloadTask").click(function() {
+    //     if ($(this).find('i').hasClass('fa-spin')) {$(this).find('i').removeClass('fa-spin'); return; }
+    //     let task = $(this).data("task");          
+    //     $(this).find('i').addClass('fa-spin');
+    //     api(task, localDomain);
+    // })
+    $('body').on('click','.similarReloadTask',async function () { 
+        let task = $(this).data("task");   
+        console.log(task);
+         
+        // let domain = url.searchParams.get("domain").replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
+        $(this).find('i').addClass('fa-spin');     
+        if (task == "getScrapedSearchAds") {
+           return;
+        }           
+        else {
+            if (task == "adwordsMonthlyFullTrend") {
+                // $(this).find('i').addClass('fa-spin')
+                $(this).parent().html('')
+            }
+       await api(task, localDomain).then( (res) =>$(this).find('i').removeClass('fa-spin')) 
+        }
+      })
 
 });
