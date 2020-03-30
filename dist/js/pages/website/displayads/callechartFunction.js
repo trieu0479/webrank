@@ -77,13 +77,25 @@ $(document).ready(() => {
             } else {
                 let domain = originalDomain.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
                 // Get all data
-                $(".similarReloadTask").click(function() {                             
-                  if ($(this).find('i').hasClass('fa-spin')) { $(this).find('i').removeClass('fa-spin'); return; }
-                  let task = $(this).data("task");
-                  $(this).find('i').addClass('fa-spin');
-                  api(task, domain);
-              })
-              
+                $('body').on('click','.similarReloadTask',async function () {   
+                  let task = $(this).data("task");   
+                  $(this).find('i').addClass('fa-spin');         
+                  if (task =="getTrafficDisplayAdvertisingAds")  {            
+                await api('getTrafficDisplayAdvertisingAds', domain, 1).then( (res) =>$(this).find('i').removeClass('fa-spin'))
+                  }
+                  else if (task =="getTrafficDestinationAds")  {            
+                await api('getTrafficDestinationAds', domain, 1).then( (res) =>$(this).find('i').removeClass('fa-spin'))
+                  }
+                  else if (task =="getWebsiteAdsVisitsOverview")  {            
+                    // $('.getWebsiteAdsVisitsOverview').html('')
+                await api('getWebsiteAdsVisitsOverview', domain, 1).then( (res) =>$(this).find('i').removeClass('fa-spin'),  $('.getWebsiteAdsVisitsOverview').html('') )
+                  }
+                 else  if (task =="getTrafficDisplayAdvertisingWebsitesTable")  {            
+                await api('getTrafficDisplayAdvertisingWebsitesTable', domain, 1).then( (res) =>$(this).find('i').removeClass('fa-spin'))
+                  }
+                   
+                })               
+                                  
 
                
                 api("getWebsiteAdsVisitsOverview", domain);
@@ -638,7 +650,7 @@ $(document).ready(() => {
       }
     )
      $('.widget-getTrafficDestinationAds .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
-     <span class="reloadrieng" data-task="getTrafficDestinationAds"><i class="fal fa-sync"></i></span>
+     <span class="similarReloadTask" data-task="getTrafficDestinationAds"><i class="fal fa-sync"></i></span>
  </div>`)
     //getTrafficDestinationAds
     initDatatable(
@@ -1113,7 +1125,7 @@ $(document).ready(() => {
     )
 
     $('.widget-getTrafficDisplayAdvertisingWebsitesTable .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
-    <span class="reloadrieng" data-task="getTrafficDisplayAdvertisingWebsitesTable"><i class="fal fa-sync"></i></span>
+    <span class="similarReloadTask" data-task="getTrafficDisplayAdvertisingWebsitesTable"><i class="fal fa-sync"></i></span>
 </div>`)
     initDatatable(
       'getTrafficDisplayAdvertisingWebsitesTable',
@@ -1317,8 +1329,8 @@ $(document).ready(() => {
         }
       }
     )
-
-  }
+    }
+  
 
   $('.btnGoBack').click(() => changeURL('website', null));
 
@@ -1359,20 +1371,5 @@ $(document).ready(() => {
     locked("getSocialVisits");
     locked("TotalSocialVisits");
     locked("getTotalSocialVisits");
-  
-});
-setTimeout(() => {
-  if ($('#Parent-getTotalOutgoingAdVisits').hasClass('empty-state')) {
-    $('.getWebsiteGeography-container').addClass('d-none')
-  }
-}, 500);
-let domain=url.searchParams.get('domain');
-  $("body").on('click','.reloadrieng',function(){                     
-    if ($(this).find('i').hasClass('fa-spin')) { $(this).find('i').removeClass('fa-spin'); return; }
-    let task = $(this).data("task");
-    if (task =="getWebsiteAdsVisitsOverview")
-    {$('.getWebsiteAdsVisitsOverview').html('')}
-    api(task, domain);
-    // $(this).find('i').addClass('fa-spin');
-    
-  })  
+   
+  })

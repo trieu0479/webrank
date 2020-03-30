@@ -586,7 +586,7 @@ const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
          <div class="text-muted similarDates font-10">03/2019 - 02/2020</div>
      </div>
      <div class="ml-auto d-flex no-block align-items-center pr-3">
-         <a class="reloadrieng text-muted" data-task="getWebsiteAdsVisitsOverview"><i class="fal fa-sync"></i></a>
+         <a class="similarReloadTask text-muted" data-task="getWebsiteAdsVisitsOverview"><i class="fal fa-sync"></i></a>
      </div>
  </div>
  <div id="Parent-getWebsiteAdsVisitsOverview">
@@ -616,8 +616,6 @@ const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
               $('#Parent-getWebsiteAdsVisitsOverview').addClass('empty-state')
               $('#Parent-getWebsiteAdsVisitsOverview').css('min-height','268px')
         }
-
-
     } else {
         console.log(`${task} failed`);
     }

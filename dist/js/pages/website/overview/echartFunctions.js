@@ -2,15 +2,20 @@
 // import counterUp from '../../../../js/pages/keywords/counterup2/index.js';
 
 // const counter = document.querySelector('.counter');
-
-var domain = '';
+var domain = "";
+var domain_name = "";
+if (location.href.indexOf("/rank/") > 1){
+    var domainTmp = location.href.split("/");
+    domain_name = domainTmp[4];
+}else{
+    domain_name = url.searchParams.get("domain");
+}
 var arrDomain = [];
 var selectWebsite = "";
 
 // const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 
-var domain_name = url.searchParams.get("domain");
 $('body').on('click', '.btn-compare', function(event) {
     Swal.fire({
         title: 'Hãy nhập website để so sánh',
@@ -50,7 +55,12 @@ $('body').on('click', '.btn-compare', function(event) {
         }
     })
 })
+function updateMetaTitle(text){
+    var metaTitle = text + document.title;
+    document.title = metaTitle;
+    $('meta[name="og:title"]').attr("content", metaTitle);
 
+}
 const getHeader = async data => {
     // Get value Header  
     const {
@@ -106,9 +116,8 @@ const getHeader = async data => {
         similarTags.map(tag => `<span><a href="./index.php?view=keywords&action=keywords-overview&keyword=${tag}"  data-type="keyword" class="changeURL" data-input="${tag}" class="text-muted"><i class="far fa-search"></i> ${tag}</a></span>`).join("")
     );
 
-    var metaTitle = "Website " + similarDomain + " được xếp hạng " + numeral(similarCountryRank).format('0,0') + "/98.000 website tại Việt Nam";
-    document.title = metaTitle;
-    $('meta[name="og:title"]').attr("content", metaTitle);
+    var metaTitle = " - xếp hạng " + numeral(similarCountryRank).format('0,0') + "/98,000 website tại Việt Nam";
+    updateMetaTitle(metaTitle);
 
     $(".similarHeader .similarRelatedAppsTitle").html(
         '<i class="far fa-mobile font-14"></i> Ứng dụng liên quan<br/><span class="font-12 text-muted">CH Play & AppStore</span>'
@@ -453,7 +462,9 @@ const api = async(task, domain, reload = 0) => {
 };
 const estmatedWorth = async(task, data) => {
         if (data.status == "success") {
-            $('.money-website-price').html(`${numeral(data.data).format('0,0')}<span>USD</span>`)
+            $('.money-website-price').html(`${numeral(data.data).format('0,0')}<span>USD</span>`);
+            var giaWebsite = numeral(data.data).format('0,0') + " USD";
+            updateMetaTitle("Domain "+ domain_name + "được định giá "+giaWebsite + " ")
         }
     }
     //sử dung truy cập theo tháng
@@ -502,6 +513,15 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                 `;
                 $('.getTrafficAndEngagementOverviewMonthly').html(html)
                 $(`.getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
+
+                let AvgVisitDuration = numeral(TrafficAndEngagementOverviewMonthly.AvgVisitDuration).format("0:00:00");
+                let PagesperVisit = numeral(TrafficAndEngagementOverviewMonthly.PagesPerVisit).format("0.00");
+                let BounceRate = numeral(TrafficAndEngagementOverviewMonthly.BounceRate).format("00.00%");
+
+                
+                var newDescription = "Website " + data.data.website + " có lượng người cập hàng tháng vào khoảng " + MonthlyVisits + " visitors và thời gian truy cập trung bình: " + AvgVisitDuration + " giây. Tỉ lệ thoát trang (bounce rate) hiện là "+ BounceRate + "...";
+                $('meta[name="description"]').attr("content", newDescription);
+                $('meta[name="og:description"]').attr("content", newDescription);
 
             } else {
                 // $(`#getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');

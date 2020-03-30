@@ -137,13 +137,20 @@ $(document).ready(() => {
                         api("getEngagementVisitsDaily", domain);
                     } else {}
                 });
-
-                $(".similarReloadTask").click(function() {
-                    if ($(this).find('i').hasClass('fa-spin')) { $(this).find('i').removeClass('fa-spin'); return; }
-                    let task = $(this).data("task");
-                    $(this).find('i').addClass('fa-spin');
-                    api(task, domain, 1);
-                })
+                
+$('body').on('click','.similarReloadTask',async function () {   
+  let task = $(this).data("task");   
+  $(this).find('i').addClass('fa-spin');   
+  if (task =="getScrapedSearchAds")  {            
+ await api('getScrapedSearchAds', domain, 1).then( (res) =>$(this).find('i').removeClass('fa-spin'))
+  }
+})
+                // $(".similarReloadTask").click(function() {
+                //     if ($(this).find('i').hasClass('fa-spin')) { $(this).find('i').removeClass('fa-spin'); return; }
+                //     let task = $(this).data("task");
+                //     $(this).find('i').addClass('fa-spin');
+                //     api(task, domain, 1);
+                // })
                 $('.share-social').click(event => {
                     event.preventDefault();
                     const url = $(event.target).closest('a').attr('dhref');
