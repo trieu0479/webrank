@@ -733,7 +733,7 @@ width: 100%;
     float: right!important;
 }
 
-#DataTables_Table_2_wrapper {
+.parent-PublicSherTable #DataTables_Table_2_wrapper {
     overflow: scroll;
 }
 
