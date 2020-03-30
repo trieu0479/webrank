@@ -68,6 +68,7 @@
     <script type="text/javascript" src='<?=$rootURL?>/dist/dist/js/pages/jquery-ui.js'></script>
     <script src="<?=$rootURL?>/dist/js/jquery-3.4.1.min.js"></script>
     <link href="<?=$rootURL?>/dist/css/swiper.min.css" rel="stylesheet">
+    
     <link href="<?=$rootURL?>/dist/css/swiper.css" rel="stylesheet">
 
 <!-- -------------------------csss rieng cho gg ads va display ads----------------------------- -->
