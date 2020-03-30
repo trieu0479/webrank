@@ -95,7 +95,7 @@ $(document).ready(function() {
     createADataTable(input);
 
     var input = {};
-    input.headerTitle = "BackLinks";
+    input.headerTitle = "";
     input.headerTime = "";
     input.widgetTask = "banckLinksOverview";
     input.widgetContainer = "widget-banckLinksOverview";

@@ -2320,11 +2320,55 @@ const getSimilarSites = async(task, data) => {
                 compareNode.click(function(e) {
                     e.preventDefault();
                     domain2 = $(this).data('domain');
-                    if (domain_name && domain2) {
-                        location.href = `?view=traffic-website&action=compare&domain1=${domain_name.toLowerCase()}&domain2=${domain2.toLowerCase()}`;
-                    }
+                    // if (domain_name && domain2) {
+                    //     location.href = `?view=traffic-website&action=compare&domain1=${domain_name.toLowerCase()}&domain2=${domain2.toLowerCase()}`;
+                    // }
+                    Swal.fire({
+                        title: 'Hãy nhập website để so sánh',
+                        html: `<input id="swal-input1" class="swal2-input text-lowercase" value=${domain_name} placeholder="Nhập website của bạn">` +
+                            `<div class="text-white font-16 bg-dark m-auto shadow-sm" style="height: 60px; width: 60px; line-height: 60px;border-radius: 60px">VS</div>` +
+                            `<input id="swal-input2" value="${domain2}" class="swal2-input text-lowercase"  placeholder="Nhập website của đối thủ">`,
+                        focusConfirm: false,
+                        showCloseButton: true,
+                        confirmButtonText: 'So Sánh',
+                        width: 600,
+                        padding: '4em',
+                        onOpen: () => {
+                            $('#swal-input2').focus()
+                            $('#swal-input2').keypress(event => {
+                                if (event.which == 13) {
+                                    $('.swal2-confirm').click();
+                                }
+                            })
+                        },
+                        preConfirm: () => {
+                            if ($('#swal-input1').val() == "" || $('#swal-input2').val() == "") {
+                                Swal.showValidationMessage(`Vui lòng nhập đủ website`)
+                            } else {
+                                if ($('#swal-input1').val() == $('#swal-input2').val()) {
+                                    Swal.showValidationMessage(`Hai website không được trùng`)
+                                }
+                            }
+                            return [
+                                $('#swal-input1').val(),
+                                $('#swal-input2').val()
+                            ]
+                        }
+                    }).then((result) => {
+                        // console.log(result);
+                        if (result.value) {
+                            location.href = `?view=traffic-website&action=compare&domain1=${result.value[0].toLowerCase()}&domain2=${result.value[1].toLowerCase()}`;
+                        }
+                    })
                 });
             })
+
+
+
+
+
+
+
             await $(`.${task}`).removeClass('is-loading');
             await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
         } else {

@@ -53,6 +53,9 @@ const apiBackLink = async (method, domain, reload = 0) => {
     if (method == "backlinksTraffic") {
         method = "backlinksTraffic";
     }
+    if (method == "backlinksDetail") {
+        method = "backlinksDetail";
+    }
     try {
         return await $.ajax({
             url: `//localapi.trazk.com/webdata/semrush.php?task=getDomainBackLinkDetail&domain=${domain}&page=1&method[${method}]=true&reload=${reload}`,
@@ -65,9 +68,9 @@ const apiBackLink = async (method, domain, reload = 0) => {
                 case "backlinkTypes":
                     backlinkTypes(data, method);
                     break;
-                // case "backlinksDetail":
-                //     overViewBackLinks(data, method);
-                //     break;
+                case "backlinksDetail":
+                    backlinksDetail(data, method);
+                    break;
                 case "anchors-cloud":
                     anchorsOverview(data, method);
                     break;
@@ -215,7 +218,7 @@ const backlinksScorical = async (data, method) => {
             series: [{
                 type: 'line',
                 smooth: true,
-                symbol:"none",
+                symbol: "none",
                 areaStyle: {
                 },
                 data: arrAScores.val
@@ -238,10 +241,9 @@ const backlinksKeywords = async (data, method) => {
 }
 
 const backlinksTraffic = async (data, method) => {
-    let dataTraffic =data.data.backlinksTraffic.visits
-   $('#trafficBackLinks').html('').html(numeral(dataTraffic).format("0.0a"))
+    let dataTraffic = data.data.backlinksTraffic.visits
+    $('#trafficBackLinks').html('').html(numeral(dataTraffic).format("0.0a"))
 }
-
 
 const anchorsOverview = async (data, method) => {
     if (data.status == "success") {
@@ -431,6 +433,8 @@ const referringDomains = async (data, method) => {
                 renderChart(newLinksByMonths, lostLinksByMonths, dateMonths)
             }
         })
+        await $('#showRefDomain').removeClass('is-loading');
+        await $('.similarReloadTask[data-task="categories-refdomains"]').find('i').removeClass('fa-spin');
     } else {
         $(`#showTotalBackLink`).removeClass('is-loading')
         $(`#showTotalBackLink`).addClass('empty-state')
@@ -529,6 +533,8 @@ const total_backlink = async (data, method) => {
                 renderChart(totalByMonths, dateMonths)
             }
         })
+        await $('#showTotalBackLink').removeClass('is-loading');
+        await $('.similarReloadTask[data-task="total_backlink"]').find('i').removeClass('fa-spin');
     } else {
         $(`#showRefDomain`).removeClass('is-loading')
         $(`#showRefDomain`).addClass('empty-state')
@@ -617,6 +623,11 @@ const backlinkTypes = async (data, method) => {
         $('#linkAttributes').addClass('empty-state');
 
     }
+}
+
+const backlinksDetail = async (data, method) => {
+    console.log(data);
+
 }
 
 export default apiBackLink;
