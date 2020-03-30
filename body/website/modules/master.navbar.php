@@ -4,7 +4,7 @@
         "organic" => '<i class="fad fa-newspaper mr-2"></i>Organic Search',
         "googleads" => '<i class="fad fa-audio-description font-14 text-warning mr-2"></i>Google Ads',
         "displayads" => '<i class="fad fa-browser mr-2"></i> Display Ads',
-        "social" => '<i class="fad fa-signal-stream font-14 text-info mr-2"></i>Social',
+        "social" => '<i class="fad fa-signal-stream font-14 text-success mr-2"></i>Social',
         "backlink" => '<i class="fad fa-solar-system mr-2"></i>Backlink'
     );
 ?>

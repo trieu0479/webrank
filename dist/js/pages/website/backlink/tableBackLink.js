@@ -50,7 +50,7 @@ $(document).ready(() => {
     initDatatable(
         'getDataContry', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/semrush.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
+                url: `https://localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
                     let dataContry = json.data.backlinksOverview.geodomains;
                     let columns = [];
@@ -114,7 +114,7 @@ $(document).ready(() => {
         'getDataZones',
         {
             ajax: {
-                url: `//localapi.trazk.com/webdata/semrush.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
                     let getDataZones = json.data.backlinksOverview.zones;
                     let columns = [];
@@ -176,7 +176,7 @@ $(document).ready(() => {
         'topBackLinks',
         {
             ajax: {
-                url: `//localapi.trazk.com/webdata/semrush.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksDetail]=true&userToken=${userToken}`,
+                url: `https://localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksDetail]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
                     let topBackLinks = json.data.backlinksDetail;
                     console.log(topBackLinks);
@@ -199,8 +199,12 @@ $(document).ready(() => {
 
             },
             columns: [
-                { title: 'TLD', data: data => `<div style="width:200px" class="text-left">.${data.response_code}</div>` },
-                { title: '<div class="text-right font-weight-500">Tên miền</div>', data: data => `<div class="text-right"><span class="pr-3">${numeral(data.response_code).format('0.0%')}</span><span class="text-info">${numeral(data.response_code).format('0,0')}</span></div>` },
+                { title: 'Page AS', data: data => `<div style="width:200px" class="text-left">${data.response_code}</div>` },
+                { title: 'Source Page Title and URL', data: data => `<div class="text-right">${data.source_title}</div>
+                <div class="text-right">${data.source_url}</div>
+                ` },
+                {title: 'Ext Links', data:data=>`<div class="text-right">${data.external_link_num}</div>`},
+                {title: 'Ext Links', data:data=>`<div class="text-right">${data.external_link_num}</div>`}
             ],
             "order": [1, 'desc'],
             language,
