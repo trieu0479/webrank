@@ -46,7 +46,7 @@ $(document).ready(() => {
                     dataSrc: json => {
                         // console.log(json);
                         if (!json.data || !json.data.data) {
-                            // $('.getWebsiteGeography-table').html('').addClass('empty-state')
+                            $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
                             return [];
                         } else {
                             return json.data.data.filter(item => item.Country != null);
