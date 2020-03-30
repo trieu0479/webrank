@@ -16,26 +16,31 @@ $(document).ready(() => {
         }
     };
     //init datatable
+    let reloaddata = 0;
     const initDatatable = function(select, tableOptions) {
             const table = $(`.${select}`).DataTable(tableOptions);
             $(table.table().header()).addClass('text-center');
             //reload click handle
             $(`.${select}`).click(function(event) {
-                // $(event.target).addClass('fa-spin');
-                $(`.${select}-container`).addClass('is-loading').block({
-                    overlayCSS: {
-                        backgroundColor: '#ccc',
-                        opacity: 0.8,
-                        zIndex: 1,
-                        cursor: 'wait'
-                    },
-                    message: null
-                });
-                // $(`.${select}`).DataTable().ajax.reload(() => {
-                //     $(`.${select}`).removeClass("is-loading");
-                //     $(`.${select} .dataTables_empty`).text("").addClass("empty-state");
-                // });
-            })
+                    // $(event.target).addClass('fa-spin');
+                    console.log(tableOptions);
+
+                    $(`.${select}-container`).addClass('is-loading').block({
+                        overlayCSS: {
+                            backgroundColor: '#ccc',
+                            opacity: 0.8,
+                            zIndex: 1,
+                            cursor: 'wait'
+                        },
+                        message: null
+                    });
+                    $(`.${select}`).DataTable().ajax.reload(() => {
+                        reloaddata = 1
+                    });
+                })
+                // $(".similarReloadTaskaaaaa").click(function() {
+                //     $(`.${select}`).click()
+                // })
             return table;
         }
         //getWebsiteGeography
@@ -56,6 +61,7 @@ $(document).ready(() => {
                 drawCallback: function(settings) {
                     $('.getWebsiteGeography-container').removeClass('is-loading').unblock();
                     $('.getWebsiteGeography-container').find('.fa-spin').removeClass('fa-spin');
+
                 },
                 columns: [{
                         title: 'Quốc gia',
@@ -98,6 +104,11 @@ $(document).ready(() => {
                     $('.dataTables_scrollHeadInner thead').removeClass('text-center');
                     $('.getWebsiteGeography_wrapper .dataTables_scrollHeadInner').removeClass('text-center');
                     $('.dataTables_scrollHead').addClass('border-bottom');
+                    console.log(url);
+                    $(".similarReloadTaskaaaaa").click(function() {
+                        console.log("fbfbdvzdvzdv");
+                        table.ajax.url('simple3.php').load();
+                    })
                 }
             }
         )
@@ -294,7 +305,7 @@ $(document).ready(() => {
                         })
                         return columns;
                     } else {
-                        $('.parent-getAdvertisingSearchDetail').html('').addClass('empty-state')
+                        $('.parent-getAdvertisingSearchDetail').html('').addClass('empty-state d-table-row')
                         return [];
                     }
                 },
@@ -393,7 +404,7 @@ $(document).ready(() => {
                     }
                 },
                 { title: 'CPC', data: data => `$${data.CPC}` },
-                { title: 'Vị trí', data: data => data.PositionPaid[0].Value },
+                { title: 'Vị trí', data: data => (data.PositionPaid[0].Value == -1) ? '1' : data.PositionPaid[0].Value },
                 { title: 'Lượt tìm kiếm', data: data => $.number(data.KwVolume) }
             ],
             "order": [

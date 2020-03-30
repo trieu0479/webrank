@@ -1,3 +1,5 @@
+<a href="./index.php?view=website&action=index" class="position-relative text-white btn-clean btn"><i class="far fa-angle-left m-r-5"></i> Quay lại
+</a>
 <div class="row justify-content-center">
 <div class="col-12 text-center maxWidthPc-800">
     <div class="h-100 px-md-5">
