@@ -2326,8 +2326,8 @@ const getTrafficSocial = async (task, data, domain) => {
             $("#TotalSocialVisits").html(`Tổng ${numeral(SearchTotal).format("0,0")}`);
 
             // Tổng Số Lượt Truy Cập Xã Hội 
-            $("#totalSocailVisits").html(`${numeral(SearchTotal).format("0.000a")}`);
-            $("#percenTotalSocailVisits").html(`${numeral(TotalDesktopTraffic).format('0.00%')}`);
+            $('.trafficSocial').html('').html(numeral(SearchTotal).format("0.0a"))
+            $('.costTrafficSocial').html('').html(numeral(SearchTotal*0.12).format('0,0$'))
 
             let dataChartPie = [{
                 name: "Mạng xã hội",
@@ -2742,7 +2742,7 @@ const getTrafficSourcesSocial = async (task, data) => {
                 // myChart.setOption(option);
                 //* update v7*/
                 var myChart = document.getElementsByClassName('getTrafficSourcesSocial');
-                console.log(myChart);
+                // console.log(myChart);
                 
                 var charts = [];
                 for (var i = 0; i < myChart.length; i++) {
@@ -2761,49 +2761,6 @@ const getTrafficSourcesSocial = async (task, data) => {
 
 
                 await $(`.${task}`).removeClass('is-loading');
-                
-                new ResizeSensor($(`.getTrafficSourcesSocial`), function () {
-                    myChart.resize();
-                });
-
-                // new ResizeSensor($(`.getTrafficSourcesSocial`), function () {
-                //     myChart.resize();
-                //     setTimeout(function () {
-                //         myChart.dispatchAction({
-                //             type: 'highlight',
-                //             seriesIndex: 0,
-                //             dataIndex: 0
-                //         });
-    
-                //         myChart.on('mouseover', function (params) {
-                //             if (params.name == dataChart[0].name) {
-                //                 myChart.dispatchAction({
-                //                     type: 'highlight',
-                //                     seriesIndex: 0,
-                //                     dataIndex: 0
-                //                 });
-                //             } else {
-                //                 myChart.dispatchAction({
-                //                     type: 'downplay',
-                //                     seriesIndex: 0,
-                //                     dataIndex: 0
-                //                 });
-                //             }
-                //         });
-    
-                //         myChart.on('mouseout', function (params) {
-                //             myChart.dispatchAction({
-                //                 type: 'highlight',
-                //                 seriesIndex: 0,
-                //                 dataIndex: 0
-                //             });
-                //         });
-                //     }, 1000);
-                // });
-
-               
-
-                await $(`#${task}`).removeClass('is-loading');
                 await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
             } else {
                 $('#Parent-getTrafficDisplayAdvertisingAds').addClass('empty-state')

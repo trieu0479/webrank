@@ -1,3 +1,4 @@
+
 async function getData(url) {
     return await $.get(url);
 }

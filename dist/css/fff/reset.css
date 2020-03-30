@@ -1863,6 +1863,7 @@ a {
 
 .progress-bg-xanh {
     max-width: 90%;
+    background: #5867dd;
 }
 
 .progress .bg-vang {
@@ -1871,7 +1872,7 @@ a {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     color: #333;
-    background: #ffa400;
+    background: #fd397a;
 }
 
 .progress-bg-vang {
@@ -1884,13 +1885,13 @@ a {
     text-align: right !important;
     height: 100%;
     padding-right: 5px;
-    background: #ff4e42;
+    background: #fd397a;
 }
 
 .progress-bg-do {
     max-width: 90%;
     min-width: 10%;
-    background: #ffa400;
+    background: #fd397a; 
 }
 
 #myProgress {
@@ -3249,3 +3250,32 @@ span.sub-tilte-content,
 .rowGroup .col-12 {
     margin-bottom: 0px!important;
 }
+
+.maxWidthPc-800{
+    max-width: 800px;
+}
+.maxWidthPc-1180{
+    max-width: 1180px;
+}
+.maxWidthPc-1280{
+    max-width: 1280px;
+}
+.percentMobilePC{
+    font-size: 9px;
+    margin-bottom: 0px;
+}
+#tablePTDT{
+    border-radius: 5px 5px 0 0;
+}
+#tablePTDT thead tr{
+    background-color: #343a40;
+}
+.bg-dark{
+    background-color: #343a40;
+}
+.fontSize-14{font-size:14px!important}
+.fontSize-16{font-size:16px}
+.fontSize-18{font-size:18px}
+.fontSize-24{font-size:24px}
+.fontSize-30{font-size:30px}
+.fontSize-36{font-size:36px}
