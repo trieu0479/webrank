@@ -605,5 +605,7 @@
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     color: white !important;
 }
-
+#tablePTDT_filter {
+    display: none!important;
+}
 /* css cua khanh dep trai */

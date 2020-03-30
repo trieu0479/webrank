@@ -46,10 +46,10 @@
 
         </div>
     </div>
-    <script src="assets/js/wordcloud2.js"></script>
-    <script src="assets/js/ResizeSensor.js"></script>
-    <script src="dist/js/pages/my-function/init-function.js"></script>
-    <script type="module" src="dist/js/pages/website/master.js?v=<?=$version?>"></script>
-    <script type="module" src="dist/js/pages/website/backlink/index.js?v=<?=$version?>"></script>
-    <script type="module" src="dist/js/pages/website/backlink/backLinkEchart.js?v=<?=$version?>"></script>
-    <script type="module" src="dist/js/pages/website/backlink/tableBackLink.js"></script>
+    <script src="<?=$rootURL?>/assets/js/wordcloud2.js"></script>
+    <script src="<?=$rootURL?>/assets/js/ResizeSensor.js"></script>
+    <script src="<?=$rootURL?>/dist/js/pages/my-function/init-function.js"></script>
+    <script type="module" src="<?=$rootURL?>/dist/js/pages/website/master.js?v=<?=$version?>"></script>
+    <script type="module" src="<?=$rootURL?>/dist/js/pages/website/backlink/index.js?v=<?=$version?>"></script>
+    <script type="module" src="<?=$rootURL?>/dist/js/pages/website/backlink/backLinkEchart.js?v=<?=$version?>"></script>
+    <script type="module" src="<?=$rootURL?>/dist/js/pages/website/backlink/tableBackLink.js"></script>

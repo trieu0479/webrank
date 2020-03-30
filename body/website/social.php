@@ -15,6 +15,10 @@
                 </div>
 
                 <div class="col-12 col-lg-12">
+                <?php require_once(__DIR__."/modules/social.widgetTraffic.php")?>
+                </div>
+
+                <div class="col-12 col-lg-12">
                 <?php require_once(__DIR__."/modules/social.widgetHeader.php")?>
                 </div>
 
