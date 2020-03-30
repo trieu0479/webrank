@@ -23,8 +23,8 @@
                     </div>
                 </div>
                 <div class="nextpage pt-3">
-                    <a href="javascript:;" class="text-box-catelog text-white text-004 SubmitCompare">So sánh 2 website</a>
-                    <a href="?view=traffic-website&action=topsites" class="text-box-catelog text-white text-turquoise">Tổng hợp top website tại Việt Nam</a>
+                    <!--<a href="javascript:;" class="text-box-catelog text-white text-004 SubmitCompare">So sánh 2 website</a> -->
+                    <a href="<?=$rootDomain?>" class="text-box-catelog text-white text-turquoise">Tổng hợp top website tại Việt Nam</a>
                 </div>
             </div>
         </div>

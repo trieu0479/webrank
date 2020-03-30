@@ -58,7 +58,7 @@ const apiBackLink = async (method, domain, reload = 0) => {
     }
     try {
         return await $.ajax({
-            url: `//localapi.trazk.com/webdata/semrush.php?task=getDomainBackLinkDetail&domain=${domain}&page=1&method[${method}]=true&reload=${reload}`,
+            url: `//localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${domain}&page=1&method[${method}]=true&userToken=${userToken}&reload=${reload}`,
             type: "GET"
         }).then(data => {
             switch (methodName) {

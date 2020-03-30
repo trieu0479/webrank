@@ -116,7 +116,6 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
     total+=socialChanel[key].Visits
   }
   $('.socialChannel').html('').html(numeral(total).format('0,0a'))
-  console.log(numeral(total).format('0,0a'));
   
 })
 
