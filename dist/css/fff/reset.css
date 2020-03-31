@@ -3279,3 +3279,8 @@ span.sub-tilte-content,
 .fontSize-24{font-size:24px}
 .fontSize-30{font-size:30px}
 .fontSize-36{font-size:36px}
+.btn-clean i, .btn-clean {
+    border-color: #93a2dd solid 1px;
+    background: #fff;
+    color: #444!important;
+}

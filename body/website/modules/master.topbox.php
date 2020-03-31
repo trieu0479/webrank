@@ -1,5 +1,7 @@
-<a href="./index.php?view=website&action=index" class="position-relative text-white btn-clean btn"><i class="far fa-angle-left m-r-5"></i> Quay lại
-</a>
+<? if ($action != "index"){?>
+<div class="mb-2 clearfix"><a href="<?=$rootURL?>" class="position-relative text-white btn-clean btn float-left"><i class="far fa-angle-left m-r-5"></i> Quay lại
+</a></div>
+<?}?>
 <div class="row justify-content-center">
 <div class="col-12 text-center maxWidthPc-800">
     <div class="h-100 px-md-5">
@@ -35,13 +37,34 @@
 </div>
 <script>
 $(document).ready(()=>{    
+    function extractHostname(url) {
+    var hostname;
+    //find & remove protocol (http, ftp, etc.) and get hostname
+
+    if (url.indexOf("//") > -1) {
+        hostname = url.split('/')[2];
+    }
+    else {
+        hostname = url.split('/')[0];
+    }
+
+    //find & remove port number
+    hostname = hostname.split(':')[0];
+    //find & remove "?"
+    hostname = hostname.split('?')[0];
+
+    return hostname;
+}
+
     $('body').on('click', '.btnCheckWebsite', function() {
-        let domain = $('.iptWebsite').val()
+        var domain = $('.iptWebsite').val();
+        domain = extractHostname(domain);
         window.location.href = `${rootURL}/rank/${domain}`;
     })
     $('.iptWebsite').keypress(event => {
         if (event.which == 13) {
-            let domain = $('.iptWebsite').val()
+        var domain = $('.iptWebsite').val();
+        domain = extractHostname(domain);
         window.location.href = `${rootURL}/rank/${domain}`;
         }
     })
