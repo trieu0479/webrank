@@ -629,3 +629,17 @@
 
 
 /* css cua khanh dep trai */
+
+@media only screen and (max-width: 768px) {
+    .keywordSearchBox .iptWebsite, 
+    .keywordSearchBox .btnCheckWebsite, 
+    .keywordSearchBox .input-group-append, 
+    .keywordSearchBox .input-group-prepend{
+        display: block;
+        width: 100%;
+    }
+    .keywordSearchBox .iptWebsite{
+        margin:0 0 10px 0!important;
+    }
+    
+}
