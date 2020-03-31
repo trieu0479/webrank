@@ -1336,13 +1336,11 @@ $(document).ready(() => {
 
   $('.btnKeyWord').click(() => changeURL('keyword', null));
 
-
-
-
     function locked(id) {
       $("#Parent-" + id + " #" + id).addClass("locked");
       $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
     }
+    
     //locked("getTrafficSourcesOverview");
     locked("getMarketingMixOverview");
     locked("getTrafficSourcesSearch");

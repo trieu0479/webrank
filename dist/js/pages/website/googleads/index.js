@@ -39,13 +39,8 @@ $( document ).ready(function() {
         api('CompetitorMapChart',localDomain)      
     }
 
-    // $(".similarReloadTask").click(function() {
-    //     if ($(this).find('i').hasClass('fa-spin')) {$(this).find('i').removeClass('fa-spin'); return; }
-    //     let task = $(this).data("task");          
-    //     $(this).find('i').addClass('fa-spin');
-    //     api(task, localDomain);
-    // })
     $('body').on('click','.similarReloadTask',async function () { 
+
         let task = $(this).data("task");   
         console.log(task);
          
@@ -62,5 +57,22 @@ $( document ).ready(function() {
        await api(task, localDomain).then( (res) =>$(this).find('i').removeClass('fa-spin')) 
         }
       })
+
+
+    function locked(id) {
+      $("#Parent-" + id + " #" + id).addClass("locked");
+      $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+    }
+    function locker(id) {        
+        $(`.row.${id}`).addClass("locked");
+        $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+      }
+   
+    // locker('ggAdsOverview')
+    locked('getScrapedSearchAds')
+    locked('')
+    
+
+
 
 });
