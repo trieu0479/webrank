@@ -24,11 +24,11 @@ $(document).ready(() => {
         }
     };
     //init datatable
-    const initDatatable = function(select, tableOptions) {
+    const initDatatable = function (select, tableOptions) {
         const table = $(`.${select}`).DataTable(tableOptions);
         $(table.table().header()).addClass('text-center');
         //reload click handle
-        $(`.${select}`).click(function(event) {
+        $(`.${select}`).click(function (event) {
             // $(event.target).addClass('fa-spin');
             $(`.${select}-container`).addClass('is-loading').block({
                 overlayCSS: {
@@ -46,35 +46,54 @@ $(document).ready(() => {
         })
         return table;
     }
+
+    var arrNameContry = [];
+    $.get(`//localapi.trazk.com/webdata/semrush.php?task=countryIsoName`, function (res) {
+        arrNameContry = res.data
+    })
     // Quốc Gia
     initDatatable(
-        'getDataContry', {
+        'getDataContry',
+        {
             ajax: {
                 url: `https://localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
+
                     let dataContry = json.data.backlinksOverview.geodomains;
                     let columns = [];
                     let total = [];
+                    let data1 = [];
                     if (json && dataContry) {
                         $(`.getDataContry_wrapper .dataTables_scrollHead table.dataTable`).addClass('d-block').removeClass('d-none')
-                        $(`#DataTables_Table_0_processing.dataTables_processing`).css('display','none').addClass('d-none')
+                        $(`#DataTables_Table_0_processing.dataTables_processing`).css('display', 'none').addClass('d-none')
                         $.each(dataContry, (index, item) => {
                             total.push(+item)
                         })
-                        $.each(dataContry, (index, item) => {
-                            let temp = {
-                                contry: {
-                                    icon: index,
-                                    value: item,
-                                    total: sum(total)
+
+                        $.each(arrNameContry, (index, item) => {
+                            let nameCountry = {
+                                ele: index.toLowerCase(),
+                                name: item
+                            }
+                            data1.push(nameCountry)
+                        })
+                        data1.forEach(val => {
+                            for (const i in dataContry) {
+                                if (val.ele == i) {
+                                    let temp = {
+                                        contry: {
+                                            id: val.ele,
+                                            name: val.name,
+                                            value: dataContry[i],
+                                            total: sum(total)
+                                        }
+                                    }
+                                    columns.push(temp)
                                 }
                             }
-                            columns.push(temp)
                         })
                         return columns
 
-
-                        // console.log(arr);
                     } else {
                         $('.getDataContry thead').addClass('d-none')
                         return columns;
@@ -82,13 +101,13 @@ $(document).ready(() => {
 
                 },
             },
-            drawCallback: function(settings) {
+            drawCallback: function (settings) {
                 $('.getDataContry').removeClass('is-loading').unblock();
                 $('.getDataContry').find('.fa-spin').removeClass('fa-spin');
 
             },
             columns: [
-                { title: 'Quốc gia', data: data => `<div class="text-left"><span class="flag flag-${data.contry.icon}"></span></div>` },
+                { title: 'Quốc gia', data: data => `<div class="text-left"><span class="flag flag-${data.contry.id}"></span><span class="pl-1 font-12">${data.contry.name}</span></div>` },
                 { title: '<div class="text-right font-weight-500">Tên miền</div>', data: data => `<div class="text-right"><span class="pr-3">${numeral(data.contry.value / data.contry.total).format('0.0%')}</span><span class="text-info">${numeral(data.contry.value).format('0,0')}</span></div>` },
             ],
             "order": [1, 'desc'],
@@ -109,7 +128,6 @@ $(document).ready(() => {
     )
 
     // TLD Distribution
-
     initDatatable(
         'getDataZones',
         {
@@ -121,7 +139,7 @@ $(document).ready(() => {
                     let total = [];
                     if (json && getDataZones) {
                         $(`#getDataZones_wrapper .dataTables_scrollHead table.dataTable`).addClass('d-block').removeClass('d-none');
-                        $(`#DataTables_Table_0_processing.dataTables_processing`).css('display','none').addClass('d-none')
+                        $(`#DataTables_Table_0_processing.dataTables_processing`).css('display', 'none').addClass('d-none')
                         $.each(getDataZones, (index, item) => {
                             total.push(+item)
                         })
@@ -180,7 +198,7 @@ $(document).ready(() => {
                 dataSrc: (json) => {
                     let topBackLinks = json.data.backlinksDetail;
                     console.log(topBackLinks);
-                    
+
                     if (json && topBackLinks) {
                         $(`#getDataZones_wrapper .dataTables_scrollHead table.dataTable`).addClass('d-block').removeClass('d-none');
                         $(`#DataTables_Table_0_processing.dataTables_processing`).css('display', 'none').addClass('d-none')
@@ -199,12 +217,18 @@ $(document).ready(() => {
 
             },
             columns: [
-                { title: 'Page AS', data: data => `<div style="width:200px" class="text-left">${data.response_code}</div>` },
-                { title: 'Source Page Title and URL', data: data => `<div class="text-right">${data.source_title}</div>
-                <div class="text-right">${data.source_url}</div>
+                { title: 'Page AS', data: data => `<div style="width:50px" class="text-left">${data.page_ascore}</div>` },
+                {
+                    title: 'Source Page Title and URL', data: data => `<div class="text-left">${data.source_title}</div>
+                                                                       <div class="text-left">${data.source_url}</div>
                 ` },
-                {title: 'Ext Links', data:data=>`<div class="text-right">${data.external_link_num}</div>`},
-                {title: 'Ext Links', data:data=>`<div class="text-right">${data.external_link_num}</div>`}
+                { title: 'Ext Links', data: data => `<div class="text-left">${data.external_link_num}</div>` },
+                { title: 'Int inks', data: data => `<div class="text-left">${data.external_link_num}</div>` },
+                { title: 'Anchor and Target URL', data: data => `<div class="text-left">${data.anchor}</div>
+                                                                 <div class="text-left text-hidden" style="width:200px!important">${data.target_url}</div>
+                ` },
+                { title: 'First Seen', data: data => `<div class="text-left">${moment(data.first_seen*1000).format('DD MMM YY')}</div>` },
+                { title: 'Last Seen', data: data => `<div class="text-left">${moment(data.last_seen*1000).format('DD MMM YY')}</div>` },
             ],
             "order": [1, 'desc'],
             language,
