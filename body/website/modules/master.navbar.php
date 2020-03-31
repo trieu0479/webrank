@@ -12,9 +12,11 @@
     <ul class=" nav nav-pills">
         <?php foreach ($navLinks as $k => $v ){
             if ($k == $_GET['action']) $active = "active"; else $active = "";
+            if ($k == "overview") $linkTarget = $rootDomain."/rank/".$_GET['domain'];
+            else  $linkTarget = $rootURL."/index.php?view=website&action=".$k."&domain=".$_GET['domain'];
         ?>
             <li class="nav-item">
-            <a class="nav-link <?=$active?>" href="<?=$rootDomain?>/index.php?view=website&action=<?=$k?>&domain=<?=$_GET['domain']?>"><?=$v?></a>
+            <a class="nav-link <?=$active?>" href="<?=$linkTarget?>"><?=$v?></a>
             </li>
         <?}?>
        

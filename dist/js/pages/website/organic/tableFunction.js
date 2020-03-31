@@ -42,7 +42,7 @@ $(document).ready(() => {
     initDatatable(
             'getOrganicKeywordsBrandedTable', {
                 ajax: {
-                    url: `//localapi.trazk.com/webdata/websiteapi.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
+                    url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
                         if (!json.data || !json.data.data) {
                             $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state').attr('style', 'height: 300px;')
@@ -86,7 +86,7 @@ $(document).ready(() => {
                         }
                     },
                     { title: 'CPC', data: data => `$${data.CPC}` },
-                    { title: 'Vị trí', data: data => data.PositionPaid[0].Value },
+                    { title: 'Vị trí', data: data => (data.PositionPaid[0].Value == -1) ? '1' : data.PositionPaid[0].Value },
                     { title: 'Lượt tìm kiếm', data: data => $.number(data.KwVolume) }
                 ],
                 "order": [
@@ -114,7 +114,7 @@ $(document).ready(() => {
     initDatatable(
         'getOrganicKeywordsNonBrandedTable', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/websiteapi.php?task=getOrganicKeywordsNonBrandedTable&domain=${localDomain}&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsNonBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
                     if (!json.data || !json.data.data) {
                         $('.parent-getOrganicKeywordsNonBrandedTable').html('').addClass('empty-state').attr('style', 'height: 292px;')
@@ -155,7 +155,7 @@ $(document).ready(() => {
                     }
                 },
                 { title: 'CPC', data: data => `$${data.CPC}` },
-                { title: 'Vị trí', data: data => data.PositionPaid[0].Value },
+                { title: 'Vị trí', data: data => (data.PositionPaid[0].Value == -1) ? '1' : data.PositionPaid[0].Value },
                 { title: 'Lượt tìm kiếm', data: data => $.number(data.KwVolume) }
 
             ],

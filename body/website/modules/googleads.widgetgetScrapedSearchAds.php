@@ -16,7 +16,7 @@
                                 <div class="col-auto pl-0">
                                     <div class="text-capitalize font-weight-bold">
                                         <?=_(" Mẫu quảng cáo tìm kiếm trả phí")?></div>
-                                    <div class="text-muted similarDates font-10">12.2019 - 02.2020</div>
+                                    <div class="text-muted data-headerTimes font-10"></div>
                                 </div>
                                 <div class="ml-auto d-flex no-block align-items-center pr-3">
                                     <a class="similarReloadTask text-muted" data-task="getScrapedSearchAds"

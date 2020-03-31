@@ -123,6 +123,8 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
 
   $.get(`//localapi.trazk.com/webdata/facebook.php?task=findFanpageByDomain&domain=${localDomain}&userToken=${userToken}`, function (res) {
     let fbId = res.data.fbId;
+    console.log('das',res);
+    
     let logo = res.data.imageURI;
     let name = res.data.name;
     let iconBlue = '';
@@ -135,7 +137,7 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
       }
       let html = `
         <div class="imgPageAds d-flex align-items-end"
-          style="--cover-photo-uri: url('${res.data.pageCoverPhoto}');background-size: cover;height: 300px;width: 100%;background-position: center;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri);padding: 20px!important;">
+          style="--cover-photo-uri: url('${res.data.pageCoverPhoto}');background-size: contain;height: 300px;width: 100%;background-position: center;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri);padding: 20px!important;">
                     <div class="p-2 mb-4 rounded-circle bg-primary" style="width:115px;height:115px;background-image: url('${res.data.imageURI}');background-size: cover;background-position: center;background-repeat: no-repeat;border:2px solid white"></div>
                     <div class="p-2 mb-2 mb-lg-5 pl-3">
                     <div class="font-16 font-weight-bold text-white">${res.data.name} <img class="ml-n1" src="${iconBlue}" style="width:20px">
