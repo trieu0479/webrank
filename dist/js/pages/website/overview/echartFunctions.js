@@ -3,13 +3,29 @@
 
 // const counter = document.querySelector('.counter');
 var domain = "";
-var domain_name = "";
 if (location.href.indexOf("/rank/") > 1) {
-    var domainTmp = location.href.split("/");
-    domain_name = domainTmp[4];
+    domain = location.href.substring(location.href.indexOf("/rank/")+6);
 } else {
-    domain_name = url.searchParams.get("domain");
+    domain = url.searchParams.get("domain");
 }
+domain = extractHostname(domain);
+
+function extractHostname(url) {
+    var hostname;
+    if (url.indexOf("//") > -1) {
+        hostname = url.split('/')[2];
+    }
+    else {
+        hostname = url.split('/')[0];
+    }
+    hostname = hostname.split(':')[0];
+    hostname = hostname.split('?')[0];
+    return hostname;
+}
+
+
+var domain_name =domain;
+
 var arrDomain = [];
 var selectWebsite = "";
 

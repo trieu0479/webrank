@@ -1,12 +1,31 @@
 var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 var domain = "";
 if (location.href.indexOf("/rank/") > 1) {
-    var domainTmp = location.href.split("/");
-    domain = domainTmp[4];
+    domain = location.href.substring(location.href.indexOf("/rank/")+6);
 } else {
     domain = url.searchParams.get("domain");
 }
-console.log(domain);
+domain = extractHostname(domain);
+
+function extractHostname(url) {
+    var hostname;
+    //find & remove protocol (http, ftp, etc.) and get hostname
+
+    if (url.indexOf("//") > -1) {
+        hostname = url.split('/')[2];
+    }
+    else {
+        hostname = url.split('/')[0];
+    }
+
+    //find & remove port number
+    hostname = hostname.split(':')[0];
+    //find & remove "?"
+    hostname = hostname.split('?')[0];
+
+    return hostname;
+}
+
 const datatableLanguage = {
     searchPlaceholder: 'Nhập từ khóa',
     processing: 'Đang xử lý...',
