@@ -9,15 +9,16 @@
                 </div>
             </div>
             <!-- -----over view display ads---------------------- -->
-            <div class="row displayAdsOverview">
-
+            <div id="Parent-displayAdsOverview" style="position: relative">
+                <div class="row displayAdsOverview">
+                </div>
             </div>
             <!-- --------------------------------sample-ads-------------------------------------- -->
-            <div class="row" >
+            <div class="row">
                 <?php require_once(__DIR__ . "/modules/displayads.widgetSampleAds.php") ?>
             </div>
-             <!-- ---------------3 chart- -->
-             <div class="row mb-0">
+            <!-- ---------------3 chart- -->
+            <div class="row mb-0">
                 <div class="col-12 col-lg-4 ">
                     <div class="widget-getDisplayCountryChart">
                     </div>
@@ -60,15 +61,15 @@
             <div class="row">
                 <?php require_once(__DIR__ . "/modules/displayads.widgetDisplayDevice.php") ?>
             </div>
-           <div class="row">
-             <div class="col-12 col-lg-12">
-                <div class="widget-PublicSherTable"></div>
-             </div>
-           </div>
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="widget-PublicSherTable"></div>
+                </div>
+            </div>
 
 
 
-           
+
 
 
         </div>
@@ -79,9 +80,9 @@
         $('[data-toggle="tooltip"]').tooltip();
     })
 </script>
-<script src="<?=$rootURL?>/assets/js/wordcloud2.js"></script>
-<script src="<?=$rootURL?>/assets/js/ResizeSensor.js"></script>
-<script src="<?=$rootURL?>/dist/js/pages/my-function/init-function.js"></script>
-<script type="module" src="<?=$rootURL?>/dist/js/pages/website/master.js?v=<?= $version ?>"></script>
-<script type="module" src="<?=$rootURL?>/dist/js/pages/website/displayads/index.js?v=<?= $version ?>"></script>
-<script type="module" src="<?=$rootURL?>/dist/js/pages/website/displayads/callechartFunction.js?v=<?= $version ?>"></script>
+<script src="<?= $rootURL ?>/assets/js/wordcloud2.js"></script>
+<script src="<?= $rootURL ?>/assets/js/ResizeSensor.js"></script>
+<script src="<?= $rootURL ?>/dist/js/pages/my-function/init-function.js"></script>
+<script type="module" src="<?= $rootURL ?>/dist/js/pages/website/master.js?v=<?= $version ?>"></script>
+<script type="module" src="<?= $rootURL ?>/dist/js/pages/website/displayads/index.js?v=<?= $version ?>"></script>
+<script type="module" src="<?= $rootURL ?>/dist/js/pages/website/displayads/callechartFunction.js?v=<?= $version ?>"></script>
