@@ -1571,19 +1571,7 @@ const getDomainOrganicDetail = async(task, data) => {
                 </fieldset>
                 <span class="similarReloadTask ml-3" data-task="${task}"><i class="fal fa-sync"></i></span>
             `)
-            $(`.similarReloadTask[data-task="trafficKeywordTrend"]`).parent().html(`
-                    <fieldset id="btn-trafficKeywordTrend" style="box-shadow: 0 0 0 1px #eaedef inset !important;border-radius: 5px;">
-                        <input id="trafficKeywordTrend-date" class="checkbox-budget" type="radio" name="getTrafficAndEngagementVisits" value="trafficKeywordTrend-date" checked="checked">
-                        <label class="for-checkbox-budget" for="trafficKeywordTrend-date">
-                            Ngày
-                        </label>
-                        <input id="trafficKeywordTrend-month" class="checkbox-budget" type="radio" name="getTrafficAndEngagementVisits" value="trafficKeywordTrend-month">
-                        <label class="for-checkbox-budget" for="trafficKeywordTrend-month">
-                            Tháng
-                        </label>
-                    </fieldset>
-                    <span class="similarReloadTask ml-3" data-task="${task}"><i class="fal fa-sync"></i></span>
-                `)
+
             renderChart(trend_month)
             $('#btn-keytrend input').click(function() {
                     let val = $(this).val()
@@ -1598,15 +1586,22 @@ const getDomainOrganicDetail = async(task, data) => {
                 let option = {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer: {
-                            type: 'cross',
-                            label: {
-                                backgroundColor: '#6a7985'
-                            }
+                        backgroundColor: 'rgba(255, 255, 255, 1)',
+                        borderColor: 'rgba(93,120,255,1)',
+                        borderWidth: 1,
+                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                        formatter: params => {
+                            return `<div style="width: 150px !important" class="text-dark text-capitalize text-left border-bottom pb-1">${params[0].name}</div>
+                            <div class="text-dark pt-2 text-left">
+                                <div class="d-flex justify-content-between">
+                                <span>${params[0].marker} ${params[0].seriesName}</span><span class="text-right" style="color:${params[0].color};font-weight:bold">${numeral(params[0].value).format("0,0")}</span></div>
+                                <div class="d-flex justify-content-between">
+                                <span>${params[1].marker} ${params[1].seriesName}</span><span class="ml-2" style="color:${params[1].color};font-weight:bold">${numeral(params[1].value).format("0,0")} vnd</span></div>
+                            </div>`;
                         }
                     },
                     legend: {
-                        data: ['Traffic', 'Traffic Cost']
+                        data: ['Traffic', 'Traffic Cost'],
                     },
                     grid: {
                         left: '3%',
@@ -1695,6 +1690,19 @@ const getDomainOrganicDetail = async(task, data) => {
                 };
                 //v7
             }
+            $(`.similarReloadTask[data-task="trafficKeywordTrend"]`).parent().html(`
+                    <fieldset id="btn-trafficKeywordTrend" style="box-shadow: 0 0 0 1px #eaedef inset !important;border-radius: 5px;">
+                        <input class="checkbox-budget" type="radio" name="budget" id="budget-1" value="trafficKeywordTrend-date" checked="">
+                        <label class="for-checkbox-budget" for="budget-1">
+                            <span>Ngày</span>
+                        </label>
+                        <input class="checkbox-budget" type="radio" name="budget" id="budget-2" value="trafficKeywordTrend-month">
+                        <label class="for-checkbox-budget" for="budget-2">
+                            <span>Tháng</span>
+                        </label>
+                    </fieldset>
+                    <span class="similarReloadTask ml-3" data-task="${task}"><i class="fal fa-sync"></i></span>
+                `)
             renderKeywordpaid(trafficCostdate)
             $('#btn-trafficKeywordTrend input').click(function() {
                 let val = $(this).val()

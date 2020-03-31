@@ -3,7 +3,7 @@
     <div class="row m-0 pt-2">
         <div class="col-auto pl-0 ml-4">
             <div class="text-capitalize font-weight-bold">Truy cập theo thời gian</div>
-            <div class="text-muted similarDates font-10"></div>
+            <div class="text-muted data-headerTimes font-10"></div>
         </div>
         <div class="ml-auto d-flex no-block align-items-center">
             <div class=" pr-3" id="TimeChart">

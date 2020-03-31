@@ -6,7 +6,7 @@
                                 <div class="col-auto pl-0">
                                     <div class="text-capitalize font-weight-bold"><?=_(" Phân tích nguồn khách hàng")?>
                                     </div>
-                                    <div class="text-muted similarDates font-10"></div>
+                                    <div class="text-muted data-headerTimes font-10"></div>
                                 </div>
                                 <div class="ml-auto d-flex no-block align-items-center pr-3" id="TimeChartMarket">
                                     <fieldset>

@@ -2761,15 +2761,17 @@ const getTrafficSocial = async(task, data, domain) => {
                 $("#percenTotalSocailVisits").html(`${numeral(TotalDesktopTraffic).format('0.00%')}`);
 
                 let dataChartPie = [{
-                            name: "Mạng xã hội",
-                            value: SearchTotal
-                        },
-                        {
-                            name: "Tổng",
-                            value: VolumeTotal - SearchTotal
-                        }
-                    ]
-                    // render chart
+                        name: "Mạng xã hội",
+                        value: SearchTotal
+                    },
+                    {
+                        name: "Tổng",
+                        value: VolumeTotal - SearchTotal
+                    }
+                ]
+                console.log(dataChartPie);
+
+                // render chart
                 let elePie = document.getElementById("getTotalSocialVisits");
                 let myChartPie = echarts.init(elePie);
 
@@ -2778,13 +2780,17 @@ const getTrafficSocial = async(task, data, domain) => {
                     legend: {
                         bottom: "-2%",
                         right: "25%",
+                        formatter: function(name) {
+                            let value = name == 'Tổng' ? dataChartPie[1].value : dataChartPie[0].value;
+                            return `${name}\n(${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')})`;
+                        }
                     },
                     series: [{
                         type: 'pie',
                         legendHoverLink: false,
                         minAngle: 20,
-                        radius: ["50%", "80%"],
-                        center: ["50%", "45%"],
+                        radius: ["45%", "70%"],
+                        center: ["45%", "45%"],
                         avoidLabelOverlap: false,
                         itemStyle: {
                             normal: {
@@ -2928,7 +2934,7 @@ const getTrafficSocial = async(task, data, domain) => {
 
                             return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
                 <div class="text-dark pt-2">
-                    ${mrkr1} ${name1} <span style="color:${color1};font-weight:bold">${val1}</span>
+                    ${mrkr1} Traffic <span style="color:${color1};font-weight:bold">${val1}</span>
                 </div>`;
                         }
                     },

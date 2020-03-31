@@ -17,7 +17,7 @@
                                         <div class="col-auto pl-0">
                                             <div class="text-capitalize font-weight-bold">Lượt truy cập xã hội
                                             </div>
-                                            <div class="text-muted similarDates font-10"></div>
+                                            <div class="text-muted data-headerTimes font-10"></div>
                                         </div>
                                         <div class="ml-auto d-flex no-block align-items-center pr-3">
                                             <a class="similarReloadTask text-muted" data-task="getTrafficSocial"
@@ -34,14 +34,14 @@
                                         </div>
                                         <div class="col-12 col-lg-4">
                                             <div class="pt-0 pt-lg-4 pb-4 pb-lg-0">
-                                                <div id="Parent-TotalSocialVisits">
+                                                <!-- <div id="Parent-TotalSocialVisits">
                                                     <div id="TotalSocialVisits"
                                                         class="d-none d-lg-block h4 text-center text-info font-bold">
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div id="Parent-getTotalSocialVisits">
                                                     <div id="getTotalSocialVisits" class="w-100 rounded"
-                                                        style="height: 200px">
+                                                        style="height: 225px">
                                                     </div>
                                                 </div>
                                             </div>

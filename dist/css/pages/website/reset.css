@@ -451,6 +451,8 @@
     width: 18%;
 }
 
+#btn-trafficKeywordTrend [type="radio"]:checked,
+#btn-trafficKeywordTrend [type="radio"]:not(:checked),
 #btnTotalBackLink [type="radio"]:checked,
 #btnTotalBackLink [type="radio"]:not(:checked) {
     position: absolute;
@@ -460,6 +462,8 @@
     visibility: hidden;
 }
 
+#btn-trafficKeywordTrend .checkbox-budget:checked+label,
+#btn-trafficKeywordTrend .checkbox-budget:not(:checked)+label,
 #btnTotalBackLink .checkbox-budget:checked+label,
 #btnTotalBackLink .checkbox-budget:not(:checked)+label {
     color: #666;
@@ -471,6 +475,7 @@
     transition: all .2s;
 }
 
+#btn-trafficKeywordTrend .checkbox-budget:checked+label,
 #btnTotalBackLink .checkbox-budget:checked+label {
     background: rgba(93, 120, 255, .1);
     color: #5d78ff;

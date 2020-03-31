@@ -48,6 +48,9 @@ const initDatatable = function(select, tableOptions) {
 }
 
 $(document).ready(() => {
+    var date = new Date();
+    var headerTimes = moment(date).format('MM.YYYY')
+    $('.data-headerTimes').text(headerTimes)
     window.localDomain = domain;
     window.createAWidgets = function createAWidgets(input) {
         if (input.headerIcon == undefined) input.headerIcon = `<i class="text-primary fad fa-check-circle"></i>`;
@@ -58,7 +61,7 @@ $(document).ready(() => {
                     <div class="col-auto d-flex no-block align-items-center mx-1">${input.headerIcon}</div>
                     <div class="col-auto pl-0">
                         <div class="text-capitalize font-weight-bold">${input.headerTitle}</div>
-                        <div class="text-muted font-10">${input.headerTime}</div>
+                        <div class="text-muted font-10">${headerTimes}</div>
                     </div>
                     <div class="ml-auto d-flex no-block align-items-center pr-3">
                         <span class="similarReloadTask" data-task="${input.widgetTask}"><i class="fal fa-sync"></i></span>
@@ -85,11 +88,9 @@ $(document).ready(() => {
                     <div class="col-auto d-flex no-block align-items-center mx-1">${input.headerIcon}</div>
                     <div class="col-auto pl-0">
                         <div class="text-capitalize font-weight-bold">${input.headerTitle}</div>
-                        <div class="text-muted font-10">${input.headerTime}</div>
+                        <div class="text-muted font-10">${headerTimes}</div>
                     </div>
-                    <div class="ml-auto d-flex no-block align-items-center pr-3">
-                        <span class="similarReloadTaskaaaaa" data-task="${input.widgetTask}"><i class="fal fa-sync"></i></span>
-                    </div>
+                    
                 </div>
                 <div class="widgetBody text-center">
                     <div class="parent-${input.widgetTask}">
