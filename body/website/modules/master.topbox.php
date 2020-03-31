@@ -24,7 +24,7 @@
                     <input type="text" class="form-control ml-1 font-14 iptWebsite py-4 rounded mr-2" aria-label="Nhập tên miền website của bạn vào đây" value="<?php echo $_GET['domain']?>" placeholder="Nhập tên miền website của bạn vào đây">
                     <div class="input-group-append">
                         <button class="btnCheckWebsite btn btn-success font-gg font-weight-500 rounded shadow-sm px-5" type="button"><i
-                            class="far fa-layer-plus mr-2 font-13"></i>Tiếp tục</button>
+                            class="fad fa-bolt mr-2 font-13"></i>Phân Tích</button>
                     </div>
                 </div>
                 <div class="nextpage pt-3">
