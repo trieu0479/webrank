@@ -375,11 +375,11 @@ const getTrafficSourcesSearch = async(task, data) => {
             let option = {
                 color: customColors,
                 legend: {
-                    top: "30%",
-                    left: '70%',
-                    itemWidth: 20,
-                    itemHeight: 14,
-                    width: 10,
+                    bottom: "5%",
+                    // left: '70%',
+                    // itemWidth: 20,
+                    // itemHeight: 14,
+                    // width: 10,
                     textStyle: {
                         fontFamily: 'Arial',
                     },
@@ -389,7 +389,7 @@ const getTrafficSourcesSearch = async(task, data) => {
                     legendHoverLink: false,
                     minAngle: 20,
                     radius: ["40%", "60%"],
-                    center: ["30%", "50%"],
+                    center: ["50%", "40%"],
                     avoidLabelOverlap: false,
                     itemStyle: {
                         normal: {
@@ -1572,18 +1572,18 @@ const getDomainOrganicDetail = async(task, data) => {
                 <span class="similarReloadTask ml-3" data-task="${task}"><i class="fal fa-sync"></i></span>
             `)
             $(`.similarReloadTask[data-task="trafficKeywordTrend"]`).parent().html(`
-                <fieldset id="btn-trafficKeywordTrend" style="box-shadow: 0 0 0 1px #eaedef inset !important;border-radius: 5px;">
-                    <input id="trafficKeywordTrend-date" class="radio-inline__input" type="radio" name="getTrafficAndEngagementVisits" value="trafficKeywordTrend-date" checked="checked">
-                    <label class="radio-inline__label" for="trafficKeywordTrend-date">
-                        Ngày
-                    </label>
-                    <input id="trafficKeywordTrend-month" class="radio-inline__input" type="radio" name="getTrafficAndEngagementVisits" value="trafficKeywordTrend-month">
-                    <label class="radio-inline__label" for="trafficKeywordTrend-month">
-                        Tháng
-                    </label>
-                </fieldset>
-                <span class="similarReloadTask ml-3" data-task="${task}"><i class="fal fa-sync"></i></span>
-            `)
+                    <fieldset id="btn-trafficKeywordTrend" style="box-shadow: 0 0 0 1px #eaedef inset !important;border-radius: 5px;">
+                        <input id="trafficKeywordTrend-date" class="checkbox-budget" type="radio" name="getTrafficAndEngagementVisits" value="trafficKeywordTrend-date" checked="checked">
+                        <label class="for-checkbox-budget" for="trafficKeywordTrend-date">
+                            Ngày
+                        </label>
+                        <input id="trafficKeywordTrend-month" class="checkbox-budget" type="radio" name="getTrafficAndEngagementVisits" value="trafficKeywordTrend-month">
+                        <label class="for-checkbox-budget" for="trafficKeywordTrend-month">
+                            Tháng
+                        </label>
+                    </fieldset>
+                    <span class="similarReloadTask ml-3" data-task="${task}"><i class="fal fa-sync"></i></span>
+                `)
             renderChart(trend_month)
             $('#btn-keytrend input').click(function() {
                     let val = $(this).val()

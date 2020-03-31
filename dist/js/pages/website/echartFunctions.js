@@ -2320,7 +2320,7 @@ const getTrafficSocial = async (task, data, domain) => {
             let TrafficSocial = data.data.data;
             let SearchTotal = TrafficSocial.SearchTotal;
             let VolumeTotal = TrafficSocial.VolumeTotal;
-            let TotalDesktopTraffic = SearchTotal / VolumeTotal;
+            // let TotalDesktopTraffic = SearchTotal / VolumeTotal;
 
             $("#TotalSocialVisits").removeClass("is-loading");
             // $("#TotalSocialVisits").html(`Tổng ${numeral(SearchTotal).format("0,0")}`);
@@ -2344,9 +2344,14 @@ const getTrafficSocial = async (task, data, domain) => {
 
             let optionPie = {
                 color: masterColor,
+                data: ['Mạng xã hội', 'Tổng'],
                 legend: {
-                    bottom: "-2%",
+                    bottom: "-3%",
                     right: "25%",
+                    formatter: function(name) {
+                        let value = name == 'Mạng xã hội' ? SearchTotal : VolumeTotal - SearchTotal;
+                        return `${name}\n(${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')})`;
+                    }
                 },
                 series: [{
                     type: 'pie',
@@ -2484,7 +2489,7 @@ const getTrafficSocial = async (task, data, domain) => {
                 let ele = document.getElementById("getSocialVisits");
 
                 let myChart = echarts.init(ele, "light");
-
+                // let name1 ="Traffic";
                 let option = {
                     tooltip: {
                         trigger: "axis",
@@ -2503,7 +2508,8 @@ const getTrafficSocial = async (task, data, domain) => {
                                 seriesName: name1,
                                 value: val1
                             } = params[0];
-
+                            console.log('sdassadsa',params[0]);
+                            
                             name = moment(name).format('DD MMMM YYYY');
 
                             val1 = numeral(val1).format('0,0');
