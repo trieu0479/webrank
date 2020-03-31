@@ -2484,7 +2484,6 @@ const getTrafficSocial = async (task, data, domain) => {
                 $.each(Volumes, (name, data) => {
                     dataChart.values.push(data[0]);
                 })
-                console.log(dataChart,'data');
                 
                 let ele = document.getElementById("getSocialVisits");
 
