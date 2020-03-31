@@ -2324,7 +2324,7 @@ const getSimilarSites = async(task, data) => {
                     $(`.${task}`).append('<div class="similarSites col-12 col-md-4"></div>')
                 }
                 var compareNode = $(`<span  data-domain="${site.Domain}" class="changeWebSite text-primary bg-info-2 rounded-pill px-2 font-10 align-self-center ml-auto text-uppercase">+ so sánh</span>`);
-                $(`<a title="${site.Domain}" class="d-flex align-items-center" href='./index.php?view=website&action=overview&domain=${site.Domain}'">
+                $(`<a title="${site.Domain}" class="d-flex align-items-center" href='${rootURL}/rank/${site.Domain}'">
             <img class="p-1 mr-2 border rounded bg-secondary" src="${site.Favicon}" />
             <span  data-type="website" data-input="${site.Domain}" >${site.Domain}</span>
         </a>`).appendTo(`.${task} .similarSites:last-child`)
@@ -2369,7 +2369,7 @@ const getSimilarSites = async(task, data) => {
                     }).then((result) => {
                         // console.log(result);
                         if (result.value) {
-                            location.href = `?view=traffic-website&action=compare&domain1=${result.value[0].toLowerCase()}&domain2=${result.value[1].toLowerCase()}`;
+                            location.href = `${rootURL}/?view=traffic-website&action=compare&domain1=${result.value[0].toLowerCase()}&domain2=${result.value[1].toLowerCase()}`;
                         }
                     })
                 });
