@@ -40,7 +40,7 @@ $(document).ready(() => {
     initDatatable(
             'getWebsiteGeography-table', {
                 ajax: {
-                    url: `https://localapi.trazk.com/webdata/websiteapi.php?task=getWebsiteGeography&domain=${localDomain}`,
+                    url: `//localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: json => {
                         // console.log(json);
                         if (!json.data || !json.data.data) {
@@ -127,7 +127,7 @@ $(document).ready(() => {
     initDatatable(
             'getKeywords', {
                 ajax: {
-                    url: `//localapi.trazk.com/keywords/keywords.php?task=keywordPlannerDomain&limit=20&domain=${localDomain}`,
+                    url: `//localapi.trazk.com/keywords/keywords.php?task=keywordPlannerDomain&limit=20&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
                         if (json.data.keywords == null) {
                             $('.parent-getKeywords').html('').addClass('empty-state')
@@ -229,7 +229,7 @@ $(document).ready(() => {
     initDatatable(
         'banckLinksOverview', {
             ajax: {
-                url: `https://localapi.trazk.com/webdata/semrush.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.banckLinksOverview.backlinks.data);
                     let columns = [];
@@ -359,7 +359,7 @@ $(document).ready(() => {
     initDatatable(
         'getOrganicKeywordsBrandedTable', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/websiteapi.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}`,
+                url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
                     $('.similarDates-organickeyno').html(`${moment(json.data.lastUpdate).format("DD-MM-YYYY")}`)
                     if (!json.data || !json.data.data) {

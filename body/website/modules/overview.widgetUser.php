@@ -29,6 +29,9 @@
                                             Tháng
                                         </label>
                                     </fieldset>
+                                    <div class="ml-2">
+                                        <span style="cursor: pointer;" class="similarReloadTask" data-task="getMarketingMixOverviewDaily"><i class="fal fa-sync"></i></span>
+                                    </div>
                                 </div>
                             </div>
                             <div id="Parent-getMarketingMixOverview">
@@ -53,12 +56,12 @@
                                                 data-task="BounceRate" href="#getMarketingMixOverview--BounceRate"
                                                 role="tab"><span class=""><i class="fal fa-sign-out fa-1x"></i></span>
                                                 <span class="d-none d-md-inline">Tỷ lệ thoát</span></a> </li>
-                                        <li class="nav-item ">
+                                        <!-- <li class="nav-item ">
 
                                             <a style="border-bottom: 2px solid #fd397a;background: #fd397a14;" class="similarReloadTask text-muted nav-link" data-task="getMarketingMixOverviewDaily"
                                                 href="javascript:;"><i class="fal fa-sync"></i> Cập nhập</a>
                                     
-                                        </li>
+                                        </li> -->
                                     </ul>
                                     
                                     <!-- Tab panes -->

@@ -4,7 +4,7 @@
 // const counter = document.querySelector('.counter');
 var domain = "";
 if (location.href.indexOf("/rank/") > 1) {
-    domain = location.href.substring(location.href.indexOf("/rank/")+6);
+    domain = location.href.substring(location.href.indexOf("/rank/") + 6);
 } else {
     domain = url.searchParams.get("domain");
 }
@@ -14,8 +14,7 @@ function extractHostname(url) {
     var hostname;
     if (url.indexOf("//") > -1) {
         hostname = url.split('/')[2];
-    }
-    else {
+    } else {
         hostname = url.split('/')[0];
     }
     hostname = hostname.split(':')[0];
@@ -24,7 +23,7 @@ function extractHostname(url) {
 }
 
 
-var domain_name =domain;
+var domain_name = domain;
 
 var arrDomain = [];
 var selectWebsite = "";
@@ -371,9 +370,9 @@ const api = async(task, domain, reload = 0) => {
 
     if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail') {
         // taskname = task;
-        url = `//localapi.trazk.com/webdata/semrush.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
+        url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
     } else {
-        url = `//localapi.trazk.com/webdata/websiteapi.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`
+        url = `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`
     }
     try {
         return await $.ajax({
@@ -3369,15 +3368,16 @@ const getMarketingMixOverview = async(task, data) => {
                                 new ResizeSensor($(`#getMarketingMixOverview--${taskName}`), function() {
                                     myChart.resize();
                                 });
-
+                                await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
                                 await $(`#getMarketingMixOverview--${taskName}`).removeClass('is-loading');
                                 await $(`#getMarketingMixOverview`).removeClass('is-loading');
                                 await $(`#getMarketingMixOverview`).removeClass('empty-state');
-                                await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
+
                             }
                         } else {
                             $(`#getMarketingMixOverview`).removeClass('is-loading');
                             $(`#getMarketingMixOverview`).addClass('empty-state');
+                            await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
                         }
 
                     }
@@ -3445,11 +3445,13 @@ const getMarketingMixOverview = async(task, data) => {
                 } else {
                     $(`#getMarketingMixOverview`).removeClass('is-loading');
                     $(`#getMarketingMixOverview`).addClass('empty-state');
+                    await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
                 }
 
             } else {
                 $(`#getMarketingMixOverview`).removeClass('is-loading');
                 $(`#getMarketingMixOverview`).addClass('empty-state');
+                await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
             }
 
         } else {
