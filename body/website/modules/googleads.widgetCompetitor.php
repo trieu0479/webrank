@@ -18,10 +18,10 @@
                 <a class="similarReloadTask text-muted" data-task="MainCompetitor" href="javascript:;"><i class="fal fa-sync"></i></a>
             </div>
         </div>
-        <div class="mt-3">
-        <table id="MainCompetitor" class="table table-striped" style="width:100%;"></table>
-       
+        <div id="Parent-MainCompetitor" style="position: relative">
+            <div class="mt-3 maincompetitor">
+                <table id="MainCompetitor" class="table table-striped" style="width:100%;"></table>
+            </div>
         </div>
-
     </div>
 </div>

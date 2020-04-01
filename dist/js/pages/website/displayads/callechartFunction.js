@@ -1132,8 +1132,7 @@ $(document).ready(() => {
       {
         ajax: {
           url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}&userToken=${userToken}`,
-          dataSrc: (json) => {
-            console.log('ee',json);
+          dataSrc: (json) => {           
             if (json.userData.member =="demo") {
                   //class   
                 $(`.widget-getTrafficDisplayAdvertisingWebsitesTable .widgetBody`).addClass("locked");
@@ -1145,6 +1144,11 @@ $(document).ready(() => {
             $(".widget-getTrafficDisplayAdvertisingWebsitesTable").prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng cấp VIP để xem data hoàn toàn miễn phí</a></div>');
                   
           }
+          if (json.data.data.Data.Records.length<=0) {
+            $('#DataTables_Table_1_wrapper').css('min-height','268px');
+            $('#DataTables_Table_1_wrapper').addClass('empty-state')
+            $('table.getTrafficDisplayAdvertisingWebsitesTable tbody tr td.dataTables_empty').addClass('d-none')
+          }
             if (json && json.data && json.data.data && json.data.data.Data) {
               let { Data: newData } = json.data.data;
               if (newData.Records.length > 0) {
@@ -1155,7 +1159,7 @@ $(document).ready(() => {
               }
               // return (newData.Records)
             }
-
+    
             else {        
                 $('#DataTables_Table_1_wrapper').css('min-height','268px');
                 $('#DataTables_Table_1_wrapper').addClass('empty-state')

@@ -59,18 +59,7 @@ $( document ).ready(function() {
       })
 
 
-    function locked(id) {
-      $("#Parent-" + id + " #" + id).addClass("locked");
-      $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-    }
-    function locker(id) {        
-        $(`.row.${id}`).addClass("locked");
-        $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-      }
-   
-    // locker('ggAdsOverview')
-    locked('getScrapedSearchAds')
-    locked('')
+    
     
 
 

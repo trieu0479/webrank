@@ -19,9 +19,10 @@
                 <a class="similarReloadTask text-muted" data-task="PaidPageTable" href="javascript:;"><i class="fal fa-sync"></i></a>
             </div>
         </div>
-        <div class="mt-3">
-        <table id="PaidPageTable" class="table table-striped" style="width:100%;"></table>
-       
+        <div id="Parent-PaidPageTable" style="position: relative">
+            <div class="mt-3 paidpagetable">
+                <table id="PaidPageTable" class="table table-striped" style="width:100%;"></table>
+            </div>
         </div>
 
     </div>

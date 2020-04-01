@@ -275,7 +275,32 @@ const getHeader = async data => {
         });
     });
 };
+function lockeddemo(id) {
+    $("#Parent-" + id + " #" + id).addClass("locked");
+    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+}
+function lockerdemo(id) {      //class   
+    $(`.row.${id}`).addClass("locked");
+    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+  }
+function lockedfree(id) {
+    $("#Parent-" + id + " #" + id).addClass("locked");
+    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+}
+function lockerfree(id) {        //class
+    $(`.row.${id}`).addClass("locked");
+    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+  }
 
+function lockchartdemo(id) {
+    console.log(id)
+    $(`.parent-${id}`).addClass("locked");
+    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+}
+function lockchartfree(id) {
+    $(`.parent-${id}`).addClass("locked");
+    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+}
 
 
 const api = async (task, domain,reload=0) => {
@@ -397,6 +422,12 @@ const api = async (task, domain,reload=0) => {
                             getWebsiteAdsIntelDisplay(task, data);
                             break;
                         case "getScrapedSearchAds":
+                            if (data.userData.member == "demo") {                                                    
+                                   lockeddemo('getScrapedSearchAds')
+                                }
+                                else if (data.userData.member =="free") {
+                                    lockedfree('getScrapedSearchAds')
+                                }
                             getScrapedSearchAds(task, data);
                             break;
                         case "getSearchBrandedKeywords":
