@@ -206,7 +206,7 @@ $(document).ready(() => {
         var swiper = new Swiper('.swiper-container', {
             slidesPerView: 1,
             spaceBetween: 10,
-            slidesPerGroup: 3,
+            slidesPerGroup: 1,
             loop: true,
             loopFillGroupWithBlank: true,
             pagination: {
@@ -221,12 +221,14 @@ $(document).ready(() => {
                 // when window width is >= 480px
                 540: {
                     slidesPerView: 2,
-                    spaceBetween: 20
+                    spaceBetween: 20,
+                    slidesPerGroup: 2,
                 },
                 // when window width is >= 640px
                 960: {
                     slidesPerView: 3,
-                    spaceBetween: 30
+                    spaceBetween: 30,
+                    slidesPerGroup: 3,
                 }
             }
         });

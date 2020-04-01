@@ -1405,9 +1405,10 @@ const getTrafficSourcesSearch = async(task, data) => {
         locked(task, dataaaaa)
     }
     $(`.${task}`).parents().parents().parents().removeClass('rounded').addClass('rounded-top')
-    $(`.${task}`).attr('style', 'height: 250px;');
+        // $(`.${task}`).attr('style', 'height: 250px;');
     $('.precent-organicoverview').removeClass('d-none')
     if (data.status == "success") {
+        $(`.${task}`).removeClass('empty-state');
         let {
             data: traffic
         } = data.data;
@@ -1442,9 +1443,10 @@ const getTrafficSourcesSearch = async(task, data) => {
                 color: masterColor,
                 legend: {
                     bottom: "5%",
-                    textStyle: {
-                        fontFamily: 'Arial',
-                    },
+                    formatter: function(name) {
+                        let value = name == 'Tự nhiên' ? dataChart[0].value * 100 : dataChart[1].value * 100;
+                        return `${name}\n(${value}%)`;
+                    }
                 },
                 series: [{
                     type: 'pie',
@@ -1918,6 +1920,7 @@ const getWebDemographicsAge = async(task, data) => {
 const getTrafficSourcesOverview = async(task, data) => {
     $('.getTrafficSourcesOverview ').attr('style', 'min-height:300px')
     if (data.status == "success" && data.data.data) {
+        $(`.${task}`).removeClass('empty-state');
         let {
             data: traffic
         } = data.data;
@@ -2032,6 +2035,7 @@ const getWebDemographicsGender = async(task, data) => {
     }
     if (data.status == "success") {
         // console.log("ddd");
+        $(`.${task}`).removeClass('empty-state');
         let {
             data: visits
         } = data.data;
@@ -2176,6 +2180,7 @@ const getDesktopVsMobileVisits = async(task, data) => {
         locked(task, data_menber)
     }
     if (data.status == "success") {
+        $(`.${task}`).removeClass('empty-state');
         let {
             data: visits
         } = data.data;
@@ -2331,6 +2336,7 @@ const getDesktopVsMobileVisits = async(task, data) => {
 // SỬ DỤNG
 const getSimilarSites = async(task, data) => {
     if (data.status == 'success') {
+        $(`.${task}`).addClass('text-left')
         if (data.data.data && data.data.haveData == true) {
             $(`.${task}`).addClass('row');
             $(`.${task}`).attr('style', 'min-height:300px !important');

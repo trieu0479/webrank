@@ -294,7 +294,7 @@ const api = async(task, domain, reload = 0) => {
     if (task == 'getAdvertisingSearchDetail' || task == 'getDomainOrganicDetail') {
         url = `//localapi.trazk.com/webdata/v2.php?task=${task}&domain=${domain}&page=1&method[${method}]=true&userToken=${userToken}&reload=${reload}`
     } else {
-        url = `//localapi.trazk.com/webdata/websiteapi.php?task=${task}&domain=${domain}&reload=${reload}`
+        url = `//localapi.trazk.com/webdata/websiteapi.php?task=${task}&domain=${domain}&userToken=${userToken}&reload=${reload}`
     }
 
     try {
@@ -342,6 +342,7 @@ const api = async(task, domain, reload = 0) => {
 //Tỉ lệ truy cập từ tìm kiếm
 const getTrafficSourcesSearch = async(task, data) => {
     if (data.status == "success") {
+        $(`.${task}`).removeClass('empty-state');
         let {
             data: traffic
         } = data.data;
@@ -380,9 +381,13 @@ const getTrafficSourcesSearch = async(task, data) => {
                     // itemWidth: 20,
                     // itemHeight: 14,
                     // width: 10,
-                    textStyle: {
-                        fontFamily: 'Arial',
-                    },
+                    // textStyle: {
+                    //     fontFamily: 'Arial',
+                    // },
+                    formatter: function(name) {
+                        let value = name == 'Tự nhiên' ? dataChart[0].value * 100 : dataChart[1].value * 100;
+                        return `${name}\n(${value}%)`;
+                    }
                 },
                 series: [{
                     type: 'pie',
@@ -497,7 +502,6 @@ const getSearchOrganicPaidOverview = async(task, data) => {
     // console.log(task2);
     if (data.status == "success") {
         if (data.data.data == null || data.data.haveData == false) {
-            console.log("sssss");
             let task = 'getSearchOrganicPaidOverviewpaid'
             let task2 = 'getSearchOrganicPaidOverview'
             await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
@@ -1008,6 +1012,7 @@ const getSearchOrganicPaidOverview = async(task, data) => {
 //Truy cập từ khóa tự nhiên
 const getSearchBrandedKeywords = async(task, data) => {
     if (data.status == "success") {
+        $(`.${task}`).removeClass('empty-state');
         let {
             data: visits
         } = data.data;
@@ -1300,15 +1305,12 @@ const getAdvertisingSearchDetail = async(task, data) => {
         }
 
     } else {
-        console.log("sudfgvybsvuiyb");
-
         await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
         await $(`.${task}`).removeClass('is-loading').addClass('empty-state');
         console.log(`${task} failed`);
     }
 };
 const getDomainOrganicDetail = async(task, data) => {
-    console.log(data);
     if (data.status == 'success') {
         if (data.data || data.data.organicOverview) {
             let trend_month = {

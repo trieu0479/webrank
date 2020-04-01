@@ -1,6 +1,6 @@
 <div class="similarRank">
         <div class="row ">
-            <div class="col-12 col-lg-4 mb-0">
+            <div class="col-12 col-lg-4 mb-3 mb-md-0">
                 <div class="bg-white p-3 align-items-center text-center rounded">
     
                     <div class="pt-5 pb-5">
@@ -9,7 +9,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4  mb-0">
+            <div class="col-12 col-lg-4  mb-3 mb-md-0">
                 <div class="bg-white p-3 align-items-center text-center rounded">
 
                     <div class="pt-5 pb-5">
@@ -19,7 +19,7 @@
                 </div>
     
             </div>
-            <div class="col-12 col-lg-4 mb-0">
+            <div class="col-12 col-lg-4 mb-0 ">
                 <div class="text-center bg-white p-3 align-items-center rounded">
                     <div class="pt-5 pb-5">
                         <div class="fontsize-14 ">Xếp hạng (Toàn Cầu)</div>
