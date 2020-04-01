@@ -1,6 +1,6 @@
-<div class="row ggAdsOverview">                
+<div class="row ggAdsOverview mt-3">                
                    
-<div class="col-12 col-lg-4 vc ">
+<div class="col-12 col-lg-4 mb-0">
 <div class="text-center bg-white p-3 align-items-center rounded">
     <div class="pt-5 pb-5">
         <div class="font-16 font-weight-bold">Traffic</div>
@@ -12,7 +12,7 @@
 
 
 
-<div class="col-12 col-lg-4 ">
+<div class="col-12 col-lg-4 mb-0">
     <div class="bg-white p-3 align-items-center text-center rounded">
         <div class="pt-5 pb-5">
             <div class="font-16 font-weight-bold">Social Channel</div>
@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<div class="col-12 col-lg-4">
+<div class="col-12 col-lg-4 mb-0">
 <div class="bg-white p-3 align-items-center text-center rounded">
     <div class="pt-5 pb-5">
         <div class="font-16 font-weight-bold">Cost</div>
