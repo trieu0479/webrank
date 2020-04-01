@@ -19,9 +19,9 @@ $(document).ready(() => {
         infoFiltered: '(lọc từ tổng số _MAX_ dòng)',
         search: 'Tìm kiếm:',
         paginate: {
-            previous: 'Quay lại',
-            next: 'Tiếp theo'
-        }
+            previous: '<i class="fal fa-angle-double-left"></i>',
+            next: '<i class="fal fa-angle-double-right"></i>'
+          }
     };
     //init datatable
     const initDatatable = function (select, tableOptions) {
@@ -241,26 +241,22 @@ $(document).ready(() => {
                         }else{
                             keyWorks =data.target_url.substring(8)
                         }
-                        return `<div class="text-left">${data.anchor}</div> <div class="text-left text-hidden" style="width:200px!important"><a href="${data.target_url}">${keyWorks}</a></div>`
+                        return `<div class="text-left">${data.anchor}</div> <div class="text-left text-hidden" style="width:150px!important"><a href="${data.target_url}">${keyWorks}</a></div>`
                     }
                 },
-                { title: 'First Seen', data: data => `<div class="text-left">${moment(data.first_seen*1000).format('DD MMM YY')}</div>` },
-                { title: 'Last Seen', data: data => `<div class="text-left">${moment(data.last_seen*1000).format('DD MMM YY')}</div>` },
+                { title: 'First Seen', data: data => `<div class="text-left" style="width:80px">${moment(data.first_seen*1000).format('DD MMM YY')}</div>` },
+                { title: 'Last Seen', data: data => `<div class="text-left" style="width:80px">${moment(data.last_seen*1000).format('DD MMM YY')}</div>` },
             ],
-            "order": [1, 'desc'],
             language,
+            ordering:false,
             info: false,
-            autoWidth: true,
-            searching: false,
-            scrollY: "260px",
-            scrollCollapse: true,
-            paging: false,
+            rowId: 'trId',
             processing: true,
+            pageLength: 10,
+            lengthChange: false,
             initComplete: function (settings, json) {
-                $(`.dataTables_scrollBody`).perfectScrollbar();
-                $(`.dataTables_scrollHeadInner`).attr('style', 'width:100% !important;padding-right:0;border-bottom: 1px solid #ddd');
-                $('.getDataContry .dataTables_empty').text("").addClass('empty-state');
-                $('.parent-getDataZones #DataTables_Table_1_processing').addClass('mt-n5');
+              $('.dataTables_wrapper .dataTables_paginate').attr('style', 'margin-top: 0')
+              $('table.dataTable thead th').attr('style', 'background: #fff;padding: 15px 10px;')
             }
         }
     )
