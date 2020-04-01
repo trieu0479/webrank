@@ -1134,7 +1134,6 @@ $(document).ready(() => {
           url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}&userToken=${userToken}`,
           dataSrc: (json) => {           
             if (json.userData.member =="demo") {
-                  //class   
                 $(`.widget-getTrafficDisplayAdvertisingWebsitesTable .widgetBody`).addClass("locked");
                 $(".widget-getTrafficDisplayAdvertisingWebsitesTable").prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
                       
@@ -1161,8 +1160,8 @@ $(document).ready(() => {
             }
     
             else {        
-                $('#DataTables_Table_1_wrapper').css('min-height','268px');
-                $('#DataTables_Table_1_wrapper').addClass('empty-state')
+                $('.parent-getTrafficDisplayAdvertisingWebsitesTable #DataTables_Table_1_wrapper').css('min-height','268px');
+                $('.parent-getTrafficDisplayAdvertisingWebsitesTable #DataTables_Table_1_wrapper').addClass('empty-state')
                 $('table.getTrafficDisplayAdvertisingWebsitesTable tbody tr td.dataTables_empty').addClass('d-none')
               return [];
             }

@@ -33,7 +33,7 @@ function lockchartfree(id) {
 
 const api = async(method, domain) => {
     let methodName = method;
-    if (method == "ggAdsOverview" || method == "TopPaidKeyword" || method == "PositionChart" || method == "PaidPageTable") {
+    if (method == "ggAdsOverview" || method == "TopPaidKeyword" || method == "PositionChart" || method == "PaidPageTable" || method =="getScrapedSearchAds") {
         method = "adwordsPositions"
     }
     if (method == "adwordsMonthlyFullTrend") {
@@ -125,6 +125,15 @@ const api = async(method, domain) => {
                         }
                         PaidPageTable(data, method)
                         break;
+                        case "getScrapedSearchAds":
+                            if (data.userData.member == "demo") {                                                    
+                                   lockeddemo('getScrapedSearchAds')
+                                }
+                                else if (data.userData.member =="free") {
+                                    lockedfree('getScrapedSearchAds')
+                                }
+                            getScrapedSearchAds(data, method);
+                            break;    
                     default:
                         break;
                 }
@@ -557,7 +566,7 @@ const TopPaidKeyword = async(data, method) => {
     initDatatable(
         'TopPaidKeyword', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method['adwordsPositions']=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method['adwordsPositions']=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     if (data.data.adwordsPositions == null) {
                         $('#TopPaidKeyword_wrapper').addClass('empty-state');
@@ -837,7 +846,7 @@ const MainCompetitor = async(data, method) => {
     initDatatable(
         'MainCompetitor', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method['adwordsCompetitors']=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method['adwordsCompetitors']=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     if (data.data.adwordsCompetitors == null) {
                         $('#MainCompetitor_wrapper').addClass('empty-state');
@@ -1110,7 +1119,7 @@ const PaidPageTable = async(data, method) => {
     initDatatable(
         'PaidPageTable', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method['adwordsPositions']=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method['adwordsPositions']=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     if (data.data.adwordsPositions == null) {
                         $('#PaidPageTable_wrapper').addClass('empty-state');
@@ -1217,7 +1226,80 @@ const PaidPageTable = async(data, method) => {
 }
 
 
+const getScrapedSearchAds = async (data,method) => {
+   if (data.data.adwordsPositions.length <=0) {
+       $('#getScrapedSearchAds').addClass('empty-state')
+   }
+    
+    if (data.status == "success") {
+        var SearchAds  = data.data.adwordsPositions;        
+        console.log(SearchAds);        
+        $(`#getScrapedSearchAds .carousel-inner`).html('');
+        $(`#getScrapedSearchAds .carousel-indicators`).html('');        
+            $("#row-getPaidSearchCompetitorsTableV1").show();
+            await $.each(SearchAds,(index, value) => {
+                if (value){
+                if (index < 5) {
+                    $(`#getScrapedSearchAds .carousel-indicators`).append(`
+                <li data-target="#getScrapedSearchAds" data-slide-to="${index}" class="my-0 border-0 bg-favorite text-white text-center rounded-circle ${index == 0 ? 'active' : ''}" style="width:20px;height:20px;text-indent:0;">${index + 1}</li>
+                `);
+                }                
+                
+                let carouselItem = '';
+ {
+                    let {
+                        description,
+                        visibleUrl,                       
+                        phrase,
+                        keywordDifficulty,                        
+                        position,
+                        title,
+                    } = value;
+                    
+                    if (index < 5) {                        
+                        (description != '') ? description = '<div class="text-muted">' + description + '</div>': null;
+                        carouselItem = `
+                    <div class="carousel-item p-20 p-l-40 p-r-40 ${index == 0 ? 'active' : ''}">
+                    <div class="similarAdsText border rounded">
+                        <div class="d-flex no-block align-items-center justify-content-center bg-secondary p-10" style="height:185px">
+                        <div class="border bg-white shadow p-10 w-100">
+                            <a href="javascript:;" target="_blank" title="${visibleUrl}">
+                            ${title}
+                            </a>   
+                            <div class="text-success text-truncate pb-0">${visibleUrl}</div>                         
+                            ${description}
+                        </div>
+                        </div>
+                        <div class="similarAdsDetails p-20 border-top">
+                        <div class="row">
+                            <div class="col text-muted font-10">Vị trí trung bình</div>
+                            <div class="col text-muted font-10">Độ khó từ khoá</div>
+                            <div class="col text-muted font-10">Website đích</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">${numeral(position).format('0')}</div>
+                            <div class="col">${numeral(keywordDifficulty).format('0,0')}</div>
+                            <div class="col text-truncate pb-0">${visibleUrl}</div>
+                        </div>
+                        <div class="mt-3 text-truncate pb-0"><div class="font-10 text-muted">Từ khoá</div>${phrase}</div>
+                        </div>
+                    </div>
+                    </div>
+                    `
+                    }
+                } 
+               
+                $(`#getScrapedSearchAds .carousel-inner`).append(carouselItem);            
+            }});
 
+            $('.keywords-list').perfectScrollbar();
+        
+        await $(`#getScrapedSearchAds .carousel-inner`).removeClass('is-loading');
+        await $(`.similarReloadTask[data-task="getScrapedSearchAds"]`).find('i').removeClass('fa-spin');
+    } else {
+        console.log(`getScrapedSearchAds failed`);
+    }
+};
 
 
 function log(obj) {
