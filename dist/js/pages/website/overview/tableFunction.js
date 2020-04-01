@@ -17,8 +17,6 @@ $(document).ready(() => {
     };
     // check vip-free-vip user
     function locked(id, data) {
-        console.log(id);
-        console.log(data);
         $(".parent-" + id).addClass("locked");
         if (data == 'demo') {
             $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
@@ -53,8 +51,6 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: json => {
-                        console.log(json.userData.member);
-
                         if (json.userData.member != 'vip') { locked('getWebsiteGeography', json.userData.member) }
                         if (!json.data || !json.data.data) {
                             $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
@@ -110,11 +106,9 @@ $(document).ready(() => {
                     $('.dataTables_scrollHeadInner thead').removeClass('text-center');
                     $('.getWebsiteGeography_wrapper .dataTables_scrollHeadInner').removeClass('text-center');
                     $('.dataTables_scrollHead').addClass('border-bottom');
-                    console.log(url);
-                    $(".similarReloadTaskaaaaa").click(function() {
-                        console.log("fbfbdvzdvzdv");
-                        table.ajax.url('simple3.php').load();
-                    })
+                    // $(".similarReloadTaskaaaaa").click(function() {
+                    //     table.ajax.url('simple3.php').load();
+                    // })
                 }
             }
         )
@@ -140,17 +134,28 @@ $(document).ready(() => {
     initDatatable(
             'getKeywords', {
                 ajax: {
-                    url: `//localapi.trazk.com/keywords/keywords.php?task=keywordPlannerDomain&limit=20&domain=${localDomain}&userToken=${userToken}`,
+                    url: `//localapi.trazk.com/keywords/v2.php?task=getKeywordsFromDomain&limit=&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
-                        // let dataaaaa = 'free';
-                        // if (dataaaaa != 'vip') { locked('getWebsiteGeography-table', dataaaaa) }
+                        if (json.data.userData.member != 'vip') { locked('getKeywords', json.data.userData.member) }
                         if (json.data.keywords == null) {
                             $('.parent-getKeywords').html('').addClass('empty-state')
                             return []
                         } else {
-                            return json.data.keywords;
+                            let columns = [];
+                            $.each(json.data.keywords, function(k, v) {
+                                let output = {
+                                    keyword: v.keyword,
+                                    length: v.length,
+                                    trungbinhtimkiem: v.results,
+                                    trend: v.trend,
+                                    dokho: v.competition_level,
+                                    giathapnhat: v.minCPC,
+                                    gicaonhat: v.maxCPC,
+                                }
+                                columns.push(output)
+                            })
+                            return columns;
                         }
-
                     },
                 },
                 drawCallback: function(settings) {
@@ -160,19 +165,19 @@ $(document).ready(() => {
                 columns: [{
                         title: 'Từ khoá',
                         data: data => `
-            <div class="d-flex no-block flex-row">
-              <a class="font-12 ml-2" href="./index.php?view=keyword-planner&action=result&keywords=${data.keyword}&language=vn&country=vn&network=web"  data-type="keyword" class="changeURL" data-input="${data.keyword}"> ${data.keyword}</a>
+                <div class="text-left flex-row" style="width: 200px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+              <a class="font-12 ml-2" href="./index.php?view=keyword-planner&action=result&keywords=${data.keyword}&language=vn&country=vn&network=web"  data-type="keyword" class="changeURL" data-input="${data.keyword}">${data.keyword}</a>
               </div>`,
                         // width: '180px'
                     },
                     {
                         title: 'Trend',
-                        data: data => `<div class="lichsuHienThi d-none d-md-flex sparkline ml-auto" data-sparkline="[${data.lichsutimkiemtrungbinh}]"></div>`,
+                        data: data => `<div class="lichsuHienThi d-none d-md-flex sparkline ml-auto" data-sparkline="[${data.trend}]"></div>`,
                         width: '100px',
                     },
                     {
                         title: 'Chiều dài',
-                        data: "chieudai",
+                        data: "length",
                         width: '100px'
                     },
                     {
@@ -184,18 +189,18 @@ $(document).ready(() => {
                     },
                     {
                         title: 'Trung bình tìm kiếm',
-                        data: (data) => numeral(data.solantimkiemtrungbinh).format('0,0'),
+                        data: (data) => numeral(data.trungbinhtimkiem).format('0,0'),
                         width: '100px'
                     },
                     {
                         title: 'Giá thấp nhất',
-                        data: (data) => numeral(data.giathaudautrangthapnhat * 23000).format('0,0') + 'đ',
+                        data: (data) => numeral(data.giathapnhat * 23000).format('0,0') + 'đ',
                         width: '100px'
                     },
                     {
                         title: 'Giá cao nhất',
                         data: "giathaudautrangcaonhat",
-                        data: (data) => numeral(data.giathaudautrangcaonhat * 23000).format('0,0') + 'đ',
+                        data: (data) => numeral(data.gicaonhat * 23000).format('0,0') + 'đ',
                         width: '100px'
                     },
                 ],
@@ -261,7 +266,6 @@ $(document).ready(() => {
                         };
                         columns.push(output)
                     })
-                    console.log(columns);
                     return columns;
                 },
             },
