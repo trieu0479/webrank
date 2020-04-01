@@ -190,7 +190,7 @@ $(document).ready(() => {
             }
         }
     )
-    $.getJSON(`//localapi.trazk.com/webdata/v2.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicSubdomains]=true&userToken=${userToken}`, function(res) {
+    $.getJSON(`//localapi.trazk.com/webdata/v3.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicSubdomains]=true&userToken=${userToken}`, function(res) {
         if (res.data.organicSubdomains) {
             res.data.organicSubdomains.forEach((v, k) => {
                 let number_tracffic = numeral(v.traffic).format('0.0a')
@@ -248,9 +248,12 @@ $(document).ready(() => {
     initDatatable(
         'organicCompetitors', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicCompetitors]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.data);
+                    if (res.userData.member != 'demo') {
+                        locked('organicCompetitors', res.userData.member)
+                    }
                     if (res.data.organicCompetitors && res.data.organicCompetitors != '') {
                         let columns = [];
                         $.each(res.data.organicCompetitors, function(k, v) {
