@@ -1,4 +1,4 @@
-<div class="col-12 col-lg-12 ">
+
     <div class="bg-white shadow-sm rounded">
         <div class="row border-bottom m-0 py-2">
             <div class="col-auto d-flex no-block align-items-center mx-1">
@@ -13,7 +13,7 @@
             </div>
             <div class="col-auto pl-0">
                 <div class="text-capitalize font-weight-bold">Top BackLinks</div>
-                <div class="text-muted similarDates font-10">12.2019 - 02.2020</div>
+                <div class="text-muted similarDates font-10">04.2020</div>
             </div>
             <div class="ml-auto d-flex no-block align-items-center pr-3">
                 <!-- <a class="similarReloadTask text-muted" data-task="PaidPageTable" href="javascript:;"><i class="fal fa-sync"></i></a> -->
@@ -25,4 +25,3 @@
         </div>
 
     </div>
-</div>

@@ -634,8 +634,28 @@
 .parent-topBackLinks .dataTables_length {
     display: none;
 }
+.badge-tLink{
+    border-radius: 0.65rem!important;
+}
 
+.badge-text{
+    color: #999;
+    border:1px solid #ccc;
+    background-color: #fff;
+}
+.badge-lost{
+    color: #ed2d2d;
+    background-color: rgba(237,45,45,.2);
+}
+.badge-new{
+    color: #4fae33;
+    background-color: rgba(79,174,51,.2);
+}
 
+.badge-nofl{
+    color: #ff7f00;
+    background-color: #ffe5cd;
+}
 /* css cua khanh dep trai */
 
 @media only screen and (max-width: 768px) {
