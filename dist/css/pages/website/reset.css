@@ -626,7 +626,9 @@
 #tablePTDT_filter {
     display: none!important;
 }
-
+.table-qc-format td{
+    padding:10px!important; 
+}
 
 /* css cua khanh dep trai */
 

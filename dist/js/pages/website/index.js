@@ -133,8 +133,9 @@ $(document).ready(function () {
               domainWithIcon = `
                           <a href="${rootURL}/rank/${v.domain}">
                           <img class='mr-2' src='https://www.google.com/s2/favicons?domain=${v.domain}'>
-                          ${v.domain}
+                          ${v.domain} 
                           </a>
+                          <a target="blank" href="https://${v.domain}"><i class="fal fa-external-link-square-alt text-muted ml-1"></i></a>
                           `;
               output.domain = domainWithIcon;
               output.AllowGDN = v.allowGDN;
@@ -181,6 +182,8 @@ $(document).ready(function () {
                           <img class='mr-2' src='https://www.google.com/s2/favicons?domain=${v.domain}'>
                           ${v.domain}
                           </a>
+                          <a target="blank" href="https://${v.domain}"><i class="fal text-muted fa-external-link-square-alt ml-1"></i></a>
+
                           `;
             output.domain = domainWithIcon;
             // console.log(AllowGDN)
