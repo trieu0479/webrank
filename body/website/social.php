@@ -30,7 +30,7 @@
 
             <div class="row">
             <div class="col-12 col-lg-12">
-                    <div id="bannerPageAds" class="is-loading" style="height:300px"></div>
+                    <div id="bannerPageAds" class="is-loading" style="height:400px"></div>
                 </div>
 
                 <div class="col-12 col-lg-12">
