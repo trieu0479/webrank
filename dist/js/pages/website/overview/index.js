@@ -89,7 +89,8 @@ $(document).ready(function() {
     }
 
     var input = {};
-    input.headerTitle = "Đối thủ cạnh tranh";
+    
+    input.headerTitle = "Đề xuất từ khóa";
     input.headerTime = "12.2019 - 02.2020";
     input.widgetTask = "getKeywords";
     input.widgetContainer = "widget-getKeywords";

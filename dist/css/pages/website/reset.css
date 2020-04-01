@@ -636,3 +636,7 @@
         margin: 0 0 10px 0!important;
     }
 }
+
+.col-lg-4 .btn-showLoginModal{
+    font-size:12px;
+}

@@ -51,7 +51,7 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: json => {
-                        if (json.userData.member != 'vip') { locked('getWebsiteGeography', json.userData.member) }
+                        lockedModule('getWebsiteGeography', json.userData.member) 
                         if (!json.data || !json.data.data) {
                             $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
                             return [];
@@ -136,7 +136,7 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/keywords/v2.php?task=getKeywordsFromDomain&limit=&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
-                        if (json.data.userData.member != 'vip') { locked('getKeywords', json.data.userData.member) }
+                        lockedModule('getKeywords', json.data.userData.member) 
                         if (json.data.keywords == null) {
                             $('.parent-getKeywords').html('').addClass('empty-state')
                             return []
@@ -252,7 +252,8 @@ $(document).ready(() => {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.banckLinksOverview.backlinks.data);
-                    if (res.userData.member != 'vip') { locked('banckLinksOverview', res.userData.member) }
+                    
+                    lockedModule('banckLinksOverview', res.userData.member);
                     let columns = [];
                     $.each(res.data.banckLinksOverview.backlinks.data, function(k, v) {
                         // console.log(v);
@@ -314,7 +315,8 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
-                    if (res.userData.member != 'vip') { locked('getAdvertisingSearchDetail', res.userData.member) }
+                    
+                    lockedModule('getAdvertisingSearchDetail', res.userData.member);
                     if (res.data.adwordsCompetitors && res.data.adwordsCompetitors != '') {
                         let columns = [];
                         $.each(res.data.adwordsCompetitors, function(k, v) {
@@ -383,7 +385,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
-                    if (json.userData.member != 'vip') { locked('getOrganicKeywordsBrandedTable', json.userData.member) }
+                    lockedModule('getOrganicKeywordsBrandedTable', json.userData.member);
                     $('.similarDates-organickeyno').html(`${moment(json.data.lastUpdate).format("DD-MM-YYYY")}`)
                     if (!json.data || !json.data.data) {
                         $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state')

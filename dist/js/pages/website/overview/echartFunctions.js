@@ -474,6 +474,7 @@ const api = async(task, domain, reload = 0) => {
                         break;
 
                 }
+                lockedModule(task, data.userData.member);
                 return;
                 // }
             });
@@ -488,12 +489,22 @@ const estmatedWorth = async(task, data) => {
 }
 
 // check vip-free-demo user
-function locked(id, data) {
-    $(".parent-" + id).addClass("locked");
-    if (data == 'demo') {
-        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
-    } else if (data == 'free') {
-        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Đăng ký để xem data</a></div>');
+function lockedModule(boxWidgetName, level) {
+    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge","getDomainBackLinkDetail","getMarketingMixOverviewDaily","getTrafficSocial","getTrafficSourcesSearch","SampleAdsasImage","SampleAdsasHTML","getScrapedSearchAds","getTrafficSourcesOverview","getTrafficAndEngagementOverviewMonthly","getSimilarSites"];
+    var VIPModule = [];
+    if (level == 'demo'){
+        if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)){
+            //ngoai le 
+            if (boxWidgetName == 'getMarketingMixOverviewDaily') boxWidgetName = 'getMarketingMixOverview';
+            if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
+            //ngoai le 
+            $(".parent-" + boxWidgetName).addClass("locked");
+            $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+        }
+    } else if (level == 'free'){
+        if (VIPModule.includes(boxWidgetName)){
+            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+        }
     }
 }
 //sử dung truy cập theo tháng
@@ -1405,9 +1416,7 @@ const getTrafficAndEngagementPagesPerVisit = async(task, data, domain) => {
     }
     //Tỉ lệ truy cập từ tìm kiếm
 const getTrafficSourcesSearch = async(task, data) => {
-    if (data.userData.member != 'vip') {
-        locked(task, data.userData.member)
-    }
+    
     $(`.${task}`).parents().parents().parents().removeClass('rounded').addClass('rounded-top')
         // $(`.${task}`).attr('style', 'height: 250px;');
     $('.precent-organicoverview').removeClass('d-none')
@@ -1778,9 +1787,6 @@ const getTrafficAndEngagementBounceRate = async(task, data, domain) => {
     // hết sử dụng truy cập thời gian
     // SỬ DỤNG
 const getWebDemographicsAge = async(task, data) => {
-    if (data.userData.member != 'vip') {
-        locked(task, data.userData.member)
-    }
     if (data.status == "success") {
         let {
             data: traffic
@@ -2032,9 +2038,6 @@ const getTrafficSourcesOverview = async(task, data) => {
 // SỬ DỤNG
 const getWebDemographicsGender = async(task, data) => {
     // console.log(data);
-    if (data.userData.member != 'vip') {
-        locked(task, data.userData.member)
-    }
     if (data.status == "success") {
         // console.log("ddd");
         $(`.${task}`).removeClass('empty-state');
@@ -2177,9 +2180,6 @@ const getWebDemographicsGender = async(task, data) => {
 };
 // SỬ DỤNG
 const getDesktopVsMobileVisits = async(task, data) => {
-    if (data.userData.member != 'vip') {
-        locked(task, data.userData.member)
-    }
     if (data.status == "success") {
         $(`.${task}`).removeClass('empty-state');
         let {
@@ -2336,9 +2336,6 @@ const getDesktopVsMobileVisits = async(task, data) => {
 };
 // SỬ DỤNG
 const getSimilarSites = async(task, data) => {
-    if (data.userData.member != 'vip') {
-        locked(task, data.userData.member)
-    }
     if (data.status == 'success') {
         $(`.${task}`).addClass('text-left')
         if (data.data.data && data.data.haveData == true) {
@@ -2536,9 +2533,6 @@ const getWebsiteGeography = async(task, data) => {
     }
     // getDomainBackLinkDetail
 const getDomainBackLinkDetail = async(task, data) => {
-        if (data.userData.member != 'vip') {
-            locked(task, data.userData.member)
-        }
         // console.log(data);
         if (data.status == 'success') {
             let dataBacklinkTypes = data.data.backlinksOverview;
@@ -2647,9 +2641,6 @@ const getDomainBackLinkDetail = async(task, data) => {
     }
     //done
 const getScrapedSearchAds = async(task, data) => {
-    if (data.userData.member != 'vip') {
-        locked(task, data.userData.member)
-    }
     // console.log(data);
     if (data.status == "success") {
         var SearchAds = null;
@@ -2803,9 +2794,6 @@ const getScrapedSearchAds = async(task, data) => {
 
 // Lượt Truy Cập Xã Hội
 const getTrafficSocial = async(task, data, domain) => {
-        if (data.userData.member != 'vip') {
-            locked(task, data.userData.member)
-        }
         if (data.status == "success") {
             if (data && data.data && data.data.data) {
                 let TrafficSocial = data.data.data;
@@ -3085,9 +3073,6 @@ const getTrafficSocial = async(task, data, domain) => {
     }
     //getMarketingMixOverview
 const getMarketingMixOverview = async(task, data) => {
-        if (data.userData.member != 'vip') {
-            locked('getMarketingMixOverview', data.userData.member)
-        }
         if (data.status == "success") {
             if (data && data.data && data.data.data && data.data.data.Data) {
                 let {
@@ -3508,9 +3493,6 @@ const getMarketingMixOverview = async(task, data) => {
     }
     // DISPLAY ADS
 const SampleAdsasImage = async(task, data) => {
-    if (data.userData.member != 'vip') {
-        locked('SampleAds', data.userData.member)
-    }
     $('.footer--bt-view').remove()
     if (data.data.bannerAds == "") {
         $('.sample-image-ads').addClass('empty-state')
