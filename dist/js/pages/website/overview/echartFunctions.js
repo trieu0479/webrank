@@ -486,7 +486,7 @@ function locked(id, data) {
 
     $(".parent-" + id).addClass("locked");
     if (data == 'free') {
-        $(".parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
     } else if (data == 'vip') {
         $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng vip để xem data</a></div>');
     }
@@ -2634,6 +2634,10 @@ const getDomainBackLinkDetail = async(task, data) => {
     }
     //done
 const getScrapedSearchAds = async(task, data) => {
+    let dataaaaa = "vip"
+    if (dataaaaa != 'demo') {
+        locked(task, dataaaaa)
+    }
     // console.log(data);
     if (data.status == "success") {
         var SearchAds = null;
@@ -3066,6 +3070,10 @@ const getTrafficSocial = async(task, data, domain) => {
     }
     //getMarketingMixOverview
 const getMarketingMixOverview = async(task, data) => {
+        let dataaaaa = 'demo';
+        if (dataaaaa != 'demo') {
+            locked(task, dataaaaa)
+        }
         if (data.status == "success") {
             if (data && data.data && data.data.data && data.data.data.Data) {
                 let {
