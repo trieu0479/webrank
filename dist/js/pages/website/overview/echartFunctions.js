@@ -490,10 +490,10 @@ const estmatedWorth = async(task, data) => {
 // check vip-free-demo user
 function locked(id, data) {
     $(".parent-" + id).addClass("locked");
-    if (data == 'free') {
-        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/account/index.php?view=user&action=payment-table" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
-    } else if (data == 'vip') {
-        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Nâng vip để xem data</a></div>');
+    if (data == 'demo') {
+        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+    } else if (data == 'free') {
+        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Đăng ký để xem data</a></div>');
     }
 }
 //sử dung truy cập theo tháng
@@ -1405,7 +1405,7 @@ const getTrafficAndEngagementPagesPerVisit = async(task, data, domain) => {
     }
     //Tỉ lệ truy cập từ tìm kiếm
 const getTrafficSourcesSearch = async(task, data) => {
-    if (data.userData.member != 'demo') {
+    if (data.userData.member != 'vip') {
         locked(task, data.userData.member)
     }
     $(`.${task}`).parents().parents().parents().removeClass('rounded').addClass('rounded-top')
@@ -1778,7 +1778,7 @@ const getTrafficAndEngagementBounceRate = async(task, data, domain) => {
     // hết sử dụng truy cập thời gian
     // SỬ DỤNG
 const getWebDemographicsAge = async(task, data) => {
-    if (data.userData.member != 'demo') {
+    if (data.userData.member != 'vip') {
         locked(task, data.userData.member)
     }
     if (data.status == "success") {
@@ -2032,7 +2032,7 @@ const getTrafficSourcesOverview = async(task, data) => {
 // SỬ DỤNG
 const getWebDemographicsGender = async(task, data) => {
     // console.log(data);
-    if (data.userData.member != 'demo') {
+    if (data.userData.member != 'vip') {
         locked(task, data.userData.member)
     }
     if (data.status == "success") {
@@ -2177,7 +2177,7 @@ const getWebDemographicsGender = async(task, data) => {
 };
 // SỬ DỤNG
 const getDesktopVsMobileVisits = async(task, data) => {
-    if (data.userData.member != 'demo') {
+    if (data.userData.member != 'vip') {
         locked(task, data.userData.member)
     }
     if (data.status == "success") {
@@ -2336,7 +2336,7 @@ const getDesktopVsMobileVisits = async(task, data) => {
 };
 // SỬ DỤNG
 const getSimilarSites = async(task, data) => {
-    if (data.userData.member != 'demo') {
+    if (data.userData.member != 'vip') {
         locked(task, data.userData.member)
     }
     if (data.status == 'success') {
@@ -2536,7 +2536,7 @@ const getWebsiteGeography = async(task, data) => {
     }
     // getDomainBackLinkDetail
 const getDomainBackLinkDetail = async(task, data) => {
-        if (data.userData.member != 'demo') {
+        if (data.userData.member != 'vip') {
             locked(task, data.userData.member)
         }
         // console.log(data);
@@ -2647,7 +2647,7 @@ const getDomainBackLinkDetail = async(task, data) => {
     }
     //done
 const getScrapedSearchAds = async(task, data) => {
-    if (data.userData.member != 'demo') {
+    if (data.userData.member != 'vip') {
         locked(task, data.userData.member)
     }
     // console.log(data);
@@ -2803,7 +2803,7 @@ const getScrapedSearchAds = async(task, data) => {
 
 // Lượt Truy Cập Xã Hội
 const getTrafficSocial = async(task, data, domain) => {
-        if (data.userData.member != 'demo') {
+        if (data.userData.member != 'vip') {
             locked(task, data.userData.member)
         }
         if (data.status == "success") {
@@ -3085,7 +3085,7 @@ const getTrafficSocial = async(task, data, domain) => {
     }
     //getMarketingMixOverview
 const getMarketingMixOverview = async(task, data) => {
-        if (data.userData.member != 'demo') {
+        if (data.userData.member != 'vip') {
             locked('getMarketingMixOverview', data.userData.member)
         }
         if (data.status == "success") {
@@ -3508,7 +3508,7 @@ const getMarketingMixOverview = async(task, data) => {
     }
     // DISPLAY ADS
 const SampleAdsasImage = async(task, data) => {
-    if (data.userData.member != 'demo') {
+    if (data.userData.member != 'vip') {
         locked('SampleAds', data.userData.member)
     }
     $('.footer--bt-view').remove()

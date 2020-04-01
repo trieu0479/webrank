@@ -18,10 +18,10 @@ $(document).ready(() => {
     // check vip-free-demo user
     function locked(id, data) {
         $(".parent-" + id).addClass("locked");
-        if (data == 'free') {
-            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/account/index.php?view=user&action=payment-table" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
-        } else if (data == 'vip') {
-            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Nâng vip để xem data</a></div>');
+        if (data == 'demo') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+        } else if (data == 'free') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Đăng ký để xem data</a></div>');
         }
     }
     //init datatable
@@ -52,7 +52,7 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
-                        if (json.userData.member != 'demo') {
+                        if (json.userData.member != 'vip') {
                             locked('getOrganicKeywordsBrandedTable', json.userData.member)
                         }
                         if (!json.data || !json.data.data) {
@@ -127,7 +127,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsNonBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
-                    if (json.userData.member != 'demo') { locked('getOrganicKeywordsNonBrandedTable', json.userData.member) }
+                    if (json.userData.member != 'vip') { locked('getOrganicKeywordsNonBrandedTable', json.userData.member) }
                     if (!json.data || !json.data.data) {
                         $('.parent-getOrganicKeywordsNonBrandedTable').html('').addClass('empty-state').attr('style', 'height: 292px;')
                         return [];
@@ -251,7 +251,7 @@ $(document).ready(() => {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.data);
-                    if (res.userData.member != 'demo') {
+                    if (res.userData.member != 'vip') {
                         locked('organicCompetitors', res.userData.member)
                     }
                     if (res.data.organicCompetitors && res.data.organicCompetitors != '') {

@@ -72,15 +72,15 @@ const api = async(task, domain, reload = 0) => {
 // check vip-free-demo user
 function locked(id, data) {
     $(".parent-" + id).addClass("locked");
-    if (data == 'free') {
-        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/account/index.php?view=user&action=payment-table" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
-    } else if (data == 'vip') {
+    if (data == 'demo') {
+        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+    } else if (data == 'free') {
         $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Nâng vip để xem data</a></div>');
     }
 }
 //Tỉ lệ truy cập từ tìm kiếm
 const getTrafficSourcesSearch = async(task, data) => {
-    if (data.userData.member != 'demo') { locked(task, data.userData.member) }
+    if (data.userData.member != 'vip') { locked(task, data.userData.member) }
     if (data.status == "success") {
         $(`.${task}`).removeClass('empty-state');
         let {
@@ -240,7 +240,7 @@ const getTrafficSourcesSearch = async(task, data) => {
 const getSearchOrganicPaidOverview = async(task, data) => {
     let task2 = 'getSearchOrganicPaidOverviewpaid';
     console.log(task2);
-    if (data.userData.member != 'demo') {
+    if (data.userData.member != 'vip') {
         locked('getSearchOrganicPaidOverviewpaid', data.userData.member)
         locked('getSearchOrganicPaidOverview', data.userData.member)
     }
@@ -755,7 +755,7 @@ const getSearchOrganicPaidOverview = async(task, data) => {
 };
 //Truy cập từ khóa tự nhiên
 const getSearchBrandedKeywords = async(task, data) => {
-    if (data.userData.member != 'demo') { locked(task, data.userData.member) }
+    if (data.userData.member != 'vip') { locked(task, data.userData.member) }
     if (data.status == "success") {
         $(`.${task}`).removeClass('empty-state');
         let {
@@ -917,7 +917,7 @@ function kFormatter(num) {
     return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
 }
 const getAdvertisingSearchDetail = async(task, data) => {
-    if (data.userData.member != 'demo') { locked(task, data.userData.member) }
+    if (data.userData.member != 'vip') { locked(task, data.userData.member) }
     if (data.status == "success") {
         if (data.data.adwordsCompetitors != "" && data.data.adwordsCompetitors != null) {
             let data_traffic = [];
@@ -1058,7 +1058,7 @@ const getAdvertisingSearchDetail = async(task, data) => {
 };
 const getDomainOrganicDetail = async(task, data) => {
 
-    if (data.userData.member != 'demo') {
+    if (data.userData.member != 'vip') {
         locked(task, data.userData.member)
         locked('trafficKeywordTrend', data.userData.member)
     }
