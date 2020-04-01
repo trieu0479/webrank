@@ -41,6 +41,11 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-12">
+                        <?require_once(__DIR__."/modules/overview.traffic30day.php")?>
+                </div>
+            </div>
+            <div class="row">
                     <div class="col-12 col-lg-5">
                         <div class="widget-getTrafficAndEngagementOverviewMonthly"></div>
                     </div>
@@ -80,8 +85,8 @@
                             <h4 class="text-left font-weight-bold fontSize-16 text-info">Google Organic Search</h4>
                             <div>Báo cáo Google Search Ads cung cấp thông tin mẫu quảng cáo, từ khóa, đối thủ cạnh tranh của website</div>
                         </div>
-                        <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a  class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0" href="<?=$rootURL?>/index.php?view=website&action=organic&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
+                        <div class=" px-md-0 pb-md-0 pt-3 pt-md-0  no-block ml-auto d-flex align-items-center">
+                            <a  class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0 w-100 text-center" href="<?=$rootURL?>/index.php?view=website&action=organic&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
 
@@ -89,7 +94,7 @@
                    <div class="row">
                         <div class="col-12 col-lg-5">
                             <div class="widget-getTrafficSourcesSearch"></div>
-                            <div class="precent-organicoverview bg-white shadow-sm text-center font-16 text-info font-weight-bold pb-4 d-none"></div>
+                            
                         </div>
                         <div class="col-12 col-lg-7">
                             <div style="height:100%" class="widget-getOrganicKeywordsBrandedTable"></div>
@@ -109,8 +114,8 @@
                             <h4 class="text-left font-weight-bold fontSize-16 text-success">Google Search Ads - Adwords</h4>
                             <div>Báo cáo Google Search Ads cung cấp thông tin mẫu quảng cáo, từ khóa, đối thủ cạnh tranh của website</div>
                         </div>
-                        <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a  class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0" href="<?=$rootURL?>/index.php?view=website&action=googleads&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
+                        <div class=" px-md-0 pb-md-0 pt-3 pt-md-0 no-block ml-auto d-flex align-items-center pr-4">
+                            <a  class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0 w-100 text-center" href="<?=$rootURL?>/index.php?view=website&action=googleads&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
 
@@ -135,8 +140,8 @@
                             <h4 class="text-left font-weight-bold fontSize-16 text-danger">Google Display Ads</h4>
                             <div>Google Display Ads - hình thức quảng cáo hiển thị banner (hoặc text) lên các website khác</div>
                         </div>
-                        <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a  class="font-gg font-13 font-weight-500 bagDanger ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="<?=$rootURL?>/index.php?view=website&action=displayads&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
+                        <div class=" px-md-0 pb-md-0 pt-3 pt-md-0 no-block ml-auto d-flex align-items-center">
+                            <a  class="font-gg font-13 font-weight-500 bagDanger ml-auto ml-md-0 w-100 text-center" data-toggle="tooltip" data-placement="top" title="" href="<?=$rootURL?>/index.php?view=website&action=displayads&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
                     <div class="row">
@@ -155,8 +160,8 @@
                             <h4 class="text-left font-weight-bold fontSize-16 text-success">Social Ads & Hoạt động fanpage</h4>
                             <div>Social Ads - ghi nhận quảng cáo từ các kênh Social như: facebook, youtube, linkedin ...</div>
                         </div>
-                        <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a  class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="<?=$rootURL?>/index.php?view=website&action=social&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
+                        <div class=" px-md-0 pb-md-0 pt-3 pt-md-0 no-block ml-auto d-flex align-items-center">
+                            <a  class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 w-100 text-center" data-toggle="tooltip" data-placement="top" title="" href="<?=$rootURL?>/index.php?view=website&action=social&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
                     <!-- SOCIAL -->
@@ -185,8 +190,8 @@
                             <h4 class="text-left font-weight-bold fontSize-16 text-success">Backlink - Hoạt động SEO</h4>
                             <div>Backlink - báo cáo link từ website khác trỏ về website của bạn</div>
                         </div>
-                        <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a  class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="<?=$rootURL?>/index.php?view=website&action=backlink&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
+                        <div class=" px-md-0 pb-md-0 pt-3 pt-md-0 no-block ml-auto d-flex align-items-center ">
+                            <a  class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 w-100 text-center" data-toggle="tooltip" data-placement="top" title="" href="<?=$rootURL?>/index.php?view=website&action=backlink&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
                       <!-- backlink-->

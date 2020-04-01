@@ -452,15 +452,14 @@ const api = async (task, domain,reload=0) => {
                             getTrafficSocial(task, data, domain);
                             break;
                         case "getWebsiteAdsVisitsOverview":
-                            if (data.userData.member =="demo") {                           
-                                $('#getWebsiteAdsVisitsOverview').addClass('locked')
-                                $('#Parent-getWebsiteAdsVisitsOverview').prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-                              
-                            }
-                            else if (data.userData.member =="free") {
-                                $('#Parent-getWebsiteAdsVisitsOverview').prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
-                                $('#getWebsiteAdsVisitsOverview').addClass('locked')
-                            }
+                            // if (data.userData.member == "demo") {                                                    
+                            //     $('#getWebsiteAdsVisitsOverview').addClass('locked')
+                            //     $('#Parent-getWebsiteAdsVisitsOverview').prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');                              
+                            // }
+                            // else if (data.userData.member =="free") {
+                            //     $('#Parent-getWebsiteAdsVisitsOverview').prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+                            //     $('#getWebsiteAdsVisitsOverview').addClass('locked')
+                            // }
                             getWebsiteAdsVisitsOverview(task, data, domain);
                             break;
                         case "getTrafficDisplayPaidOutgoingAdsTable":
@@ -615,6 +614,7 @@ const getTrafficDisplayPaidOutgoingAdsTable = async (task, data) => {
 }
 //done
 const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
+    
  $('.getWebsiteAdsVisitsOverview').append (`<div class="bg-white shadow-sm rounded h-100">
  <div class="row border-bottom m-0 py-2">
      <div class="col-auto d-flex no-block align-items-center mx-1">
@@ -642,7 +642,14 @@ const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
      </div>
  </div>
 </div>`)
- 
+if (data.userData.member == "demo") {                                                    
+    $('#getWebsiteAdsVisitsOverview').addClass('locked')
+    $('#Parent-getWebsiteAdsVisitsOverview').prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');                              
+}
+if (data.userData.member =="free") {
+    $('#Parent-getWebsiteAdsVisitsOverview').prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+    $('#getWebsiteAdsVisitsOverview').addClass('locked')
+}    
     if (data.status == "success") {
         if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data &&
             data.data.data.Data.Data[domain].AdsTotal > 0) {
@@ -5167,7 +5174,7 @@ const getWebsiteAdsIntelDisplay = async (task, data) => {
 };
 //done
 const getScrapedSearchAds = async (task, data) => {
-    console.log(data);    
+    
     if (data.status == "success") {
         var SearchAds  = null;
         var domain = url.searchParams.get("domain");

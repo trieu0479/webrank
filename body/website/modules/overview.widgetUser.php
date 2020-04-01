@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="Parent-getMarketingMixOverview">
+                            <div class="parent-getMarketingMixOverview">
                                 <div id="getMarketingMixOverview" class="rounded is-loading" style="min-height:400px">
                                     <ul class="nav nav-tabs customtab" role="tablist">
                                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab"

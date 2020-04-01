@@ -15,6 +15,17 @@ $(document).ready(() => {
             next: 'Tiếp theo'
         }
     };
+    // check vip-free-vip user
+    function locked(id, data) {
+        console.log(id);
+        console.log(data);
+        $(".parent-" + id).addClass("locked");
+        if (data == 'demo') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+        } else if (data == 'free') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Đăng ký để xem data</a></div>');
+        }
+    }
     //init datatable
     let reloaddata = 0;
     const initDatatable = function(select, tableOptions) {
@@ -42,7 +53,9 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: json => {
-                        // console.log(json);
+                        console.log(json.userData.member);
+
+                        if (json.userData.member != 'vip') { locked('getWebsiteGeography', json.userData.member) }
                         if (!json.data || !json.data.data) {
                             $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
                             return [];
@@ -129,6 +142,8 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/keywords/keywords.php?task=keywordPlannerDomain&limit=20&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
+                        // let dataaaaa = 'free';
+                        // if (dataaaaa != 'vip') { locked('getWebsiteGeography-table', dataaaaa) }
                         if (json.data.keywords == null) {
                             $('.parent-getKeywords').html('').addClass('empty-state')
                             return []
@@ -232,6 +247,7 @@ $(document).ready(() => {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.banckLinksOverview.backlinks.data);
+                    if (res.userData.member != 'vip') { locked('banckLinksOverview', res.userData.member) }
                     let columns = [];
                     $.each(res.data.banckLinksOverview.backlinks.data, function(k, v) {
                         // console.log(v);
@@ -285,14 +301,16 @@ $(document).ready(() => {
                 $(`.dataTables_scrollBody`).perfectScrollbar();
                 $('.organicCompetitors tbody').addClass('text-left');
                 $('.parent-banckLinksOverview .dataTables_scrollBody ').attr('style', 'max-height: 275px;');
+                $('.widget-banckLinksOverview .widgetHeader').remove()
             }
         }
     )
     initDatatable(
         'getAdvertisingSearchDetail', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
+                    if (res.userData.member != 'vip') { locked('getAdvertisingSearchDetail', res.userData.member) }
                     if (res.data.adwordsCompetitors && res.data.adwordsCompetitors != '') {
                         let columns = [];
                         $.each(res.data.adwordsCompetitors, function(k, v) {
@@ -313,7 +331,7 @@ $(document).ready(() => {
             drawCallback: function(settings) {},
             columns: [{
                     title: "Competitor",
-                    "data": data => `<a href="./index.php?view=website&action=overview&domain=${data.domain}"><div class="dot-table-a">${data.domain}</div></a>`,
+                    "data": data => `<a href="${rootURL}/rank/${data.domain}"><div class="dot-table-a">${data.domain}</div></a>`,
                     class: 'text-left'
                 },
                 {
@@ -361,6 +379,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
+                    if (json.userData.member != 'vip') { locked('getOrganicKeywordsBrandedTable', json.userData.member) }
                     $('.similarDates-organickeyno').html(`${moment(json.data.lastUpdate).format("DD-MM-YYYY")}`)
                     if (!json.data || !json.data.data) {
                         $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state')
@@ -434,13 +453,13 @@ $(document).ready(() => {
         let name = res.data.name;
         let iconBlue = '';
         if (res.data.verification == "blue_verified") {
-            iconBlue =  rootURL + "/dist/images/check.png";
+            iconBlue = rootURL + "/dist/images/check.png";
         } else {
             iconBlue = "";
         }
         let html = `
           <div class="imgPageAds d-flex align-items-end"
-            style="--cover-photo-uri: url('${res.data.pageCoverPhoto}');background-size: cover;height: 420px;width: 100%;background-position: bottom left;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri);padding: 20px!important;">
+            style="--cover-photo-uri: url('${res.data.pageCoverPhoto}');background-size: contain;height: 300px;width: 100%;background-position: center;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri);padding: 20px!important;">
                       <div class="p-2 mb-4 rounded-circle bg-primary" style="width:115px;height:115px;background-image: url('${res.data.imageURI}');background-size: cover;background-position: center;background-repeat: no-repeat;border:2px solid white"></div>
                       <div class="p-2 mb-5 pl-3">
                       <div class="font-16 font-weight-bold text-white">${res.data.name} <img class="ml-n1" src="${iconBlue}" style="width:20px">

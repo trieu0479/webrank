@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row ">
     <div class="col-12 col-lg-12 mb-0">
         <div class="bg-white shadow-sm rounded getWebsiteGeography-container">
             <div class="row border-bottom m-0 py-2 h-100">
@@ -12,7 +12,7 @@
                         href="javascript:;"><i class="fal fa-sync"></i></a>
                 </div>
             </div>
-            <div class="row">
+            <div class="row parent-getWebsiteGeography">
                 <div class="col-12 col-md-4 pr-0">
                     <div style="height:300px;" class="getWebsiteGeography-col-maptbale">
                         <table  class="table table-striped getWebsiteGeography-table"

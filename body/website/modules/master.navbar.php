@@ -1,11 +1,11 @@
 <?php
     $navLinks = array(
-        "overview" => '<i class="fad fa-globe-europe mr-2"></i>Overview',
-        "organic" => '<i class="fad fa-newspaper mr-2"></i>Organic Search',
-        "googleads" => '<i class="fad fa-audio-description font-14 text-warning mr-2"></i>Google Ads',
-        "displayads" => '<i class="fad fa-browser mr-2"></i> Display Ads',
-        "social" => '<i class="fad fa-signal-stream font-14 text-success mr-2"></i>Social',
-        "backlink" => '<i class="fad fa-solar-system mr-2"></i>Backlink'
+        "overview" => '<span><i class="fad fa-globe-europe mr-2"></i></span> <span class="d-none d-md-inline">Overview</span>',
+        "organic" => '<span><i class="fad fa-newspaper mr-2"></i></span> <span class="d-none d-md-inline">Organic Search</span>',
+        "googleads" => '<span><i class="fad fa-audio-description font-14 text-warning mr-2"></i></span> <span class="d-none d-md-inline">Google Ads</span>',
+        "displayads" => '<span><i class="fad fa-browser mr-2"></i></span><span class="d-none d-md-inline">Display Ads</span> ',
+        "social" => '<span><i class="fad fa-signal-stream font-14 text-success mr-2"></i></span> <span class="d-none d-md-inline">Social</span>',
+        "backlink" => '<span><i class="fad fa-solar-system mr-2"></i></span> <span class="d-none d-md-inline">Backlink</span>'
     );
 ?>
 <div class="bg-white">

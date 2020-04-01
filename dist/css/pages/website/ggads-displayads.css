@@ -605,7 +605,7 @@ svg ._icon_1fpvc_1 {
 }
 
 .parent-CompetitorMapChart .CompetitorMapChart {
-    height: 372px !important;
+    height: 366px !important;
 }
 
 .table.getTrafficDestinationAds tbody>tr>td {
@@ -699,15 +699,19 @@ width: 100%;
 #getAllTextTable_length,#getAllHTMLTable_length,#getAllImageTable_length {
     display: none;
 }
-
-/* --------------------Reponsive--------------------------------------------- */
-#MainCompetitor_wrapper,#TopPaidKeyword_wrapper,#PaidPageTable_wrapper {
-    overflow: auto;
-}
-
 .parent-getTrafficDestinationAds {
     min-height: 299px;
 }
+
+
+
+
+
+
+/* --------------------Reponsive--------------------------------------------- */
+
+
+
 /* ------css cho buuton excel------------ */
 .dt-buttons .buttons-excel {
     display: inline-block!important;
@@ -732,10 +736,16 @@ width: 100%;
 #DataTables_Table_2_paginate,#TopPaidKeyword_paginate,#MainCompetitor_paginate,#PaidPageTable_paginate {
     float: right!important;
 }
-
+/* ---- */
+#Parent-TopPaidKeyword {
+    height: 377px;
+}
 
 
 @media screen and (max-width:1200px) {
+    #MainCompetitor_wrapper,#TopPaidKeyword_wrapper,#PaidPageTable_wrapper {
+        overflow: auto;
+    }
 .parent-PublicSherTable #DataTables_Table_2_wrapper {
     overflow: scroll;
     white-space: nowrap;

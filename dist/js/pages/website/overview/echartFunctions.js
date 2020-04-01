@@ -365,10 +365,14 @@ const api = async(task, domain, reload = 0) => {
         taskname = 'getDomainBackLinkDetail'
         method = 'backlinksOverview'
     }
+    if (task == 'getTraffic30Days') {
+        taskname = 'getDomainOverview'
+        method = 'ranksHistory'
+    }
 
     // console.log(taskname);
 
-    if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail') {
+    if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview') {
         // taskname = task;
         url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
     } else {
@@ -432,6 +436,9 @@ const api = async(task, domain, reload = 0) => {
                     case "getWebsiteGeography": //sử dụng
                         getWebsiteGeography(task, data);
                         break;
+                    case "getTraffic30Days": //sử dụng
+                        getTraffic30Days(task, data);
+                        break;
                     case "getMarketingMixOverviewDaily":
                         // case "getMarketingMixOverviewWeekly":
                         // case "getMarketingMixOverviewMonthly":
@@ -480,15 +487,13 @@ const estmatedWorth = async(task, data) => {
     }
 }
 
+// check vip-free-demo user
 function locked(id, data) {
-    console.log(id);
-    console.log(data);
-
     $(".parent-" + id).addClass("locked");
-    if (data == 'free') {
-        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
-    } else if (data == 'vip') {
-        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng vip để xem data</a></div>');
+    if (data == 'demo') {
+        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+    } else if (data == 'free') {
+        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Đăng ký để xem data</a></div>');
     }
 }
 //sử dung truy cập theo tháng
@@ -1400,14 +1405,14 @@ const getTrafficAndEngagementPagesPerVisit = async(task, data, domain) => {
     }
     //Tỉ lệ truy cập từ tìm kiếm
 const getTrafficSourcesSearch = async(task, data) => {
-    let dataaaaa = 'free'
-    if (dataaaaa != 'demo') {
-        locked(task, dataaaaa)
+    if (data.userData.member != 'vip') {
+        locked(task, data.userData.member)
     }
     $(`.${task}`).parents().parents().parents().removeClass('rounded').addClass('rounded-top')
-    $(`.${task}`).attr('style', 'height: 250px;');
+        // $(`.${task}`).attr('style', 'height: 250px;');
     $('.precent-organicoverview').removeClass('d-none')
     if (data.status == "success") {
+        $(`.${task}`).removeClass('empty-state');
         let {
             data: traffic
         } = data.data;
@@ -1442,9 +1447,10 @@ const getTrafficSourcesSearch = async(task, data) => {
                 color: masterColor,
                 legend: {
                     bottom: "5%",
-                    textStyle: {
-                        fontFamily: 'Arial',
-                    },
+                    formatter: function(name) {
+                        let value = name == 'Tự nhiên' ? dataChart[0].value * 100 : dataChart[1].value * 100;
+                        return `${name}\n(${value}%)`;
+                    }
                 },
                 series: [{
                     type: 'pie',
@@ -1772,9 +1778,8 @@ const getTrafficAndEngagementBounceRate = async(task, data, domain) => {
     // hết sử dụng truy cập thời gian
     // SỬ DỤNG
 const getWebDemographicsAge = async(task, data) => {
-    let dataaaaaa = 'vip'
-    if (dataaaaaa != 'demo') {
-        locked(task, dataaaaaa)
+    if (data.userData.member != 'vip') {
+        locked(task, data.userData.member)
     }
     if (data.status == "success") {
         let {
@@ -1918,6 +1923,7 @@ const getWebDemographicsAge = async(task, data) => {
 const getTrafficSourcesOverview = async(task, data) => {
     $('.getTrafficSourcesOverview ').attr('style', 'min-height:300px')
     if (data.status == "success" && data.data.data) {
+        $(`.${task}`).removeClass('empty-state');
         let {
             data: traffic
         } = data.data;
@@ -2026,12 +2032,12 @@ const getTrafficSourcesOverview = async(task, data) => {
 // SỬ DỤNG
 const getWebDemographicsGender = async(task, data) => {
     // console.log(data);
-    let dataaaaaa = 'vip'
-    if (dataaaaaa != 'demo') {
-        locked(task, dataaaaaa)
+    if (data.userData.member != 'vip') {
+        locked(task, data.userData.member)
     }
     if (data.status == "success") {
         // console.log("ddd");
+        $(`.${task}`).removeClass('empty-state');
         let {
             data: visits
         } = data.data;
@@ -2171,11 +2177,11 @@ const getWebDemographicsGender = async(task, data) => {
 };
 // SỬ DỤNG
 const getDesktopVsMobileVisits = async(task, data) => {
-    let data_menber = 'vip'
-    if (data_menber != 'demo') {
-        locked(task, data_menber)
+    if (data.userData.member != 'vip') {
+        locked(task, data.userData.member)
     }
     if (data.status == "success") {
+        $(`.${task}`).removeClass('empty-state');
         let {
             data: visits
         } = data.data;
@@ -2330,7 +2336,11 @@ const getDesktopVsMobileVisits = async(task, data) => {
 };
 // SỬ DỤNG
 const getSimilarSites = async(task, data) => {
+    if (data.userData.member != 'vip') {
+        locked(task, data.userData.member)
+    }
     if (data.status == 'success') {
+        $(`.${task}`).addClass('text-left')
         if (data.data.data && data.data.haveData == true) {
             $(`.${task}`).addClass('row');
             $(`.${task}`).attr('style', 'min-height:300px !important');
@@ -2526,6 +2536,9 @@ const getWebsiteGeography = async(task, data) => {
     }
     // getDomainBackLinkDetail
 const getDomainBackLinkDetail = async(task, data) => {
+        if (data.userData.member != 'vip') {
+            locked(task, data.userData.member)
+        }
         // console.log(data);
         if (data.status == 'success') {
             let dataBacklinkTypes = data.data.backlinksOverview;
@@ -2634,9 +2647,8 @@ const getDomainBackLinkDetail = async(task, data) => {
     }
     //done
 const getScrapedSearchAds = async(task, data) => {
-    let dataaaaa = "vip"
-    if (dataaaaa != 'demo') {
-        locked(task, dataaaaa)
+    if (data.userData.member != 'vip') {
+        locked(task, data.userData.member)
     }
     // console.log(data);
     if (data.status == "success") {
@@ -2791,6 +2803,9 @@ const getScrapedSearchAds = async(task, data) => {
 
 // Lượt Truy Cập Xã Hội
 const getTrafficSocial = async(task, data, domain) => {
+        if (data.userData.member != 'vip') {
+            locked(task, data.userData.member)
+        }
         if (data.status == "success") {
             if (data && data.data && data.data.data) {
                 let TrafficSocial = data.data.data;
@@ -2978,9 +2993,9 @@ const getTrafficSocial = async(task, data, domain) => {
                             val1 = numeral(val1).format('0,0');
 
                             return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
-                <div class="text-dark pt-2">
-                    ${mrkr1} Traffic <span style="color:${color1};font-weight:bold">${val1}</span>
-                </div>`;
+            <div class="text-dark pt-2">
+                ${mrkr1} Traffic <span style="color:${color1};font-weight:bold">${val1}</span>
+            </div>`;
                         }
                     },
                     grid: {
@@ -3070,9 +3085,8 @@ const getTrafficSocial = async(task, data, domain) => {
     }
     //getMarketingMixOverview
 const getMarketingMixOverview = async(task, data) => {
-        let dataaaaa = 'demo';
-        if (dataaaaa != 'demo') {
-            locked(task, dataaaaa)
+        if (data.userData.member != 'vip') {
+            locked('getMarketingMixOverview', data.userData.member)
         }
         if (data.status == "success") {
             if (data && data.data && data.data.data && data.data.data.Data) {
@@ -3494,6 +3508,9 @@ const getMarketingMixOverview = async(task, data) => {
     }
     // DISPLAY ADS
 const SampleAdsasImage = async(task, data) => {
+    if (data.userData.member != 'vip') {
+        locked('SampleAds', data.userData.member)
+    }
     $('.footer--bt-view').remove()
     if (data.data.bannerAds == "") {
         $('.sample-image-ads').addClass('empty-state')
@@ -3571,4 +3588,99 @@ const SampleAdsasText = async(task, data) => {
     })
 }
 
+
+const getTraffic30Days = async(task, data) => {
+
+    if (data.status == "success") {
+        let totalBacklinks = data.data.ranksHistory;
+        let adsTraffic = [];
+        let organicTraffic = [];
+        let date30 = [];
+
+        $.each(totalBacklinks, (key, item) => {
+            //   console.log('dsss',refDomains[index]);
+            date30.push(moment(item.date).format('DD MMM'))
+            adsTraffic.push(item.adsTraffic)
+            organicTraffic.push(item.traffic)
+        });
+
+        date30 = date30.reverse();
+        adsTraffic = adsTraffic.reverse();
+        organicTraffic = organicTraffic.reverse();
+        let ele = document.getElementById("showTraffic30Days");
+        let myChart = echarts.init(ele, 'light');
+
+        function renderChart(date30, organicTraffic, adsTraffic) {
+            let option = {
+                color: masterColor,
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                legend: {
+                    data: ['Organic Traffic', 'Paid Traffic'],
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [{
+                    type: 'category',
+                    boundaryGap: false,
+                    data: date30
+                }],
+                yAxis: [{
+                    type: 'value',
+                    silent: true,
+                    axisLine: {
+                        show: false
+                    }
+                }],
+                series: [{
+                        name: 'Paid Traffic',
+                        data: adsTraffic,
+                        type: 'line',
+                        smooth: true,
+                        symbolSize: 10,
+
+
+                    },
+                    {
+                        name: 'Organic Traffic',
+                        data: organicTraffic,
+                        type: 'line',
+                        smooth: true,
+                        symbolSize: 10,
+
+
+                    },
+
+
+
+
+                ]
+            };
+
+
+            myChart.setOption(option);
+            new ResizeSensor($(`#showTraffic30Days`), function() {
+                myChart.resize();
+            });
+        };
+        renderChart(date30, organicTraffic, adsTraffic)
+
+        await $('#showTraffic30Days').removeClass('is-loading');
+        await $('.similarReloadTask[data-task="total_backlink"]').find('i').removeClass('fa-spin');
+    } else {
+        $(`#showRefDomain`).removeClass('is-loading')
+        $(`#showRefDomain`).addClass('empty-state')
+    }
+}
 export default api;

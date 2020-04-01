@@ -20,7 +20,7 @@
         </div>
         <div class="col-12 col-lg-12 bg-white shadow-sm rounded w-100" style="min-height:300px">
             <!-- -----------------pop up Image ---------------- -->
-            <div id="Parent-SampleAds" style="position: relative">
+            <div class="parent-SampleAds" style="position: relative">
                 <div class="listsample ml-1 mt-3">
                     <ul class="nav nav-tabs" id="Tabsample" role="tablist">
                         <li class="nav-item">

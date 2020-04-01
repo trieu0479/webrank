@@ -55,8 +55,7 @@ const api = async (method, domain) => {
                     $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
                   }
 
-                function lockchartdemo(id) {
-                    console.log(id)
+                function lockchartdemo(id) {                  
                     $(`.parent-${id}`).addClass("locked");
                     $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
                 }
@@ -164,7 +163,7 @@ const api = async (method, domain) => {
                         getAllTextTable(data, method)
                         break;
                     case "PublicSherTable":
-                        if (data.userData.member =="vip") {
+                        if (data.userData.member =="demo") {
                             lockchartdemo('PublicSherTable')                              
                         }
                         else if (data.userData.member =="free") {
@@ -622,8 +621,7 @@ const adTypeOverview = async (data, method) => {
 }
 
 const topPublicSher = async (data, method) => {   
-    var res = data.data.publishersOveview.categories; 
-    console.log(res);
+    var res = data.data.publishersOveview.categories;    
     if (res.length<=0) {
         $('.list-public').addClass('empty-state')
     }
@@ -1285,7 +1283,7 @@ const getAllTextTable = async (data, method) => {
                         })
                        
                     })
-                    console.log('ww',columns);
+
                     return columns;
                 },
             },
@@ -1388,17 +1386,19 @@ const PublicSherTable = async(data,method) => {
         'PublicSherTable', {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['publishersDetail']=true&userToken=${userToken}`,
-                dataSrc: function(res) {
+                dataSrc: function(res) {                  
+                    
                     if (data.data.publishersDetail == null) {
-                        $('#DataTables_Table_2_wrapper').addClass('empty-state');
-                        $('#DataTables_Table_2_wrapper').removeClass('is-loading');
-                        $('#DataTables_Table_2_wrapper tbody tr td').html('')
+                        $('.parent-PublicSherTable #DataTables_Table_2_wrapper').addClass('empty-state');
+                        $('.parent-PublicSherTable #DataTables_Table_2_wrapper').removeClass('is-loading');
+                        $('.parent-PublicSherTable #DataTables_Table_2_wrapper tbody tr td').html('')
                         return;
-                    }                                     
+                    }                                            
+                                                    
                     var res = data.data.publishersDetail.data;
                     let columns = [];
                     var stt = 1;
-                    $('#DataTables_Table_2_wrapper .dt-buttons').addClass('resize-dl')
+                    $('.parent-PublicSherTable #DataTables_Table_2_wrapper .dt-buttons').addClass('resize-dl')
                     $.each(res, function(k, v) {                       
                         let output = {};
                         output.stt = stt;
@@ -1414,12 +1414,9 @@ const PublicSherTable = async(data,method) => {
                         output.html = numeral(v.htmlAdsCount*100/(v.mediaAdsCount+v.htmlAdsCount+v.textAdsCount)).format('0,0')    
                         output.text = numeral(v.textAdsCount*100/(v.mediaAdsCount+v.htmlAdsCount+v.textAdsCount)).format('0,0')    
                                            
-                        stt += 1;
-                        console.log('qq',k,v);
-                        
+                        stt += 1;                                               
                         columns.push(output)
-                    })
-                    console.log(columns);
+                    })                   
                     return columns;
                 },
             },

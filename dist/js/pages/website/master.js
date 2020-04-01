@@ -1,7 +1,7 @@
 var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 var domain = "";
 if (location.href.indexOf("/rank/") > 1) {
-    domain = location.href.substring(location.href.indexOf("/rank/")+6);
+    domain = location.href.substring(location.href.indexOf("/rank/") + 6);
 } else {
     domain = url.searchParams.get("domain");
 }
@@ -13,8 +13,7 @@ function extractHostname(url) {
 
     if (url.indexOf("//") > -1) {
         hostname = url.split('/')[2];
-    }
-    else {
+    } else {
         hostname = url.split('/')[0];
     }
 

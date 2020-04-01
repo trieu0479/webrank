@@ -11,7 +11,7 @@
                     href="javascript:;"><i class="fal fa-sync"></i></a>
             </div>
         </div>
-        <div id="Parent-getSearchOrganicPaidOverviewpaid">
+        <div class="parent-getSearchOrganicPaidOverviewpaid">
             <div id="getSearchOrganicPaidOverviewpaid" class="rounded is-loading"
                 style="min-height:250px">
                 <ul class="nav nav-tabs customtab" role="tablist">
@@ -68,7 +68,7 @@
                     href="javascript:;"><i class="fal fa-sync"></i></a>
             </div>
         </div>
-        <div id="Parent-getSearchOrganicPaidOverview">
+        <div class="parent-getSearchOrganicPaidOverview">
             <div id="getSearchOrganicPaidOverview" class="rounded is-loading"
                 style="min-height:250px">
                 <ul class="nav nav-tabs customtab" role="tablist">

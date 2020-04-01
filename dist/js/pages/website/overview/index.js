@@ -8,6 +8,7 @@ $(document).ready(function() {
     api("getDomainBackLinkDetail", localDomain);
     api("getTrafficSocial", localDomain);
     api('getScrapedSearchAds', localDomain)
+    api('getTraffic30Days', localDomain)
         // ORGANIC
     var input = {};
     input.headerTitle = "Chi tiết truy cập theo từ khoá tự nhiên- Có thương hiệu";

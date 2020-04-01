@@ -15,7 +15,15 @@ $(document).ready(() => {
             next: 'Tiếp theo'
         }
     };
-
+    // check vip-free-demo user
+    function locked(id, data) {
+        $(".parent-" + id).addClass("locked");
+        if (data == 'demo') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+        } else if (data == 'free') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Đăng ký để xem data</a></div>');
+        }
+    }
     //init datatable
     const initDatatable = function(select, tableOptions) {
         const table = $(`.${select}`).DataTable(tableOptions);
@@ -44,6 +52,9 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
+                        if (json.userData.member != 'vip') {
+                            locked('getOrganicKeywordsBrandedTable', json.userData.member)
+                        }
                         if (!json.data || !json.data.data) {
                             $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state').attr('style', 'height: 300px;')
                             return [];
@@ -116,6 +127,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsNonBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
+                    if (json.userData.member != 'vip') { locked('getOrganicKeywordsNonBrandedTable', json.userData.member) }
                     if (!json.data || !json.data.data) {
                         $('.parent-getOrganicKeywordsNonBrandedTable').html('').addClass('empty-state').attr('style', 'height: 292px;')
                         return [];
@@ -178,7 +190,7 @@ $(document).ready(() => {
             }
         }
     )
-    $.getJSON(`//localapi.trazk.com/webdata/v2.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicSubdomains]=true&userToken=${userToken}`, function(res) {
+    $.getJSON(`//localapi.trazk.com/webdata/v3.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicSubdomains]=true&userToken=${userToken}`, function(res) {
         if (res.data.organicSubdomains) {
             res.data.organicSubdomains.forEach((v, k) => {
                 let number_tracffic = numeral(v.traffic).format('0.0a')
@@ -206,7 +218,7 @@ $(document).ready(() => {
         var swiper = new Swiper('.swiper-container', {
             slidesPerView: 1,
             spaceBetween: 10,
-            slidesPerGroup: 3,
+            slidesPerGroup: 1,
             loop: true,
             loopFillGroupWithBlank: true,
             pagination: {
@@ -221,12 +233,14 @@ $(document).ready(() => {
                 // when window width is >= 480px
                 540: {
                     slidesPerView: 2,
-                    spaceBetween: 20
+                    spaceBetween: 20,
+                    slidesPerGroup: 2,
                 },
                 // when window width is >= 640px
                 960: {
                     slidesPerView: 3,
-                    spaceBetween: 30
+                    spaceBetween: 30,
+                    slidesPerGroup: 3,
                 }
             }
         });
@@ -234,9 +248,12 @@ $(document).ready(() => {
     initDatatable(
         'organicCompetitors', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicCompetitors]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.data);
+                    if (res.userData.member != 'vip') {
+                        locked('organicCompetitors', res.userData.member)
+                    }
                     if (res.data.organicCompetitors && res.data.organicCompetitors != '') {
                         let columns = [];
                         $.each(res.data.organicCompetitors, function(k, v) {
