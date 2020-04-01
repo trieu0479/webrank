@@ -176,7 +176,7 @@ $(document).ready(() => {
             info: false,
             autoWidth: true,
             searching: false,
-            scrollY: "260px",
+            scrollY: "255px",
             scrollCollapse: true,
             paging: false,
             processing: true,
