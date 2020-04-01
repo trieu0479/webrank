@@ -365,10 +365,14 @@ const api = async(task, domain, reload = 0) => {
         taskname = 'getDomainBackLinkDetail'
         method = 'backlinksOverview'
     }
+    if (task == 'getTraffic30Days') {
+        taskname = 'getDomainOverview'
+        method = 'ranksHistory'
+    }
 
     // console.log(taskname);
 
-    if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail') {
+    if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview') {
         // taskname = task;
         url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
     } else {
@@ -431,6 +435,9 @@ const api = async(task, domain, reload = 0) => {
                         break;
                     case "getWebsiteGeography": //sử dụng
                         getWebsiteGeography(task, data);
+                        break;
+                    case "getTraffic30Days": //sử dụng
+                        getTraffic30Days(task, data);
                         break;
                     case "getMarketingMixOverviewDaily":
                         // case "getMarketingMixOverviewWeekly":
@@ -3577,4 +3584,103 @@ const SampleAdsasText = async(task, data) => {
     })
 }
 
+
+const getTraffic30Days = async (task, data) => {
+
+    if (data.status == "success") {
+        let totalBacklinks = data.data.ranksHistory;
+        let adsTraffic = [];
+        let organicTraffic = [];
+        let date30 = [];
+
+        $.each(totalBacklinks, (key, item) => {
+            //   console.log('dsss',refDomains[index]);
+            date30.push(moment(item.date).format('DD MMM'))
+            adsTraffic.push(item.adsTraffic)
+            organicTraffic.push(item.traffic)
+        });
+
+        date30 = date30.reverse(); 
+        adsTraffic = adsTraffic.reverse(); 
+        organicTraffic = organicTraffic.reverse(); 
+        let ele = document.getElementById("showTraffic30Days");
+        let myChart = echarts.init(ele, 'light');
+        function renderChart(date30, organicTraffic,adsTraffic ) {
+            let option = {
+                color: masterColor,
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                legend: {
+                    data: ['Organic Traffic','Paid Traffic'],
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: date30
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        silent: true,
+                        axisLine: {
+                            show: false
+                        }
+                    }
+                ],
+                series: [
+                    {
+                        name: 'Paid Traffic',
+                        data: adsTraffic,
+                        type: 'line',
+                        smooth: true,
+                        symbolSize: 10,
+                       
+                        
+                    },
+                    {
+                        name: 'Organic Traffic',
+                        data: organicTraffic,
+                        type: 'line',
+                        smooth: true,
+                        symbolSize: 10,
+                       
+                        
+                    },
+
+
+
+
+                ]
+            };
+
+
+            myChart.setOption(option);
+            new ResizeSensor($(`#showTraffic30Days`), function () {
+                myChart.resize();
+            });
+        };
+        renderChart(date30, organicTraffic,adsTraffic )
+   
+        await $('#showTraffic30Days').removeClass('is-loading');
+        await $('.similarReloadTask[data-task="total_backlink"]').find('i').removeClass('fa-spin');
+    } else {
+        $(`#showRefDomain`).removeClass('is-loading')
+        $(`#showRefDomain`).addClass('empty-state')
+    }
+}
 export default api;

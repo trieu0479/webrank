@@ -627,6 +627,14 @@
     display: none!important;
 }
 
+.table-qc-format td {
+    padding: 10px!important;
+}
+
+.parent-topBackLinks .dataTables_length {
+    display: none;
+}
+
 
 /* css cua khanh dep trai */
 

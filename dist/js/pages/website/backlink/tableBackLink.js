@@ -19,9 +19,9 @@ $(document).ready(() => {
         infoFiltered: '(lọc từ tổng số _MAX_ dòng)',
         search: 'Tìm kiếm:',
         paginate: {
-            previous: 'Quay lại',
-            next: 'Tiếp theo'
-        }
+            previous: '<i class="fal fa-angle-double-left"></i>',
+            next: '<i class="fal fa-angle-double-right"></i>'
+          }
     };
     //init datatable
     const initDatatable = function (select, tableOptions) {
@@ -51,7 +51,7 @@ $(document).ready(() => {
     $.get(`//localapi.trazk.com/webdata/semrush.php?task=countryIsoName`, function (res) {
         arrNameContry = res.data
     })
-    // Quốc Gia
+    // Quá»‘c Gia
     initDatatable(
         'getDataContry',
         {
@@ -176,7 +176,7 @@ $(document).ready(() => {
             info: false,
             autoWidth: true,
             searching: false,
-            scrollY: "260px",
+            scrollY: "255px",
             scrollCollapse: true,
             paging: false,
             processing: true,
@@ -241,28 +241,34 @@ $(document).ready(() => {
                         }else{
                             keyWorks =data.target_url.substring(8)
                         }
-                        return `<div class="text-left">${data.anchor}</div> <div class="text-left text-hidden" style="width:200px!important"><a href="${data.target_url}">${keyWorks}</a></div>`
+                        return `<div class="text-left">${data.anchor}</div> <div class="text-left text-hidden" style="width:150px!important"><a href="${data.target_url}">${keyWorks}</a></div>`
                     }
                 },
-                { title: 'First Seen', data: data => `<div class="text-left">${moment(data.first_seen*1000).format('DD MMM YY')}</div>` },
-                { title: 'Last Seen', data: data => `<div class="text-left">${moment(data.last_seen*1000).format('DD MMM YY')}</div>` },
+                { title: 'First Seen', data: data => `<div class="text-left" style="width:80px">${moment(data.first_seen*1000).format('DD MMM YY')}</div>` },
+                { title: 'Last Seen', data: data => `<div class="text-left" style="width:80px">${moment(data.last_seen*1000).format('DD MMM YY')}</div>` },
             ],
-            "order": [1, 'desc'],
+            // "order": [1, 'desc'],
             language,
             info: false,
             autoWidth: true,
             searching: false,
-            scrollY: "260px",
+            // scrollY: "260px",
+            pageLength: 10,
             scrollCollapse: true,
-            paging: false,
+            paging: true,
             processing: true,
             initComplete: function (settings, json) {
-                $(`.dataTables_scrollBody`).perfectScrollbar();
                 $(`.dataTables_scrollHeadInner`).attr('style', 'width:100% !important;padding-right:0;border-bottom: 1px solid #ddd');
-                $('.getDataContry .dataTables_empty').text("").addClass('empty-state');
-                $('.parent-getDataZones #DataTables_Table_1_processing').addClass('mt-n5');
+                // $('.getDataContry .dataTables_empty').text("").addClass('empty-state');
+                // $('.parent-getDataZones #DataTables_Table_1_processing').addClass('mt-n5');
+                $(`.topBackLinks`).attr('style', 'margin-top:0!important')
+                .find('thead').addClass('bg-primary-2')
+                .find('th').each(function (i) {
+                  $(this).addClass('text-white text-left font-gg border-0 font-12 bg-dark')
+                });
             }
         }
     )
 
 })
+

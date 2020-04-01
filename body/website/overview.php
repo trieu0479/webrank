@@ -41,6 +41,11 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-12">
+                        <?require_once(__DIR__."/modules/overview.traffic30day.php")?>
+                </div>
+            </div>
+            <div class="row">
                     <div class="col-12 col-lg-5">
                         <div class="widget-getTrafficAndEngagementOverviewMonthly"></div>
                     </div>

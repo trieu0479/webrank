@@ -3,6 +3,34 @@ var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c
 const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 var userToken = 'cHhZeE1KcFQvSis0K2VrN3kxMm1oQT09OjpxzF1Po19uXTHZBqnUT9hb'
 var domain = url.searchParams.get('domain');
+
+function lockeddemo(id) {
+    $("#Parent-" + id + " #" + id).addClass("locked");
+    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+}
+function lockerdemo(id) {      //class   
+    $(`.row.${id}`).addClass("locked");
+    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+  }
+function lockedfree(id) {
+    $("#Parent-" + id + " #" + id).addClass("locked");
+    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+}
+function lockerfree(id) {        //class
+    $(`.row.${id}`).addClass("locked");
+    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+  }
+
+function lockchartdemo(id) { 
+    $(`.parent-${id}`).addClass("locked");
+    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+}
+function lockchartfree(id) {
+    $(`.parent-${id}`).addClass("locked");
+    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+}
+
+
 const api = async(method, domain) => {
     let methodName = method;
     if (method == "ggAdsOverview" || method == "TopPaidKeyword" || method == "PositionChart" || method == "PaidPageTable") {
@@ -16,30 +44,85 @@ const api = async(method, domain) => {
     }
     try {
         return await $.ajax({
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method[${method}]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method[${method}]=true&userToken=${userToken}`,
                 type: "GET"
             })
             .then(data => {
                 switch (methodName) {
                     case "ggAdsOverview":
+                        if (data.userData.member =="demo") {                          
+                            lockerdemo('ggAdsOverview')                    
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('ggAdsOverview')
+                        }
                         ggAdsOverview(data, method);
                         break;
                     case 'adwordsMonthlyFullTrend':
+                        if (data.userData.member == "demo") {                                                  
+                            lockerdemo('adwordsMonthlyFullTrend')
+                            $("#Parent-adwordsMonthlyFullTrend").prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>')                    
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('adwordsMonthlyFullTrend')
+                            $("#Parent-adwordsMonthlyFullTrend").prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng VIP để xem data hoàn toàn miễn phí</a></div>')                    
+                        }
+
                         adwordsMonthlyFullTrend(data, method);
                         break;
                     case 'TopPaidKeyword':
+                        if (data.userData.member == "demo") {                                                  
+                            lockerdemo('TopPaidKeyword')
+                            $('.toppaidkey').addClass('locked')
+                           
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('TopPaidKeyword')
+                            $('.toppaidkey').addClass('locked')                                     
+                        }
                         TopPaidKeyword(data, method);
                         break;
                     case 'PositionChart':
+                        if (data.userData.member == "demo") {                                                  
+                            lockchartdemo('PositionChart')                           
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('PositionChart')
+                                     
+                        }
                         PositionChart(data, method);
                         break;
                     case "MainCompetitor":
+                        if (data.userData.member == "demo") {                                                  
+                            lockerdemo('MainCompetitor')
+                            $('.maincompetitor').addClass('locked')                           
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('MainCompetitor')
+                            $('.maincompetitor').addClass('locked')                                     
+                        }
                         MainCompetitor(data, method)
                         break;
                     case "CompetitorMapChart":
+                        if (data.userData.member == "demo") {                                                  
+                            lockchartdemo('CompetitorMapChart')                           
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('CompetitorMapChart')                                                                
+                        }
                         CompetitorMapChart(data, method)
                         break;
                     case "PaidPageTable":
+                        if (data.userData.member == "demo") {                                                  
+                            lockerdemo('PaidPageTable')
+                            $('.paidpagetable').addClass('locked')
+                           
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('PaidPageTable')
+                            $('.paidpagetable').addClass('locked')
+                                     
+                        }
                         PaidPageTable(data, method)
                         break;
                     default:
@@ -130,6 +213,7 @@ const ggAdsOverview = async(data,method) => {
 
         return c;
     }, 0)
+   
     $('.ggAdsOverview').append(`   
 <div class="col-12 col-lg-4 vc ">
 <div class="text-center bg-white p-3 align-items-center rounded">
@@ -165,13 +249,18 @@ const ggAdsOverview = async(data,method) => {
 
 `)
 
-
-
+ 
+if (res.length <=0) {       
+    $('.kwhard').html('0k')
+    $('.visit').html('0k')
+    $('.tra-cost').html('$' + '0k' + '<span>USD</span>')
+    }
+else {
     $('.kwhard').html(kFormatter(k))
     $('.visit').html(kFormatter(S))
     $('.tra-cost').html('$' + kFormatter(c) + '<span>USD</span>')
 }
-
+}
 function compareNumbers(a, b) {
     return a - b;
 }
@@ -465,7 +554,6 @@ const TopPaidKeyword = async(data, method) => {
         $('#TopPaidKeyword_wrapper').addClass('empty-state');
         $('#TopPaidKeyword_wrapper').css('min-height', '361px')
     }
-
     initDatatable(
         'TopPaidKeyword', {
             ajax: {
@@ -478,7 +566,12 @@ const TopPaidKeyword = async(data, method) => {
                         $('#TopPaidKeyword_paginate').html('')
                         return;
                     }
-
+                    if (data.data.adwordsPositions.length<=0) {
+                        $('#TopPaidKeyword_wrapper').addClass('empty-state');
+                        $('#TopPaidKeyword_wrapper').css('min-height', '361px')
+                        $('#TopPaidKeyword tbody tr td').html('');
+                        $('#TopPaidKeyword_paginate').html('')
+                    } 
 
                     var res = data.data.adwordsPositions;
                     let columns = [];
@@ -1025,6 +1118,11 @@ const PaidPageTable = async(data, method) => {
                         $('#PaidPageTable_wrapper tbody tr td').html('')
                         return;
                     }
+                    if (data.data.adwordsPositions.length<=0) {
+                        $('#PaidPageTable_wrapper').addClass('empty-state');
+                        $('#PaidPageTable_wrapper').removeClass('is-loading');
+                        $('#PaidPageTable_wrapper tbody tr td').html('')
+                    } 
                     var res = data.data.adwordsPositions;
                     let columns = [];
                     var stt = 1;

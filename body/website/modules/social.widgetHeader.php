@@ -34,11 +34,7 @@
                                         </div>
                                         <div class="col-12 col-lg-4">
                                             <div class="pt-0 pt-lg-4 pb-4 pb-lg-0">
-                                                <!-- <div id="Parent-TotalSocialVisits">
-                                                    <div id="TotalSocialVisits"
-                                                        class="d-none d-lg-block h4 text-center text-info font-bold">
-                                                    </div>
-                                                </div> -->
+                                             
                                                 <div id="Parent-getTotalSocialVisits">
                                                     <div id="getTotalSocialVisits" class="w-100 rounded"
                                                         style="height: 225px">

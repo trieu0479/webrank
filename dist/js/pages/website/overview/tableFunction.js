@@ -435,7 +435,7 @@ $(document).ready(() => {
         let name = res.data.name;
         let iconBlue = '';
         if (res.data.verification == "blue_verified") {
-            iconBlue = "./dist/images/check.png";
+            iconBlue = rootURL + "/dist/images/check.png";
         } else {
             iconBlue = "";
         }

@@ -29,8 +29,7 @@
                 </div>
             </div>
             <!-- -----over view---------------------- -->
-            <div id="Parent-ggAdsOverview" style="position: relative">
-             
+            <div id="Parent-ggAdsOverview" style="position: relative">             
                 <div class="row ggAdsOverview">
                 </div>
             </div>
@@ -43,10 +42,11 @@
 
 
             <!-- -------------paid search trewnds-------------- -->
-            <div class="row">
+            <div id="Parent-adwordsMonthlyFullTrend" style="position: relative"> 
+            <div class="row adwordsMonthlyFullTrend">
                 <?php require_once(__DIR__ . "/modules/googleads.widgetMonthlyFullTrend.php") ?>
             </div>
-
+</div>
             <!-- ------------------top paid-keywords--------------- -->
             <div class="row">
                 <?php require_once(__DIR__ . "/modules/googleads.widgetTopPaidKeyWord.php") ?>

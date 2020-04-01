@@ -27,6 +27,11 @@ switch ($action) {
     case "displayads": $meta['title'] = "Kết quả phân tích display ads - traffic website ".$_GET['domain'];break;
     case "social": $meta['title'] = "Kết quả phân tích social - traffic website ".$_GET['domain'];break;
     case "backlink": $meta['title'] = "Kết quả phân tích backlink - traffic website ".$_GET['domain'];break;
+    case "top-website-vietnam": 
+        $meta['title'] = "Top website tại Việt Nam - Bảng xếp hạng 100k website Việt ";
+        $meta['description'] = "Bảng xếp hạng hơn 100k website tại Việt Nam, phân loại theo giá trị (USD), traffic, cho phép quảng cáo GDN và nhiều thông tin khác";
+
+    break;
    }
 
 
