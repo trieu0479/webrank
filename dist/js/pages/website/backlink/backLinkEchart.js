@@ -14,7 +14,7 @@ function appendHtml(arr, name) {
 
         let html = `
        <tr class="" style="height:35px">
-         <td class="pl-3 pl-sm-5 pl-md-3 w-10 w-md-10 text-capitalize" style="min-width:60px!important">${arr[key].name}</td>
+         <td class="pl-3 pl-sm-5 pl-md-3 w-10 w-md-10 text-capitalize" style="width:20px!important">${arr[key].name}</td>
          <td class="w-lg-55 w-55">
          <div class="range-dt">
             <div class="slider-full w-100 mx-2 ml-md-3">
