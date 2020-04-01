@@ -308,9 +308,9 @@ $(document).ready(() => {
     initDatatable(
         'getAdvertisingSearchDetail', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
-                    // if (res.userData.member != 'demo') { locked('getAdvertisingSearchDetail', res.userData.member) }
+                    if (res.userData.member != 'demo') { locked('getAdvertisingSearchDetail', res.userData.member) }
                     if (res.data.adwordsCompetitors && res.data.adwordsCompetitors != '') {
                         let columns = [];
                         $.each(res.data.adwordsCompetitors, function(k, v) {
