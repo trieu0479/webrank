@@ -986,7 +986,7 @@ const getAllImageTable = async (data, method) => {
     initDatatable(
         'getAllImageTable', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['bannerAds']=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['bannerAds']=true&userToken=${userToken}`,
                 dataSrc: function (res) {
                     var res = data.data.bannerAds;
                     if (res.length<=0) {
@@ -1111,7 +1111,7 @@ const getAllHTMLTable = async (data, method) => {
     initDatatable(
         'getAllHTMLTable', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['htmlAds']=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['htmlAds']=true&userToken=${userToken}`,
                 dataSrc: function (res) {
                     var res = data.data.htmlAds;
                     let columns = [];
@@ -1242,7 +1242,7 @@ const getAllTextTable = async (data, method) => {
     initDatatable(
         'getAllTextTable', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['textAds']=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['textAds']=true&userToken=${userToken}`,
                 dataSrc: function (res) {
                     var res = data.data.textAds;
                     let columns = [];
@@ -1385,7 +1385,7 @@ const PublicSherTable = async(data,method) => {
     initDatatableClass(
         'PublicSherTable', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['publishersDetail']=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['publishersDetail']=true&userToken=${userToken}`,
                 dataSrc: function(res) {                  
                     
                     if (data.data.publishersDetail == null) {
