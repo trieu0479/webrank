@@ -75,4 +75,4 @@
     <script type="module" src="<?=$rootURL?>/dist/js/pages/website/master.js?v=<?=$version?>"></script>
     <script type="module" src="<?=$rootURL?>/dist/js/pages/website/backlink/index.js?v=<?=$version?>"></script>
     <script type="module" src="<?=$rootURL?>/dist/js/pages/website/backlink/backLinkEchart.js?v=<?=$version?>"></script>
-    <script type="module" src="<?=$rootURL?>/dist/js/pages/website/backlink/tableBackLink.js"></script>
+    <script type="module" src="<?=$rootURL?>/dist/js/pages/website/backlink/tableBackLink.js?v=<?=$version?>"></script>
