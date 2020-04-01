@@ -3,13 +3,28 @@
 
 // const counter = document.querySelector('.counter');
 var domain = "";
-var domain_name = "";
 if (location.href.indexOf("/rank/") > 1) {
-    var domainTmp = location.href.split("/");
-    domain_name = domainTmp[4];
+    domain = location.href.substring(location.href.indexOf("/rank/") + 6);
 } else {
-    domain_name = url.searchParams.get("domain");
+    domain = url.searchParams.get("domain");
 }
+domain = extractHostname(domain);
+
+function extractHostname(url) {
+    var hostname;
+    if (url.indexOf("//") > -1) {
+        hostname = url.split('/')[2];
+    } else {
+        hostname = url.split('/')[0];
+    }
+    hostname = hostname.split(':')[0];
+    hostname = hostname.split('?')[0];
+    return hostname;
+}
+
+
+var domain_name = domain;
+
 var arrDomain = [];
 var selectWebsite = "";
 
@@ -355,9 +370,9 @@ const api = async(task, domain, reload = 0) => {
 
     if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail') {
         // taskname = task;
-        url = `//localapi.trazk.com/webdata/semrush.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
+        url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
     } else {
-        url = `//localapi.trazk.com/webdata/websiteapi.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`
+        url = `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`
     }
     try {
         return await $.ajax({
@@ -2309,7 +2324,7 @@ const getSimilarSites = async(task, data) => {
                     $(`.${task}`).append('<div class="similarSites col-12 col-md-4"></div>')
                 }
                 var compareNode = $(`<span  data-domain="${site.Domain}" class="changeWebSite text-primary bg-info-2 rounded-pill px-2 font-10 align-self-center ml-auto text-uppercase">+ so sánh</span>`);
-                $(`<a title="${site.Domain}" class="d-flex align-items-center" href='./index.php?view=website&action=overview&domain=${site.Domain}'">
+                $(`<a title="${site.Domain}" class="d-flex align-items-center" href='${rootURL}/rank/${site.Domain}'">
             <img class="p-1 mr-2 border rounded bg-secondary" src="${site.Favicon}" />
             <span  data-type="website" data-input="${site.Domain}" >${site.Domain}</span>
         </a>`).appendTo(`.${task} .similarSites:last-child`)
@@ -2354,7 +2369,7 @@ const getSimilarSites = async(task, data) => {
                     }).then((result) => {
                         // console.log(result);
                         if (result.value) {
-                            location.href = `?view=traffic-website&action=compare&domain1=${result.value[0].toLowerCase()}&domain2=${result.value[1].toLowerCase()}`;
+                            location.href = `${rootURL}/?view=traffic-website&action=compare&domain1=${result.value[0].toLowerCase()}&domain2=${result.value[1].toLowerCase()}`;
                         }
                     })
                 });
@@ -2761,15 +2776,17 @@ const getTrafficSocial = async(task, data, domain) => {
                 $("#percenTotalSocailVisits").html(`${numeral(TotalDesktopTraffic).format('0.00%')}`);
 
                 let dataChartPie = [{
-                            name: "Mạng xã hội",
-                            value: SearchTotal
-                        },
-                        {
-                            name: "Tổng",
-                            value: VolumeTotal - SearchTotal
-                        }
-                    ]
-                    // render chart
+                        name: "Mạng xã hội",
+                        value: SearchTotal
+                    },
+                    {
+                        name: "Tổng",
+                        value: VolumeTotal - SearchTotal
+                    }
+                ]
+                console.log(dataChartPie);
+
+                // render chart
                 let elePie = document.getElementById("getTotalSocialVisits");
                 let myChartPie = echarts.init(elePie);
 
@@ -2778,13 +2795,17 @@ const getTrafficSocial = async(task, data, domain) => {
                     legend: {
                         bottom: "-2%",
                         right: "25%",
+                        formatter: function(name) {
+                            let value = name == 'Tổng' ? dataChartPie[1].value : dataChartPie[0].value;
+                            return `${name}\n(${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')})`;
+                        }
                     },
                     series: [{
                         type: 'pie',
                         legendHoverLink: false,
                         minAngle: 20,
-                        radius: ["50%", "80%"],
-                        center: ["50%", "45%"],
+                        radius: ["45%", "70%"],
+                        center: ["45%", "45%"],
                         avoidLabelOverlap: false,
                         itemStyle: {
                             normal: {
@@ -2928,7 +2949,7 @@ const getTrafficSocial = async(task, data, domain) => {
 
                             return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
                 <div class="text-dark pt-2">
-                    ${mrkr1} ${name1} <span style="color:${color1};font-weight:bold">${val1}</span>
+                    ${mrkr1} Traffic <span style="color:${color1};font-weight:bold">${val1}</span>
                 </div>`;
                         }
                     },
@@ -3347,15 +3368,16 @@ const getMarketingMixOverview = async(task, data) => {
                                 new ResizeSensor($(`#getMarketingMixOverview--${taskName}`), function() {
                                     myChart.resize();
                                 });
-
+                                await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
                                 await $(`#getMarketingMixOverview--${taskName}`).removeClass('is-loading');
                                 await $(`#getMarketingMixOverview`).removeClass('is-loading');
                                 await $(`#getMarketingMixOverview`).removeClass('empty-state');
-                                await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
+
                             }
                         } else {
                             $(`#getMarketingMixOverview`).removeClass('is-loading');
                             $(`#getMarketingMixOverview`).addClass('empty-state');
+                            await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
                         }
 
                     }
@@ -3423,11 +3445,13 @@ const getMarketingMixOverview = async(task, data) => {
                 } else {
                     $(`#getMarketingMixOverview`).removeClass('is-loading');
                     $(`#getMarketingMixOverview`).addClass('empty-state');
+                    await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
                 }
 
             } else {
                 $(`#getMarketingMixOverview`).removeClass('is-loading');
                 $(`#getMarketingMixOverview`).addClass('empty-state');
+                await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
             }
 
         } else {

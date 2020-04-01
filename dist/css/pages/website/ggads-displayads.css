@@ -238,7 +238,7 @@ ul#Tabsample>li>a {
 .list-public .row-public-footer {
     position: relative;
     border-bottom: 1px solid #ccc;
-    height: 46px;
+    height: 43px;
     max-width: 100%;
     display: flex;
 }

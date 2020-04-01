@@ -1,10 +1,10 @@
- <header class="topbar">
+<header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <!-- ============================================================== -->
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="./index.php?userToken=<?=$userToken?>">
+            <a class="navbar-brand" href="<?=$rootURL?>?userToken=<?=$userToken?>">
                  <img width="40px" src="<?=$rootURL?>/assets/images/icon/favicon-196x196.png">
             </a>
         </div>
@@ -31,7 +31,7 @@
                     <a  class=" dropdown-toggle"  href="https://admin.fff.com.vn/insight/?view=default&action=index&userToken=<?=$userToken?>" id="navbarDropdown" role="button" data-toggle="" aria-haspopup="true" aria-expanded="false" href="#">Phân Tích</a>
                     <div class="dropdown-menu-li  animate  slideIn" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="https://go.fff.com.vn/?view=market&action=index&userToken=<?=$userToken?>"><i class="fad fa-lightbulb-on font-18 mr-2"></i><span class="font-13">Dữ liệu thị trường Việt Nam</span> </a>
-                        <a class="dropdown-item" href="https://go.fff.com.vn/?view=traffic-website&action=index&userToken=<?=$userToken?>"><i class="fad fa-send-backward font-18 mr-2"></i><span class="font-13">Phân tích traffic Website</span> </a>
+                        <a class="dropdown-item" href="<?=$rootURL?>?userToken=<?=$userToken?>"><i class="fad fa-send-backward font-18 mr-2"></i><span class="font-13">Phân tích traffic Website</span> </a>
                         <a class="dropdown-item" href="https://admin.fff.com.vn/keyword-planner/?userToken=<?=$userToken?>"><i class="fad fa-keyboard font-18 mr-2"></i><span class="font-13">Từ Khóa - Keyword Planner <i class="fab fa-hotjar text-danger ml-3"></i></span> </a>
                         <a class="dropdown-item" href="https://go.fff.com.vn/?view=pagespeed&action=index&userToken=<?=$userToken?>"><i class="fad fa-monitor-heart-rate font-18 mr-2"></i><span class="font-13">Tốc độ website - Page Speed</span> </a>
 

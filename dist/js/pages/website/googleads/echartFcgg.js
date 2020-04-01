@@ -4520,7 +4520,7 @@ const getTrafficDestinationAds = async (task, data) => {
         if (site.Domain == "grid.upgrade") return;
         $(`#${task}`).append(`
         <tr>
-            <td><a title="${site.Domain}" href="index.php?view=traffic-website&action=result&domain=${site.Domain}"><img src="${site.Favicon}" class="p-1 mr-2 border rounded bg-secondary" />${site.Domain}</a></td>
+            <td><a title="${site.Domain}" href="${rootURL}/rank/${site.Domain}"><img src="${site.Favicon}" class="p-1 mr-2 border rounded bg-secondary" />${site.Domain}</a></td>
             <td class="text-right">${numeral(site.Share).format('0.00%')}</td>
             <td>
                 <div class="progress">

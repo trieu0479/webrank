@@ -20,34 +20,27 @@ $(document).ready(() => {
     const initDatatable = function(select, tableOptions) {
             const table = $(`.${select}`).DataTable(tableOptions);
             $(table.table().header()).addClass('text-center');
-            //reload click handle
             $(`.${select}`).click(function(event) {
-                    // $(event.target).addClass('fa-spin');
-                    console.log(tableOptions);
-
-                    $(`.${select}-container`).addClass('is-loading').block({
-                        overlayCSS: {
-                            backgroundColor: '#ccc',
-                            opacity: 0.8,
-                            zIndex: 1,
-                            cursor: 'wait'
-                        },
-                        message: null
-                    });
-                    $(`.${select}`).DataTable().ajax.reload(() => {
-                        reloaddata = 1
-                    });
-                })
-                // $(".similarReloadTaskaaaaa").click(function() {
-                //     $(`.${select}`).click()
-                // })
+                $(`.${select}-container`).addClass('is-loading').block({
+                    overlayCSS: {
+                        backgroundColor: '#ccc',
+                        opacity: 0.8,
+                        zIndex: 1,
+                        cursor: 'wait'
+                    },
+                    message: null
+                });
+                // $(`.${select}`).DataTable().ajax.reload(() => {
+                //     reloaddata = 1
+                // });
+            })
             return table;
         }
         //getWebsiteGeography
     initDatatable(
             'getWebsiteGeography-table', {
                 ajax: {
-                    url: `https://localapi.trazk.com/webdata/websiteapi.php?task=getWebsiteGeography&domain=${localDomain}`,
+                    url: `//localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: json => {
                         // console.log(json);
                         if (!json.data || !json.data.data) {
@@ -125,7 +118,7 @@ $(document).ready(() => {
                 highlightSpotColor: '',
                 // tooltipFormatter: (sparkline, options, fields) =>
                 //     `<span style="color: ${fields.color}">&#9679;</span> Tháng ${++fields.x}: ${numeral(fields.y).format(0,0)}`,
-                barColor: '#74b9ff',
+                barColor: '#5d78ff',
                 sliceColors: ['#1abc9c', '#e74c3c'],
                 fillColor: 'rgba(61, 133, 222, 0.3)',
             });
@@ -134,7 +127,7 @@ $(document).ready(() => {
     initDatatable(
             'getKeywords', {
                 ajax: {
-                    url: `//localapi.trazk.com/keywords/keywords.php?task=keywordPlannerDomain&limit=20&domain=${localDomain}`,
+                    url: `//localapi.trazk.com/keywords/keywords.php?task=keywordPlannerDomain&limit=20&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
                         if (json.data.keywords == null) {
                             $('.parent-getKeywords').html('').addClass('empty-state')
@@ -153,10 +146,14 @@ $(document).ready(() => {
                         title: 'Từ khoá',
                         data: data => `
             <div class="d-flex no-block flex-row">
-              <a href="./index.php?view=keyword-planner&action=result&keywords=${data.keyword}&language=vn&country=vn&network=web"  data-type="keyword" class="changeURL" data-input="${data.keyword}"><i class="child-hover far fa-search mr-1"></i> ${data.keyword}</a>
-              <div class="lichsuHienThi d-none d-md-flex sparkline ml-auto" data-sparkline="[${data.lichsutimkiemtrungbinh}]"></div>
-            </div>`,
+              <a class="font-12 ml-2" href="./index.php?view=keyword-planner&action=result&keywords=${data.keyword}&language=vn&country=vn&network=web"  data-type="keyword" class="changeURL" data-input="${data.keyword}"> ${data.keyword}</a>
+              </div>`,
                         // width: '180px'
+                    },
+                    {
+                        title: 'Trend',
+                        data: data => `<div class="lichsuHienThi d-none d-md-flex sparkline ml-auto" data-sparkline="[${data.lichsutimkiemtrungbinh}]"></div>`,
+                        width: '100px',
                     },
                     {
                         title: 'Chiều dài',
@@ -167,7 +164,7 @@ $(document).ready(() => {
                         title: 'Độ khó',
                         data: 'dokho',
                         render: (data) =>
-                            `<div class="round round-sm align-self-center ${data <= 70 ? data <= 30 ? 'bg-success' : 'bg-war text-dark' : 'bg-warning'}">${data ? data : 0}</a>`,
+                            `<div class="round round-sm align-self-center ${data <= 70 ? data <= 30 ? 'bg-success' : 'bg-danger' : 'bg-warning'}">${data ? data : 0}</a>`,
                         width: '100px'
                     },
                     {
@@ -191,12 +188,15 @@ $(document).ready(() => {
                     [3, 'desc']
                 ],
                 columnDefs: [{
-                    targets: [1, 3, 4, 5],
+                    targets: [3, 4, 5],
                     className: 'text-center',
                     // render: $.fn.dataTable.render.number(',', '.', 0, '')
                 }, {
                     targets: 2,
                     className: 'text-center'
+                }, {
+                    targets: 1,
+                    className: 'text-left'
                 }],
                 "ordering": false,
                 language,
@@ -229,7 +229,7 @@ $(document).ready(() => {
     initDatatable(
         'banckLinksOverview', {
             ajax: {
-                url: `https://localapi.trazk.com/webdata/semrush.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.banckLinksOverview.backlinks.data);
                     let columns = [];
@@ -359,7 +359,7 @@ $(document).ready(() => {
     initDatatable(
         'getOrganicKeywordsBrandedTable', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/websiteapi.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}`,
+                url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
                     $('.similarDates-organickeyno').html(`${moment(json.data.lastUpdate).format("DD-MM-YYYY")}`)
                     if (!json.data || !json.data.data) {

@@ -1,4 +1,24 @@
 <div class="page-wrapper">
+            <!-- sub menu -->
+            <div class="sub-header border-bottom pl-4 pt-3 pb-3 bg-white">
+                <div class="d-flex no-block">
+                    <div class="align-self-center font-14 mr-3">
+                        <a href="./" class="" style="color: rgba(79,80,80,.7);">Phân tích</a>
+                    </div>
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14" style="color: rgba(79,80,80,.7);"> <a
+                            href="<?=$rootURL?>">Website</a> </div>
+                    <div class="align-self-center mr-3 ml-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14" style="color: rgba(79,80,80,.7);"> <a
+                            href="<?=$rootURL?>/index.php?view=website&action=organic&domain=<?=$_GET['domain']?>">Organic Search</a> </div>
+                </div>
+
+            </div>
+            <!-- sub menu -->
     <div class="container similarBody  widgetContainer">
         <div class="page-contents pt-5">
             <div class="topbox"><?require_once(__DIR__."/modules/master.topbox.php")?></div>
@@ -44,13 +64,8 @@
                 <div class="col-12 col-lg-5">
                     <div class="widget-getSearchBrandedKeywords"></div>
                 </div>
+
                 <div class="col-12 col-lg-7">
-                    <div style="height:100%" class="widget-getOrganicKeywordsBrandedTable"></div>
-                </div>
-                <div class="col-12 col-lg-6">
-                    <div style="height:100%" class="widget-getOrganicKeywordsNonBrandedTable"></div>
-                </div>
-                <div class="col-12 col-lg-6">
                     <div style="height:100%" class="widget-organicCompetitors"></div>
                 </div>
             </div>
@@ -63,6 +78,14 @@
             <div class="row">
                 <div class="col-12 ">
                     <div class="widget-trafficKeywordTrend"></div>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-12 col-lg-6">
+                    <div style="height:100%" class="widget-getOrganicKeywordsBrandedTable"></div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div style="height:100%" class="widget-getOrganicKeywordsNonBrandedTable"></div>
                 </div>
             </div>
     </div>

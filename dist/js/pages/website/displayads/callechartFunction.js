@@ -1134,7 +1134,17 @@ $(document).ready(() => {
           url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}&userToken=${userToken}`,
           dataSrc: (json) => {
             console.log('ee',json);
-             
+            if (json.userData.member =="demo") {
+                  //class   
+                $(`.widget-getTrafficDisplayAdvertisingWebsitesTable .widgetBody`).addClass("locked");
+                $(".widget-getTrafficDisplayAdvertisingWebsitesTable").prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+                      
+          }
+          else if (json.userData.member =="free") {
+            $(`.widget-getTrafficDisplayAdvertisingWebsitesTable .widgetBody`).addClass("locked");
+            $(".widget-getTrafficDisplayAdvertisingWebsitesTable").prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng cấp VIP để xem data hoàn toàn miễn phí</a></div>');
+                  
+          }
             if (json && json.data && json.data.data && json.data.data.Data) {
               let { Data: newData } = json.data.data;
               if (newData.Records.length > 0) {
@@ -1336,13 +1346,11 @@ $(document).ready(() => {
 
   $('.btnKeyWord').click(() => changeURL('keyword', null));
 
-
-
-
     function locked(id) {
       $("#Parent-" + id + " #" + id).addClass("locked");
       $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
     }
+    
     //locked("getTrafficSourcesOverview");
     locked("getMarketingMixOverview");
     locked("getTrafficSourcesSearch");
@@ -1353,10 +1361,10 @@ $(document).ready(() => {
     locked("getPaidSearchCompetitorsTable");
     locked("getPaidKeywordsTable");
     // locked("getWebsiteAdsVisitsOverview");
-    // locked("getTrafficDisplayAdvertisingAds");
+    locked("getTrafficDisplayAdvertisingAds");
     locked("getTrafficDestinationAds");
     // locked("getWebsiteAdsIntelDisplay");
-    locked("getTrafficDisplayAdvertisingWebsitesTable");
+    // locked("getTrafficDisplayAdvertisingWebsitesTable");
     locked("getTrafficSourcesSocial");
     locked("getTrafficSocialTableDetail");
     locked("getTrafficSourcesTotalReferralsTable");

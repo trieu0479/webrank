@@ -1,4 +1,23 @@
 <div class="page-wrapper">
+            <!-- sub menu -->
+            <div class="sub-header border-bottom pl-4 pt-3 pb-3 bg-white">
+                <div class="d-flex no-block">
+                    <div class="align-self-center font-14 mr-3">
+                        <a href="./" class="" style="color: rgba(79,80,80,.7);">Phân tích</a>
+                    </div>
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14" style="color: rgba(79,80,80,.7);"> <a
+                            href="<?=$rootURL?>">Website</a> </div>
+                    <div class="align-self-center mr-3 ml-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14" style="color: rgba(79,80,80,.7);"> <a
+                            href="<?=$rootURL?>/index.php?view=website&action=social&domain=<?=$_GET['domain']?>">Social</a> </div>
+                </div>
+
+            </div>
     <div class="container widgetContainer">
         <div class="page-contents pt-5">
             <div class="topbox"><?php require_once(__DIR__."/modules/master.topbox.php")?></div>
