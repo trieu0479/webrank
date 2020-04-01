@@ -75,7 +75,7 @@ function locked(id, data) {
     if (data == 'demo') {
         $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
     } else if (data == 'free') {
-        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Nâng vip để xem data</a></div>');
+        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/account/?view=user&action=payment-table" > <i class="fas fa-gem"></i> Nâng vip để xem data</a></div>');
     }
 }
 //Tỉ lệ truy cập từ tìm kiếm
