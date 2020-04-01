@@ -779,7 +779,7 @@ const MainCompetitor = async(data, method) => {
             drawCallback: function(settings) {},
             columns: [{
                     title: "<span class='font-gg font-weight-100 font-12'>Competitor</span>",
-                    "data": data => `<a href="?view=website&action=overview&domain=${data.domain}">${data.domain}</a>`,
+                    "data": data => `<a href="${rootURL}/rank/${data.domain}">${data.domain}</a>`,
                     width: '35%',
                     class: 'text-left'
                 },

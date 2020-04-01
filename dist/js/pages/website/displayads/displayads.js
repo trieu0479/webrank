@@ -33,15 +33,56 @@ const api = async (method, domain) => {
 
     try {
         return await $.ajax({
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method[${method}]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method[${method}]=true&userToken=${userToken}`,
                 type: "GET"
             })
             .then(data => {
+                //locked:bảng cũ locker:bảng mới
+                function lockeddemo(id) {
+                    $("#Parent-" + id + " #" + id).addClass("locked");
+                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+                }
+                function lockerdemo(id) {      //class   
+                    $(`.row.${id}`).addClass("locked");
+                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+                  }
+                function lockedfree(id) {
+                    $("#Parent-" + id + " #" + id).addClass("locked");
+                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+                }
+                function lockerfree(id) {        //class
+                    $(`.row.${id}`).addClass("locked");
+                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+                  }
+
+                function lockchartdemo(id) {
+                    console.log(id)
+                    $(`.parent-${id}`).addClass("locked");
+                    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+                }
+                function lockchartfree(id) {
+                    $(`.parent-${id}`).addClass("locked");
+                    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+                }
                 switch (methodName) {
                     case "displayAdsOverview":
+                        if (data.userData.member =="demo") {
+                            lockerdemo('displayAdsOverview')                    
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('displayAdsOverview')
+                        }
                         displayAdsOverview(data, method);
                         break;
                     case "SampleAdsasImage":
+                        if (data.userData.member =="demo") {
+                            lockerdemo('SampleAds')     
+                            $(`.listsample.${id}`).addClass("locked");               
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('SampleAds')
+                            $(`.listsample`).addClass("locked");    
+                        }
                         SampleAdsasImage(data, method);
                         break;
                     case "SampleAdsasHTML":
@@ -54,21 +95,63 @@ const api = async (method, domain) => {
                         //     SampleAdsasText(data, method);
                         //     break;
                     case "displayDevice":
+                        if (data.userData.member =="demo") {
+                            lockeddemo('displayDevice')   
+                            $('.list-devices').addClass('locked')                             
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('displayDevice')   
+                            $('.list-devices').addClass('locked')                            
+                        }
                         displayDevice(data, method);
                         break;
                     case "getDisplayCountryChart":
+                        if (data.userData.member =="demo") {                            
+                            lockchartdemo('getDisplayCountryChart')                              
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('getDisplayCountryChart')
+                        }                        
                         getDisplayCountryChart(data, method);
                         break;
                     case "adTypeOverview":
+                        if (data.userData.member =="demo") {                            
+                            lockerdemo('adTypeOverview')    
+                            $('.list-adtypes').addClass('locked')                          
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('adTypeOverview')
+                            $('.list-adtypes').addClass('locked')                          
+                        }  
                         adTypeOverview(data, method);
                         break;
                     case "topPublicSher":
+                        if (data.userData.member =="demo") {                            
+                            lockerdemo('topPublicSher')    
+                            $('.list-public').addClass('locked')                          
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('topPublicSher')
+                            $('.list-public').addClass('locked')                          
+                        }  
                         topPublicSher(data, method);
                         break;
                     case "getDisplayGenderChart":
+                        if (data.userData.member =="demo") {
+                            lockchartdemo('getDisplayGenderChart')                              
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('getDisplayGenderChart')
+                        } 
                         getDisplayGenderChart(data, method);
                         break;
                     case "getDisplayAgeChart":
+                        if (data.userData.member =="demo") {
+                            lockchartdemo('getDisplayAgeChart')                              
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('getDisplayAgeChart')
+                        } 
                         getDisplayAgeChart(data, method);
                         break;
                     case "getAllImageTable":
@@ -81,6 +164,12 @@ const api = async (method, domain) => {
                         getAllTextTable(data, method)
                         break;
                     case "PublicSherTable":
+                        if (data.userData.member =="vip") {
+                            lockchartdemo('PublicSherTable')                              
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('PublicSherTable')
+                        } 
                         PublicSherTable(data, method)
                         break;
 

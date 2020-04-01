@@ -20,50 +20,52 @@
         </div>
         <div class="col-12 col-lg-12 bg-white shadow-sm rounded w-100" style="min-height:300px">
             <!-- -----------------pop up Image ---------------- -->
-            <div class="listsample ml-1 mt-3">
-                <ul class="nav nav-tabs" id="Tabsample" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="img-tab" data-toggle="tab" href="#sample_image" role="tab" aria-controls="image" aria-selected="true">Image <small class="count-image"></small></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="html-tab" data-toggle="tab" href="#sample_html" role="tab" aria-controls="html" aria-selected="false">HTML <small class="count-html"></small></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="text-tab" data-toggle="tab" href="#sample_text" role="tab" aria-controls="text" aria-selected="false">Text <small class="count-text"></small> </a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="sample_image" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="sample-image-ads mt-4">
+            <div id="Parent-SampleAds" style="position: relative">
+                <div class="listsample ml-1 mt-3">
+                    <ul class="nav nav-tabs" id="Tabsample" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="img-tab" data-toggle="tab" href="#sample_image" role="tab" aria-controls="image" aria-selected="true">Image <small class="count-image"></small></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="html-tab" data-toggle="tab" href="#sample_html" role="tab" aria-controls="html" aria-selected="false">HTML <small class="count-html"></small></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="text-tab" data-toggle="tab" href="#sample_text" role="tab" aria-controls="text" aria-selected="false">Text <small class="count-text"></small> </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="sample_image" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="sample-image-ads mt-4">
+
+                            </div>
+                        </div>
+                        <!-- #het tab-1--------------------------------------- -->
+
+                        <div class="tab-pane fade" id="sample_html" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="sample-html-ads">
+
+                            </div>
 
                         </div>
-                    </div>
-                    <!-- #het tab-1--------------------------------------- -->
 
-                    <div class="tab-pane fade" id="sample_html" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="sample-html-ads">
-
-                        </div>
-
-                    </div>
-
-                    <!-- ############het tab 2-----------------------------------------     -->
-                    <div class="tab-pane fade" id="sample_text" role="tabpanel" aria-labelledby="contact-tab">
-                        <div class="sample-text-ads">
+                        <!-- ############het tab 2-----------------------------------------     -->
+                        <div class="tab-pane fade" id="sample_text" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="sample-text-ads">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="footer--bt-view mt-4 ml-3 pb-4">
-                    <button class="btn btn-primary btn-sm " style="padding: 4px 13px;" id="btn-view-image">
-                        <span class="content-btn">Xem toàn bộ </span>
-                    </button>
-                    <button class="btn btn-primary btn-sm d-none" id="btn-view-text" style="padding: 4px 13px;">
-                        <span class="content-btn">Xem toàn bộ </span>
-                    </button>
-                    <button class="btn btn-primary btn-sm d-none" id="btn-view-html" style="padding: 4px 13px;">
-                        <span class="content-btn ">Xem toàn bộ</span>
-                    </button>
+                    <div class="footer--bt-view mt-4 ml-3 pb-4">
+                        <button class="btn btn-primary btn-sm " style="padding: 4px 13px;" id="btn-view-image">
+                            <span class="content-btn">Xem toàn bộ </span>
+                        </button>
+                        <button class="btn btn-primary btn-sm d-none" id="btn-view-text" style="padding: 4px 13px;">
+                            <span class="content-btn">Xem toàn bộ </span>
+                        </button>
+                        <button class="btn btn-primary btn-sm d-none" id="btn-view-html" style="padding: 4px 13px;">
+                            <span class="content-btn ">Xem toàn bộ</span>
+                        </button>
 
+                    </div>
                 </div>
             </div>
         </div>
