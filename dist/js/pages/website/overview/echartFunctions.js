@@ -475,12 +475,26 @@ const api = async(task, domain, reload = 0) => {
     }
 };
 const estmatedWorth = async(task, data) => {
-        if (data.status == "success") {
-            $('.money-website-price').html(`${numeral(data.data).format('0,0')}<span>USD</span>`);
-        }
+    if (data.status == "success") {
+        $('.money-website-price').html(`${numeral(data.data).format('0,0')}<span>USD</span>`);
     }
-    //sử dung truy cập theo tháng
+}
+
+function locked(id, data) {
+    console.log(id);
+    console.log(data);
+
+    $(".parent-" + id).addClass("locked");
+    if (data == 'free') {
+        $(".parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+    } else if (data == 'vip') {
+        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng vip để xem data</a></div>');
+    }
+}
+//sử dung truy cập theo tháng
 const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
+
+        // locked(id, data)
         $('.date-access').html(moment(data.data.lastUpdate).format("MM.YYYY"))
         if (data.status == "success") {
             if (data && data.data && data.data.data && data.data.data.Data) {
@@ -1386,6 +1400,10 @@ const getTrafficAndEngagementPagesPerVisit = async(task, data, domain) => {
     }
     //Tỉ lệ truy cập từ tìm kiếm
 const getTrafficSourcesSearch = async(task, data) => {
+    let dataaaaa = 'free'
+    if (dataaaaa != 'demo') {
+        locked(task, dataaaaa)
+    }
     $(`.${task}`).parents().parents().parents().removeClass('rounded').addClass('rounded-top')
     $(`.${task}`).attr('style', 'height: 250px;');
     $('.precent-organicoverview').removeClass('d-none')
@@ -1754,6 +1772,10 @@ const getTrafficAndEngagementBounceRate = async(task, data, domain) => {
     // hết sử dụng truy cập thời gian
     // SỬ DỤNG
 const getWebDemographicsAge = async(task, data) => {
+    let dataaaaaa = 'vip'
+    if (dataaaaaa != 'demo') {
+        locked(task, dataaaaaa)
+    }
     if (data.status == "success") {
         let {
             data: traffic
@@ -1894,11 +1916,8 @@ const getWebDemographicsAge = async(task, data) => {
 };
 // SỬ DỤNG NGUỒN KHÁCH HÀNG
 const getTrafficSourcesOverview = async(task, data) => {
-    console.log(data.data.haveData)
     $('.getTrafficSourcesOverview ').attr('style', 'min-height:300px')
     if (data.status == "success" && data.data.data) {
-        console.log("Ddddd");
-
         let {
             data: traffic
         } = data.data;
@@ -2007,6 +2026,10 @@ const getTrafficSourcesOverview = async(task, data) => {
 // SỬ DỤNG
 const getWebDemographicsGender = async(task, data) => {
     // console.log(data);
+    let dataaaaaa = 'vip'
+    if (dataaaaaa != 'demo') {
+        locked(task, dataaaaaa)
+    }
     if (data.status == "success") {
         // console.log("ddd");
         let {
@@ -2148,6 +2171,10 @@ const getWebDemographicsGender = async(task, data) => {
 };
 // SỬ DỤNG
 const getDesktopVsMobileVisits = async(task, data) => {
+    let data_menber = 'vip'
+    if (data_menber != 'demo') {
+        locked(task, data_menber)
+    }
     if (data.status == "success") {
         let {
             data: visits
@@ -2784,7 +2811,6 @@ const getTrafficSocial = async(task, data, domain) => {
                         value: VolumeTotal - SearchTotal
                     }
                 ]
-                console.log(dataChartPie);
 
                 // render chart
                 let elePie = document.getElementById("getTotalSocialVisits");
