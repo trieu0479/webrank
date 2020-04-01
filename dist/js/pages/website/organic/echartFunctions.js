@@ -11,275 +11,6 @@ const customColors = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#6
 
 // var domain_name = url.searchParams.get("domain");
 
-const getHeader = async data => {
-    // Get value Header  
-    const {
-        data: similarHeader,
-    } = data.data;
-    var similarDomain = null;
-    if (data.data.website) similarDomain = data.data.website;
-    else similarDomain = url.searchParams.get("domain")
-    let {
-        icon: similarIcon,
-        title: similarTitle,
-        description: similarDescription,
-        relatedApps: similarRelatedApps,
-        imageLarge: similarThumb,
-        tags: similarTags,
-        globalRanking: similarGlobalRank,
-        highestTrafficCountryRanking: similarCountryRank,
-    } = similarHeader;
-
-    let similarThumbMobile = similarThumb.replace("t=1", "t=4");
-    let similarThumbMapHeat = similarThumb.replace("t=1", "t=3");
-
-    if (!similarThumb.startsWith('http')) {
-        similarThumb = 'assets' + similarThumb;
-        similarThumbMobile = similarThumb;
-    }
-
-    // Check value Header
-    if (!similarTags) similarTags = []; // set null = []
-    if (similarTags.length <= 0)
-        $(".similarHeader .similarTags").addClass("d-none");
-    if ($.isEmptyObject(similarRelatedApps))
-        $(".similarHeader .similarRelatedApps").addClass("d-none");
-    if (!similarRelatedApps)
-        similarRelatedApps = [];
-    if (!similarTitle)
-        similarTitle = "<em>Website này chưa cập nhật tiêu đề</em>";
-    if (similarDescription == "")
-        similarDescription = "<em>Website này chưa cập nhật mô tả</em>";
-
-    // Set value Header
-    similarIcon = "https://files.fff.com.vn/f.php?url=" + btoa(similarIcon);
-    $(".similarHeader .similarIcon").html(
-        `<img class="p-1 mr-2 border rounded bg-secondary" src="${similarIcon}" />`
-    );
-    $(".similarHeader .similarDomain").text(similarDomain);
-    $(".similarFooter .similarGlobalRank").text('#' + numeral(similarGlobalRank).format('0,0'));
-    $(".similarFooter .similarCountryRank").text('#' + numeral(similarCountryRank).format('0,0'));
-    $(".similarHeader .similarTitle").html(similarTitle);
-    $(".similarHeader .similarDescription").html(similarDescription);
-    $(".similarHeader .similarTags").html(
-        '<p class="font-bold mb-2"><i class="far fa-tag font-14"></i> Từ khoá: </p>' +
-        similarTags.map(tag => `<span><a href="./index.php?view=keywords&action=keywords-overview&keyword=${tag}"  data-type="keyword" class="changeURL" data-input="${tag}" class="text-muted"><i class="far fa-search"></i> ${tag}</a></span>`).join("")
-    );
-
-    var metaTitle = "Website " + similarDomain + " được xếp hạng " + numeral(similarCountryRank).format('0,0') + "/98.000 website tại Việt Nam";
-    document.title = metaTitle;
-    $('meta[name="og:title"]').attr("content", metaTitle);
-
-    $(".similarHeader .similarRelatedAppsTitle").html(
-        '<i class="far fa-mobile font-14"></i> Ứng dụng liên quan<br/><span class="font-12 text-muted">CH Play & AppStore</span>'
-    );
-
-    let apps = "";
-    $.each(similarRelatedApps, (index, item) => {
-        const mainApp = item[0];
-        const appId =
-            (index == "apps_0" ?
-                "//play.google.com/store/apps/details?id=" :
-                "//itunes.apple.com/us/app/id") + mainApp.id;
-        const appIcon = "https://files.fff.com.vn/f.php?url=" + btoa(mainApp.icon);
-        const appTitle = mainApp.title;
-        apps += `<a target="_blank" class="mr-2" href="${appId}"><img width="32px" src="${appIcon}" /></a>`;
-    });
-
-    $(".similarHeader .similarApps").html(
-        `<div class="d-flex flex-row">${apps}</div>`
-    );
-
-    similarThumb = "https://files.fff.com.vn/f.php?url=" + btoa(similarThumb);
-    similarThumbMobile = "https://files.fff.com.vn/f.php?url=" + btoa(similarThumbMobile);
-    $(".similarThumb img").attr("src", similarThumb);
-    $(".similarThumbMobile img").attr("src", similarThumbMobile);
-
-    // Remove loading state
-    $(
-        ".similarHeader .similarDomainWrapper," +
-        ".similarHeader .similarTitle," +
-        ".similarHeader .similarDescription," +
-        ".similarHeader .similarTags," +
-        ".similarHeader .similarRelatedApps"
-    ).removeClass("placeholder-loading");
-
-
-    // Popup nhap website
-    const getDomain = async() => {
-        const result = await Swal.fire({
-            type: "info",
-            title: "Hãy nhập một website cần phân tích",
-            input: "text",
-            position: 'top',
-            // showCancelButton: true,
-            confirmButtonText: 'Phân Tích',
-            showCloseButton: true,
-            // customClass: {
-            //     container: 'pt-6'
-            // },
-            inputValidator: value => {
-                if (!value) {
-                    return "Bạn hãy nhập website để phân tích!";
-                }
-            }
-        });
-        return result;
-    };
-
-    // Change website
-    $(
-        ".similarHeader .changeWebSite, .similarHeader .similarDomain"
-    ).click(() => {
-        getDomain().then(data => {
-            if (data.value) {
-                location.href = `?view=traffic-website&action=result&domain=${data.value}`;
-            }
-        });
-    });
-
-    const getDomainCompare = async() => {
-        const result = await Swal.fire({
-            title: 'Hãy nhập website để so sánh',
-            width: 600,
-            padding: '4em',
-            position: 'top',
-            // customClass: {
-            //     container: "pt-6"
-            // },
-            html: `<input id="swal-input1" class="swal2-input text-lowercase" value=${similarDomain} placeholder="Nhập website của bạn">` +
-                `<div class="text-white font-16 bg-dark m-auto shadow-sm" style="height: 60px; width: 60px; line-height: 60px;border-radius: 60px">VS</div>` +
-                `<input id="swal-input2" autocomplete="off" class="swal2-input text-lowercase" placeholder="Nhập website của đối thủ">` +
-                `<div id="selectWebsiteScrollbar" class="selectWebsite bg-white d-flex flex-column text-left m-auto overflow-auto rounded shadow-sm pb-3" style="height: auto; position: absolute; width: 485px"></div>`,
-            focusConfirm: false,
-            showCloseButton: true,
-            confirmButtonText: 'So Sánh',
-            onOpen: () => {
-
-                $('#swal-input1').focus();
-
-                $('#selectWebsiteScrollbar').perfectScrollbar();
-
-                $.each(arrDomain, (index, site) => {
-                    selectWebsite += `<span class="p-2" data-domain="${site.Domain}"><img class="p-1 mr-2 border rounded bg-secondary" src="${site.Favicon}"/>${site.Domain}</span>`
-                });
-
-                $('.swal2-confirm').css("opacity", "1");
-                $(".selectWebsite").css("opacity", "0");
-
-                // $('#swal-input2').focus();
-                $('#swal-input2').focus(() => {
-                    $('.swal2-confirm').css("opacity", "0");
-                    $(".selectWebsite").css("opacity", "1");
-
-                    let temp = $("#swal-input2").val();
-
-                    if (temp == "" && arrDomain.length >= 4) {
-                        $(".selectWebsite").css("height", "150px");
-                        $(".selectWebsite").addClass("overflow-auto");
-                    } else {
-                        $(".selectWebsite").html("");
-                        $('.swal2-confirm').css("opacity", "1");
-                        $(".selectWebsite").css("opacity", "0");
-                    }
-
-                    $(".selectWebsite").html(selectWebsite);
-
-                    $('#swal-input2').keyup(() => {
-
-                        $(".selectWebsite").css("opacity", "1");
-                        $('.swal2-confirm').css("opacity", "0");
-
-                        let temp = $("#swal-input2").val();
-
-                        let dataNew = arrDomain.filter((el) =>
-                            el.Domain.toLowerCase().indexOf(temp.toLowerCase()) > -1
-                        );
-                        selectWebsite = "";
-                        $.each(dataNew, (index, site) => {
-                            selectWebsite += `<span class="p-2" data-domain="${site.Domain}"><img class="p-1 mr-2 border rounded bg-secondary" src="${site.Favicon}"/>${site.Domain}</span>`
-                        })
-                        if (dataNew.length >= 4) {
-                            $(".selectWebsite").css("height", "150px");
-                            $(".selectWebsite").addClass("overflow-auto");
-                        } else {
-                            $(".selectWebsite").css("height", "auto");
-                            $(".selectWebsite").removeClass("overflow-auto");
-                        }
-
-                        if (dataNew.length == 0) {
-                            $('.swal2-confirm').css("opacity", "1")
-                            $(".selectWebsite").css("opacity", "0")
-                        }
-
-                        $(".selectWebsite").html(selectWebsite);
-
-                        $("span").click(function() {
-                            $("#swal-input2").val($(this).data("domain"));
-                            $(".selectWebsite").html("");
-                            $('.swal2-confirm').css("opacity", "1")
-                            $(".selectWebsite").css("opacity", "0")
-
-                        })
-                    })
-
-                    $("span").click(function() {
-                        $("#swal-input2").val($(this).data("domain"));
-                        $(".selectWebsite").html("");
-                        $('.swal2-confirm').css("opacity", "1");
-                        $(".selectWebsite").css("opacity", "0");
-                    })
-                });
-
-                $('#swal-input2').blur(() => {
-                    $('.swal2-confirm').css("opacity", "1");
-                    $(".selectWebsite").css("opacity", "0");
-                });
-
-
-                $('#swal-input2').keypress(event => (event.which == 13) ? $('.swal2-confirm').click() : null);
-            },
-            preConfirm: () => {
-                if (document.getElementById('swal-input1').value == "" || document.getElementById('swal-input2').value == "") {
-                    Swal.showValidationMessage(
-                        `Vui lòng nhập đủ website`
-                    )
-                } else {
-                    if (document.getElementById('swal-input1').value == document.getElementById('swal-input2').value) {
-                        Swal.showValidationMessage(
-                            `Hai website không được trùng`
-                        )
-                    }
-                }
-
-                return [
-                    document.getElementById('swal-input1').value,
-                    document.getElementById('swal-input2').value
-                ]
-            }
-
-        })
-
-        if (result.dismiss == undefined) {
-            return result;
-
-        }
-
-    };
-
-    // Change website
-    $(".SubmitCompare").click(() => {
-        getDomainCompare().then(data => {
-            if (data) {
-                location.href = `?view=traffic-website&action=compare&domain1=${data.value[0].toLowerCase()}&domain2=${data.value[1].toLowerCase()}`;
-                // changeURLCompare(data.value[0].toLowerCase(), data.value[1].toLowerCase());
-            }
-        });
-    });
-};
-
-
-
 const api = async(task, domain, reload = 0) => {
     domain;
     let url = '';
@@ -309,9 +40,9 @@ const api = async(task, domain, reload = 0) => {
                 let isEmpty = false;
                 let temp = 0;
                 switch (task) {
-                    case "getHeader":
-                        getHeader(data);
-                        break;
+                    // case "getHeader":
+                    //     getHeader(data);
+                    //     break;
                     case "getTrafficSourcesSearch":
                         getTrafficSourcesSearch(task, data);
                         break;
@@ -338,9 +69,20 @@ const api = async(task, domain, reload = 0) => {
         console.error(error);
     }
 };
-
+// check vip-free-demo user
+function locked(id, data) {
+    console.log(id);
+    console.log(data);
+    $(".parent-" + id).addClass("locked");
+    if (data == 'free') {
+        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/account/index.php?view=user&action=payment-table" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+    } else if (data == 'vip') {
+        $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Nâng vip để xem data</a></div>');
+    }
+}
 //Tỉ lệ truy cập từ tìm kiếm
 const getTrafficSourcesSearch = async(task, data) => {
+    // if (data.userData.member != 'demo') { locked(task, data.userData.member) }
     if (data.status == "success") {
         $(`.${task}`).removeClass('empty-state');
         let {
@@ -500,6 +242,10 @@ const getTrafficSourcesSearch = async(task, data) => {
 const getSearchOrganicPaidOverview = async(task, data) => {
     let task2 = 'getSearchOrganicPaidOverviewpaid';
     // console.log(task2);
+    // if (data.userData.member != 'demo') {
+    //     locked('getSearchOrganicPaidOverviewpaid', data.userData.member)
+    //     locked('getSearchOrganicPaidOverview', data.userData.member)
+    // }
     if (data.status == "success") {
         if (data.data.data == null || data.data.haveData == false) {
             let task = 'getSearchOrganicPaidOverviewpaid'
@@ -1011,6 +757,7 @@ const getSearchOrganicPaidOverview = async(task, data) => {
 };
 //Truy cập từ khóa tự nhiên
 const getSearchBrandedKeywords = async(task, data) => {
+    // if (data.userData.member != 'demo') { locked(task, data.userData.member) }
     if (data.status == "success") {
         $(`.${task}`).removeClass('empty-state');
         let {

@@ -15,7 +15,15 @@ $(document).ready(() => {
             next: 'Tiếp theo'
         }
     };
-
+    // check vip-free-demo user
+    function locked(id, data) {
+        $(".parent-" + id).addClass("locked");
+        if (data == 'free') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/account/index.php?view=user&action=payment-table" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+        } else if (data == 'vip') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Nâng vip để xem data</a></div>');
+        }
+    }
     //init datatable
     const initDatatable = function(select, tableOptions) {
         const table = $(`.${select}`).DataTable(tableOptions);
@@ -44,6 +52,9 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
+                        if (json.userData.member != 'demo') {
+                            locked('getOrganicKeywordsBrandedTable', json.userData.member)
+                        }
                         if (!json.data || !json.data.data) {
                             $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state').attr('style', 'height: 300px;')
                             return [];
@@ -116,6 +127,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsNonBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
+                    if (json.userData.member != 'demo') { locked('getOrganicKeywordsNonBrandedTable', json.userData.member) }
                     if (!json.data || !json.data.data) {
                         $('.parent-getOrganicKeywordsNonBrandedTable').html('').addClass('empty-state').attr('style', 'height: 292px;')
                         return [];

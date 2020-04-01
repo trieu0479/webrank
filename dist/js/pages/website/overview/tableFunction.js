@@ -15,6 +15,17 @@ $(document).ready(() => {
             next: 'Tiếp theo'
         }
     };
+    // check vip-free-demo user
+    function locked(id, data) {
+        console.log(id);
+        console.log(data);
+        $(".parent-" + id).addClass("locked");
+        if (data == 'free') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/account/index.php?view=user&action=payment-table" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+        } else if (data == 'vip') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Nâng vip để xem data</a></div>');
+        }
+    }
     //init datatable
     let reloaddata = 0;
     const initDatatable = function(select, tableOptions) {
@@ -42,7 +53,9 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: json => {
-                        // console.log(json);
+                        console.log(json.userData.member);
+
+                        if (json.userData.member != 'demo') { locked('getWebsiteGeography', json.userData.member) }
                         if (!json.data || !json.data.data) {
                             $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
                             return [];
@@ -129,6 +142,8 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/keywords/keywords.php?task=keywordPlannerDomain&limit=20&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
+                        // let dataaaaa = 'free';
+                        // if (dataaaaa != 'demo') { locked('getWebsiteGeography-table', dataaaaa) }
                         if (json.data.keywords == null) {
                             $('.parent-getKeywords').html('').addClass('empty-state')
                             return []
@@ -232,6 +247,7 @@ $(document).ready(() => {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.banckLinksOverview.backlinks.data);
+                    if (res.userData.member != 'demo') { locked('banckLinksOverview', res.userData.member) }
                     let columns = [];
                     $.each(res.data.banckLinksOverview.backlinks.data, function(k, v) {
                         // console.log(v);
@@ -294,6 +310,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
+                    // if (res.userData.member != 'demo') { locked('getAdvertisingSearchDetail', res.userData.member) }
                     if (res.data.adwordsCompetitors && res.data.adwordsCompetitors != '') {
                         let columns = [];
                         $.each(res.data.adwordsCompetitors, function(k, v) {
@@ -314,7 +331,7 @@ $(document).ready(() => {
             drawCallback: function(settings) {},
             columns: [{
                     title: "Competitor",
-                    "data": data => `<a href="./index.php?view=website&action=overview&domain=${data.domain}"><div class="dot-table-a">${data.domain}</div></a>`,
+                    "data": data => `<a href="${rootURL}/rank/${data.domain}"><div class="dot-table-a">${data.domain}</div></a>`,
                     class: 'text-left'
                 },
                 {
@@ -362,6 +379,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
+                    if (json.userData.member != 'demo') { locked('getOrganicKeywordsBrandedTable', json.userData.member) }
                     $('.similarDates-organickeyno').html(`${moment(json.data.lastUpdate).format("DD-MM-YYYY")}`)
                     if (!json.data || !json.data.data) {
                         $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state')
