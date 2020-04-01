@@ -51,7 +51,7 @@ $(document).ready(() => {
     $.get(`//localapi.trazk.com/webdata/semrush.php?task=countryIsoName`, function (res) {
         arrNameContry = res.data
     })
-    // Quốc Gia
+    // Quá»‘c Gia
     initDatatable(
         'getDataContry',
         {
@@ -247,18 +247,28 @@ $(document).ready(() => {
                 { title: 'First Seen', data: data => `<div class="text-left" style="width:80px">${moment(data.first_seen*1000).format('DD MMM YY')}</div>` },
                 { title: 'Last Seen', data: data => `<div class="text-left" style="width:80px">${moment(data.last_seen*1000).format('DD MMM YY')}</div>` },
             ],
+            // "order": [1, 'desc'],
             language,
-            ordering:false,
             info: false,
-            rowId: 'trId',
-            processing: true,
+            autoWidth: true,
+            searching: false,
+            // scrollY: "260px",
             pageLength: 10,
-            lengthChange: false,
+            scrollCollapse: true,
+            paging: true,
+            processing: true,
             initComplete: function (settings, json) {
-              $('.dataTables_wrapper .dataTables_paginate').attr('style', 'margin-top: 0')
-              $('table.dataTable thead th').attr('style', 'background: #fff;padding: 15px 10px;')
+                $(`.dataTables_scrollHeadInner`).attr('style', 'width:100% !important;padding-right:0;border-bottom: 1px solid #ddd');
+                // $('.getDataContry .dataTables_empty').text("").addClass('empty-state');
+                // $('.parent-getDataZones #DataTables_Table_1_processing').addClass('mt-n5');
+                $(`.topBackLinks`).attr('style', 'margin-top:0!important')
+                .find('thead').addClass('bg-primary-2')
+                .find('th').each(function (i) {
+                  $(this).addClass('text-white text-left font-gg border-0 font-12 bg-dark')
+                });
             }
         }
     )
 
 })
+
