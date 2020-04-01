@@ -7,8 +7,6 @@ if (@$_GET['userToken']) $userToken =$_GET['userToken'];else $userToken =  $_COO
 if (empty($userToken))  $userToken = $demoToken;
 if (empty($view)) $view = "website";
 if (empty($action)) $action = "index";
-
-
 switch ($view) {
     case "market": $meta['title'] = "Dữ liệu quảng cáo thị trường Việt Nam";break;
     case "traffic-website": 
