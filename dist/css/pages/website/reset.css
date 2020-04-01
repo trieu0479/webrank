@@ -626,10 +626,6 @@
 #tablePTDT_filter {
     display: none!important;
 }
-.parent-topBackLinks .dataTables_length{
- display: none;
-}
-
 /* css cua khanh dep trai */
 
 @media only screen and (max-width: 768px) {
