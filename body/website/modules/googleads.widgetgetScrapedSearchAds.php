@@ -23,7 +23,7 @@
                                         href="javascript:;"><i class="fal fa-sync"></i></a>
                                 </div>
                             </div>
-                            <div id="Parent-getScrapedSearchAds">
+                            <div class="parent-getScrapedSearchAds">
                                 <div id="getScrapedSearchAds" class="carousel slide" data-interval="false">
                                     <ol class="carousel-indicators">
                                     </ol>

@@ -21,7 +21,7 @@ $(document).ready(() => {
         paginate: {
             previous: '<i class="fal fa-angle-double-left"></i>',
             next: '<i class="fal fa-angle-double-right"></i>'
-          }
+        }
     };
     //init datatable
     const initDatatable = function (select, tableOptions) {
@@ -198,15 +198,36 @@ $(document).ready(() => {
                 dataSrc: (json) => {
                     let topBackLinks = json.data.backlinksDetail;
                     console.log(topBackLinks);
-
+                    let arrTopBackLinks = [];
+                    let stt = 1;
                     if (json && topBackLinks) {
+                        $('#DataTables_Table_2_length').addClass('d-none');
                         $(`#getDataZones_wrapper .dataTables_scrollHead table.dataTable`).addClass('d-block').removeClass('d-none');
-                        $(`#DataTables_Table_0_processing.dataTables_processing`).css('display', 'none').addClass('d-none')
-                        return topBackLinks
+                        $(`#DataTables_Table_2_processing.dataTables_processing`).css('display', 'none').addClass('d-none')
+                        for (const key in topBackLinks) {
+                            let temp = {};
+                            temp.stt = stt
+                            temp.source_title = topBackLinks[key].source_title,
+                                temp.source_url = topBackLinks[key].source_url,
+                                temp.external_link_num = topBackLinks[key].external_link_num,
+                                temp.internal_link_num = topBackLinks[key].internal_link_num,
+                                temp.anchor = topBackLinks[key].anchor,
+                                temp.target_url = topBackLinks[key].target_url,
+                                temp.first_seen = topBackLinks[key].first_seen,
+                                temp.last_seen = topBackLinks[key].last_seen,
+                                temp.image = topBackLinks[key].image,
+                                temp.text = topBackLinks[key].text,
+                                temp.lostlink = topBackLinks[key].image,
+                                temp.newlink = topBackLinks[key].text,
+                                temp.nofollow = topBackLinks[key].nofollow,
+                                stt += 1;
+                            arrTopBackLinks.push(temp)
+                        }
+                        return arrTopBackLinks
                     }
                     else {
                         $('.topBackLinks thead').addClass('d-none')
-                        return topBackLinks;
+                        return arrTopBackLinks;
                     }
 
                 },
@@ -216,18 +237,22 @@ $(document).ready(() => {
                 $('.topBackLinks').find('.fa-spin').removeClass('fa-spin');
 
             },
+
             columns: [
-                { title: 'Page AS', data: data => `<div style="width:50px" class="text-left">${data.page_ascore}</div>` },
+                { title: 'STT', data: data => `<div style="width:50px" class="text-left">${data.stt}</div>` },
                 {
                     title: 'Source Page Title and URL',
                     data: data => {
-                        let keyWork = '';
-                        if(data.source_url.substring(0,7) == 'http://'){
-                            keyWork =data.source_url.substring(7)
-                        }else{
-                            keyWork =data.source_url.substring(8)
+                        let url = '';
+                        let icon = '';
+                        if (data.source_url.substring(0, 8) == 'https://') {
+                            url = data.source_url.substring(8)
+                            icon = `<i class="fad fa-lock pr-2 text-muted" data-toggle="tooltip" data-placement="top" title="HTTPS protocol"></i>`;
+                        } else {
+                            url = data.source_url.substring(7)
+                            icon = ""
                         }
-                        return `<div class="text-left">${data.source_title}</div> <div class="text-left"><a href="${data.source_url}">${keyWork}</a></div>`
+                        return `<div class="text-left">${data.source_title}</div> <div class="text-left">${icon}<a href="${data.source_url}">${url}</a></div>`
                     }
                 },
                 { title: 'Ext Links', data: data => `<div class="text-left">${data.external_link_num}</div>` },
@@ -235,37 +260,79 @@ $(document).ready(() => {
                 {
                     title: 'Anchor and Target URL',
                     data: data => {
-                        let keyWorks = '';
-                        if(data.target_url.substring(0,7) == 'http://'){
-                            keyWorks =data.target_url.substring(7)
-                        }else{
-                            keyWorks =data.target_url.substring(8)
+                        let url_target = '';
+                        let icon = '';
+                        let image = '';
+                        let text = '';
+                        let lostlink = '';
+                        let newlink = '';
+                        let nofollow = ''
+                        if (data.image == true) {
+                            image = `<span class="badge badge-text mr-2 badge-tLink">image</span>`
+                        } else {
+                            image = ""
                         }
-                        return `<div class="text-left">${data.anchor}</div> <div class="text-left text-hidden" style="width:150px!important"><a href="${data.target_url}">${keyWorks}</a></div>`
+                        if (data.text == true) {
+                            text = `<span class="badge badge-text mr-2 badge-tLink">text</span>`
+                        } else {
+                            text = ""
+                        }
+                        if (data.lostlink == true) {
+                            lostlink = `<span class="badge badge-lost mr-2 badge-tLink">lost</span>`
+                        } else {
+                            lostlink = ""
+                        }
+                        if (data.newlink == true) {
+                            newlink = `<span class="badge badge-new mr-2 badge-tLink">new</span>`
+                        } else {
+                            newlink = ""
+                        }
+                        if (data.nofollow == true) {
+                            nofollow = `<span class="badge badge-nofl mr-2 badge-tLink">nofollow</span>`
+                        } else {
+                            nofollow = ""
+                        }
+
+                        if (data.target_url.substring(0, 8) == 'https://') {
+                            url_target = data.target_url.substring(8);
+                            icon = `<i class="fad fa-lock pr-2 text-muted" data-toggle="tooltip" data-placement="top" title="HTTPS protocol"></i>`;
+                        } else {
+                            url_target = data.target_url.substring(7);
+                            icon = ""
+                        }
+                        return `<div class="text-left">${data.anchor}</div> 
+                                <div class="text-left text-hidden">
+                                ${icon}<a href="${data.target_url}">${url_target}</a>
+                                </div>
+                                <div>
+                                ${image}${text}${lostlink}${newlink}${nofollow}
+                                </div>
+                                `
                     }
                 },
-                { title: 'First Seen', data: data => `<div class="text-left" style="width:80px">${moment(data.first_seen*1000).format('DD MMM YY')}</div>` },
-                { title: 'Last Seen', data: data => `<div class="text-left" style="width:80px">${moment(data.last_seen*1000).format('DD MMM YY')}</div>` },
+                { title: 'First Seen', data: data => `<div class="text-left" style="width:80px">${moment(data.first_seen * 1000).format('DD MMM YY')}</div>` },
+                { title: 'Last Seen', data: data => `<div class="text-left" style="width:80px">${moment(data.last_seen * 1000).format('DD MMM YY')}</div>` },
             ],
             // "order": [1, 'desc'],
             language,
+            ordering: true,
+            rowId: 'trId',
             info: false,
-            autoWidth: true,
+            autoWidth: false,
             searching: false,
-            // scrollY: "260px",
-            pageLength: 10,
             scrollCollapse: true,
             paging: true,
             processing: true,
+            pageLength: 10,
             initComplete: function (settings, json) {
                 $(`.dataTables_scrollHeadInner`).attr('style', 'width:100% !important;padding-right:0;border-bottom: 1px solid #ddd');
                 // $('.getDataContry .dataTables_empty').text("").addClass('empty-state');
                 // $('.parent-getDataZones #DataTables_Table_1_processing').addClass('mt-n5');
                 $(`.topBackLinks`).attr('style', 'margin-top:0!important')
-                .find('thead').addClass('bg-primary-2')
-                .find('th').each(function (i) {
-                  $(this).addClass('text-white text-left font-gg border-0 font-12 bg-dark')
-                });
+                    .find('thead').addClass('bg-primary-2')
+                    .find('th').each(function (i) {
+                        $(this).addClass(' text-left font-gg border-0 font-12')
+                    });
             }
         }
     )

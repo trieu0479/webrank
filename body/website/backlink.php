@@ -60,8 +60,12 @@
                     <?php require_once(__DIR__."/modules/backlink.wighetBacklinkTypes.php")?>
                 </div>
 
+                <div class="col-12 col-lg-6">
+                    <?php require_once(__DIR__."/modules/backlink.wighetLinkAttri.php")?>
+                </div>
+
                 <div class="col-12 col-lg-12">
-                    <div class="widget-topBackLinks"></div>
+                <?php require_once(__DIR__."/modules/backLink.TopBackLink.php")?>
                 </div>
 
             </div>
@@ -75,4 +79,4 @@
     <script type="module" src="<?=$rootURL?>/dist/js/pages/website/master.js?v=<?=$version?>"></script>
     <script type="module" src="<?=$rootURL?>/dist/js/pages/website/backlink/index.js?v=<?=$version?>"></script>
     <script type="module" src="<?=$rootURL?>/dist/js/pages/website/backlink/backLinkEchart.js?v=<?=$version?>"></script>
-    <script type="module" src="<?=$rootURL?>/dist/js/pages/website/backlink/tableBackLink.js"></script>
+    <script type="module" src="<?=$rootURL?>/dist/js/pages/website/backlink/tableBackLink.js?v=<?=$version?>"></script>

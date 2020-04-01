@@ -15,6 +15,15 @@ $(document).ready(() => {
             next: 'Tiếp theo'
         }
     };
+    // check vip-free-vip user
+    function locked(id, data) {
+        $(".parent-" + id).addClass("locked");
+        if (data == 'demo') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+        } else if (data == 'free') {
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Đăng ký để xem data</a></div>');
+        }
+    }
     //init datatable
     let reloaddata = 0;
     const initDatatable = function(select, tableOptions) {
@@ -42,7 +51,7 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: json => {
-                        // console.log(json);
+                        if (json.userData.member != 'vip') { locked('getWebsiteGeography', json.userData.member) }
                         if (!json.data || !json.data.data) {
                             $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
                             return [];
@@ -97,11 +106,9 @@ $(document).ready(() => {
                     $('.dataTables_scrollHeadInner thead').removeClass('text-center');
                     $('.getWebsiteGeography_wrapper .dataTables_scrollHeadInner').removeClass('text-center');
                     $('.dataTables_scrollHead').addClass('border-bottom');
-                    console.log(url);
-                    $(".similarReloadTaskaaaaa").click(function() {
-                        console.log("fbfbdvzdvzdv");
-                        table.ajax.url('simple3.php').load();
-                    })
+                    // $(".similarReloadTaskaaaaa").click(function() {
+                    //     table.ajax.url('simple3.php').load();
+                    // })
                 }
             }
         )
@@ -127,15 +134,28 @@ $(document).ready(() => {
     initDatatable(
             'getKeywords', {
                 ajax: {
-                    url: `//localapi.trazk.com/keywords/keywords.php?task=keywordPlannerDomain&limit=20&domain=${localDomain}&userToken=${userToken}`,
+                    url: `//localapi.trazk.com/keywords/v2.php?task=getKeywordsFromDomain&limit=&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
+                        if (json.data.userData.member != 'vip') { locked('getKeywords', json.data.userData.member) }
                         if (json.data.keywords == null) {
                             $('.parent-getKeywords').html('').addClass('empty-state')
                             return []
                         } else {
-                            return json.data.keywords;
+                            let columns = [];
+                            $.each(json.data.keywords, function(k, v) {
+                                let output = {
+                                    keyword: v.keyword,
+                                    length: v.length,
+                                    trungbinhtimkiem: v.results,
+                                    trend: v.trend,
+                                    dokho: v.competition_level,
+                                    giathapnhat: v.minCPC,
+                                    gicaonhat: v.maxCPC,
+                                }
+                                columns.push(output)
+                            })
+                            return columns;
                         }
-
                     },
                 },
                 drawCallback: function(settings) {
@@ -145,19 +165,19 @@ $(document).ready(() => {
                 columns: [{
                         title: 'Từ khoá',
                         data: data => `
-            <div class="d-flex no-block flex-row">
-              <a class="font-12 ml-2" href="./index.php?view=keyword-planner&action=result&keywords=${data.keyword}&language=vn&country=vn&network=web"  data-type="keyword" class="changeURL" data-input="${data.keyword}"> ${data.keyword}</a>
+                <div class="text-left flex-row" style="width: 200px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+              <a class="font-12 ml-2" href="./index.php?view=keyword-planner&action=result&keywords=${data.keyword}&language=vn&country=vn&network=web"  data-type="keyword" class="changeURL" data-input="${data.keyword}">${data.keyword}</a>
               </div>`,
                         // width: '180px'
                     },
                     {
                         title: 'Trend',
-                        data: data => `<div class="lichsuHienThi d-none d-md-flex sparkline ml-auto" data-sparkline="[${data.lichsutimkiemtrungbinh}]"></div>`,
+                        data: data => `<div class="lichsuHienThi d-none d-md-flex sparkline ml-auto" data-sparkline="[${data.trend}]"></div>`,
                         width: '100px',
                     },
                     {
                         title: 'Chiều dài',
-                        data: "chieudai",
+                        data: "length",
                         width: '100px'
                     },
                     {
@@ -169,18 +189,18 @@ $(document).ready(() => {
                     },
                     {
                         title: 'Trung bình tìm kiếm',
-                        data: (data) => numeral(data.solantimkiemtrungbinh).format('0,0'),
+                        data: (data) => numeral(data.trungbinhtimkiem).format('0,0'),
                         width: '100px'
                     },
                     {
                         title: 'Giá thấp nhất',
-                        data: (data) => numeral(data.giathaudautrangthapnhat * 23000).format('0,0') + 'đ',
+                        data: (data) => numeral(data.giathapnhat * 23000).format('0,0') + 'đ',
                         width: '100px'
                     },
                     {
                         title: 'Giá cao nhất',
                         data: "giathaudautrangcaonhat",
-                        data: (data) => numeral(data.giathaudautrangcaonhat * 23000).format('0,0') + 'đ',
+                        data: (data) => numeral(data.gicaonhat * 23000).format('0,0') + 'đ',
                         width: '100px'
                     },
                 ],
@@ -232,6 +252,7 @@ $(document).ready(() => {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.banckLinksOverview.backlinks.data);
+                    if (res.userData.member != 'vip') { locked('banckLinksOverview', res.userData.member) }
                     let columns = [];
                     $.each(res.data.banckLinksOverview.backlinks.data, function(k, v) {
                         // console.log(v);
@@ -245,7 +266,6 @@ $(document).ready(() => {
                         };
                         columns.push(output)
                     })
-                    console.log(columns);
                     return columns;
                 },
             },
@@ -285,14 +305,16 @@ $(document).ready(() => {
                 $(`.dataTables_scrollBody`).perfectScrollbar();
                 $('.organicCompetitors tbody').addClass('text-left');
                 $('.parent-banckLinksOverview .dataTables_scrollBody ').attr('style', 'max-height: 275px;');
+                $('.widget-banckLinksOverview .widgetHeader').remove()
             }
         }
     )
     initDatatable(
         'getAdvertisingSearchDetail', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
+                    if (res.userData.member != 'vip') { locked('getAdvertisingSearchDetail', res.userData.member) }
                     if (res.data.adwordsCompetitors && res.data.adwordsCompetitors != '') {
                         let columns = [];
                         $.each(res.data.adwordsCompetitors, function(k, v) {
@@ -313,7 +335,7 @@ $(document).ready(() => {
             drawCallback: function(settings) {},
             columns: [{
                     title: "Competitor",
-                    "data": data => `<a href="./index.php?view=website&action=overview&domain=${data.domain}"><div class="dot-table-a">${data.domain}</div></a>`,
+                    "data": data => `<a href="${rootURL}/rank/${data.domain}"><div class="dot-table-a">${data.domain}</div></a>`,
                     class: 'text-left'
                 },
                 {
@@ -361,6 +383,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
+                    if (json.userData.member != 'vip') { locked('getOrganicKeywordsBrandedTable', json.userData.member) }
                     $('.similarDates-organickeyno').html(`${moment(json.data.lastUpdate).format("DD-MM-YYYY")}`)
                     if (!json.data || !json.data.data) {
                         $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state')
@@ -434,13 +457,13 @@ $(document).ready(() => {
         let name = res.data.name;
         let iconBlue = '';
         if (res.data.verification == "blue_verified") {
-            iconBlue =  rootURL + "/dist/images/check.png";
+            iconBlue = rootURL + "/dist/images/check.png";
         } else {
             iconBlue = "";
         }
         let html = `
           <div class="imgPageAds d-flex align-items-end"
-            style="--cover-photo-uri: url('${res.data.pageCoverPhoto}');background-size: cover;height: 420px;width: 100%;background-position: bottom left;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri);padding: 20px!important;">
+            style="--cover-photo-uri: url('${res.data.pageCoverPhoto}');background-size: contain;height: 300px;width: 100%;background-position: center;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri);padding: 20px!important;">
                       <div class="p-2 mb-4 rounded-circle bg-primary" style="width:115px;height:115px;background-image: url('${res.data.imageURI}');background-size: cover;background-position: center;background-repeat: no-repeat;border:2px solid white"></div>
                       <div class="p-2 mb-5 pl-3">
                       <div class="font-16 font-weight-bold text-white">${res.data.name} <img class="ml-n1" src="${iconBlue}" style="width:20px">

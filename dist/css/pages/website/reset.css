@@ -99,7 +99,7 @@
 }
 
 .nav-pills>li>a {
-    padding: 15px 20px;
+    padding: 15px 19px;
 }
 
 .widgetContainer .col-6,
@@ -402,40 +402,6 @@
 }
 
 
-/* 
-.title-chart-overview h2 {
-    text-align: center;
-    font-weight: 500;
-    font-size: 36px;
-    color: #525252;
-    margin: 0 0 10px;
-}
-
-.title-chart-overview hr {
-    height: 3px;
-    width: 32px;
-    margin: 0 auto;
-    background: #0fd185;
-}
-
-.title-chart-overview p {
-    text-align: center;
-    color: #7c7c7c;
-    font-size: 16px;
-    margin: 15px 0 0;
-}
-
-.title-chart-overview p a {
-    color: #0fd185;
-}
-
-.title-chart-overview p a:hover {
-    font-size: 16px;
-    color: #0fd185;
-    text-decoration: underline !important;
-} */
-
-
 /* css cua dung dep trai */
 
 
@@ -626,25 +592,47 @@
 #tablePTDT_filter {
     display: none!important;
 }
-.table-qc-format td{
-    padding:10px!important; 
-}
-.parent-topBackLinks .dataTables_length{
-    display: none;
+
+.table-qc-format td {
+    padding: 10px!important;
 }
 
+.parent-topBackLinks .dataTables_length {
+    display: none;
+}
+.badge-tLink{
+    border-radius: 0.65rem!important;
+}
+
+.badge-text{
+    color: #999;
+    border:1px solid #ccc;
+    background-color: #fff;
+}
+.badge-lost{
+    color: #ed2d2d;
+    background-color: rgba(237,45,45,.2);
+}
+.badge-new{
+    color: #4fae33;
+    background-color: rgba(79,174,51,.2);
+}
+
+.badge-nofl{
+    color: #ff7f00;
+    background-color: #ffe5cd;
+}
 /* css cua khanh dep trai */
 
 @media only screen and (max-width: 768px) {
-    .keywordSearchBox .iptWebsite, 
-    .keywordSearchBox .btnCheckWebsite, 
-    .keywordSearchBox .input-group-append, 
-    .keywordSearchBox .input-group-prepend{
+    .keywordSearchBox .iptWebsite,
+    .keywordSearchBox .btnCheckWebsite,
+    .keywordSearchBox .input-group-append,
+    .keywordSearchBox .input-group-prepend {
         display: block;
         width: 100%;
     }
-    .keywordSearchBox .iptWebsite{
-        margin:0 0 10px 0!important;
+    .keywordSearchBox .iptWebsite {
+        margin: 0 0 10px 0!important;
     }
-    
 }

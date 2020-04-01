@@ -44,14 +44,6 @@ $(document).ready(function () {
     input.widgetContainer = "widget-getDataZones";
     createADataTable(input);
 
-    var input = {};
-    input.headerTitle = "Top 10 Backlinks"; 
-
-    input.headerTime = "12.2019 - 02.2020";
-    input.widgetTask = "topBackLinks";
-    input.widgetContainer = "widget-topBackLinks";
-    createADataTable(input);
-
     $(".similarReloadTask").click(function () {
         if ($(this).find('i').hasClass('fa-spin')) { $(this).find('i').removeClass('fa-spin'); return; }
         let task = $(this).data("task");
