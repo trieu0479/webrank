@@ -200,8 +200,9 @@ $(document).ready(() => {
                     console.log(topBackLinks);
 
                     if (json && topBackLinks) {
+                        $('#DataTables_Table_2_length').addClass('d-none');
                         $(`#getDataZones_wrapper .dataTables_scrollHead table.dataTable`).addClass('d-block').removeClass('d-none');
-                        $(`#DataTables_Table_0_processing.dataTables_processing`).css('display', 'none').addClass('d-none')
+                        $(`#DataTables_Table_2_processing.dataTables_processing`).css('display', 'none').addClass('d-none')
                         return topBackLinks
                     }
                     else {
@@ -222,12 +223,15 @@ $(document).ready(() => {
                     title: 'Source Page Title and URL',
                     data: data => {
                         let keyWork = '';
-                        if(data.source_url.substring(0,7) == 'http://'){
-                            keyWork =data.source_url.substring(7)
-                        }else{
+                        let icon = '';
+                        if(data.source_url.substring(0,8) == 'https://'){
                             keyWork =data.source_url.substring(8)
+                            icon = `<i class="fad fa-lock pr-2 text-muted" data-toggle="tooltip" data-placement="top" title="HTTPS protocol">`;
+                        }else{
+                            keyWork =data.source_url.substring(7)
+                            icon = ""
                         }
-                        return `<div class="text-left">${data.source_title}</div> <div class="text-left"><a href="${data.source_url}">${keyWork}</a></div>`
+                        return `<div class="text-left">${data.source_title}</div> <div class="text-left">${icon}<a href="${data.source_url}"></i>${keyWork}</a></div>`
                     }
                 },
                 { title: 'Ext Links', data: data => `<div class="text-left">${data.external_link_num}</div>` },
@@ -249,14 +253,15 @@ $(document).ready(() => {
             ],
             // "order": [1, 'desc'],
             language,
+            ordering: true,
+            rowId: 'trId',
             info: false,
-            autoWidth: true,
+            autoWidth: false,
             searching: false,
-            // scrollY: "260px",
-            pageLength: 10,
             scrollCollapse: true,
             paging: true,
             processing: true,
+            pageLength: 10,
             initComplete: function (settings, json) {
                 $(`.dataTables_scrollHeadInner`).attr('style', 'width:100% !important;padding-right:0;border-bottom: 1px solid #ddd');
                 // $('.getDataContry .dataTables_empty').text("").addClass('empty-state');
@@ -264,7 +269,7 @@ $(document).ready(() => {
                 $(`.topBackLinks`).attr('style', 'margin-top:0!important')
                 .find('thead').addClass('bg-primary-2')
                 .find('th').each(function (i) {
-                  $(this).addClass('text-white text-left font-gg border-0 font-12 bg-dark')
+                  $(this).addClass(' text-left font-gg border-0 font-12')
                 });
             }
         }

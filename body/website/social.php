@@ -63,5 +63,5 @@
     <script src="<?=$rootURL?>/dist/js/pages/my-function/init-function.js"></script>
     <script type="module" src="<?=$rootURL?>/dist/js/pages/website/master.js?v=<?=$version?>"></script>
     <script type="module" src="<?=$rootURL?>/dist/js/pages/website/social/index.js?v=<?=$version?>"></script>
-    <script type="module" src="<?=$rootURL?>/dist/js/pages/website/social/tableSocial.js"></script>
+    <script type="module" src="<?=$rootURL?>/dist/js/pages/website/social/tableSocial.js?v=<?=$version?>"></script>
 
