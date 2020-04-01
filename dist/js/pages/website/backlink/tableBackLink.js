@@ -219,14 +219,31 @@ $(document).ready(() => {
             columns: [
                 { title: 'Page AS', data: data => `<div style="width:50px" class="text-left">${data.page_ascore}</div>` },
                 {
-                    title: 'Source Page Title and URL', data: data => `<div class="text-left">${data.source_title}</div>
-                                                                       <div class="text-left">${data.source_url}</div>
-                ` },
+                    title: 'Source Page Title and URL',
+                    data: data => {
+                        let keyWork = '';
+                        if(data.source_url.substring(0,7) == 'http://'){
+                            keyWork =data.source_url.substring(7)
+                        }else{
+                            keyWork =data.source_url.substring(8)
+                        }
+                        return `<div class="text-left">${data.source_title}</div> <div class="text-left"><a href="${data.source_url}">${keyWork}</a></div>`
+                    }
+                },
                 { title: 'Ext Links', data: data => `<div class="text-left">${data.external_link_num}</div>` },
                 { title: 'Int inks', data: data => `<div class="text-left">${data.external_link_num}</div>` },
-                { title: 'Anchor and Target URL', data: data => `<div class="text-left">${data.anchor}</div>
-                                                                 <div class="text-left text-hidden" style="width:200px!important">${data.target_url}</div>
-                ` },
+                {
+                    title: 'Anchor and Target URL',
+                    data: data => {
+                        let keyWorks = '';
+                        if(data.target_url.substring(0,7) == 'http://'){
+                            keyWorks =data.target_url.substring(7)
+                        }else{
+                            keyWorks =data.target_url.substring(8)
+                        }
+                        return `<div class="text-left">${data.anchor}</div> <div class="text-left text-hidden" style="width:200px!important"><a href="${data.target_url}">${keyWorks}</a></div>`
+                    }
+                },
                 { title: 'First Seen', data: data => `<div class="text-left">${moment(data.first_seen*1000).format('DD MMM YY')}</div>` },
                 { title: 'Last Seen', data: data => `<div class="text-left">${moment(data.last_seen*1000).format('DD MMM YY')}</div>` },
             ],

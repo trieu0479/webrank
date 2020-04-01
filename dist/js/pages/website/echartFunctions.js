@@ -2748,23 +2748,60 @@ const getTrafficSourcesSocial = async (task, data) => {
                 // myChart.setOption(option);
                 //* update v7*/
                 var myChart = document.getElementsByClassName('getTrafficSourcesSocial');
-                // console.log(myChart);
-                
                 var charts = [];
                 for (var i = 0; i < myChart.length; i++) {
                     var chart = echarts.init(myChart[i]);
                     chart.setOption(option);
                     charts.push(chart);
                 }
-
-
-
                 window.onresize = function () {
                     for (var i = 0; i < charts.length; ++i) {
                         charts[i].resize();
                     }
                 };
+                
+            new ResizeSensor($(`.${task}`), function() {
+                chart.resize();
+                setTimeout(function() {
+                    chart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0,
+                        dataIndex: 0
+                    });
+                }, 1000);
+            });
 
+            setTimeout(function() {
+                chart.dispatchAction({
+                    type: 'highlight',
+                    seriesIndex: 0,
+                    dataIndex: 0
+                });
+
+                chart.on('mouseover', function(params) {
+                    if (params.name == dataChart[0].name) {
+                        chart.dispatchAction({
+                            type: 'highlight',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    } else {
+                        chart.dispatchAction({
+                            type: 'downplay',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    }
+                });
+
+                chart.on('mouseout', function(params) {
+                    chart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0,
+                        dataIndex: 0
+                    });
+                });
+            }, 1000);
 
                 await $(`.${task}`).removeClass('is-loading');
                 await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
