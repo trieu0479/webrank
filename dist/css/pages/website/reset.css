@@ -1,3 +1,15 @@
+.btn-clean {
+    border-color: #93a2dd solid 1px;
+    background: #fff;
+    color: #444!important;
+}
+
+.btn-clean:hover {
+    color: #fff!important;
+    background: #666cfe;
+    transition: all 0.3s;
+}
+
 .dataTables_wrapper .dataTables_paginate {
     justify-content: flex-end !important;
 }
@@ -439,6 +451,8 @@
     width: 18%;
 }
 
+#btn-trafficKeywordTrend [type="radio"]:checked,
+#btn-trafficKeywordTrend [type="radio"]:not(:checked),
 #btnTotalBackLink [type="radio"]:checked,
 #btnTotalBackLink [type="radio"]:not(:checked) {
     position: absolute;
@@ -448,6 +462,8 @@
     visibility: hidden;
 }
 
+#btn-trafficKeywordTrend .checkbox-budget:checked+label,
+#btn-trafficKeywordTrend .checkbox-budget:not(:checked)+label,
 #btnTotalBackLink .checkbox-budget:checked+label,
 #btnTotalBackLink .checkbox-budget:not(:checked)+label {
     color: #666;
@@ -459,6 +475,7 @@
     transition: all .2s;
 }
 
+#btn-trafficKeywordTrend .checkbox-budget:checked+label,
 #btnTotalBackLink .checkbox-budget:checked+label {
     background: rgba(93, 120, 255, .1);
     color: #5d78ff;
@@ -497,7 +514,7 @@
 
 #backLinks .slider-fill-dt {
     height: 100%;
-    background-color: #2b94e1;
+    background-color: #5d78ff;
 }
 
 #backlinkTypes .slider-fill-text,
@@ -606,4 +623,23 @@
     color: white !important;
 }
 
+#tablePTDT_filter {
+    display: none!important;
+}
+
+
 /* css cua khanh dep trai */
+
+@media only screen and (max-width: 768px) {
+    .keywordSearchBox .iptWebsite, 
+    .keywordSearchBox .btnCheckWebsite, 
+    .keywordSearchBox .input-group-append, 
+    .keywordSearchBox .input-group-prepend{
+        display: block;
+        width: 100%;
+    }
+    .keywordSearchBox .iptWebsite{
+        margin:0 0 10px 0!important;
+    }
+    
+}

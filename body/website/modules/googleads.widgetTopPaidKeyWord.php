@@ -12,7 +12,7 @@
             </div>
             <div class="col-auto pl-0">
                 <div class="text-capitalize font-weight-bold"><?= _("Từ Khóa Quảng Cáo") ?></div>
-                <div class="text-muted similarDates font-10">12.2019 - 02.2020</div>
+                <div class="text-muted similarDates font-10"><?=$_GET['headerTimes']?></div>
             </div>
             <div class="ml-auto d-flex no-block align-items-center pr-3">
                 <a class="similarReloadTask text-muted" data-task="TopPaidKeyword" href="javascript:;"><i class="fal fa-sync"></i></a>

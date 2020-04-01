@@ -137,13 +137,20 @@ $(document).ready(() => {
                         api("getEngagementVisitsDaily", domain);
                     } else {}
                 });
-
-                $(".similarReloadTask").click(function() {
-                    if ($(this).find('i').hasClass('fa-spin')) { $(this).find('i').removeClass('fa-spin'); return; }
-                    let task = $(this).data("task");
-                    $(this).find('i').addClass('fa-spin');
-                    api(task, domain, 1);
-                })
+                
+$('body').on('click','.similarReloadTask',async function () {   
+  let task = $(this).data("task");   
+  $(this).find('i').addClass('fa-spin');   
+  if (task =="getScrapedSearchAds")  {            
+ await api('getScrapedSearchAds', domain, 1).then( (res) =>$(this).find('i').removeClass('fa-spin'))
+  }
+})
+                // $(".similarReloadTask").click(function() {
+                //     if ($(this).find('i').hasClass('fa-spin')) { $(this).find('i').removeClass('fa-spin'); return; }
+                //     let task = $(this).data("task");
+                //     $(this).find('i').addClass('fa-spin');
+                //     api(task, domain, 1);
+                // })
                 $('.share-social').click(event => {
                     event.preventDefault();
                     const url = $(event.target).closest('a').attr('dhref');
@@ -161,7 +168,7 @@ $(document).ready(() => {
                 initDatatable(
                     'getTrendingKeywordsTable', {
                         ajax: {
-                            url: `//localapi.trazk.com/webdata/websiteapi.php?task=getTrendingKeywordsTable&domain=${domain}`,
+                            url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrendingKeywordsTable&domain=${domain}&userToken=${userToken}`,
                             dataSrc: (json) => {
                                 if (!json.data || !json.data.data) {
                                     return [];
@@ -236,7 +243,7 @@ $(document).ready(() => {
                 initDatatable(
                         'getPaidKeywordsTable', {
                             ajax: {
-                                url: `//localapi.trazk.com/webdata/websiteapi.php?task=getPaidKeywordsTable&domain=${domain}`,
+                                url: `//localapi.trazk.com/webdata/v3.1.php?task=getPaidKeywordsTable&domain=${domain}`,
                                 dataSrc: (json) => {
                                     if (json === null || !json.data) {
                                         return []
@@ -298,7 +305,7 @@ $(document).ready(() => {
       'getTrafficSourcesSearchDetails',
       {
         ajax: {
-          url: `//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSourcesSearchDetails&domain=${domain}`,
+          url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficSourcesSearchDetails&domain=${domain}`,
           dataSrc: json => {
             if (!json.data || !json.data.data) {
               return [];
@@ -342,7 +349,7 @@ $(document).ready(() => {
       'getOrganicKeywordsTable',
       {
         ajax: {
-          url: `//localapi.trazk.com/webdata/websiteapi.php?task=getOrganicKeywordsBrandedTable&domain=${domain}`,
+          url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${domain}`,
           dataSrc: (json) => {
             if (!json.data || !json.data.data) {
               return [];
@@ -398,7 +405,7 @@ $(document).ready(() => {
     $("input[type=radio][name=getOrganicKeywordsTable]").change(function () {
 
       $('#getOrganicKeywordsTable').removeClass('empty-state').addClass('is-loading');
-      const url = `https://localapi.trazk.com/webdata/websiteapi.php?task=${this.value == "getOrganicKeywordsNonBrandedTable" ?
+      const url = `https://localapi.trazk.com/webdata/v3.1.php?task=${this.value == "getOrganicKeywordsNonBrandedTable" ?
         'getOrganicKeywordsNonBrandedTable' :
         'getOrganicKeywordsBrandedTable'}&domain=${domain}`;
       getOrganicKeywordsTableTable.ajax.url(url).load(() => {
@@ -544,7 +551,7 @@ $(document).ready(() => {
       'getTopReferrals',
       {
         ajax: {
-          url: `//localapi.trazk.com/webdata/websiteapi.php?task=getTopReferrals&domain=${domain}`,
+          url: `//localapi.trazk.com/webdata/v3.1.php?task=getTopReferrals&domain=${domain}`,
           dataSrc: json => {
             if (!json.data || !json.data.data) {
               return [];
@@ -607,7 +614,7 @@ $(document).ready(() => {
       'getTrafficDestinationReferrals',
       {
         ajax: {
-          url: `https://localapi.trazk.com/webdata/websiteapi.php?task=getTrafficDestinationReferrals&domain=${domain}`,
+          url: `https://localapi.trazk.com/webdata/v3.1.php?task=getTrafficDestinationReferrals&domain=${domain}`,
           dataSrc: json => {
             if (!json.data || !json.data.data) {
               return [];
@@ -670,7 +677,7 @@ $(document).ready(() => {
       'getTrafficDestinationAds',
       {
         ajax: {
-          url: `https://localapi.trazk.com/webdata/websiteapi.php?task=getTrafficDestinationAds&domain=${domain}`,
+          url: `https://localapi.trazk.com/webdata/v3.1.php?task=getTrafficDestinationAds&domain=${domain}`,
           dataSrc: json => {
             if (!json.data || !json.data.data) {
               return [];
@@ -737,7 +744,7 @@ $(document).ready(() => {
       'getTopIncomingAds',
       {
         ajax: {
-          url: `https://localapi.trazk.com/webdata/websiteapi.php?task=getTopIncomingAds&domain=${domain}`,
+          url: `https://localapi.trazk.com/webdata/v3.1.php?task=getTopIncomingAds&domain=${domain}`,
           dataSrc: json => {
             if (!json.data || !json.data.data) {
               return [];
@@ -798,7 +805,7 @@ $(document).ready(() => {
       'getWebsiteGeography',
       {
         ajax: {
-          url: `https://localapi.trazk.com/webdata/websiteapi.php?task=getWebsiteGeography&domain=${domain}`,
+          url: `https://localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${domain}`,
           dataSrc: json => {
             if (!json.data || !json.data.data) {
               return [];
@@ -873,7 +880,7 @@ $(document).ready(() => {
       'getPaidSearchCompetitorsTable',
       {
         ajax: {
-          url: `//localapi.trazk.com/webdata/websiteapi.php?task=getPaidSearchCompetitorsTable&domain=${domain}`,
+          url: `//localapi.trazk.com/webdata/v3.1.php?task=getPaidSearchCompetitorsTable&domain=${domain}`,
           dataSrc: (json) => {
             // console.log(json)
             if (json && json.data && json.data.data && json.data.data.Data) {
@@ -944,7 +951,7 @@ $(document).ready(() => {
       'getTrafficSourcesTotalReferralsTable',
       {
         ajax: {
-          url: `//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSourcesTotalReferralsTable&domain=${domain}`,
+          url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficSourcesTotalReferralsTable&domain=${domain}`,
           dataSrc: (json) => {
             if (json && json.data && json.data.data && json.data.data.Data) {
               let { Data: newData } = json.data.data;
@@ -1008,7 +1015,7 @@ $(document).ready(() => {
       'getTrafficSocialTableDetail',
       {
         ajax: {
-          url: `//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDetail&domain=${domain}`,
+          url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficSocialTableDetail&domain=${domain}`,
           dataSrc: (json) => {
             if (json && json.data && json.data.data && json.data.data.Data) {
               let { Data: newData } = json.data.data;
@@ -1069,7 +1076,7 @@ $(document).ready(() => {
       'getTrafficDisplayPaidOutgoingWebsitesTable',
       {
         ajax: {
-          url: `//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficDisplayPaidOutgoingWebsitesTable&domain=${domain}`,
+          url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayPaidOutgoingWebsitesTable&domain=${domain}`,
           dataSrc: (json) => {
             if (json && json.data && json.data.data && json.data.data.Data) {
               let { Data: newData } = json.data.data;
@@ -1129,7 +1136,7 @@ $(document).ready(() => {
       'getTrafficDisplayAdvertisingWebsitesTable',
       {
         ajax: {
-          url: `//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}`,
+          url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}`,
           dataSrc: (json) => {
 
             if (json && json.data && json.data.data && json.data.data.Data) {

@@ -33,15 +33,56 @@ const api = async (method, domain) => {
 
     try {
         return await $.ajax({
-                url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method[${method}]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method[${method}]=true&userToken=${userToken}`,
                 type: "GET"
             })
             .then(data => {
+                //locked:bảng cũ locker:bảng mới
+                function lockeddemo(id) {
+                    $("#Parent-" + id + " #" + id).addClass("locked");
+                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+                }
+                function lockerdemo(id) {      //class   
+                    $(`.row.${id}`).addClass("locked");
+                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+                  }
+                function lockedfree(id) {
+                    $("#Parent-" + id + " #" + id).addClass("locked");
+                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+                }
+                function lockerfree(id) {        //class
+                    $(`.row.${id}`).addClass("locked");
+                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+                  }
+
+                function lockchartdemo(id) {
+                    console.log(id)
+                    $(`.parent-${id}`).addClass("locked");
+                    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
+                }
+                function lockchartfree(id) {
+                    $(`.parent-${id}`).addClass("locked");
+                    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+                }
                 switch (methodName) {
                     case "displayAdsOverview":
+                        if (data.userData.member =="demo") {
+                            lockerdemo('displayAdsOverview')                    
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('displayAdsOverview')
+                        }
                         displayAdsOverview(data, method);
                         break;
                     case "SampleAdsasImage":
+                        if (data.userData.member =="demo") {
+                            lockerdemo('SampleAds')     
+                            $(`.listsample.${id}`).addClass("locked");               
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('SampleAds')
+                            $(`.listsample`).addClass("locked");    
+                        }
                         SampleAdsasImage(data, method);
                         break;
                     case "SampleAdsasHTML":
@@ -54,21 +95,63 @@ const api = async (method, domain) => {
                         //     SampleAdsasText(data, method);
                         //     break;
                     case "displayDevice":
+                        if (data.userData.member =="demo") {
+                            lockeddemo('displayDevice')   
+                            $('.list-devices').addClass('locked')                             
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('displayDevice')   
+                            $('.list-devices').addClass('locked')                            
+                        }
                         displayDevice(data, method);
                         break;
                     case "getDisplayCountryChart":
+                        if (data.userData.member =="demo") {                            
+                            lockchartdemo('getDisplayCountryChart')                              
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('getDisplayCountryChart')
+                        }                        
                         getDisplayCountryChart(data, method);
                         break;
                     case "adTypeOverview":
+                        if (data.userData.member =="demo") {                            
+                            lockerdemo('adTypeOverview')    
+                            $('.list-adtypes').addClass('locked')                          
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('adTypeOverview')
+                            $('.list-adtypes').addClass('locked')                          
+                        }  
                         adTypeOverview(data, method);
                         break;
                     case "topPublicSher":
+                        if (data.userData.member =="demo") {                            
+                            lockerdemo('topPublicSher')    
+                            $('.list-public').addClass('locked')                          
+                        }
+                        else if (data.userData.member =="free") {
+                            lockerfree('topPublicSher')
+                            $('.list-public').addClass('locked')                          
+                        }  
                         topPublicSher(data, method);
                         break;
                     case "getDisplayGenderChart":
+                        if (data.userData.member =="demo") {
+                            lockchartdemo('getDisplayGenderChart')                              
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('getDisplayGenderChart')
+                        } 
                         getDisplayGenderChart(data, method);
                         break;
                     case "getDisplayAgeChart":
+                        if (data.userData.member =="demo") {
+                            lockchartdemo('getDisplayAgeChart')                              
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('getDisplayAgeChart')
+                        } 
                         getDisplayAgeChart(data, method);
                         break;
                     case "getAllImageTable":
@@ -81,6 +164,12 @@ const api = async (method, domain) => {
                         getAllTextTable(data, method)
                         break;
                     case "PublicSherTable":
+                        if (data.userData.member =="vip") {
+                            lockchartdemo('PublicSherTable')                              
+                        }
+                        else if (data.userData.member =="free") {
+                            lockchartfree('PublicSherTable')
+                        } 
                         PublicSherTable(data, method)
                         break;
 
@@ -1291,22 +1380,25 @@ const getAllTextTable = async (data, method) => {
 }
 
 const PublicSherTable = async(data,method) => {
-    console.log('jjj',data);
+    $('.widget-PublicSherTable .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
+    <a class="similarReloadTask text-muted" data-task="PublicSherTable" href="javascript:;"><i class="fal fa-sync"></i></a>
+</div>`)
     
     initDatatableClass(
         'PublicSherTable', {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['publishersDetail']=true&userToken=${userToken}`,
                 dataSrc: function(res) {
-                    // if (data.data.publishersDetail == null) {
-                    //     $('#PaidPageTable_wrapper').addClass('empty-state');
-                    //     $('#PaidPageTable_wrapper').removeClass('is-loading');
-                    //     $('#PaidPageTable_wrapper tbody tr td').html('')
-                    //     return;
-                    // }                                     
+                    if (data.data.publishersDetail == null) {
+                        $('#DataTables_Table_2_wrapper').addClass('empty-state');
+                        $('#DataTables_Table_2_wrapper').removeClass('is-loading');
+                        $('#DataTables_Table_2_wrapper tbody tr td').html('')
+                        return;
+                    }                                     
                     var res = data.data.publishersDetail.data;
                     let columns = [];
                     var stt = 1;
+                    $('#DataTables_Table_2_wrapper .dt-buttons').addClass('resize-dl')
                     $.each(res, function(k, v) {                       
                         let output = {};
                         output.stt = stt;
@@ -1317,7 +1409,11 @@ const PublicSherTable = async(data,method) => {
                         output.mediaAdsCount = v.mediaAdsCount;
                         output.htmlAdsCount = v.htmlAdsCount;
                         output.textAdsCount = v.textAdsCount;                       
-                        output.timesSeen = v.timesSeen;                       
+                        output.timesSeen = v.timesSeen;    
+                        output.media = numeral(v.mediaAdsCount*100/(v.mediaAdsCount+v.htmlAdsCount+v.textAdsCount)).format('0,0')    
+                        output.html = numeral(v.htmlAdsCount*100/(v.mediaAdsCount+v.htmlAdsCount+v.textAdsCount)).format('0,0')    
+                        output.text = numeral(v.textAdsCount*100/(v.mediaAdsCount+v.htmlAdsCount+v.textAdsCount)).format('0,0')    
+                                           
                         stt += 1;
                         console.log('qq',k,v);
                         
@@ -1332,42 +1428,42 @@ const PublicSherTable = async(data,method) => {
                     title: "STT",
                     data: 'stt',
                     width:'5%',
-                    className: 'align-middle ml-5 pl-3'
+                    className: 'align-middle ml-5 pl-3 font-12'
                 },
                 {
-                    title: "Tiêu đề và Website",
+                    title: "Title & URL",
                     className: 'parent-hover pr-0 text-left align-middle font-12',                   
-                    render: (data, type, row) => `${row.title} <a href=" './'+${row.domain}" target="_blank" class="text-break text-truncate-2">${row.domain} <i class="fal fa-external-link"></i></a>`,
+                    render: (data, type, row) => `<span class="font-14">${row.title}</span><a href=" http://${row.domain}" target="_blank" class="text-break text-truncate-2">${row.domain} <i class="fal fa-external-link"></i></a>`,
                     width: '30%'
                 },                
                 {
-                    title: "Mô tả",
-                    className: 'parent-hover pr-0 align-middle text-left font-12',
-                    "data": data => `${data.description}`,
-                    width: '40%'
+                    title: "Content",
+                    className: 'parent-hover pr-0 align-middle text-left font-12 ',
+                    "data": data => `<span class=""font-14>${data.description}</span>`,
+                    width: '30%'
                 },
                 {
-                    title: "Ads",
-                    data: 'adsCount',
-                    "data": data => `${data.adsCount}`,
-                    width:'5%',
-                    className: 'align-middle'
+                    title: "Ads",                    
+                    "data": data => `<div class="badge font-10 ml-2 ${data.adsCount <= 100 ? data.adsCount <= 10 ? 'bg-warning' : 'bg-danger' : 'bg-success'}">${data.adsCount ? numeral(data.adsCount).format('0,0') : 0}</a>`,
+                    width:'10%',
+                    className: 'text-left align-middle font-12 '
                 },
                 {
-                    title: "Image/HTML/Text",                   
-                    render: (data, type, row) => `
-                    <span>${row.mediaAdsCount}</span>
-                    <span>${row.htmlAdsCount}</span>
-                    <span>${row.textAdsCount}</span>                    
+                    title: "Image-HTML-Text",                   
+                    render: (data, type, row) => ` 
+                    <span class= "${row.media > 0 ? 'text-info':'' }"> ${row.media > 0 ? row.media+'%' :row.media}</span ><span class="pl-1">-</span>
+                    <span class= "${row.html > 0 ? 'text-info':'' }"> ${row.html > 0 ? row.html+'%' : row.html}</span><span class="pl-1">-</span>
+                    <span class="${row.text > 0 ? 'text-info':'' }"> ${row.text > 0 ? row.text+'%' :row.text} </span>
+                   
                     `,
-                    class: 'align-middle',
-                    width: '10%'
+                    class: 'align-middle text-left font-12 ml-1',
+                    width: '14%'
                 },
                 {
-                    title: "Ghi nhận(days)",
-                    "data": data =>  `${data.timesSeen}`,
-                    class: 'align-middle',
-                    width: '20%'
+                    title: "TimesSeen ",
+                    "data": data =>  `<div class="round round-sm font-10 ${data.timesSeen <= 100 ? data.timesSeen <= 10 ? 'bg-success' : 'bg-danger' : 'bg-warning'}">${data.timesSeen ? numeral(data.timesSeen).format('0,0') : 0}</a>`,
+                    class: 'align-middle font-12',
+                    width: '9%'
                 },
 
             ],

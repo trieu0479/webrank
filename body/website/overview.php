@@ -1,6 +1,28 @@
 <div class="page-wrapper">
+            <!-- sub menu -->
+            <div class="sub-header border-bottom pl-4 pt-3 pb-3 bg-white">
+                <div class="d-flex no-block">
+                    <div class="align-self-center font-14 mr-3">
+                        <a href="./" class="" style="color: rgba(79,80,80,.7);">Phân tích</a>
+                    </div>
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14" style="color: rgba(79,80,80,.7);"> <a
+                            href="<?=$rootURL?>">Website</a> </div>
+                    <div class="align-self-center mr-3 ml-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14" style="color: rgba(79,80,80,.7);"> <a
+                            href="<?=$rootURL?>/rank/<?=$_GET['domain']?>">Tổng quan</a> </div>
+                </div>
+
+            </div>
+            <!-- sub menu -->
     <div class="container similarBody  widgetContainer">
         <div class="page-contents pt-5">
+
+
             <div class="topbox"><?require_once(__DIR__."/modules/master.topbox.php")?></div>
             
             <div class="row pt-5">
@@ -59,7 +81,7 @@
                             <div>Báo cáo Google Search Ads cung cấp thông tin mẫu quảng cáo, từ khóa, đối thủ cạnh tranh của website</div>
                         </div>
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a target="blank" class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0" href="./index.php?view=website&action=googleads&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
+                            <a  class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0" href="<?=$rootURL?>/index.php?view=website&action=organic&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
 
@@ -70,7 +92,7 @@
                             <div class="precent-organicoverview bg-white shadow-sm text-center font-16 text-info font-weight-bold pb-4 d-none"></div>
                         </div>
                         <div class="col-12 col-lg-7">
-                            <div class="widget-getOrganicKeywordsBrandedTable"></div>
+                            <div style="height:100%" class="widget-getOrganicKeywordsBrandedTable"></div>
                         </div>
                     </div>
                    <!-- Organic -->
@@ -88,7 +110,7 @@
                             <div>Báo cáo Google Search Ads cung cấp thông tin mẫu quảng cáo, từ khóa, đối thủ cạnh tranh của website</div>
                         </div>
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a target="blank" class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0" href="./index.php?view=website&action=googleads&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
+                            <a  class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0" href="<?=$rootURL?>/index.php?view=website&action=googleads&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
 
@@ -98,7 +120,7 @@
                                 <?php require_once(__DIR__ . "/modules/googleads.widgetgetScrapedSearchAds.php")?>               
                         </div>    
                         <div class="col-12 col-lg-6">
-                                <div class="widget-getAdvertisingSearchDetail"></div>               
+                                <div style="height:100%" class="widget-getAdvertisingSearchDetail"></div>               
                         </div>    
                     </div>
                     
@@ -114,7 +136,7 @@
                             <div>Google Display Ads - hình thức quảng cáo hiển thị banner (hoặc text) lên các website khác</div>
                         </div>
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a target="blank" class="font-gg font-13 font-weight-500 bagDanger ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="https://ads.google.com/" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
+                            <a  class="font-gg font-13 font-weight-500 bagDanger ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="<?=$rootURL?>/index.php?view=website&action=displayads&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
                     <div class="row">
@@ -134,7 +156,7 @@
                             <div>Social Ads - ghi nhận quảng cáo từ các kênh Social như: facebook, youtube, linkedin ...</div>
                         </div>
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a target="blank" class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="https://ads.google.com/" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
+                            <a  class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="<?=$rootURL?>/index.php?view=website&action=social&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
                     <!-- SOCIAL -->
@@ -164,7 +186,7 @@
                             <div>Backlink - báo cáo link từ website khác trỏ về website của bạn</div>
                         </div>
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a target="blank" class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="https://ads.google.com/" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
+                            <a  class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="<?=$rootURL?>/index.php?view=website&action=backlink&domain=<?=$_GET['domain']?>" data-original-title="Xem Thông Báo Từ Google">Chi tiết <i class="fal fa-angle-right"></i></a>
                         </div>
                     </div>
                       <!-- backlink-->
@@ -200,11 +222,11 @@
             </div>
     </div>
 </div>
-<script src="<?=$ROOT?>/assets/js/wordcloud2.js"></script>
-<script src="<?=$ROOT?>/assets/js/ResizeSensor.js"></script>
-<script src="<?=$ROOT?>/dist/js/pages/my-function/init-function.js"></script>
+<script src="<?=$rootURL?>/assets/js/wordcloud2.js"></script>
+<script src="<?=$rootURL?>/assets/js/ResizeSensor.js"></script>
+<script src="<?=$rootURL?>/dist/js/pages/my-function/init-function.js"></script>
 
-<script type="module" src="<?=$ROOT?>/dist/js/pages/website/master.js?v=<?=$version?>"></script>
-<script type="module" src="<?=$ROOT?>/dist/js/pages/website/overview/index.js?v=<?=$version?>"></script>
-<script type="module" src="<?=$ROOT?>/dist/js/pages/website/overview/tableFunction.js?v=<?=$version?>"></script>
+<script type="module" src="<?=$rootURL?>/dist/js/pages/website/master.js?v=<?=$version?>"></script>
+<script type="module" src="<?=$rootURL?>/dist/js/pages/website/overview/index.js?v=<?=$version?>"></script>
+<script type="module" src="<?=$rootURL?>/dist/js/pages/website/overview/tableFunction.js?v=<?=$version?>"></script>
  

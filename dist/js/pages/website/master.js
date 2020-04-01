@@ -1,12 +1,31 @@
 var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 var domain = "";
-if (location.href.indexOf("/rank/") > 1){
-    var domainTmp = location.href.split("/");
-    domain = domainTmp[4];
-}else{
+if (location.href.indexOf("/rank/") > 1) {
+    domain = location.href.substring(location.href.indexOf("/rank/")+6);
+} else {
     domain = url.searchParams.get("domain");
 }
-console.log(domain);
+domain = extractHostname(domain);
+
+function extractHostname(url) {
+    var hostname;
+    //find & remove protocol (http, ftp, etc.) and get hostname
+
+    if (url.indexOf("//") > -1) {
+        hostname = url.split('/')[2];
+    }
+    else {
+        hostname = url.split('/')[0];
+    }
+
+    //find & remove port number
+    hostname = hostname.split(':')[0];
+    //find & remove "?"
+    hostname = hostname.split('?')[0];
+
+    return hostname;
+}
+
 const datatableLanguage = {
     searchPlaceholder: 'Nhập từ khóa',
     processing: 'Đang xử lý...',
@@ -48,6 +67,9 @@ const initDatatable = function(select, tableOptions) {
 }
 
 $(document).ready(() => {
+    var date = new Date();
+    var headerTimes = moment(date).format('MM.YYYY')
+    $('.data-headerTimes').text(headerTimes)
     window.localDomain = domain;
     window.createAWidgets = function createAWidgets(input) {
         if (input.headerIcon == undefined) input.headerIcon = `<i class="text-primary fad fa-check-circle"></i>`;
@@ -58,7 +80,7 @@ $(document).ready(() => {
                     <div class="col-auto d-flex no-block align-items-center mx-1">${input.headerIcon}</div>
                     <div class="col-auto pl-0">
                         <div class="text-capitalize font-weight-bold">${input.headerTitle}</div>
-                        <div class="text-muted font-10">${input.headerTime}</div>
+                        <div class="text-muted font-10">${headerTimes}</div>
                     </div>
                     <div class="ml-auto d-flex no-block align-items-center pr-3">
                         <span class="similarReloadTask" data-task="${input.widgetTask}"><i class="fal fa-sync"></i></span>
@@ -79,13 +101,13 @@ $(document).ready(() => {
     window.createADataTable = function createATable(input) {
         if (input.headerIcon == undefined) input.headerIcon = `<i class="text-primary fad fa-check-circle"></i>`;
         var html = `
-            <div class="bg-white shadow-sm rounded">
+            <div class="bg-white shadow-sm rounded" style="height:100%">
                 <!-- widget header -->
                 <div class="row border-bottom m-0 py-2 widgetHeader">
                     <div class="col-auto d-flex no-block align-items-center mx-1">${input.headerIcon}</div>
                     <div class="col-auto pl-0">
                         <div class="text-capitalize font-weight-bold">${input.headerTitle}</div>
-                        <div class="text-muted font-10">${input.headerTime}</div>
+                        <div class="text-muted font-10">${headerTimes}</div>
                     </div>
                     
                 </div>

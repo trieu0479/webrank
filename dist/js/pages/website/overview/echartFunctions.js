@@ -2,15 +2,35 @@
 // import counterUp from '../../../../js/pages/keywords/counterup2/index.js';
 
 // const counter = document.querySelector('.counter');
+var domain = "";
+if (location.href.indexOf("/rank/") > 1) {
+    domain = location.href.substring(location.href.indexOf("/rank/") + 6);
+} else {
+    domain = url.searchParams.get("domain");
+}
+domain = extractHostname(domain);
 
-var domain = '';
+function extractHostname(url) {
+    var hostname;
+    if (url.indexOf("//") > -1) {
+        hostname = url.split('/')[2];
+    } else {
+        hostname = url.split('/')[0];
+    }
+    hostname = hostname.split(':')[0];
+    hostname = hostname.split('?')[0];
+    return hostname;
+}
+
+
+var domain_name = domain;
+
 var arrDomain = [];
 var selectWebsite = "";
 
 // const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 
-var domain_name = url.searchParams.get("domain");
 $('body').on('click', '.btn-compare', function(event) {
     Swal.fire({
         title: 'Hãy nhập website để so sánh',
@@ -51,6 +71,12 @@ $('body').on('click', '.btn-compare', function(event) {
     })
 })
 
+function updateMetaTitle(text) {
+    var metaTitle = text + document.title;
+    document.title = metaTitle;
+    $('meta[name="og:title"]').attr("content", metaTitle);
+
+}
 const getHeader = async data => {
     // Get value Header  
     const {
@@ -106,9 +132,6 @@ const getHeader = async data => {
         similarTags.map(tag => `<span><a href="./index.php?view=keywords&action=keywords-overview&keyword=${tag}"  data-type="keyword" class="changeURL" data-input="${tag}" class="text-muted"><i class="far fa-search"></i> ${tag}</a></span>`).join("")
     );
 
-    var metaTitle = "Website " + similarDomain + " được xếp hạng " + numeral(similarCountryRank).format('0,0') + "/98.000 website tại Việt Nam";
-    document.title = metaTitle;
-    $('meta[name="og:title"]').attr("content", metaTitle);
 
     $(".similarHeader .similarRelatedAppsTitle").html(
         '<i class="far fa-mobile font-14"></i> Ứng dụng liên quan<br/><span class="font-12 text-muted">CH Play & AppStore</span>'
@@ -347,9 +370,9 @@ const api = async(task, domain, reload = 0) => {
 
     if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail') {
         // taskname = task;
-        url = `//localapi.trazk.com/webdata/semrush.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}`
+        url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
     } else {
-        url = `//localapi.trazk.com/webdata/websiteapi.php?task=${task}&domain=${domain}&reload=${reload}`
+        url = `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`
     }
     try {
         return await $.ajax({
@@ -453,7 +476,7 @@ const api = async(task, domain, reload = 0) => {
 };
 const estmatedWorth = async(task, data) => {
         if (data.status == "success") {
-            $('.money-website-price').html(`${numeral(data.data).format('0,0')}<span>USD</span>`)
+            $('.money-website-price').html(`${numeral(data.data).format('0,0')}<span>USD</span>`);
         }
     }
     //sử dung truy cập theo tháng
@@ -465,7 +488,7 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                 if (data.data.data.Data.AvgMonthVisits) {
                     TrafficAndEngagementOverviewMonthly = data.data.data.Data;
                 } else {
-                    TrafficAndEngagementOverviewMonthly = data.data.data.Data.Data[0];
+                    TrafficAndEngagementOverviewMonthly = data.data.data.Data;
                 }
                 let MonthlyVisits = numeral(TrafficAndEngagementOverviewMonthly.AvgMonthVisits).format("0,0");
                 let html = `
@@ -477,7 +500,7 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-table-kh px-3 border-top">
+                        <div class="col-table-kh px-3 border-top text-left">
                             <div class="row padding-y-12 border-bottom ">
                                 <div class="col h6 m-0 align-self-center text-muted">
                                     Thời gian truy cập trung bình</div>
@@ -485,14 +508,14 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                                     <span class="AvgVisitDuration h5 font-gg text-favorite ">${numeral(TrafficAndEngagementOverviewMonthly.AvgVisitDuration).format("0:00:00")}</span>
                                 </div>
                             </div>
-                            <div class="row padding-y-12 border-bottom">
+                            <div class="row padding-y-12 border-bottom text-left">
                                 <div class="col h6 m-0 align-self-center text-muted"> Số trang/Lượt truy cập
                                 </div>
                                 <div class="col-4 text-right">
                                     <span class="PagesperVisit h5 font-gg text-favorite ">${numeral(TrafficAndEngagementOverviewMonthly.PagesPerVisit).format("0.00")}</span>
                                 </div>
                             </div>
-                            <div class="row padding-y-12">
+                            <div class="row padding-y-12 text-left">
                                 <div class="col h6 m-0 align-self-center text-muted"> Tỷ lệ thoát</div>
                                 <div class="col-4 text-right">
                                     <span class="BounceRate h5 font-gg text-favorite ">${numeral(TrafficAndEngagementOverviewMonthly.BounceRate).format("00.00%")}</span>
@@ -503,9 +526,18 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                 $('.getTrafficAndEngagementOverviewMonthly').html(html)
                 $(`.getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
 
+                let AvgVisitDuration = numeral(TrafficAndEngagementOverviewMonthly.AvgVisitDuration).format("0:00:00");
+                let PagesperVisit = numeral(TrafficAndEngagementOverviewMonthly.PagesPerVisit).format("0.00");
+                let BounceRate = numeral(TrafficAndEngagementOverviewMonthly.BounceRate).format("00.00%");
+
+
+                var newDescription = "Website " + data.data.website + " có lượng người cập hàng tháng vào khoảng " + MonthlyVisits + " visitors và thời gian truy cập trung bình: " + AvgVisitDuration + " giây. Tỉ lệ thoát trang (bounce rate) hiện là " + BounceRate + "...";
+                $('meta[name="description"]').attr("content", newDescription);
+                $('meta[name="og:description"]').attr("content", newDescription);
+
             } else {
-                // // $(`#getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
-                // // $(`#getTrafficAndEngagementOverviewMonthly`).addClass('empty-state');
+                // $(`#getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
+                // $(`#getTrafficAndEngagementOverviewMonthly`).addClass('empty-state');
                 // await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
             }
         } else {
@@ -1391,11 +1423,7 @@ const getTrafficSourcesSearch = async(task, data) => {
             let option = {
                 color: masterColor,
                 legend: {
-                    top: "30%",
-                    left: '70%',
-                    itemWidth: 20,
-                    itemHeight: 14,
-                    width: 10,
+                    bottom: "5%",
                     textStyle: {
                         fontFamily: 'Arial',
                     },
@@ -1405,7 +1433,7 @@ const getTrafficSourcesSearch = async(task, data) => {
                     legendHoverLink: false,
                     minAngle: 20,
                     radius: ["40%", "60%"],
-                    center: ["30%", "50%"],
+                    center: ["50%", "40%"],
                     avoidLabelOverlap: false,
                     itemStyle: {
                         normal: {
@@ -1866,8 +1894,11 @@ const getWebDemographicsAge = async(task, data) => {
 };
 // SỬ DỤNG NGUỒN KHÁCH HÀNG
 const getTrafficSourcesOverview = async(task, data) => {
+    console.log(data.data.haveData)
     $('.getTrafficSourcesOverview ').attr('style', 'min-height:300px')
     if (data.status == "success" && data.data.data) {
+        console.log("Ddddd");
+
         let {
             data: traffic
         } = data.data;
@@ -1892,7 +1923,7 @@ const getTrafficSourcesOverview = async(task, data) => {
             dataChart.push(obj);
             dataChartname.key.push(key);
         });
-        console.log(traffic.Social);
+        // console.log(traffic.Social);
         $('.precent-organicoverview').html(`${numeral((traffic.Social).toFixed(2)).format("0,0")}/${numeral(total).format("0,0")}`)
             // render chart
         let data_params_legend;
@@ -1970,12 +2001,12 @@ const getTrafficSourcesOverview = async(task, data) => {
         //* update v7*/
         await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
     } else {
-        $(`#${task}`).removeClass('is-loading').addClass('empty-state');;
+        $(`.${task}`).removeClass('is-loading').addClass('empty-state');
     }
 };
 // SỬ DỤNG
 const getWebDemographicsGender = async(task, data) => {
-    console.log(data);
+    // console.log(data);
     if (data.status == "success") {
         // console.log("ddd");
         let {
@@ -2117,8 +2148,6 @@ const getWebDemographicsGender = async(task, data) => {
 };
 // SỬ DỤNG
 const getDesktopVsMobileVisits = async(task, data) => {
-
-
     if (data.status == "success") {
         let {
             data: visits
@@ -2274,40 +2303,94 @@ const getDesktopVsMobileVisits = async(task, data) => {
 };
 // SỬ DỤNG
 const getSimilarSites = async(task, data) => {
-    $(`.${task}`).addClass('row');
-    $(`.${task}`).attr('style', 'min-height:300px !important');
-    // console.log("sssss");
-    $(`.${task}`).html('');
-    let {
-        data: SimilarSites,
-        website: domain
-    } = data.data;
-    let domain2;
-    $.each(SimilarSites, (index, site) => {
-        let temp = {
-            Domain: site.Domain,
-            Favicon: site.Favicon
-        }
-        arrDomain.push(temp);
-        if ((index % 7) == 0) {
-            $(`.${task}`).append('<div class="similarSites col-12 col-md-4"></div>')
-        }
-        var compareNode = $(`<span  data-domain="${site.Domain}" class="changeWebSite text-primary bg-info-2 rounded-pill px-2 font-10 align-self-center ml-auto text-uppercase">+ so sánh</span>`);
-        $(`<a title="${site.Domain}" class="d-flex align-items-center" href='?view=traffic-website&action=result&domain=${site.Domain}'">
+    if (data.status == 'success') {
+        if (data.data.data && data.data.haveData == true) {
+            $(`.${task}`).addClass('row');
+            $(`.${task}`).attr('style', 'min-height:300px !important');
+            // console.log("sssss");
+            $(`.${task}`).html('');
+            let {
+                data: SimilarSites,
+                website: domain
+            } = data.data;
+            let domain2;
+            $.each(SimilarSites, (index, site) => {
+                let temp = {
+                    Domain: site.Domain,
+                    Favicon: site.Favicon
+                }
+                arrDomain.push(temp);
+                if ((index % 7) == 0) {
+                    $(`.${task}`).append('<div class="similarSites col-12 col-md-4"></div>')
+                }
+                var compareNode = $(`<span  data-domain="${site.Domain}" class="changeWebSite text-primary bg-info-2 rounded-pill px-2 font-10 align-self-center ml-auto text-uppercase">+ so sánh</span>`);
+                $(`<a title="${site.Domain}" class="d-flex align-items-center" href='${rootURL}/rank/${site.Domain}'">
             <img class="p-1 mr-2 border rounded bg-secondary" src="${site.Favicon}" />
             <span  data-type="website" data-input="${site.Domain}" >${site.Domain}</span>
         </a>`).appendTo(`.${task} .similarSites:last-child`)
-            .append(compareNode);
-        compareNode.click(function(e) {
-            e.preventDefault();
-            domain2 = $(this).data('domain');
-            if (domain_name && domain2) {
-                location.href = `?view=traffic-website&action=compare&domain1=${domain_name.toLowerCase()}&domain2=${domain2.toLowerCase()}`;
-            }
-        });
-    })
-    await $(`.${task}`).removeClass('is-loading');
-    await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+                    .append(compareNode);
+                compareNode.click(function(e) {
+                    e.preventDefault();
+                    domain2 = $(this).data('domain');
+                    // if (domain_name && domain2) {
+                    //     location.href = `?view=traffic-website&action=compare&domain1=${domain_name.toLowerCase()}&domain2=${domain2.toLowerCase()}`;
+                    // }
+                    Swal.fire({
+                        title: 'Hãy nhập website để so sánh',
+                        html: `<input id="swal-input1" class="swal2-input text-lowercase" value=${domain_name} placeholder="Nhập website của bạn">` +
+                            `<div class="text-white font-16 bg-dark m-auto shadow-sm" style="height: 60px; width: 60px; line-height: 60px;border-radius: 60px">VS</div>` +
+                            `<input id="swal-input2" value="${domain2}" class="swal2-input text-lowercase"  placeholder="Nhập website của đối thủ">`,
+                        focusConfirm: false,
+                        showCloseButton: true,
+                        confirmButtonText: 'So Sánh',
+                        width: 600,
+                        padding: '4em',
+                        onOpen: () => {
+                            $('#swal-input2').focus()
+                            $('#swal-input2').keypress(event => {
+                                if (event.which == 13) {
+                                    $('.swal2-confirm').click();
+                                }
+                            })
+                        },
+                        preConfirm: () => {
+                            if ($('#swal-input1').val() == "" || $('#swal-input2').val() == "") {
+                                Swal.showValidationMessage(`Vui lòng nhập đủ website`)
+                            } else {
+                                if ($('#swal-input1').val() == $('#swal-input2').val()) {
+                                    Swal.showValidationMessage(`Hai website không được trùng`)
+                                }
+                            }
+                            return [
+                                $('#swal-input1').val(),
+                                $('#swal-input2').val()
+                            ]
+                        }
+                    }).then((result) => {
+                        // console.log(result);
+                        if (result.value) {
+                            location.href = `${rootURL}/?view=traffic-website&action=compare&domain1=${result.value[0].toLowerCase()}&domain2=${result.value[1].toLowerCase()}`;
+                        }
+                    })
+                });
+            })
+
+
+
+
+
+
+
+            await $(`.${task}`).removeClass('is-loading');
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+        } else {
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+            await $(`.${task}`).removeClass('is-loading').addClass('empty-state');
+        }
+    } else {
+        console.log(`${task} failed`);
+    }
+
 }
 const getWebsiteGeography = async(task, data) => {
         // console.log(data);
@@ -2340,7 +2423,7 @@ const getWebsiteGeography = async(task, data) => {
         };
         await $(`.${task}`).removeClass('is-loading');
         //* update v7*/
-        $.getJSON('assets/mapworld.geo.json', function(usaJson) {
+        $.getJSON(rootURL + '/assets/mapworld.geo.json', function(usaJson) {
             // console.log(usaJson)
             chart.hideLoading();
             echarts.registerMap('World', usaJson, {});
@@ -2524,7 +2607,7 @@ const getDomainBackLinkDetail = async(task, data) => {
     }
     //done
 const getScrapedSearchAds = async(task, data) => {
-    console.log(data);
+    // console.log(data);
     if (data.status == "success") {
         var SearchAds = null;
         var domain = url.searchParams.get("domain");
@@ -2677,9 +2760,7 @@ const getScrapedSearchAds = async(task, data) => {
 
 // Lượt Truy Cập Xã Hội
 const getTrafficSocial = async(task, data, domain) => {
-
         if (data.status == "success") {
-
             if (data && data.data && data.data.data) {
                 let TrafficSocial = data.data.data;
 
@@ -2695,15 +2776,17 @@ const getTrafficSocial = async(task, data, domain) => {
                 $("#percenTotalSocailVisits").html(`${numeral(TotalDesktopTraffic).format('0.00%')}`);
 
                 let dataChartPie = [{
-                            name: "Mạng xã hội",
-                            value: SearchTotal
-                        },
-                        {
-                            name: "Tổng",
-                            value: VolumeTotal - SearchTotal
-                        }
-                    ]
-                    // render chart
+                        name: "Mạng xã hội",
+                        value: SearchTotal
+                    },
+                    {
+                        name: "Tổng",
+                        value: VolumeTotal - SearchTotal
+                    }
+                ]
+                console.log(dataChartPie);
+
+                // render chart
                 let elePie = document.getElementById("getTotalSocialVisits");
                 let myChartPie = echarts.init(elePie);
 
@@ -2712,13 +2795,17 @@ const getTrafficSocial = async(task, data, domain) => {
                     legend: {
                         bottom: "-2%",
                         right: "25%",
+                        formatter: function(name) {
+                            let value = name == 'Tổng' ? dataChartPie[1].value : dataChartPie[0].value;
+                            return `${name}\n(${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')})`;
+                        }
                     },
                     series: [{
                         type: 'pie',
                         legendHoverLink: false,
                         minAngle: 20,
-                        radius: ["50%", "80%"],
-                        center: ["50%", "45%"],
+                        radius: ["45%", "70%"],
+                        center: ["45%", "45%"],
                         avoidLabelOverlap: false,
                         itemStyle: {
                             normal: {
@@ -2862,7 +2949,7 @@ const getTrafficSocial = async(task, data, domain) => {
 
                             return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
                 <div class="text-dark pt-2">
-                    ${mrkr1} ${name1} <span style="color:${color1};font-weight:bold">${val1}</span>
+                    ${mrkr1} Traffic <span style="color:${color1};font-weight:bold">${val1}</span>
                 </div>`;
                         }
                     },
@@ -3281,15 +3368,16 @@ const getMarketingMixOverview = async(task, data) => {
                                 new ResizeSensor($(`#getMarketingMixOverview--${taskName}`), function() {
                                     myChart.resize();
                                 });
-
+                                await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
                                 await $(`#getMarketingMixOverview--${taskName}`).removeClass('is-loading');
                                 await $(`#getMarketingMixOverview`).removeClass('is-loading');
                                 await $(`#getMarketingMixOverview`).removeClass('empty-state');
-                                await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
+
                             }
                         } else {
                             $(`#getMarketingMixOverview`).removeClass('is-loading');
                             $(`#getMarketingMixOverview`).addClass('empty-state');
+                            await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
                         }
 
                     }
@@ -3357,11 +3445,13 @@ const getMarketingMixOverview = async(task, data) => {
                 } else {
                     $(`#getMarketingMixOverview`).removeClass('is-loading');
                     $(`#getMarketingMixOverview`).addClass('empty-state');
+                    await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
                 }
 
             } else {
                 $(`#getMarketingMixOverview`).removeClass('is-loading');
                 $(`#getMarketingMixOverview`).addClass('empty-state');
+                await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
             }
 
         } else {
@@ -3371,6 +3461,9 @@ const getMarketingMixOverview = async(task, data) => {
     // DISPLAY ADS
 const SampleAdsasImage = async(task, data) => {
     $('.footer--bt-view').remove()
+    if (data.data.bannerAds == "") {
+        $('.sample-image-ads').addClass('empty-state')
+    }
     data.data.bannerAds.forEach((val, index) => {
         if (index < 5) {
             $(".sample-image-ads").append(`<div class="box-all">
@@ -3381,7 +3474,7 @@ const SampleAdsasImage = async(task, data) => {
                     </div>
                 </div>
                 <div class="text-sample pt-2">
-                    <span class="dayseen">Days seen:<span class="seen-img pl-1 font-12">${val.daysSeen}</span> </span>
+                    <span class="dayseen">Xuất hiện:<span class="seen-img pl-1 font-12">${val.daysSeen}</span> ngày</span>
                     <span class="image-w-h"> <small class="image-width">${val.width}</small><small class="vs"> x </small> <small class="image-height">${val.height}</small></span>
                 </div>
             </div>
@@ -3391,6 +3484,9 @@ const SampleAdsasImage = async(task, data) => {
 }
 const SampleAdsasHTML = async(task, data) => {
     $('.footer--bt-view').remove()
+    if (data.data.htmlAds == '') {
+        $('.sample-html-ads').addClass('empty-state')
+    }
     data.data.htmlAds.forEach((val, index) => {
         if (index < 5) {
             $(".sample-html-ads").append(`<div class="box-all">
@@ -3402,7 +3498,7 @@ const SampleAdsasHTML = async(task, data) => {
 
                 </div>
                 <div class="text-sample pt-2">
-                    <span class="dayseen">Days seen:<span class="seen-img pl-1 font-12">${val.daysSeen}</span> </span>
+                    <span class="dayseen">Xuất hiện:<span class="seen-img pl-1 font-12">${val.daysSeen}</span> ngày</span>
                     <span class="image-w-h"> <small class="image-width">${val.width}</small><small class="vs"> x </small> <small class="image-height">${val.height}</small></span>
                 </div>
             </div>
@@ -3412,6 +3508,9 @@ const SampleAdsasHTML = async(task, data) => {
 }
 const SampleAdsasText = async(task, data) => {
     $('.footer--bt-view').remove()
+    if (data.data.textAds == '') {
+        $('.sample-text-ads').addClass('empty-state')
+    }
     data.data.textAds.forEach((val, index) => {
         if (index < 5) {
             $(".sample-text-ads").append(` <div class="box-text-all">
@@ -3426,7 +3525,7 @@ const SampleAdsasText = async(task, data) => {
                 </div>
                 <div class="footer-text mt-2">
                     <a href="#" class="content-small font-12">${val.advertiser}</a>          
-                    <p class="tseen">Days seen: <small class="font-12">1</small>${val.daysSeen}</p>
+                    <p class="tseen">Xuất hiện: <small class="font-12">1</small>${val.daysSeen} ngày</p>
                 </div>
             </div>
         </div>`)

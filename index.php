@@ -7,42 +7,27 @@ if (@$_GET['userToken']) $userToken =$_GET['userToken'];else $userToken =  $_COO
 if (empty($userToken))  $userToken = $demoToken;
 if (empty($view)) $view = "website";
 if (empty($action)) $action = "index";
-switch ($view) {
-    case "market": $meta['title'] = "Dữ liệu quảng cáo thị trường Việt Nam";break;
-    case "traffic-website": 
-        if ($action == "topsites"){
-            $meta['title'] = "Danh sách Top 1,000 Website Tại Việt Nam";
-            $meta['description'] = "Bảng xếp hạng các website tại Việt Nam, phân theo ngành nghề, lượng traffic và khả năng chạy quảng cáo Google Display Ads.";
-        
-        }else if ($action == "categories"){
-            $meta['title'] = "Danh sách Website Phân Bổ Theo Ngành  Tại Việt Nam";
-            $meta['description'] = "Bảng xếp hạng các website tại Việt Nam, phân theo ngành nghề, lượng traffic và khả năng chạy quảng cáo Google Display Ads.";
 
-        }else if ($action == "result"){
-            $meta['title'] = "Kết quả phân tích website: ".$_GET['domain'];
-            $meta['img'] = "https://go.fff.com.vn/assets/images/share.png";
-            $meta['description'] = "Kết quả phân tích traffic website ".$_GET['domain'];
 
-        }else{
-            $meta['title'] = "Phân tích traffic website - Hiểu hơn về website của bạn và đối thủ";
-           
-            $meta['description'] = "Phân tích traffic website, tìm hiểu cách website thực hiện marketing online: chạy quảng cáo, làm SEO, tối ưu di động ...";
-        }
+switch ($action) {
+    case "index": $meta['title'] = "Công cụ phân tích website - phân tích đối thủ";break;
+    case "overview": 
+        $data = file_get_contents("http://local.api.trazk.com/webdata/websiteapi.php?task=getHeader&domain=".$_GET['domain']."&userToken=".$userToken);
+        $data = json_decode($data,true);
+        $meta['image'] = "https://imgcdn.trazk.com/thumb/?domain=".$_GET['domain'];
+        $highestTrafficCountryRanking = $data['data']['data']['highestTrafficCountryRanking'];
 
-        break;
-    case "pagespeed": $meta['title'] = "Kiểm tra tốc độ website - Tối ưu website với Google Speed";break;
-    case "keyword-planner":
-        if (empty($_GET['action']) ||  $_GET['action'] == "index"){
-            $meta['title'] = "Công Cụ phân tích Từ Khóa Miễn Phí - Keyword Planner Free ";
-            $meta['description'] = "Công cụ phân tích từ khóa miễn phí từ fff.com.vn - Giải pháp hoàn hảo thay thế Keywords Planner. Kết hợp AI và Bigdata cung cấp hàng triệu từ khóa cho SEOer và Chạy Ads mỗi ngày";
-        }else{
-            $meta['title'] = "Kết quả phân tích từ khóa: ".$_GET['keywords'];
-            $meta['description'] = "Xem kết quả phân tích từ khóa: ".$_GET['keywords']." từ công cụ phân tích từ khóa fff.com.vn hơn Keywords Planner";
-        }
-        break;
-    case "adwords-plan": $meta['title'] = "Lập kế hoạch quảng cáo Google Ads ";break;
-    default: $meta['title'] = "Công cụ phân tích - Ngọn hải đăng trong biển rộng Digital Marketing";break;
-}
+        $data = file_get_contents("http://local.api.trazk.com/webdata/websiteapi.php?task=estmatedWorth&domain=".$_GET['domain']."&userToken=".$userToken);
+        $data = json_decode($data,true);
+        $estmatedWorth = $data['data'];
+        $meta['title'] = "Website ".$_GET['domain']." được định giá ".number_format($estmatedWorth)."$ - Xếp hạng " . number_format($highestTrafficCountryRanking) . "/98,000 website tại Việt Nam";;
+    break;
+    case "organic": $meta['title'] = "Kết quả phân tích organic traffic website ".$_GET['domain'];break;
+    case "googleads": $meta['title'] = "Kết quả phân tích google ads - traffic website ".$_GET['domain'];break;
+    case "displayads": $meta['title'] = "Kết quả phân tích display ads - traffic website ".$_GET['domain'];break;
+    case "social": $meta['title'] = "Kết quả phân tích social - traffic website ".$_GET['domain'];break;
+    case "backlink": $meta['title'] = "Kết quả phân tích backlink - traffic website ".$_GET['domain'];break;
+   }
 
 
 require_once('modules/header.php') ;

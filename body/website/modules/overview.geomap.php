@@ -5,7 +5,7 @@
                 <div class="col-auto pl-0 ml-4">
                     <div class="text-capitalize font-weight-bold">Truy cập theo quốc gia
                     </div>
-                    <div class="text-muted similarDates font-10"></div>
+                    <div class="text-muted data-headerTimes font-10"></div>
                 </div>
                 <div class="ml-auto d-flex no-block align-items-center pr-3">
                     <a class="getWebsiteGeography-reload text-muted" data-task="getWebsiteGeography"
@@ -14,7 +14,7 @@
             </div>
             <div class="row">
                 <div class="col-12 col-md-4 pr-0">
-                    <div style="height:300px;">
+                    <div style="height:300px;" class="getWebsiteGeography-col-maptbale">
                         <table  class="table table-striped getWebsiteGeography-table"
                             style="width:100%;height:100%;"></table>
                     </div>

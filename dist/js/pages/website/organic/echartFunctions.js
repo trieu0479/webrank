@@ -375,11 +375,11 @@ const getTrafficSourcesSearch = async(task, data) => {
             let option = {
                 color: customColors,
                 legend: {
-                    top: "30%",
-                    left: '70%',
-                    itemWidth: 20,
-                    itemHeight: 14,
-                    width: 10,
+                    bottom: "5%",
+                    // left: '70%',
+                    // itemWidth: 20,
+                    // itemHeight: 14,
+                    // width: 10,
                     textStyle: {
                         fontFamily: 'Arial',
                     },
@@ -389,7 +389,7 @@ const getTrafficSourcesSearch = async(task, data) => {
                     legendHoverLink: false,
                     minAngle: 20,
                     radius: ["40%", "60%"],
-                    center: ["30%", "50%"],
+                    center: ["50%", "40%"],
                     avoidLabelOverlap: false,
                     itemStyle: {
                         normal: {
@@ -496,9 +496,13 @@ const getSearchOrganicPaidOverview = async(task, data) => {
     let task2 = 'getSearchOrganicPaidOverviewpaid';
     // console.log(task2);
     if (data.status == "success") {
-        if (data.data.data == null) {
-            await $(`.${task}`).removeClass('is-loading').addClass('empty-state');
+        if (data.data.data == null || data.data.haveData == false) {
+            console.log("sssss");
+            let task = 'getSearchOrganicPaidOverviewpaid'
+            let task2 = 'getSearchOrganicPaidOverview'
             await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+            $(`#${task}`).removeClass('is-loading').addClass('empty-state').attr('style', 'height:100% !important');
+            $(`#${task2}`).removeClass('is-loading').addClass('empty-state');
         } else {
             let website = data.data.website;
             let Data = data.data.data;
@@ -1163,74 +1167,75 @@ function kFormatter(num) {
     return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
 }
 const getAdvertisingSearchDetail = async(task, data) => {
-    if (data.status == "success" && data.data.adwordsCompetitors || data.data.adwordsCompetitors != []) {
-        let data_traffic = [];
-        let series = [];
-        let myarrChartName = [];
-        data.data.adwordsCompetitors.forEach((v) => {
-            data_traffic.push(v.traffic)
-        })
-        data_traffic.sort(function(a, b) {
-            { return b - a }
-        });
-        data_traffic.length = 10;
-        const outputs = data.data.adwordsCompetitors.filter((element, indexOfElement) => {
-                for (let i = 0; i < data_traffic.length; i++) {
-                    if (element.traffic == data_traffic[i]) {
-                        return data.data.adwordsCompetitors
-                    }
-                }
+    if (data.status == "success") {
+        if (data.data.adwordsCompetitors != "" && data.data.adwordsCompetitors != null) {
+            let data_traffic = [];
+            let series = [];
+            let myarrChartName = [];
+            data.data.adwordsCompetitors.forEach((v) => {
+                data_traffic.push(v.traffic)
             })
-            // phan getCompetitorReportChart
-        $.each(outputs, (index, item) => {
-            myarrChartName.push(item.domain)
-        })
-        outputs.forEach((v, i) => {
-            let obj = {}
-            obj.name = v.domain,
-                obj.type = 'scatter',
-                obj.symbolSize = function(data) {
-                    return kFormatter(data[2]);
-                },
-                obj.emphasis = {
-                    label: {
-                        show: false,
-                        formatter: function(param) {
-                            return kFormatter(param.data[3]);
-                        },
+            data_traffic.sort(function(a, b) {
+                { return b - a }
+            });
+            data_traffic.length = 10;
+            const outputs = data.data.adwordsCompetitors.filter((element, indexOfElement) => {
+                    for (let i = 0; i < data_traffic.length; i++) {
+                        if (element.traffic == data_traffic[i]) {
+                            return data.data.adwordsCompetitors
+                        }
+                    }
+                })
+                // phan getCompetitorReportChart
+            $.each(outputs, (index, item) => {
+                myarrChartName.push(item.domain)
+            })
+            outputs.forEach((v, i) => {
+                let obj = {}
+                obj.name = v.domain,
+                    obj.type = 'scatter',
+                    obj.symbolSize = function(data) {
+                        return kFormatter(data[2]);
                     },
-                    top: '40%'
-                },
-                obj.itemStyle = {
-                    shadowBlur: 10,
-                    shadowColor: 'rgba(120, 36, 50, 0.5)',
-                    shadowOffsetY: 5,
-                    top: '40%'
-                },
-                obj.data = [
-                    [v.adwordsKeywords, v.traffic, v.commonKeywords, v.domain]
-                ]
+                    obj.emphasis = {
+                        label: {
+                            show: false,
+                            formatter: function(param) {
+                                return kFormatter(param.data[3]);
+                            },
+                        },
+                        top: '40%'
+                    },
+                    obj.itemStyle = {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(120, 36, 50, 0.5)',
+                        shadowOffsetY: 5,
+                        top: '40%'
+                    },
+                    obj.data = [
+                        [v.adwordsKeywords, v.traffic, v.commonKeywords, v.domain]
+                    ]
 
-            series.push(obj)
-        });
-        let option = {
-            color: customColors,
-            tooltip: {
-                trigger: "axis",
-                backgroundColor: 'rgb(255, 255, 255, 1)',
-                borderColor: 'rgb(101,155,250)',
-                borderWidth: 1,
-                extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                formatter: params => {
-                    let {
-                        name,
-                        value,
-                        seriesName,
-                        marker,
-                        color
-                    } = params[0];
-                    // name = moment(name).format('DD MMMM YYYY');
-                    return `
+                series.push(obj)
+            });
+            let option = {
+                color: customColors,
+                tooltip: {
+                    trigger: "axis",
+                    backgroundColor: 'rgb(255, 255, 255, 1)',
+                    borderColor: 'rgb(101,155,250)',
+                    borderWidth: 1,
+                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                    formatter: params => {
+                        let {
+                            name,
+                            value,
+                            seriesName,
+                            marker,
+                            color
+                        } = params[0];
+                        // name = moment(name).format('DD MMMM YYYY');
+                        return `
                         <div class="text-dark text-left">
                         <div class="text-dark  border-bottom pb-1">${ marker + " " + seriesName} <span style="color:${color};font-weight:bold;opacity:.8"></span> <br> </div>
                             ${ 'Keywords'} <span style="color:${color};font-weight:bold">${kFormatter(value[0])}</span> <br>
@@ -1238,57 +1243,65 @@ const getAdvertisingSearchDetail = async(task, data) => {
                             ${ 'Common Keywords'} <span style="color:${color};font-weight:bold">${kFormatter(value[2])}</span> <br>
                         </div> 
                         `;
-                }
-            },
-            xAxis: {
-                splitLine: {
-                    lineStyle: {
-                        type: 'category'
-                    },
-                    axisTick: {
-                        show: false
-                    },
+                    }
                 },
-                axisLabel: {
-                    formatter: (value, index) => (value = kFormatter(value)),
-                },
-            },
-            yAxis: {
-                splitLine: {
-                    lineStyle: {
-                        type: 'value'
+                xAxis: {
+                    splitLine: {
+                        lineStyle: {
+                            type: 'category'
+                        },
+                        axisTick: {
+                            show: false
+                        },
                     },
-                    axisTick: {
-                        show: false
+                    axisLabel: {
+                        formatter: (value, index) => (value = kFormatter(value)),
                     },
                 },
-                axisLabel: {
-                    formatter: (value, index) => (value = kFormatter(value)),
+                yAxis: {
+                    splitLine: {
+                        lineStyle: {
+                            type: 'value'
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                    },
+                    axisLabel: {
+                        formatter: (value, index) => (value = kFormatter(value)),
+                    },
+                    scale: true
                 },
-                scale: true
-            },
-            legend: {
-                left: 30,
-                data: myarrChartName,
-                width: 800
-            },
-            series: series
-        };
-        var containers = document.getElementsByClassName(task);
-        var charts = [];
-        for (var i = 0; i < containers.length; i++) {
-            var chart = echarts.init(containers[i]);
-            chart.setOption(option);
-            charts.push(chart);
-        }
-        window.onresize = function() {
-            for (var i = 0; i < charts.length; ++i) {
-                charts[i].resize();
+                legend: {
+                    left: 30,
+                    data: myarrChartName,
+                    width: 800
+                },
+                series: series
+            };
+            var containers = document.getElementsByClassName(task);
+            var charts = [];
+            for (var i = 0; i < containers.length; i++) {
+                var chart = echarts.init(containers[i]);
+                chart.setOption(option);
+                charts.push(chart);
             }
-        };
-        await $(`.${task}`).removeClass('is-loading');
-        await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+            window.onresize = function() {
+                for (var i = 0; i < charts.length; ++i) {
+                    charts[i].resize();
+                }
+            };
+            await $(`.${task}`).removeClass('is-loading');
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+        } else {
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+            await $(`.${task}`).removeClass('is-loading').addClass('empty-state');
+            console.log(`${task} failed`);
+        }
+
     } else {
+        console.log("sudfgvybsvuiyb");
+
         await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
         await $(`.${task}`).removeClass('is-loading').addClass('empty-state');
         console.log(`${task} failed`);
@@ -1558,19 +1571,7 @@ const getDomainOrganicDetail = async(task, data) => {
                 </fieldset>
                 <span class="similarReloadTask ml-3" data-task="${task}"><i class="fal fa-sync"></i></span>
             `)
-            $(`.similarReloadTask[data-task="trafficKeywordTrend"]`).parent().html(`
-                <fieldset id="btn-trafficKeywordTrend" style="box-shadow: 0 0 0 1px #eaedef inset !important;border-radius: 5px;">
-                    <input id="trafficKeywordTrend-date" class="radio-inline__input" type="radio" name="getTrafficAndEngagementVisits" value="trafficKeywordTrend-date" checked="checked">
-                    <label class="radio-inline__label" for="trafficKeywordTrend-date">
-                        Ngày
-                    </label>
-                    <input id="trafficKeywordTrend-month" class="radio-inline__input" type="radio" name="getTrafficAndEngagementVisits" value="trafficKeywordTrend-month">
-                    <label class="radio-inline__label" for="trafficKeywordTrend-month">
-                        Tháng
-                    </label>
-                </fieldset>
-                <span class="similarReloadTask ml-3" data-task="${task}"><i class="fal fa-sync"></i></span>
-            `)
+
             renderChart(trend_month)
             $('#btn-keytrend input').click(function() {
                     let val = $(this).val()
@@ -1585,15 +1586,22 @@ const getDomainOrganicDetail = async(task, data) => {
                 let option = {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer: {
-                            type: 'cross',
-                            label: {
-                                backgroundColor: '#6a7985'
-                            }
+                        backgroundColor: 'rgba(255, 255, 255, 1)',
+                        borderColor: 'rgba(93,120,255,1)',
+                        borderWidth: 1,
+                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                        formatter: params => {
+                            return `<div style="width: 150px !important" class="text-dark text-capitalize text-left border-bottom pb-1">${params[0].name}</div>
+                            <div class="text-dark pt-2 text-left">
+                                <div class="d-flex justify-content-between">
+                                <span>${params[0].marker} ${params[0].seriesName}</span><span class="text-right" style="color:${params[0].color};font-weight:bold">${numeral(params[0].value).format("0,0")}</span></div>
+                                <div class="d-flex justify-content-between">
+                                <span>${params[1].marker} ${params[1].seriesName}</span><span class="ml-2" style="color:${params[1].color};font-weight:bold">${numeral(params[1].value).format("0,0")} vnd</span></div>
+                            </div>`;
                         }
                     },
                     legend: {
-                        data: ['Traffic', 'Traffic Cost']
+                        data: ['Traffic', 'Traffic Cost'],
                     },
                     grid: {
                         left: '3%',
@@ -1682,6 +1690,19 @@ const getDomainOrganicDetail = async(task, data) => {
                 };
                 //v7
             }
+            $(`.similarReloadTask[data-task="trafficKeywordTrend"]`).parent().html(`
+                    <fieldset id="btn-trafficKeywordTrend" style="box-shadow: 0 0 0 1px #eaedef inset !important;border-radius: 5px;">
+                        <input class="checkbox-budget" type="radio" name="budget" id="budget-1" value="trafficKeywordTrend-date" checked="">
+                        <label class="for-checkbox-budget" for="budget-1">
+                            <span>Ngày</span>
+                        </label>
+                        <input class="checkbox-budget" type="radio" name="budget" id="budget-2" value="trafficKeywordTrend-month">
+                        <label class="for-checkbox-budget" for="budget-2">
+                            <span>Tháng</span>
+                        </label>
+                    </fieldset>
+                    <span class="similarReloadTask ml-3" data-task="${task}"><i class="fal fa-sync"></i></span>
+                `)
             renderKeywordpaid(trafficCostdate)
             $('#btn-trafficKeywordTrend input').click(function() {
                 let val = $(this).val()

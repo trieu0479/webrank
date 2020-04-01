@@ -326,7 +326,7 @@ const api = async (task, domain, reload = 0) => {
 
     try {
         return await $.ajax({
-            url: `//localapi.trazk.com/webdata/websiteapi.php?task=${task}&domain=${domain}&reload=${reload}`,
+            url: `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&userToken=${userToken}&reload=${reload}`,
             type: "GET"
         })
             .then(data => {
@@ -2320,14 +2320,14 @@ const getTrafficSocial = async (task, data, domain) => {
             let TrafficSocial = data.data.data;
             let SearchTotal = TrafficSocial.SearchTotal;
             let VolumeTotal = TrafficSocial.VolumeTotal;
-            let TotalDesktopTraffic = SearchTotal / VolumeTotal;
+            // let TotalDesktopTraffic = SearchTotal / VolumeTotal;
 
             $("#TotalSocialVisits").removeClass("is-loading");
-            $("#TotalSocialVisits").html(`Tổng ${numeral(SearchTotal).format("0,0")}`);
+            // $("#TotalSocialVisits").html(`Tổng ${numeral(SearchTotal).format("0,0")}`);
 
             // Tổng Số Lượt Truy Cập Xã Hội 
-            $("#totalSocailVisits").html(`${numeral(SearchTotal).format("0.000a")}`);
-            $("#percenTotalSocailVisits").html(`${numeral(TotalDesktopTraffic).format('0.00%')}`);
+            $('.trafficSocial').html('').html(numeral(SearchTotal).format("0.0a"))
+            $('.costTrafficSocial').html('').html(numeral(SearchTotal*0.12).format('0,0$'))
 
             let dataChartPie = [{
                 name: "Mạng xã hội",
@@ -2344,9 +2344,14 @@ const getTrafficSocial = async (task, data, domain) => {
 
             let optionPie = {
                 color: masterColor,
+                data: ['Mạng xã hội', 'Tổng'],
                 legend: {
-                    bottom: "-2%",
+                    bottom: "-3%",
                     right: "25%",
+                    formatter: function(name) {
+                        let value = name == 'Mạng xã hội' ? SearchTotal : VolumeTotal - SearchTotal;
+                        return `${name}\n(${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')})`;
+                    }
                 },
                 series: [{
                     type: 'pie',
@@ -2479,11 +2484,11 @@ const getTrafficSocial = async (task, data, domain) => {
                 $.each(Volumes, (name, data) => {
                     dataChart.values.push(data[0]);
                 })
-
+                
                 let ele = document.getElementById("getSocialVisits");
 
                 let myChart = echarts.init(ele, "light");
-
+                // let name1 ="Traffic";
                 let option = {
                     tooltip: {
                         trigger: "axis",
@@ -2502,7 +2507,8 @@ const getTrafficSocial = async (task, data, domain) => {
                                 seriesName: name1,
                                 value: val1
                             } = params[0];
-
+                            console.log('sdassadsa',params[0]);
+                            
                             name = moment(name).format('DD MMMM YYYY');
 
                             val1 = numeral(val1).format('0,0');
@@ -2612,7 +2618,10 @@ const getTrafficSourcesSocial = async (task, data) => {
             let {
                 data: traffic
             } = data.data;
-
+            
+            $(`.${task}`).css('height','235px')
+            $(`.widget-${task} .bg-white `).addClass('h-100')
+            $(`.widget-${task} .widgetBody `).addClass('pt-5 pb-4')
             // console.log(traffic);
 
             if (traffic != null) {
@@ -2739,7 +2748,7 @@ const getTrafficSourcesSocial = async (task, data) => {
                 // myChart.setOption(option);
                 //* update v7*/
                 var myChart = document.getElementsByClassName('getTrafficSourcesSocial');
-                console.log(myChart);
+                // console.log(myChart);
                 
                 var charts = [];
                 for (var i = 0; i < myChart.length; i++) {
@@ -2758,49 +2767,6 @@ const getTrafficSourcesSocial = async (task, data) => {
 
 
                 await $(`.${task}`).removeClass('is-loading');
-                
-                new ResizeSensor($(`.getTrafficSourcesSocial`), function () {
-                    myChart.resize();
-                });
-
-                // new ResizeSensor($(`.getTrafficSourcesSocial`), function () {
-                //     myChart.resize();
-                //     setTimeout(function () {
-                //         myChart.dispatchAction({
-                //             type: 'highlight',
-                //             seriesIndex: 0,
-                //             dataIndex: 0
-                //         });
-    
-                //         myChart.on('mouseover', function (params) {
-                //             if (params.name == dataChart[0].name) {
-                //                 myChart.dispatchAction({
-                //                     type: 'highlight',
-                //                     seriesIndex: 0,
-                //                     dataIndex: 0
-                //                 });
-                //             } else {
-                //                 myChart.dispatchAction({
-                //                     type: 'downplay',
-                //                     seriesIndex: 0,
-                //                     dataIndex: 0
-                //                 });
-                //             }
-                //         });
-    
-                //         myChart.on('mouseout', function (params) {
-                //             myChart.dispatchAction({
-                //                 type: 'highlight',
-                //                 seriesIndex: 0,
-                //                 dataIndex: 0
-                //             });
-                //         });
-                //     }, 1000);
-                // });
-
-               
-
-                await $(`#${task}`).removeClass('is-loading');
                 await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
             } else {
                 $('#Parent-getTrafficDisplayAdvertisingAds').addClass('empty-state')

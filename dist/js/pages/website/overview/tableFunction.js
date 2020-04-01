@@ -16,12 +16,11 @@ $(document).ready(() => {
         }
     };
     //init datatable
+    let reloaddata = 0;
     const initDatatable = function(select, tableOptions) {
             const table = $(`.${select}`).DataTable(tableOptions);
             $(table.table().header()).addClass('text-center');
-            //reload click handle
             $(`.${select}`).click(function(event) {
-                // $(event.target).addClass('fa-spin');
                 $(`.${select}-container`).addClass('is-loading').block({
                     overlayCSS: {
                         backgroundColor: '#ccc',
@@ -32,8 +31,7 @@ $(document).ready(() => {
                     message: null
                 });
                 // $(`.${select}`).DataTable().ajax.reload(() => {
-                //     $(`.${select}`).removeClass("is-loading");
-                //     $(`.${select} .dataTables_empty`).text("").addClass("empty-state");
+                //     reloaddata = 1
                 // });
             })
             return table;
@@ -42,13 +40,13 @@ $(document).ready(() => {
     initDatatable(
             'getWebsiteGeography-table', {
                 ajax: {
-                    url: `https://localapi.trazk.com/webdata/websiteapi.php?task=getWebsiteGeography&domain=${localDomain}`,
+                    url: `//localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: json => {
                         // console.log(json);
                         if (!json.data || !json.data.data) {
+                            $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
                             return [];
                         } else {
-                            // console.log(json.data.data.filter(item => item.Country != null));
                             return json.data.data.filter(item => item.Country != null);
                         }
                     }
@@ -56,6 +54,7 @@ $(document).ready(() => {
                 drawCallback: function(settings) {
                     $('.getWebsiteGeography-container').removeClass('is-loading').unblock();
                     $('.getWebsiteGeography-container').find('.fa-spin').removeClass('fa-spin');
+
                 },
                 columns: [{
                         title: 'Quốc gia',
@@ -98,6 +97,11 @@ $(document).ready(() => {
                     $('.dataTables_scrollHeadInner thead').removeClass('text-center');
                     $('.getWebsiteGeography_wrapper .dataTables_scrollHeadInner').removeClass('text-center');
                     $('.dataTables_scrollHead').addClass('border-bottom');
+                    console.log(url);
+                    $(".similarReloadTaskaaaaa").click(function() {
+                        console.log("fbfbdvzdvzdv");
+                        table.ajax.url('simple3.php').load();
+                    })
                 }
             }
         )
@@ -114,7 +118,7 @@ $(document).ready(() => {
                 highlightSpotColor: '',
                 // tooltipFormatter: (sparkline, options, fields) =>
                 //     `<span style="color: ${fields.color}">&#9679;</span> Tháng ${++fields.x}: ${numeral(fields.y).format(0,0)}`,
-                barColor: '#74b9ff',
+                barColor: '#5d78ff',
                 sliceColors: ['#1abc9c', '#e74c3c'],
                 fillColor: 'rgba(61, 133, 222, 0.3)',
             });
@@ -123,12 +127,14 @@ $(document).ready(() => {
     initDatatable(
             'getKeywords', {
                 ajax: {
-                    url: `//localapi.trazk.com/keywords/keywords.php?task=keywordPlannerDomain&limit=20&domain=${localDomain}`,
+                    url: `//localapi.trazk.com/keywords/keywords.php?task=keywordPlannerDomain&limit=20&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
                         if (json.data.keywords == null) {
-                            $('.table_getKeywords').addClass('d-none')
+                            $('.parent-getKeywords').html('').addClass('empty-state')
+                            return []
+                        } else {
+                            return json.data.keywords;
                         }
-                        return json.data.keywords;
 
                     },
                 },
@@ -140,10 +146,14 @@ $(document).ready(() => {
                         title: 'Từ khoá',
                         data: data => `
             <div class="d-flex no-block flex-row">
-              <a href="?view=keywords&action=keywords-overview&keyword=${data.keyword}&language=vn"  data-type="keyword" class="changeURL" data-input="${data.keyword}"><i class="child-hover far fa-search mr-1"></i> ${data.keyword}</a>
-              <div class="lichsuHienThi d-none d-md-flex sparkline ml-auto" data-sparkline="[${data.lichsutimkiemtrungbinh}]"></div>
-            </div>`,
+              <a class="font-12 ml-2" href="./index.php?view=keyword-planner&action=result&keywords=${data.keyword}&language=vn&country=vn&network=web"  data-type="keyword" class="changeURL" data-input="${data.keyword}"> ${data.keyword}</a>
+              </div>`,
                         // width: '180px'
+                    },
+                    {
+                        title: 'Trend',
+                        data: data => `<div class="lichsuHienThi d-none d-md-flex sparkline ml-auto" data-sparkline="[${data.lichsutimkiemtrungbinh}]"></div>`,
+                        width: '100px',
                     },
                     {
                         title: 'Chiều dài',
@@ -154,7 +164,7 @@ $(document).ready(() => {
                         title: 'Độ khó',
                         data: 'dokho',
                         render: (data) =>
-                            `<div class="round round-sm align-self-center ${data <= 70 ? data <= 30 ? 'round-success' : 'round-warning text-dark' : 'round-danger'}">${data ? data : 0}</a>`,
+                            `<div class="round round-sm align-self-center ${data <= 70 ? data <= 30 ? 'bg-success' : 'bg-danger' : 'bg-warning'}">${data ? data : 0}</a>`,
                         width: '100px'
                     },
                     {
@@ -178,12 +188,15 @@ $(document).ready(() => {
                     [3, 'desc']
                 ],
                 columnDefs: [{
-                    targets: [1, 3, 4, 5],
+                    targets: [3, 4, 5],
                     className: 'text-center',
                     // render: $.fn.dataTable.render.number(',', '.', 0, '')
                 }, {
                     targets: 2,
                     className: 'text-center'
+                }, {
+                    targets: 1,
+                    className: 'text-left'
                 }],
                 "ordering": false,
                 language,
@@ -216,7 +229,7 @@ $(document).ready(() => {
     initDatatable(
         'banckLinksOverview', {
             ajax: {
-                url: `https://localapi.trazk.com/webdata/semrush.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.banckLinksOverview.backlinks.data);
                     let columns = [];
@@ -256,7 +269,7 @@ $(document).ready(() => {
                 },
                 {
                     title: 'Type',
-                    "data": data => `<div>${(data.nofollow == true) ? '<div class="bg-nofoll px-2 py-1 rounded-pill font-weight-bold">nofollow</div>' :'<div class="bg-foll px-2 py-1 rounded-pill font-weight-bold">follow</div>'}</div>`
+                    "data": data => `<div>${(data.nofollow == true) ? '<div class="bg-warning px-2 py-1 rounded-pill font-weight-bold">nofollow</div>' : '<div class="bg-info px-2 py-1 rounded-pill font-weight-bold">follow</div>'}</div>`
                 },
             ],
             language,
@@ -280,23 +293,27 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v2.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
-                    // var res = data.data.adwordsCompetitors;
-                    let columns = [];
-                    $.each(res.data.adwordsCompetitors, function(k, v) {
-                        let output = {};
-                        output.domain = v.domain;
-                        output.competitionLvl = v.competitionLvl;
-                        output.commonKeywords = v.commonKeywords;
-                        output.adwordsKeywords = v.adwordsKeywords;
-                        columns.push(output)
-                    })
-                    return columns;
+                    if (res.data.adwordsCompetitors && res.data.adwordsCompetitors != '') {
+                        let columns = [];
+                        $.each(res.data.adwordsCompetitors, function(k, v) {
+                            let output = {};
+                            output.domain = v.domain;
+                            output.competitionLvl = v.competitionLvl;
+                            output.commonKeywords = v.commonKeywords;
+                            output.adwordsKeywords = v.adwordsKeywords;
+                            columns.push(output)
+                        })
+                        return columns;
+                    } else {
+                        $('.parent-getAdvertisingSearchDetail').html('').addClass('empty-state d-table-row')
+                        return [];
+                    }
                 },
             },
             drawCallback: function(settings) {},
             columns: [{
                     title: "Competitor",
-                    "data": data => `<a href="${data.domain}"><div class="dot-table-a">${data.domain}</div></a>`,
+                    "data": data => `<a href="./index.php?view=website&action=overview&domain=${data.domain}"><div class="dot-table-a">${data.domain}</div></a>`,
                     class: 'text-left'
                 },
                 {
@@ -332,7 +349,7 @@ $(document).ready(() => {
                 // $(".dataTables_scrollBody table.getAdvertisingSearchDetail thead").html('')
                 $(".getAdvertisingSearchDetail tbody tr td").css("padding", "15px 10px!important");
                 $(".getAdvertisingSearchDetail tbody tr td:first-child").attr("style", "width:60px!important");
-                $(".parent-getAdvertisingSearchDetail .dataTables_scrollBody ").attr("style", "height:325px!important");
+                // $(".parent-getAdvertisingSearchDetail .dataTables_scrollBody ").attr("style", "height:325px!important");
 
             }
         }
@@ -342,10 +359,11 @@ $(document).ready(() => {
     initDatatable(
         'getOrganicKeywordsBrandedTable', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/websiteapi.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}`,
+                url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
                     $('.similarDates-organickeyno').html(`${moment(json.data.lastUpdate).format("DD-MM-YYYY")}`)
                     if (!json.data || !json.data.data) {
+                        $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state')
                         return [];
                     } else {
                         let website = json.data.website;
@@ -370,7 +388,7 @@ $(document).ready(() => {
                     title: 'Từ khoá',
                     data: data => {
                         const keyWork = data.SearchTerm.length > 15 ? data.SearchTerm.substring(0, 15) : data.SearchTerm;
-                        return `<div style="width:100px;word-wrap: break-word;"><a href="?view=keywords&action=keywords-overview&keyword=${keyWork}&language=vn"  data-type="keyword" class="changeURL" data-input="${data.SearchTerm}">${keyWork}</a></div>`
+                        return `<div style="width:100px;word-wrap: break-word;"><a href="./index.php?view=keyword-planner&action=result&keywords=${keyWork}&language=vn&country=vn&network=web"  data-type="keyword" class="changeURL" data-input="${data.SearchTerm}">${keyWork}</a></div>`
                     }
                 },
                 {
@@ -386,7 +404,7 @@ $(document).ready(() => {
                     }
                 },
                 { title: 'CPC', data: data => `$${data.CPC}` },
-                { title: 'Vị trí', data: data => data.PositionPaid[0].Value },
+                { title: 'Vị trí', data: data => (data.PositionPaid[0].Value == -1) ? '1' : data.PositionPaid[0].Value },
                 { title: 'Lượt tìm kiếm', data: data => $.number(data.KwVolume) }
             ],
             "order": [
@@ -406,7 +424,7 @@ $(document).ready(() => {
                 $(`table.getOrganicKeywordsBrandedTable  tbody`).addClass('text-left')
                 $(`table.getOrganicKeywordsBrandedTable`).attr('style', 'width:100% !important')
                 $(`.dataTables_scrollHeadInner`).attr('style', 'width:100% !important;padding-right:0;')
-                $(`.parent-getOrganicKeywordsBrandedTable`).attr('style', 'height:295px!important')
+                    // $(`.parent-getOrganicKeywordsBrandedTable`).attr('style', 'height:295px!important')
             }
         }
     )
