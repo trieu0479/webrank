@@ -131,13 +131,13 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
     if (res != null) {
       $('#bannerPageAds').removeClass('is-loading')
       if (res.data.verification == "blue_verified") {
-        iconBlue = "./dist/images/check.png";
+        iconBlue =  rootURL + "/dist/images/check.png";
       } else {
         iconBlue = " ";
       }
       let html = `
         <div class="imgPageAds d-flex align-items-end"
-          style="--cover-photo-uri: url('${res.data.pageCoverPhoto}');background-size: contain;height: 300px;width: 100%;background-position: center;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri);padding: 20px!important;">
+          style="--cover-photo-uri: url('${res.data.pageCoverPhoto}');background-size: contain;height: 420px;width: 100%;background-position: center;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri);padding: 20px!important;">
                     <div class="p-2 mb-4 rounded-circle bg-primary" style="width:115px;height:115px;background-image: url('${res.data.imageURI}');background-size: cover;background-position: center;background-repeat: no-repeat;border:2px solid white"></div>
                     <div class="p-2 mb-2 mb-lg-5 pl-3">
                     <div class="font-16 font-weight-bold text-white">${res.data.name} <img class="ml-n1" src="${iconBlue}" style="width:20px">
@@ -168,16 +168,16 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
               let mes = '';
               for (const icon in data[key].publisherPlatform) {
                 if (data[key].publisherPlatform[icon] == "facebook") {
-                  fb = "./dist/images/facebook.png"
+                  fb = rootURL + "/dist/images/facebook.png"
                 }
                 if (data[key].publisherPlatform[icon] == "instagram") {
-                  ins = './dist/images/instagram.png'
+                  ins =  rootURL + "/dist/images/instagram.png"
                 }
                 if (data[key].publisherPlatform[icon] == "audience_network") {
-                  fb_netword = "./dist/images/audience_network.png";
+                  fb_netword =  rootURL + "/dist/images/audience_network.png";
                 }
                 if (data[key].publisherPlatform[icon] == "messenger") {
-                  mes = "./dist/images/messenger.png";
+                  mes =  rootURL + "/dist/images/messenger.png";
                 }
               }
               let id = data[key].creation_time
