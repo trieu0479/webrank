@@ -68,8 +68,6 @@ const api = async(task, domain, reload = 0) => {
 };
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    console.log(boxWidgetName, level);
-
     var freeModule = ["getAdvertisingSearchDetail", "getDomainOrganicDetail", "getTrafficSourcesSearch", "getSearchBrandedKeywords", "getSearchOrganicPaidOverview"];
     var VIPModule = ["getAdvertisingSearchDetail", "getDomainOrganicDetail", "getTrafficSourcesSearch", "getSearchBrandedKeywords", "getSearchOrganicPaidOverview"];
     if (level == 'demo') {
