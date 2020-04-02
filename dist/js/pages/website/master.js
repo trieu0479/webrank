@@ -125,10 +125,8 @@ $(document).ready(() => {
     window.lockedModule = function lockedModule(boxWidgetName, level) {
         var freeModule = ["getKeywords", "getWebsiteGeography", "banckLinksOverview","getAdvertisingSearchDetail","getOrganicKeywordsBrandedTable","getSimilarSites"];
         var VIPModule = ["topBackLinks","getTrafficDisplayAdvertisingWebsitesTable"];
-        console.log(boxWidgetName,level);
         if (level == 'demo'){
             if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)){
-                console.log(".parent-" + boxWidgetName,"locked");
                 $(".parent-" + boxWidgetName).addClass("locked");
                 $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
             }

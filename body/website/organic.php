@@ -43,6 +43,12 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="widget-trafficKeywordTrend"></div>
+                </div>
+            </div>
             <!-- <div class="row">
                    
                     <div class="col-12 col-lg-6">
@@ -75,11 +81,7 @@
                 </div>
             </div>
             
-            <div class="row">
-                <div class="col-12 ">
-                    <div class="widget-trafficKeywordTrend"></div>
-                </div>
-            </div>
+           
             <div class="row">
             <div class="col-12 col-lg-6">
                     <div style="height:100%" class="widget-getOrganicKeywordsBrandedTable"></div>

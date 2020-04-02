@@ -1413,14 +1413,14 @@ const getDomainOrganicDetail = async(task, data) => {
                         {
 
                             name: 'Traffic Cost',
-                            type: 'line',
+                            type: 'bar',
                             stack: "0",
                             areaStyle: {
-                                color: "rgb(140, 210, 255)"
+                                color: '#e74c3c'
                             },
                             symbol: "none",
                             itemStyle: {
-                                color: "rgb(140, 210, 255)"
+                                color: '#e74c3c'
                             },
                             symbol: 'none',
                             smooth: true,

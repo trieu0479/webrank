@@ -142,15 +142,18 @@ $(document).ready(() => {
                             return []
                         } else {
                             let columns = [];
+                            var stt = 1;
                             $.each(json.data.keywords, function(k, v) {
+                                if (v.maxCPC) var maxCPC =v.maxCPC; else var maxCPC =  v.minCPC*1.5;
                                 let output = {
+                                    stt: stt++,
                                     keyword: v.keyword,
                                     length: v.length,
                                     trungbinhtimkiem: v.results,
                                     trend: v.trend,
                                     dokho: v.competition_level,
                                     giathapnhat: v.minCPC,
-                                    gicaonhat: v.maxCPC,
+                                    gicaonhat: maxCPC,
                                 }
                                 columns.push(output)
                             })
@@ -162,7 +165,13 @@ $(document).ready(() => {
                     // $('.getTrendingKeywordsTable-container').removeClass('is-loading').unblock();
                     // $('.getTrendingKeywordsTable-container').find('.fa-spin').removeClass('fa-spin');
                 },
-                columns: [{
+                columns: [
+                    {
+                        title: 'STT',
+                        data: data => data.stt,
+                        width: '20px',
+                    },
+                    {
                         title: 'Từ khoá',
                         data: data => `
                 <div class="text-left flex-row" style="width: 200px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
@@ -194,13 +203,13 @@ $(document).ready(() => {
                     },
                     {
                         title: 'Giá thấp nhất',
-                        data: (data) => numeral(data.giathapnhat * 23000).format('0,0') + 'đ',
+                        data: (data) => numeral(data.giathapnhat).format('0,0') + 'đ',
                         width: '100px'
                     },
                     {
                         title: 'Giá cao nhất',
                         data: "giathaudautrangcaonhat",
-                        data: (data) => numeral(data.gicaonhat * 23000).format('0,0') + 'đ',
+                        data: (data) => numeral(data.gicaonhat).format('0,0') + 'đ',
                         width: '100px'
                     },
                 ],

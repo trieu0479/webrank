@@ -27,7 +27,7 @@ $(document).ready(function() {
         api("getDomainOrganicDetail", localDomain);
     }
     var input = {};
-    input.headerTitle = "Chi phí theo từ khóa";
+    input.headerTitle = "Chi phí Organic";
     input.headerTime = "12.2019 - 02.2020";
     input.widgetTask = "trafficKeywordTrend";
     input.widgetContainer = "widget-trafficKeywordTrend";
