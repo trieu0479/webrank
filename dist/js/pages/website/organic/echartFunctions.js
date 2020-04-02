@@ -68,31 +68,33 @@ const api = async(task, domain, reload = 0) => {
 };
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    var freeModule = ["getAdvertisingSearchDetail", "getDomainOrganicDetail", "getTrafficSourcesSearch", "getSearchBrandedKeywords", "getSearchOrganicPaidOverview"];
-    var VIPModule = ["getAdvertisingSearchDetail", "getDomainOrganicDetail", "getTrafficSourcesSearch", "getSearchBrandedKeywords", "getSearchOrganicPaidOverview"];
+    console.log(boxWidgetName,level);
+    var freeModule = [];
+    var VIPModule = ["trafficKeywordTrend","getAdvertisingSearchDetail", "getDomainOrganicDetail", "getTrafficSourcesSearch", "getSearchBrandedKeywords", "getSearchOrganicPaidOverview"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             //ngoai le 
-            if (boxWidgetName == 'getDomainOrganicDetail') {
-                boxWidgetName = 'getDomainOrganicDetail';
-                boxWidgetName = 'trafficKeywordTrend';
-            }
-            if (boxWidgetName == 'getSearchOrganicPaidOverview') boxWidgetName = 'getSearchOrganicPaidOverview';
-            //ngoai le 
+           
             $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+
+            if ( boxWidgetName == "getSearchOrganicPaidOverview"){
+                var addOtherBox = "getSearchOrganicPaidOverviewpaid";
+                $(".parent-" + addOtherBox).addClass("locked");
+                $(".parent-" + addOtherBox).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+            }
+
         }
     } else if (level == 'free') {
         if (VIPModule.includes(boxWidgetName)) {
-            //ngoai le 
-            if (boxWidgetName == 'getDomainOrganicDetail') {
-                boxWidgetName = 'getDomainOrganicDetail';
-                boxWidgetName = 'trafficKeywordTrend';
-            }
-            if (boxWidgetName == 'getSearchOrganicPaidOverview') boxWidgetName = 'getSearchOrganicPaidOverview';
-            //ngoai le 
+            
             $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+            if ( boxWidgetName == "getSearchOrganicPaidOverview"){
+                var addOtherBox = "getSearchOrganicPaidOverviewpaid";
+                $(".parent-" + addOtherBox).addClass("locked");
+                $(".parent-" + addOtherBox).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+            }
         }
     }
 }
@@ -256,8 +258,9 @@ const getTrafficSourcesSearch = async(task, data) => {
 //Chi tiết từ truy cập
 const getSearchOrganicPaidOverview = async(task, data) => {
     let task2 = 'getSearchOrganicPaidOverviewpaid';
-    console.log(task2);
+    
     if (data.status == "success") {
+        
         if (data.data.data == null || data.data.haveData == false) {
             let task = 'getSearchOrganicPaidOverviewpaid'
             let task2 = 'getSearchOrganicPaidOverview'
@@ -1421,11 +1424,11 @@ const getDomainOrganicDetail = async(task, data) => {
                             type: 'bar',
                             stack: "0",
                             areaStyle: {
-                                color: '#e74c3c'
+                                color: '#fd397a'
                             },
                             symbol: "none",
                             itemStyle: {
-                                color: '#e74c3c'
+                                color: '#fd397a'
                             },
                             symbol: 'none',
                             smooth: true,
