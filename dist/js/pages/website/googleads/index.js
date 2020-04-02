@@ -42,7 +42,7 @@ $( document ).ready(function() {
     $('body').on('click','.similarReloadTask',async function () { 
 
         let task = $(this).data("task");   
-        console.log(task);
+        
          
         // let domain = url.searchParams.get("domain").replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
         $(this).find('i').addClass('fa-spin');             

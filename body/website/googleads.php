@@ -33,6 +33,13 @@
                 <div class="row ggAdsOverview">
                 </div>
             </div>
+            <!-- -------------paid search trewnds-------------- -->
+            <div id="Parent-adwordsMonthlyFullTrend" style="position: relative"> 
+                <div class="row adwordsMonthlyFullTrend">
+                    <?php require_once(__DIR__ . "/modules/googleads.widgetMonthlyFullTrend.php") ?>
+                </div>
+            </div>
+            
             <!-- -------------------------getScrapedSearchAds-------------- -->
             <div class="row">
                 <div class="col-12 col-lg-12">
@@ -41,12 +48,7 @@
             </div>
 
 
-            <!-- -------------paid search trewnds-------------- -->
-            <div id="Parent-adwordsMonthlyFullTrend" style="position: relative"> 
-            <div class="row adwordsMonthlyFullTrend">
-                <?php require_once(__DIR__ . "/modules/googleads.widgetMonthlyFullTrend.php") ?>
-            </div>
-</div>
+            
             <!-- ------------------top paid-keywords--------------- -->
             <div class="row">
                 <?php require_once(__DIR__ . "/modules/googleads.widgetTopPaidKeyWord.php") ?>

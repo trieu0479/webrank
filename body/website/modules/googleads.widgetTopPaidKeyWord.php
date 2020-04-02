@@ -18,9 +18,9 @@
                 <a class="similarReloadTask text-muted" data-task="TopPaidKeyword" href="javascript:;"><i class="fal fa-sync"></i></a>
             </div>
         </div>
-        <div id="Parent-TopPaidKeyword" style="position: relative">
+        <div id="parent-TopPaidKeyword" style="position: relative">
             <div class="mt toppaidkey">
-                <table id="TopPaidKeyword" class="table table-striped " style="width:100%;"></table>       
+                <table id="TopPaidKeyword" class="table table-striped parent-TopPaidKeyword" style="width:100%;"></table>       
             </div>
         </div>
 

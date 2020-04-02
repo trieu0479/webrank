@@ -20,7 +20,7 @@
         </div>
         <div id="Parent-MainCompetitor" style="position: relative">
             <div class="mt-3 maincompetitor">
-                <table id="MainCompetitor" class="table table-striped" style="width:100%;"></table>
+                <table id="MainCompetitor" class="table table-striped parent-MainCompetitor" style="width:100%;"></table>
             </div>
         </div>
     </div>
