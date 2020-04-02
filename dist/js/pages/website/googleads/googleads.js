@@ -313,7 +313,7 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                     dataChart_1.keys.push(val.keys)
                     dataChart_1.values.push(val.values);
                     dataChart_1.positionsTrend.push(val.positionsTrend);                   
-                     console.log(dataChart_1);
+                  
                 })
               console.log( dataChart_1);
               
@@ -659,7 +659,6 @@ const PositionChart = async(data, method) => {
                 return;
             }
             var res = data.data.adwordsPositions;
-            console.log(res);
 
             let dataChart = {
                 keys: ['1', '2-3', 'Others'],
@@ -981,12 +980,11 @@ const CompetitorMapChart = async(data, method) => {
             myarrchart.forEach((v, i) => {
                 if (i < 7) {
                     let obj = {}
-                    console.log(v);
+                   
 
                     obj.name = v[3],
                         obj.type = 'scatter',
-                        obj.symbolSize = function(data) {
-                            console.log(data);
+                        obj.symbolSize = function(data) {                         
                             return kFormatter(data[2]);
                         },
                         obj.emphasis = {
@@ -1149,7 +1147,7 @@ const PaidPageTable = async(data, method) => {
 
                     })
 
-                    console.log(columns);
+
                     return columns;
                 },
             },
