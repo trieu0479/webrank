@@ -202,9 +202,7 @@ else {
     $('.tra-cost').html('$' + kFormatter(c) + '<span>USD</span>')
 }
 }
-function compareNumbers(a, b) {
-    return a - b;
-}
+
 
 const adwordsMonthlyFullTrend = async(data, method) => {
     $('.widget-PublicSherTable').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
@@ -581,8 +579,6 @@ const TopPaidKeyword = async(data, method) => {
 
 const PositionChart = async(data, method) => {
 
-
-    // render chart gender
     if (data.status = "success") {
         if (data && data.data) {
             if (data.data.adwordsPositions == null) {
@@ -714,52 +710,6 @@ const PositionChart = async(data, method) => {
 
         }
 
-
-
-
-
-        // new ResizeSensor($(`.PositionChart`), function () {
-        //     charts.resize();
-        //     setTimeout(function () {
-        //         charts.dispatchAction({
-        //             type: 'highlight',
-        //             seriesIndex: 0,
-        //             dataIndex: 0
-        //         });
-        //     }, 1000);
-        // });
-
-        // setTimeout(function () {
-        //     charts.dispatchAction({
-        //         type: 'highlight',
-        //         seriesIndex: 0,
-        //         dataIndex: 0
-        //     });
-
-        //     charts.on('mouseover', function (params) {
-        //         if (params.name == dataChart[0].name) {
-        //             charts.dispatchAction({
-        //                 type: 'highlight',
-        //                 seriesIndex: 0,
-        //                 dataIndex: 0
-        //             });
-        //         } else {
-        //             charts.dispatchAction({
-        //                 type: 'downplay',
-        //                 seriesIndex: 0,
-        //                 dataIndex: 0
-        //             });
-        //         }
-        //     });
-
-        //     charts.on('mouseout', function (params) {
-        //         charts.dispatchAction({
-        //             type: 'highlight',
-        //             seriesIndex: 0,
-        //             dataIndex: 0
-        //         });
-        //     });
-        // }, 1000);
 
     } else {
 //console.log(`PositionChart failed`);
@@ -1237,28 +1187,8 @@ function log(obj) {
     console.log(obj);
 }
 
-$(document).ready(function() {
-    // let domain = url.searchParams.get("domain");
-    // $(".similarReloadTask").click(function() {
-    //     if ($(this).find('i').hasClass('fa-spin')) {$(this).find('i').removeClass('fa-spin'); return; }
-    //     let task = $(this).data("task");
-    //     $(this).find('i').addClass('fa-spin');
-    //     api(task, domain);
-    // })
-    // api('ggAdsOverview', domain);
-    // api('adwordsMonthlyFullTrend', domain);
-    // api('TopPaidKeyword', domain);
-    // // api('PositionChart', domain);
-    // api('MainCompetitor',domain);
-    // api('CompetitorMapChart',domain);
-
-    // $('#myTabContent a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    //     var target = $(e.target).attr("href") // activated tab
-    //     alert(target);
-    //     if (target == "#CostChart") {
-    //         api('CostChart', domain);
-    //     }
-    //   });
-})
+// $(document).ready(function() {
+  
+// })
 
 export default api;
