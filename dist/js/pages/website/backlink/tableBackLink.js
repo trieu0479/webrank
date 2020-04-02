@@ -48,7 +48,7 @@ $(document).ready(() => {
     }
 
     var arrNameContry = [];
-    $.get(`//localapi.trazk.com/webdata/semrush.php?task=countryIsoName`, function (res) {
+    $.get(`//localapi.trazk.com/webdata/v3.php?task=countryIsoName`, function (res) {
         arrNameContry = res.data
     })
     // Quá»‘c Gia
@@ -197,7 +197,7 @@ $(document).ready(() => {
                 url: `https://localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksDetail]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
                     let topBackLinks = json.data.backlinksDetail;
-                    console.log(topBackLinks);
+                    lockedModule('topBackLinks', json.userData.member);
                     let arrTopBackLinks = [];
                     let stt = 1;
                     if (json && topBackLinks) {

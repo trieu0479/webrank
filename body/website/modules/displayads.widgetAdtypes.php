@@ -18,7 +18,7 @@
                 <a class="similarReloadTask text-muted" data-task="adTypeOverview" href="javascript:;"><i class="fal fa-sync"></i></a>
             </div>
         </div>
-        <div class="mt-3" id="Parent-adTypeOverview">
+        <div class="mt-3 parent-adTypeOverview" id="Parent-adTypeOverview">
             <div class="list-adtypes  d-flex flex-row" style="min-height: 260px">
                 <div class="adtypes-chart ml-4">
                     <div>

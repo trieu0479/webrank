@@ -1,9 +1,25 @@
 //US,GB,AU,FR,
-
-var userToken = 'cHhZeE1KcFQvSis0K2VrN3kxMm1oQT09OjpxzF1Po19uXTHZBqnUT9hb';
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
-
 var domain = url.searchParams.get('domain');
+function lockedModule(boxWidgetName, level) {
+    var freeModule = [];
+    var VIPModule = ["SampleAdsasHTML","topPublicSher","getAllImageTable","PublicSherTable","getWebsiteAdsIntelDisplay","getTrafficDestinationAds","adwordsMonthlyFullTrend","adTypeOverview","displayDevice"];
+    if (level == 'demo') {
+        if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
+            //ngoai le 
+            
+            //ngoai le 
+            $(".parent-" + boxWidgetName).addClass("locked");
+            $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+        }
+    } else if (level == 'free') {
+        if (VIPModule.includes(boxWidgetName)) {
+            if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
+            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+        }
+    }
+}
+
 const api = async (method, domain) => {
     let methodName = method;
     if (method == "displayAdsOverview" || method == "adTypeOverview") {
@@ -38,50 +54,13 @@ const api = async (method, domain) => {
             })
             .then(data => {
                 //locked:bảng cũ locker:bảng mới
-                function lockeddemo(id) {
-                    $("#Parent-" + id + " #" + id).addClass("locked");
-                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-                }
-                function lockerdemo(id) {      //class   
-                    $(`.row.${id}`).addClass("locked");
-                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-                  }
-                function lockedfree(id) {
-                    $("#Parent-" + id + " #" + id).addClass("locked");
-                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
-                }
-                function lockerfree(id) {        //class
-                    $(`.row.${id}`).addClass("locked");
-                    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
-                  }
-
-                function lockchartdemo(id) {                  
-                    $(`.parent-${id}`).addClass("locked");
-                    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-                }
-                function lockchartfree(id) {
-                    $(`.parent-${id}`).addClass("locked");
-                    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
-                }
                 switch (methodName) {
                     case "displayAdsOverview":
-                        if (data.userData.member =="demo") {
-                            lockerdemo('displayAdsOverview')                    
-                        }
-                        else if (data.userData.member =="free") {
-                            lockerfree('displayAdsOverview')
-                        }
+                        
                         displayAdsOverview(data, method);
                         break;
                     case "SampleAdsasImage":
-                        if (data.userData.member =="demo") {
-                            lockerdemo('SampleAds')     
-                            $(`.listsample.${id}`).addClass("locked");               
-                        }
-                        else if (data.userData.member =="free") {
-                            lockerfree('SampleAds')
-                            $(`.listsample`).addClass("locked");    
-                        }
+                       
                         SampleAdsasImage(data, method);
                         break;
                     case "SampleAdsasHTML":
@@ -94,63 +73,27 @@ const api = async (method, domain) => {
                         //     SampleAdsasText(data, method);
                         //     break;
                     case "displayDevice":
-                        if (data.userData.member =="demo") {
-                            lockeddemo('displayDevice')   
-                            $('.list-devices').addClass('locked')                             
-                        }
-                        else if (data.userData.member =="free") {
-                            lockchartfree('displayDevice')   
-                            $('.list-devices').addClass('locked')                            
-                        }
+                       
                         displayDevice(data, method);
                         break;
                     case "getDisplayCountryChart":
-                        if (data.userData.member =="demo") {                            
-                            lockchartdemo('getDisplayCountryChart')                              
-                        }
-                        else if (data.userData.member =="free") {
-                            lockchartfree('getDisplayCountryChart')
-                        }                        
+                                            
                         getDisplayCountryChart(data, method);
                         break;
                     case "adTypeOverview":
-                        if (data.userData.member =="demo") {                            
-                            lockerdemo('adTypeOverview')    
-                            $('.list-adtypes').addClass('locked')                          
-                        }
-                        else if (data.userData.member =="free") {
-                            lockerfree('adTypeOverview')
-                            $('.list-adtypes').addClass('locked')                          
-                        }  
+                        
                         adTypeOverview(data, method);
                         break;
                     case "topPublicSher":
-                        if (data.userData.member =="demo") {                            
-                            lockerdemo('topPublicSher')    
-                            $('.list-public').addClass('locked')                          
-                        }
-                        else if (data.userData.member =="free") {
-                            lockerfree('topPublicSher')
-                            $('.list-public').addClass('locked')                          
-                        }  
+                       
                         topPublicSher(data, method);
                         break;
                     case "getDisplayGenderChart":
-                        if (data.userData.member =="demo") {
-                            lockchartdemo('getDisplayGenderChart')                              
-                        }
-                        else if (data.userData.member =="free") {
-                            lockchartfree('getDisplayGenderChart')
-                        } 
+                       
                         getDisplayGenderChart(data, method);
                         break;
                     case "getDisplayAgeChart":
-                        if (data.userData.member =="demo") {
-                            lockchartdemo('getDisplayAgeChart')                              
-                        }
-                        else if (data.userData.member =="free") {
-                            lockchartfree('getDisplayAgeChart')
-                        } 
+                        
                         getDisplayAgeChart(data, method);
                         break;
                     case "getAllImageTable":
@@ -163,23 +106,21 @@ const api = async (method, domain) => {
                         getAllTextTable(data, method)
                         break;
                     case "PublicSherTable":
-                        if (data.userData.member =="demo") {
-                            lockchartdemo('PublicSherTable')                              
-                        }
-                        else if (data.userData.member =="free") {
-                            lockchartfree('PublicSherTable')
-                        } 
+                        
                         PublicSherTable(data, method)
                         break;
 
                     default:
                         break;
                 }
+
+                lockedModule(methodName, data.userData.member)
+
                 return true;
             })
 
     } catch (error) {
-        console.log(error);
+        //console.log(error);
 
     }
 }
@@ -600,7 +541,7 @@ const getDisplayCountryChart = async (data, method) => {
         // $(`#totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
 
     } else {
-        console.log(`getDisplayCountryChart failed`);
+       // console.log(`getDisplayCountryChart failed`);
     }
 }
 
@@ -799,7 +740,7 @@ const getDisplayGenderChart = async (data, method) => {
         await $(`.getDisplayGenderChart`).removeClass('is-loading');
 
     } else {
-        console.log(`getDisplayGenderChart failed`);
+        //console.log(`getDisplayGenderChart failed`);
     }
 
 }
@@ -974,7 +915,7 @@ const getDisplayAgeChart = async (data, method) => {
         // $(`#totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
 
     } else {
-        console.log(` getDisplayAgeChart failed`);
+       // console.log(` getDisplayAgeChart failed`);
     }
 
 
@@ -1236,7 +1177,7 @@ const getAllHTMLTable = async (data, method) => {
     
 }
 const getAllTextTable = async (data, method) => {
-    console.log(data);
+  //  console.log(data);
     
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Augu", "Sep", "Oct", "Nov", "Dec"];
     initDatatable(

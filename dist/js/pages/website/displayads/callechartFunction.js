@@ -1071,6 +1071,8 @@ $(document).ready(() => {
           url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayPaidOutgoingWebsitesTable&domain=${domain}`,
           dataSrc: (json) => {
             if (json && json.data && json.data.data && json.data.data.Data) {
+             
+
               let { Data: newData } = json.data.data;
               return newData.Records.filter(item => item.Domain != "grid.upgrade");
               // return (newData.Records)
@@ -1128,21 +1130,12 @@ $(document).ready(() => {
     <span class="similarReloadTask" data-task="getTrafficDisplayAdvertisingWebsitesTable"><i class="fal fa-sync"></i></span>
 </div>`)
     initDatatable(
-      'getTrafficDisplayAdvertisingWebsitesTable',
+      'getTrafficDisplayAdvertisingWebsitesTable', 
       {
         ajax: {
           url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}&userToken=${userToken}`,
-          dataSrc: (json) => {           
-            if (json.userData.member =="demo") {
-                $(`.widget-getTrafficDisplayAdvertisingWebsitesTable .widgetBody`).addClass("locked");
-                $(".widget-getTrafficDisplayAdvertisingWebsitesTable").prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-                      
-          }
-          else if (json.userData.member =="free") {
-            $(`.widget-getTrafficDisplayAdvertisingWebsitesTable .widgetBody`).addClass("locked");
-            $(".widget-getTrafficDisplayAdvertisingWebsitesTable").prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng cấp VIP để xem data hoàn toàn miễn phí</a></div>');
-                  
-          }
+          dataSrc: (json) => {          
+               lockedModule('getTrafficDisplayAdvertisingWebsitesTable', json.userData.member);  
           if (json.data.data.Data.Records.length<=0) {
             $('#DataTables_Table_1_wrapper').css('min-height','268px');
             $('#DataTables_Table_1_wrapper').addClass('empty-state')

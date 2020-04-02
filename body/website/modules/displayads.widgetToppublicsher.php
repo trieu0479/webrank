@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="mt-3" id="Parent-topPublicSher">
+        <div class="mt-3 parent-topPublicSher" id="Parent-topPublicSher">
             <div class="list-public  d-flex flex-column" style="min-height: 260px">
                 <div class="row-public-header d-flex">
                     <div class="left-public d-flex align-items-center h-100">

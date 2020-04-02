@@ -443,7 +443,7 @@ $('body').on('click','.similarReloadTask',async function () {
       } else {
         $("div#TimeChart").html("");
       }
-      console.log(taskName);
+      //console.log(taskName);
       
       let name_access=taskName;
       let temp = taskName;
@@ -462,7 +462,7 @@ $('body').on('click','.similarReloadTask',async function () {
 
       // echarts.dispose(ele);
       $(`#${taskName}`).addClass('is-loading');
-      console.log(name_access);
+    //  console.log(name_access);
       if (taskName == "getTrafficAndEngagement--MonthlyUniqueVisitors")
         api(temp + "Monthly", domain);
       else
