@@ -60,6 +60,10 @@
                     <?php require_once(__DIR__."/modules/backlink.wighetBacklinkTypes.php")?>
                 </div>
 
+                <div class="col-12 col-lg-6">
+                    <?php require_once(__DIR__."/modules/backlink.wighetLinkAttri.php")?>
+                </div>
+
                 <div class="col-12 col-lg-12">
                 <?php require_once(__DIR__."/modules/backLink.TopBackLink.php")?>
                 </div>

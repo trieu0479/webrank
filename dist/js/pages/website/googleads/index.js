@@ -45,17 +45,13 @@ $( document ).ready(function() {
         console.log(task);
          
         // let domain = url.searchParams.get("domain").replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
-        $(this).find('i').addClass('fa-spin');     
-        if (task == "getScrapedSearchAds") {
-           return;
-        }           
-        else {
+        $(this).find('i').addClass('fa-spin');             
             if (task == "adwordsMonthlyFullTrend") {
                 // $(this).find('i').addClass('fa-spin')
                 $(this).parent().html('')
             }
        await api(task, localDomain).then( (res) =>$(this).find('i').removeClass('fa-spin')) 
-        }
+        
       })
 
 
