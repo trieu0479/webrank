@@ -1,13 +1,13 @@
 import api from './googleads.js';
-$( document ).ready(function() {
+$(document).ready(function () {
     api("getHeader", localDomain);
-    api('getScrapedSearchAds',localDomain)
+    api('getScrapedSearchAds', localDomain)
     // ----------------------------------
     api("ggAdsOverview", localDomain);
-    api('adwordsMonthlyFullTrend',localDomain)
-    api('TopPaidKeyword',localDomain)    
-    api('MainCompetitor',localDomain)    
-    api('PaidPageTable',localDomain)
+    api('adwordsMonthlyFullTrend', localDomain)
+    api('TopPaidKeyword', localDomain)
+    api('MainCompetitor', localDomain)
+    api('PaidPageTable', localDomain)
     var input = {};
     input.headerTitle = "Vị trí từ khóa";
     input.headerTime = "12.2019 - 02.2020";
@@ -20,8 +20,8 @@ $( document ).ready(function() {
         <path d="M11.9630156,7.5 L12.0475062,7.5 C12.3043819,7.5 12.5194647,7.69464724 12.5450248,7.95024814 L13,12.5 L16.2480695,14.3560397 C16.403857,14.4450611 16.5,14.6107328 16.5,14.7901613 L16.5,15 C16.5,15.2109164 16.3290185,15.3818979 16.1181021,15.3818979 C16.0841582,15.3818979 16.0503659,15.3773725 16.0176181,15.3684413 L11.3986612,14.1087258 C11.1672824,14.0456225 11.0132986,13.8271186 11.0316926,13.5879956 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z" id="Path-107" fill="#000000"></path>
     </g>
 </svg>`;
-    if (createAWidgets(input)){
-        api("PositionChart", localDomain);        
+    if (createAWidgets(input)) {
+        api("PositionChart", localDomain);
     }
     var input = {};
     input.headerTitle = "Bản đồ cạnh tranh";
@@ -35,28 +35,25 @@ $( document ).ready(function() {
         <path d="M11.9630156,7.5 L12.0475062,7.5 C12.3043819,7.5 12.5194647,7.69464724 12.5450248,7.95024814 L13,12.5 L16.2480695,14.3560397 C16.403857,14.4450611 16.5,14.6107328 16.5,14.7901613 L16.5,15 C16.5,15.2109164 16.3290185,15.3818979 16.1181021,15.3818979 C16.0841582,15.3818979 16.0503659,15.3773725 16.0176181,15.3684413 L11.3986612,14.1087258 C11.1672824,14.0456225 11.0132986,13.8271186 11.0316926,13.5879956 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z" id="Path-107" fill="#000000"></path>
     </g>
 </svg>`;
-    if (createAWidgets(input)){
-        api('CompetitorMapChart',localDomain)      
+    if (createAWidgets(input)) {
+        api('CompetitorMapChart', localDomain)
     }
 
-    $('body').on('click','.similarReloadTask',async function () { 
+    $('body').on('click', '.similarReloadTask', async function () {
 
-        let task = $(this).data("task");   
-        
-         
-        // let domain = url.searchParams.get("domain").replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
-        $(this).find('i').addClass('fa-spin');             
-            if (task == "adwordsMonthlyFullTrend") {
-                // $(this).find('i').addClass('fa-spin')
-                $(this).parent().html('')
-            }
-       await api(task, localDomain).then( (res) =>$(this).find('i').removeClass('fa-spin')) 
-        
-      })
+        let task = $(this).data("task");
+
+        $(this).find('i').addClass('fa-spin');
+        if (task == "adwordsMonthlyFullTrend") {
+            $(this).parent().html('')
+        }
+        await api(task, localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
+
+    })
 
 
-    
-    
+
+
 
 
 
