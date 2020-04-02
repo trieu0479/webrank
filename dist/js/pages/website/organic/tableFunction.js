@@ -52,9 +52,7 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
-                        if (json.userData.member != 'vip') {
-                            locked('getOrganicKeywordsBrandedTable', json.userData.member)
-                        }
+                        lockedModule('getOrganicKeywordsBrandedTable', json.userData.member)
                         if (!json.data || !json.data.data) {
                             $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state').attr('style', 'height: 300px;')
                             return [];
@@ -127,7 +125,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsNonBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
-                    if (json.userData.member != 'vip') { locked('getOrganicKeywordsNonBrandedTable', json.userData.member) }
+                    lockedModule('getOrganicKeywordsNonBrandedTable', json.userData.member)
                     if (!json.data || !json.data.data) {
                         $('.parent-getOrganicKeywordsNonBrandedTable').html('').addClass('empty-state').attr('style', 'height: 292px;')
                         return [];
@@ -250,10 +248,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
-                    // console.log(res.data.data);
-                    if (res.userData.member != 'vip') {
-                        locked('organicCompetitors', res.userData.member)
-                    }
+                    lockedModule('organicCompetitors', res.userData.member)
                     if (res.data.organicCompetitors && res.data.organicCompetitors != '') {
                         let columns = [];
                         $.each(res.data.organicCompetitors, function(k, v) {

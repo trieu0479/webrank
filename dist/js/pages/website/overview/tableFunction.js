@@ -16,14 +16,6 @@ $(document).ready(() => {
         }
     };
     // check vip-free-vip user
-    function locked(id, data) {
-        $(".parent-" + id).addClass("locked");
-        if (data == 'demo') {
-            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
-        } else if (data == 'free') {
-            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/account/" > <i class="fas fa-gem"></i> Đăng ký để xem data</a></div>');
-        }
-    }
     //init datatable
     let reloaddata = 0;
     const initDatatable = function(select, tableOptions) {
@@ -51,7 +43,7 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: json => {
-                        lockedModule('getWebsiteGeography', json.userData.member) 
+                        lockedModule('getWebsiteGeography', json.userData.member)
                         if (!json.data || !json.data.data) {
                             $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
                             return [];
@@ -136,7 +128,7 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/keywords/v2.php?task=getKeywordsFromDomain&limit=&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
-                        lockedModule('getKeywords', json.data.userData.member) 
+                        lockedModule('getKeywords', json.data.userData.member)
                         if (json.data.keywords == null) {
                             $('.parent-getKeywords').html('').addClass('empty-state')
                             return []
@@ -261,7 +253,7 @@ $(document).ready(() => {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.banckLinksOverview.backlinks.data);
-                    
+
                     lockedModule('banckLinksOverview', res.userData.member);
                     let columns = [];
                     $.each(res.data.banckLinksOverview.backlinks.data, function(k, v) {
@@ -324,7 +316,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
-                    
+
                     lockedModule('getAdvertisingSearchDetail', res.userData.member);
                     if (res.data.adwordsCompetitors && res.data.adwordsCompetitors != '') {
                         let columns = [];
