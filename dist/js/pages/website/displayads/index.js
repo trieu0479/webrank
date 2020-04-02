@@ -190,7 +190,7 @@ $( document ).ready(function() {
         }
        
       });
-      
+//  ---------------------------------------reload task---------------------     
       $('body').on('click','.similarReloadTask',async function () { 
         let task = $(this).data("task");   
          

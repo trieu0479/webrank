@@ -19,7 +19,6 @@ function lockedModule(boxWidgetName, level) {
         }
     }
 }
-
 const api = async (method, domain) => {
     let methodName = method;
     if (method == "displayAdsOverview" || method == "adTypeOverview") {
@@ -124,7 +123,6 @@ const api = async (method, domain) => {
 
     }
 }
-
 function kFormatter(num) {
     return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
 }
@@ -172,11 +170,8 @@ const initDatatable = function (select, tableOptions) {
 const initDatatableClass = function (select, tableOptions) {
     const table = $(`.${select}`).DataTable(tableOptions);
     let idTable;
-    idTable = table;
-    //$(table.table().header()).addClass('text-center');
-    //reload click handle
-    $(`.${select}`).click(function (event) {
-        // $(event.target).addClass('fa-spin');
+    idTable = table;    
+    $(`.${select}`).click(function (event) {              
         $(`.${select}-container`).addClass('is-loading').block({
             overlayCSS: {
                 backgroundColor: '#ccc',
@@ -312,8 +307,6 @@ const SampleAdsasText = async (data, method) => {
     })
 }
 
-
-
 // ---Display by Device----
 const displayDevice = async (data, method) => {
     var res = data.data.adsCountByDevice;
@@ -347,8 +340,6 @@ const displayDevice = async (data, method) => {
     await $(`.similarReloadTask[data-task="displayDevice"]`).find('i').removeClass('fa-spin');
 
 }
-
-
 // ----------display chart--------------------
 const getDisplayCountryChart = async (data, method) => {
 
@@ -417,21 +408,7 @@ const getDisplayCountryChart = async (data, method) => {
                 orient: 'horizontal',
                 left: '10%',
                 data: ['United States', 'United Kingdom', 'Australia', 'France', 'Other'],
-                // itemWidth: 20,
-                // itemHeight: 14,
-                // width: 50,
-                // height:100,
-                // orient : 'horizontal',
-                // borderRadius:10 ,
-                // textStyle: {
-                //     fontFamily: 'Arial',
-                //     lineHeight: 16,
-                //     color:'#00A0DF'
-                // },
-                // formatter: function (name) {
-                //     let value = name == 'United States' ? value_us : name=="United Kingdom" ? value_gb :name=="Australia"?value_au:name=="France"?value_fr:value_other;
-                //     return `${name}\n${value > 1000000 ?+ numeral(value).format('0.0a') : numeral(value).format('0,0') }`;
-                // }
+            
             },
             series: [{
                 type: 'pie',
@@ -1435,22 +1412,7 @@ const PublicSherTable = async(data,method) => {
 }
 
 $(document).ready(function () {
-    let domain = url.searchParams.get("domain");
-    // api('displayAdsOverview', domain);
-    // api('SampleAdsasImage', domain)
-    // api('SampleAdsasHTML', domain)
-    // api('SampleAdsasText', domain)
-    // api('displayDevice', domain)
-    // api('getDisplayCountryChart', domain);
-    // api('adTypeOverview',domain)
-    // api('topPublicSher',domain);
-    // api('getDisplayGenderChart',domain)
-    // api('getDisplayAgeChart',domain)
-    // $("#Tabsample")
-    //     .tabs()
-    //     .on("click", '[role="tab"]', function () {
-    //         api('SampleAdsasHTML', domain)
-    //     });
+    let domain = url.searchParams.get("domain");    
     $(".similarReloadTask").click(function() {
         if ($(this).find('i').hasClass('fa-spin')) {$(this).find('i').removeClass('fa-spin'); return; }
         let task = $(this).data("task");       
