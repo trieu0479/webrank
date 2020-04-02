@@ -21,7 +21,7 @@ $(document).ready(() => {
         if (data == 'demo') {
             $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
         } else if (data == 'free') {
-            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" > <i class="fas fa-gem"></i> Đăng ký để xem data</a></div>');
+            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/account/" > <i class="fas fa-gem"></i> Đăng ký để xem data</a></div>');
         }
     }
     //init datatable
