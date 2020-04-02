@@ -1,6 +1,5 @@
 import api from './echartFunctions.js';
 $(document).ready(function() {
-    api("getHeader", localDomain);
     api("getSearchOrganicPaidOverview", localDomain);
     var input = {};
     input.headerTitle = "Tỉ Lệ Truy Câp Từ Tìm Kiếm";

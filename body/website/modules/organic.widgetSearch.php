@@ -11,7 +11,7 @@
                     href="javascript:;"><i class="fal fa-sync"></i></a>
             </div>
         </div>
-        <div class="parent-getSearchOrganicPaidOverviewpaid">
+        <div class="parent-getSearchOrganicPaidOverview">
             <div id="getSearchOrganicPaidOverviewpaid" class="rounded is-loading"
                 style="min-height:250px">
                 <ul class="nav nav-tabs customtab" role="tablist">
