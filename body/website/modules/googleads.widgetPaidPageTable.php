@@ -21,7 +21,7 @@
         </div>
         <div id="Parent-PaidPageTable" style="position: relative">
             <div class="mt-3 paidpagetable">
-                <table id="PaidPageTable" class="table table-striped" style="width:100%;"></table>
+                <table id="PaidPageTable" class="table table-striped parent-PaidPageTable" style="width:100%;"></table>
             </div>
         </div>
 

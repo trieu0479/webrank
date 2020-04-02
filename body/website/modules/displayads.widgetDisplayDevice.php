@@ -19,7 +19,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="mt-3" id ="Parent-displayDevice">
+                                    <div class="mt-3 parent-displayDevice" id ="Parent-displayDevice">
                                         <div class="list-devices  d-flex flex-column" style="min-height: 245px">
                                             <div class="mt-2 list-dt">
                                                 <div class="dvc-desktop d-flex align-items-center">

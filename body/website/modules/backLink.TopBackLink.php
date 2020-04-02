@@ -19,7 +19,7 @@
                 <!-- <a class="similarReloadTask text-muted" data-task="PaidPageTable" href="javascript:;"><i class="fal fa-sync"></i></a> -->
             </div>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive  parent-topBackLinks ">
         <table class="table table-striped topBackLinks" style="width:100%;"></table>
        
         </div>

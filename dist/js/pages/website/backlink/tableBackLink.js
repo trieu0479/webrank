@@ -48,8 +48,9 @@ $(document).ready(() => {
     }
 
     var arrNameContry = [];
-    $.get(`//localapi.trazk.com/webdata/semrush.php?task=countryIsoName`, function (res) {
+    $.get(`//localapi.trazk.com/webdata/v3.php?task=countryIsoName&userToken=${userToken}`, function (res) {
         arrNameContry = res.data
+
     })
     // Quá»‘c Gia
     initDatatable(
@@ -58,7 +59,7 @@ $(document).ready(() => {
             ajax: {
                 url: `https://localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
-
+                    
                     let dataContry = json.data.backlinksOverview.geodomains;
                     let columns = [];
                     let total = [];
@@ -197,7 +198,7 @@ $(document).ready(() => {
                 url: `https://localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksDetail]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
                     let topBackLinks = json.data.backlinksDetail;
-                    console.log(topBackLinks);
+                    lockedModule('topBackLinks', json.userData.member);
                     let arrTopBackLinks = [];
                     let stt = 1;
                     if (json && topBackLinks) {

@@ -1,33 +1,26 @@
 //US,GB,AU,FR,
 var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
-var userToken = 'cHhZeE1KcFQvSis0K2VrN3kxMm1oQT09OjpxzF1Po19uXTHZBqnUT9hb'
 var domain = url.searchParams.get('domain');
 
-function lockeddemo(id) {
-    $("#Parent-" + id + " #" + id).addClass("locked");
-    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-}
-function lockerdemo(id) {      //class   
-    $(`.row.${id}`).addClass("locked");
-    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-  }
-function lockedfree(id) {
-    $("#Parent-" + id + " #" + id).addClass("locked");
-    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
-}
-function lockerfree(id) {        //class
-    $(`.row.${id}`).addClass("locked");
-    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
-  }
 
-function lockchartdemo(id) { 
-    $(`.parent-${id}`).addClass("locked");
-    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-}
-function lockchartfree(id) {
-    $(`.parent-${id}`).addClass("locked");
-    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+function lockedModule(boxWidgetName, level) {
+    var freeModule = [];
+    var VIPModule = ["TopPaidKeyword","MainCompetitor","PositionChart","CompetitorMapChart","getScrapedSearchAds","PaidPageTable","adwordsMonthlyFullTrend"];
+    if (level == 'demo') {
+        if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
+            //ngoai le 
+            if (boxWidgetName == 'getMarketingMixOverviewDaily') boxWidgetName = 'getMarketingMixOverview';
+            if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
+            //ngoai le 
+            $(".parent-" + boxWidgetName).addClass("locked");
+            $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+        }
+    } else if (level == 'free') {
+        if (VIPModule.includes(boxWidgetName)) {
+            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+        }
+    }
 }
 
 
@@ -50,98 +43,37 @@ const api = async(method, domain) => {
             .then(data => {
                 switch (methodName) {
                     case "ggAdsOverview":
-                        if (data.userData.member =="demo") {                          
-                            lockerdemo('ggAdsOverview')                    
-                        }
-                        else if (data.userData.member =="free") {
-                            lockerfree('ggAdsOverview')
-                        }
                         ggAdsOverview(data, method);
                         break;
                     case 'adwordsMonthlyFullTrend':
-                        if (data.userData.member == "demo") {                                                  
-                            lockerdemo('adwordsMonthlyFullTrend')
-                            $("#Parent-adwordsMonthlyFullTrend").prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>')                    
-                        }
-                        else if (data.userData.member =="free") {
-                            lockerfree('adwordsMonthlyFullTrend')
-                            $("#Parent-adwordsMonthlyFullTrend").prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng VIP để xem data hoàn toàn miễn phí</a></div>')                    
-                        }
-
                         adwordsMonthlyFullTrend(data, method);
                         break;
                     case 'TopPaidKeyword':
-                        if (data.userData.member == "demo") {                                                  
-                            lockerdemo('TopPaidKeyword')
-                            $('.toppaidkey').addClass('locked')
-                           
-                        }
-                        else if (data.userData.member =="free") {
-                            lockerfree('TopPaidKeyword')
-                            $('.toppaidkey').addClass('locked')                                     
-                        }
                         TopPaidKeyword(data, method);
                         break;
                     case 'PositionChart':
-                        if (data.userData.member == "demo") {                                                  
-                            lockchartdemo('PositionChart')                           
-                        }
-                        else if (data.userData.member =="free") {
-                            lockchartfree('PositionChart')
-                                     
-                        }
                         PositionChart(data, method);
                         break;
                     case "MainCompetitor":
-                        if (data.userData.member == "demo") {                                                  
-                            lockerdemo('MainCompetitor')
-                            $('.maincompetitor').addClass('locked')                           
-                        }
-                        else if (data.userData.member =="free") {
-                            lockerfree('MainCompetitor')
-                            $('.maincompetitor').addClass('locked')                                     
-                        }
                         MainCompetitor(data, method)
                         break;
                     case "CompetitorMapChart":
-                        if (data.userData.member == "demo") {                                                  
-                            lockchartdemo('CompetitorMapChart')                           
-                        }
-                        else if (data.userData.member =="free") {
-                            lockchartfree('CompetitorMapChart')                                                                
-                        }
                         CompetitorMapChart(data, method)
                         break;
                     case "PaidPageTable":
-                        if (data.userData.member == "demo") {                                                  
-                            lockerdemo('PaidPageTable')
-                            $('.paidpagetable').addClass('locked')
-                           
-                        }
-                        else if (data.userData.member =="free") {
-                            lockerfree('PaidPageTable')
-                            $('.paidpagetable').addClass('locked')
-                                     
-                        }
-                        PaidPageTable(data, method)
-                        break;
-                        case "getScrapedSearchAds":
-                            if (data.userData.member == "demo") {                                                    
-                                   lockeddemo('getScrapedSearchAds')
-                                }
-                                else if (data.userData.member =="free") {
-                                    lockedfree('getScrapedSearchAds')
-                                }
-                            getScrapedSearchAds(data, method);
-                            break;    
+                        PaidPageTable(data, method);break;
+                    case "getScrapedSearchAds":
+                        getScrapedSearchAds(data, method);
+                        break;    
                     default:
                         break;
                 }
+                lockedModule(methodName, data.userData.member)
                 return true;
             })
 
     } catch (error) {
-        console.log(error);
+       // console.log(error);
     }
 }
 const initDatatable = function(select, tableOptions) {
@@ -313,9 +245,9 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                     dataChart_1.keys.push(val.keys)
                     dataChart_1.values.push(val.values);
                     dataChart_1.positionsTrend.push(val.positionsTrend);                   
-                     console.log(dataChart_1);
+                    // console.log(dataChart_1);
                 })
-              console.log( dataChart_1);
+              //console.log( dataChart_1);
               
                
                 let series = [{
@@ -416,7 +348,7 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                                                 top4 = v[3] + v[4] + v[5] + v[6] + v[7] + v[8];
                                                 top9 = v[9] + v[10];
                                                 total = top3 + top4 + top9;
-                                                console.log(top3);
+                                               // console.log(top3);
 
 
                                             }
@@ -554,7 +486,7 @@ const adwordsMonthlyFullTrend = async(data, method) => {
         $('#KeywordsChart').addClass('empty-state');
         $('#CostChart').addClass('empty-state');
     } else {
-        console.log(`#${name} failed`);
+      //  console.log(`#${name} failed`);
     }
 }
 
@@ -659,7 +591,7 @@ const PositionChart = async(data, method) => {
                 return;
             }
             var res = data.data.adwordsPositions;
-            console.log(res);
+          //  console.log(res);
 
             let dataChart = {
                 keys: ['1', '2-3', 'Others'],
@@ -830,7 +762,7 @@ const PositionChart = async(data, method) => {
         // }, 1000);
 
     } else {
-        console.log(`PositionChart failed`);
+//console.log(`PositionChart failed`);
 
     }
 }
@@ -840,7 +772,6 @@ const PositionChart = async(data, method) => {
 
 
 const MainCompetitor = async(data, method) => {
-    console.log(data.data.adwordsCompetitors);
 
 
     initDatatable(
@@ -981,12 +912,12 @@ const CompetitorMapChart = async(data, method) => {
             myarrchart.forEach((v, i) => {
                 if (i < 7) {
                     let obj = {}
-                    console.log(v);
+                  //  console.log(v);
 
                     obj.name = v[3],
                         obj.type = 'scatter',
                         obj.symbolSize = function(data) {
-                            console.log(data);
+                           // console.log(data);
                             return kFormatter(data[2]);
                         },
                         obj.emphasis = {
@@ -1106,7 +1037,7 @@ const CompetitorMapChart = async(data, method) => {
 
         }
     } else {
-        console.log(`.CompetitorMapChart failed`);
+       // console.log(`.CompetitorMapChart failed`);
     }
 
 
@@ -1149,7 +1080,7 @@ const PaidPageTable = async(data, method) => {
 
                     })
 
-                    console.log(columns);
+                  //  console.log(columns);
                     return columns;
                 },
             },
@@ -1233,7 +1164,7 @@ const getScrapedSearchAds = async (data,method) => {
     
     if (data.status == "success") {
         var SearchAds  = data.data.adwordsPositions;        
-        console.log(SearchAds);        
+      //  console.log(SearchAds);        
         $(`#getScrapedSearchAds .carousel-inner`).html('');
         $(`#getScrapedSearchAds .carousel-indicators`).html('');        
             $("#row-getPaidSearchCompetitorsTableV1").show();
@@ -1297,7 +1228,7 @@ const getScrapedSearchAds = async (data,method) => {
         await $(`#getScrapedSearchAds .carousel-inner`).removeClass('is-loading');
         await $(`.similarReloadTask[data-task="getScrapedSearchAds"]`).find('i').removeClass('fa-spin');
     } else {
-        console.log(`getScrapedSearchAds failed`);
+      //  console.log(`getScrapedSearchAds failed`);
     }
 };
 

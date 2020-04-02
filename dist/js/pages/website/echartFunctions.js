@@ -44,7 +44,7 @@ $('body').on('click', '.btn-compare', function (event) {
             ]
         }
     }).then((result) => {
-        // console.log(result);
+        // //console.log(result);
         if (result.value) {
             location.href = `?view=traffic-website&action=compare&domain1=${result.value[0].toLowerCase()}&domain2=${result.value[1].toLowerCase()}`;
         }
@@ -448,17 +448,17 @@ const api = async (task, domain, reload = 0) => {
 
 const getTrafficAndEngagementOverviewMonthly = async (task, data) => {
     // $('.date-access').html(moment(data.data.lastUpdate).format("MM.YYYY"))
-    console.log("1");
+    //console.log("1");
     // if (data.status == "success") {
     //     if (data && data.data && data.data.data && data.data.data.Data) {
-    //         console.log('2');
+    //         //console.log('2');
     //         var TrafficAndEngagementOverviewMonthly = null
     //         if (data.data.data.Data.AvgMonthVisits) {
     //             TrafficAndEngagementOverviewMonthly = data.data.data.Data;
     //         } else {
     //             TrafficAndEngagementOverviewMonthly = data.data.data.Data.Data[0];
     //         }
-    //         console.log('3');
+    //         //console.log('3');
     //         $(`.getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
     //         // $(`#totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
     //         // let MonthlyVisits = numeral(TrafficAndEngagementOverviewMonthly.AvgMonthVisits).format("0,0");
@@ -526,14 +526,14 @@ const getTrafficAndEngagementOverviewMonthly = async (task, data) => {
 //done
 // TRUY CAP THEO THỜI GIAN -LƯỢT TRUY CẬP
 const getTrafficAndEngagementVisits = async (task, data, domain) => {
-    // console.log(data);
+    // //console.log(data);
     if (data.status == "success") {
         if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
             let {
                 Data
             } = data.data.data.Data;
             let TrafficAndEngagementVisits = Data[domain];
-            // console.log(TrafficAndEngagementVisits);
+            // //console.log(TrafficAndEngagementVisits);
             let Desktop = TrafficAndEngagementVisits.Desktop[0];
             let Mobile = TrafficAndEngagementVisits['Mobile Web'][0];
             let dataChartDesktop = {
@@ -570,7 +570,7 @@ const getTrafficAndEngagementVisits = async (task, data, domain) => {
                     sum_time_access.keys.push(num.Key)
                     sum_time_access.values.push(value)
                 });
-                // console.log(sum_time_access);
+                // //console.log(sum_time_access);
                 let ele = document.getElementById("getTrafficAndEngagement--MonthlyVisits");
 
                 let myChart = echarts.init(ele);
@@ -583,7 +583,7 @@ const getTrafficAndEngagementVisits = async (task, data, domain) => {
                         borderWidth: 1,
                         extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
                         formatter: params => {
-                            // console.log(params);
+                            // //console.log(params);
                             let {
                                 name
                             } = params[0];
@@ -793,7 +793,7 @@ const getTrafficAndEngagementVisits = async (task, data, domain) => {
         }
 
     } else {
-        console.log(`${task} failed`);
+        //console.log(`${task} failed`);
     }
 }
 //done
@@ -947,12 +947,12 @@ const getUniqueUsersMonthly = async (task, data, domain) => {
 
 
     } else {
-        console.log(`${task} failed`);
+        //console.log(`${task} failed`);
     }
 }
 
 const getTrafficAndEngagementAvgVisitDuration = async (task, data, domain) => {
-    // console.log(data);
+    // //console.log(data);
 
     if (data.status == "success") {
         if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
@@ -1002,7 +1002,7 @@ const getTrafficAndEngagementAvgVisitDuration = async (task, data, domain) => {
                     borderWidth: 1,
                     extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
                     formatter: params => {
-                        // console.log(params);
+                        // //console.log(params);
                         let {
                             name
                         } = params[0];
@@ -1165,7 +1165,7 @@ const getTrafficAndEngagementAvgVisitDuration = async (task, data, domain) => {
             $(`#getTrafficAndEngagement--AvgVisitDuration`).addClass('empty-state');
         }
     } else {
-        console.log(`${task} failed`);
+        //console.log(`${task} failed`);
     }
 }
 
@@ -1219,7 +1219,7 @@ const getTrafficAndEngagementPagesPerVisit = async (task, data, domain) => {
                     borderWidth: 1,
                     extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
                     formatter: params => {
-                        // console.log(params);
+                        // //console.log(params);
                         let {
                             name
                         } = params[0];
@@ -1383,7 +1383,7 @@ const getTrafficAndEngagementPagesPerVisit = async (task, data, domain) => {
         }
 
     } else {
-        console.log(`${task} failed`);
+        //console.log(`${task} failed`);
     }
 }
 
@@ -1437,7 +1437,7 @@ const getTrafficAndEngagementBounceRate = async (task, data, domain) => {
                     borderWidth: 1,
                     extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
                     formatter: params => {
-                        // console.log(params);
+                        // //console.log(params);
                         let {
                             name
                         } = params[0];
@@ -1600,7 +1600,7 @@ const getTrafficAndEngagementBounceRate = async (task, data, domain) => {
             $(`#getTrafficAndEngagement--BounceRate`).addClass('empty-state');
         }
     } else {
-        console.log(`${task} failed`);
+        //console.log(`${task} failed`);
     }
 }
 // hết sử dụng truy cập thời gian
@@ -1736,12 +1736,12 @@ const getWebDemographicsAge = async (task, data) => {
             await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
         }
     } else {
-        console.log(`${task} failed`);
+        //console.log(`${task} failed`);
     }
 };
 // SỬ DỤNG NGUỒN KHÁCH HÀNG
 const getTrafficSourcesOverview = async (task, data) => {
-    // console.log(data);
+    // //console.log(data);
     let custumcolor = ["#910BFE", "#1075F1", "#F29016", "#5452CF", "#37A5D3", "#4FD266", "#FFB0E3"]
     if (data.status == "success" && data.data.data) {
         let {
@@ -2003,7 +2003,7 @@ const getWebDemographicsGender = async (task, data) => {
             // })
         }
     } else {
-        console.log(`${task} failed`);
+        //console.log(`${task} failed`);
     }
 };
 // SỬ DỤNG
@@ -2166,7 +2166,7 @@ const getDesktopVsMobileVisits = async (task, data) => {
             // })
         }
     } else {
-        console.log(`${task} failed`);
+        //console.log(`${task} failed`);
     }
 };
 // SỬ DỤNG
@@ -2204,7 +2204,7 @@ const getSimilarSites = async (task, data) => {
     await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
 }
 const getWebsiteGeography = async (task, data) => {
-    console.log(data);
+    //console.log(data);
     if (!data.data || !data.data.data) {
         data = [];
     } else {
@@ -2213,20 +2213,20 @@ const getWebsiteGeography = async (task, data) => {
     let chartmap_data = [];
     data.forEach((ele) => {
         // let value_percent = numeral(ele.Share * 100).format('0.00')
-        // console.log(value_percent);
+        // //console.log(value_percent);
         let obj = {
             name: ele.Country.text,
             value: numeral(ele.Share * 100).format('0.00')
         }
         chartmap_data.push(obj)
     })
-    console.log(chartmap_data);
+    //console.log(chartmap_data);
 
     let ele = document.getElementById("map");
     let myChart = echarts.init(ele);
     myChart.showLoading();
     $.getJSON('assets/mapworld.geo.json', function (usaJson) {
-        console.log(usaJson)
+        //console.log(usaJson)
         myChart.hideLoading();
         echarts.registerMap('World', usaJson, {});
         let option = {
@@ -2235,10 +2235,10 @@ const getWebsiteGeography = async (task, data) => {
                 showDelay: 0,
                 transitionDuration: 0.2,
                 formatter: function (params) {
-                    // console.log(params.value);
+                    // //console.log(params.value);
 
                     let value = (params.value == NaN) ? '0' : `${numeral(params.value).format('0.00')}`
-                    // console.log(value);
+                    // //console.log(value);
 
                     // value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
                     return params.name + ': ' + value + '%';
@@ -2507,7 +2507,6 @@ const getTrafficSocial = async (task, data, domain) => {
                                 seriesName: name1,
                                 value: val1
                             } = params[0];
-                            console.log('sdassadsa',params[0]);
                             
                             name = moment(name).format('DD MMMM YYYY');
 
@@ -2602,14 +2601,14 @@ const getTrafficSocial = async (task, data, domain) => {
 
         }
     } else {
-        console.log(`${task} failed`);
+        //console.log(`${task} failed`);
     }
 }
 
 
 // Kênh Xã Hội
 const getTrafficSourcesSocial = async (task, data) => {
-    // console.log(data);
+    // //console.log(data);
 
     if (data.status == "success") {
         if (data.data.haveData == false) {
@@ -2622,7 +2621,7 @@ const getTrafficSourcesSocial = async (task, data) => {
             $(`.${task}`).css('height','235px')
             $(`.widget-${task} .bg-white `).addClass('h-100')
             $(`.widget-${task} .widgetBody `).addClass('pt-5 pb-4')
-            // console.log(traffic);
+            // //console.log(traffic);
 
             if (traffic != null) {
                 let dataChart = [];
@@ -2812,7 +2811,7 @@ const getTrafficSourcesSocial = async (task, data) => {
         }
 
     } else {
-        console.log(`${task} failed`);
+        //console.log(`${task} failed`);
     }
 };
 

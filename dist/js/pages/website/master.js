@@ -124,7 +124,7 @@ $(document).ready(() => {
     }
     window.lockedModule = function lockedModule(boxWidgetName, level) {
         var freeModule = ["getKeywords", "getWebsiteGeography", "banckLinksOverview", "getAdvertisingSearchDetail", "getOrganicKeywordsBrandedTable", "getSimilarSites", "getOrganicKeywordsBrandedTable", "getOrganicKeywordsNonBrandedTable", "organicCompetitors", ];
-        var VIPModule = [];
+        var VIPModule = ["topBackLinks", "getTrafficDisplayAdvertisingWebsitesTable"];
         console.log(boxWidgetName, level);
         if (level == 'demo') {
             if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {

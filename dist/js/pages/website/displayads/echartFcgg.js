@@ -9,6 +9,8 @@ var selectWebsite = "";
 
 const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
+
+
 const getHeader = async data => {
     // Get value Header  
     const {
@@ -276,31 +278,23 @@ const getHeader = async data => {
     });
 };
 
-function lockeddemo(id) {
-    $("#Parent-" + id + " #" + id).addClass("locked");
-    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-}
-function lockerdemo(id) {      //class   
-    $(`.row.${id}`).addClass("locked");
-    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-  }
-function lockedfree(id) {
-    $("#Parent-" + id + " #" + id).addClass("locked");
-    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
-}
-function lockerfree(id) {        //class
-    $(`.row.${id}`).addClass("locked");
-    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
-  }
-
-function lockchartdemo(id) {
-    console.log(id)
-    $(`.parent-${id}`).addClass("locked");
-    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-}
-function lockchartfree(id) {
-    $(`.parent-${id}`).addClass("locked");
-    $(`.widget-${id} .widgetBody`).prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i>Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
+function lockedModule(boxWidgetName, level) {
+    var freeModule = [];
+    var VIPModule = ["getWebsiteAdsVisitsOverview","getTrafficDestinationAds","getTrafficDisplayAdvertisingAds","getWebsiteAdsIntelDisplay","getScrapedSearchAds"];
+    if (level == 'demo') {
+        if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
+            //ngoai le 
+            
+            //ngoai le 
+            $(".parent-" + boxWidgetName).addClass("locked");
+            $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
+        }
+    } else if (level == 'free') {
+        if (VIPModule.includes(boxWidgetName)) {
+            if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
+            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+        }
+    }
 }
 
 const api = async (task, domain,reload=0) => {
@@ -342,12 +336,7 @@ const api = async (task, domain,reload=0) => {
                             getTrafficSourcesOverview(task, data);
                             break;
                         case "getTrafficDisplayAdvertisingAds":
-                            if (data.userData.member =="demo") {
-                                lockchartdemo('getTrafficDisplayAdvertisingAds')                    
-                            }
-                            else if (data.userData.member =="free") {
-                                lockchartfree('getTrafficDisplayAdvertisingAds')
-                            }
+                           
                             getTrafficDisplayAdvertisingAds(task, data);
                             break;
                         case "getTrafficSourcesSocial":
@@ -378,12 +367,7 @@ const api = async (task, domain,reload=0) => {
                             getTopIncomingAds(task, data);
                             break;
                         case "getTrafficDestinationAds":
-                            if (data.userData.member =="demo") {
-                                lockchartdemo('getTrafficDestinationAds')                    
-                            }
-                            else if (data.userData.member =="free") {
-                                lockchartfree('getTrafficDestinationAds')
-                            }
+                           
                             getTrafficDestinationAds(task, data);
                             break;
                         case "getWebsiteGeography":
@@ -469,6 +453,7 @@ const api = async (task, domain,reload=0) => {
                             break;
 
                     }
+                    lockedModule(task, data.userData.member)
                     return;
                 // }
             });
@@ -637,19 +622,13 @@ const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
  </div>
  <div id="Parent-getWebsiteAdsVisitsOverview">
      <div class="row rounded m-0 p-b-10 justify-content-center py-5" style="height: 270px">
-         <div class="col-auto py-5 is-loading font-number h1 text-center" id="getWebsiteAdsVisitsOverview">
+         <div class="col-auto py-5 is-loading font-number h1 text-center parent-getWebsiteAdsVisitsOverview" id="getWebsiteAdsVisitsOverview">
          </div>
      </div>
  </div>
 </div>`)
-if (data.userData.member == "demo") {                                                    
-    $('#getWebsiteAdsVisitsOverview').addClass('locked')
-    $('#Parent-getWebsiteAdsVisitsOverview').prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');                              
-}
-if (data.userData.member =="free") {
-    $('#Parent-getWebsiteAdsVisitsOverview').prepend('<div class="center"><a class="btn btn-info shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Nâng VIP để xem data hoàn toàn miễn phí</a></div>');
-    $('#getWebsiteAdsVisitsOverview').addClass('locked')
-}    
+ 
+
     if (data.status == "success") {
         if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data &&
             data.data.data.Data.Data[domain].AdsTotal > 0) {

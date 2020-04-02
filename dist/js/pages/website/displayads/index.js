@@ -193,7 +193,6 @@ $( document ).ready(function() {
       
       $('body').on('click','.similarReloadTask',async function () { 
         let task = $(this).data("task");   
-        console.log(task);
          
         // let domain = url.searchParams.get("domain").replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
         $(this).find('i').addClass('fa-spin');     
@@ -218,15 +217,6 @@ $( document ).ready(function() {
         }
       })
 
-// -------------------------locked--------------
-function locked(id) {
-    $("#Parent-" + id + " #" + id).addClass("locked");
-    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-}
-function locker(id) {        
-    $(`.row.${id}`).addClass("locked");
-    $("#Parent-" + id).prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/login.php" target="_blank"> <i class="fas fa-unlock"></i> Đăng ký để xem data hoàn toàn miễn phí</a></div>');
-  }
 
   
 
