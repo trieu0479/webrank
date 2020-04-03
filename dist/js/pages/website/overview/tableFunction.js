@@ -16,14 +16,6 @@ $(document).ready(() => {
         }
     };
     // check vip-free-vip user
-    function locked(id, data) {
-        $(".parent-" + id).addClass("locked");
-        if (data == 'demo') {
-            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
-        } else if (data == 'free') {
-            $(".parent-" + id).parent().prepend('<div class="center"><a class="btn btn-success shadow" href="//admin.fff.com.vn/account/" > <i class="fas fa-gem"></i> Đăng ký để xem data</a></div>');
-        }
-    }
     //init datatable
     let reloaddata = 0;
     const initDatatable = function(select, tableOptions) {
@@ -51,7 +43,7 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: json => {
-                        lockedModule('getWebsiteGeography', json.userData.member) 
+                        lockedModule('getWebsiteGeography', json.userData.member)
                         if (!json.data || !json.data.data) {
                             $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
                             return [];
@@ -136,21 +128,25 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/keywords/v2.php?task=getKeywordsFromDomain&limit=&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
-                        lockedModule('getKeywords', json.data.userData.member) 
+                        lockedModule('getKeywords', json.data.userData.member)
                         if (json.data.keywords == null) {
                             $('.parent-getKeywords').html('').addClass('empty-state')
                             return []
                         } else {
                             let columns = [];
+                            var stt = 1;
                             $.each(json.data.keywords, function(k, v) {
+                                if (v.maxCPC) var maxCPC = v.maxCPC;
+                                else var maxCPC = v.minCPC * 1.5;
                                 let output = {
+                                    stt: stt++,
                                     keyword: v.keyword,
                                     length: v.length,
                                     trungbinhtimkiem: v.results,
                                     trend: v.trend,
                                     dokho: v.competition_level,
                                     giathapnhat: v.minCPC,
-                                    gicaonhat: v.maxCPC,
+                                    gicaonhat: maxCPC,
                                 }
                                 columns.push(output)
                             })
@@ -163,6 +159,11 @@ $(document).ready(() => {
                     // $('.getTrendingKeywordsTable-container').find('.fa-spin').removeClass('fa-spin');
                 },
                 columns: [{
+                        title: 'STT',
+                        data: data => data.stt,
+                        width: '20px',
+                    },
+                    {
                         title: 'Từ khoá',
                         data: data => `
                 <div class="text-left flex-row" style="width: 200px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
@@ -194,13 +195,13 @@ $(document).ready(() => {
                     },
                     {
                         title: 'Giá thấp nhất',
-                        data: (data) => numeral(data.giathapnhat * 23000).format('0,0') + 'đ',
+                        data: (data) => numeral(data.giathapnhat).format('0,0') + 'đ',
                         width: '100px'
                     },
                     {
                         title: 'Giá cao nhất',
                         data: "giathaudautrangcaonhat",
-                        data: (data) => numeral(data.gicaonhat * 23000).format('0,0') + 'đ',
+                        data: (data) => numeral(data.gicaonhat).format('0,0') + 'đ',
                         width: '100px'
                     },
                 ],
@@ -252,7 +253,7 @@ $(document).ready(() => {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.banckLinksOverview.backlinks.data);
-                    
+
                     lockedModule('banckLinksOverview', res.userData.member);
                     let columns = [];
                     $.each(res.data.banckLinksOverview.backlinks.data, function(k, v) {
@@ -315,7 +316,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
-                    
+
                     lockedModule('getAdvertisingSearchDetail', res.userData.member);
                     if (res.data.adwordsCompetitors && res.data.adwordsCompetitors != '') {
                         let columns = [];

@@ -57,14 +57,14 @@ $(document).ready(function () {
     let list = '';
     let dropdownMenu = '';
     let all = `
-    <a class="dropdown-item" href="?view=website&action=index">
+    <a class="dropdown-item" href="${rootURL}/top-website-vietnam">
     <button class="dropdown-item btn btn-info text-center" type="button">
     Toàn bộ
     </button>  
     </a>
     `;
     list = `
-      <a href="?view=website&action=index">
+      <a href="${rootURL}/top-website-vietnam">
             <div id="" class="kt-widget6__item">
             <span class="pr-2"><i class="fad fa-globe-asia text-info"></i></span>
             <span>Toàn bộ</span>
@@ -76,7 +76,7 @@ $(document).ready(function () {
       // <a href="${ele.targetHref.replace("[userToken]", userToken)}">
       
       list += `
-       <a href="?view=website&action=index&name=${ele.name}">
+       <a href="${rootURL}/top-website-vietnam/${ele.name}">
              <div id="${ele.name}" class="kt-widget6__item">
              <span class="pr-2"><i class="${ele.icon}" style="color: #${ele.iconColor}"></i></span>
              <span>${ele.title}</span>
@@ -85,7 +85,7 @@ $(document).ready(function () {
         `
 
       dropdownMenu = `
-        <a class="dropdown-item" href="?view=website&action=index&name=${ele.name}">
+        <a class="dropdown-item" href="${rootURL}/top-website-vietnam/${ele.name}">
         <button class="dropdown-item" type="button">
               <span class="pr-2"><i class="${ele.icon}" style="color: #${ele.iconColor}"></i></span>
               <span>${ele.title}</span>
@@ -102,6 +102,11 @@ $(document).ready(function () {
 
   // Table Topwebsite
   var name = url.searchParams.get("name");
+  if (location.href.indexOf("/top-website-vietnam/") > 1) {
+    name = location.href.substring(location.href.indexOf("/top-website-vietnam/") + 21);
+    console.log(name);
+  } 
+  
   initDatatable(
     'tablePTDT', {
     ajax: {

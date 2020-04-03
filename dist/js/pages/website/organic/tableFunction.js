@@ -15,7 +15,12 @@ $(document).ready(() => {
             next: 'Tiếp theo'
         }
     };
-    // check vip-free-demo user
+    // reloadTable
+    $('body').on('click', '.similarReloadTasktable', function() {
+            $(this).find('i').addClass('fa-spin')
+            $('.organicPositions').DataTable().ajax.url(`//localapi.trazk.com/webdata/v3.php?task=getDomainOrganicDetail&domain=${localDomain}&page=1&reload=1&method[organicPositions]=true&userToken=${userToken}`).load();
+        })
+        // check vip-free-demo user
     function locked(id, data) {
         $(".parent-" + id).addClass("locked");
         if (data == 'demo') {
@@ -52,9 +57,7 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                     dataSrc: (json) => {
-                        if (json.userData.member != 'vip') {
-                            locked('getOrganicKeywordsBrandedTable', json.userData.member)
-                        }
+                        lockedModule('getOrganicKeywordsBrandedTable', json.userData.member)
                         if (!json.data || !json.data.data) {
                             $('.parent-getOrganicKeywordsBrandedTable').html('').addClass('empty-state').attr('style', 'height: 300px;')
                             return [];
@@ -127,7 +130,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.1.php?task=getOrganicKeywordsNonBrandedTable&domain=${localDomain}&userToken=${userToken}`,
                 dataSrc: (json) => {
-                    if (json.userData.member != 'vip') { locked('getOrganicKeywordsNonBrandedTable', json.userData.member) }
+                    lockedModule('getOrganicKeywordsNonBrandedTable', json.userData.member)
                     if (!json.data || !json.data.data) {
                         $('.parent-getOrganicKeywordsNonBrandedTable').html('').addClass('empty-state').attr('style', 'height: 292px;')
                         return [];
@@ -250,22 +253,19 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOrganicDetail&domain=${localDomain}&method[organicCompetitors]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
-                    // console.log(res.data.data);
-                    if (res.userData.member != 'vip') {
-                        locked('organicCompetitors', res.userData.member)
-                    }
+                    lockedModule('organicCompetitors', res.userData.member)
                     if (res.data.organicCompetitors && res.data.organicCompetitors != '') {
                         let columns = [];
                         $.each(res.data.organicCompetitors, function(k, v) {
-                            let output = {
-                                commonKeywords: v.commonKeywords,
-                                competitionLvl: v.competitionLvl,
-                                domain: v.domain,
-                                organicKeywords: v.organicKeywords
-                            };
-                            columns.push(output)
-                        })
-                        console.log(columns);
+                                let output = {
+                                    commonKeywords: v.commonKeywords,
+                                    competitionLvl: v.competitionLvl,
+                                    domain: v.domain,
+                                    organicKeywords: v.organicKeywords
+                                };
+                                columns.push(output)
+                            })
+                            // console.log(columns);
                         return columns;
                     } else {
                         $('.parent-organicCompetitors').html('').addClass('empty-state').attr('style', 'height: 292px;')
@@ -313,4 +313,137 @@ $(document).ready(() => {
             }
         }
     )
+    const renderSparkline = (task) => {
+        $(`.organicPositions .sparkline`).each((index, item) => {
+            $(item).sparkline($(item).data('sparkline'), {
+                type: $(item).data('sparktype') || 'bar',
+                width: '50px',
+                height: '16px',
+                spotColor: '',
+                minSpotColor: '',
+                maxSpotColor: '',
+                highlightSpotColor: '',
+                // tooltipFormatter: (sparkline, options, fields) =>
+                //     `<span style="color: ${fields.color}">&#9679;</span> Tháng ${++fields.x}: ${numeral(fields.y).format(0,0)}`,
+                barColor: '#5d78ff',
+                sliceColors: ['#1abc9c', '#e74c3c'],
+                fillColor: 'rgba(61, 133, 222, 0.3)',
+            });
+        });
+    }
+
+    initDatatable(
+        'organicPositions', {
+            ajax: {
+                url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOrganicDetail&domain=${localDomain}&page=1&method[organicPositions]=true&userToken=${userToken}`,
+                dataSrc: function(res) {
+                    lockedModule('organicPositions', res.userData.member)
+                    if (res.data.organicPositions && res.data.organicPositions != '') {
+                        let columns = [];
+                        var stt = 1;
+                        $.each(res.data.organicPositions, function(k, v) {
+                            let output = {
+                                keyword: v.phrase,
+                                pos: v.position,
+                                pos_previou: v.previousPosition,
+                                diff: v.positionDifference,
+                                traffic: v.trafficPercent,
+                                volume: v.volume,
+                                dokho: v.keywordDifficulty,
+                                url: v.url,
+                                upd: v.crawledTime,
+                                trends: v.trends,
+                                stt: k + 1
+                            };
+                            columns.push(output)
+                        })
+                        return columns;
+                    } else {
+                        $('.parent-organicPositions').html('').addClass('empty-state')
+                        return [];
+                    }
+                },
+            },
+            drawCallback: function(settings) {
+                $('[data-toggle="tooltip"]').tooltip();
+            },
+            columns: [{
+                    title: "Stt",
+                    "data": "stt"
+                },
+                {
+                    title: "KeyWord",
+                    "data": data => `<div><a href="">${data.keyword}</a></div>`
+                },
+                {
+                    title: "Pos.",
+                    "data": data => `<div><span class="text-black-50">${data.pos}</span> <i class="far fa-arrow-right font-10 text-black-50 mx-1"></i> <span>${data.pos_previou}</span></div>`
+                },
+                {
+                    title: "Diff",
+                    "data": "diff"
+                },
+                {
+                    title: "Traffic",
+                    "data": "traffic"
+                },
+                {
+                    title: "Volume",
+                    "data": data => `${numeral(data.volume).format('0,0')}`
+                },
+                {
+                    title: "Cạnh tranh",
+                    "data": data => {
+                        return `<div class="bg-ctranh align-self-center ${data.dokho <= 70 ? data.dokho <= 30 ? 'bg-success' : 'bg-danger' : 'bg-warning'}">${data.dokho ? data.dokho : 0}</a>`
+                    }
+                },
+                {
+                    title: "Trend",
+                    "data": data => {
+                        return `<div class="lichsuHienThi d-none d-md-flex sparkline ml-auto" data-sparkline="[${data.trends}]"></div>`
+                    },
+                    width: '70px'
+                },
+                {
+                    title: "URL",
+                    "data": data => `<div class="limit-dot"><i class="far fa-lock text-muted"></i> <a data-toggle="tooltip" title="${data.url}" data-original-title="${data.url}" href="">${data.url}</a></div>`
+                },
+                {
+                    title: "Update",
+                    "data": data => `${moment(data.upd * 1000).format("MMM DD")}`
+                },
+            ],
+            language,
+            "ordering": false,
+            rowId: 'trId',
+            language,
+            info: false,
+            autoWidth: false,
+            searching: false,
+            // scrollX: true,
+            scrollCollapse: true,
+            paging: true,
+            processing: false,
+            pageLength: 15,
+            drawCallback: function() {
+                renderSparkline("organicPositions");
+            },
+            initComplete: function(settings, json) {
+                $("table.dataTable thead th").css("padding", "10px");
+                $("table.dataTable tbody tr td").css("padding", "15px 10px");
+                $(`#table-manager-cidads_wrapper`).css("overflow", "auto")
+                $(`.organicPositions`).css("text-align", "left")
+                renderSparkline("organicPositions");
+                $('.parent-organicPositions .dataTables_wrapper').css({
+                    "overflow": "auto",
+                    "white-space": "nowrap"
+                })
+                $('.widget-organicPositions .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
+                    <span class="similarReloadTasktable" data-task="organicPositions"><i class="fal fa-sync"></i></span>
+                </div>`)
+                $('.similarReloadTasktable').find('i').removeClass('fa-spin')
+            }
+        }
+    )
+
 })

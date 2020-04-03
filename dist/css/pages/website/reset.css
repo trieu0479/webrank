@@ -401,6 +401,20 @@
     transition: all 0.4s;
 }
 
+.bg-ctranh {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 8px;
+    font-size: 11px;
+}
+
+.limit-dot {
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 
 /* css cua dung dep trai */
 
@@ -600,28 +614,33 @@
 .parent-topBackLinks .dataTables_length {
     display: none;
 }
-.badge-tLink{
+
+.badge-tLink {
     border-radius: 0.65rem!important;
 }
 
-.badge-text{
+.badge-text {
     color: #999;
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
     background-color: #fff;
 }
-.badge-lost{
+
+.badge-lost {
     color: #ed2d2d;
-    background-color: rgba(237,45,45,.2);
-}
-.badge-new{
-    color: #4fae33;
-    background-color: rgba(79,174,51,.2);
+    background-color: rgba(237, 45, 45, .2);
 }
 
-.badge-nofl{
+.badge-new {
+    color: #4fae33;
+    background-color: rgba(79, 174, 51, .2);
+}
+
+.badge-nofl {
     color: #ff7f00;
     background-color: #ffe5cd;
 }
+
+
 /* css cua khanh dep trai */
 
 @media only screen and (max-width: 768px) {
@@ -637,6 +656,6 @@
     }
 }
 
-.col-lg-4 .btn-showLoginModal{
-    font-size:12px;
+.col-lg-4 .btn-showLoginModal {
+    font-size: 12px;
 }

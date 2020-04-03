@@ -1,6 +1,5 @@
 import api from './echartFunctions.js';
 $(document).ready(function() {
-    api("getHeader", localDomain);
     api("getSearchOrganicPaidOverview", localDomain);
     var input = {};
     input.headerTitle = "Tỉ Lệ Truy Câp Từ Tìm Kiếm";
@@ -27,11 +26,18 @@ $(document).ready(function() {
         api("getDomainOrganicDetail", localDomain);
     }
     var input = {};
-    input.headerTitle = "Chi phí theo từ khóa";
+    input.headerTitle = "Chi phí Organic";
     input.headerTime = "12.2019 - 02.2020";
     input.widgetTask = "trafficKeywordTrend";
     input.widgetContainer = "widget-trafficKeywordTrend";
     createAWidgets(input)
+
+    var input = {};
+    input.headerTitle = "Organic Search Positions";
+    input.headerTime = "12.2019 - 02.2020";
+    input.widgetTask = "organicPositions";
+    input.widgetContainer = "widget-organicPositions";
+    createADataTable(input)
 
     var input = {};
     input.headerTitle = "Tỉ Lệ Truy Cập Theo Từ Khoá Tự Nhiên";
