@@ -123,10 +123,10 @@ $(document).ready(() => {
         return true;
     }
     window.lockedModule = function lockedModule(boxWidgetName, level) {
-        var freeModule = ["getKeywords", "getWebsiteGeography", "banckLinksOverview","getAdvertisingSearchDetail","getOrganicKeywordsBrandedTable","getSimilarSites"];
-        var VIPModule = ["topBackLinks","getTrafficDisplayAdvertisingWebsitesTable","organicCompetitors","getOrganicKeywordsNonBrandedTable"];
-        if (level == 'demo'){
-            if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)){
+        var freeModule = ["getKeywords", "getWebsiteGeography", "banckLinksOverview", "getAdvertisingSearchDetail", "getOrganicKeywordsBrandedTable", "getSimilarSites", "organicPositions"];
+        var VIPModule = ["topBackLinks", "getTrafficDisplayAdvertisingWebsitesTable", "organicCompetitors", "getOrganicKeywordsNonBrandedTable", "organicPositions"];
+        if (level == 'demo') {
+            if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
                 $(".parent-" + boxWidgetName).addClass("locked");
                 $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
             }

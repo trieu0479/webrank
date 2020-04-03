@@ -68,17 +68,16 @@ const api = async(task, domain, reload = 0) => {
 };
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    console.log(boxWidgetName,level);
     var freeModule = [];
-    var VIPModule = ["trafficKeywordTrend","getAdvertisingSearchDetail", "getDomainOrganicDetail", "getTrafficSourcesSearch", "getSearchBrandedKeywords", "getSearchOrganicPaidOverview"];
+    var VIPModule = ["trafficKeywordTrend", "getAdvertisingSearchDetail", "getDomainOrganicDetail", "getTrafficSourcesSearch", "getSearchBrandedKeywords", "getSearchOrganicPaidOverview"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             //ngoai le 
-           
+
             $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
 
-            if ( boxWidgetName == "getSearchOrganicPaidOverview"){
+            if (boxWidgetName == "getSearchOrganicPaidOverview") {
                 var addOtherBox = "getSearchOrganicPaidOverviewpaid";
                 $(".parent-" + addOtherBox).addClass("locked");
                 $(".parent-" + addOtherBox).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
@@ -87,10 +86,10 @@ function lockedModule(boxWidgetName, level) {
         }
     } else if (level == 'free') {
         if (VIPModule.includes(boxWidgetName)) {
-            
+
             $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
-            if ( boxWidgetName == "getSearchOrganicPaidOverview"){
+            if (boxWidgetName == "getSearchOrganicPaidOverview") {
                 var addOtherBox = "getSearchOrganicPaidOverviewpaid";
                 $(".parent-" + addOtherBox).addClass("locked");
                 $(".parent-" + addOtherBox).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
@@ -258,9 +257,9 @@ const getTrafficSourcesSearch = async(task, data) => {
 //Chi tiết từ truy cập
 const getSearchOrganicPaidOverview = async(task, data) => {
     let task2 = 'getSearchOrganicPaidOverviewpaid';
-    
+
     if (data.status == "success") {
-        
+
         if (data.data.data == null || data.data.haveData == false) {
             let task = 'getSearchOrganicPaidOverviewpaid'
             let task2 = 'getSearchOrganicPaidOverview'
