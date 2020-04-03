@@ -16,7 +16,7 @@ $( document ).ready(function() {
     api('getAllTextTable',localDomain)
     api('PublicSherTable',localDomain)
 
-    // -------create table trang nguon quang cao hie nthi----------/
+    // -------create API----------/
     var input = {};
     input.headerTitle = "Trang Nguồn Quảng Cáo Hiển Thị";
     input.headerTime = "12.2019 - 02.2020";
