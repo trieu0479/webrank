@@ -18,7 +18,7 @@ function lockedModule(boxWidgetName, level) {
             $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
         }
     }
-}
+} 
 const api = async (method, domain) => {
     let methodName = method;
     if (method == "displayAdsOverview" || method == "adTypeOverview") {
@@ -241,7 +241,7 @@ const SampleAdsasImage = async (data, method) => {
             <div class="box-img">
                 <div class="image-media">
                     <div class="image-sample">
-                        <img src="${val.mediaUrl}">
+                         <img src="https://imgcdn.trazk.com/f.php?f=${btoa(val.mediaUrl)}">
                     </div>
                 </div>
                 <div class="text-sample pt-2">

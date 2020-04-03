@@ -59,12 +59,14 @@ $(document).ready(()=>{
     $('body').on('click', '.btnCheckWebsite', function() {
         var domain = $('.iptWebsite').val();
         domain = extractHostname(domain);
+        domain = domain.toLowerCase();
         window.location.href = `${rootURL}/rank/${domain}`;
     })
     $('.iptWebsite').keypress(event => {
         if (event.which == 13) {
         var domain = $('.iptWebsite').val();
         domain = extractHostname(domain);
+        domain = domain.toLowerCase();
         window.location.href = `${rootURL}/rank/${domain}`;
         }
     })

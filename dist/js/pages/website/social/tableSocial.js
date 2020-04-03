@@ -57,7 +57,6 @@ $(document).ready(() => {
             return newData.Records.filter(item => item.Page != "grid.upgrade")
           }
           else {
-            console.log('khanh');
             // $('.getTrafficSocialTableDetail thead').addClass('d-none')
             $('.getTrafficSocialTableDetail tbody tr .dataTables_empty').text("").addClass("empty-state");
             return [];
@@ -115,7 +114,7 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
   for (const key in socialChanel) {
     total+=socialChanel[key].Visits
   }
-  $('.socialChannel').html('').html(numeral(total).format('0,0a'))
+  $('.socialChannel').html('').html(numeral(socialChanel.length).format('0,0a'))
   
 })
 
@@ -123,7 +122,6 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
 
   $.get(`//localapi.trazk.com/webdata/facebook.php?task=findFanpageByDomain&domain=${localDomain}&userToken=${userToken}`, function (res) {
     let fbId = res.data.fbId;
-    console.log('das',res);
     
     let logo = res.data.imageURI;
     let name = res.data.name;

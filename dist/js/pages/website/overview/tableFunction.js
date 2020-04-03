@@ -459,31 +459,33 @@ $(document).ready(() => {
         let logo = res.data.imageURI;
         let name = res.data.name;
         let iconBlue = '';
-        if (res.data.verification == "blue_verified") {
-            iconBlue = rootURL + "/dist/images/check.png";
-        } else {
-            iconBlue = "";
+        if (fbId != undefined) {
+            if (res.data.verification == "blue_verified") {
+                iconBlue = rootURL + "/dist/images/check.png";
+            } else {
+                iconBlue = "";
+            }
+            let html = `
+            <div class="imgPageAds d-flex align-items-end"
+                style="--cover-photo-uri: url('${res.data.pageCoverPhoto}');background-size: contain;height: 300px;width: 100%;background-position: center;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri);padding: 20px!important;">
+                        <div class="p-2 mb-4 rounded-circle bg-primary" style="width:115px;height:115px;background-image: url('${res.data.imageURI}');background-size: cover;background-position: center;background-repeat: no-repeat;border:2px solid white"></div>
+                        <div class="p-2 mb-5 pl-3">
+                        <div class="font-16 font-weight-bold text-white">${res.data.name} <img class="ml-n1" src="${iconBlue}" style="width:20px">
+                                    
+                        </div>
+                        <div class="font-12 text-white">@${res.data.pageAlias}</div>
+                        <div class="font-12 text-white">${res.data.category} - <span>${numeral(res.data.likes).format("0,0")} likes</span></div>
+                        </div>
+                        <div class="ml-auto mb-5">
+                        <div class="bg-white" style="border-radius: 5px;padding: 5px 10px 5px 10px;">
+                        <div class="font-12 text-dark p-5"><i class="far fa-flag-alt"></i> Trang được tạo <span>${moment(res.data.pageCreationDate).format('MMMM DD YYYY')}</span><div>
+                        </div>
+                        </div>
+                        
+                        
+            </div>
+            `;
+            $('#bannerPageAds').append(html)
         }
-        let html = `
-          <div class="imgPageAds d-flex align-items-end"
-            style="--cover-photo-uri: url('${res.data.pageCoverPhoto}');background-size: contain;height: 300px;width: 100%;background-position: center;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri);padding: 20px!important;">
-                      <div class="p-2 mb-4 rounded-circle bg-primary" style="width:115px;height:115px;background-image: url('${res.data.imageURI}');background-size: cover;background-position: center;background-repeat: no-repeat;border:2px solid white"></div>
-                      <div class="p-2 mb-5 pl-3">
-                      <div class="font-16 font-weight-bold text-white">${res.data.name} <img class="ml-n1" src="${iconBlue}" style="width:20px">
-                                
-                      </div>
-                      <div class="font-12 text-white">@${res.data.pageAlias}</div>
-                      <div class="font-12 text-white">${res.data.category} - <span>${numeral(res.data.likes).format("0,0")} likes</span></div>
-                      </div>
-                      <div class="ml-auto mb-5">
-                      <div class="bg-white" style="border-radius: 5px;padding: 5px 10px 5px 10px;">
-                      <div class="font-12 text-dark p-5"><i class="far fa-flag-alt"></i> Trang được tạo <span>${moment(res.data.pageCreationDate).format('MMMM DD YYYY')}</span><div>
-                      </div>
-                      </div>
-                    
-                     
-          </div>
-          `;
-        $('#bannerPageAds').append(html)
     })
 })

@@ -1104,7 +1104,7 @@ const PaidPageTable = async(data, method) => {
         }
     )
 
-}
+} 
 
 
 const getScrapedSearchAds = async (data,method) => {

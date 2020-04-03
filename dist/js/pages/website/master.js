@@ -6,7 +6,7 @@ if (location.href.indexOf("/rank/") > 1) {
     domain = url.searchParams.get("domain");
 }
 domain = extractHostname(domain);
-
+domain = domain.toLowerCase();
 function extractHostname(url) {
     var hostname;
     //find & remove protocol (http, ftp, etc.) and get hostname

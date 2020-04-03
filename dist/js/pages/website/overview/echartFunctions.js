@@ -117,8 +117,8 @@ const getHeader = async data => {
     if (similarDescription == "")
         similarDescription = "<em>Website này chưa cập nhật mô tả</em>";
 
-    // Set value Header
-    similarIcon = "https://files.fff.com.vn/f.php?url=" + btoa(similarIcon);
+    // Set value Headerhttps://www.google.com/s2/favicons?domain=news.zing.vn
+    similarIcon = "https://www.google.com/s2/favicons?domain=" + similarDomain;
     $(".similarHeader .similarIcon").html(
         `<img class="p-1 mr-2 border rounded bg-secondary" src="${similarIcon}" />`
     );
@@ -144,7 +144,7 @@ const getHeader = async data => {
             (index == "apps_0" ?
                 "//play.google.com/store/apps/details?id=" :
                 "//itunes.apple.com/us/app/id") + mainApp.id;
-        const appIcon = "https://files.fff.com.vn/f.php?url=" + btoa(mainApp.icon);
+        const appIcon = "https://imgcdn.trazk.com/f.php?f=" + btoa(mainApp.icon);
         const appTitle = mainApp.title;
         apps += `<a target="_blank" class="mr-2" href="${appId}"><img width="32px" src="${appIcon}" /></a>`;
     });
@@ -153,8 +153,8 @@ const getHeader = async data => {
         `<div class="d-flex flex-row">${apps}</div>`
     );
 
-    similarThumb = "https://files.fff.com.vn/f.php?url=" + btoa(similarThumb);
-    similarThumbMobile = "https://files.fff.com.vn/f.php?url=" + btoa(similarThumbMobile);
+    similarThumb = "https://imgcdn.trazk.com/f.php?f=" + btoa(similarThumb);
+    similarThumbMobile = "https://imgcdn.trazk.com/f.php?f=" + btoa(similarThumbMobile);
     $(".similarThumb img").attr("src", similarThumb);
     $(".similarThumbMobile img").attr("src", similarThumbMobile);
 
@@ -368,6 +368,10 @@ const api = async(task, domain, reload = 0) => {
     if (task == 'getTraffic30Days') {
         taskname = 'getDomainOverview'
         method = 'ranksHistory'
+    }   
+    if (task == 'getScrapedSearchAds') {
+        taskname = 'getDomainOverview'
+        method = 'adwordsPositionsOverview'
     }
 
     // console.log(taskname);
@@ -2640,157 +2644,83 @@ const getDomainBackLinkDetail = async(task, data) => {
         }
     }
     //done
-const getScrapedSearchAds = async(task, data) => {
-    // console.log(data);
-    if (data.status == "success") {
-        var SearchAds = null;
-        var domain = url.searchParams.get("domain");
 
-        if (data.data.data && data.data.data[`${domain}`]) SearchAds = data.data.data[`${domain}`];
-        else if (data.data.data) SearchAds = data.data.data;
-
-        $(`#${task} .carousel-inner`).html('');
-        $(`#${task} .carousel-indicators`).html('');
-        if (SearchAds == null) {
-            await $(`#${task} .carousel-inner`).removeClass('is-loading').addClass('empty-state');
-            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-        } else {
-            $("#row-getPaidSearchCompetitorsTableV1").show();
-            await $.each(SearchAds, (index, value) => {
-
-                if (value) {
-                    if (index < 5) {
-                        $(`#${task} .carousel-indicators`).append(`
-                <li data-target="#${task}" data-slide-to="${index}" class="my-0 border-0 bg-favorite text-white text-center rounded-circle ${index == 0 ? 'active' : ''}" style="width:20px;height:20px;text-indent:0;">${index + 1}</li>
-                `);
-                    }
-                    var Type = value.Type;
-
-                    let carouselItem = '';
-
-                    if (Type == "Text") {
-                        let {
-                            Description,
-                            DestUrl,
-                            FullPage,
-                            Keywords,
-                            NumberOfKeywords,
-                            Page,
-                            Position,
-                            Title,
-                        } = value;
-
-                        if (index < 5) {
-
-                            Page = Page || FullPage;
-                            (Description != '') ? Description = '<div class="text-muted">' + Description + '</div>': null;
-
-                            carouselItem = `
-                    <div class="carousel-item p-20 p-l-40 p-r-40 ${index == 0 ? 'active' : ''}">
-                    <div class="similarAdsText border rounded">
-                        <div class="d-flex no-block align-items-center justify-content-center bg-secondary p-10" style="height:185px">
-                        <div class="border bg-white shadow p-10 w-100">
-                            <a href="javascript:;" target="_blank" title="${DestUrl}">
-                            ${Title}
-                            </a>
-                            ${Page != '' ? '<div class="text-success text-truncate pb-0">' + Page + '</div>' : ''}
-                            ${Description}
-                        </div>
-                        </div>
-                        <div class="similarAdsDetails p-20 border-top">
-                        <div class="row">
-                            <div class="col text-muted font-10">Vị trí trung bình</div>
-                            <div class="col text-muted font-10">Số lượng từ khoá</div>
-                            <div class="col text-muted font-10">Website đích</div>
-                        </div>
-                        <div class="row">
-                            <div class="col">${numeral(Position).format('0')}</div>
-                            <div class="col">${NumberOfKeywords}</div>
-                            <div class="col text-truncate pb-0">${DestUrl == '' ? domain : DestUrl}</div>
-                        </div>
-                        <div class="mt-3 text-truncate pb-0"><div class="font-10 text-muted">Từ khoá</div>${Keywords.join(',')}</div>
-                        </div>
-                    </div>
-                    </div>
-                    `
-                        }
-                    } else {
-                        // Google shopping
-                        let {
-                            Brand,
-                            DestUrl,
-                            ImageUrl,
-                            Keywords,
-                            NumberOfKeywords,
-                            Position,
-                            Price,
-                            Title,
-                        } = value;
-
-                        if (index < 5) {
-                            DestUrl == '' ? DestUrl = domain : null;
-
-                            carouselItem = `
-                <div class="carousel-item p-20 p-l-40 p-r-40 ${index == 0 ? 'active' : ''}">
-                    <div class="similarAdsShopping border rounded">
-                    <div class="row">
-                        <div class="col-5">
-                        <div class="d-flex no-block flex-column bg-favorite-2 h-100 align-items-center justify-content-center px-4">
-                            <div class="w-100 border rounded bg-secondary shadow">
-                            <img width="121px" height="121px" class="d-flex no-block img-responsive align-self-center mh-100 my-2 mx-auto shadow" src="${ImageUrl.replace(/\\x3d/g, '')}" />
-                            <div class="p-10 border-top bg-white rounded-bottom">
-                                <a href="javascript:;" target="_blank" title="${DestUrl}">
-                                ${Title}
-                                </a>
-                                <div class="font-weight-bold">${Price}</div>
-                                <div class="text-success">${Brand}</div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="col-7 p-10">
-                        <div class="row">
-                            <div class="col text-muted font-10">Vị trí trung bình</div>
-                            <div class="col text-muted font-10">Số lượng từ khoá</div>
-                        </div>
-                        <div class="row">
-                            <div class="col">${numeral(Position).format('0')}</div>
-                            <div class="col">${NumberOfKeywords}</div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col text-muted font-10">Website đích</div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-truncate"><a target="_blank" href="${DestUrl}" title="${DestUrl}">${DestUrl} <i class="fal fa-external-link ml-auto"></i></a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-muted font-10">Từ khoá</div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><div class="position-relative p-r-10 w-100 keywords-list" style="height:190px;word-wrap:break-word;">${Keywords.join(', ')}</div></div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                `
-                        }
-                    }
-                    $(`#${task} .carousel-inner`).append(carouselItem);
-
-                }
-            });
-
-            $('.keywords-list').perfectScrollbar();
+    const getScrapedSearchAds = async (boxName,data) => {
+       
+        console.log(data);
+        if (data.data.adwordsPositionsOverview == null) {
+            $('#getScrapedSearchAds').addClass('empty-state')
         }
 
-
-        await $(`#${task} .carousel-inner`).removeClass('is-loading');
-        await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-    } else {
-        console.log(`${task} failed`);
-    }
-};
+         if (data.status == "success") {
+             var SearchAds  = data.data.adwordsPositionsOverview;        
+           //  console.log(SearchAds);        
+             $(`#getScrapedSearchAds .carousel-inner`).html('');
+             $(`#getScrapedSearchAds .carousel-indicators`).html('');        
+                 $("#row-getPaidSearchCompetitorsTableV1").show();
+                 await $.each(SearchAds,(index, value) => {
+                     if (value){
+                     if (index < 5) {
+                         $(`#getScrapedSearchAds .carousel-indicators`).append(`
+                     <li data-target="#getScrapedSearchAds" data-slide-to="${index}" class="my-0 border-0 bg-favorite text-white text-center rounded-circle ${index == 0 ? 'active' : ''}" style="width:20px;height:20px;text-indent:0;">${index + 1}</li>
+                     `);
+                     }                
+                     
+                     let carouselItem = '';
+      {
+                         let {
+                             description,
+                             visibleUrl,                       
+                             phrase,
+                             keywordDifficulty,                        
+                             position,
+                             title,
+                             traffic,
+                             trafficCost,
+                             trafficPercent,
+                             crawledTime,
+                         } = value;
+                         
+                                                
+                             (description != '') ? description = '<div class="text-muted">' + description + '</div>': null;
+                             carouselItem = `
+                         <div class="carousel-item p-20 p-l-40 p-r-40 ${index == 0 ? 'active' : ''}">
+                         <div class="similarAdsText border rounded">
+                             <div class="d-flex no-block align-items-center justify-content-center bg-secondary p-10" style="height:185px">
+                             <div class="border bg-white shadow p-10 w-100">
+                                 <a href="javascript:;" target="_blank" title="${visibleUrl}">
+                                 ${title}
+                                 </a>   
+                                 <div class="text-success text-truncate pb-0">${visibleUrl}</div>                         
+                                 ${description}
+                             </div>
+                             </div>
+                             <div class="similarAdsDetails p-20 border-top">
+                             <div class="row">
+                                 <div class="col text-muted font-10">Traffic: <span>${numeral(traffic).format('0,0')}</span></div>
+                                 <div class="col text-muted font-10">Tỉ lệ traffic: <span>${numeral(trafficPercent).format('0,0')} <sup>%</sup></span></div>
+                                 <div class="col text-muted font-10">Chi phí: <span>${numeral(trafficCost*23500).format('0,0')} <sup>vnd</sup></span></div>
+                             </div>
+                             
+                             <div class="mt-3 text-truncate pb-0"><span class="mr-1 bagInfo font-10 ">${moment.unix(crawledTime).format("DD MMM YYYY")}</span> <span class="font-10 text-muted">  Từ khoá: ${phrase}</span></div>
+                             </div>
+                         </div>
+                         </div>
+                         `
+                         
+                     } 
+                    
+                     $(`#getScrapedSearchAds .carousel-inner`).append(carouselItem);            
+                 }});
+     
+                 $('.keywords-list').perfectScrollbar();
+             
+             await $(`#getScrapedSearchAds .carousel-inner`).removeClass('is-loading');
+             await $(`.similarReloadTask[data-task="getScrapedSearchAds"]`).find('i').removeClass('fa-spin');
+         } else {
+           //  console.log(`getScrapedSearchAds failed`);
+         }
+     };
 
 // Lượt Truy Cập Xã Hội
 const getTrafficSocial = async(task, data, domain) => {
@@ -3503,7 +3433,7 @@ const SampleAdsasImage = async(task, data) => {
             <div class="box-img">
                 <div class="image-media">
                     <div class="image-sample">
-                        <img src="${val.mediaUrl}">
+                        <img src="https://imgcdn.trazk.com/f.php?f=${btoa(val.mediaUrl)}">
                     </div>
                 </div>
                 <div class="text-sample pt-2">
