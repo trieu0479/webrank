@@ -69,7 +69,7 @@ const api = async(task, domain, reload = 0) => {
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
-    var VIPModule = ["trafficKeywordTrend", "getAdvertisingSearchDetail", "getDomainOrganicDetail", "getTrafficSourcesSearch", "getSearchBrandedKeywords", "getSearchOrganicPaidOverview"];
+    var VIPModule = ["trafficKeywordTrend", "getAdvertisingSearchDetail", "getTrafficSourcesSearch", "getSearchBrandedKeywords", "getSearchOrganicPaidOverview"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             //ngoai le 
@@ -1425,6 +1425,7 @@ const getDomainOrganicDetail = async(task, data) => {
                             areaStyle: {
                                 color: '#fd397a'
                             },
+
                             symbol: "none",
                             itemStyle: {
                                 color: '#fd397a'
