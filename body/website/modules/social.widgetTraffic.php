@@ -1,4 +1,4 @@
-<div class="row ggAdsOverview mt-3">                
+<div class="row">                
                    
 <div class="col-12 col-lg-4 mb-0">
 <div class="text-center bg-white p-3 align-items-center rounded">

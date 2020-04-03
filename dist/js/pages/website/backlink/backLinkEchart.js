@@ -110,7 +110,7 @@ const apiBackLink = async (method, domain, reload = 0) => {
                 default:
                     break;
             }
-            lockedModule(methodName,data.userData.member);
+            lockedModule(methodName, data.userData.member);
             return true;
         })
 
@@ -320,7 +320,7 @@ const anchorsOverview = async (data, method) => {
 
 const categoriesRefDomain = async (data, method) => {
     // console.log('backlinksDetail', data.data);
-    if (data.status == "success") {
+    if (data.status == "success" && data.data.backlinksOverview.categories != null) {
         let cataDomain = data.data.backlinksOverview.categories;
         $.each(cataDomain, (index, item) => {
             let string = index.slice(1);
@@ -356,8 +356,8 @@ const categoriesRefDomain = async (data, method) => {
         $('.widget-categories-refdomains .similarReloadTask').addClass('d-none')
         await $(`.similarReloadTask[data-task="categories-refdomains"]`).find('i').removeClass('fa-spin');
     } else {
-        $(`#showRefDomain`).removeClass('is-loading')
-        $(`#showRefDomain`).addClass('empty-state')
+        $(`.categories-refdomains`).removeClass('is-loading')
+        $(`.categories-refdomains`).addClass('empty-state')
     }
 }
 
