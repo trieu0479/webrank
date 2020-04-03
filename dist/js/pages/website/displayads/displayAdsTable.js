@@ -1,7 +1,3 @@
-var domain = '';
-var arrDomain = [];
-var selectWebsite = "";
-const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 
 function lockedModule(boxWidgetName, level) {

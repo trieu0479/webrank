@@ -81,14 +81,19 @@
                 </div>
             </div>
             
-           
             <div class="row">
-            <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-6">
                     <div style="height:100%" class="widget-getOrganicKeywordsBrandedTable"></div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <div style="height:100%" class="widget-getOrganicKeywordsNonBrandedTable"></div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-12 ">
+                    <div style="height:100%" class="widget-organicPositions"></div>
+                </div>
+                
             </div>
     </div>
 </div>

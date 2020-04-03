@@ -136,7 +136,8 @@ $(document).ready(() => {
                             let columns = [];
                             var stt = 1;
                             $.each(json.data.keywords, function(k, v) {
-                                if (v.maxCPC) var maxCPC =v.maxCPC; else var maxCPC =  v.minCPC*1.5;
+                                if (v.maxCPC) var maxCPC = v.maxCPC;
+                                else var maxCPC = v.minCPC * 1.5;
                                 let output = {
                                     stt: stt++,
                                     keyword: v.keyword,
@@ -157,8 +158,7 @@ $(document).ready(() => {
                     // $('.getTrendingKeywordsTable-container').removeClass('is-loading').unblock();
                     // $('.getTrendingKeywordsTable-container').find('.fa-spin').removeClass('fa-spin');
                 },
-                columns: [
-                    {
+                columns: [{
                         title: 'STT',
                         data: data => data.stt,
                         width: '20px',
