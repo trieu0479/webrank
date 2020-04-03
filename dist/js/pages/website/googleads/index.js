@@ -51,10 +51,4 @@ $(document).ready(function () {
 
     })
 
-
-
-
-
-
-
 });

@@ -104,22 +104,6 @@ const initDatatable = function(select, tableOptions) {
 function kFormatter(num) {
     return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
 }
-const language = {
-    searchPlaceholder: 'Nhập từ khóa',
-    processing: 'Đang xử lý...',
-    loadingRecords: 'Đang tải...',
-    emptyTable: 'Không có dữ liệu hiển thị',
-    lengthMenu: 'Hiển thị: _MENU_ dòng mỗi trang',
-    zeroRecords: 'Không tìm thấy dữ liệu',
-    info: 'Hiển thị từ _START_ đến _END_ trong tổng _TOTAL_ dòng',
-    infoEmpty: 'Hiển thị từ 0 đến 0 trong tổng 0 dòng',
-    infoFiltered: '(lọc từ tổng số _MAX_ dòng)',
-    search: 'Tìm kiếm:',
-    paginate: {
-        previous: 'Quay lại',
-        next: 'Tiếp theo'
-    }
-};
 const renderSparkline = (task) => { //task ở đây là id cha
     $(`#${task} .sparkline`).each((index, item) => {
         $(item).html('');

@@ -3,8 +3,7 @@ $( document ).ready(function() {
     $("#btn-view-text").hide()
     $("#btn-view-html").hide()
     api("getHeader", localDomain);
-    api('getWebsiteAdsIntelDisplay');    
-    // ---------------------------
+    api('getWebsiteAdsIntelDisplay');      
     api("displayAdsOverview", localDomain);
     api("SampleAdsasImage", localDomain);
     api("SampleAdsasHTML", localDomain);
@@ -172,15 +171,13 @@ $( document ).ready(function() {
         if (target == "#tab-image-ads") {           
             $(".sample__view__big__text").addClass("d-none");
             $(".sample__view__big__html").addClass("d-none");
-            $(".sample__view__big__ads").removeClass("d-none");     
-            //    api('getAllImageTable',localDomain)      
+            $(".sample__view__big__ads").removeClass("d-none");               
         }
        else if (target == "#tab-html-ads") {         
         $('#tab-html-ads').addClass('active')         
         $(".sample__view__big__ads").addClass("d-none");
         $(".sample__view__big__text").addClass("d-none");
-        $(".sample__view__big__html").removeClass("d-none");       
-            //    api('getAllHTMLTable',localDomain)      
+        $(".sample__view__big__html").removeClass("d-none");                  
         }
         else  if (target == "#tab-text-ads") {              
             $(".sample__view__big__ads").addClass("d-none");
@@ -193,15 +190,13 @@ $( document ).ready(function() {
 //  ---------------------------------------reload task---------------------     
       $('body').on('click','.similarReloadTask',async function () { 
         let task = $(this).data("task");   
-         
-        // let domain = url.searchParams.get("domain").replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
+        
         $(this).find('i').addClass('fa-spin');     
         if ( task == "getTrafficDisplayAdvertisingAds" ||task == "getTrafficDestinationAds" ||task == "getWebsiteAdsVisitsOverview" ||task == "getTrafficDisplayAdvertisingWebsitesTable" ) {
            return;
         }           
         else {
-            if (task == "PublicSherTable") {
-                // $(this).find('i').addClass('fa-spin')
+            if (task == "PublicSherTable") {              
                 $(this).parent().html('')
             }
             if (task =="SampleAds") {
@@ -216,8 +211,4 @@ $( document ).ready(function() {
        await api(task, localDomain).then( (res) =>$(this).find('i').removeClass('fa-spin')) 
         }
       })
-
-
-  
-
 });

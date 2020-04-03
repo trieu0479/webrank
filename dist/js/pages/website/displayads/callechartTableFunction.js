@@ -7,7 +7,6 @@ function insertToLg(data) {
         data = JSON.parse(data);
     })
 }
-
 var fullWebsite = new URL(location.href);
 var website = fullWebsite.searchParams.get("domain");
 let obj_limit = Promise.resolve(checkVIP("WebsiteTraffic"));
