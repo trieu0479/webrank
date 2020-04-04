@@ -658,11 +658,7 @@
         display: none;
     }
 }
-@media screen and (max-width: 480px){
-    .hiddenMobile{
-        display: none;
-    }
-}
+
 .col-lg-4 .btn-showLoginModal {
     font-size: 12px;
 }

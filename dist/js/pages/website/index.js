@@ -257,15 +257,8 @@ $(document).ready(function () {
     },
     {
       title: "Hạng thế giới ",
-      className: 'hiddenMobile',
       "data": "GlobalRank",
-      class:'text-right',
-    },
-    {
-      title: "Hạng VN",
-      "data": "LocalRank",
-      width: '60',
-      class:'text-right',
+      class:'text-right hiddenMobile',
     },
     {
       title: "PC vs Mobile",
@@ -276,15 +269,13 @@ $(document).ready(function () {
     {
       title: "Traffic",
       "data": data => `<div class="pl-3 ">${data.TotalTraffic}</div>`,
-      className: 'hiddenMobile',
       class:'text-right',
 
     },
     {
       title: `Money Traffic <i class="fad fa-question-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Lưu lượng có thể kiếm tiền được"></i>`,
       "data": data => `<div>${data.TrafficMonetization}</div>`,
-      className: 'hiddenMobile',
-      class:'text-right',
+      class:'text-right hiddenMobile',
     },
     {
       title: "GDN",
