@@ -84,5 +84,5 @@
     </div>
 </div>
 <script src="<?=$rootURL?>/dist/js/pages/my-function/init-function.js"></script>
-<script src="<?=$rootURL?>/dist/js/pages/website/index.js"></script>
+<script src="<?=$rootURL?>/dist/js/pages/website/index.js?v=<?=$version?>"></script>
 <!-- <script src="dist/js/pages/traffic-website/compareDomain.js"></script> -->

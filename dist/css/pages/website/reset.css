@@ -654,8 +654,15 @@
     .keywordSearchBox .iptWebsite {
         margin: 0 0 10px 0!important;
     }
+    .hiddenMobile{
+        display: none;
+    }
 }
-
+@media screen and (max-width: 480px){
+    .hiddenMobile{
+        display: none;
+    }
+}
 .col-lg-4 .btn-showLoginModal {
     font-size: 12px;
 }

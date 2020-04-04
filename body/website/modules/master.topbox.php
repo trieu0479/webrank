@@ -29,6 +29,7 @@
                 </div>
                 <div class="nextpage pt-3">
                     <a href="<?=$rootDomain?>/top-website-vietnam" class="text-box-catelog text-white text-turquoise">Tổng hợp top website tại Việt Nam</a>
+                    <a href="https://keywordplanner.vn" class="text-box-catelog text-white text-001">Phân tích từ khóa</a>
                 </div>
             </div>
         </div>
