@@ -349,17 +349,21 @@ const api = async(task, domain, reload = 0) => {
     let url = "";
     let method = '';
     let taskname = '';
-    if (task == "SampleAdsasImage" || task == "getAllImageTable") {
-        taskname = 'getAdvertisingDisplayDetail';
-        method = "bannerAds"
+    if (task == "googleAdsGDNOverview" || task == "getAllImageTable") {
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
     }
     if (task == "SampleAdsasHTML" || task == "getAllHTMLTable") {
-        taskname = 'getAdvertisingDisplayDetail';
-        method = "htmlAds"
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
     }
     if (task == "SampleAdsasText" || task == "getAllTextTable") {
-        taskname = 'getAdvertisingDisplayDetail';
-        method = "textAds"
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
+    }
+    if (task == "googleAdsGDNOverview") {
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
     }
     if (task == 'getDomainBackLinkDetail') {
         taskname = 'getDomainBackLinkDetail'
@@ -372,11 +376,15 @@ const api = async(task, domain, reload = 0) => {
     if (task == 'getScrapedSearchAds') {
         taskname = 'getDomainOverview'
         method = 'adwordsPositionsOverview'
-    }
+    }    
+    if (task == 'getDomainOverviewV2') {
+        taskname = 'getDomainOverviewV2'
+        method = 'all'
+    } 
 
     // console.log(taskname);
 
-    if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview') {
+    if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview' || taskname=='getDomainOverviewV2') {
         // taskname = task;
         url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
     } else {
@@ -406,6 +414,9 @@ const api = async(task, domain, reload = 0) => {
                         break;
                     case "getScrapedSearchAds":
                         getScrapedSearchAds(task, data);
+                        break;  
+                     case "adwordsCompetitorsOverview":
+                        adwordsCompetitorsOverview(task, data);
                         break;
                     case "getTrafficSourcesSearch":
                         getTrafficSourcesSearch(task, data);
@@ -413,8 +424,14 @@ const api = async(task, domain, reload = 0) => {
                     case "getDomainBackLinkDetail":
                         getDomainBackLinkDetail(task, data);
                         break;
+                    case "getDomainOverviewV2":
+                        getDomainOverviewV2(task, data);
+                        break;  
                     case "SampleAdsasImage":
                         SampleAdsasImage(task, data);
+                        break; 
+                    case "googleAdsGDNOverview":
+                        googleAdsGDNOverview(task, data);
                         break;
                     case "SampleAdsasHTML":
                         SampleAdsasHTML(task, data);
@@ -483,7 +500,7 @@ const api = async(task, domain, reload = 0) => {
                 // }
             });
     } catch (error) {
-        console.error(error);
+       // console.error(error);
     }
 };
 const estmatedWorth = async(task, data) => {
@@ -494,7 +511,7 @@ const estmatedWorth = async(task, data) => {
 
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAdsasHTML", "getScrapedSearchAds", "getSimilarSites"];
+    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites",'getListGoogleAdsCompetitor'];
     var VIPModule = [];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
@@ -2363,7 +2380,7 @@ const getSimilarSites = async(task, data) => {
                 }
                 var compareNode = $(`<span  data-domain="${site.Domain}" class="changeWebSite text-primary bg-info-2 rounded-pill px-2 font-10 align-self-center ml-auto text-uppercase">+ so sánh</span>`);
                 $(`<a title="${site.Domain}" class="d-flex align-items-center" href='${rootURL}/rank/${site.Domain}'">
-            <img class="p-1 mr-2 border rounded bg-secondary" src="${site.Favicon}" />
+            <img class="p-1 mr-2 border rounded bg-secondary" src="https://www.google.com/s2/favicons?domain=${site.Domain}">
             <span  data-type="website" data-input="${site.Domain}" >${site.Domain}</span>
         </a>`).appendTo(`.${task} .similarSites:last-child`)
                     .append(compareNode);
@@ -2644,14 +2661,18 @@ const getDomainBackLinkDetail = async(task, data) => {
         }
     }
     //done
-
+    const getDomainOverviewV2 = async (boxName,data) => {
+        getScrapedSearchAds('getScrapedSearchAds', data)
+        getTraffic30Days('getTraffic30Days', data)
+        getListGoogleAdsCompetitor('getListGoogleAdsCompetitor', data)
+        lockedModule('getScrapedSearchAds', data.userData.member);
+        lockedModule('getListGoogleAdsCompetitor', data.userData.member); 
+    };
     const getScrapedSearchAds = async (boxName,data) => {
-       
-        console.log(data);
-        if (data.data.adwordsPositionsOverview == null) {
+
+        if (data.data.adwordsPositionsOverview.length ==0) {
             $('#getScrapedSearchAds').addClass('empty-state')
         }
-
          if (data.status == "success") {
              var SearchAds  = data.data.adwordsPositionsOverview;        
            //  console.log(SearchAds);        
@@ -2660,11 +2681,7 @@ const getDomainBackLinkDetail = async(task, data) => {
                  $("#row-getPaidSearchCompetitorsTableV1").show();
                  await $.each(SearchAds,(index, value) => {
                      if (value){
-                     if (index < 5) {
-                         $(`#getScrapedSearchAds .carousel-indicators`).append(`
-                     <li data-target="#getScrapedSearchAds" data-slide-to="${index}" class="my-0 border-0 bg-favorite text-white text-center rounded-circle ${index == 0 ? 'active' : ''}" style="width:20px;height:20px;text-indent:0;">${index + 1}</li>
-                     `);
-                     }                
+                            
                      
                      let carouselItem = '';
       {
@@ -2685,9 +2702,9 @@ const getDomainBackLinkDetail = async(task, data) => {
                              (description != '') ? description = '<div class="text-muted">' + description + '</div>': null;
                              carouselItem = `
                          <div class="carousel-item p-20 p-l-40 p-r-40 ${index == 0 ? 'active' : ''}">
-                         <div class="similarAdsText border rounded">
+                         <div class="similarAdsText rounded">
                              <div class="d-flex no-block align-items-center justify-content-center bg-secondary p-10" style="height:185px">
-                             <div class="border bg-white shadow p-10 w-100">
+                             <div class="bg-white shadow p-10 w-100">
                                  <a href="javascript:;" target="_blank" title="${visibleUrl}">
                                  ${title}
                                  </a>   
@@ -2699,7 +2716,7 @@ const getDomainBackLinkDetail = async(task, data) => {
                              <div class="row">
                                  <div class="col text-muted font-10">Traffic: <span>${numeral(traffic).format('0,0')}</span></div>
                                  <div class="col text-muted font-10">Tỉ lệ traffic: <span>${numeral(trafficPercent).format('0,0')} <sup>%</sup></span></div>
-                                 <div class="col text-muted font-10">Chi phí: <span>${numeral(trafficCost*23500).format('0,0')} <sup>vnd</sup></span></div>
+                                 <div class="col text-muted font-10">Chi phí: <span>${numeral(trafficCost).format('0,0')} <sup>$</sup></span></div>
                              </div>
                              
                              <div class="mt-3 text-truncate pb-0"><span class="mr-1 bagInfo font-10 ">${moment.unix(crawledTime).format("DD MMM YYYY")}</span> <span class="font-10 text-muted">  Từ khoá: ${phrase}</span></div>
@@ -3424,26 +3441,66 @@ const getMarketingMixOverview = async(task, data) => {
     // DISPLAY ADS
 const SampleAdsasImage = async(task, data) => {
     $('.footer--bt-view').remove()
-    if (data.data.bannerAds == "") {
+    if (data.data.googleAdsGDNOverview.media.data.length == 0) {
         $('.sample-image-ads').addClass('empty-state')
-    }
-    data.data.bannerAds.forEach((val, index) => {
-        if (index < 5) {
-            $(".sample-image-ads").append(`<div class="box-all">
-            <div class="box-img">
-                <div class="image-media">
-                    <div class="image-sample">
-                        <img src="https://imgcdn.trazk.com/f.php?f=${btoa(val.mediaUrl)}">
+    }else{
+        data.data.googleAdsGDNOverview.media.data.forEach((val, index) => {
+            if (index < 5) {
+                $(".sample-image-ads").append(`<div class="box-all">
+                <div class="box-img">
+                    <div class="image-media">
+                        <div class="image-sample">
+                            <img src="https://imgcdn.trazk.com/f.php?f=${btoa(val.mediaUrl)}">
+                        </div>
                     </div>
+                    
                 </div>
-                <div class="text-sample pt-2">
-                    <span class="dayseen">Xuất hiện:<span class="seen-img pl-1 font-12">${val.daysSeen}</span> ngày</span>
-                    <span class="image-w-h"> <small class="image-width">${val.width}</small><small class="vs"> x </small> <small class="image-height">${val.height}</small></span>
+            </div>`)
+            }
+        })
+    }
+}// DISPLAY ADS
+const googleAdsGDNOverview = async(task, data) => {
+    lockedModule('SampleAds', data.userData.member);
+    if (data.data.googleAdsGDNOverview.media.data.length == 0) {
+        $('.sample-image-ads').addClass('empty-state')
+    }else{
+       
+        $(".count-image").html(`(${data.data.googleAdsGDNOverview.media.total})`);
+        data.data.googleAdsGDNOverview.media.data.forEach((val, index) => {
+           
+                $(".sample-image-ads").append(`<div class="box-all">
+                <div class="box-img">
+                    <div class="image-media">
+                        <div class="image-sample">
+                            <img src="https://imgcdn.trazk.com/f.php?f=${btoa(val.mediaUrl)}">
+                        </div>
+                    </div>
+                    
                 </div>
+            </div>`)
+            }
+        )
+        $(".count-text").html(`(${data.data.googleAdsGDNOverview.text.total})`);
+        data.data.googleAdsGDNOverview.text.data.forEach((val, index) => {
+           
+            $(".sample-text-ads").append(` <div class="box-text-all">
+            <div class="box-text">
+                <div class="body-text-overview">
+                    <a href="" class="title-blued">${val.title}</a>
+                    <div class="title-greened mt-2">
+                        <a href="${val.targetUrl}" class="font-12 smallgreend">${val.targetUrl}</a>
+                        <span class="child-hover delete-ic fal fa-external-link"></span>
+                    </div>
+                    <a href="#" class="text-contended pt-5">${val.text}</a>
+                </div>
+               
             </div>
         </div>`)
-        }
-    })
+       
+        })
+       
+    }
 }
 const SampleAdsasHTML = async(task, data) => {
     $('.footer--bt-view').remove()
@@ -3470,11 +3527,13 @@ const SampleAdsasHTML = async(task, data) => {
     })
 }
 const SampleAdsasText = async(task, data) => {
-    $('.footer--bt-view').remove()
-    if (data.data.textAds == '') {
+    $('.footer--bt-view').remove();
+    console.log(data);
+
+    if (data.data.googleAdsGDNOverview.text.data.length  == '') {
         $('.sample-text-ads').addClass('empty-state')
     }
-    data.data.textAds.forEach((val, index) => {
+    data.data.googleAdsGDNOverview.text.data.forEach((val, index) => {
         if (index < 5) {
             $(".sample-text-ads").append(` <div class="box-text-all">
             <div class="box-text">
@@ -3501,24 +3560,36 @@ const SampleAdsasText = async(task, data) => {
 }
 
 
+function kFormatter(num) {
+    return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
+}
 const getTraffic30Days = async(task, data) => {
-
+    
     if (data.status == "success") {
-        let totalBacklinks = data.data.ranksHistory;
+        let ranksHistory = data.data.ranksHistory;
         let adsTraffic = [];
         let organicTraffic = [];
         let date30 = [];
-
-        $.each(totalBacklinks, (key, item) => {
-            //   console.log('dsss',refDomains[index]);
-            date30.push(moment(item.date).format('DD MMM'))
-            adsTraffic.push(item.adsTraffic)
-            organicTraffic.push(item.traffic)
-        });
-
-        date30 = date30.reverse();
-        adsTraffic = adsTraffic.reverse();
-        organicTraffic = organicTraffic.reverse();
+       ranksHistory = ranksHistory.reverse();
+        for (var i=2;i<ranksHistory.length;i=i+7){
+            var item = null;
+            var adsTraffic7Day = 0;
+            var trafficDay = 0;
+            var item01 = ranksHistory[i];
+            for (var k=0;k<7;k++){
+                if (ranksHistory[i+k]){
+                    item = ranksHistory[i+k];
+                    adsTraffic7Day = adsTraffic7Day + item.adsTraffic;
+                    trafficDay = trafficDay + item.traffic;
+                }
+            }
+            date30.push(moment(item01.date).format('DD.MM') + " - " + moment(item.date).format('DD.MM'))
+            adsTraffic.push(adsTraffic7Day)
+            organicTraffic.push(trafficDay)
+        }
+       // date30 = date30.reverse();
+       // adsTraffic = adsTraffic.reverse();
+       // organicTraffic = organicTraffic.reverse();
         let ele = document.getElementById("showTraffic30Days");
         let myChart = echarts.init(ele, 'light');
 
@@ -3558,11 +3629,16 @@ const getTraffic30Days = async(task, data) => {
                 series: [{
                         name: 'Paid Traffic',
                         data: adsTraffic,
-                        type: 'line',
+                        type: 'bar',
                         smooth: true,
                         symbolSize: 10,
-
-
+                        label: {
+                            show: true,
+                            position: 'top',
+                            formatter: function (params) {                                                                                           
+                                return kFormatter(params.value)
+                            },
+                        },
                     },
                     {
                         name: 'Organic Traffic',
@@ -3570,6 +3646,13 @@ const getTraffic30Days = async(task, data) => {
                         type: 'line',
                         smooth: true,
                         symbolSize: 10,
+                        label: {
+                            show: true,
+                            position: 'top',
+                            formatter: function (params) {                                                                                           
+                                return kFormatter(params.value)
+                            },
+                        },
 
 
                     },
@@ -3594,5 +3677,85 @@ const getTraffic30Days = async(task, data) => {
         $(`#showRefDomain`).removeClass('is-loading')
         $(`#showRefDomain`).addClass('empty-state')
     }
+}
+
+const getListGoogleAdsCompetitor = async(task, data) => {
+    var initDatatable = function(select, tableOptions) {
+        const table = $(`.${select}`).DataTable(tableOptions);
+        $(table.table().header()).addClass('text-center');
+        $(`.${select}`).click(function(event) {
+            $(`.${select}-container`).addClass('is-loading').block({
+                overlayCSS: {
+                    backgroundColor: '#ccc',
+                    opacity: 0.8,
+                    zIndex: 1,
+                    cursor: 'wait'
+                },
+                message: null
+            });
+            // $(`.${select}`).DataTable().ajax.reload(() => {
+            //     reloaddata = 1
+            // });
+        })
+        return table;
+    }
+    initDatatable(
+        'getListGoogleAdsCompetitor', {
+            data: data.data.adwordsCompetitorsOverview,
+            drawCallback: function(settings) {},
+            columns: [{
+                    title: "Đối thủ",
+                    "data": data => `<a href="${rootURL}/rank/${data.domain}"><div class=""><img class="p-1 mr-2 border rounded bg-secondary" src="https://www.google.com/s2/favicons?domain=${data.domain}"> ${data.domain}</div></a>`,
+                    class: 'text-left',
+                    
+                },
+                {
+                    title: "Level",
+                    "data": data => `<div class="progress rounded progress-custom w-100 my-auto">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: ${(data.competitionLvl * 1000).toFixed(1)}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>`,
+                    class: 'text-left',
+                    width:'50'
+                },
+                {
+                    title: "Adwords",
+                    "data": data => `${numeral(data.adwordsKeywords).format('0,0')}`,
+                    class: 'text-right',
+                    width:'50'
+                },
+                {
+                    title: "Organic",
+                    "data": data => `${numeral(data.organicKeywords).format('0,0')}`,
+                    class: 'text-right',
+                    width:'50'
+                },
+            ],
+            "ordering": false,
+            info: false,
+            autoWidth: false,
+            searching: false,
+            scrollY: '325px',
+            scrollCollapse: true,
+            paging: false,
+            processing: true,
+
+            initComplete: function(settings, json) {
+                $("table.getAdvertisingSearchDetail thead th").css("padding", "10px");
+                // $(".dataTables_scrollBody table.getAdvertisingSearchDetail thead").html('')
+                $(".getAdvertisingSearchDetail tbody tr td").css("padding", "15px 10px!important");
+                $(".getAdvertisingSearchDetail tbody tr td:first-child").attr("style", "width:60px!important");
+                // $(".parent-getAdvertisingSearchDetail .dataTables_scrollBody ").attr("style", "height:325px!important");
+                 if (data.data.adwordsCompetitorsTotal > 0){
+                $(".parent-getListGoogleAdsCompetitor").append(`
+                   <div class="text-right mt-4 pr-2"><a href="https://webrank.vn/index.php?view=website&amp;action=displayads&amp;domain=tiki.vn&amp;userToken=V3gxbEZwK0tXU3NMcXVQSnZyZ1R2OXpzUDVyMGU1Qi8yWUlPTUtraXI3OD06Orsjp4yqccrrQ4PR08Jl_F8"><button class="btn btn-primary btn-sm " style="padding: 4px 13px;">
+                <span class="content-btn">Xem toàn bộ (${data.data.adwordsCompetitorsTotal}) </span>
+            </button></a></div>`)
+                 }else{
+                    $(`.widget-getListGoogleAdsCompetitor`).addClass('empty-state');
+                    $(`.parent-getListGoogleAdsCompetitor`).hide();
+                 }
+            }
+        }
+    )
 }
 export default api;

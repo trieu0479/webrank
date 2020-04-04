@@ -48,7 +48,8 @@ $(document).ready(() => {
                             $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
                             return [];
                         } else {
-                            return json.data.data.filter(item => item.Country != null);
+                            var cols = json.data.data.filter(item => item.Country != null);
+                            return cols;
                         }
                     }
                 },
@@ -314,7 +315,7 @@ $(document).ready(() => {
     initDatatable(
         'getAdvertisingSearchDetail', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${localDomain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
+                url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOverview&domain=${localDomain}&page=1&method[googleAdsGDNOverview]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
 
                     lockedModule('getAdvertisingSearchDetail', res.userData.member);

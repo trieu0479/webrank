@@ -2,7 +2,7 @@
     <div class="d-flex m-0 py-2 px-3  no-block d-flex align-items-center border-bottom"
         id="btnTraffic30Days">
         <div class="col-auto pl-0">
-            <div class="text-capitalize font-weight-bold"><i class="text-primary fad fa-usd-square"></i> Traffic - 30 Ngày Qua</div>
+            <div class="text-capitalize font-weight-bold"><i class="text-primary fad fa-usd-square"></i> Tăng trưởng tháng qua</div>
         </div>
         
         <div class="ml-auto d-flex no-block align-items-center pr-3">
