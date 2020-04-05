@@ -251,23 +251,26 @@ $(document).ready(() => {
     initDatatable(
         'banckLinksOverview', {
             ajax: {
-                url: `//localapi.trazk.com/webdata/v3.php?task=getDomainOverview&domain=${localDomain}&method[banckLinksOverview]=true&userToken=${userToken}`,
+                
+                url: `//localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&method[backlinksDetail]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.banckLinksOverview.backlinks.data);
-
                     lockedModule('banckLinksOverview', res.userData.member);
                     let columns = [];
-                    $.each(res.data.banckLinksOverview.backlinks.data, function(k, v) {
-                        // console.log(v);
-                        let output = {
-                            source_url: v.source_url,
-                            source_title: v.source_title,
-                            target_url: v.target_url,
-                            anchor: v.anchor,
-                            target_title: v.target_title,
-                            nofollow: v.nofollow,
-                        };
-                        columns.push(output)
+                    var stt = 0;
+                    $.each(res.data.backlinksDetail, function(k, v) {
+                        if (stt < 10){
+                            let output = {
+                                source_url: v.source_url,
+                                source_title: v.source_title,
+                                target_url: v.target_url,
+                                anchor: v.anchor,
+                                target_title: v.target_title,
+                                nofollow: v.nofollow,
+                            };
+                            columns.push(output)
+                            stt ++;
+                        }
                     })
                     return columns;
                 },

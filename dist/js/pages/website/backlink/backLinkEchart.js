@@ -124,14 +124,13 @@ const overViewBackLinks = async (data, method) => {
     if (data.status == "success") {
         let myChartinternet_users_percentage = echarts.init(document.getElementById('pieChart'), "light");
 
-        new ResizeSensor($('#pieChart'), () => myChartinternet_users_percentage.resize());
+       
         let frequency_of_internet_use = data.data.backlinksOverview;
         let option = {
             backgroundColor: "#fff",
             series: {
                 type: 'pie',
-                clockWise: true,
-                radius: [20, 30],
+                radius: ['50%', '70%'],
                 itemStyle: {
                     normal: {
                         color: '#a181fc',
@@ -177,7 +176,7 @@ const overViewBackLinks = async (data, method) => {
             }
         }
         myChartinternet_users_percentage.setOption(option);
-
+       // new ResizeSensor($('#pieChart'), () => myChartinternet_users_percentage.resize());
         $('#domainBacklinks').html('').html(numeral(frequency_of_internet_use.domains).format('0.0a'))
         $('#totalBacklinks').html('').html(numeral(frequency_of_internet_use.total).format('0.0a'))
         // await $(`#${task}`).removeClass('is-loading');

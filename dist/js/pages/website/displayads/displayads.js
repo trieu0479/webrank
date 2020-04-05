@@ -1,6 +1,9 @@
 //US,GB,AU,FR,
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
-var domain = url.searchParams.get('domain');
+
+var localUrl = new URL(location.href);
+var domain = localUrl.searchParams.get('domain');
+
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
     var VIPModule = ["SampleAdsasHTML","topPublicSher","getAllImageTable","PublicSherTable","getWebsiteAdsIntelDisplay","getTrafficDestinationAds","adwordsMonthlyFullTrend","adTypeOverview","displayDevice"];

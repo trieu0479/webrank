@@ -252,7 +252,7 @@ $(document).ready(function () {
       title: "Danh Mục",
       className: 'hiddenMobile',
       "data": data => {
-        return `<a data-name="${data.category1}" href="?view=traffic-website&action=topsites&domain=fff.com.vn&name=${data.category1}" class="Categories"></a>`
+        return `<a data-name="${data.category1}" href="${rootURL}/top-website-vietnam/${data.category1}" class="Categories"></a>`
       }
     },
     {

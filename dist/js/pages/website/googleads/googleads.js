@@ -1,7 +1,9 @@
 //US,GB,AU,FR,
 var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
-var domain = url.searchParams.get('domain');
+
+var localUrl = new URL(location.href);
+var domain = localUrl.searchParams.get('domain');
 
 
 function lockedModule(boxWidgetName, level) {

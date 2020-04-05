@@ -3,6 +3,12 @@ import apiBackLink from './backLinkEchart.js';
 
 
 $(document).ready(function () {
+
+    
+    var localUrl = new URL(location.href);
+    var localDomain = localUrl.searchParams.get('domain');
+
+
     api("getHeader", localDomain);
     apiBackLink('backLinksOverviews', localDomain);
     apiBackLink('referringDomains', localDomain);

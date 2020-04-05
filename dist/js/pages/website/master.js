@@ -3,7 +3,8 @@ var domain = "";
 if (location.href.indexOf("/rank/") > 1) {
     domain = location.href.substring(location.href.indexOf("/rank/") + 6);
 } else {
-    domain = url.searchParams.get("domain");
+    var localUrl = new URL(location.href);
+    domain = localUrl.searchParams.get("domain");
 }
 domain = extractHostname(domain);
 domain = domain.toLowerCase();

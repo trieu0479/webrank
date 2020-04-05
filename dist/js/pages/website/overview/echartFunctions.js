@@ -545,9 +545,9 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                 let html = `
                         <div class="px-3 py-4" >
                             <div class="title-ttc text-center mb-1 font-15">Tổng lượt truy cập</div>
-                            <div class="d-flex ">
-                                <div id="totalTraffic" class="d-flex no-block m-auto">
-                                <h1 class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</h1>
+                            <div class="">
+                                <div id="totalTraffic" class="text-center no-block m-auto">
+                                <span class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</span>
                                 </div>
                             </div>
                         </div>
