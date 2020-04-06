@@ -110,7 +110,7 @@ const apiBackLink = async (method, domain, reload = 0) => {
                 default:
                     break;
             }
-            lockedModule(methodName,data.userData.member);
+            lockedModule(methodName, data.userData.member);
             return true;
         })
 
@@ -124,14 +124,13 @@ const overViewBackLinks = async (data, method) => {
     if (data.status == "success") {
         let myChartinternet_users_percentage = echarts.init(document.getElementById('pieChart'), "light");
 
-        new ResizeSensor($('#pieChart'), () => myChartinternet_users_percentage.resize());
+       
         let frequency_of_internet_use = data.data.backlinksOverview;
         let option = {
             backgroundColor: "#fff",
             series: {
                 type: 'pie',
-                clockWise: true,
-                radius: [20, 30],
+                radius: ['50%', '70%'],
                 itemStyle: {
                     normal: {
                         color: '#a181fc',
@@ -177,7 +176,7 @@ const overViewBackLinks = async (data, method) => {
             }
         }
         myChartinternet_users_percentage.setOption(option);
-
+       // new ResizeSensor($('#pieChart'), () => myChartinternet_users_percentage.resize());
         $('#domainBacklinks').html('').html(numeral(frequency_of_internet_use.domains).format('0.0a'))
         $('#totalBacklinks').html('').html(numeral(frequency_of_internet_use.total).format('0.0a'))
         // await $(`#${task}`).removeClass('is-loading');
@@ -320,7 +319,7 @@ const anchorsOverview = async (data, method) => {
 
 const categoriesRefDomain = async (data, method) => {
     // console.log('backlinksDetail', data.data);
-    if (data.status == "success") {
+    if (data.status == "success" && data.data.backlinksOverview.categories != null) {
         let cataDomain = data.data.backlinksOverview.categories;
         $.each(cataDomain, (index, item) => {
             let string = index.slice(1);
@@ -356,8 +355,8 @@ const categoriesRefDomain = async (data, method) => {
         $('.widget-categories-refdomains .similarReloadTask').addClass('d-none')
         await $(`.similarReloadTask[data-task="categories-refdomains"]`).find('i').removeClass('fa-spin');
     } else {
-        $(`#showRefDomain`).removeClass('is-loading')
-        $(`#showRefDomain`).addClass('empty-state')
+        $(`.categories-refdomains`).removeClass('is-loading')
+        $(`.categories-refdomains`).addClass('empty-state')
     }
 }
 

@@ -33,6 +33,13 @@ $(document).ready(function() {
     createAWidgets(input)
 
     var input = {};
+    input.headerTitle = "Organic Search Positions";
+    input.headerTime = "12.2019 - 02.2020";
+    input.widgetTask = "organicPositions";
+    input.widgetContainer = "widget-organicPositions";
+    createADataTable(input)
+
+    var input = {};
     input.headerTitle = "Tỉ Lệ Truy Cập Theo Từ Khoá Tự Nhiên";
     input.headerTime = "12.2019 - 02.2020";
     input.widgetTask = "getSearchBrandedKeywords";

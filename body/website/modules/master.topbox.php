@@ -11,6 +11,12 @@
         <div class="font-gg font-weight-400 fontsize-32 text-center">
         Công cụ Phân tích Traffic Website 
         </div>
+        <div class="text-center extensionLogo">
+            <a target="blank" href="https://chrome.google.com/webstore/detail/ph%C3%A2n-t%C3%ADch-%C4%91%E1%BB%91i-th%E1%BB%A7-website/bafckfijdjmflihjfdhaajjejcboaiaj"><img src="<?=$rootURL?>/dist/images/chrome-extension.png" class="mr-2"></a>
+            <a target="blank" href="https://addons.mozilla.org/en-US/firefox/addon/website-analysis-tool/"><img src="<?=$rootURL?>/dist/images/firefox-extension.png" class="mr-2"></a>
+            <a target="blank" href="https://microsoftedge.microsoft.com/addons/detail/pfbdckfkjpaedbflbhmdflfbihpcconf"><img src="<?=$rootURL?>/dist/images/edge-extension.png"></a>
+        </div>
+
         <? if ($action == "index"){?>
         <div class="font-gg text-muted font-14 text-center mt-2 font-weight-400">
         Nhập vào tên miền (domain) website cần phân tích, công cụ phân tích traffic sẽ cung cấp cho bạn mọi thông tin về website 
@@ -29,6 +35,7 @@
                 </div>
                 <div class="nextpage pt-3">
                     <a href="<?=$rootDomain?>/top-website-vietnam" class="text-box-catelog text-white text-turquoise">Tổng hợp top website tại Việt Nam</a>
+                    <a href="https://keywordplanner.vn" class="text-box-catelog text-white text-001">Phân tích từ khóa</a>
                 </div>
             </div>
         </div>
@@ -59,12 +66,14 @@ $(document).ready(()=>{
     $('body').on('click', '.btnCheckWebsite', function() {
         var domain = $('.iptWebsite').val();
         domain = extractHostname(domain);
+        domain = domain.toLowerCase();
         window.location.href = `${rootURL}/rank/${domain}`;
     })
     $('.iptWebsite').keypress(event => {
         if (event.which == 13) {
         var domain = $('.iptWebsite').val();
         domain = extractHostname(domain);
+        domain = domain.toLowerCase();
         window.location.href = `${rootURL}/rank/${domain}`;
         }
     })

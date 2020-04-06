@@ -57,7 +57,6 @@ $(document).ready(() => {
             return newData.Records.filter(item => item.Page != "grid.upgrade")
           }
           else {
-            console.log('khanh');
             // $('.getTrafficSocialTableDetail thead').addClass('d-none')
             $('.getTrafficSocialTableDetail tbody tr .dataTables_empty').text("").addClass("empty-state");
             return [];
@@ -115,7 +114,7 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
   for (const key in socialChanel) {
     total+=socialChanel[key].Visits
   }
-  $('.socialChannel').html('').html(numeral(total).format('0,0a'))
+  $('.socialChannel').html('').html(numeral(socialChanel.length).format('0,0a'))
   
 })
 
@@ -123,21 +122,27 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
 
   $.get(`//localapi.trazk.com/webdata/facebook.php?task=findFanpageByDomain&domain=${localDomain}&userToken=${userToken}`, function (res) {
     let fbId = res.data.fbId;
-    console.log('das',res);
     
     let logo = res.data.imageURI;
     let name = res.data.name;
     let iconBlue = '';
-    if (res != null) {
+    let pageImg = '';
+    if (res != null && logo != undefined && name != undefined) {
       $('#bannerPageAds').removeClass('is-loading')
       if (res.data.verification == "blue_verified") {
         iconBlue =  rootURL + "/dist/images/check.png";
       } else {
         iconBlue = " ";
       }
+      if(res.data.pageCoverPhoto !=null){
+        pageImg = `--cover-photo-uri: url('${res.data.pageCoverPhoto}');height:400px`
+      }else{
+        pageImg = "background-color:#0d0d0d;height: 300px;"
+        $("#bannerPageAds").css('height','300px')
+      }
       let html = `
         <div class="imgPageAds d-flex align-items-end"
-          style="--cover-photo-uri: url('${res.data.pageCoverPhoto}');background-size: cover;height: 420px;width: 100%;background-position: center;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri);padding: 20px!important;">
+          style="${pageImg};padding: 20px!important;background-size: cover;width: 100%;background-position: center;background-repeat: no-repeat;background-image:linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .8)), var(--cover-photo-uri)">
                     <div class="p-2 mb-4 rounded-circle bg-primary" style="width:115px;height:115px;background-image: url('${res.data.imageURI}');background-size: cover;background-position: center;background-repeat: no-repeat;border:2px solid white"></div>
                     <div class="p-2 mb-2 mb-lg-5 pl-3">
                     <div class="font-16 font-weight-bold text-white">${res.data.name} <img class="ml-n1" src="${iconBlue}" style="width:20px">
@@ -372,7 +377,7 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
         }
       })
     } else {
-      console.log('khsdas');
+     $('.bannerPageAds').addClass('d-none')
     }
   })
   // Quảng Cáo Khu Vực Tương Tự

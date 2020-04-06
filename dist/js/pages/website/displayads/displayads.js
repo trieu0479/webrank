@@ -20,107 +20,6 @@ function lockedModule(boxWidgetName, level) {
         }
     }
 }
-// const api = async (method, domain) => {
-//     let methodName = method;
-//     if (method == "displayAdsOverview" || method == "adTypeOverview") {
-//         method = "displayAdsOverview"
-//     }
-//     if (method == "SampleAdsasImage" || method == "getAllImageTable") {
-//         method = "bannerAds"
-//     }
-//     if (method == "SampleAdsasHTML" || method == "getAllHTMLTable") {
-//         method = "htmlAds"
-//     }
-//     if (method == "SampleAdsasText" || method == "getAllTextTable") {
-//         method = "textAds"
-//     }
-//     if (method == "displayDevice") {
-//         method = "adsCountByDevice"
-//     }
-//     if (method == "getDisplayCountryChart") {
-//         method = "adsCountByCountry"
-//     }
-//     if (method == "topPublicSher" || method == "getDisplayGenderChart" || method == "getDisplayAgeChart") {
-//         method = "publishersOveview"
-//     }
-//     if (method =="PublicSherTable") {
-//         method ="publishersDetail"
-//     }
-
-//     try {
-//         return await $.ajax({
-//                 url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method[${method}]=true&userToken=${userToken}`,
-//                 type: "GET"
-//             })
-//             .then(data => {
-//                 //locked:bảng cũ locker:bảng mới
-//                 switch (methodName) {
-//                     case "displayAdsOverview":
-
-//                         displayAdsOverview(data, method);
-//                         break;
-//                     case "SampleAdsasImage":
-
-//                         SampleAdsasImage(data, method);
-//                         break;
-//                     case "SampleAdsasHTML":
-//                         SampleAdsasHTML(data, method);
-//                         break;
-//                     case "SampleAdsasText":
-//                         SampleAdsasText(data, method);
-//                         break;                       
-//                     case "displayDevice":
-
-//                         displayDevice(data, method);
-//                         break;
-//                     case "getDisplayCountryChart":
-
-//                         getDisplayCountryChart(data, method);
-//                         break;
-//                     case "adTypeOverview":
-
-//                         adTypeOverview(data, method);
-//                         break;
-//                     case "topPublicSher":
-
-//                         topPublicSher(data, method);
-//                         break;
-//                     case "getDisplayGenderChart":
-
-//                         getDisplayGenderChart(data, method);
-//                         break;
-//                     case "getDisplayAgeChart":
-
-//                         getDisplayAgeChart(data, method);
-//                         break;
-//                     case "getAllImageTable":
-//                         getAllImageTable(data, method);
-//                         break;
-//                     case "getAllHTMLTable":
-//                         getAllHTMLTable(data, method)
-//                         break;
-//                     case "getAllTextTable":
-//                         getAllTextTable(data, method)
-//                         break;
-//                     case "PublicSherTable":
-
-//                         PublicSherTable(data, method)
-//                         break;
-
-//                     default:
-//                         break;
-//                 }
-
-//                 lockedModule(methodName, data.userData.member)
-
-//                 return true;
-//             })
-
-//     } catch (error) {
-//         //console.log(error);
-
-//     }
-// }
 
 
 // -------------------------------------------------------
@@ -248,7 +147,7 @@ const api = async (task, domain, reload = 0) => {
                         break;
 
                 }
-                // lockedModule(task, data.userData.member);
+                lockedModule(task, data.userData.member);
                 return;
                 // }
             });
@@ -256,23 +155,6 @@ const api = async (task, domain, reload = 0) => {
         console.error(error);
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function kFormatter(num) {
     return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
@@ -393,7 +275,7 @@ const SampleAdsasImage = async (data, task) => {
             <div class="box-img">
                 <div class="image-media">
                     <div class="image-sample">
-                        <img src="${val.mediaUrl}">
+                         <img src="https://imgcdn.trazk.com/f.php?f=${btoa(val.mediaUrl)}">
                     </div>
                 </div>
                 <div class="text-sample pt-2">
@@ -1865,8 +1747,6 @@ const getTrafficDisplayAdvertisingWebsitesTable = async(task,data,domain) => {
         ajax: {
           url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}&userToken=${userToken}`,
           dataSrc: (json) => { 
-              console.log(json);
-                       
                lockedModule('getTrafficDisplayAdvertisingWebsitesTable', json.userData.member);  
         if (json.data.data.Data == null ) {
                 $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper').css('min-height','268px');
@@ -1882,8 +1762,10 @@ const getTrafficDisplayAdvertisingWebsitesTable = async(task,data,domain) => {
           }
           
             if (json && json.data && json.data.data && json.data.data.Data) {
+               
               let { Data: newData } = json.data.data;
               if (newData.Records.length > 0) {
+                $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_processing').removeClass('d-none')
                 return newData.Records.filter(item => item.Domain != "grid.upgrade")
               } else {
                 $("#row-getTrafficDisplayAdvertisingWebsitesTable").hide();
@@ -1955,7 +1837,7 @@ const getTrafficDisplayAdvertisingWebsitesTable = async(task,data,domain) => {
 $(document).ready(function () {                            
     $('#Tabsample a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         var target = $(e.target).attr("href") // activated tab
-        // alert(target);
+       
         if (target == "#sample_html") {
             $('#btn-view-html').removeClass('d-none');
         }

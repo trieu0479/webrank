@@ -85,7 +85,10 @@
 <link href="<?=$rootURL?>/dist/css/pages/website/style.bundle.css" rel="stylesheet">
 <link href="<?=$rootURL?>/dist/css/pages/website/ggads-displayads.css" rel="stylesheet">
 
-
+<!-- Bão test -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<!-- đóng Bão test -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

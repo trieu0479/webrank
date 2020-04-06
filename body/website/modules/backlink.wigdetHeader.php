@@ -1,9 +1,9 @@
 <div class="bg-white shadow-sm rounded">
     <div class="d-flex">
-        <div class="p-2 w-100 w-md-24">
+        <div class="p-2 w-100 w-md-24 backlinkHeader">
             <div class="d-flex">
                 <div class="w-50">
-                    <div id="pieChart" style="height: 75px;line-height: 75px;"></div>
+                    <div id="pieChart" ></div>
                 </div>
                 <div class="p-2 w-50">
                     <div class="text-capitalize font-10 font-weight-500 text-center" style="margin-bottom: -40px;">Authority Score</div>

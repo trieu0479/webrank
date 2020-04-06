@@ -1,0 +1,174 @@
+#google{
+    padding: 10px;
+    /* box-shadow: rgba(14, 30, 62, 0.08) 0px 3px 6px 0px; */
+    /* box-shadow: rgba(0,0,0, .3) 0 1px 2px 0, rgba(0,0,0, .15) 0 1px 3px 1px; */
+    border:1px solid #F2F2F2;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+#img-fff{
+    width: 120px;
+    height: 40px;
+}
+
+
+
+.header{
+    padding: 5px;
+    height: 40px;
+    display: flex;
+    margin-bottom: 10px;
+}
+.header h2{
+    width: 82%;
+    font-weight: 600;
+    margin-left: 20px;
+    line-height: 5px;
+    text-transform: capitalize;
+}
+.header span{
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.text-fff{
+    width: 70%;
+    font-size: 19px;
+    text-align: right;
+    margin: 11px 0;
+    font-family: sans-serif;
+    font-weight: 500;
+}
+
+.text-primary{
+    color: #0080FF !important;
+}
+.text-bold{
+    font-weight: 600 !important;
+}
+  
+  #table-fff {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-radius: 10px;
+    table-layout: fixed;
+    box-shadow: rgba(14, 30, 62, 0.08) 0px 3px 6px 0px;
+  }
+
+  #table-fff-2{
+    width: 100%;
+    margin: 0 5px;
+    border-radius: 10px;
+  }
+
+  #table-fff-2 th,
+  #table-fff-2 td {
+      border-bottom: 1px solid #F2F2F2;
+    padding: 5px 2px;
+  }
+
+  #table-fff tr:nth-child(even) {
+    background-color: #f8f8f8;
+  }
+  
+  #table-fff caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  
+  #table-fff tr {
+    /* margin: 20px 0; */
+    border:1px solid #F2F2F2;
+    /* box-shadow: rgba(14, 30, 62, 0.08) 0px 3px 6px 0px; */
+  }
+  #table-fff td{
+font-size: 12px;
+font-weight: 500;
+  }
+  
+  #table-fff th,
+  #table-fff td {
+    padding: 12px 2px;
+    text-align: center;
+  }
+  
+  #table-fff th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: capitalize;
+  }
+  
+  
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+  }
+  .actived{ color: transparent;text-shadow: 0 0 6px #737373;cursor: help;}
+ 
+  .round{
+    width: 19px;
+    height: 19px;
+    /* background: #00c292; */
+    line-height: 19px;
+    margin: auto;
+    font-size: 11px;
+    color: #fff;
+    border-radius: 100%;
+}
+
+.bg-red{
+background: #FE2E2E !important;
+}
+.bg-green{
+background: #00c292 !important;
+}
+
+.bg-yellow{
+background: #F7D358 !important;
+}
+
+
+  .tooltip {
+    /* position: relative;
+    display: inline-block; */
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .btn-excel{
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    color: #fff;
+    cursor: pointer;
+    background: #0080FF;
+    /* float: right; */
+  }
+
+  .btn-excel:active{
+    padding: 4px 14px;
+ 
+  }

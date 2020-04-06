@@ -3,14 +3,15 @@
 
 // const counter = document.querySelector('.counter');
 
-var domain = '';
+
+var localUrl = new URL(location.href);
+var domain = localUrl.searchParams.get('domain');
+var domain_name = localUrl.searchParams.get("domain");
 var arrDomain = [];
 var selectWebsite = "";
 
 const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
-
-var domain_name = url.searchParams.get("domain");
 $('body').on('click', '.btn-compare', function (event) {
     Swal.fire({
         title: 'Hãy nhập website để so sánh',
