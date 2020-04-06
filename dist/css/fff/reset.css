@@ -3309,13 +3309,11 @@ span.sub-tilte-content,
 .card-traffic:hover, .card-traffic:active {
     background-color: aqua;
     cursor: pointer;
-    transform: translateY(-5%);
-    transition: all 0.5s;
+    transform: translateY(-2%);
+    transition: all 0.3s;
 }
 
-.card-traffic {
-    animation: card-traffic-show 1s ease-out;
-}
+
 
 @keyframes card-traffic-show {
     0% {
