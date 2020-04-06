@@ -1,13 +1,14 @@
 //US,GB,AU,FR,
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 var domain = url.searchParams.get('domain');
+
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
-    var VIPModule = ["SampleAdsasHTML","topPublicSher","getAllImageTable","PublicSherTable","getWebsiteAdsIntelDisplay","getTrafficDestinationAds","adwordsMonthlyFullTrend","adTypeOverview","displayDevice"];
+    var VIPModule = ["SampleAdsasHTML", "topPublicSher", "getAllImageTable", "PublicSherTable", "getWebsiteAdsIntelDisplay", "getTrafficDestinationAds", "adwordsMonthlyFullTrend", "adTypeOverview", "displayDevice"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             //ngoai le 
-            
+
             //ngoai le 
             $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
@@ -19,110 +20,260 @@ function lockedModule(boxWidgetName, level) {
         }
     }
 }
-const api = async (method, domain) => {
-    let methodName = method;
-    if (method == "displayAdsOverview" || method == "adTypeOverview") {
-        method = "displayAdsOverview"
-    }
-    if (method == "SampleAdsasImage" || method == "getAllImageTable") {
+// const api = async (method, domain) => {
+//     let methodName = method;
+//     if (method == "displayAdsOverview" || method == "adTypeOverview") {
+//         method = "displayAdsOverview"
+//     }
+//     if (method == "SampleAdsasImage" || method == "getAllImageTable") {
+//         method = "bannerAds"
+//     }
+//     if (method == "SampleAdsasHTML" || method == "getAllHTMLTable") {
+//         method = "htmlAds"
+//     }
+//     if (method == "SampleAdsasText" || method == "getAllTextTable") {
+//         method = "textAds"
+//     }
+//     if (method == "displayDevice") {
+//         method = "adsCountByDevice"
+//     }
+//     if (method == "getDisplayCountryChart") {
+//         method = "adsCountByCountry"
+//     }
+//     if (method == "topPublicSher" || method == "getDisplayGenderChart" || method == "getDisplayAgeChart") {
+//         method = "publishersOveview"
+//     }
+//     if (method =="PublicSherTable") {
+//         method ="publishersDetail"
+//     }
+
+//     try {
+//         return await $.ajax({
+//                 url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method[${method}]=true&userToken=${userToken}`,
+//                 type: "GET"
+//             })
+//             .then(data => {
+//                 //locked:bảng cũ locker:bảng mới
+//                 switch (methodName) {
+//                     case "displayAdsOverview":
+
+//                         displayAdsOverview(data, method);
+//                         break;
+//                     case "SampleAdsasImage":
+
+//                         SampleAdsasImage(data, method);
+//                         break;
+//                     case "SampleAdsasHTML":
+//                         SampleAdsasHTML(data, method);
+//                         break;
+//                     case "SampleAdsasText":
+//                         SampleAdsasText(data, method);
+//                         break;                       
+//                     case "displayDevice":
+
+//                         displayDevice(data, method);
+//                         break;
+//                     case "getDisplayCountryChart":
+
+//                         getDisplayCountryChart(data, method);
+//                         break;
+//                     case "adTypeOverview":
+
+//                         adTypeOverview(data, method);
+//                         break;
+//                     case "topPublicSher":
+
+//                         topPublicSher(data, method);
+//                         break;
+//                     case "getDisplayGenderChart":
+
+//                         getDisplayGenderChart(data, method);
+//                         break;
+//                     case "getDisplayAgeChart":
+
+//                         getDisplayAgeChart(data, method);
+//                         break;
+//                     case "getAllImageTable":
+//                         getAllImageTable(data, method);
+//                         break;
+//                     case "getAllHTMLTable":
+//                         getAllHTMLTable(data, method)
+//                         break;
+//                     case "getAllTextTable":
+//                         getAllTextTable(data, method)
+//                         break;
+//                     case "PublicSherTable":
+
+//                         PublicSherTable(data, method)
+//                         break;
+
+//                     default:
+//                         break;
+//                 }
+
+//                 lockedModule(methodName, data.userData.member)
+
+//                 return true;
+//             })
+
+//     } catch (error) {
+//         //console.log(error);
+
+//     }
+// }
+
+
+// -------------------------------------------------------
+const api = async (task, domain, reload = 0) => {
+    domain;
+    let url = "";
+    let method = '';
+    let taskname = '';
+    if (task == "SampleAdsasImage" || task == "getAllImageTable") {
+        taskname = 'getAdvertisingDisplayDetail';
         method = "bannerAds"
     }
-    if (method == "SampleAdsasHTML" || method == "getAllHTMLTable") {
-        method = "htmlAds"
+    if (task == "SampleAdsasHTML" || task == "getAllHTMLTable") {
+        taskname = 'getAdvertisingDisplayDetail'; ///tak trong api
+        method = "htmlAds" //method api
     }
-    if (method == "SampleAdsasText" || method == "getAllTextTable") {
+    if (task == "SampleAdsasText" || task == "getAllTextTable") {
+        taskname = 'getAdvertisingDisplayDetail';
         method = "textAds"
     }
-    if (method == "displayDevice") {
+    if (task == "displayAdsOverview" || task == "adTypeOverview") {
+        taskname = 'getAdvertisingDisplayDetail';
+        method = "displayAdsOverview"
+    }
+    if (task == "displayDevice") {
+        taskname = 'getAdvertisingDisplayDetail';
         method = "adsCountByDevice"
     }
-    if (method == "getDisplayCountryChart") {
+    if (task == "getDisplayCountryChart") {
+        taskname = 'getAdvertisingDisplayDetail';
         method = "adsCountByCountry"
     }
-    if (method == "topPublicSher" || method == "getDisplayGenderChart" || method == "getDisplayAgeChart") {
+    if (task == "topPublicSher" || task == "getDisplayGenderChart" || task == "getDisplayAgeChart") {
+        taskname = 'getAdvertisingDisplayDetail';
         method = "publishersOveview"
     }
-    if (method =="PublicSherTable") {
-        method ="publishersDetail"
+    if (task == "PublicSherTable") {
+        taskname = 'getAdvertisingDisplayDetail';
+        method = "publishersDetail"
+    }
+    // --------------------------
+    if (task == "getTrafficDisplayAdvertisingAds") {
+        taskname = 'getTrafficDisplayAdvertisingAds';
     }
 
+    if (task == "getTrafficDestinationAds") {
+        taskname = 'getTrafficDestinationAds';
+    }
+    if (task == "getWebsiteAdsVisitsOverview") {
+        taskname = 'getWebsiteAdsVisitsOverview';
+    }
+    if (task == "getTrafficDisplayAdvertisingWebsitesTable") {
+        taskname = 'getTrafficDisplayAdvertisingWebsitesTable';
+    }
+
+    if (taskname == 'getAdvertisingDisplayDetail') {
+        // taskname = task;
+        url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
+    } else {
+        url = `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`
+    }
     try {
         return await $.ajax({
-                url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method[${method}]=true&userToken=${userToken}`,
+                url: url,
                 type: "GET"
             })
             .then(data => {
-                //locked:bảng cũ locker:bảng mới
-                switch (methodName) {
+                switch (task) {
                     case "displayAdsOverview":
-                        
-                        displayAdsOverview(data, method);
+                        displayAdsOverview(data, task);
                         break;
                     case "SampleAdsasImage":
-                       
-                        SampleAdsasImage(data, method);
+                        SampleAdsasImage(data, task);
                         break;
                     case "SampleAdsasHTML":
-                        SampleAdsasHTML(data, method);
+                        SampleAdsasHTML(data, task);
                         break;
                     case "SampleAdsasText":
-                        SampleAdsasText(data, method);
+                        SampleAdsasText(data, task);
                         break;
-                        // case "SampleAdsasText":
-                        //     SampleAdsasText(data, method);
-                        //     break;
                     case "displayDevice":
-                       
-                        displayDevice(data, method);
+                        displayDevice(data, task);
                         break;
                     case "getDisplayCountryChart":
-                                            
-                        getDisplayCountryChart(data, method);
+                        getDisplayCountryChart(data, task);
                         break;
                     case "adTypeOverview":
-                        
-                        adTypeOverview(data, method);
+                        adTypeOverview(data, task);
                         break;
                     case "topPublicSher":
-                       
-                        topPublicSher(data, method);
+                        topPublicSher(data, task);
                         break;
                     case "getDisplayGenderChart":
-                       
-                        getDisplayGenderChart(data, method);
+                        getDisplayGenderChart(data, task);
                         break;
                     case "getDisplayAgeChart":
-                        
-                        getDisplayAgeChart(data, method);
+                        getDisplayAgeChart(data, task);
                         break;
                     case "getAllImageTable":
-                        getAllImageTable(data, method);
+                        getAllImageTable(data, task);
                         break;
                     case "getAllHTMLTable":
-                        getAllHTMLTable(data, method)
+                        getAllHTMLTable(data, task)
                         break;
                     case "getAllTextTable":
-                        getAllTextTable(data, method)
+                        getAllTextTable(data, task)
                         break;
                     case "PublicSherTable":
-                        
-                        PublicSherTable(data, method)
+                        PublicSherTable(data, task)
+                        break;
+                    case "getTrafficDisplayAdvertisingAds":
+                        getTrafficDisplayAdvertisingAds(task, data);
+                        break;
+                    case "getTrafficDestinationAds":
+                        getTrafficDestinationAds(task, data,domain);
+                        break;
+                    case "getWebsiteAdsVisitsOverview":
+                        getWebsiteAdsVisitsOverview(task, data, domain);
+                        break;
+                    case "getTrafficDisplayAdvertisingWebsitesTable":
+                        getTrafficDisplayAdvertisingWebsitesTable(task, data,domain);
                         break;
 
                     default:
                         break;
+
                 }
-
-                lockedModule(methodName, data.userData.member)
-
-                return true;
-            })
-
+                // lockedModule(task, data.userData.member);
+                return;
+                // }
+            });
     } catch (error) {
-        //console.log(error);
-
+        console.error(error);
     }
-}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function kFormatter(num) {
     return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
 }
@@ -170,8 +321,8 @@ const initDatatable = function (select, tableOptions) {
 const initDatatableClass = function (select, tableOptions) {
     const table = $(`.${select}`).DataTable(tableOptions);
     let idTable;
-    idTable = table;    
-    $(`.${select}`).click(function (event) {              
+    idTable = table;
+    $(`.${select}`).click(function (event) {
         $(`.${select}-container`).addClass('is-loading').block({
             overlayCSS: {
                 backgroundColor: '#ccc',
@@ -191,7 +342,8 @@ const initDatatableClass = function (select, tableOptions) {
 
 // ------------------------------init function--------------------------
 
-const displayAdsOverview = async (data, method) => {
+const displayAdsOverview = async (data, task) => {
+   
     let first = new Date(data.data.displayAdsOverview.firstSeen);
     let last = new Date(data.data.displayAdsOverview.lastSeen);
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Augu", "Sep", "Oct", "Nov", "Dec"];
@@ -222,17 +374,17 @@ const displayAdsOverview = async (data, method) => {
             </div>
         </div>
     </div>
-    `
-    )
+    `)
+    
     $('.ads').html(kFormatter(data.data.displayAdsOverview.adsOverall))
     $('.publisher').html(kFormatter(data.data.displayAdsOverview.domainOverall))
     $('.timeseen').html(kFormatter(data.data.displayAdsOverview.timesSeen));
     $('.firstseen').html(first.getDay() + '&nbsp;' + monthNames[first.getMonth()] + ',&nbsp' + first.getFullYear());
     $('.lastseen').html(last.getDay() == 0 ? 31 + '&nbsp;' + monthNames[last.getMonth()] + ',&nbsp' + last.getFullYear() : last.getDay() + '&nbsp;' + monthNames[last.getMonth()] + ',&nbsp' + last.getFullYear());
 }
-const SampleAdsasImage = async (data, method) => {
+const SampleAdsasImage = async (data, task) => {
 
-    if (data.data.bannerAds=="") {        
+    if (data.data.bannerAds == "") {
         $('.sample-image-ads').addClass('empty-state')
     }
     data.data.bannerAds.forEach((val, index) => {
@@ -253,11 +405,11 @@ const SampleAdsasImage = async (data, method) => {
         }
     })
 }
-const SampleAdsasHTML = async (data, method) => {
-    if (data.data.htmlAds=='') {
+const SampleAdsasHTML = async (data, task) => {
+    if (data.data.htmlAds == '') {
         $('.sample-html-ads').addClass('empty-state')
     }
-    data.data.htmlAds.forEach((val, index) => {      
+    data.data.htmlAds.forEach((val, index) => {
         if (index < 5) {
             $(".sample-html-ads").append(`<div class="box-all">
             <div class="box-img">
@@ -277,8 +429,8 @@ const SampleAdsasHTML = async (data, method) => {
     })
 
 }
-const SampleAdsasText = async (data, method) => {
-    if (data.data.textAds=='') {
+const SampleAdsasText = async (data, task) => {
+    if (data.data.textAds == '') {
         $('#sample-text-ads').addClass('empty-state')
     }
     data.data.textAds.forEach((val, index) => {
@@ -308,11 +460,11 @@ const SampleAdsasText = async (data, method) => {
 }
 
 // ---Display by Device----
-const displayDevice = async (data, method) => {
+const displayDevice = async (data, task) => {
     var res = data.data.adsCountByDevice;
     var temp = 0;
     for (let xy of res) {
-        temp += xy.v;           
+        temp += xy.v;
     }
     res.forEach(val => {
         if (val.k == "desktop") {
@@ -341,8 +493,7 @@ const displayDevice = async (data, method) => {
 
 }
 // ----------display chart--------------------
-const getDisplayCountryChart = async (data, method) => {
-
+const getDisplayCountryChart = async (data, task) => {
     $('.appendSVG').append(`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <rect id="bound" x="0" y="0" width="24" height="24"></rect>
@@ -408,7 +559,7 @@ const getDisplayCountryChart = async (data, method) => {
                 orient: 'horizontal',
                 left: '10%',
                 data: ['United States', 'United Kingdom', 'Australia', 'France', 'Other'],
-            
+
             },
             series: [{
                 type: 'pie',
@@ -518,12 +669,12 @@ const getDisplayCountryChart = async (data, method) => {
         // $(`#totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
 
     } else {
-       // console.log(`getDisplayCountryChart failed`);
+        // console.log(`getDisplayCountryChart failed`);
     }
 }
 
 // --------------------adtypes overview---------------
-const adTypeOverview = async (data, method) => {    
+const adTypeOverview = async (data, task) => {
     var xyz = data.data.displayAdsOverview;
     var total = xyz.mediaAdsOverall + xyz.htmlAdsOverall + xyz.textAdsOverall
     $('#count-img-type').html(xyz.mediaAdsOverall)
@@ -531,19 +682,18 @@ const adTypeOverview = async (data, method) => {
     $('#count-text-type').html(xyz.textAdsOverall)
     $('.count-percent-blue').html(numeral(xyz.mediaAdsOverall * 100 / total).format('0,0') + '%')
     $('.count-percent-orange').html(numeral(xyz.htmlAdsOverall * 100 / total).format('0,0') + '%')
-    $('.count-percent-green').html(numeral(xyz.textAdsOverall * 100 / total).format('0,0') + '%')    
+    $('.count-percent-green').html(numeral(xyz.textAdsOverall * 100 / total).format('0,0') + '%')
     $('#fill-blue').css("height", numeral(xyz.mediaAdsOverall * 100 / total).format('0,0') + '%')
     $('#fill-orange').css("height", numeral(xyz.htmlAdsOverall * 100 / total).format('0,0') + '%')
     $('#fill-green').css("height", numeral(xyz.textAdsOverall * 100 / total).format('0,0') + '%')
     await $(`.similarReloadTask[data-task="adTypeOverview"]`).find('i').removeClass('fa-spin');
 }
 
-const topPublicSher = async (data, method) => {   
-    var res = data.data.publishersOveview.categories;    
-    if (res.length<=0) {
+const topPublicSher = async (data, task) => {
+    var res = data.data.publishersOveview.categories;
+    if (res.length <= 0) {
         $('.list-public').addClass('empty-state')
-    }
-    {
+    } {
         $('.cate-1').html(res['0'].name)
         $('.count-buss').html(res['0'].percentage + '%')
         $('#hl-buss').css('width', (numeral(res['0'].percentage).format('0,0') + '%'))
@@ -568,8 +718,8 @@ const topPublicSher = async (data, method) => {
 
 }
 
-const getDisplayGenderChart = async (data, method) => {
-    var res = data.data.publishersOveview.gender;    
+const getDisplayGenderChart = async (data, task) => {
+    var res = data.data.publishersOveview.gender;
     let value_male, value_female;
     value_male = res.male
     value_female = res.female
@@ -721,8 +871,8 @@ const getDisplayGenderChart = async (data, method) => {
     }
 
 }
-const getDisplayAgeChart = async (data, method) => {
-    var res = data.data.publishersOveview.age;    
+const getDisplayAgeChart = async (data, task) => {
+    var res = data.data.publishersOveview.age;
     let value_18, value_25, value_35, value_45, value_55, value_65;
     value_18 = res["18-24"];
     value_25 = res["25-34"];
@@ -892,35 +1042,35 @@ const getDisplayAgeChart = async (data, method) => {
         // $(`#totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
 
     } else {
-       // console.log(` getDisplayAgeChart failed`);
+        // console.log(` getDisplayAgeChart failed`);
     }
 
 
 
 }
 
-const getAllImageTable = async (data, method) => {
-    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Augu", "Sep", "Oct", "Nov", "Dec"];   
+const getAllImageTable = async (data, task) => {
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Augu", "Sep", "Oct", "Nov", "Dec"];
     initDatatable(
         'getAllImageTable', {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['bannerAds']=true&userToken=${userToken}`,
                 dataSrc: function (res) {
                     var res = data.data.bannerAds;
-                    if (res.length<=0) {
+                    if (res.length <= 0) {
                         $('.sample-image-ads').addClass('empty-state')
-                    }   
+                    }
 
                     let columns = [];
                     var stt = 1;
-                    $.each(res, function (k, v) {                       
+                    $.each(res, function (k, v) {
                         let output = {};
                         let first = new Date(v.firstSeen)
                         let firstseen = first.getDay() + '&nbsp;' + monthNames[first.getMonth()] + ',&nbsp' + first.getFullYear()
                         let last = new Date(v.lastSeen)
                         let lastseen = last.getDay() + '&nbsp;' + monthNames[last.getMonth()] + ',&nbsp' + last.getFullYear()
                         let ct = [];
-                        v.countries.forEach(res => {                           
+                        v.countries.forEach(res => {
                             res = res.toLowerCase();
                             let obj = {
                                 values: res
@@ -936,9 +1086,9 @@ const getAllImageTable = async (data, method) => {
                             output.firstSeen = firstseen;
                             output.lastSeen = lastseen;
                             output.countries = rsx.values;
-                            stt += 1;                          
+                            stt += 1;
                             columns.push(output)
-                        })                       
+                        })
                     })
                     return columns;
                 },
@@ -1024,7 +1174,7 @@ const getAllImageTable = async (data, method) => {
     $('#getAllImageTable_wrapper .dataTables_scrollBody').addClass('ps--active-x')
 }
 
-const getAllHTMLTable = async (data, method) => {
+const getAllHTMLTable = async (data, task) => {
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Augu", "Sep", "Oct", "Nov", "Dec"];
     initDatatable(
         'getAllHTMLTable', {
@@ -1034,9 +1184,9 @@ const getAllHTMLTable = async (data, method) => {
                     var res = data.data.htmlAds;
                     let columns = [];
                     var stt = 1;
-                    if (res.length<=0) {
+                    if (res.length <= 0) {
                         $('.sample-html-ads').addClass('empty-state')
-                    }   
+                    }
                     $.each(res, function (k, v) {
                         let output = {};
                         let first = new Date(v.firstSeen)
@@ -1044,9 +1194,9 @@ const getAllHTMLTable = async (data, method) => {
                         let last = new Date(v.lastSeen)
                         let lastseen = last.getDay() + '&nbsp;' + monthNames[last.getMonth()] + ',&nbsp' + last.getFullYear()
                         let ct = [];
-                        
 
-                        v.countries.forEach(res => {                           
+
+                        v.countries.forEach(res => {
                             res = res.toLowerCase();
                             let obj = {
                                 values: res
@@ -1064,9 +1214,9 @@ const getAllHTMLTable = async (data, method) => {
                             output.lastSeen = lastseen;
                             output.countries = rsx.values;
                             stt += 1;
-                            
+
                             columns.push(output)
-                        })                      
+                        })
                     })
                     return columns;
                 },
@@ -1151,11 +1301,11 @@ const getAllHTMLTable = async (data, method) => {
         }
     )
 
-    
+
 }
-const getAllTextTable = async (data, method) => {
-  //  console.log(data);
-    
+const getAllTextTable = async (data, task) => {
+    //  console.log(data);
+
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Augu", "Sep", "Oct", "Nov", "Dec"];
     initDatatable(
         'getAllTextTable', {
@@ -1164,11 +1314,11 @@ const getAllTextTable = async (data, method) => {
                 dataSrc: function (res) {
                     var res = data.data.textAds;
                     let columns = [];
-                    var stt = 1;         
-                    if (res.length<=0) {
+                    var stt = 1;
+                    if (res.length <= 0) {
                         $('.sample-text-ads').addClass('empty-state')
-                    }                          
-                    $.each(res, function (k, v) {                        
+                    }
+                    $.each(res, function (k, v) {
                         let output = {};
                         let first = new Date(v.firstSeen)
                         let firstseen = first.getDay() + '&nbsp;' + monthNames[first.getMonth()] + ',&nbsp' + first.getFullYear()
@@ -1196,10 +1346,10 @@ const getAllTextTable = async (data, method) => {
                             output.lastSeen = lastseen;
                             output.countries = rsx.values;
                             stt += 1;
-                            
+
                             columns.push(output)
                         })
-                       
+
                     })
 
                     return columns;
@@ -1215,7 +1365,8 @@ const getAllTextTable = async (data, method) => {
                 {
                     title: "Text Ads",
                     className: 'pr-0',
-                    data:data => {return `
+                    data: data => {
+                        return `
                          <div class="box-text-table">
                             <div class="title-text-table  text-decoration-none font-gg">     
                                 ${data.title}                                     
@@ -1232,7 +1383,8 @@ const getAllTextTable = async (data, method) => {
                             </div>
                            
                         </div>
-                    `},
+                    `
+                    },
                     width: '40%'
                 },
                 {
@@ -1295,29 +1447,28 @@ const getAllTextTable = async (data, method) => {
     )
 }
 
-const PublicSherTable = async(data,method) => {
+const PublicSherTable = async (data, task) => {
     $('.widget-PublicSherTable .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
     <a class="similarReloadTask text-muted" data-task="PublicSherTable" href="javascript:;"><i class="fal fa-sync"></i></a>
 </div>`)
-    
     initDatatableClass(
         'PublicSherTable', {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method['publishersDetail']=true&userToken=${userToken}`,
-                dataSrc: function(res) {                  
-                    
+                dataSrc: function (res) {
+                    $('')
                     if (data.data.publishersDetail == null) {
-                        $('.parent-PublicSherTable #DataTables_Table_2_wrapper').addClass('empty-state');
-                        $('.parent-PublicSherTable #DataTables_Table_2_wrapper').removeClass('is-loading');
-                        $('.parent-PublicSherTable #DataTables_Table_2_wrapper tbody tr td').html('')
+                        $('.parent-PublicSherTable .dataTables_wrapper').addClass('empty-state');
+                        $('.parent-PublicSherTable .dataTables_wrapper').removeClass('is-loading');
+                        $('.parent-PublicSherTable .dataTables_wrapper tbody tr td').html('')
                         return;
-                    }                                            
-                                                    
+                    }
+
                     var res = data.data.publishersDetail.data;
                     let columns = [];
                     var stt = 1;
-                    $('.parent-PublicSherTable #DataTables_Table_2_wrapper .dt-buttons').addClass('resize-dl')
-                    $.each(res, function(k, v) {                       
+                    $('.parent-PublicSherTable .dataTables_wrapper .dt-buttons').addClass('resize-dl')
+                    $.each(res, function (k, v) {
                         let output = {};
                         output.stt = stt;
                         output.domain = v.domain;
@@ -1326,31 +1477,31 @@ const PublicSherTable = async(data,method) => {
                         output.adsCount = v.adsCount;
                         output.mediaAdsCount = v.mediaAdsCount;
                         output.htmlAdsCount = v.htmlAdsCount;
-                        output.textAdsCount = v.textAdsCount;                       
-                        output.timesSeen = v.timesSeen;    
-                        output.media = numeral(v.mediaAdsCount*100/(v.mediaAdsCount+v.htmlAdsCount+v.textAdsCount)).format('0,0')    
-                        output.html = numeral(v.htmlAdsCount*100/(v.mediaAdsCount+v.htmlAdsCount+v.textAdsCount)).format('0,0')    
-                        output.text = numeral(v.textAdsCount*100/(v.mediaAdsCount+v.htmlAdsCount+v.textAdsCount)).format('0,0')    
-                                           
-                        stt += 1;                                               
+                        output.textAdsCount = v.textAdsCount;
+                        output.timesSeen = v.timesSeen;
+                        output.media = numeral(v.mediaAdsCount * 100 / (v.mediaAdsCount + v.htmlAdsCount + v.textAdsCount)).format('0,0')
+                        output.html = numeral(v.htmlAdsCount * 100 / (v.mediaAdsCount + v.htmlAdsCount + v.textAdsCount)).format('0,0')
+                        output.text = numeral(v.textAdsCount * 100 / (v.mediaAdsCount + v.htmlAdsCount + v.textAdsCount)).format('0,0')
+
+                        stt += 1;
                         columns.push(output)
-                    })                   
+                    })
                     return columns;
                 },
             },
-            drawCallback: function(settings) { },
+            drawCallback: function (settings) {},
             columns: [{
                     title: "STT",
                     data: 'stt',
-                    width:'5%',
+                    width: '5%',
                     className: 'align-middle ml-5 pl-3 font-12'
                 },
                 {
                     title: "Title & URL",
-                    className: 'parent-hover pr-0 text-left align-middle font-12',                   
+                    className: 'parent-hover pr-0 text-left align-middle font-12',
                     render: (data, type, row) => `<span class="font-14">${row.title}</span><a href=" http://${row.domain}" target="_blank" class="text-break text-truncate-2">${row.domain} <i class="fal fa-external-link"></i></a>`,
                     width: '30%'
-                },                
+                },
                 {
                     title: "Content",
                     className: 'parent-hover pr-0 align-middle text-left font-12 ',
@@ -1358,13 +1509,13 @@ const PublicSherTable = async(data,method) => {
                     width: '30%'
                 },
                 {
-                    title: "Ads",                    
+                    title: "Ads",
                     "data": data => `<div class="badge font-10 ml-2 ${data.adsCount <= 100 ? data.adsCount <= 10 ? 'bg-warning' : 'bg-danger' : 'bg-success'}">${data.adsCount ? numeral(data.adsCount).format('0,0') : 0}</a>`,
-                    width:'10%',
+                    width: '10%',
                     className: 'text-left align-middle font-12 '
                 },
                 {
-                    title: "Image-HTML-Text",                   
+                    title: "Image-HTML-Text",
                     render: (data, type, row) => ` 
                     <span class= "${row.media > 0 ? 'text-info':'' }"> ${row.media > 0 ? row.media+'%' :row.media}</span ><span class="pl-1">-</span>
                     <span class= "${row.html > 0 ? 'text-info':'' }"> ${row.html > 0 ? row.html+'%' : row.html}</span><span class="pl-1">-</span>
@@ -1376,7 +1527,7 @@ const PublicSherTable = async(data,method) => {
                 },
                 {
                     title: "TimesSeen ",
-                    "data": data =>  `<div class="round round-sm font-10 ${data.timesSeen <= 100 ? data.timesSeen <= 10 ? 'bg-success' : 'bg-danger' : 'bg-warning'}">${data.timesSeen ? numeral(data.timesSeen).format('0,0') : 0}</a>`,
+                    "data": data => `<div class="round round-sm font-10 ${data.timesSeen <= 100 ? data.timesSeen <= 10 ? 'bg-success' : 'bg-danger' : 'bg-warning'}">${data.timesSeen ? numeral(data.timesSeen).format('0,0') : 0}</a>`,
                     class: 'align-middle font-12',
                     width: '9%'
                 },
@@ -1401,7 +1552,7 @@ const PublicSherTable = async(data,method) => {
             processing: false,
             destroy: true,
             pageLength: 10,
-            initComplete: function(settings, json) {
+            initComplete: function (settings, json) {
                 $("table.dataTable thead th").css("padding", "10px");
                 $("table.dataTable tbody tr td").css("padding", "15px 10px");
                 // renderSparkline('PaidPageTable')
@@ -1411,25 +1562,407 @@ const PublicSherTable = async(data,method) => {
 
 }
 
-$(document).ready(function () {
-    let domain = url.searchParams.get("domain");    
-    $(".similarReloadTask").click(function() {
-        if ($(this).find('i').hasClass('fa-spin')) {$(this).find('i').removeClass('fa-spin'); return; }
-        let task = $(this).data("task");       
-        $(this).find('i').addClass('fa-spin');
-        api(task, domain);
-    })
 
+
+const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
+    $('.getWebsiteAdsVisitsOverview').append(`<div class="bg-white shadow-sm rounded h-100">
+    <div class="row border-bottom m-0 py-2">
+        <div class="col-auto d-flex no-block align-items-center mx-1">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <rect id="bound" x="0" y="0" width="24" height="24" />
+                    <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                    <path d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" id="Path-92" fill="#000000" fill-rule="nonzero" />
+                </g>
+            </svg>
+        </div>
+        <div class="col-auto pl-0">
+            <div class="text-capitalize font-weight-bold">Truy cập quảng cáo hiển thị 
+            </div>
+            <div class="text-muted similarDates font-10">03/2019 - 02/2020</div>
+        </div>
+        <div class="ml-auto d-flex no-block align-items-center pr-3">
+            <a class="similarReloadTask text-muted" data-task="getWebsiteAdsVisitsOverview"><i class="fal fa-sync"></i></a>
+        </div>
+    </div>
+    <div id="Parent-getWebsiteAdsVisitsOverview">
+        <div class="row rounded m-0 p-b-10 justify-content-center py-5" style="height: 270px">
+            <div class="col-auto py-5 is-loading font-number h1 text-center parent-getWebsiteAdsVisitsOverview" id="getWebsiteAdsVisitsOverview">
+            </div>
+        </div>
+    </div>
+   </div>`)
+
+
+    if (data.status == "success") {
+        if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data &&
+            data.data.data.Data.Data[domain].AdsTotal > 0) {
+            let WebsiteAdsVisitsOverview = data.data.data.Data.Data[domain];
+
+            let AdsTotal = WebsiteAdsVisitsOverview.AdsTotal;
+
+            let VolumeTotal = WebsiteAdsVisitsOverview.VolumeTotal;
+
+            $("#getWebsiteAdsVisitsOverview").removeClass("is-loading");
+            $("#getWebsiteAdsVisitsOverview").html(`${numeral(AdsTotal).format("0,0")}<br><span class="h4 font-gg text-muted">${numeral(VolumeTotal).format("0.00%")} của tổng lượng truy cập bằng máy tính</span>`);
+
+            await $(`#getWebsiteAdsVisitsOverview`).removeClass('is-loading');
+            $(`#getWebsiteAdsVisitsOverview`).parent().removeClass('empty-state');
+        } else {
+            $(`#getWebsiteAdsVisitsOverview`).removeClass('is-loading');
+            $('#Parent-getWebsiteAdsVisitsOverview').addClass('empty-state')
+            $('#Parent-getWebsiteAdsVisitsOverview').css('min-height', '268px')
+        }
+    } else {
+        console.log(`${task} failed`);
+    }
+}
+const getTrafficDisplayAdvertisingAds = async (task, data) => {
+
+    if (data.status == "success") {
+        let {
+            data: traffic
+        } = data.data;
+
+        let dataChart = [];
+        if (traffic == null) {
+            await $(`.${task}`).removeClass('is-loading').addClass('empty-state');
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+        } else {
+            let others = 0;
+            $.each(traffic, (index, visit) => {
+                others += visit.Share;
+                let item = {
+                    value: visit.Share,
+                    name: visit.Name == "Google Display Network" ? "GDN" : visit.Name
+                };
+                dataChart.push(item);
+            });
+
+            if (others < 1) {
+                let itemOther = {
+                    value: (1 - others),
+                    name: 'Khác',
+                    itemStyle: {
+                        color: '#95a5a6'
+                    }
+                };
+                dataChart.push(itemOther);
+            }
+
+            // render chart            
+
+            let myChart = document.getElementsByClassName('getTrafficDisplayAdvertisingAds')
+
+            let option = {
+                color: masterColor,
+                legend: {
+                    bottom: '5',
+                    orient: 'horizontal',
+                    left: '5%',                  
+                },
+                series: [{
+                    type: 'pie',
+                    legendHoverLink: false,
+                    minAngle: 20,
+                    radius: ["40%", "60%"],
+                    center: ["50%", "35%"],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#ffffff',
+                            borderWidth: 5,
+                        },
+                    },
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center',
+                            formatter: '{text|{b}}\n{value|{d}%}',
+                            rich: {
+                                text: {
+                                    color: "#666",
+                                    fontSize: 12,
+                                    align: 'center',
+                                    verticalAlign: 'middle',
+                                    padding: 5
+                                },
+                                value: {
+                                    color: "#8693F3",
+                                    fontSize: 24,
+                                    align: 'center',
+                                    verticalAlign: 'middle',
+                                },
+                            }
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: 46,
+                            }
+                        }
+                    },
+                    data: dataChart
+                }]
+            };
+            // myChart.setOption(option);
+            var charts = [];
+            for (var i = 0; i < myChart.length; i++) {
+                var chart = echarts.init(myChart[i]);
+                chart.setOption(option);
+                charts.push(chart);
+            }
+            window.onresize = function () {
+                for (var i = 0; i < charts.length; ++i) {
+                    charts[i].resize();
+                }
+            };
+
+
+
+            new ResizeSensor($(`.${task}`), function () {
+                chart.resize();
+                setTimeout(function () {
+                    chart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0,
+                        dataIndex: 0
+                    });
+                }, 1000);
+            });
+
+            setTimeout(function () {
+                chart.dispatchAction({
+                    type: 'highlight',
+                    seriesIndex: 0,
+                    dataIndex: 0
+                });
+
+                chart.on('mouseover', function (params) {
+                    if (params.name == dataChart[0].name) {
+                        chart.dispatchAction({
+                            type: 'highlight',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    } else {
+                        chart.dispatchAction({
+                            type: 'downplay',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    }
+                });
+
+                chart.on('mouseout', function (params) {
+                    chart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0,
+                        dataIndex: 0
+                    });
+                });
+            }, 1000);
+        }
+
+
+        await $(`.${task}`).removeClass('is-loading');
+        await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+    } else {
+        console.log(`${task} failed`);
+    }
+};
+const getTrafficDestinationAds = async (task, data) => {
+    $('.widget-getTrafficDestinationAds .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
+     <span class="similarReloadTask" data-task="getTrafficDestinationAds"><i class="fal fa-sync"></i></span>
+ </div>`)
+    //getTrafficDestinationAds
+    initDatatableClass(
+      'getTrafficDestinationAds',
+      {
+        ajax: {
+          url: `https://localapi.trazk.com/webdata/v3.1.php?task=getTrafficDestinationAds&domain=${domain}&userToken=${userToken}`,
+          dataSrc: json => {                   
+              if(!json.data || !json.data.data){
+              $('.parent-getTrafficDestinationAds .dataTables_wrapper').css('min-height','299px');
+              $('.parent-getTrafficDestinationAds .dataTables_wrapper').addClass('empty-state')
+              $('table.getTrafficDestinationAds tbody tr td.dataTables_empty').addClass('d-none')
+               return [];
+              }
+              else{
+                return json.data.data.data;
+              }
+             
+          }
+        },
+        drawCallback: function (settings) {
+          $('.getTrafficDestinationAds-container').removeClass('is-loading').unblock();
+          $('.getTrafficDestinationAds-container').find('.fa-spin').removeClass('fa-spin');
+          $('table.getTrafficDestinationAds tbody tr td.dataTables_empty').addClass('d-none')
+        },
+        columns: [
+          { 
+            title: 'Website', 
+            data: data => `<div>
+                    <img src="${data.Favicon}" class="mr-1"/>
+                    <a data-type="website" class="changeURL" data-input="${data.Domain}" href="?view=traffic-website&action=result&domain=${data.Domain}">${data.Domain}</a>
+                  </div>`,
+             className:'text-left' 
+            }
+           ,
+          {
+            title: '(%)',
+            data: data => {
+              const share = numeral(data.Share).format('0.00%');
+              return `<div class="">
+                          ${share}
+                        </div>                        
+                     `;
+            },
+            className:'text-left' 
+          },
+          {
+            title: 'Tỉ lệ',
+            data: data => {
+              const share = numeral(data.Share).format('0.00%');
+              return `                       
+                       
+                          <div class="progress border">
+                            <div class="progress-bar bg-success" style="width: ${share}; height:7px;" role="progressbar"></div>
+                          </div>
+                        
+                     `;
+            }
+          }
+        ],"order": [[ 1, 'desc' ]],
+        // language,
+        info: false,
+        autoWidth: false,
+        searching: false,
+        scrollY: '250px',
+        scrollCollapse: true,
+        paging: false,
+        destroy:true,
+        initComplete: function (settings, json) {
+          $(`.dataTables_scrollBody`).perfectScrollbar();
+        //   $(`#getTrafficDestinationAds_wrapper .dataTables_scrollBody`).perfectScrollbar();
+        //   $(`#getTrafficDestinationAds_wrapper .dataTables_scrollHead table.dataTable`).attr('style', 'margin-top:0!important')
+        //     // .find('thead').addClass('bg-secondary')
+        //     .find('th').each(function (i) { $(this).addClass('border-top-0 border-bottom') });
+        //   $('.getTrafficDestinationAds-container').removeClass('is-loading');
+          // $('#getTrafficDestinationAds .dataTables_empty').text('').addClass('empty-state');
+        }
+      }
+    )
+}
+
+const getTrafficDisplayAdvertisingWebsitesTable = async(task,data,domain) => {  
+    $('.widget-getTrafficDisplayAdvertisingWebsitesTable .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
+    <span class="similarReloadTask" data-task="getTrafficDisplayAdvertisingWebsitesTable"><i class="fal fa-sync"></i></span>
+</div>`)
+    initDatatableClass(
+      'getTrafficDisplayAdvertisingWebsitesTable', 
+      {
+        ajax: {
+          url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}&userToken=${userToken}`,
+          dataSrc: (json) => { 
+              console.log(json);
+                       
+               lockedModule('getTrafficDisplayAdvertisingWebsitesTable', json.userData.member);  
+        if (json.data.data.Data == null ) {
+                $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper').css('min-height','268px');
+                $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper').addClass('empty-state')
+                $('table.getTrafficDisplayAdvertisingWebsitesTable tbody tr td.dataTables_empty').addClass('d-none')
+                $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_processing').addClass('d-none')
+              }     
+          if (json.data.data.Data.Records.length<=0) {
+            $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper').css('min-height','268px');
+            $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper').addClass('empty-state')
+            $('table.getTrafficDisplayAdvertisingWebsitesTable tbody tr td.dataTables_empty').addClass('d-none')
+            $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_processing').addClass('d-none')
+          }
+          
+            if (json && json.data && json.data.data && json.data.data.Data) {
+              let { Data: newData } = json.data.data;
+              if (newData.Records.length > 0) {
+                return newData.Records.filter(item => item.Domain != "grid.upgrade")
+              } else {
+                $("#row-getTrafficDisplayAdvertisingWebsitesTable").hide();
+                return [];
+              }
+              // return (newData.Records)
+            }
+    
+            else {        
+                $('.parent-getTrafficDisplayAdvertisingWebsitesTable #DataTables_Table_1_wrapper').css('min-height','268px');
+                $('.parent-getTrafficDisplayAdvertisingWebsitesTable #DataTables_Table_1_wrapper').addClass('empty-state')
+                $('table.getTrafficDisplayAdvertisingWebsitesTable tbody tr td.dataTables_empty').addClass('d-none')
+              return [];
+            }
+
+          },
+        },
+        drawCallback: function (settings) {
+          $('.getTrafficDisplayAdvertisingWebsitesTable-container').removeClass('is-loading').unblock();
+          $('.getTrafficDisplayAdvertisingWebsitesTable-container').find('.fa-spin').removeClass('fa-spin');
+          $('table.getTrafficDisplayAdvertisingWebsitesTable tbody tr td.dataTables_empty').addClass('d-none')
+        },
+        columns: [
+          { title: 'Trang web',
+           data: data => `<div class="d-flex"><img class="p-1 mr-2 border rounded bg-secondary" src="${data.Favicon}"/>${data.Domain} </div>`,
+            width: "30%",
+            className:'text-left'
+           },
+
+          { title: 'Lượt truy cập', width:"35%", data: data => (data.Visits == 0) ? `-` : `${numeral(data.Visits).format("0,0")}`,className:'text-left' },
+          {
+            title: 'Tỉ lệ truy cập', width: "70%",data: data => `
+          <div class="row align-items-center" style="width:150px">
+              <div class="col-4">${numeral(data.Share).format('0.00%')}</div>
+              <div class="col">
+                <div class="progress progress-style border">
+                    <div class="progress-bar bg-info" style="width: ${numeral(data.Share).format('0%')}; height:14px;" role="progressbar"></div> 
+                </div>
+              </div>
+              <div class="col-4">
+              ${(data.Change == 0 || data.Change == null) ? `-` : (data.Change < 0) ? `<div class="negative text-red">${numeral(data.Change).format('0.00%').slice(1)}</div>` : `<div class="positive text-success">${numeral(data.Change).format('0.00%')}</div>`}
+              </div>
+          </div>`
+          },
+        ],
+        "order": [[2, 'desc']],
+        language,
+        info: false,
+        autoWidth: false,
+        searching: false,
+        scrollY: '230px',
+        scrollCollapse: true,
+        paging: false,
+        processing: true,
+        destroy:true,
+        initComplete: function (settings, json) {
+          $(`.dataTables_scrollBody`).perfectScrollbar();
+          $(`#getTrafficDisplayAdvertisingWebsitesTable_wrapper .dataTables_scrollBody`).perfectScrollbar();
+          $(`#getTrafficDisplayAdvertisingWebsitesTable_wrapper .dataTables_scrollHead table.dataTable`).attr('style', 'margin-top:0!important')         
+            .find('th').each(function (i) { $(this).addClass('border-top-0 border-bottom') });
+          $('.getTrafficDisplayAdvertisingWebsitesTable-container').removeClass('is-loading');
+          $('#getTrafficDisplayAdvertisingWebsitesTable .dataTables_empty').text("").addClass('empty-state');
+        }
+      }
+    )
+}
+
+
+$(document).ready(function () {                            
     $('#Tabsample a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         var target = $(e.target).attr("href") // activated tab
         // alert(target);
-        if (target == "#sample_html") {            
+        if (target == "#sample_html") {
             $('#btn-view-html').removeClass('d-none');
         }
-        if (target == "#sample_text") {            
+        if (target == "#sample_text") {
             $('#btn-view-text').removeClass('d-none');
         }
-      });
+    });
 
 
     $('#img-tab').click(function () {

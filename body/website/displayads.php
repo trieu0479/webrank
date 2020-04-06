@@ -104,4 +104,4 @@
 <script src="<?= $rootURL ?>/dist/js/pages/my-function/init-function.js"></script>
 <script type="module" src="<?= $rootURL ?>/dist/js/pages/website/master.js?v=<?= $version ?>"></script>
 <script type="module" src="<?= $rootURL ?>/dist/js/pages/website/displayads/index.js?v=<?= $version ?>"></script>
-<script type="module" src="<?= $rootURL ?>/dist/js/pages/website/displayads/callechartTableFunction.js?v=<?= $version ?>"></script>
+<!-- <script type="module" src="<?= $rootURL ?>/dist/js/pages/website/displayads/callechartTableFunction.js?v=<?= $version ?>"></script> -->
