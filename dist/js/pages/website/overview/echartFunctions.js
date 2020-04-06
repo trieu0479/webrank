@@ -3560,8 +3560,30 @@ const SampleAdsasText = async(task, data) => {
 }
 
 
-function kFormatter(num) {
-    return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
+function kFormatter(x) {
+    if(isNaN(x)) return x;
+
+	if(x < 9999) {
+		return x;
+	}
+
+	if(x < 1000000) {
+		return Math.round(x/1000) + "K";
+	}
+	if( x < 10000000) {
+		return (x/1000000).toFixed(2) + "M";
+	}
+
+	if(x < 1000000000) {
+		return Math.round((x/1000000)) + "M";
+	}
+
+	if(x < 1000000000000) {
+		return Math.round((x/1000000000)) + "B";
+	}
+
+	return "1T+";
+    
 }
 const getTraffic30Days = async(task, data) => {
     
@@ -3570,6 +3592,7 @@ const getTraffic30Days = async(task, data) => {
         let adsTraffic = [];
         let organicTraffic = [];
         let date30 = [];
+        console.log(ranksHistory);
        ranksHistory = ranksHistory.reverse();
         for (var i=2;i<ranksHistory.length;i=i+7){
             var item = null;
@@ -3579,8 +3602,11 @@ const getTraffic30Days = async(task, data) => {
             for (var k=0;k<7;k++){
                 if (ranksHistory[i+k]){
                     item = ranksHistory[i+k];
+                    
                     adsTraffic7Day = adsTraffic7Day + item.adsTraffic;
                     trafficDay = trafficDay + item.traffic;
+                    console.log(item.traffic);
+                    console.log(trafficDay);
                 }
             }
             date30.push(moment(item01.date).format('DD.MM') + " - " + moment(item.date).format('DD.MM'))
