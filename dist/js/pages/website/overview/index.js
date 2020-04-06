@@ -7,8 +7,10 @@ $(document).ready(function() {
     api("getMarketingMixOverviewDaily", localDomain);
     api("getDomainBackLinkDetail", localDomain);
     api("getTrafficSocial", localDomain);
-    api('getScrapedSearchAds', localDomain)
-    api('getTraffic30Days', localDomain)
+    api("getDomainOverviewV2", localDomain);
+    //api('getScrapedSearchAds', localDomain)
+    //api('adwordsCompetitorsOverview', localDomain)
+    //api('getTraffic30Days', localDomain)
         // ORGANIC
     var input = {};
     input.headerTitle = "Chi tiết truy cập theo từ khoá tự nhiên- Có thương hiệu";
@@ -29,14 +31,14 @@ $(document).ready(function() {
     var input = {};
     input.headerTitle = "Đối thủ tìm kiếm trả phí";
     input.headerTime = "12.2019 - 02.2020";
-    input.widgetTask = "getAdvertisingSearchDetail";
-    input.widgetContainer = "widget-getAdvertisingSearchDetail";
+    input.widgetTask = "getListGoogleAdsCompetitor ";
+    input.widgetContainer = "widget-getListGoogleAdsCompetitor";
     createADataTable(input);
     // GOOGLE ADS END
     //DISPAY ADS
-    api("SampleAdsasImage", localDomain);
-    api("SampleAdsasHTML", localDomain);
-    api("SampleAdsasText", localDomain);
+    api("googleAdsGDNOverview", localDomain);
+    //api("SampleAdsasHTML", localDomain);
+    //api("SampleAdsasText", localDomain);
     //DISPLAY ADS END
     //CHART MOI NHAT
     var input = {};

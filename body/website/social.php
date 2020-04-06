@@ -29,7 +29,7 @@
             </div>
 
             <div class="row">
-            <div class="col-12 col-lg-12">
+            <div class="col-12 col-lg-12 bannerPageAds">
                     <div id="bannerPageAds" class="is-loading" style="height:400px"></div>
                 </div>
 

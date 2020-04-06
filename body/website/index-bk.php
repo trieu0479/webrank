@@ -11,51 +11,27 @@
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14" style="color: rgba(79,80,80,.7);"> <a
-                            href="./?view=analyze-competitor&action=index">Website Traffic </a> </div>
+                            href="<?=$rootURL?>">Website</a> </div>
+                    
                 </div>
 
             </div>
             <!-- sub menu -->
-            <div class="row">
+            <div class="row px-4 pl-lg-2">
                 <div class="col-12">
-                    <div class="px-3 px-md-5">
-                        <div class="row justify-content-center pt-6">
-                            <?php require_once(__DIR__."/modules/master.topbox.php")?>
-                            <div class="col-12">
-                                <div class="content-table mt-5 text-left d-none" style="max-width: 850px;margin:auto">
-                                    <div class="font-gg font-weight-500 font-16 mb-3">
-                                        Danh sách:
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-qc-format" style="white-space: nowrap;">
-                                            <thead>
-                                                <tr class="">
-                                                    <th scope="col" class="font-weight-bold">STT</th>
-                                                    <th scope="col" class="font-weight-bold">Domain</th>
-                                                    <th scope="col" class="font-weight-bold">Ngày xem</th>
-                                                    <th scope="col" class="font-weight-bold">Trạng thái</th>
-                                                    <th scope="col" class="font-weight-bold">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="table-content-ads">
-                                            </tbody>
-                                        </table>
-                                        <nav aria-label="...">
-                                            <ul class="pagination">
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
+                    <div class="px-0 px-lg-5">
+                        <div class="row justify-content-center">
+                            <div class="col-12 text-center maxWidthPc-800 mt-5">
+                                <?php require_once(__DIR__."/modules/master.topbox.php")?>
                             </div>
+
+                            
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-
-
-<script src="dist/js/pages/my-function/init-function.js"></script>
-<script src="dist/js/pages/traffic-website/index.js"></script>
-<script src="dist/js/pages/traffic-website/compareDomain.js"></script>
+<script src="<?=$rootURL?>/dist/js/pages/my-function/init-function.js"></script>

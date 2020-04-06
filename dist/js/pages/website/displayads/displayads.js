@@ -1,6 +1,9 @@
 //US,GB,AU,FR,
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
-var domain = url.searchParams.get('domain');
+
+var localUrl = new URL(location.href);
+var domain = localUrl.searchParams.get('domain');
+
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
     var VIPModule = ["SampleAdsasHTML","topPublicSher","getAllImageTable","PublicSherTable","getWebsiteAdsIntelDisplay","getTrafficDestinationAds","adwordsMonthlyFullTrend","adTypeOverview","displayDevice"];
@@ -18,7 +21,7 @@ function lockedModule(boxWidgetName, level) {
             $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
         }
     }
-}
+} 
 const api = async (method, domain) => {
     let methodName = method;
     if (method == "displayAdsOverview" || method == "adTypeOverview") {
@@ -241,7 +244,7 @@ const SampleAdsasImage = async (data, method) => {
             <div class="box-img">
                 <div class="image-media">
                     <div class="image-sample">
-                        <img src="${val.mediaUrl}">
+                         <img src="https://imgcdn.trazk.com/f.php?f=${btoa(val.mediaUrl)}">
                     </div>
                 </div>
                 <div class="text-sample pt-2">

@@ -110,12 +110,12 @@ $(document).ready(function () {
   initDatatable(
     'tablePTDT', {
     ajax: {
-      url: (!name) ? "//localapi.trazk.com/webdata/websiteapicat.php?task=getTopWebsiteInVietnam&limit=1000" : `//localapi.trazk.com/webdata/websiteapicat.php?task=getWebsiteInACategoryInVietnam&catName=${name}`,
+      url: (!name) ? "//localapi.trazk.com/webdata/websiteapicat.php?task=getTopWebsiteInVietnamServer&limit=50" : `//localapi.trazk.com/webdata/websiteapicat.php?task=getWebsiteInACategoryInVietnamServer&catName=${name}&limit=50`,
       dataSrc: function (res) {
         // trId: ele.blockType
         // console.log(res)
         var columns = [];
-        var stt = 1;
+        var stt = parseInt(res.from) + 1;
 
 
         let urlCategories = new URL(window.location.href);
@@ -240,7 +240,9 @@ $(document).ready(function () {
     },
     columns: [{
       title: "STT",
-      "data": "stt"
+      "data": "stt",
+      width: '20',
+      class:'text-center',
     },
     {
       title: "Website",
@@ -248,33 +250,36 @@ $(document).ready(function () {
     },
     {
       title: "Danh Mục",
+      className: 'hiddenMobile',
       "data": data => {
-        return `<a data-name="${data.category1}" href="?view=traffic-website&action=topsites&domain=fff.com.vn&name=${data.category1}" class="Categories"></a>`
+        return `<a data-name="${data.category1}" href="${rootURL}/top-website-vietnam/${data.category1}" class="Categories"></a>`
       }
     },
     {
       title: "Hạng thế giới ",
-      "data": "GlobalRank"
-    },
-    {
-      title: "Hạng VN",
-      "data": "LocalRank"
+      "data": "GlobalRank",
+      class:'text-right hiddenMobile',
     },
     {
       title: "PC vs Mobile",
-      "data": "DesktopVsMobile",
+      className: 'hiddenMobile',
+      data: "DesktopVsMobile",
       width: '150',
     },
     {
       title: "Traffic",
-      "data": data => `<div class="pl-3 ">${data.TotalTraffic}</div>`
+      "data": data => `<div class="pl-3 ">${data.TotalTraffic}</div>`,
+      class:'text-right',
+
     },
     {
       title: `Money Traffic <i class="fad fa-question-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Lưu lượng có thể kiếm tiền được"></i>`,
-      "data": data => `<div>${data.TrafficMonetization}</div>`
+      "data": data => `<div>${data.TrafficMonetization}</div>`,
+      class:'text-right hiddenMobile',
     },
     {
       title: "GDN",
+      className: 'hiddenMobile',
       "data": data => {
         return (data.TrafficMonetization == 0) ? "<span class='px-3 py-1 text-white' style='background: #fd397a; border-radius: 5px;font-weight: 600; font-size: 12px;'>No<span>" : "<span class='px-3 py-1 text-white' style='background: #5867dd; border-radius: 5px;font-weight: 600; font-size: 12px;'>Yes<span>";
       }
@@ -284,9 +289,11 @@ $(document).ready(function () {
     ordering:false,
     info: false,
     rowId: 'trId',
+    autoWidth: false,
     processing: true,
     pageLength: 50,
     lengthChange: false,
+    serverSide: true,
     initComplete: function (settings, json) {
       // $(`#dataTable_Topsite .dataTables_scrollBody`).addClass("border-0")
       $(`#tablePTDT`).attr('style', 'margin-top:0!important')
@@ -296,7 +303,7 @@ $(document).ready(function () {
         });
       $('#tablePTDT_wrapper').attr('style', 'overflow: auto;')
       $('.dataTables_wrapper .dataTables_paginate').attr('style', 'margin-top: 0')
-      $('table.dataTable thead th').attr('style', 'background: #fff;padding: 15px 10px;')
+     // $('table.dataTable thead th').attr('style', 'background: #fff;padding: 15px 10px;word-wrap:normal')
     }
   }
   )

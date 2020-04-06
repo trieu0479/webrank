@@ -3,7 +3,10 @@
 
 // const counter = document.querySelector('.counter');
 
-var domain = '';
+
+var localUrl = new URL(location.href);
+var domain = localUrl.searchParams.get('domain');
+
 var arrDomain = [];
 var selectWebsite = "";
 

@@ -640,7 +640,10 @@
     background-color: #ffe5cd;
 }
 
-
+.backlinkHeader #pieChart{
+    width: 75px;
+    height: 75px;
+}
 /* css cua khanh dep trai */
 
 @media only screen and (max-width: 768px) {
@@ -654,8 +657,32 @@
     .keywordSearchBox .iptWebsite {
         margin: 0 0 10px 0!important;
     }
+    .hiddenMobile{
+        display: none;
+    }
+    .nav-pills>li>a{
+        padding: 15px 18px;
+    }
+    .backlinkHeader .w-50{
+        width: 100%!important;
+    }
+    .backlinkHeader #pieChart{
+        width: 100%!important;
+        height:300px!important;
+    }
 }
-
+@media only screen and (max-width: 360px) {
+    .nav-pills>li>a{
+        padding: 15px 17px;
+    }
+    .backlinkHeader .w-50{
+        width: 100%!important;
+    }
+    .backlinkHeader #pieChart{
+        width: 100%!important;
+        height:300px;
+    }
+}
 .col-lg-4 .btn-showLoginModal {
     font-size: 12px;
 }

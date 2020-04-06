@@ -136,10 +136,11 @@
                     <div class="row">
                 
                         <div class="col-12 col-lg-6">
-                                <?php require_once(__DIR__ . "/modules/googleads.widgetgetScrapedSearchAds.php")?>               
+                                <?php require_once(__DIR__ . "/modules/overview.widgetgetScrapedSearchAds.php")?>               
                         </div>    
                         <div class="col-12 col-lg-6">
-                                <div style="height:100%" class="widget-getAdvertisingSearchDetail"></div>               
+                                <div style="height:100%" class="widget-getListGoogleAdsCompetitor"></div>        
+                                 
                         </div>    
                     </div>
                     
@@ -159,7 +160,7 @@
                         </div>
                     </div>
                     <div class="row">
-                      <?php require_once(__DIR__ . "/modules/displayads.widgetSampleAds.php")?>               
+                      <?php require_once(__DIR__ . "/modules/overview.widgetDisplayAds.php")?>               
                         
                     </div>
                 </div>

@@ -21,8 +21,11 @@ obj_limit.then(data => {
 })
 
 $(document).ready(() => {           
-            const url = new URL(location.href);
-            const originalDomain = url.searchParams.get("domain") || url.pathname.split("/")[2];
+
+          var localUrl = new URL(location.href);
+          var originalDomain = localUrl.searchParams.get('domain');
+
+
             const language = {
                 searchPlaceholder: 'Nhập từ khóa',
                 processing: 'Đang xử lý...',

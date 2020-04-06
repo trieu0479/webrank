@@ -49,7 +49,7 @@ $(document).ready(() => {
 
     var arrNameContry = [];
     $.get(`//localapi.trazk.com/webdata/v3.php?task=countryIsoName&userToken=${userToken}`, function (res) {
-        arrNameContry = res.data
+        arrNameContry = res.data 
 
     })
     // Quá»‘c Gia
@@ -227,6 +227,7 @@ $(document).ready(() => {
                         return arrTopBackLinks
                     }
                     else {
+                        $('#DataTables_Table_2_paginate').attr('style', 'display:none!important');
                         $('.topBackLinks thead').addClass('d-none')
                         return arrTopBackLinks;
                     }
@@ -253,7 +254,7 @@ $(document).ready(() => {
                             url = data.source_url.substring(7)
                             icon = ""
                         }
-                        return `<div class="text-left">${data.source_title}</div> <div class="text-left">${icon}<a href="${data.source_url}">${url}</a></div>`
+                        return `<div class="text-left w-100">${data.source_title}</div> <div class="text-left w-100">${icon}<a href="${data.source_url}">${url}</a></div>`
                     }
                 },
                 { title: 'Ext Links', data: data => `<div class="text-left">${data.external_link_num}</div>` },
@@ -302,7 +303,7 @@ $(document).ready(() => {
                             icon = ""
                         }
                         return `<div class="text-left">${data.anchor}</div> 
-                                <div class="text-left text-hidden">
+                                <div class="text-left text-hidden" style="width:250px">
                                 ${icon}<a href="${data.target_url}">${url_target}</a>
                                 </div>
                                 <div>
@@ -327,7 +328,7 @@ $(document).ready(() => {
             pageLength: 10,
             initComplete: function (settings, json) {
                 $(`.dataTables_scrollHeadInner`).attr('style', 'width:100% !important;padding-right:0;border-bottom: 1px solid #ddd');
-                // $('.getDataContry .dataTables_empty').text("").addClass('empty-state');
+                $('.parent-topBackLinks .dataTables_empty').text("").addClass('empty-state');
                 // $('.parent-getDataZones #DataTables_Table_1_processing').addClass('mt-n5');
                 $(`.topBackLinks`).attr('style', 'margin-top:0!important')
                     .find('thead').addClass('bg-primary-2')
