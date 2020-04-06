@@ -1,6 +1,6 @@
 function htmlOrder() {
     return `<div class="text-left mb-3"> 
-                <div class="px-3 py-3 font-gg font-weight-bold font-14 border">Mua traffic cho website</div>
+                <div class="px-3 py-3 font-gg font-weight-bold font-15 border">Mua traffic cho website</div>
                 <div class="mt-3 px-3 py-3"> 
                     <div class="d-flex no-block">
                         <span class="align-self-center font-gg font-weight-bold font-14 d-block w-30">URL:</span>
