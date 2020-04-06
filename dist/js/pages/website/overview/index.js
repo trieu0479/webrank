@@ -40,6 +40,28 @@ $(document).ready(function() {
     //api("SampleAdsasHTML", localDomain);
     //api("SampleAdsasText", localDomain);
     //DISPLAY ADS END
+    //CHART MOI NHAT
+    var input = {};
+    input.headerTitle = "Truy cập theo tháng";
+    input.headerTime = "12.2019 - 02.2020";
+    input.widgetTask = "getTrafficOverview";
+    input.widgetContainer = "widget-getTrafficOverview";
+    if (createAWidgets(input)) {
+        api("getTrafficOverview", localDomain);
+    }
+    var input = {};
+    input.headerTitle = "Nguồn khách hàng";
+    input.headerTime = "12.2019 - 02.2020";
+    input.widgetTask = "getTrafficOverviewCustomerResources";
+    input.widgetContainer = "widget-getTrafficOverviewCustomerResources";
+    createAWidgets(input)
+    var input = {};
+    input.headerTitle = "Phân tích nguồn khách hàng";
+    input.headerTime = "12.2019 - 02.2020";
+    input.widgetTask = "getTrafficOverviewCustomerSourceAnalysis";
+    input.widgetContainer = "widget-getTrafficOverviewCustomerSourceAnalysis";
+    createAWidgets(input)
+        // CHART MOI NHAT
     var input = {};
     input.headerTitle = "Truy cập theo tháng";
     input.headerTime = "12.2019 - 02.2020";
@@ -91,7 +113,7 @@ $(document).ready(function() {
     }
 
     var input = {};
-    
+
     input.headerTitle = "Đề xuất từ khóa";
     input.headerTime = "12.2019 - 02.2020";
     input.widgetTask = "getKeywords";
