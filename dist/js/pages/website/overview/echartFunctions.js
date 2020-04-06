@@ -345,35 +345,6 @@ const getHeader = async data => {
 
 
 const api = async(task, domain, reload = 0) => {
-<<<<<<< HEAD
-        domain;
-        let url = "";
-        let method = '';
-        let taskname = '';
-        if (task == "SampleAdsasImage" || task == "getAllImageTable") {
-            taskname = 'getAdvertisingDisplayDetail';
-            method = "bannerAds"
-        }
-        if (task == "SampleAdsasHTML" || task == "getAllHTMLTable") {
-            taskname = 'getAdvertisingDisplayDetail';
-            method = "htmlAds"
-        }
-        if (task == "SampleAdsasText" || task == "getAllTextTable") {
-            taskname = 'getAdvertisingDisplayDetail';
-            method = "textAds"
-        }
-        if (task == 'getDomainBackLinkDetail') {
-            taskname = 'getDomainBackLinkDetail'
-            method = 'backlinksOverview'
-        }
-        if (task == 'getTrafficOverview') {
-            taskname = 'getTrafficOverview'
-        }
-        if (task == 'getTraffic30Days') {
-            taskname = 'getDomainOverview'
-            method = 'ranksHistory'
-        }
-=======
     domain;
     let url = "";
     let method = '';
@@ -410,19 +381,12 @@ const api = async(task, domain, reload = 0) => {
         taskname = 'getDomainOverviewV2'
         method = 'all'
     } 
->>>>>>> 5626e4c1fc179e7bf25593b1b117079ce8cf1d68
 
         // console.log(taskname);
 
-<<<<<<< HEAD
-        if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview' || taskname == 'getTrafficOverview') {
-            // taskname = task;
-            url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}${(taskname =='getTrafficOverview')?'':`&page=1&method[${method}]=true`}&reload=${reload}&userToken=${userToken}`
-=======
     if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview' || taskname=='getDomainOverviewV2') {
         // taskname = task;
         url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
->>>>>>> 5626e4c1fc179e7bf25593b1b117079ce8cf1d68
     } else {
         url = `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`
     }
@@ -3957,7 +3921,6 @@ const getTraffic30Days = async(task, data) => {
         let adsTraffic = [];
         let organicTraffic = [];
         let date30 = [];
-        console.log(ranksHistory);
        ranksHistory = ranksHistory.reverse();
         for (var i=2;i<ranksHistory.length;i=i+7){
             var item = null;
@@ -3970,8 +3933,7 @@ const getTraffic30Days = async(task, data) => {
                     
                     adsTraffic7Day = adsTraffic7Day + item.adsTraffic;
                     trafficDay = trafficDay + item.traffic;
-                    console.log(item.traffic);
-                    console.log(trafficDay);
+                   
                 }
             }
             date30.push(moment(item01.date).format('DD.MM') + " - " + moment(item.date).format('DD.MM'))
