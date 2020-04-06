@@ -53,6 +53,21 @@
                         <div class="widget-getTrafficSourcesOverview"></div>
                     </div>
             </div>
+            <!-- Chart moi  -->
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <div class="widget-getTrafficOverview"></div>
+                </div>
+                <div class="col-12 col-lg-7">
+                    <div class="widget-getTrafficOverviewCustomerResources"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="widget-getTrafficOverviewCustomerSourceAnalysis"></div>
+                </div>
+            </div>
+          <!--het  -->
             <div class="row">
                     <div class="col-12">
                         <?require_once(__DIR__."/modules/overview.widgetTime.php")?>
@@ -68,7 +83,6 @@
                     <div class="col-12 col-lg-4">
                         <div class="widget-getWebDemographicsAge"></div>
                     </div>
-                    
             </div>
             <div class="row">
                 <div class="col-12 ">
