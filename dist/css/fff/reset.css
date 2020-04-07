@@ -3468,7 +3468,9 @@ span.sub-tilte-content,
     font-size: 1rem;
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
-    line-height: 22px;
+    line-height: 24px;
+    height: 25px;
+    padding-right: 5px; 
 }
 
 .kt-checkbox>input {
@@ -3485,6 +3487,7 @@ span.sub-tilte-content,
     left: 0;
     height: 18px;
     width: 18px;
+    margin: 3px 5px;
 }
 
 .kt-checkbox.kt-checkbox--bold>span {
