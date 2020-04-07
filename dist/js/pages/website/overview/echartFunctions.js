@@ -345,35 +345,6 @@ const getHeader = async data => {
 
 
 const api = async(task, domain, reload = 0) => {
-<<<<<<< HEAD
-        domain;
-        let url = "";
-        let method = '';
-        let taskname = '';
-        if (task == "SampleAdsasImage" || task == "getAllImageTable") {
-            taskname = 'getAdvertisingDisplayDetail';
-            method = "bannerAds"
-        }
-        if (task == "SampleAdsasHTML" || task == "getAllHTMLTable") {
-            taskname = 'getAdvertisingDisplayDetail';
-            method = "htmlAds"
-        }
-        if (task == "SampleAdsasText" || task == "getAllTextTable") {
-            taskname = 'getAdvertisingDisplayDetail';
-            method = "textAds"
-        }
-        if (task == 'getDomainBackLinkDetail') {
-            taskname = 'getDomainBackLinkDetail'
-            method = 'backlinksOverview'
-        }
-        if (task == 'getTrafficOverview') {
-            taskname = 'getTrafficOverview'
-        }
-        if (task == 'getTraffic30Days') {
-            taskname = 'getDomainOverview'
-            method = 'ranksHistory'
-        }
-=======
     domain;
     let url = "";
     let method = '';
@@ -410,19 +381,17 @@ const api = async(task, domain, reload = 0) => {
         taskname = 'getDomainOverviewV2'
         method = 'all'
     } 
->>>>>>> 5626e4c1fc179e7bf25593b1b117079ce8cf1d68
+    if (task == 'getTrafficOverview') {
+        taskname = 'getTrafficOverview'
+        method = 'all'
 
-        // console.log(taskname);
+    }
 
-<<<<<<< HEAD
-        if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview' || taskname == 'getTrafficOverview') {
-            // taskname = task;
-            url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}${(taskname =='getTrafficOverview')?'':`&page=1&method[${method}]=true`}&reload=${reload}&userToken=${userToken}`
-=======
-    if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview' || taskname=='getDomainOverviewV2') {
+    // console.log(taskname);
+
+    if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview' || taskname=='getDomainOverviewV2' || taskname == 'getTrafficOverview') {
         // taskname = task;
         url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
->>>>>>> 5626e4c1fc179e7bf25593b1b117079ce8cf1d68
     } else {
         url = `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`
     }
@@ -439,6 +408,9 @@ const api = async(task, domain, reload = 0) => {
                 let isEmpty = false;
                 let temp = 0;
                 switch (task) {
+                    case "getTrafficOverview":// thêm chart moi nhât
+                         getTrafficOverview(task, data);
+                    break;
                     case "getHeader":
                         getHeader(data);
                         break;
@@ -474,9 +446,6 @@ const api = async(task, domain, reload = 0) => {
                         break;
                     case "SampleAdsasText":
                         SampleAdsasText(task, data);
-                        break;
-                    case "getTrafficOverview":// thêm chart moi nhât
-                        getTrafficOverview(task, data);
                         break;
                     case "getDesktopVsMobileVisits": //sử dụng
                         getDesktopVsMobileVisits(task, data);
@@ -567,333 +536,7 @@ function lockedModule(boxWidgetName, level) {
         }
     }
 }
-const getTrafficOverview = async (task, data) => {
-    if (data.status == "success") {
-        if (data.data && data.data.trafficTrend) {
-            let items0 = data.data.trafficTrend.items[0];
-            let items6 = data.data.trafficTrend.items;
-            //--------Truy Cập Theo Tháng
-            let MonthlyVisits = numeral(items0.visits).format("0,0");
-            let html = `
-                <div class="px-3 py-4 pb-5" >
-                    <div class="title-ttc text-center mb-1 font-15">Tổng lượt truy cập</div>
-                    <div class="d-flex ">
-                        <div id="totalTraffic" class="d-flex no-block m-auto">
-                        <h1 class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-table-kh px-3 border-top text-left">
-                    <div class="row padding-y-12 border-bottom ">
-                        <div class="col h6 m-0 align-self-center text-muted">
-                            Thời gian truy cập trung bình</div>
-                        <div class="col-4 text-right">
-                            <span class="AvgVisitDuration h5 font-gg text-favorite ">${numeral(items0.time_on_site).format("0:00:00")}</span>
-                        </div>
-                    </div>
-                    <div class="row padding-y-12 border-bottom text-left">
-                        <div class="col h6 m-0 align-self-center text-muted"> Số trang/Lượt truy cập
-                        </div>
-                        <div class="col-4 text-right">
-                            <span class="PagesperVisit h5 font-gg text-favorite ">${numeral(items0.pages).format("0.00")}</span>
-                        </div>
-                    </div>
-                    <div class="row padding-y-12 text-left">
-                        <div class="col h6 m-0 align-self-center text-muted"> Tỷ lệ thoát</div>
-                        <div class="col-4 text-right">
-                            <span class="BounceRate h5 font-gg text-favorite ">${numeral(items0.bounce_rate).format("00.00%")}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-            $('.getTrafficOverview').html(html)
-            $(`.getTrafficOverview`).removeClass('is-loading');
-            //Hết Truy Cập Theo Tháng
-            //-------Nguồn Khách Hàng
-            $(`.getTrafficOverviewCustomerResources `).removeClass('empty-state');
-            $('.getTrafficOverviewCustomerResources ').attr('style', 'min-height:300px')
-            let dataTrafficSources = ["social", "direct", "referral", "paid", "rank", "search"];
-            let dataChart = [];
-            let datanamechart = [];
-            $.each(items0, (index, item) => {
-                if (dataTrafficSources.includes(index)) {
-                    let key = index;
-                    let value = +numeral(item).format("0");
-                    let obj = {
-                        name: key,
-                        value: value
-                    }
-                    let data_namechart = {
-                        name: key,
-                        icon: 'circle',
-                    }
-                    datanamechart.push(data_namechart);
-                    dataChart.push(obj);
-                }
-            })
-            let data_params_legend;
-            let option = {
-                color: masterColor,
-                tooltip: {
-                    trigger: 'item',
-                    // formatter: '{a} <br/>{b}: {c} ({d}%)',
-                    formatter: params => {
-                        data_params_legend = params
-                        return `
-                        <div class="text-dark pt-2">
-                            <span style="background-color:${params.color}" class=" pill-dot rounded-pill mr-1"></span>
-                            <span style="color:#fff;font-weight:400">${params.name}  ${params.percent}%</span>
-                        </div>`
-                    }
-                },
-                legend: {
-                    //orient: 'vertical',
-                    bottom: '5%',
-                    left: 'center',
-                    orient: 'horizontal',
-                    width:500,
-                    //right: 100,
-                    //top: 50,
-                    //bottom: 20,
-                    data: datanamechart,
-                    formatter: function (name) {
-                        let temp = dataChart.filter((val) => {
-                            if (name == val.name)
-                                return val;
-                        })
-                        return name + "\t\t" + numeral(temp[0].value).format("0,00");
-                    }
-                },
-                series: [{
-                    name: 'Nguồn khách hàng',
-                    type: 'pie',
-                    radius: '60%',
-                    center: ['50%', '40%'],
-                    avoidLabelOverlap: false,
-                    label: {
-                        normal: {
-                            show: false,
-                            position: 'center'
-                        },
-                        emphasis: {
-                            textStyle: {
-                                fontSize: '18',
-                                fontWeight: 'bold'
-                            }
-                        }
-                    },
-                    labelLine: {
-                        normal: {
-                            show: false
-                        }
-                    },
-                    data: dataChart
-                }]
-            };
-            //* update v7*/
-            var containers = document.getElementsByClassName('getTrafficOverviewCustomerResources');
-            var charts = [];
-            for (var i = 0; i < containers.length; i++) {
-                var chart = echarts.init(containers[i]);
-                chart.setOption(option);
-                charts.push(chart);
-            }
-            window.onresize = function () {
-                for (var i = 0; i < charts.length; ++i) {
-                    charts[i].resize();
-                }
-            };
-            await $(`.getTrafficOverviewCustomerResources `).removeClass('is-loading');
-            //* update v7*/
-            await $(`.similarReloadTask[data-task="getTrafficOverviewCustomerResources "]`).find('i').removeClass('fa-spin');
-            //Hết Nguồn Khách Hàng
-            //-------------Phân tsích nguồn khách hàng["social", "direct", "referral", "paid", "rank", "search"]
-            let chartmarketing={
-                keys:[],
-                social:[],
-                direct:[],
-                referral:[],
-                paid:[],
-                rank:[],
-                search:[]
-            }
-            $.each(items6, (i, item) => {
-                $.each(item, (index, data) => {
-                    if (index == 'date')
-                        chartmarketing.keys.push(moment(data).format('DD-MM-YYYY'))
-                    if (index == 'social')
-                        chartmarketing.social.push(data)
-                    if (index == 'direct')
-                        chartmarketing.direct.push(data)
-                    if (index == 'referral')
-                        chartmarketing.referral.push(data)
-                    if (index == 'paid')
-                        chartmarketing.paid.push(data)
-                    if (index == 'rank')
-                        chartmarketing.rank.push(data)
-                    if (index == 'search')
-                        chartmarketing.search.push(data)
-                })
-                return i<5
-            })
-            console.log(chartmarketing)
-            let optionmarketing = {
-                    color:masterColor,
-                    tooltip: {
-                        trigger: "axis",
-                        backgroundColor: 'rgba(255, 255, 255, 1)',
-                        borderColor: 'rgba(93,120,255,1)',
-                        borderWidth: 1,
-                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                        formatter: params => {
-                            // console.log(params);
-                            let {
-                                name
-                            } = params[0];
-                            let detail = "";
-                            let format = "";
-                            params.forEach((p, i) => {
-                                if (p.value == null || p.value == "A")
-                                    p.value == 0;
-                                let {
-                                    marker,
-                                    color,
-                                    seriesName,
-                                    value
-                                } = p;
-                                value = numeral(value).format(format);
-                                detail += `<div class="d-flex justify-content-between"><span class="mr-2">${marker} ${seriesName}</span> <span style="color:${color};font-weight:bold">${value}</span></div>`
-                            })
-                            return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
-                    <div class="text-dark pt-2">${detail}`;
-                        }
-                    },
-                    legend: {
-                        data: ["Trực tiếp", "Liên kết ngoài", "Mạng xã hội", "Xếp hạng", "Trả phí", "Tìm kiếm"],
-                    },
-                    grid: {
-                        right: "5%"
-                    },
-                    xAxis: {
-                        type: "category",
-                        boundaryGap: false,
-                        data: chartmarketing.keys,
-                        axisLine: {
-                            lineStyle: {
-                                color: "#ccc"
-                            }
-                        },
-                    },
-                    yAxis: {
-                        type: "value",
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                        axisLabel: {
-                            margin: 10,
-                            textStyle: {
-                                color: "#ccc"
-                            },
-                            fontFamily: 'Arial',
-                            formatter: (value, index) => (value = numeral(value).format("0a")),
-                        },
-                        splitLine: {
-                            show: true,
-                            lineStyle: {
-                                color: 'rgba(0,0,0,0.1)'
-                            }
-                        },
-                    },
-                    series: [{
-                            name: 'Trực tiếp',
-                            data: chartmarketing.direct,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        },
-                        {
-                            name: 'Mạng xã hội',
-                            data: chartmarketing.social,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        },
-                        {
-                            name: 'Liên kết ngoài',
-                            data: chartmarketing.referral,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        },
-                        {
-                            name: 'Xếp hạng',
-                            data: chartmarketing.rank,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        },
-                        {
-                            name: 'Trả phí',
-                            data: chartmarketing.paid,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        },
-                        {
-                            name: 'Tìm kiếm',
-                            data: chartmarketing.search,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        }
-                    ]
-                };  
-                //* update v7*/
-            var containers = document.getElementsByClassName('getTrafficOverviewCustomerSourceAnalysis');
-            var charts = [];
-            for (var i = 0; i < containers.length; i++) {
-                var chart = echarts.init(containers[i]);
-                chart.setOption(optionmarketing);
-                charts.push(chart);
-            }
-            window.onresize = function () {
-                for (var i = 0; i < charts.length; ++i) {
-                    charts[i].resize();
-                }
-            };
-            await $(`.getTrafficOverviewCustomerSourceAnalysis `).removeClass('is-loading');
-            //* update v7*/          
-            //hết Phân tsích nguồn khách hàng
-        }
-    } else {
-        console.log("error", task);
-    }
-}
-
-
-
-//sử dung truy cập theo tháng 
+//sử dung truy cập theo tháng
 const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
 
         // locked(id, data)
@@ -3925,8 +3568,30 @@ const SampleAdsasText = async(task, data) => {
 }
 
 
-function kFormatter(num) {
-    return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
+function kFormatter(x) {
+    if(isNaN(x)) return x;
+
+	if(x < 9999) {
+		return x;
+	}
+
+	if(x < 1000000) {
+		return Math.round(x/1000) + "K";
+	}
+	if( x < 10000000) {
+		return (x/1000000).toFixed(2) + "M";
+	}
+
+	if(x < 1000000000) {
+		return Math.round((x/1000000)) + "M";
+	}
+
+	if(x < 1000000000000) {
+		return Math.round((x/1000000000)) + "B";
+	}
+
+	return "1T+";
+    
 }
 const getTraffic30Days = async(task, data) => {
     
@@ -3935,6 +3600,7 @@ const getTraffic30Days = async(task, data) => {
         let adsTraffic = [];
         let organicTraffic = [];
         let date30 = [];
+        console.log(ranksHistory);
        ranksHistory = ranksHistory.reverse();
         for (var i=2;i<ranksHistory.length;i=i+7){
             var item = null;
@@ -3944,8 +3610,11 @@ const getTraffic30Days = async(task, data) => {
             for (var k=0;k<7;k++){
                 if (ranksHistory[i+k]){
                     item = ranksHistory[i+k];
+                    
                     adsTraffic7Day = adsTraffic7Day + item.adsTraffic;
                     trafficDay = trafficDay + item.traffic;
+                    console.log(item.traffic);
+                    console.log(trafficDay);
                 }
             }
             date30.push(moment(item01.date).format('DD.MM') + " - " + moment(item.date).format('DD.MM'))
@@ -4123,4 +3792,330 @@ const getListGoogleAdsCompetitor = async(task, data) => {
         }
     )
 }
+
+const getTrafficOverview = async (task, data) => {
+    if (data.status == "success") {
+        if (data.data && data.data.trafficTrend) {
+            let items0 = data.data.trafficTrend.items[0];
+            let items6 = data.data.trafficTrend.items;
+            //--------Truy Cập Theo Tháng
+            let MonthlyVisits = numeral(items0.visits).format("0,0");
+            let html = `
+                <div class="px-3 py-4 pb-5" >
+                    <div class="title-ttc text-center mb-1 font-15">Tổng lượt truy cập</div>
+                    <div class="d-flex ">
+                        <div id="totalTraffic" class="d-flex no-block m-auto">
+                        <h1 class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-table-kh px-3 border-top text-left">
+                    <div class="row padding-y-12 border-bottom ">
+                        <div class="col h6 m-0 align-self-center text-muted">
+                            Thời gian truy cập trung bình</div>
+                        <div class="col-4 text-right">
+                            <span class="AvgVisitDuration h5 font-gg text-favorite ">${numeral(items0.time_on_site).format("0:00:00")}</span>
+                        </div>
+                    </div>
+                    <div class="row padding-y-12 border-bottom text-left">
+                        <div class="col h6 m-0 align-self-center text-muted"> Số trang/Lượt truy cập
+                        </div>
+                        <div class="col-4 text-right">
+                            <span class="PagesperVisit h5 font-gg text-favorite ">${numeral(items0.pages).format("0.00")}</span>
+                        </div>
+                    </div>
+                    <div class="row padding-y-12 text-left">
+                        <div class="col h6 m-0 align-self-center text-muted"> Tỷ lệ thoát</div>
+                        <div class="col-4 text-right">
+                            <span class="BounceRate h5 font-gg text-favorite ">${numeral(items0.bounce_rate).format("00.00%")}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('.getTrafficOverview').html(html)
+            $(`.getTrafficOverview`).removeClass('is-loading');
+            //Hết Truy Cập Theo Tháng
+            //-------Nguồn Khách Hàng
+            $(`.getTrafficOverviewCustomerResources `).removeClass('empty-state');
+            $('.getTrafficOverviewCustomerResources ').attr('style', 'min-height:300px')
+            let dataTrafficSources = ["social", "direct", "referral", "paid", "rank", "search"];
+            let dataChart = [];
+            let datanamechart = [];
+            $.each(items0, (index, item) => {
+                if (dataTrafficSources.includes(index)) {
+                    let key = index;
+                    let value = +numeral(item).format("0");
+                    let obj = {
+                        name: key,
+                        value: value
+                    }
+                    let data_namechart = {
+                        name: key,
+                        icon: 'circle',
+                    }
+                    datanamechart.push(data_namechart);
+                    dataChart.push(obj);
+                }
+            })
+            let data_params_legend;
+            let option = {
+                color: masterColor,
+                tooltip: {
+                    trigger: 'item',
+                    // formatter: '{a} <br/>{b}: {c} ({d}%)',
+                    formatter: params => {
+                        data_params_legend = params
+                        return `
+                        <div class="text-dark pt-2">
+                            <span style="background-color:${params.color}" class=" pill-dot rounded-pill mr-1"></span>
+                            <span style="color:#fff;font-weight:400">${params.name}  ${params.percent}%</span>
+                        </div>`
+                    }
+                },
+                legend: {
+                    //orient: 'vertical',
+                    bottom: '5%',
+                    left: 'center',
+                    orient: 'horizontal',
+                    width:500,
+                    //right: 100,
+                    //top: 50,
+                    //bottom: 20,
+                    data: datanamechart,
+                    formatter: function (name) {
+                        let temp = dataChart.filter((val) => {
+                            if (name == val.name)
+                                return val;
+                        })
+                        return name + "\t\t" + numeral(temp[0].value).format("0,00");
+                    }
+                },
+                series: [{
+                    name: 'Nguồn khách hàng',
+                    type: 'pie',
+                    radius: '60%',
+                    center: ['50%', '40%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            textStyle: {
+                                fontSize: '18',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: dataChart
+                }]
+            };
+            //* update v7*/
+            var containers = document.getElementsByClassName('getTrafficOverviewCustomerResources');
+            var charts = [];
+            for (var i = 0; i < containers.length; i++) {
+                var chart = echarts.init(containers[i]);
+                chart.setOption(option);
+                charts.push(chart);
+            }
+            window.onresize = function () {
+                for (var i = 0; i < charts.length; ++i) {
+                    charts[i].resize();
+                }
+            };
+            await $(`.getTrafficOverviewCustomerResources `).removeClass('is-loading');
+            //* update v7*/
+            await $(`.similarReloadTask[data-task="getTrafficOverviewCustomerResources "]`).find('i').removeClass('fa-spin');
+            //Hết Nguồn Khách Hàng
+            //-------------Phân tsích nguồn khách hàng["social", "direct", "referral", "paid", "rank", "search"]
+            let chartmarketing={
+                keys:[],
+                social:[],
+                direct:[],
+                referral:[],
+                paid:[],
+                rank:[],
+                search:[]
+            }
+            $.each(items6, (i, item) => {
+                $.each(item, (index, data) => {
+                    if (index == 'date')
+                        chartmarketing.keys.push(moment(data).format('DD-MM-YYYY'))
+                    if (index == 'social')
+                        chartmarketing.social.push(data)
+                    if (index == 'direct')
+                        chartmarketing.direct.push(data)
+                    if (index == 'referral')
+                        chartmarketing.referral.push(data)
+                    if (index == 'paid')
+                        chartmarketing.paid.push(data)
+                    if (index == 'rank')
+                        chartmarketing.rank.push(data)
+                    if (index == 'search')
+                        chartmarketing.search.push(data)
+                })
+                return i<5
+            })
+            console.log(chartmarketing)
+            let optionmarketing = {
+                    color:masterColor,
+                    tooltip: {
+                        trigger: "axis",
+                        backgroundColor: 'rgba(255, 255, 255, 1)',
+                        borderColor: 'rgba(93,120,255,1)',
+                        borderWidth: 1,
+                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                        formatter: params => {
+                            // console.log(params);
+                            let {
+                                name
+                            } = params[0];
+                            let detail = "";
+                            let format = "";
+                            params.forEach((p, i) => {
+                                if (p.value == null || p.value == "A")
+                                    p.value == 0;
+                                let {
+                                    marker,
+                                    color,
+                                    seriesName,
+                                    value
+                                } = p;
+                                value = numeral(value).format(format);
+                                detail += `<div class="d-flex justify-content-between"><span class="mr-2">${marker} ${seriesName}</span> <span style="color:${color};font-weight:bold">${value}</span></div>`
+                            })
+                            return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
+                    <div class="text-dark pt-2">${detail}`;
+                        }
+                    },
+                    legend: {
+                        data: ["Trực tiếp", "Liên kết ngoài", "Mạng xã hội", "Xếp hạng", "Trả phí", "Tìm kiếm"],
+                    },
+                    grid: {
+                        right: "5%"
+                    },
+                    xAxis: {
+                        type: "category",
+                        boundaryGap: false,
+                        data: chartmarketing.keys,
+                        axisLine: {
+                            lineStyle: {
+                                color: "#ccc"
+                            }
+                        },
+                    },
+                    yAxis: {
+                        type: "value",
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLabel: {
+                            margin: 10,
+                            textStyle: {
+                                color: "#ccc"
+                            },
+                            fontFamily: 'Arial',
+                            formatter: (value, index) => (value = numeral(value).format("0a")),
+                        },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: 'rgba(0,0,0,0.1)'
+                            }
+                        },
+                    },
+                    series: [{
+                            name: 'Trực tiếp',
+                            data: chartmarketing.direct,
+                            type: "line",
+                            symbol: "circle",
+                            symbolSize: 1,
+                            showSymbol: true,
+                            hoverAnimation: true,
+
+                        },
+                        {
+                            name: 'Mạng xã hội',
+                            data: chartmarketing.social,
+                            type: "line",
+                            symbol: "circle",
+                            symbolSize: 1,
+                            showSymbol: true,
+                            hoverAnimation: true,
+
+                        },
+                        {
+                            name: 'Liên kết ngoài',
+                            data: chartmarketing.referral,
+                            type: "line",
+                            symbol: "circle",
+                            symbolSize: 1,
+                            showSymbol: true,
+                            hoverAnimation: true,
+
+                        },
+                        {
+                            name: 'Xếp hạng',
+                            data: chartmarketing.rank,
+                            type: "line",
+                            symbol: "circle",
+                            symbolSize: 1,
+                            showSymbol: true,
+                            hoverAnimation: true,
+
+                        },
+                        {
+                            name: 'Trả phí',
+                            data: chartmarketing.paid,
+                            type: "line",
+                            symbol: "circle",
+                            symbolSize: 1,
+                            showSymbol: true,
+                            hoverAnimation: true,
+
+                        },
+                        {
+                            name: 'Tìm kiếm',
+                            data: chartmarketing.search,
+                            type: "line",
+                            symbol: "circle",
+                            symbolSize: 1,
+                            showSymbol: true,
+                            hoverAnimation: true,
+
+                        }
+                    ]
+                };  
+                //* update v7*/
+            var containers = document.getElementsByClassName('getTrafficOverviewCustomerSourceAnalysis');
+            var charts = [];
+            for (var i = 0; i < containers.length; i++) {
+                var chart = echarts.init(containers[i]);
+                chart.setOption(optionmarketing);
+                charts.push(chart);
+            }
+            window.onresize = function () {
+                for (var i = 0; i < charts.length; ++i) {
+                    charts[i].resize();
+                }
+            };
+            await $(`.getTrafficOverviewCustomerSourceAnalysis `).removeClass('is-loading');
+            //* update v7*/          
+            //hết Phân tsích nguồn khách hàng
+        }
+    } else {
+        console.log("error", task);
+    }
+}
+
+
 export default api;

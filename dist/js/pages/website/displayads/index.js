@@ -15,7 +15,9 @@ $( document ).ready(function() {
     api('getAllHTMLTable',localDomain)
     api('getAllTextTable',localDomain)
     api('PublicSherTable',localDomain)
-
+    api('getTrafficDisplayAdvertisingAds', localDomain);                                                   
+    api('getTrafficDestinationAds', localDomain);  
+    api('getTrafficDisplayAdvertisingWebsitesTable', localDomain);  
     // -------create API----------/
     var input = {};
     input.headerTitle = "Trang Nguồn Quảng Cáo Hiển Thị";
@@ -189,16 +191,27 @@ $( document ).ready(function() {
       });
 //  ---------------------------------------reload task---------------------     
       $('body').on('click','.similarReloadTask',async function () { 
-        let task = $(this).data("task");   
-        
+        let task = $(this).data("task");           
         $(this).find('i').addClass('fa-spin');     
-        if ( task == "getTrafficDisplayAdvertisingAds" ||task == "getTrafficDestinationAds" ||task == "getWebsiteAdsVisitsOverview" ||task == "getTrafficDisplayAdvertisingWebsitesTable" ) {
-           return;
-        }           
+        if (task =="getTrafficDisplayAdvertisingAds")  {            
+            await api('getTrafficDisplayAdvertisingAds',localDomain, 0).then( (res) =>$(this).find('i').removeClass('fa-spin'))
+              }
+              else if (task == "getTrafficDestinationAds")  {
+                $(this).parent().html('')   
+            await api(task,localDomain,0).then( (res) =>$(this).find('i').removeClass('fa-spin'))
+              }
+              else if (task =="getWebsiteAdsVisitsOverview")  {                               
+            await api('getWebsiteAdsVisitsOverview',localDomain, 0).then( (res) =>$(this).find('i').removeClass('fa-spin'),  $('.getWebsiteAdsVisitsOverview').html('') )
+              }
+             else  if (task =="getTrafficDisplayAdvertisingWebsitesTable")  {    
+                $(this).parent().html('')        
+            await api('getTrafficDisplayAdvertisingWebsitesTable',localDomain, 0).then( (res) =>$(this).find('i').removeClass('fa-spin'))
+        }
         else {
             if (task == "PublicSherTable") {              
                 $(this).parent().html('')
             }
+            
             if (task =="SampleAds") {
                 $('.sample-image-ads').html('')
                 $('.sample-html-ads').html('')
@@ -210,5 +223,6 @@ $( document ).ready(function() {
             }
        await api(task, localDomain).then( (res) =>$(this).find('i').removeClass('fa-spin')) 
         }
-      })
+      }
+      )
 });
