@@ -719,11 +719,13 @@ width: 100%;
     min-height: 299px;
 }
 
-.parent-getTrafficDisplayAdvertisingWebsitesTable #DataTables_Table_1_wrapper {
+.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper {
     min-height: 268px;
 }
 
-
+.progress-style {
+   width: 23px!important;
+}
 
 
 
@@ -767,7 +769,7 @@ width: 100%;
     #MainCompetitor_wrapper,#TopPaidKeyword_wrapper,#PaidPageTable_wrapper {
         overflow: auto;
     }
-.parent-PublicSherTable #DataTables_Table_2_wrapper {
+.parent-PublicSherTable .dataTables_wrapper  {
     overflow: scroll;
     white-space: nowrap;
 }    

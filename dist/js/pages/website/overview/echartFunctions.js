@@ -345,6 +345,7 @@ const getHeader = async data => {
 
 
 const api = async(task, domain, reload = 0) => {
+<<<<<<< HEAD
         domain;
         let url = "";
         let method = '';
@@ -378,6 +379,50 @@ const api = async(task, domain, reload = 0) => {
         if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview' || taskname == 'getTrafficOverview') {
             // taskname = task;
             url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}${(taskname =='getTrafficOverview')?'':`&page=1&method[${method}]=true`}&reload=${reload}&userToken=${userToken}`
+=======
+    domain;
+    let url = "";
+    let method = '';
+    let taskname = '';
+    if (task == "googleAdsGDNOverview" || task == "getAllImageTable") {
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
+    }
+    if (task == "SampleAdsasHTML" || task == "getAllHTMLTable") {
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
+    }
+    if (task == "SampleAdsasText" || task == "getAllTextTable") {
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
+    }
+    if (task == "googleAdsGDNOverview") {
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
+    }
+    if (task == 'getDomainBackLinkDetail') {
+        taskname = 'getDomainBackLinkDetail'
+        method = 'backlinksOverview'
+    }
+    if (task == 'getTraffic30Days') {
+        taskname = 'getDomainOverview'
+        method = 'ranksHistory'
+    }   
+    if (task == 'getScrapedSearchAds') {
+        taskname = 'getDomainOverview'
+        method = 'adwordsPositionsOverview'
+    }    
+    if (task == 'getDomainOverviewV2') {
+        taskname = 'getDomainOverviewV2'
+        method = 'all'
+    } 
+
+        // console.log(taskname);
+
+    if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview' || taskname=='getDomainOverviewV2') {
+        // taskname = task;
+        url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
+>>>>>>> 27b6ef60f42afb07aa25661cc4c61c4f9b4890c2
     } else {
         url = `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`
     }
@@ -3903,6 +3948,34 @@ const SampleAdsasText = async(task, data) => {
 }
 
 
+<<<<<<< HEAD
+=======
+function kFormatter(x) {
+    if(isNaN(x)) return x;
+
+	if(x < 9999) {
+		return x;
+	}
+
+	if(x < 1000000) {
+		return Math.round(x/1000) + "K";
+	}
+	if( x < 10000000) {
+		return (x/1000000).toFixed(2) + "M";
+	}
+
+	if(x < 1000000000) {
+		return Math.round((x/1000000)) + "M";
+	}
+
+	if(x < 1000000000000) {
+		return Math.round((x/1000000000)) + "B";
+	}
+
+	return "1T+";
+    
+}
+>>>>>>> 27b6ef60f42afb07aa25661cc4c61c4f9b4890c2
 const getTraffic30Days = async(task, data) => {
 
     if (data.status == "success") {
@@ -3910,6 +3983,7 @@ const getTraffic30Days = async(task, data) => {
         let adsTraffic = [];
         let organicTraffic = [];
         let date30 = [];
+<<<<<<< HEAD
 
         $.each(totalBacklinks, (key, item) => {
             //   console.log('dsss',refDomains[index]);
@@ -3921,6 +3995,30 @@ const getTraffic30Days = async(task, data) => {
         date30 = date30.reverse();
         adsTraffic = adsTraffic.reverse();
         organicTraffic = organicTraffic.reverse();
+=======
+       ranksHistory = ranksHistory.reverse();
+        for (var i=2;i<ranksHistory.length;i=i+7){
+            var item = null;
+            var adsTraffic7Day = 0;
+            var trafficDay = 0;
+            var item01 = ranksHistory[i];
+            for (var k=0;k<7;k++){
+                if (ranksHistory[i+k]){
+                    item = ranksHistory[i+k];
+                    
+                    adsTraffic7Day = adsTraffic7Day + item.adsTraffic;
+                    trafficDay = trafficDay + item.traffic;
+                   
+                }
+            }
+            date30.push(moment(item01.date).format('DD.MM') + " - " + moment(item.date).format('DD.MM'))
+            adsTraffic.push(adsTraffic7Day)
+            organicTraffic.push(trafficDay)
+        }
+       // date30 = date30.reverse();
+       // adsTraffic = adsTraffic.reverse();
+       // organicTraffic = organicTraffic.reverse();
+>>>>>>> 27b6ef60f42afb07aa25661cc4c61c4f9b4890c2
         let ele = document.getElementById("showTraffic30Days");
         let myChart = echarts.init(ele, 'light');
 

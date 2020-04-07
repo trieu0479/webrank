@@ -3289,3 +3289,308 @@ span.sub-tilte-content,
     color:#fff!important;
     transition: all 0.3s;
 }
+
+.card-traffic .image {
+    clip-path: polygon(100% 70%, 100% 0, 0 0, 0 70%, 50% 100%);
+}
+
+.card-traffic .image-1 {
+    background-image: linear-gradient(to bottom, rgba(255, 184, 34, .4), rgba(255, 184, 34, .1));
+}
+
+.card-traffic .image-2 {
+    background-image: linear-gradient(to bottom, rgba(3, 169, 243, .4), rgba(3, 169, 243, .1));
+}
+
+.card-traffic .image-3 {
+    background-image: linear-gradient(to bottom, rgba(253, 57, 122, .4), rgba(253, 57, 122, .1));
+}
+
+.card-traffic:hover, .card-traffic:active {
+    background-color: aqua;
+    cursor: pointer;
+    transform: translateY(-2%);
+    transition: all 0.3s;
+}
+
+
+
+@keyframes card-traffic-show {
+    0% {
+        opacity: 0;
+        transform: translate(0, 100px);
+    }
+    80% {
+        transform: translate(0, 20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+.traffic-headline {
+    animation: traffic-headline-show 1s ease-out;
+}
+
+@keyframes traffic-headline-show {
+    0% {
+        opacity: 0;
+        transform: translate(0, -50px);
+    }
+    80% {
+        transform: translate(0, -10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+.traffic-titleline {
+    animation: traffic-titleline-show 1s ease-out;
+}
+
+@keyframes traffic-titleline-show {
+    0% {
+        opacity: 0;
+        transform: translate(-100px, 0);
+    }
+    80% {
+        transform: translate(-10px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+.traffic-descriptionline {
+    animation: traffic-descriptionline-show 1s ease-out;
+}
+
+@keyframes traffic-descriptionline-show {
+    0% {
+        opacity: 0;
+        transform: translate(100px, 0);
+    }
+    80% {
+        transform: translate(10px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+.my-input {
+    position: relative;
+    border: none; 
+    padding-left: 0;
+} 
+
+.my-input:focus~.underline {
+    transform: scale(1, 1);
+}
+
+.my-input:focus~.title-line {
+    transform: scale(1, 1);
+    top: -35%;
+}
+
+.title-line {
+    position: absolute;
+    display: inline-block; 
+    top: 27%;  
+    left: 0;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+
+.underline {
+    background-color: dodgerblue;
+    display: inline-block;
+    height: 3px;
+    left: 0;
+    margin-top: -4px;
+    position: absolute; 
+    -webkit-transform: scale(0, 1);
+    transform: scale(0, 1);
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    margin: auto;
+    width: 100%;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #03a9f3!important
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #03a9f3!important;
+    border: 1px solid #03a9f3!important;
+    color: #fff!important;
+    margin: 3px!important; 
+    padding: 0 5px!important;
+    font-size: 12px!important; 
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #fff!important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered { 
+    line-height: 38px!important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    line-height: 28px!important;
+}
+
+.select2-search--dropdown .select2-search__field {
+    border: 1px solid #e9ecef!important;
+    border-radius: .25rem!important;
+}
+
+.select2-dropdown {
+    border: 1px solid #e9ecef!important;
+    border-top: none!important;
+}
+
+/* check-box */
+.kt-checkbox {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 0;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1rem;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    line-height: 22px;
+}
+
+.kt-checkbox>input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.kt-checkbox>span {
+    border-radius: 3px;
+    background: 0 0;
+    position: absolute;
+    top: 1px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+}
+
+.kt-checkbox.kt-checkbox--bold>span {
+    border-width: 2px!important;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.kt-checkbox.kt-checkbox--brand.kt-checkbox--bold>input:checked~span {
+    border: 2px solid #5578eb;
+}
+
+.kt-checkbox>input:checked~span:after {
+    display: block;
+}
+
+.kt-checkbox.kt-checkbox--brand>span:after {
+    border: solid #5578eb;
+}
+
+.kt-checkbox.kt-checkbox--brand>span {
+    border: 1px solid #5578eb;
+}
+
+.kt-checkbox>span:after {
+    content: '';
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    margin-left: -2px;
+    margin-top: -6px;
+    width: 5px;
+    height: 10px;
+    border-width: 0 2px 2px 0!important;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* radio */
+
+.kt-radio {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    text-align: left;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-size: 1rem;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.kt-radio>input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.kt-radio.kt-radio--brand>span {
+    border: 1px solid #5578eb;
+}
+
+.kt-radio.kt-radio--bold>span {
+    border-width: 2px!important;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.kt-radio>span {
+    background: 0 0;
+    position: absolute;
+    top: 1px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%!important;
+}
+
+.kt-radio.kt-radio--brand.kt-radio--bold>input:checked~span {
+    border: 2px solid #5578eb;
+}
+
+.kt-radio:hover>input:not([disabled]):checked~span, .kt-radio>input:checked~span {
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.kt-radio>input:checked~span:after {
+    display: block;
+}
+
+.kt-radio.kt-radio--brand>span:after {
+    border: solid #5578eb;
+    background: #5578eb;
+}
+
+.kt-radio>span:after {
+    content: '';
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    margin-left: -3px;
+    margin-top: -3px;
+    width: 6px;
+    height: 6px;
+    border-radius: 100%!important;
+} 
