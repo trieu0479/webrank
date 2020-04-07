@@ -11,9 +11,6 @@ $(document).ready(function () {
     api('topPublicSher', localDomain)
     api('adTypeOverview', localDomain);
     api('displayDevice', localDomain);
-    api('getAllImageTable', localDomain)
-    api('getAllHTMLTable', localDomain)
-    api('getAllTextTable', localDomain)
     // api('PublicSherTable',localDomain)
 
     // -------create API----------/
@@ -77,8 +74,6 @@ $(document).ready(function () {
         api("getDisplayAgeChart", localDomain);
     }
 
-    // ---------------------truy cap qc kenh qc nguon qc-------------
-    api('getWebsiteAdsVisitsOverview', localDomain);
 
     var input = {};
     input.headerTitle = "Kênh Quảng Cáo";
@@ -170,27 +165,5 @@ $(document).ready(function () {
 
     });
     //  ---------------------------------------reload task---------------------     
-    $('body').on('click', '.similarReloadTask', async function () {
-        let task = $(this).data("task");
-
-        $(this).find('i').addClass('fa-spin');
-        if (task == "getTrafficDisplayAdvertisingAds" || task == "getTrafficDestinationAds" || task == "getWebsiteAdsVisitsOverview" || task == "getTrafficDisplayAdvertisingWebsitesTable") {
-            return;
-        }
-        else {
-            if (task == "PublicSherTable") {
-                $(this).parent().html('')
-            }
-            if (task == "SampleAds") {
-                $('.sample-image-ads').html('')
-                $('.sample-html-ads').html('')
-                $('.sample-text-ads').html('')
-                $('.sample-image-ads').html('')
-                await api("SampleAdsasImage", localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-                await api("SampleAdsasHTML", localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-                await api("SampleAdsasText", localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-            }
-            await api(task, localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-        }
-    })
+    
 });

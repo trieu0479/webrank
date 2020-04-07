@@ -85,7 +85,7 @@ $(document).ready(() => {
         await api('getTrafficDestinationAds', domain, 1).then((res) => $(this).find('i').removeClass('fa-spin'))
       }
       else if (task == "getWebsiteAdsVisitsOverview") {
-        await api('getWebsiteAdsVisitsOverview', domain, 1).then((res) => $(this).find('i').removeClass('fa-spin'), $('.getWebsiteAdsVisitsOverview').html(''))
+        await api('getWebsiteAdsVisitsOverview', domain, 1).then((res) => $(this).find('i').removeClass('fa-spin'))
       }
       else if (task == "getTrafficDisplayAdvertisingWebsitesTable") {
         await api('getTrafficDisplayAdvertisingWebsitesTable', domain, 1).then((res) => $(this).find('i').removeClass('fa-spin'))
@@ -185,23 +185,19 @@ $(document).ready(() => {
         paging: false,
         initComplete: function (settings, json) {
           $(`.dataTables_scrollBody`).perfectScrollbar();
-          $(`#getTrafficDestinationAds_wrapper .dataTables_scrollBody`).perfectScrollbar();
-          $(`#getTrafficDestinationAds_wrapper .dataTables_scrollHead table.dataTable`).attr('style', 'margin-top:0!important')
-            // .find('thead').addClass('bg-secondary')
-            .find('th').each(function (i) { $(this).addClass('border-top-0 border-bottom') });
+          $('#DataTables_Table_0 thead').addClass('d-none')
+          $(`.dataTables_scrollHeadInner`).attr('style', 'width:100% !important;padding-right:0;border-bottom: 1px solid #ddd');
           $('.getTrafficDestinationAds-container').removeClass('is-loading');
           // $('#getTrafficDestinationAds .dataTables_empty').text('').addClass('empty-state');
         }
       }
     )
+
     $('.widget-getTrafficDisplayAdvertisingWebsitesTable .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
     <span class="similarReloadTask" data-task="getTrafficDisplayAdvertisingWebsitesTable"><i class="fal fa-sync"></i></span>
 </div>`)
 
 
-    $('.widget-PublicSherTable .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
-      <a class="similarReloadTask text-muted" data-task="PublicSherTable" href="javascript:;"><i class="fal fa-sync"></i></a>
-      </div>`)
 
     initDatatable(
       'getTrafficDisplayAdvertisingWebsitesTable',
@@ -287,9 +283,6 @@ $(document).ready(() => {
     )
 
 
-      $('.widget-PublicSherTable .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
-      <a class="similarReloadTask text-muted" data-task="PublicSherTable" href="javascript:;"><i class="fal fa-sync"></i></a>
-      </div>`)
       initDatatable(
         'PublicSherTable', {
         ajax: {
