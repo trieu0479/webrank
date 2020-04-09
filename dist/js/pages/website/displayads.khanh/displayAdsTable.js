@@ -53,7 +53,7 @@ const api = async (task, domain,reload=0) => {
 };
 
 //done
-const getWebsiteAdsVisitsOverview = async (task, data, domain) => {    
+const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
     let html = `<div class="bg-white shadow-sm rounded h-100">
     <div class="row border-bottom m-0 py-2">
         <div class="col-auto d-flex no-block align-items-center mx-1">
@@ -82,7 +82,7 @@ const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
     </div>
    </div>`
 
- $('.getWebsiteAdsVisitsOverview').append(html)
+ $('.getWebsiteAdsVisitsOverview').html('').html(html)
  
 
     if (data.status == "success") {
@@ -108,6 +108,7 @@ const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
         console.log(`${task} failed`);
     }
 }
+
 const getDesktopVsMobileVisits = async (task, data) => {
     if (data.status == "success") {
         let {
@@ -259,6 +260,7 @@ const getDesktopVsMobileVisits = async (task, data) => {
         console.log(`${task} failed`);
     }
 };
+
 const getTrafficDisplayAdvertisingAds = async (task, data) => {
     
     if (data.status == "success") {
@@ -413,9 +415,9 @@ const getTrafficDisplayAdvertisingAds = async (task, data) => {
         console.log(`${task} failed`);
     }
 };
+
 const getTrafficDestinationAds = async (task, data) => {
-    if (data.data.data.data.length<=0) { 
-        alert('rrr')
+    if (data.data.data.length<=0) { 
         $('.parent-getTrafficDestinationAds').addClass('empty-state')
     }
     $(`#${task}`).html('');
@@ -427,7 +429,7 @@ const getTrafficDestinationAds = async (task, data) => {
         
         if (site != null){
         if (site.Domain == "grid.upgrade") return;
-        $(`#${task}`).append(`
+        let html = `
         <tr>
             <td><a title="${site.Domain}" href="index.php?view=traffic-website&action=result&domain=${site.Domain}"><img src="${site.Favicon}" class="p-1 mr-2 border rounded bg-secondary" />${site.Domain}</a></td>
             <td class="text-right">${numeral(site.Share).format('0.00%')}</td>
@@ -438,7 +440,8 @@ const getTrafficDestinationAds = async (task, data) => {
             </td>
             <!--<div class="col-2 text-right ${(!site.Change) ? 'text-muted' : (site.Change > 0 ? 'text-success positive' : 'text-danger negative')}">${(!site.Change) ? '-' : ((site.Change.toString().charAt(0) === '-' ? numeral(Math.abs(site.Change)).format('0.00%') : numeral(site.Change).format('0.00%')))}</div> -->
         </tr>
-        `);
+        `
+        $(`#${task}`).append(html);
         }
     })
 
