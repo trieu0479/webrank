@@ -3562,8 +3562,8 @@ const getAccessMonthly = async(task, data) => {
                     <div class="px-3 py-4 pb-5" >
                         <div class="title-ttc text-center mb-1 font-15">Tổng lượt truy cập</div>
                         <div class="d-flex ">
-                            <div id="totalTraffic" class="d-flex no-block m-auto">
-                            <h1 class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</h1>
+                            <div id="totalTraffic" class="no-block m-auto">
+                            <div class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</div>
                             </div>
                         </div>
                     </div>
@@ -3707,6 +3707,7 @@ const getTrafficOverviewCustomerResources = async(task, data) => {
 const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
     $('.similarReloadTask[data-task="getTrafficOverviewCustomerSourceAnalysis"]').attr('data-task', 'getTrafficOverview')
     if (data.status == "success") {
+        
         if (data.data && data.data.trafficTrend) {
             let items6 = data.data.trafficTrend.items;
             let chartmarketing = {
@@ -3735,9 +3736,8 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                         if (index == 'search')
                             chartmarketing.search.push(data)
                     })
-                    return i < 5
+                    return i < 11
                 })
-                // console.log(chartmarketing)
             let optionmarketing = {
                 color: masterColor,
                 tooltip: {
@@ -3924,21 +3924,21 @@ const getTimeMobileDesktop = async(task, data) => {
                     chartMobileDesktop.desktop.push(data)
             })
             chartMobileDesktop.keys.push(moment(item.date).format('MM YYYY'))
-            return i < 5
+            return i < 11
         })
         $.each(mobile, (i, item) => {
             $.each(item, (index, data) => {
                 if (index == nameData)
                     chartMobileDesktop.mobile.push(data)
             })
-            return i < 5
+            return i < 11
         })
         $.each(alldevices, (i, item) => {
             $.each(item, (index, data) => {
                 if (index == nameData)
                     chartMobileDesktop.tong.push(data)
             })
-            return i < 5
+            return i < 11
         })
         let optiondesktopmobile = {
             color: masterColor,
