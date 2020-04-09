@@ -2,9 +2,9 @@ import api from './echartFunctions.js';
 $(document).ready(function() {
     api("getHeader", localDomain);
     api("estmatedWorth", localDomain);
-    api("getTrafficAndEngagementVisitsMonthly", localDomain);
+    //api("getTrafficAndEngagementVisitsMonthly", localDomain);
     // api("getWebsiteGeography", localDomain);
-    api("getMarketingMixOverviewDaily", localDomain);
+    //api("getMarketingMixOverviewDaily", localDomain);
     api("getDomainBackLinkDetail", localDomain);
     api("getTrafficSocial", localDomain);
     api("getDomainOverviewV2", localDomain);
@@ -71,6 +71,7 @@ $(document).ready(function() {
     createADataTable(input);
 
     // HET CHART MOI NHAT
+    /*
     var input = {};
     input.headerTitle = "Truy cập theo tháng";
     input.headerTime = "12.2019 - 02.2020";
@@ -88,6 +89,9 @@ $(document).ready(function() {
     if (createAWidgets(input)) {
         api("getTrafficSourcesOverview", localDomain);
     }
+
+        */
+
     var input = {};
     input.headerTitle = "Truy cập theo tiết bị";
     input.headerTime = "12.2019 - 02.2020";

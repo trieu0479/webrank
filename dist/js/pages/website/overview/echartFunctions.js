@@ -2417,7 +2417,7 @@ const getDomainBackLinkDetail = async(task, data) => {
     //done
 const getDomainOverviewV2 = async(boxName, data) => {
     getScrapedSearchAds('getScrapedSearchAds', data)
-    getTraffic30Days('getTraffic30Days', data)
+        // getTraffic30Days('getTraffic30Days', data)
     getListGoogleAdsCompetitor('getListGoogleAdsCompetitor', data)
     lockedModule('getScrapedSearchAds', data.userData.member);
     lockedModule('getListGoogleAdsCompetitor', data.userData.member);
@@ -3546,6 +3546,9 @@ const getTrafficOverview = async(task, data) => {
         trafficByGeo('trafficByGeo', data);
         getDesktopVsMobileVisits('getDesktopVsMobileVisits', data);
         lockedModule('getDesktopVsMobileVisits', data.userData.member);
+        lockedModule('getTimeMobileDesktop', data.userData.member);
+        lockedModule('trafficByGeo', data.userData.member);
+        lockedModule('getCrunchBase', data.userData.member);
     }
     //--------Truy Cập Theo Tháng
 const getAccessMonthly = async(task, data) => {
@@ -3559,8 +3562,8 @@ const getAccessMonthly = async(task, data) => {
                     <div class="px-3 py-4 pb-5" >
                         <div class="title-ttc text-center mb-1 font-15">Tổng lượt truy cập</div>
                         <div class="d-flex ">
-                            <div id="totalTraffic" class="d-flex no-block m-auto">
-                            <h1 class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</h1>
+                            <div id="totalTraffic" class="no-block m-auto">
+                            <div class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</div>
                             </div>
                         </div>
                     </div>
@@ -3704,6 +3707,7 @@ const getTrafficOverviewCustomerResources = async(task, data) => {
 const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
     $('.similarReloadTask[data-task="getTrafficOverviewCustomerSourceAnalysis"]').attr('data-task', 'getTrafficOverview')
     if (data.status == "success") {
+
         if (data.data && data.data.trafficTrend) {
             let items6 = data.data.trafficTrend.items;
             let chartmarketing = {
@@ -3715,28 +3719,28 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                 search: []
             }
             $.each(items6, (i, item) => {
-                    $.each(item, (index, data) => {
-                        if (index == 'date')
-                            chartmarketing.keys.push(moment(data).format('MMM YYYY'))
-                        if (index == 'social')
-                            chartmarketing.social.push(data)
-                        if (index == 'direct')
-                            chartmarketing.direct.push(data)
-                        if (index == 'referral')
-                            chartmarketing.referral.push(data)
-                        if (index == 'paid')
-                            chartmarketing.paid.push(data)
-                        if (index == 'search')
-                            chartmarketing.search.push(data)
-                    })
-                    return i < 5
+                $.each(item, (index, data) => {
+                    if (index == 'date')
+                        chartmarketing.keys.push(moment(data).format('MMM YYYY'))
+                    if (index == 'social')
+                        chartmarketing.social.push(data)
+                    if (index == 'direct')
+                        chartmarketing.direct.push(data)
+                    if (index == 'referral')
+                        chartmarketing.referral.push(data)
+                    if (index == 'paid')
+                        chartmarketing.paid.push(data)
+                    if (index == 'search')
+                        chartmarketing.search.push(data)
                 })
-                // console.log(chartmarketing)
+                return i < 11
+            })
             let optionmarketing = {
                 color: masterColor,
                 tooltip: {
                     trigger: "axis",
                     backgroundColor: 'rgba(255, 255, 255, 1)',
+                    fontFamily: 'Google Sans,sans-serif',
                     borderColor: 'rgba(93,120,255,1)',
                     borderWidth: 1,
                     extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
@@ -3902,21 +3906,21 @@ const getTimeMobileDesktop = async(task, data) => {
                     chartMobileDesktop.desktop.push(data)
             })
             chartMobileDesktop.keys.push(moment(item.date).format('MM YYYY'))
-            return i < 5
+            return i < 11
         })
         $.each(mobile, (i, item) => {
             $.each(item, (index, data) => {
                 if (index == nameData)
                     chartMobileDesktop.mobile.push(data)
             })
-            return i < 5
+            return i < 11
         })
         $.each(alldevices, (i, item) => {
             $.each(item, (index, data) => {
                 if (index == nameData)
                     chartMobileDesktop.tong.push(data)
             })
-            return i < 5
+            return i < 11
         })
         let optiondesktopmobile = {
             color: masterColor,
@@ -3967,6 +3971,10 @@ const getTimeMobileDesktop = async(task, data) => {
             },
             legend: {
                 data: ["Desktop", "Mobile", "Tổng"],
+                textStyle: {
+                    fontFamily: 'Google Sans,sans-serif',
+                    lineHeight: 12
+                }
             },
             grid: {
                 right: "1%",
@@ -4018,9 +4026,10 @@ const getTimeMobileDesktop = async(task, data) => {
             series: [{
                     name: 'Desktop',
                     data: chartMobileDesktop.desktop.reverse(),
-                    type: "line",
+                    type: "bar",
                     symbol: "circle",
                     smooth: true,
+                    stack: '0',
                     symbolSize: 1,
                     showSymbol: true,
                     hoverAnimation: true,
@@ -4031,9 +4040,10 @@ const getTimeMobileDesktop = async(task, data) => {
                 {
                     name: 'Mobile',
                     data: chartMobileDesktop.mobile.reverse(),
-                    type: "line",
+                    type: "bar",
                     symbol: "circle",
                     smooth: true,
+                    stack: '0',
                     symbolSize: 1,
                     showSymbol: true,
                     hoverAnimation: true,
@@ -4143,7 +4153,6 @@ const getCrunchBase = async(task, data) => {
 }
 const trafficByGeo = async(task, data) => {
     let percentcont = data.data.trafficByGeo
-    console.log(percentcont);
     let contry = []
     let chartmap_data = []
     $.each(arrNameContry, (index, item) => {
@@ -4165,7 +4174,6 @@ const trafficByGeo = async(task, data) => {
             }
         })
     })
-    console.log(chartmap_data);
     var containers = document.getElementsByClassName(task);
     var charts = [];
     for (var i = 0; i < containers.length; i++) {
