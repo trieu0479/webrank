@@ -3712,7 +3712,6 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                 direct: [],
                 referral: [],
                 paid: [],
-                rank: [],
                 search: []
             }
             $.each(items6, (i, item) => {
@@ -3727,8 +3726,6 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                             chartmarketing.referral.push(data)
                         if (index == 'paid')
                             chartmarketing.paid.push(data)
-                        if (index == 'rank')
-                            chartmarketing.rank.push(data)
                         if (index == 'search')
                             chartmarketing.search.push(data)
                     })
@@ -3768,7 +3765,7 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                     }
                 },
                 legend: {
-                    data: ["Trực tiếp", "Liên kết ngoài", "Mạng xã hội", "Xếp hạng", "Trả phí", "Tìm kiếm"],
+                    data: ["Trực tiếp", "Liên kết ngoài", "Mạng xã hội", "Trả phí", "Tìm kiếm"],
                 },
                 grid: {
                     right: "5%"
@@ -3831,17 +3828,6 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                     {
                         name: 'Liên kết ngoài',
                         data: chartmarketing.referral.reverse(),
-                        type: "line",
-                        symbol: "circle",
-                        smooth: true,
-                        symbolSize: 1,
-                        showSymbol: true,
-                        hoverAnimation: true,
-
-                    },
-                    {
-                        name: 'Xếp hạng',
-                        data: chartmarketing.rank.reverse(),
                         type: "line",
                         symbol: "circle",
                         smooth: true,
