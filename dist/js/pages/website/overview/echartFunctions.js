@@ -2417,7 +2417,7 @@ const getDomainBackLinkDetail = async(task, data) => {
     //done
 const getDomainOverviewV2 = async(boxName, data) => {
     getScrapedSearchAds('getScrapedSearchAds', data)
-    getTraffic30Days('getTraffic30Days', data)
+   // getTraffic30Days('getTraffic30Days', data)
     getListGoogleAdsCompetitor('getListGoogleAdsCompetitor', data)
     lockedModule('getScrapedSearchAds', data.userData.member);
     lockedModule('getListGoogleAdsCompetitor', data.userData.member);
@@ -3546,6 +3546,9 @@ const getTrafficOverview = async(task, data) => {
         trafficByGeo('trafficByGeo', data);
         getDesktopVsMobileVisits('getDesktopVsMobileVisits', data);
         lockedModule('getDesktopVsMobileVisits', data.userData.member);
+        lockedModule('getTimeMobileDesktop', data.userData.member);
+        lockedModule('trafficByGeo', data.userData.member);
+        lockedModule('getCrunchBase', data.userData.member);
     }
     //--------Truy Cập Theo Tháng
 const getAccessMonthly = async(task, data) => {
@@ -3740,6 +3743,7 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                 tooltip: {
                     trigger: "axis",
                     backgroundColor: 'rgba(255, 255, 255, 1)',
+                    fontFamily: 'Google Sans,sans-serif',
                     borderColor: 'rgba(93,120,255,1)',
                     borderWidth: 1,
                     extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
@@ -3768,7 +3772,11 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                     }
                 },
                 legend: {
-                    data: ["Trực tiếp", "Liên kết ngoài", "Mạng xã hội", "Xếp hạng", "Trả phí", "Tìm kiếm"],
+                    data: ["Trực tiếp", "Liên kết ngoài", "Mạng xã hội", "Xếp hạng", "Trả phí", "Tìm kiếm"],                   
+                    textStyle: {
+                        fontFamily: 'Google Sans,sans-serif',
+                        lineHeight: 12
+                    },
                 },
                 grid: {
                     right: "5%"
@@ -3981,6 +3989,10 @@ const getTimeMobileDesktop = async(task, data) => {
             },
             legend: {
                 data: ["Desktop", "Mobile", "Tổng"],
+                textStyle: {
+                    fontFamily: 'Google Sans,sans-serif',
+                    lineHeight: 12
+                }
             },
             grid: {
                 right: "1%",
@@ -4032,9 +4044,10 @@ const getTimeMobileDesktop = async(task, data) => {
             series: [{
                     name: 'Desktop',
                     data: chartMobileDesktop.desktop.reverse(),
-                    type: "line",
+                    type: "bar",
                     symbol: "circle",
                     smooth: true,
+                    stack: '0',
                     symbolSize: 1,
                     showSymbol: true,
                     hoverAnimation: true,
@@ -4045,9 +4058,10 @@ const getTimeMobileDesktop = async(task, data) => {
                 {
                     name: 'Mobile',
                     data: chartMobileDesktop.mobile.reverse(),
-                    type: "line",
+                    type: "bar",
                     symbol: "circle",
                     smooth: true,
+                    stack: '0',
                     symbolSize: 1,
                     showSymbol: true,
                     hoverAnimation: true,
@@ -4157,7 +4171,6 @@ const getCrunchBase = async(task, data) => {
 }
 const trafficByGeo = async(task, data) => {
     let percentcont = data.data.trafficByGeo
-    console.log(percentcont);
     let contry = []
     let chartmap_data = []
     $.each(arrNameContry, (index, item) => {
@@ -4179,7 +4192,6 @@ const trafficByGeo = async(task, data) => {
             }
         })
     })
-    console.log(chartmap_data);
     var containers = document.getElementsByClassName(task);
     var charts = [];
     for (var i = 0; i < containers.length; i++) {

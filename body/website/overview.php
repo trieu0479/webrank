@@ -41,18 +41,18 @@
                 </div>
             </div>
             <div class="row">
+                    <div class="col-12">
+                        <?require_once(__DIR__."/modules/overview.widgetTimeMobileDestop.php")?>
+                    </div>
+            </div>
+            
+            <!--
+            <div class="row">
                 <div class="col-12">
                         <?require_once(__DIR__."/modules/overview.traffic30day.php")?>
                 </div>
             </div>
-            <div class="row">
-                    <div class="col-12 col-lg-5">
-                        <div class="widget-getTrafficAndEngagementOverviewMonthly"></div>
-                    </div>
-                    <div class="col-12 col-lg-7">
-                        <div class="widget-getTrafficSourcesOverview"></div>
-                    </div>
-            </div>
+            -->
             <!-- Chart moi  -->
             <div class="row">
                 <div class="col-12 col-lg-5">
@@ -68,28 +68,14 @@
                 </div>
             </div>
             
-            <div class="row">
-                    <div class="col-12">
-                        <?require_once(__DIR__."/modules/overview.widgetTimeMobileDestop.php")?>
-                    </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="widget-getSubdomains"></div>
-                </div>
-            </div>
-            <div class="row">
-                    <div class="col-12">
-                        <?require_once(__DIR__."/modules/overview.widgetCompanyInfo.php")?>
-                    </div>
-            </div>
-          <!--het  -->
-
+           
+          <!--
             <div class="row">
                     <div class="col-12">
                         <?require_once(__DIR__."/modules/overview.widgetTime.php")?>
                     </div>
             </div>
+        -->
             <div class="row">
                     <div class="col-12 col-lg-4">
                         <div class="widget-getDesktopVsMobileVisits"></div>
@@ -257,6 +243,18 @@
                     <div class="widget-getSimilarSites"></div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="widget-getSubdomains"></div>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-12">
+                        <?require_once(__DIR__."/modules/overview.widgetCompanyInfo.php")?>
+                    </div>
+            </div>
+          <!--het  -->
+
     </div>
 </div>
 <script src="<?=$rootURL?>/assets/js/wordcloud2.js"></script>

@@ -47,7 +47,6 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.php?task=getTrafficOverview&domain=${localDomain}&page=1&method[all]=true&userToken=${userToken}`,
                     dataSrc: json => {
-                        console.log(json);
                         let contry = []
                         let columns = []
                         $.each(arrNameContry, (index, item) => {
@@ -71,7 +70,7 @@ $(document).ready(() => {
                                 }
                             })
                         })
-                        console.log(columns);
+                      
 
                         return columns;
                         // lockedModule('getWebsiteGeography', json.userData.member)
