@@ -35,7 +35,6 @@ $(document).ready(function () {
     if (createAWidgets(input)) {
         api('CompetitorMapChart', localDomain)
     }
-
     $(".similarReloadTask").click(function () {
         if ($(this).find('i').hasClass('fa-spin')) { $(this).find('i').removeClass('fa-spin'); return; }
         let task = $(this).data("task");

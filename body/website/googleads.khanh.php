@@ -64,7 +64,7 @@
                     <div class="widget-CompetitorMapChart"></div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12 px-0">
                     <?php require_once(__DIR__ . "/modules/googleads.widgetPaidPageTable.php") ?>
                 </div>
 

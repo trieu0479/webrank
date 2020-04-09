@@ -28,7 +28,7 @@ const initDatatable = function (select, tableOptions) {
     return table;
 };
 const renderSparkline = (task) => { //task ở đây là id cha
-    $(`#${task} .sparkline`).each((index, item) => {
+    $(`.${task} .sparkline`).each((index, item) => {
         $(item).html('');
         $(item).sparkline($(item).data('sparkline'), {
             type: 'bar',
@@ -46,8 +46,9 @@ $(document).ready(function () {
         ajax: {
             url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
             dataSrc: function (res) {
-                console.log(res);
                 
+                    console.log(res);
+                    
                 if (res.data.adwordsCompetitors == null) {
                     $('#MainCompetitor_wrapper').addClass('empty-state');
                     $('#MainCompetitor_wrapper').css('min-height', '361px')
@@ -64,6 +65,7 @@ $(document).ready(function () {
                 }
 
                 let dataMainCompetitor = res.data.adwordsCompetitors;
+                lockedModule('MainCompetitor', res.userData.member);
                 let columns = [];
                 $.each(dataMainCompetitor, function (k, v) {
 
@@ -237,8 +239,8 @@ $(document).ready(function () {
         ajax: {
             url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method[adwordsPositions]=true&userToken=${userToken}`,
             dataSrc: function (res) {
-                console.log(res);
-                
+                // console.log(res);
+                lockedModule('TopPaidKeyword', res.userData.member);
                 if (res.data.adwordsPositions == null) {
                     $('#TopPaidKeyword_wrapper').addClass('empty-state');
                     $('#TopPaidKeyword_wrapper').css('min-height', '361px')

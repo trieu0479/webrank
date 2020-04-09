@@ -2,15 +2,19 @@
 var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 
-var localUrl = new URL(location.href);
-var domain = localUrl.searchParams.get('domain');
+// var localUrl = new URL(location.href);
+// var domain = localUrl.searchParams.get('domain');
 
 
 function lockedModule(boxWidgetName, level) {
+    // console.log(boxWidgetName);
+    
     var freeModule = [];
-    var VIPModule = ["TopPaidKeyword", "MainCompetitor", "PositionChart", "CompetitorMapChart", "getScrapedSearchAds", "PaidPageTable", "adwordsMonthlyFullTrend"];
+    var VIPModule = ["PositionChart", "CompetitorMapChart", "getScrapedSearchAds", "PaidPageTable", "adwordsMonthlyFullTrend"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
+            console.log(boxWidgetName);
+            
             //ngoai le 
             if (boxWidgetName == 'getMarketingMixOverviewDaily') boxWidgetName = 'getMarketingMixOverview';
             if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
@@ -28,7 +32,7 @@ function lockedModule(boxWidgetName, level) {
 
 const api = async (method, domain) => {
     let methodName = method;
-    if (method == "ggAdsOverview" || method == "TopPaidKeyword" || method == "PositionChart" || method == "PaidPageTable" || method == "getScrapedSearchAds") {
+    if (method == "ggAdsOverview" || method == "TopPaidKeyword" || method == "PositionChart" || method == "PaidPageTables" || method == "getScrapedSearchAds") {
         method = "adwordsPositions"
     }
     if (method == "adwordsMonthlyFullTrend") {
