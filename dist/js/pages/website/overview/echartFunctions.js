@@ -3598,7 +3598,6 @@ const getAccessMonthly = async(task, data) => {
     //-------Nguồn Khách Hàng
 const getTrafficOverviewCustomerResources = async(task, data) => {
     $('.similarReloadTask[data-task="getTrafficOverviewCustomerResources"]').attr('data-task', 'getTrafficOverview')
-
     if (data.status == "success") {
         if (data.data && data.data.trafficTrend) {
             let items0 = data.data.trafficTrend.items[0];
