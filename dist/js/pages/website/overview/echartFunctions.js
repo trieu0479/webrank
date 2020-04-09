@@ -22,7 +22,11 @@ function extractHostname(url) {
     return hostname;
 }
 
+var arrNameContry = [];
+$.get(`//localapi.trazk.com/webdata/v3.php?task=countryIsoName&userToken=${userToken}`, function(res) {
+    arrNameContry = res.data
 
+})
 var domain_name = domain;
 
 var arrDomain = [];
@@ -117,8 +121,8 @@ const getHeader = async data => {
     if (similarDescription == "")
         similarDescription = "<em>Website này chưa cập nhật mô tả</em>";
 
-    // Set value Header
-    similarIcon = "https://files.fff.com.vn/f.php?url=" + btoa(similarIcon);
+    // Set value Headerhttps://www.google.com/s2/favicons?domain=news.zing.vn
+    similarIcon = "https://www.google.com/s2/favicons?domain=" + similarDomain;
     $(".similarHeader .similarIcon").html(
         `<img class="p-1 mr-2 border rounded bg-secondary" src="${similarIcon}" />`
     );
@@ -144,7 +148,7 @@ const getHeader = async data => {
             (index == "apps_0" ?
                 "//play.google.com/store/apps/details?id=" :
                 "//itunes.apple.com/us/app/id") + mainApp.id;
-        const appIcon = "https://files.fff.com.vn/f.php?url=" + btoa(mainApp.icon);
+        const appIcon = "https://imgcdn.trazk.com/f.php?f=" + btoa(mainApp.icon);
         const appTitle = mainApp.title;
         apps += `<a target="_blank" class="mr-2" href="${appId}"><img width="32px" src="${appIcon}" /></a>`;
     });
@@ -153,8 +157,8 @@ const getHeader = async data => {
         `<div class="d-flex flex-row">${apps}</div>`
     );
 
-    similarThumb = "https://files.fff.com.vn/f.php?url=" + btoa(similarThumb);
-    similarThumbMobile = "https://files.fff.com.vn/f.php?url=" + btoa(similarThumbMobile);
+    similarThumb = "https://imgcdn.trazk.com/f.php?f=" + btoa(similarThumb);
+    similarThumbMobile = "https://imgcdn.trazk.com/f.php?f=" + btoa(similarThumbMobile);
     $(".similarThumb img").attr("src", similarThumb);
     $(".similarThumbMobile img").attr("src", similarThumbMobile);
 
@@ -345,39 +349,53 @@ const getHeader = async data => {
 
 
 const api = async(task, domain, reload = 0) => {
-        domain;
-        let url = "";
-        let method = '';
-        let taskname = '';
-        if (task == "SampleAdsasImage" || task == "getAllImageTable") {
-            taskname = 'getAdvertisingDisplayDetail';
-            method = "bannerAds"
-        }
-        if (task == "SampleAdsasHTML" || task == "getAllHTMLTable") {
-            taskname = 'getAdvertisingDisplayDetail';
-            method = "htmlAds"
-        }
-        if (task == "SampleAdsasText" || task == "getAllTextTable") {
-            taskname = 'getAdvertisingDisplayDetail';
-            method = "textAds"
-        }
-        if (task == 'getDomainBackLinkDetail') {
-            taskname = 'getDomainBackLinkDetail'
-            method = 'backlinksOverview'
-        }
-        if (task == 'getTrafficOverview') {
-            taskname = 'getTrafficOverview'
-        }
-        if (task == 'getTraffic30Days') {
-            taskname = 'getDomainOverview'
-            method = 'ranksHistory'
-        }
+    domain;
+    let url = "";
+    let method = '';
+    let taskname = '';
+    if (task == "googleAdsGDNOverview" || task == "getAllImageTable") {
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
+    }
+    if (task == "SampleAdsasHTML" || task == "getAllHTMLTable") {
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
+    }
+    if (task == "SampleAdsasText" || task == "getAllTextTable") {
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
+    }
+    if (task == "googleAdsGDNOverview") {
+        taskname = 'getDomainOverview';
+        method = "googleAdsGDNOverview"
+    }
+    if (task == 'getDomainBackLinkDetail') {
+        taskname = 'getDomainBackLinkDetail'
+        method = 'backlinksOverview'
+    }
+    if (task == 'getTraffic30Days') {
+        taskname = 'getDomainOverview'
+        method = 'ranksHistory'
+    }
+    if (task == 'getScrapedSearchAds') {
+        taskname = 'getDomainOverview'
+        method = 'adwordsPositionsOverview'
+    }
+    if (task == 'getDomainOverviewV2') {
+        taskname = 'getDomainOverviewV2'
+        method = 'all'
+    }
+    if (task == 'getTrafficOverview') {
+        taskname = 'getTrafficOverview'
+        method = 'all'
 
-        // console.log(taskname);
+    }
 
-        if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview' || taskname == 'getTrafficOverview') {
-            // taskname = task;
-            url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}${(taskname =='getTrafficOverview')?'':`&page=1&method[${method}]=true`}&reload=${reload}&userToken=${userToken}`
+    // console.log(taskname);
+
+    if (taskname == 'getDomainBackLinkDetail' || taskname == 'getAdvertisingDisplayDetail' || taskname == 'getDomainOverview' || taskname == 'getDomainOverviewV2' || taskname == 'getTrafficOverview') {
+        // taskname = task;
+        url = `//localapi.trazk.com/webdata/v3.php?task=${taskname}&domain=${domain}&page=1&method[${method}]=true&reload=${reload}&userToken=${userToken}`
     } else {
         url = `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`
     }
@@ -394,6 +412,9 @@ const api = async(task, domain, reload = 0) => {
                 let isEmpty = false;
                 let temp = 0;
                 switch (task) {
+                    case "getTrafficOverview": // thêm chart moi nhât
+                        getTrafficOverview(task, data);
+                        break;
                     case "getHeader":
                         getHeader(data);
                         break;
@@ -406,14 +427,23 @@ const api = async(task, domain, reload = 0) => {
                     case "getScrapedSearchAds":
                         getScrapedSearchAds(task, data);
                         break;
+                    case "adwordsCompetitorsOverview":
+                        adwordsCompetitorsOverview(task, data);
+                        break;
                     case "getTrafficSourcesSearch":
                         getTrafficSourcesSearch(task, data);
                         break;
                     case "getDomainBackLinkDetail":
                         getDomainBackLinkDetail(task, data);
                         break;
+                    case "getDomainOverviewV2":
+                        getDomainOverviewV2(task, data);
+                        break;
                     case "SampleAdsasImage":
                         SampleAdsasImage(task, data);
+                        break;
+                    case "googleAdsGDNOverview":
+                        googleAdsGDNOverview(task, data);
                         break;
                     case "SampleAdsasHTML":
                         SampleAdsasHTML(task, data);
@@ -421,12 +451,9 @@ const api = async(task, domain, reload = 0) => {
                     case "SampleAdsasText":
                         SampleAdsasText(task, data);
                         break;
-                    case "getTrafficOverview":// thêm chart moi nhât
-                        getTrafficOverview(task, data);
-                        break;
-                    case "getDesktopVsMobileVisits": //sử dụng
-                        getDesktopVsMobileVisits(task, data);
-                        break;
+                        // case "getDesktopVsMobileVisits": //sử dụng
+                        //     getDesktopVsMobileVisits(task, data);
+                        //     break;
                     case "getWebDemographicsGender": //sử dung
                         getWebDemographicsGender(task, data);
                         break;
@@ -439,9 +466,9 @@ const api = async(task, domain, reload = 0) => {
                     case "getSimilarSites": //sử dụng
                         getSimilarSites(task, data);
                         break;
-                    case "getWebsiteGeography": //sử dụng
-                        getWebsiteGeography(task, data);
-                        break;
+                        // case "getWebsiteGeography": //sử dụng
+                        //     getWebsiteGeography(task, data);
+                        //     break;
                     case "getTraffic30Days": //sử dụng
                         getTraffic30Days(task, data);
                         break;
@@ -485,7 +512,7 @@ const api = async(task, domain, reload = 0) => {
                 // }
             });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
     }
 };
 const estmatedWorth = async(task, data) => {
@@ -496,7 +523,7 @@ const estmatedWorth = async(task, data) => {
 
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAdsasHTML", "getScrapedSearchAds", "getSimilarSites"];
+    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor'];
     var VIPModule = [];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
@@ -513,333 +540,7 @@ function lockedModule(boxWidgetName, level) {
         }
     }
 }
-const getTrafficOverview = async (task, data) => {
-    if (data.status == "success") {
-        if (data.data && data.data.trafficTrend) {
-            let items0 = data.data.trafficTrend.items[0];
-            let items6 = data.data.trafficTrend.items;
-            //--------Truy Cập Theo Tháng
-            let MonthlyVisits = numeral(items0.visits).format("0,0");
-            let html = `
-                <div class="px-3 py-4 pb-5" >
-                    <div class="title-ttc text-center mb-1 font-15">Tổng lượt truy cập</div>
-                    <div class="d-flex ">
-                        <div id="totalTraffic" class="d-flex no-block m-auto">
-                        <h1 class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-table-kh px-3 border-top text-left">
-                    <div class="row padding-y-12 border-bottom ">
-                        <div class="col h6 m-0 align-self-center text-muted">
-                            Thời gian truy cập trung bình</div>
-                        <div class="col-4 text-right">
-                            <span class="AvgVisitDuration h5 font-gg text-favorite ">${numeral(items0.time_on_site).format("0:00:00")}</span>
-                        </div>
-                    </div>
-                    <div class="row padding-y-12 border-bottom text-left">
-                        <div class="col h6 m-0 align-self-center text-muted"> Số trang/Lượt truy cập
-                        </div>
-                        <div class="col-4 text-right">
-                            <span class="PagesperVisit h5 font-gg text-favorite ">${numeral(items0.pages).format("0.00")}</span>
-                        </div>
-                    </div>
-                    <div class="row padding-y-12 text-left">
-                        <div class="col h6 m-0 align-self-center text-muted"> Tỷ lệ thoát</div>
-                        <div class="col-4 text-right">
-                            <span class="BounceRate h5 font-gg text-favorite ">${numeral(items0.bounce_rate).format("00.00%")}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-            $('.getTrafficOverview').html(html)
-            $(`.getTrafficOverview`).removeClass('is-loading');
-            //Hết Truy Cập Theo Tháng
-            //-------Nguồn Khách Hàng
-            $(`.getTrafficOverviewCustomerResources `).removeClass('empty-state');
-            $('.getTrafficOverviewCustomerResources ').attr('style', 'min-height:300px')
-            let dataTrafficSources = ["social", "direct", "referral", "paid", "rank", "search"];
-            let dataChart = [];
-            let datanamechart = [];
-            $.each(items0, (index, item) => {
-                if (dataTrafficSources.includes(index)) {
-                    let key = index;
-                    let value = +numeral(item).format("0");
-                    let obj = {
-                        name: key,
-                        value: value
-                    }
-                    let data_namechart = {
-                        name: key,
-                        icon: 'circle',
-                    }
-                    datanamechart.push(data_namechart);
-                    dataChart.push(obj);
-                }
-            })
-            let data_params_legend;
-            let option = {
-                color: masterColor,
-                tooltip: {
-                    trigger: 'item',
-                    // formatter: '{a} <br/>{b}: {c} ({d}%)',
-                    formatter: params => {
-                        data_params_legend = params
-                        return `
-                        <div class="text-dark pt-2">
-                            <span style="background-color:${params.color}" class=" pill-dot rounded-pill mr-1"></span>
-                            <span style="color:#fff;font-weight:400">${params.name}  ${params.percent}%</span>
-                        </div>`
-                    }
-                },
-                legend: {
-                    //orient: 'vertical',
-                    bottom: '5%',
-                    left: 'center',
-                    orient: 'horizontal',
-                    width:500,
-                    //right: 100,
-                    //top: 50,
-                    //bottom: 20,
-                    data: datanamechart,
-                    formatter: function (name) {
-                        let temp = dataChart.filter((val) => {
-                            if (name == val.name)
-                                return val;
-                        })
-                        return name + "\t\t" + numeral(temp[0].value).format("0,00");
-                    }
-                },
-                series: [{
-                    name: 'Nguồn khách hàng',
-                    type: 'pie',
-                    radius: '60%',
-                    center: ['50%', '40%'],
-                    avoidLabelOverlap: false,
-                    label: {
-                        normal: {
-                            show: false,
-                            position: 'center'
-                        },
-                        emphasis: {
-                            textStyle: {
-                                fontSize: '18',
-                                fontWeight: 'bold'
-                            }
-                        }
-                    },
-                    labelLine: {
-                        normal: {
-                            show: false
-                        }
-                    },
-                    data: dataChart
-                }]
-            };
-            //* update v7*/
-            var containers = document.getElementsByClassName('getTrafficOverviewCustomerResources');
-            var charts = [];
-            for (var i = 0; i < containers.length; i++) {
-                var chart = echarts.init(containers[i]);
-                chart.setOption(option);
-                charts.push(chart);
-            }
-            window.onresize = function () {
-                for (var i = 0; i < charts.length; ++i) {
-                    charts[i].resize();
-                }
-            };
-            await $(`.getTrafficOverviewCustomerResources `).removeClass('is-loading');
-            //* update v7*/
-            await $(`.similarReloadTask[data-task="getTrafficOverviewCustomerResources "]`).find('i').removeClass('fa-spin');
-            //Hết Nguồn Khách Hàng
-            //-------------Phân tsích nguồn khách hàng["social", "direct", "referral", "paid", "rank", "search"]
-            let chartmarketing={
-                keys:[],
-                social:[],
-                direct:[],
-                referral:[],
-                paid:[],
-                rank:[],
-                search:[]
-            }
-            $.each(items6, (i, item) => {
-                $.each(item, (index, data) => {
-                    if (index == 'date')
-                        chartmarketing.keys.push(moment(data).format('DD-MM-YYYY'))
-                    if (index == 'social')
-                        chartmarketing.social.push(data)
-                    if (index == 'direct')
-                        chartmarketing.direct.push(data)
-                    if (index == 'referral')
-                        chartmarketing.referral.push(data)
-                    if (index == 'paid')
-                        chartmarketing.paid.push(data)
-                    if (index == 'rank')
-                        chartmarketing.rank.push(data)
-                    if (index == 'search')
-                        chartmarketing.search.push(data)
-                })
-                return i<5
-            })
-            console.log(chartmarketing)
-            let optionmarketing = {
-                    color:masterColor,
-                    tooltip: {
-                        trigger: "axis",
-                        backgroundColor: 'rgba(255, 255, 255, 1)',
-                        borderColor: 'rgba(93,120,255,1)',
-                        borderWidth: 1,
-                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                        formatter: params => {
-                            // console.log(params);
-                            let {
-                                name
-                            } = params[0];
-                            let detail = "";
-                            let format = "";
-                            params.forEach((p, i) => {
-                                if (p.value == null || p.value == "A")
-                                    p.value == 0;
-                                let {
-                                    marker,
-                                    color,
-                                    seriesName,
-                                    value
-                                } = p;
-                                value = numeral(value).format(format);
-                                detail += `<div class="d-flex justify-content-between"><span class="mr-2">${marker} ${seriesName}</span> <span style="color:${color};font-weight:bold">${value}</span></div>`
-                            })
-                            return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
-                    <div class="text-dark pt-2">${detail}`;
-                        }
-                    },
-                    legend: {
-                        data: ["Trực tiếp", "Liên kết ngoài", "Mạng xã hội", "Xếp hạng", "Trả phí", "Tìm kiếm"],
-                    },
-                    grid: {
-                        right: "5%"
-                    },
-                    xAxis: {
-                        type: "category",
-                        boundaryGap: false,
-                        data: chartmarketing.keys,
-                        axisLine: {
-                            lineStyle: {
-                                color: "#ccc"
-                            }
-                        },
-                    },
-                    yAxis: {
-                        type: "value",
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                        axisLabel: {
-                            margin: 10,
-                            textStyle: {
-                                color: "#ccc"
-                            },
-                            fontFamily: 'Arial',
-                            formatter: (value, index) => (value = numeral(value).format("0a")),
-                        },
-                        splitLine: {
-                            show: true,
-                            lineStyle: {
-                                color: 'rgba(0,0,0,0.1)'
-                            }
-                        },
-                    },
-                    series: [{
-                            name: 'Trực tiếp',
-                            data: chartmarketing.direct,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        },
-                        {
-                            name: 'Mạng xã hội',
-                            data: chartmarketing.social,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        },
-                        {
-                            name: 'Liên kết ngoài',
-                            data: chartmarketing.referral,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        },
-                        {
-                            name: 'Xếp hạng',
-                            data: chartmarketing.rank,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        },
-                        {
-                            name: 'Trả phí',
-                            data: chartmarketing.paid,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        },
-                        {
-                            name: 'Tìm kiếm',
-                            data: chartmarketing.search,
-                            type: "line",
-                            symbol: "circle",
-                            symbolSize: 1,
-                            showSymbol: true,
-                            hoverAnimation: true,
-
-                        }
-                    ]
-                };  
-                //* update v7*/
-            var containers = document.getElementsByClassName('getTrafficOverviewCustomerSourceAnalysis');
-            var charts = [];
-            for (var i = 0; i < containers.length; i++) {
-                var chart = echarts.init(containers[i]);
-                chart.setOption(optionmarketing);
-                charts.push(chart);
-            }
-            window.onresize = function () {
-                for (var i = 0; i < charts.length; ++i) {
-                    charts[i].resize();
-                }
-            };
-            await $(`.getTrafficOverviewCustomerSourceAnalysis `).removeClass('is-loading');
-            //* update v7*/          
-            //hết Phân tsích nguồn khách hàng
-        }
-    } else {
-        console.log("error", task);
-    }
-}
-
-
-
-//sử dung truy cập theo tháng 
+//sử dung truy cập theo tháng
 const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
 
         // locked(id, data)
@@ -856,9 +557,9 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                 let html = `
                         <div class="px-3 py-4" >
                             <div class="title-ttc text-center mb-1 font-15">Tổng lượt truy cập</div>
-                            <div class="d-flex ">
-                                <div id="totalTraffic" class="d-flex no-block m-auto">
-                                <h1 class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</h1>
+                            <div class="">
+                                <div id="totalTraffic" class="text-center no-block m-auto">
+                                <span class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</span>
                                 </div>
                             </div>
                         </div>
@@ -2511,161 +2212,7 @@ const getWebDemographicsGender = async(task, data) => {
     }
 };
 // SỬ DỤNG
-const getDesktopVsMobileVisits = async(task, data) => {
-    if (data.status == "success") {
-        $(`.${task}`).removeClass('empty-state');
-        let {
-            data: visits
-        } = data.data;
-        if (visits == null || visits.percentDesktop == 0 && visits.percentMobile == 0 && visits.totalDesktop == 0 && visits.totalMobile == 0 && visits.totalTraffic == 0) {
-            await $(`#${task}, #totalTraffic`).removeClass('is-loading').addClass("empty-state");
-            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-        } else {
-            const {
-                percentDesktop,
-                percentMobile,
-                totalDesktop,
-                totalMobile,
-                totalTraffic
-            } = visits;
 
-            let dataChart = [{
-                    name: 'Máy tính',
-                    value: percentDesktop
-                },
-                {
-                    name: 'Điện thoại',
-                    value: percentMobile
-                }
-            ];
-            // render chart
-            let option = {
-                color: masterColor,
-                legend: {
-                    left: 'center',
-                    bottom: '5%',
-                    data: ['Máy tính', 'Điện thoại'],
-                    textStyle: {
-                        fontFamily: 'Google Sans,sans-serif',
-                        lineHeight: 12
-                    },
-                    formatter: function(name) {
-                        let value = name == 'Máy tính' ? totalDesktop : totalMobile;
-                        return `${name}\n(${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')})`;
-                    }
-                },
-                series: [{
-                    type: 'pie',
-                    legendHoverLink: false,
-                    minAngle: 20,
-                    radius: ["40%", "60%"],
-                    center: ["50%", "45%"],
-                    avoidLabelOverlap: false,
-                    itemStyle: {
-                        normal: {
-                            borderColor: '#ffffff',
-                            borderWidth: 5,
-                        },
-                    },
-                    label: {
-                        normal: {
-                            show: false,
-                            position: 'center',
-                            formatter: '{text|{b}}\n{value|{d}%}',
-                            rich: {
-                                text: {
-                                    color: "#666",
-                                    fontSize: 12,
-                                    fontFamily: 'Arial',
-                                    align: 'center',
-                                    verticalAlign: 'middle',
-                                    padding: 5
-                                },
-                                value: {
-                                    color: "#8693F3",
-                                    fontSize: 24,
-                                    align: 'center',
-                                    verticalAlign: 'middle',
-                                },
-                            }
-                        },
-                        emphasis: {
-                            show: true,
-                            textStyle: {
-                                fontSize: 46,
-                            }
-                        }
-                    },
-                    data: dataChart
-                }]
-            };
-
-
-            var containers = document.getElementsByClassName(task);
-            var charts = [];
-            for (var i = 0; i < containers.length; i++) {
-                var chart = echarts.init(containers[i]);
-                chart.setOption(option);
-                charts.push(chart);
-            }
-            window.onresize = function() {
-                for (var i = 0; i < charts.length; ++i) {
-                    charts[i].resize();
-                }
-            };
-            await $(`.${task}`).removeClass('is-loading');
-            new ResizeSensor($(`.${task}`), function() {
-                chart.resize();
-                setTimeout(function() {
-                    chart.dispatchAction({
-                        type: 'highlight',
-                        seriesIndex: 0,
-                        dataIndex: 0
-                    });
-                }, 1000);
-            });
-            setTimeout(function() {
-                chart.dispatchAction({
-                    type: 'highlight',
-                    seriesIndex: 0,
-                    dataIndex: 0
-                });
-                chart.on('mouseover', function(params) {
-                    if (params.name == dataChart[0].name) {
-                        chart.dispatchAction({
-                            type: 'highlight',
-                            seriesIndex: 0,
-                            dataIndex: 0
-                        });
-                    } else {
-                        chart.dispatchAction({
-                            type: 'downplay',
-                            seriesIndex: 0,
-                            dataIndex: 0
-                        });
-                    }
-                });
-                chart.on('mouseout', function(params) {
-                    chart.dispatchAction({
-                        type: 'highlight',
-                        seriesIndex: 0,
-                        dataIndex: 0
-                    });
-                });
-            }, 1000);
-            await $(`.${task}, #totalTraffic`).removeClass('is-loading');
-            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-            // $(`#totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
-            // Start counting, do this on DOM ready or with Waypoints.
-            // counterUp(counter, {
-            //     duration: 1000,
-            //     delay: 16,
-            // })
-        }
-    } else {
-        console.log(`${task} failed`);
-    }
-};
 // SỬ DỤNG
 const getSimilarSites = async(task, data) => {
     if (data.status == 'success') {
@@ -2691,7 +2238,7 @@ const getSimilarSites = async(task, data) => {
                 }
                 var compareNode = $(`<span  data-domain="${site.Domain}" class="changeWebSite text-primary bg-info-2 rounded-pill px-2 font-10 align-self-center ml-auto text-uppercase">+ so sánh</span>`);
                 $(`<a title="${site.Domain}" class="d-flex align-items-center" href='${rootURL}/rank/${site.Domain}'">
-            <img class="p-1 mr-2 border rounded bg-secondary" src="${site.Favicon}" />
+            <img class="p-1 mr-2 border rounded bg-secondary" src="https://www.google.com/s2/favicons?domain=${site.Domain}">
             <span  data-type="website" data-input="${site.Domain}" >${site.Domain}</span>
         </a>`).appendTo(`.${task} .similarSites:last-child`)
                     .append(compareNode);
@@ -2758,112 +2305,8 @@ const getSimilarSites = async(task, data) => {
     }
 
 }
-const getWebsiteGeography = async(task, data) => {
-        // console.log(data);
-        if (!data.data || !data.data.data) {
-            data = [];
-        } else {
-            data = data.data.data.filter(item => item.Country != null);
-        }
-        let chartmap_data = [];
-        data.forEach((ele) => {
-                let obj = {
-                    name: ele.Country.text,
-                    value: numeral(ele.Share * 100).format('0.00')
-                }
-                chartmap_data.push(obj)
-            })
-            // console.log(chartmap_data);
-        var containers = document.getElementsByClassName(task);
-        var charts = [];
-        for (var i = 0; i < containers.length; i++) {
-            var chart = echarts.init(containers[i]);
 
-            charts.push(chart);
-            chart.showLoading();
-        }
-        window.onresize = function() {
-            for (var i = 0; i < charts.length; ++i) {
-                charts[i].resize();
-            }
-        };
-        await $(`.${task}`).removeClass('is-loading');
-        //* update v7*/
-        $.getJSON(rootURL + '/assets/mapworld.geo.json', function(usaJson) {
-            // console.log(usaJson)
-            chart.hideLoading();
-            echarts.registerMap('World', usaJson, {});
-            let option = {
-                tooltip: {
-                    trigger: 'item',
-                    showDelay: 0,
-                    transitionDuration: 0.2,
-                    formatter: function(params) {
-                        let valueaaaa = (params.value != NaN) ? `${numeral(params.value).format('0.00')}` : 0;
-                        if ((params.value == NaN)) {
-                            // console.log("Đá")
-                        }
-                        return params.name + ': ' + valueaaaa + '%';
-                    }
-                },
-                visualMap: {
-                    left: 'right',
-                    min: 500000,
-                    max: 38000000,
-                    inRange: {
-                        color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-                    },
-                    text: ['High', 'Low'],
-                    calculable: false
-                },
-                toolbox: {
-                    show: true,
-                    //orient: 'vertical',
-                    left: 'left',
-                    top: 'top',
-                },
-                visualMap: {
-                    min: 0,
-                    max: 100,
-                    text: ['High', 'Low'],
-                    realtime: false,
-                    show: false,
-                    calculable: false,
-                    inRange: {
-                        color: ['lightskyblue', '#0984e3']
-                    }
-                },
-                mapStyle: {
-                    color: "#000",
-                },
-                series: [{
-                    name: 'Truy cập theo quốc gia',
-                    type: 'map',
-                    map: 'World',
-                    zoom: 1.2,
-                    emphasis: {
-                        label: {
-                            show: true,
-                            areaColor: '#EBECFD'
-                        }
-                    },
-                    itemStyle: {
-                        borderWidth: 0.8,
-                        borderColor: '#fff',
-                        areaColor: '#EBECFD'
-                    },
-                    data: chartmap_data
-                }]
-            };
-            chart.setOption(option);
-            //* update v7*/
-            // myChart.setOption(option);
-            // new ResizeSensor($(task), function() {
-            //     myChart.resize();
-            // });
-        });
-    }
-    // getDomainBackLinkDetail
+// getDomainBackLinkDetail
 const getDomainBackLinkDetail = async(task, data) => {
         // console.log(data);
         if (data.status == 'success') {
@@ -2972,155 +2415,81 @@ const getDomainBackLinkDetail = async(task, data) => {
         }
     }
     //done
-const getScrapedSearchAds = async(task, data) => {
-    // console.log(data);
+const getDomainOverviewV2 = async(boxName, data) => {
+    getScrapedSearchAds('getScrapedSearchAds', data)
+    getTraffic30Days('getTraffic30Days', data)
+    getListGoogleAdsCompetitor('getListGoogleAdsCompetitor', data)
+    lockedModule('getScrapedSearchAds', data.userData.member);
+    lockedModule('getListGoogleAdsCompetitor', data.userData.member);
+};
+const getScrapedSearchAds = async(boxName, data) => {
+
+    if (data.data.adwordsPositionsOverview.length == 0) {
+        $('#getScrapedSearchAds').addClass('empty-state')
+    }
     if (data.status == "success") {
-        var SearchAds = null;
-        var domain = url.searchParams.get("domain");
+        var SearchAds = data.data.adwordsPositionsOverview;
+        //  console.log(SearchAds);        
+        $(`#getScrapedSearchAds .carousel-inner`).html('');
+        $(`#getScrapedSearchAds .carousel-indicators`).html('');
+        $("#row-getPaidSearchCompetitorsTableV1").show();
+        await $.each(SearchAds, (index, value) => {
+            if (value) {
 
-        if (data.data.data && data.data.data[`${domain}`]) SearchAds = data.data.data[`${domain}`];
-        else if (data.data.data) SearchAds = data.data.data;
 
-        $(`#${task} .carousel-inner`).html('');
-        $(`#${task} .carousel-indicators`).html('');
-        if (SearchAds == null) {
-            await $(`#${task} .carousel-inner`).removeClass('is-loading').addClass('empty-state');
-            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-        } else {
-            $("#row-getPaidSearchCompetitorsTableV1").show();
-            await $.each(SearchAds, (index, value) => {
+                let carouselItem = ''; {
+                    let {
+                        description,
+                        visibleUrl,
+                        phrase,
+                        keywordDifficulty,
+                        position,
+                        title,
+                        traffic,
+                        trafficCost,
+                        trafficPercent,
+                        crawledTime,
+                    } = value;
 
-                if (value) {
-                    if (index < 5) {
-                        $(`#${task} .carousel-indicators`).append(`
-                <li data-target="#${task}" data-slide-to="${index}" class="my-0 border-0 bg-favorite text-white text-center rounded-circle ${index == 0 ? 'active' : ''}" style="width:20px;height:20px;text-indent:0;">${index + 1}</li>
-                `);
-                    }
-                    var Type = value.Type;
 
-                    let carouselItem = '';
-
-                    if (Type == "Text") {
-                        let {
-                            Description,
-                            DestUrl,
-                            FullPage,
-                            Keywords,
-                            NumberOfKeywords,
-                            Page,
-                            Position,
-                            Title,
-                        } = value;
-
-                        if (index < 5) {
-
-                            Page = Page || FullPage;
-                            (Description != '') ? Description = '<div class="text-muted">' + Description + '</div>': null;
-
-                            carouselItem = `
-                    <div class="carousel-item p-20 p-l-40 p-r-40 ${index == 0 ? 'active' : ''}">
-                    <div class="similarAdsText border rounded">
-                        <div class="d-flex no-block align-items-center justify-content-center bg-secondary p-10" style="height:185px">
-                        <div class="border bg-white shadow p-10 w-100">
-                            <a href="javascript:;" target="_blank" title="${DestUrl}">
-                            ${Title}
-                            </a>
-                            ${Page != '' ? '<div class="text-success text-truncate pb-0">' + Page + '</div>' : ''}
-                            ${Description}
-                        </div>
-                        </div>
-                        <div class="similarAdsDetails p-20 border-top">
-                        <div class="row">
-                            <div class="col text-muted font-10">Vị trí trung bình</div>
-                            <div class="col text-muted font-10">Số lượng từ khoá</div>
-                            <div class="col text-muted font-10">Website đích</div>
-                        </div>
-                        <div class="row">
-                            <div class="col">${numeral(Position).format('0')}</div>
-                            <div class="col">${NumberOfKeywords}</div>
-                            <div class="col text-truncate pb-0">${DestUrl == '' ? domain : DestUrl}</div>
-                        </div>
-                        <div class="mt-3 text-truncate pb-0"><div class="font-10 text-muted">Từ khoá</div>${Keywords.join(',')}</div>
-                        </div>
-                    </div>
-                    </div>
-                    `
-                        }
-                    } else {
-                        // Google shopping
-                        let {
-                            Brand,
-                            DestUrl,
-                            ImageUrl,
-                            Keywords,
-                            NumberOfKeywords,
-                            Position,
-                            Price,
-                            Title,
-                        } = value;
-
-                        if (index < 5) {
-                            DestUrl == '' ? DestUrl = domain : null;
-
-                            carouselItem = `
-                <div class="carousel-item p-20 p-l-40 p-r-40 ${index == 0 ? 'active' : ''}">
-                    <div class="similarAdsShopping border rounded">
-                    <div class="row">
-                        <div class="col-5">
-                        <div class="d-flex no-block flex-column bg-favorite-2 h-100 align-items-center justify-content-center px-4">
-                            <div class="w-100 border rounded bg-secondary shadow">
-                            <img width="121px" height="121px" class="d-flex no-block img-responsive align-self-center mh-100 my-2 mx-auto shadow" src="${ImageUrl.replace(/\\x3d/g, '')}" />
-                            <div class="p-10 border-top bg-white rounded-bottom">
-                                <a href="javascript:;" target="_blank" title="${DestUrl}">
-                                ${Title}
-                                </a>
-                                <div class="font-weight-bold">${Price}</div>
-                                <div class="text-success">${Brand}</div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="col-7 p-10">
-                        <div class="row">
-                            <div class="col text-muted font-10">Vị trí trung bình</div>
-                            <div class="col text-muted font-10">Số lượng từ khoá</div>
-                        </div>
-                        <div class="row">
-                            <div class="col">${numeral(Position).format('0')}</div>
-                            <div class="col">${NumberOfKeywords}</div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col text-muted font-10">Website đích</div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-truncate"><a target="_blank" href="${DestUrl}" title="${DestUrl}">${DestUrl} <i class="fal fa-external-link ml-auto"></i></a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-muted font-10">Từ khoá</div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><div class="position-relative p-r-10 w-100 keywords-list" style="height:190px;word-wrap:break-word;">${Keywords.join(', ')}</div></div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                `
-                        }
-                    }
-                    $(`#${task} .carousel-inner`).append(carouselItem);
+                    (description != '') ? description = '<div class="text-muted">' + description + '</div>': null;
+                    carouselItem = `
+                         <div class="carousel-item p-20 p-l-40 p-r-40 ${index == 0 ? 'active' : ''}">
+                         <div class="similarAdsText rounded">
+                             <div class="d-flex no-block align-items-center justify-content-center bg-secondary p-10" style="height:185px">
+                             <div class="bg-white shadow p-10 w-100">
+                                 <a href="javascript:;" target="_blank" title="${visibleUrl}">
+                                 ${title}
+                                 </a>   
+                                 <div class="text-success text-truncate pb-0">${visibleUrl}</div>                         
+                                 ${description}
+                             </div>
+                             </div>
+                             <div class="similarAdsDetails p-20 border-top">
+                             <div class="row">
+                                 <div class="col text-muted font-10">Traffic: <span>${numeral(traffic).format('0,0')}</span></div>
+                                 <div class="col text-muted font-10">Tỉ lệ traffic: <span>${numeral(trafficPercent).format('0,0')} <sup>%</sup></span></div>
+                                 <div class="col text-muted font-10">Chi phí: <span>${numeral(trafficCost).format('0,0')} <sup>$</sup></span></div>
+                             </div>
+                             
+                             <div class="mt-3 text-truncate pb-0"><span class="mr-1 bagInfo font-10 ">${moment.unix(crawledTime).format("DD MMM YYYY")}</span> <span class="font-10 text-muted">  Từ khoá: ${phrase}</span></div>
+                             </div>
+                         </div>
+                         </div>
+                         `
 
                 }
-            });
 
-            $('.keywords-list').perfectScrollbar();
-        }
+                $(`#getScrapedSearchAds .carousel-inner`).append(carouselItem);
+            }
+        });
 
+        $('.keywords-list').perfectScrollbar();
 
-        await $(`#${task} .carousel-inner`).removeClass('is-loading');
-        await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+        await $(`#getScrapedSearchAds .carousel-inner`).removeClass('is-loading');
+        await $(`.similarReloadTask[data-task="getScrapedSearchAds"]`).find('i').removeClass('fa-spin');
     } else {
-        console.log(`${task} failed`);
+        //  console.log(`getScrapedSearchAds failed`);
     }
 };
 
@@ -3513,7 +2882,6 @@ const getMarketingMixOverview = async(task, data) => {
                                 let ele = document.getElementById(`getMarketingMixOverview--${taskName}`);
 
                                 let myChart = echarts.init(ele, 'light');
-
                                 let option = {
                                     tooltip: {
                                         trigger: "axis",
@@ -3825,27 +3193,66 @@ const getMarketingMixOverview = async(task, data) => {
     }
     // DISPLAY ADS
 const SampleAdsasImage = async(task, data) => {
-    $('.footer--bt-view').remove()
-    if (data.data.bannerAds == "") {
-        $('.sample-image-ads').addClass('empty-state')
-    }
-    data.data.bannerAds.forEach((val, index) => {
-        if (index < 5) {
-            $(".sample-image-ads").append(`<div class="box-all">
-            <div class="box-img">
-                <div class="image-media">
-                    <div class="image-sample">
-                        <img src="${val.mediaUrl}">
+        $('.footer--bt-view').remove()
+        if (data.data.googleAdsGDNOverview.media.data.length == 0) {
+            $('.sample-image-ads').addClass('empty-state')
+        } else {
+            data.data.googleAdsGDNOverview.media.data.forEach((val, index) => {
+                if (index < 5) {
+                    $(".sample-image-ads").append(`<div class="box-all">
+                <div class="box-img">
+                    <div class="image-media">
+                        <div class="image-sample">
+                            <img src="https://imgcdn.trazk.com/f.php?f=${btoa(val.mediaUrl)}">
+                        </div>
                     </div>
+                    
                 </div>
-                <div class="text-sample pt-2">
-                    <span class="dayseen">Xuất hiện:<span class="seen-img pl-1 font-12">${val.daysSeen}</span> ngày</span>
-                    <span class="image-w-h"> <small class="image-width">${val.width}</small><small class="vs"> x </small> <small class="image-height">${val.height}</small></span>
+            </div>`)
+                }
+            })
+        }
+    } // DISPLAY ADS
+const googleAdsGDNOverview = async(task, data) => {
+    lockedModule('SampleAds', data.userData.member);
+    if (data.data.googleAdsGDNOverview.media.data.length == 0) {
+        $('.sample-image-ads').addClass('empty-state')
+    } else {
+
+        $(".count-image").html(`(${data.data.googleAdsGDNOverview.media.total})`);
+        data.data.googleAdsGDNOverview.media.data.forEach((val, index) => {
+
+            $(".sample-image-ads").append(`<div class="box-all">
+                <div class="box-img">
+                    <div class="image-media">
+                        <div class="image-sample">
+                            <img src="https://imgcdn.trazk.com/f.php?f=${btoa(val.mediaUrl)}">
+                        </div>
+                    </div>
+                    
                 </div>
+            </div>`)
+        })
+        $(".count-text").html(`(${data.data.googleAdsGDNOverview.text.total})`);
+        data.data.googleAdsGDNOverview.text.data.forEach((val, index) => {
+
+            $(".sample-text-ads").append(` <div class="box-text-all">
+            <div class="box-text">
+                <div class="body-text-overview">
+                    <a href="" class="title-blued">${val.title}</a>
+                    <div class="title-greened mt-2">
+                        <a href="${val.targetUrl}" class="font-12 smallgreend">${val.targetUrl}</a>
+                        <span class="child-hover delete-ic fal fa-external-link"></span>
+                    </div>
+                    <a href="#" class="text-contended pt-5">${val.text}</a>
+                </div>
+               
             </div>
         </div>`)
-        }
-    })
+
+        })
+
+    }
 }
 const SampleAdsasHTML = async(task, data) => {
     $('.footer--bt-view').remove()
@@ -3866,17 +3273,19 @@ const SampleAdsasHTML = async(task, data) => {
                     <span class="dayseen">Xuất hiện:<span class="seen-img pl-1 font-12">${val.daysSeen}</span> ngày</span>
                     <span class="image-w-h"> <small class="image-width">${val.width}</small><small class="vs"> x </small> <small class="image-height">${val.height}</small></span>
                 </div>
-            </div>  
+            </div>
         </div>`)
         }
     })
 }
 const SampleAdsasText = async(task, data) => {
-    $('.footer--bt-view').remove()
-    if (data.data.textAds == '') {
+    $('.footer--bt-view').remove();
+    console.log(data);
+
+    if (data.data.googleAdsGDNOverview.text.data.length == '') {
         $('.sample-text-ads').addClass('empty-state')
     }
-    data.data.textAds.forEach((val, index) => {
+    data.data.googleAdsGDNOverview.text.data.forEach((val, index) => {
         if (index < 5) {
             $(".sample-text-ads").append(` <div class="box-text-all">
             <div class="box-text">
@@ -3903,24 +3312,62 @@ const SampleAdsasText = async(task, data) => {
 }
 
 
+function kFormatter(x) {
+    if (isNaN(x)) return x;
+
+    if (x < 9999) {
+        return x;
+    }
+
+    if (x < 1000000) {
+        return Math.round(x / 1000) + "K";
+    }
+    if (x < 10000000) {
+        return (x / 1000000).toFixed(2) + "M";
+    }
+
+    if (x < 1000000000) {
+        return Math.round((x / 1000000)) + "M";
+    }
+
+    if (x < 1000000000000) {
+        return Math.round((x / 1000000000)) + "B";
+    }
+
+    return "1T+";
+
+}
 const getTraffic30Days = async(task, data) => {
 
     if (data.status == "success") {
-        let totalBacklinks = data.data.ranksHistory;
+        let ranksHistory = data.data.ranksHistory;
         let adsTraffic = [];
         let organicTraffic = [];
         let date30 = [];
+        // console.log(ranksHistory);
+        ranksHistory = ranksHistory.reverse();
+        for (var i = 2; i < ranksHistory.length; i = i + 7) {
+            var item = null;
+            var adsTraffic7Day = 0;
+            var trafficDay = 0;
+            var item01 = ranksHistory[i];
+            for (var k = 0; k < 7; k++) {
+                if (ranksHistory[i + k]) {
+                    item = ranksHistory[i + k];
 
-        $.each(totalBacklinks, (key, item) => {
-            //   console.log('dsss',refDomains[index]);
-            date30.push(moment(item.date).format('DD MMM'))
-            adsTraffic.push(item.adsTraffic)
-            organicTraffic.push(item.traffic)
-        });
-
-        date30 = date30.reverse();
-        adsTraffic = adsTraffic.reverse();
-        organicTraffic = organicTraffic.reverse();
+                    adsTraffic7Day = adsTraffic7Day + item.adsTraffic;
+                    trafficDay = trafficDay + item.traffic;
+                    // console.log(item.traffic);
+                    // console.log(trafficDay);
+                }
+            }
+            date30.push(moment(item01.date).format('DD.MM') + " - " + moment(item.date).format('DD.MM'))
+            adsTraffic.push(adsTraffic7Day)
+            organicTraffic.push(trafficDay)
+        }
+        // date30 = date30.reverse();
+        // adsTraffic = adsTraffic.reverse();
+        // organicTraffic = organicTraffic.reverse();
         let ele = document.getElementById("showTraffic30Days");
         let myChart = echarts.init(ele, 'light');
 
@@ -3960,11 +3407,16 @@ const getTraffic30Days = async(task, data) => {
                 series: [{
                         name: 'Paid Traffic',
                         data: adsTraffic,
-                        type: 'line',
+                        type: 'bar',
                         smooth: true,
                         symbolSize: 10,
-
-
+                        label: {
+                            show: true,
+                            position: 'top',
+                            formatter: function(params) {
+                                return kFormatter(params.value)
+                            },
+                        },
                     },
                     {
                         name: 'Organic Traffic',
@@ -3972,6 +3424,13 @@ const getTraffic30Days = async(task, data) => {
                         type: 'line',
                         smooth: true,
                         symbolSize: 10,
+                        label: {
+                            show: true,
+                            position: 'top',
+                            formatter: function(params) {
+                                return kFormatter(params.value)
+                            },
+                        },
 
 
                     },
@@ -3997,4 +3456,934 @@ const getTraffic30Days = async(task, data) => {
         $(`#showRefDomain`).addClass('empty-state')
     }
 }
+
+const getListGoogleAdsCompetitor = async(task, data) => {
+    var initDatatable = function(select, tableOptions) {
+        const table = $(`.${select}`).DataTable(tableOptions);
+        $(table.table().header()).addClass('text-center');
+        $(`.${select}`).click(function(event) {
+            $(`.${select}-container`).addClass('is-loading').block({
+                overlayCSS: {
+                    backgroundColor: '#ccc',
+                    opacity: 0.8,
+                    zIndex: 1,
+                    cursor: 'wait'
+                },
+                message: null
+            });
+            // $(`.${select}`).DataTable().ajax.reload(() => {
+            //     reloaddata = 1
+            // });
+        })
+        return table;
+    }
+    initDatatable(
+        'getListGoogleAdsCompetitor', {
+            data: data.data.adwordsCompetitorsOverview,
+            drawCallback: function(settings) {},
+            columns: [{
+                    title: "Đối thủ",
+                    "data": data => `<a href="${rootURL}/rank/${data.domain}"><div class=""><img class="p-1 mr-2 border rounded bg-secondary" src="https://www.google.com/s2/favicons?domain=${data.domain}"> ${data.domain}</div></a>`,
+                    class: 'text-left',
+
+                },
+                {
+                    title: "Level",
+                    "data": data => `<div class="progress rounded progress-custom w-100 my-auto">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: ${(data.competitionLvl * 1000).toFixed(1)}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>`,
+                    class: 'text-left',
+                    width: '50'
+                },
+                {
+                    title: "Adwords",
+                    "data": data => `${numeral(data.adwordsKeywords).format('0,0')}`,
+                    class: 'text-right',
+                    width: '50'
+                },
+                {
+                    title: "Organic",
+                    "data": data => `${numeral(data.organicKeywords).format('0,0')}`,
+                    class: 'text-right',
+                    width: '50'
+                },
+            ],
+            "ordering": false,
+            info: false,
+            autoWidth: false,
+            searching: false,
+            scrollY: '325px',
+            scrollCollapse: true,
+            paging: false,
+            processing: true,
+
+            initComplete: function(settings, json) {
+                $("table.getAdvertisingSearchDetail thead th").css("padding", "10px");
+                // $(".dataTables_scrollBody table.getAdvertisingSearchDetail thead").html('')
+                $(".getAdvertisingSearchDetail tbody tr td").css("padding", "15px 10px!important");
+                $(".getAdvertisingSearchDetail tbody tr td:first-child").attr("style", "width:60px!important");
+                // $(".parent-getAdvertisingSearchDetail .dataTables_scrollBody ").attr("style", "height:325px!important");
+                if (data.data.adwordsCompetitorsTotal > 0) {
+                    $(".parent-getListGoogleAdsCompetitor").append(`
+                   <div class="text-right mt-4 pr-2"><a href="https://webrank.vn/index.php?view=website&amp;action=displayads&amp;domain=tiki.vn&amp;userToken=V3gxbEZwK0tXU3NMcXVQSnZyZ1R2OXpzUDVyMGU1Qi8yWUlPTUtraXI3OD06Orsjp4yqccrrQ4PR08Jl_F8"><button class="btn btn-primary btn-sm " style="padding: 4px 13px;">
+                <span class="content-btn">Xem toàn bộ (${data.data.adwordsCompetitorsTotal}) </span>
+            </button></a></div>`)
+                } else {
+                    $(`.widget-getListGoogleAdsCompetitor`).addClass('empty-state');
+                    $(`.parent-getListGoogleAdsCompetitor`).hide();
+                }
+            }
+        }
+    )
+}
+
+const getTrafficOverview = async(task, data) => {
+        getAccessMonthly('getTrafficOverview', data);
+        getTrafficOverviewCustomerResources('getTrafficOverviewCustomerResources', data);
+        getTrafficOverviewCustomerSourceAnalysis('getTrafficOverviewCustomerSourceAnalysis ', data);
+        getTimeMobileDesktop('getTimeMobileDesktop', data);
+        getCrunchBase('getCrunchBase', data);
+        trafficByGeo('trafficByGeo', data);
+        getDesktopVsMobileVisits('getDesktopVsMobileVisits', data);
+        lockedModule('getDesktopVsMobileVisits', data.userData.member);
+    }
+    //--------Truy Cập Theo Tháng
+const getAccessMonthly = async(task, data) => {
+        if (data.status == "success") {
+            if (data.data && data.data.trafficTrend) {
+                let items0 = data.data.trafficTrend.items[0];
+                let items6 = data.data.trafficTrend.items;
+
+                let MonthlyVisits = numeral(items0.visits).format("0,0");
+                let html = `
+                    <div class="px-3 py-4 pb-5" >
+                        <div class="title-ttc text-center mb-1 font-15">Tổng lượt truy cập</div>
+                        <div class="d-flex ">
+                            <div id="totalTraffic" class="d-flex no-block m-auto">
+                            <h1 class="counter font-gg fontsize-48 mr-1">${MonthlyVisits >= 1000000 ? numeral(MonthlyVisits).format('0.00a') : numeral(MonthlyVisits).format("0.00a")}</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-table-kh px-3 border-top text-left">
+                        <div class="row padding-y-12 border-bottom ">
+                            <div class="col h6 m-0 align-self-center text-muted">
+                                Thời gian truy cập trung bình</div>
+                            <div class="col-4 text-right">
+                                <span class="AvgVisitDuration h5 font-gg text-favorite ">${numeral(items0.time_on_site).format("0:00:00")}</span>
+                            </div>
+                        </div>
+                        <div class="row padding-y-12 border-bottom text-left">
+                            <div class="col h6 m-0 align-self-center text-muted"> Số trang/Lượt truy cập
+                            </div>
+                            <div class="col-4 text-right">
+                                <span class="PagesperVisit h5 font-gg text-favorite ">${numeral(items0.pages).format("0.00")}</span>
+                            </div>
+                        </div>
+                        <div class="row padding-y-12 text-left">
+                            <div class="col h6 m-0 align-self-center text-muted"> Tỷ lệ thoát</div>
+                            <div class="col-4 text-right">
+                                <span class="BounceRate h5 font-gg text-favorite ">${numeral(items0.bounce_rate).format("00.00%")}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $('.getTrafficOverview').html(html)
+                $(`.getTrafficOverview`).removeClass('is-loading');
+                //Hết Truy Cập Theo Tháng
+            } else {
+
+            }
+        } else { console.log("error", task); }
+    }
+    //-------Nguồn Khách Hàng
+const getTrafficOverviewCustomerResources = async(task, data) => {
+    $('.similarReloadTask[data-task="getTrafficOverviewCustomerResources"]').attr('data-task', 'getTrafficOverview')
+
+    if (data.status == "success") {
+        if (data.data && data.data.trafficTrend) {
+            let items0 = data.data.trafficTrend.items[0];
+            $(`.getTrafficOverviewCustomerResources `).removeClass('empty-state');
+            $('.getTrafficOverviewCustomerResources ').attr('style', 'min-height:300px')
+            let dataTrafficSources = ["social", "direct", "referral", "paid", "rank", "search"];
+            let dataChart = [];
+            let datanamechart = [];
+            $.each(items0, (index, item) => {
+                if (dataTrafficSources.includes(index)) {
+                    let key = index;
+                    let value = +numeral(item).format("0");
+                    let obj = {
+                        name: key,
+                        value: value
+                    }
+                    let data_namechart = {
+                        name: key,
+                        icon: 'circle',
+                    }
+                    datanamechart.push(data_namechart);
+                    dataChart.push(obj);
+                }
+            })
+            let data_params_legend;
+            let option = {
+                color: masterColor,
+                tooltip: {
+                    trigger: 'item',
+                    // formatter: '{a} <br/>{b}: {c} ({d}%)',
+                    formatter: params => {
+                        data_params_legend = params
+                        return `
+                    <div class="text-dark pt-2">
+                        <span style="background-color:${params.color}" class=" pill-dot rounded-pill mr-1"></span>
+                        <span style="color:#fff;font-weight:400">${params.name}  ${params.percent}%</span>
+                    </div>`
+                    }
+                },
+                legend: {
+                    //orient: 'vertical',
+                    bottom: '5%',
+                    left: 'center',
+                    orient: 'horizontal',
+                    width: 500,
+                    //right: 100,
+                    //top: 50,
+                    //bottom: 20,
+                    data: datanamechart,
+                    formatter: function(name) {
+                        let temp = dataChart.filter((val) => {
+                            if (name == val.name)
+                                return val;
+                        })
+                        return name + "\t\t" + numeral(temp[0].value).format("0,00");
+                    }
+                },
+                series: [{
+                    name: 'Nguồn khách hàng',
+                    type: 'pie',
+                    radius: ['45%', '60%'],
+                    center: ['50%', '40%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            textStyle: {
+                                fontSize: '18',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: dataChart
+                }]
+            };
+            //* update v7*/
+            var containers = document.getElementsByClassName('getTrafficOverviewCustomerResources');
+            var charts = [];
+            for (var i = 0; i < containers.length; i++) {
+                var chart = echarts.init(containers[i]);
+                chart.setOption(option);
+                charts.push(chart);
+            }
+            window.onresize = function() {
+                for (var i = 0; i < charts.length; ++i) {
+                    charts[i].resize();
+                }
+            };
+            await $(`.getTrafficOverviewCustomerResources `).removeClass('is-loading');
+            //* update v7*/
+            await $(`.similarReloadTask[data-task="getTrafficOverviewCustomerResources "]`).find('i').removeClass('fa-spin');
+            //Hết Nguồn Khách Hàng
+        } else {}
+    } else { console.log("error", task); }
+}
+const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
+    $('.similarReloadTask[data-task="getTrafficOverviewCustomerSourceAnalysis"]').attr('data-task', 'getTrafficOverview')
+    if (data.status == "success") {
+        if (data.data && data.data.trafficTrend) {
+            let items6 = data.data.trafficTrend.items;
+            let chartmarketing = {
+                keys: [],
+                social: [],
+                direct: [],
+                referral: [],
+                paid: [],
+                rank: [],
+                search: []
+            }
+            $.each(items6, (i, item) => {
+                    $.each(item, (index, data) => {
+                        if (index == 'date')
+                            chartmarketing.keys.push(moment(data).format('MMM YYYY'))
+                        if (index == 'social')
+                            chartmarketing.social.push(data)
+                        if (index == 'direct')
+                            chartmarketing.direct.push(data)
+                        if (index == 'referral')
+                            chartmarketing.referral.push(data)
+                        if (index == 'paid')
+                            chartmarketing.paid.push(data)
+                        if (index == 'rank')
+                            chartmarketing.rank.push(data)
+                        if (index == 'search')
+                            chartmarketing.search.push(data)
+                    })
+                    return i < 5
+                })
+                // console.log(chartmarketing)
+            let optionmarketing = {
+                color: masterColor,
+                tooltip: {
+                    trigger: "axis",
+                    backgroundColor: 'rgba(255, 255, 255, 1)',
+                    borderColor: 'rgba(93,120,255,1)',
+                    borderWidth: 1,
+                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                    formatter: params => {
+                        // console.log(params);
+                        let {
+                            name
+                        } = params[0];
+                        let detail = "";
+                        let format = "";
+                        params.forEach((p, i) => {
+                            if (p.value == null || p.value == "A")
+                                p.value == 0;
+                            let {
+                                marker,
+                                color,
+                                seriesName,
+                                value
+                            } = p;
+
+                            value = numeral(value).format(format);
+                            detail += `<div class="d-flex justify-content-between"><span class="mr-2">${marker} ${seriesName}</span> <span style="color:${color};font-weight:bold">${value}</span></div>`
+                        })
+                        return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
+                <div class="text-dark pt-2">${detail}`;
+                    }
+                },
+                legend: {
+                    data: ["Trực tiếp", "Liên kết ngoài", "Mạng xã hội", "Xếp hạng", "Trả phí", "Tìm kiếm"],
+                },
+                grid: {
+                    right: "5%"
+                },
+                xAxis: {
+                    type: "category",
+                    boundaryGap: false,
+                    data: chartmarketing.keys.reverse(),
+                    axisLine: {
+                        lineStyle: {
+                            color: "#ccc"
+                        }
+                    },
+                },
+                yAxis: {
+                    type: "value",
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        margin: 10,
+                        textStyle: {
+                            color: "#ccc"
+                        },
+                        fontFamily: 'Arial',
+                        formatter: (value, index) => (value = numeral(value).format("0a")),
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(0,0,0,0.1)'
+                        }
+                    },
+                },
+                series: [{
+                        name: 'Trực tiếp',
+                        data: chartmarketing.direct.reverse(),
+                        type: "line",
+                        symbol: "circle",
+                        smooth: true,
+                        symbolSize: 1,
+                        showSymbol: true,
+                        hoverAnimation: true,
+
+                    },
+                    {
+                        name: 'Mạng xã hội',
+                        data: chartmarketing.social.reverse(),
+                        type: "line",
+                        symbol: "circle",
+                        smooth: true,
+                        symbolSize: 1,
+                        showSymbol: true,
+                        hoverAnimation: true,
+
+                    },
+                    {
+                        name: 'Liên kết ngoài',
+                        data: chartmarketing.referral.reverse(),
+                        type: "line",
+                        symbol: "circle",
+                        smooth: true,
+                        symbolSize: 1,
+                        showSymbol: true,
+                        hoverAnimation: true,
+
+                    },
+                    {
+                        name: 'Xếp hạng',
+                        data: chartmarketing.rank.reverse(),
+                        type: "line",
+                        symbol: "circle",
+                        smooth: true,
+                        symbolSize: 1,
+                        showSymbol: true,
+                        hoverAnimation: true,
+
+                    },
+                    {
+                        name: 'Trả phí',
+                        data: chartmarketing.paid.reverse(),
+                        type: "line",
+                        symbol: "circle",
+                        smooth: true,
+                        symbolSize: 1,
+                        showSymbol: true,
+                        hoverAnimation: true,
+
+                    },
+                    {
+                        name: 'Tìm kiếm',
+                        data: chartmarketing.search.reverse(),
+                        type: "line",
+                        symbol: "circle",
+                        smooth: true,
+                        symbolSize: 1,
+                        showSymbol: true,
+                        hoverAnimation: true,
+
+                    }
+                ]
+            };
+            //* update v7*/
+            var containers = document.getElementsByClassName('getTrafficOverviewCustomerSourceAnalysis');
+            var charts = [];
+            for (var i = 0; i < containers.length; i++) {
+                var chart = echarts.init(containers[i]);
+                chart.setOption(optionmarketing);
+                charts.push(chart);
+            }
+            window.onresize = function() {
+                for (var i = 0; i < charts.length; ++i) {
+                    charts[i].resize();
+                }
+            };
+            await $(`.getTrafficOverviewCustomerSourceAnalysis `).removeClass('is-loading');
+            //* update v7*/          
+            //hết Phân tsích nguồn khách hàng
+        } else {
+
+        }
+    } else { console.log("error", task); }
+}
+const getTimeMobileDesktop = async(task, data) => {
+    let desktop = data.data.trafficTrend.desktop.items;
+    let mobile = data.data.trafficTrend.mobile.items;
+    let alldevices = data.data.trafficTrend.items;
+    const run = async(taskName, nameData) => {
+        if (taskName == "visit") {
+            $('#getTimedes-mob-btn li a').removeClass('active')
+            $('#getTimedes-mob-btn li a[data-task="TrafficShare"]').addClass('active')
+        }
+        let chartMobileDesktop = {
+            keys: [],
+            desktop: [],
+            mobile: [],
+            tong: []
+        }
+        $.each(desktop, (i, item) => {
+            $.each(item, (index, data) => {
+                if (index == nameData)
+                    chartMobileDesktop.desktop.push(data)
+            })
+            chartMobileDesktop.keys.push(moment(item.date).format('MM YYYY'))
+            return i < 5
+        })
+        $.each(mobile, (i, item) => {
+            $.each(item, (index, data) => {
+                if (index == nameData)
+                    chartMobileDesktop.mobile.push(data)
+            })
+            return i < 5
+        })
+        $.each(alldevices, (i, item) => {
+            $.each(item, (index, data) => {
+                if (index == nameData)
+                    chartMobileDesktop.tong.push(data)
+            })
+            return i < 5
+        })
+        let optiondesktopmobile = {
+            color: masterColor,
+            tooltip: {
+                trigger: "axis",
+                backgroundColor: 'rgba(255, 255, 255, 1)',
+                borderColor: 'rgba(93,120,255,1)',
+                borderWidth: 1,
+                extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                formatter: params => {
+                    // console.log(params);
+                    let {
+                        name
+                    } = params[0];
+                    let detail = "";
+                    let format = "";
+                    params.forEach((p, i) => {
+                        if (p.value == null || p.value == "A")
+                            p.value == 0;
+                        let {
+                            marker,
+                            color,
+                            seriesName,
+                            value
+                        } = p;
+                        switch (taskName) {
+                            case 'visit':
+                                format = '0,0';
+                                break;
+                            case 'timeonsite':
+                                format = '00:00:00';
+                                break;
+                            case 'users':
+                                format = '0,0';
+                                break;
+                            case 'BounceRate':
+                                format = '00.00%';
+                                break;
+                            default:
+                                break;
+                        }
+                        value = numeral(value).format(format);
+                        detail += `<div class="d-flex justify-content-between"><span class="mr-2">${marker} ${seriesName}</span> <span style="color:${color};font-weight:bold">${value}</span></div>`
+                    })
+                    return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
+                    <div class="text-dark pt-2">${detail}`;
+                }
+            },
+            legend: {
+                data: ["Desktop", "Mobile", "Tổng"],
+            },
+            grid: {
+                right: "1%",
+                left: "4%"
+            },
+            xAxis: {
+                type: "category",
+                boundaryGap: false,
+                data: chartMobileDesktop.keys.reverse(),
+                axisLine: {
+                    lineStyle: {
+                        color: "#ccc"
+                    }
+                },
+            },
+            yAxis: {
+                type: "value",
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    margin: 10,
+                    textStyle: {
+                        color: "#ccc"
+                    },
+                    fontFamily: 'Arial',
+                    formatter: (value, index) => {
+                        if (taskName == 'visit') {
+                            return numeral(value).format("0a")
+                        } else if (taskName == 'timeonsite') {
+                            return numeral(value).format("00:00:00")
+                        } else if (taskName == 'users') {
+                            return numeral(value).format("0a")
+                        } else {
+                            return numeral(value).format("00%")
+                        }
+                    },
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'rgba(0,0,0,0.1)'
+                    }
+                },
+            },
+            series: [{
+                    name: 'Desktop',
+                    data: chartMobileDesktop.desktop.reverse(),
+                    type: "line",
+                    symbol: "circle",
+                    smooth: true,
+                    symbolSize: 1,
+                    showSymbol: true,
+                    hoverAnimation: true,
+                    lineStyle: {
+                        width: 3
+                    },
+                },
+                {
+                    name: 'Mobile',
+                    data: chartMobileDesktop.mobile.reverse(),
+                    type: "line",
+                    symbol: "circle",
+                    smooth: true,
+                    symbolSize: 1,
+                    showSymbol: true,
+                    hoverAnimation: true,
+                    lineStyle: {
+                        width: 3
+                    },
+                },
+                {
+                    name: 'Tổng',
+                    data: chartMobileDesktop.tong.reverse(),
+                    type: "line",
+                    symbol: "circle",
+                    smooth: true,
+                    symbolSize: 1,
+                    showSymbol: true,
+                    hoverAnimation: true,
+                    lineStyle: {
+                        width: 3
+                    },
+                }
+            ]
+        };
+        //* update v7*/
+        var containers = document.getElementsByClassName('getTimeMobileDesktopvisits');
+        var charts = [];
+        for (var i = 0; i < containers.length; i++) {
+            var chart = echarts.init(containers[i]);
+            chart.setOption(optiondesktopmobile);
+            charts.push(chart);
+        }
+        window.onresize = function() {
+            for (var i = 0; i < charts.length; ++i) {
+                charts[i].resize();
+            }
+        };
+    }
+    run('visit', 'visits')
+    $('#getTimedes-mob-btn li').click(function() {
+        let idtab = $(this).find('a').attr('href')
+        if (idtab == '#getTimeMobileDesktop--TrafficShare') {
+            run('visit', 'visits')
+        } else if (idtab == '#getTimeMobileDesktop--AverageDuration') {
+            run('users', 'users')
+        } else if (idtab == '#getTimeMobileDesktop--PagesPerVisit') {
+            run('timeonsite', 'time_on_site')
+        } else if (idtab == '#getTimeMobileDesktop--BounceRate') {
+            run('BounceRate', 'bounce_rate')
+        }
+    })
+    await $(`#getTimeMobileDesktop `).removeClass('is-loading');
+}
+const getCrunchBase = async(task, data) => {
+    if (data.data.crunchbase[0].domain) {
+        let dataweb = data.data.crunchbase[0]
+        let category = data.data.crunchbase[0].category_list.replace(/[\"|\[\]]/g, "").split(",")
+        let html = `
+        <div class="row">
+            <div class="col-2">
+                <div class="logo-company">
+                    <img src="${dataweb.logo_url}" alt="" class="w-100">
+                </div>
+            </div>
+            <div class="col-10">
+                <div>
+                    <div class="title-companyweb d-flex justify-content-start">
+                        <span class="titlenameweb">${dataweb.name}</span>
+                        <div class="social-network" style="line-height: 24px;">
+                            <span class="iconsfb"><a href="${dataweb.facebook_url}"><i class="fab fa-facebook-f font-16 text-black-50 mx-1"></i></a></span>
+                            <span class="iconstwitter"><a href="${dataweb.linkedin_url}"><i class="fab fa-twitter font-16 text-black-50 mx-1"></i></a></span>
+                            <span class="iconslinked"><a href="${dataweb.twitter_url}"><i class="fab fa-linkedin-in font-16 text-black-50 mx-1"></i></a></span>
+                        </div>
+                    </div>
+                    <div class="content-website">${dataweb.short_description}</div>
+                    <div class="category-web">
+                    </div>
+                    <div class="wapper-companyinfo mt-3">
+                        <div class="info-comp d-flex justify-content-start">
+                            <span data-toggle="tooltip" data-placement="left" title="Địa chỉ công ty"><i class="fas fa-map-marker-alt mr-2"></i></span>
+                            <p>${dataweb.address_full}</p>
+                        </div>
+                        <div class="info-comp d-flex justify-content-start">
+                            <span  data-toggle="tooltip" data-placement="left" title="Số lượng nhân viên">
+                                <i class="fas fa-users"></i>
+                            </span>
+                            <p>${dataweb.employee_count}</p>
+                        </div>
+                        <div class="info-comp d-flex justify-content-start">
+                            <span  data-toggle="tooltip" data-placement="left" title="Tổng số vốn">
+                                <i class="fas fa-sack"></i>
+                            </span>
+                            <span>$${numeral(dataweb.total_funding_usd).format("0,0")}</span>
+                        </div>
+                        <div class="font-13 mt-2">
+                            Ngày thành lập: ${moment(dataweb.founded_on).format('DD MMMM YYYY')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+        $('.wapper-companyweb').html(html)
+        category.forEach((v) => {
+            $('.category-web').append(`<span class="wapper-category mr-1">${v}</span>`)
+        })
+    } else {
+        $('.wapper-widget-company .wapper-companyweb').addClass('empty-state')
+    }
+}
+const trafficByGeo = async(task, data) => {
+    let percentcont = data.data.trafficByGeo
+    console.log(percentcont);
+    let contry = []
+    let chartmap_data = []
+    $.each(arrNameContry, (index, item) => {
+            let nameCountry = {
+                ele: index.toLowerCase(),
+                name: item
+            }
+            contry.push(nameCountry)
+        })
+        // console.log(contry);
+    $.each(percentcont, (i, v) => {
+        $.each(contry, (k, val) => {
+            if (v.country == val.ele) {
+                let obj = {
+                    name: val.name,
+                    value: numeral(v.traffic * 100).format('0.00')
+                }
+                chartmap_data.push(obj)
+            }
+        })
+    })
+    console.log(chartmap_data);
+    var containers = document.getElementsByClassName(task);
+    var charts = [];
+    for (var i = 0; i < containers.length; i++) {
+        var chart = echarts.init(containers[i]);
+        charts.push(chart);
+        chart.showLoading();
+    }
+    window.onresize = function() {
+        for (var i = 0; i < charts.length; ++i) {
+            charts[i].resize();
+        }
+    };
+    await $(`.${task}`).removeClass('is-loading');
+    //* update v7*/
+    $.getJSON(rootURL + '/assets/mapworld.geo.json', function(usaJson) {
+        // console.log(usaJson)
+        chart.hideLoading();
+        echarts.registerMap('World', usaJson, {});
+        let option = {
+            tooltip: {
+                trigger: 'item',
+                showDelay: 0,
+                transitionDuration: 0.2,
+                formatter: function(params) {
+                    let valueaaaa = (params.value != NaN) ? `${numeral(params.value).format('0.00')}` : 0;
+                    if ((params.value == NaN)) {
+                        // console.log("Đá")
+                    }
+                    return params.name + ': ' + valueaaaa + '%';
+                }
+            },
+            visualMap: {
+                left: 'right',
+                min: 500000,
+                max: 38000000,
+                inRange: {
+                    color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+                },
+                text: ['High', 'Low'],
+                calculable: false
+            },
+            toolbox: {
+                show: true,
+                //orient: 'vertical',
+                left: 'left',
+                top: 'top',
+            },
+            visualMap: {
+                min: 0,
+                max: 100,
+                text: ['High', 'Low'],
+                realtime: false,
+                show: false,
+                calculable: false,
+                inRange: {
+                    color: ['lightskyblue', '#0984e3']
+                }
+            },
+            mapStyle: {
+                color: "#000",
+            },
+            series: [{
+                name: 'Truy cập theo quốc gia',
+                type: 'map',
+                map: 'World',
+                zoom: 1.2,
+                emphasis: {
+                    label: {
+                        show: true,
+                        areaColor: '#EBECFD'
+                    }
+                },
+                itemStyle: {
+                    borderWidth: 0.8,
+                    borderColor: '#fff',
+                    areaColor: '#EBECFD'
+                },
+                data: chartmap_data
+            }]
+        };
+        chart.setOption(option);
+    })
+}
+const getDesktopVsMobileVisits = async(task, data) => {
+    $('.similarReloadTask[data-task="getDesktopVsMobileVisits"]').attr('data-task', 'getTrafficOverview')
+    let percent = data.data.trafficTrend.items[0]
+    let dataChart = [{
+            name: 'Máy tính',
+            value: percent.desktop_share * 100
+        },
+        {
+            name: 'Điện thoại',
+            value: percent.mobile_share * 100
+        }
+    ];
+    // render chart
+    let option = {
+        color: masterColor,
+        legend: {
+            left: 'center',
+            bottom: '5%',
+            data: ['Máy tính', 'Điện thoại'],
+            textStyle: {
+                fontFamily: 'Google Sans,sans-serif',
+                lineHeight: 12
+            },
+        },
+        series: [{
+            type: 'pie',
+            legendHoverLink: false,
+            minAngle: 20,
+            radius: ["40%", "60%"],
+            center: ["50%", "45%"],
+            avoidLabelOverlap: false,
+            itemStyle: {
+                normal: {
+                    borderColor: '#ffffff',
+                    borderWidth: 5,
+                },
+            },
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center',
+                    formatter: '{text|{b}}\n{value|{d}%}',
+                    rich: {
+                        text: {
+                            color: "#666",
+                            fontSize: 12,
+                            fontFamily: 'Arial',
+                            align: 'center',
+                            verticalAlign: 'middle',
+                            padding: 5
+                        },
+                        value: {
+                            color: "#8693F3",
+                            fontSize: 24,
+                            align: 'center',
+                            verticalAlign: 'middle',
+                        },
+                    }
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 46,
+                    }
+                }
+            },
+            data: dataChart
+        }]
+    };
+    var containers = document.getElementsByClassName(task);
+    var charts = [];
+    for (var i = 0; i < containers.length; i++) {
+        var chart = echarts.init(containers[i]);
+        chart.setOption(option);
+        charts.push(chart);
+    }
+    window.onresize = function() {
+        for (var i = 0; i < charts.length; ++i) {
+            charts[i].resize();
+        }
+    };
+    await $(`.${task}`).removeClass('is-loading');
+    new ResizeSensor($(`.${task}`), function() {
+        chart.resize();
+        setTimeout(function() {
+            chart.dispatchAction({
+                type: 'highlight',
+                seriesIndex: 0,
+                dataIndex: 0
+            });
+        }, 1000);
+    });
+    setTimeout(function() {
+        chart.dispatchAction({
+            type: 'highlight',
+            seriesIndex: 0,
+            dataIndex: 0
+        });
+        chart.on('mouseover', function(params) {
+            if (params.name == dataChart[0].name) {
+                chart.dispatchAction({
+                    type: 'highlight',
+                    seriesIndex: 0,
+                    dataIndex: 0
+                });
+            } else {
+                chart.dispatchAction({
+                    type: 'downplay',
+                    seriesIndex: 0,
+                    dataIndex: 0
+                });
+            }
+        });
+        chart.on('mouseout', function(params) {
+            chart.dispatchAction({
+                type: 'highlight',
+                seriesIndex: 0,
+                dataIndex: 0
+            });
+        });
+    }, 1000);
+};
 export default api;

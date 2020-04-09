@@ -67,7 +67,24 @@
                     <div class="widget-getTrafficOverviewCustomerSourceAnalysis"></div>
                 </div>
             </div>
+            
+            <div class="row">
+                    <div class="col-12">
+                        <?require_once(__DIR__."/modules/overview.widgetTimeMobileDestop.php")?>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="widget-getSubdomains"></div>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-12">
+                        <?require_once(__DIR__."/modules/overview.widgetCompanyInfo.php")?>
+                    </div>
+            </div>
           <!--het  -->
+
             <div class="row">
                     <div class="col-12">
                         <?require_once(__DIR__."/modules/overview.widgetTime.php")?>

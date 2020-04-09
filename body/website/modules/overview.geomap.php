@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-8 px-0">
-                    <div class="tab-pane px-4 active getWebsiteGeography" role="tabpanel" style="min-height: 350px"></div>
+                    <div class="tab-pane px-4 active trafficByGeo" role="tabpanel" style="min-height: 350px"></div>
                 </div>
             </div>
         </div>
