@@ -3719,21 +3719,21 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                 search: []
             }
             $.each(items6, (i, item) => {
-                $.each(item, (index, data) => {
-                    if (index == 'date')
-                        chartmarketing.keys.push(moment(data).format('MMM YYYY'))
-                    if (index == 'social')
-                        chartmarketing.social.push(data)
-                    if (index == 'direct')
-                        chartmarketing.direct.push(data)
-                    if (index == 'referral')
-                        chartmarketing.referral.push(data)
-                    if (index == 'paid')
-                        chartmarketing.paid.push(data)
-                    if (index == 'search')
-                        chartmarketing.search.push(data)
-                })
-                return i < 11
+                    $.each(item, (index, data) => {
+                        if (index == 'date')
+                            chartmarketing.keys.push(moment(data).format('MMM YYYY'))
+                        if (index == 'social')
+                            chartmarketing.social.push(data)
+                        if (index == 'direct')
+                            chartmarketing.direct.push(data)
+                        if (index == 'referral')
+                            chartmarketing.referral.push(data)
+                        if (index == 'paid')
+                            chartmarketing.paid.push(data)
+                        if (index == 'search')
+                            chartmarketing.search.push(data)
+                    })
+                    return i < 11
             })
             let optionmarketing = {
                 color: masterColor,
@@ -3840,6 +3840,7 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                         hoverAnimation: true,
 
                     },
+                
                     {
                         name: 'Trả phí',
                         data: chartmarketing.paid.reverse(),
