@@ -2417,7 +2417,7 @@ const getDomainBackLinkDetail = async(task, data) => {
     //done
 const getDomainOverviewV2 = async(boxName, data) => {
     getScrapedSearchAds('getScrapedSearchAds', data)
-   // getTraffic30Days('getTraffic30Days', data)
+        // getTraffic30Days('getTraffic30Days', data)
     getListGoogleAdsCompetitor('getListGoogleAdsCompetitor', data)
     lockedModule('getScrapedSearchAds', data.userData.member);
     lockedModule('getListGoogleAdsCompetitor', data.userData.member);
@@ -3707,7 +3707,7 @@ const getTrafficOverviewCustomerResources = async(task, data) => {
 const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
     $('.similarReloadTask[data-task="getTrafficOverviewCustomerSourceAnalysis"]').attr('data-task', 'getTrafficOverview')
     if (data.status == "success") {
-        
+
         if (data.data && data.data.trafficTrend) {
             let items6 = data.data.trafficTrend.items;
             let chartmarketing = {
@@ -3716,10 +3716,10 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                 direct: [],
                 referral: [],
                 paid: [],
-                rank: [],
                 search: []
             }
             $.each(items6, (i, item) => {
+<<<<<<< HEAD
                     $.each(item, (index, data) => {
                         if (index == 'date')
                             chartmarketing.keys.push(moment(data).format('MMM YYYY'))
@@ -3735,7 +3735,24 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                             chartmarketing.search.push(data)
                     })
                     return i < 11
+=======
+                $.each(item, (index, data) => {
+                    if (index == 'date')
+                        chartmarketing.keys.push(moment(data).format('MMM YYYY'))
+                    if (index == 'social')
+                        chartmarketing.social.push(data)
+                    if (index == 'direct')
+                        chartmarketing.direct.push(data)
+                    if (index == 'referral')
+                        chartmarketing.referral.push(data)
+                    if (index == 'paid')
+                        chartmarketing.paid.push(data)
+                    if (index == 'search')
+                        chartmarketing.search.push(data)
+>>>>>>> e6c06e2b3eff27e1384eb0a0da13d99dc09eb8de
                 })
+                return i < 11
+            })
             let optionmarketing = {
                 color: masterColor,
                 tooltip: {
@@ -3770,11 +3787,7 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                     }
                 },
                 legend: {
-                    data: ["Trực tiếp", "Liên kết ngoài", "Mạng xã hội", "Xếp hạng", "Trả phí", "Tìm kiếm"],                   
-                    textStyle: {
-                        fontFamily: 'Google Sans,sans-serif',
-                        lineHeight: 12
-                    },
+                    data: ["Trực tiếp", "Liên kết ngoài", "Mạng xã hội", "Trả phí", "Tìm kiếm"],
                 },
                 grid: {
                     right: "5%"
