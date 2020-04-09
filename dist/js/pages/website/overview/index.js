@@ -4,7 +4,7 @@ $(document).ready(function() {
     api("estmatedWorth", localDomain);
     //api("getTrafficAndEngagementVisitsMonthly", localDomain);
     // api("getWebsiteGeography", localDomain);
-    api("getMarketingMixOverviewDaily", localDomain);
+    //api("getMarketingMixOverviewDaily", localDomain);
     api("getDomainBackLinkDetail", localDomain);
     api("getTrafficSocial", localDomain);
     api("getDomainOverviewV2", localDomain);

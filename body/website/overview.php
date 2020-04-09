@@ -62,11 +62,7 @@
                     <div class="widget-getTrafficOverviewCustomerResources"></div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 ">
-                    <div class="widget-getTrafficOverviewCustomerSourceAnalysis"></div>
-                </div>
-            </div>
+            
             
            
           <!--
@@ -87,9 +83,10 @@
                         <div class="widget-getWebDemographicsAge"></div>
                     </div>
             </div>
+          
             <div class="row">
                 <div class="col-12 ">
-                    <?require_once(__DIR__."/modules/overview.widgetUser.php")?>
+                    <div class="widget-getTrafficOverviewCustomerSourceAnalysis"></div>
                 </div>
             </div>
            
