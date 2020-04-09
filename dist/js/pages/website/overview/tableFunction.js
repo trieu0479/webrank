@@ -47,6 +47,7 @@ $(document).ready(() => {
                 ajax: {
                     url: `//localapi.trazk.com/webdata/v3.php?task=getTrafficOverview&domain=${localDomain}&page=1&method[all]=true&userToken=${userToken}`,
                     dataSrc: json => {
+                        lockedModule('getWebsiteGeography', json.userData.member)
                         let contry = []
                         let columns = []
                         $.each(arrNameContry, (index, item) => {
@@ -70,17 +71,7 @@ $(document).ready(() => {
                                 }
                             })
                         })
-                      
-
                         return columns;
-                        // lockedModule('getWebsiteGeography', json.userData.member)
-                        // if (!json.data || !json.data.data) {
-                        //     $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
-                        //     return [];
-                        // } else {
-                        //     var cols = json.data.data.filter(item => item.Country != null);
-                        //     return cols;
-                        // }
                     }
                 },
                 drawCallback: function(settings) {
@@ -524,6 +515,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getTrafficOverview&domain=${localDomain}&page=1&method[all]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
+                    lockedModule('getSubdomains', json.userData.member);
                     return json.data.trafficBySubDomain
                 },
             },

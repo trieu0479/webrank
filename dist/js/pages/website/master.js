@@ -8,6 +8,7 @@ if (location.href.indexOf("/rank/") > 1) {
 }
 domain = extractHostname(domain);
 domain = domain.toLowerCase();
+
 function extractHostname(url) {
     var hostname;
     //find & remove protocol (http, ftp, etc.) and get hostname
@@ -124,7 +125,7 @@ $(document).ready(() => {
         return true;
     }
     window.lockedModule = function lockedModule(boxWidgetName, level) {
-        var freeModule = ["getKeywords", "getWebsiteGeography", "banckLinksOverview", "getAdvertisingSearchDetail", "getOrganicKeywordsBrandedTable", "getSimilarSites", "organicPositions"];
+        var freeModule = ["getKeywords", "getWebsiteGeography", "banckLinksOverview", "getAdvertisingSearchDetail", "getOrganicKeywordsBrandedTable", "getSimilarSites", "organicPositions", "getSubdomains"];
         var VIPModule = ["topBackLinks", "getTrafficDisplayAdvertisingWebsitesTable", "organicCompetitors", "getOrganicKeywordsNonBrandedTable", "organicPositions"];
         if (level == 'demo') {
             if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
