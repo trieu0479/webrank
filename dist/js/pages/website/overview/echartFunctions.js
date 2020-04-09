@@ -3731,8 +3731,6 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                             chartmarketing.referral.push(data)
                         if (index == 'paid')
                             chartmarketing.paid.push(data)
-                        if (index == 'rank')
-                            chartmarketing.rank.push(data)
                         if (index == 'search')
                             chartmarketing.search.push(data)
                     })
@@ -3847,17 +3845,7 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                         hoverAnimation: true,
 
                     },
-                    {
-                        name: 'Xếp hạng',
-                        data: chartmarketing.rank.reverse(),
-                        type: "line",
-                        symbol: "circle",
-                        smooth: true,
-                        symbolSize: 1,
-                        showSymbol: true,
-                        hoverAnimation: true,
-
-                    },
+                
                     {
                         name: 'Trả phí',
                         data: chartmarketing.paid.reverse(),
