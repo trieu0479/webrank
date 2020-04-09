@@ -3734,8 +3734,6 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                             chartmarketing.search.push(data)
                     })
                     return i < 11
-                })
-                return i < 11
             })
             let optionmarketing = {
                 color: masterColor,
