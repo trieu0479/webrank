@@ -38,19 +38,40 @@ $(document).ready(() => {
             return table;
         }
         //getWebsiteGeography
+    var arrNameContry = [];
+    $.get(`//localapi.trazk.com/webdata/v3.php?task=countryIsoName&userToken=${userToken}`, function(res) {
+        arrNameContry = res.data
+    })
     initDatatable(
             'getWebsiteGeography-table', {
                 ajax: {
-                    url: `//localapi.trazk.com/webdata/v3.1.php?task=getWebsiteGeography&domain=${localDomain}&userToken=${userToken}`,
+                    url: `//localapi.trazk.com/webdata/v3.php?task=getTrafficOverview&domain=${localDomain}&page=1&method[all]=true&userToken=${userToken}`,
                     dataSrc: json => {
                         lockedModule('getWebsiteGeography', json.userData.member)
-                        if (!json.data || !json.data.data) {
-                            $('.getWebsiteGeography-col-maptbale').html('').addClass('empty-state')
-                            return [];
-                        } else {
-                            var cols = json.data.data.filter(item => item.Country != null);
-                            return cols;
-                        }
+                        let contry = []
+                        let columns = []
+                        $.each(arrNameContry, (index, item) => {
+                                let nameCountry = {
+                                    ele: index.toLowerCase(),
+                                    name: item
+                                }
+                                contry.push(nameCountry)
+                            })
+                            // console.log(contry);
+                        $.each(json.data.trafficByGeo, (i, v) => {
+                            $.each(contry, (k, val) => {
+                                if (v.country == val.ele) {
+                                    let obj = {
+                                        id: val.ele,
+                                        name: val.name,
+                                        traffic: numeral(v.traffic_value).format('0.0a'),
+                                        value: numeral(v.traffic * 100).format('0.00')
+                                    }
+                                    columns.push(obj)
+                                }
+                            })
+                        })
+                        return columns;
                     }
                 },
                 drawCallback: function(settings) {
@@ -61,20 +82,16 @@ $(document).ready(() => {
                 columns: [{
                         title: 'Quốc gia',
                         data: data => {
-
                             return `<div  class="d-flex align-items-baseline">
-                    <span class="flag flag-${data.Country.icon} mr-2"></span>
-                    <span>${data.Country.text}</span>
+                    <span class="flag flag-${data.id} mr-2"></span>
+                    <span>${data.name}</span>
                 </div>`
                         }
                     },
                     {
                         title: 'Tỉ lệ',
                         data: data => {
-                            const share = numeral(data.Share).format('0.00%');
-                            return `<div class="">
-                          ${share}
-                      </div>`;
+                            return `<div class=""><span class="text-muted mr-1">${data.value}%</span></div>`;
                         }
                     }
                 ],
@@ -251,7 +268,7 @@ $(document).ready(() => {
     initDatatable(
         'banckLinksOverview', {
             ajax: {
-                
+
                 url: `//localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&method[backlinksDetail]=true&userToken=${userToken}`,
                 dataSrc: function(res) {
                     // console.log(res.data.banckLinksOverview.backlinks.data);
@@ -259,7 +276,7 @@ $(document).ready(() => {
                     let columns = [];
                     var stt = 0;
                     $.each(res.data.backlinksDetail, function(k, v) {
-                        if (stt < 10){
+                        if (stt < 10) {
                             let output = {
                                 source_url: v.source_url,
                                 source_title: v.source_title,
@@ -269,7 +286,7 @@ $(document).ready(() => {
                                 nofollow: v.nofollow,
                             };
                             columns.push(output)
-                            stt ++;
+                            stt++;
                         }
                     })
                     return columns;
@@ -492,4 +509,47 @@ $(document).ready(() => {
             $('#bannerPageAds').append(html)
         }
     })
+    initDatatable(
+        'getSubdomains', {
+            // data: data.data.trafficBySubDomain,
+            ajax: {
+                url: `//localapi.trazk.com/webdata/v3.php?task=getTrafficOverview&domain=${localDomain}&page=1&method[all]=true&userToken=${userToken}`,
+                dataSrc: (json) => {
+                    lockedModule('getSubdomains', json.userData.member);
+                    return json.data.trafficBySubDomain
+                },
+            },
+            drawCallback: function(settings) {},
+            columns: [{
+                    title: "Subdomain",
+                    "data": data => `<a href="${rootURL}/rank/${data.subdomain}"><div class=""><img class="p-1 mr-2 border rounded bg-secondary" src="https://www.google.com/s2/favicons?domain=${data.subdomain}"> ${data.subdomain}</div></a>`,
+                },
+                {
+                    title: `<i class="fal fa-phone-laptop"></i> Mọi thiết bị`,
+                    "data": data => `${numeral(data.traffic_value).format("0.0a")}`,
+                },
+                {
+                    title: `<i class="fal fa-desktop"></i> Desktop`,
+                    "data": data => `<div style="color:#ffb822">${numeral(data.desktop_share).format('00.00%')}</div>`,
+                },
+                {
+                    title: `<i class="fal fa-mobile"></i> Mobile`,
+                    "data": data => `<div style="color:#0abb87">${numeral(data.mobile_share).format('00.00%')}</div>`,
+                },
+            ],
+            "ordering": false,
+            info: false,
+            autoWidth: false,
+            searching: false,
+            scrollY: '325px',
+            scrollCollapse: true,
+            paging: false,
+            processing: true,
+            initComplete: function(settings, json) {
+                // $("table.dataTable thead th").css("padding", "10px");
+                $("table.dataTable tbody tr td").css("padding", "10px 18px");
+                $("table.dataTable tbody").css("text-align", "left");
+            }
+        }
+    )
 })
