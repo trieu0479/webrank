@@ -523,7 +523,7 @@ const estmatedWorth = async(task, data) => {
 
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor', "getCrunchBase"];
+    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor', "getCrunchBase", "getTrafficOverviewCustomerSourceAnalysis "];
     var VIPModule = [];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
@@ -3549,6 +3549,7 @@ const getTrafficOverview = async(task, data) => {
         lockedModule('getTimeMobileDesktop', data.userData.member);
         lockedModule('trafficByGeo', data.userData.member);
         lockedModule('getCrunchBase', data.userData.member);
+        lockedModule('getTrafficOverviewCustomerSourceAnalysis ', data.userData.member);
     }
     //--------Truy Cập Theo Tháng
 const getAccessMonthly = async(task, data) => {
@@ -3719,21 +3720,21 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                 search: []
             }
             $.each(items6, (i, item) => {
-                    $.each(item, (index, data) => {
-                        if (index == 'date')
-                            chartmarketing.keys.push(moment(data).format('MMM YYYY'))
-                        if (index == 'social')
-                            chartmarketing.social.push(data)
-                        if (index == 'direct')
-                            chartmarketing.direct.push(data)
-                        if (index == 'referral')
-                            chartmarketing.referral.push(data)
-                        if (index == 'paid')
-                            chartmarketing.paid.push(data)
-                        if (index == 'search')
-                            chartmarketing.search.push(data)
-                    })
-                    return i < 11
+                $.each(item, (index, data) => {
+                    if (index == 'date')
+                        chartmarketing.keys.push(moment(data).format('MMM YYYY'))
+                    if (index == 'social')
+                        chartmarketing.social.push(data)
+                    if (index == 'direct')
+                        chartmarketing.direct.push(data)
+                    if (index == 'referral')
+                        chartmarketing.referral.push(data)
+                    if (index == 'paid')
+                        chartmarketing.paid.push(data)
+                    if (index == 'search')
+                        chartmarketing.search.push(data)
+                })
+                return i < 11
             })
             let optionmarketing = {
                 color: masterColor,
@@ -3840,7 +3841,7 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                         hoverAnimation: true,
 
                     },
-                
+
                     {
                         name: 'Trả phí',
                         data: chartmarketing.paid.reverse(),
