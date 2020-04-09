@@ -3719,7 +3719,6 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                 search: []
             }
             $.each(items6, (i, item) => {
-<<<<<<< HEAD
                     $.each(item, (index, data) => {
                         if (index == 'date')
                             chartmarketing.keys.push(moment(data).format('MMM YYYY'))
@@ -3735,21 +3734,6 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                             chartmarketing.search.push(data)
                     })
                     return i < 11
-=======
-                $.each(item, (index, data) => {
-                    if (index == 'date')
-                        chartmarketing.keys.push(moment(data).format('MMM YYYY'))
-                    if (index == 'social')
-                        chartmarketing.social.push(data)
-                    if (index == 'direct')
-                        chartmarketing.direct.push(data)
-                    if (index == 'referral')
-                        chartmarketing.referral.push(data)
-                    if (index == 'paid')
-                        chartmarketing.paid.push(data)
-                    if (index == 'search')
-                        chartmarketing.search.push(data)
->>>>>>> e6c06e2b3eff27e1384eb0a0da13d99dc09eb8de
                 })
                 return i < 11
             })
