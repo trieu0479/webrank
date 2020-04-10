@@ -39,7 +39,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 px-0">
+                <div class="col-12 px-0 mb-0">
                     <?php require_once(__DIR__ . "/modules/googleads.widgetMonthlyFullTrend.php") ?>
                 </div>
 
@@ -48,16 +48,17 @@
                 </div>
 
                 <div class="col-12 col-lg-6">
-                    <?php require_once(__DIR__ . "/modules/googleads.khanh.widgetTopPaidKeyWord.php") ?>
+                    <div class="widget-TopPaidKeyword">
+                    </div>
                 </div>
 
                 <div class="col-12 col-lg-6">
                     <div class="widget-PositionChart">
                     </div>
                 </div>
-
+                
                 <div class="col-12 col-lg-6">
-                    <?php require_once(__DIR__ . "/modules/googleads.khanh.widgetCompetitor.php") ?>
+                    <div class="widget-MainCompetitor"></div>
                 </div>
 
                 <div class="col-12 col-lg-6">

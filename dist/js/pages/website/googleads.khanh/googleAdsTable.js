@@ -9,9 +9,9 @@ const initDatatable = function (select, tableOptions) {
     idTable = table;
     //$(table.table().header()).addClass('text-center');
     //reload click handle
-    $(`.${select}`).click(function (event) {
+    $(`#${select}`).click(function (event) {
         $(event.target).addClass('fa-spin');
-        $(`.${select}-container`).addClass('is-loading').block({
+        $(`#${select}-container`).addClass('is-loading').block({
             overlayCSS: {
                 backgroundColor: '#ccc',
                 opacity: 0.8,
@@ -27,6 +27,30 @@ const initDatatable = function (select, tableOptions) {
     })
     return table;
 };
+
+const initClassDatatable = function (select, tableOptions) {
+    const table = $(`.${select}`).DataTable(tableOptions);
+    let idTable;
+    idTable = table;
+    $(`.${select}`).click(function (event) {
+        $(event.target).addClass('fa-spin');
+        $(`.${select}-container`).addClass('is-loading').block({
+            overlayCSS: {
+                backgroundColor: '#ccc',
+                opacity: 0.8,
+                zIndex: 1,
+                cursor: 'wait'
+            },
+            message: null
+        });
+        $(`.${select}`).DataTable().ajax.reload(() => {
+            $(`.${select}`).removeClass("is-loading");
+            $(`.${select} .dataTables_empty`).text("").addClass("empty-state");
+        });
+    })
+    return table;
+};
+
 const renderSparkline = (task) => { //task ở đây là id cha
     $(`.${task} .sparkline`).each((index, item) => {
         $(item).html('');
@@ -41,47 +65,41 @@ const renderSparkline = (task) => { //task ở đây là id cha
 
 $(document).ready(function () {
 
-    initDatatable(
+    initClassDatatable(
         'MainCompetitor', {
         ajax: {
             url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method[adwordsCompetitors]=true&userToken=${userToken}`,
             dataSrc: function (res) {
-                
-                    console.log(res);
-                    
-                if (res.data.adwordsCompetitors == null) {
-                    $('#MainCompetitor_wrapper').addClass('empty-state');
-                    $('#MainCompetitor_wrapper').css('min-height', '361px')
-                    $('#MainCompetitor tbody tr td').html('');
-                    $('#MainCompetitor_paginate').html('')
-                    return;
-                }
-                if (res.data.adwordsCompetitors.length <= 0) {
-                    $('#MainCompetitor_wrapper').addClass('empty-state');
-                    $('#MainCompetitor_wrapper').css('min-height', '361px')
-                    $('#MainCompetitor tbody tr td').html('');
-                    $('#MainCompetitor_paginate').html('')
-                    return;
-                }
-
                 let dataMainCompetitor = res.data.adwordsCompetitors;
-                lockedModule('MainCompetitor', res.userData.member);
                 let columns = [];
-                $.each(dataMainCompetitor, function (k, v) {
+                console.log(res, 'khanh');
 
-                    let output = {};
-                    output.domain = v.domain;
-                    output.competitionLvl = v.competitionLvl;
-                    output.commonKeywords = v.commonKeywords;
-                    output.adwordsKeywords = v.adwordsKeywords;
-                    columns.push(output)
+                $('.similarReloadTask[data-task="MainCompetitor"]').find('i').addClass('d-none');
+                if (res.data.adwordsCompetitors != null && res.data.adwordsCompetitors.length != 0) {
 
-                })
-                return columns;
+                    lockedModule('MainCompetitor', res.userData.member);
+
+                    $.each(dataMainCompetitor, function (k, v) {
+
+                        let output = {};
+                        output.domain = v.domain;
+                        output.competitionLvl = v.competitionLvl;
+                        output.commonKeywords = v.commonKeywords;
+                        output.adwordsKeywords = v.adwordsKeywords;
+                        columns.push(output)
+
+                    })
+                    return columns;
+                } else {
+                    $('.parent-MainCompetitor').addClass('empty-state').attr('style', 'height:300px!important');
+                    $(".MainCompetitor").addClass('d-none')
+                    $("#DataTables_Table_0_paginate").attr('style', 'display:none!important');
+                    return columns;
+                }
             },
         },
-        drawCallback: function (settings) { 
-            
+        drawCallback: function (settings) {
+
         },
         columns: [{
             title: "<span class='font-gg font-weight-100 font-12'>Competitor</span>",
@@ -122,7 +140,9 @@ $(document).ready(function () {
         destroy: true,
         initComplete: function (settings, json) {
             $("table.dataTable thead th").css("padding", "10px");
-            $("table#MainCompetitor tbody tr td").css("padding", "15px 10px!important");
+            $("table.MainCompetitor tbody tr td").css("padding", "15px 10px!important");
+            $('#DataTables_Table_0_length').attr('style', 'display:none!important')
+            $('#DataTables_Table_0_paginate').attr('style', 'margin-top: 15px;!important')
         }
     }
     )
@@ -132,36 +152,35 @@ $(document).ready(function () {
         ajax: {
             url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method[adwordsPositions]=true&userToken=${userToken}`,
             dataSrc: function (res) {
-                if (res.data.adwordsPositions == null) {
-                    $('#PaidPageTable_wrapper').addClass('empty-state');
-                    $('#PaidPageTable_wrapper').removeClass('is-loading');
-                    $('#PaidPageTable_wrapper tbody tr td').html('')
-                    return;
-                }
-                if (res.data.adwordsPositions.length <= 0) {
-                    $('#PaidPageTable_wrapper').addClass('empty-state');
-                    $('#PaidPageTable_wrapper').removeClass('is-loading');
-                    $('#PaidPageTable_wrapper tbody tr td').html('')
-                }
                 let dataPaidPageTable = res.data.adwordsPositions;
                 let columns = [];
-                var stt = 1;
-                $.each(dataPaidPageTable, function (k, v) {
-                    let output = {};
-                    output.stt = stt;
-                    output.url = v.url;
-                    output.traffic = v.traffic;
-                    output.keywordDifficulty = v.keywordDifficulty;
-                    output.description = v.description
-                    output.trends = v.trends;
-                    stt += 1;
-                    columns.push(output)
+                let stt = 1;
+                $('.similarReloadTask[data-task="PaidPageTable"]').find('i').addClass('d-none');
+                if (res.data.adwordsPositions != null && res.data.adwordsPositions.length != 0) {
+                    $.each(dataPaidPageTable, function (k, v) {
+                        let output = {};
+                        output.stt = stt;
+                        output.url = v.url;
+                        output.traffic = v.traffic;
+                        output.keywordDifficulty = v.keywordDifficulty;
+                        output.description = v.description
+                        output.trends = v.trends;
+                        stt += 1;
+                        columns.push(output)
 
 
-                })
+                    })
 
-                //  console.log(columns);
-                return columns;
+                    //  console.log(columns);
+                    return columns;
+                } else {
+                    $('#PaidPageTable_wrapper').addClass('empty-state');
+                    $('#PaidPageTable_wrapper').removeClass('is-loading');
+                    $('#PaidPageTable').addClass('d-none')
+                    $('#PaidPageTable_wrapper .dt-buttons').addClass('d-none')
+                    $('#PaidPageTable_paginate').attr('style', 'display:none!important')
+                    return columns;
+                }
             },
         },
         drawCallback: function (settings) { renderSparkline('PaidPageTable') },
@@ -234,41 +253,36 @@ $(document).ready(function () {
     }
     )
 
-    initDatatable(
+    initClassDatatable(
         'TopPaidKeyword', {
         ajax: {
             url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingSearchDetail&domain=${domain}&page=1&method[adwordsPositions]=true&userToken=${userToken}`,
             dataSrc: function (res) {
-                // console.log(res);
-                lockedModule('TopPaidKeyword', res.userData.member);
-                if (res.data.adwordsPositions == null) {
-                    $('#TopPaidKeyword_wrapper').addClass('empty-state');
-                    $('#TopPaidKeyword_wrapper').css('min-height', '361px')
-                    $('#TopPaidKeyword tbody tr td').html('');
-                    $('#TopPaidKeyword_paginate').html('')
-                    return;
-                }
-                if (res.data.adwordsPositions.length <= 0) {
-                    $('#TopPaidKeyword_wrapper').addClass('empty-state');
-                    $('#TopPaidKeyword_wrapper').css('min-height', '361px')
-                    $('#TopPaidKeyword tbody tr td').html('');
-                    $('#TopPaidKeyword_paginate').html('')
-                }
-
-                var dataTopPaidKeyword = res.data.adwordsPositions;
+                let dataTopPaidKeyword = res.data.adwordsPositions;
                 let columns = [];
-                $.each(dataTopPaidKeyword, function (k, v) {
+                $('.similarReloadTask[data-task="TopPaidKeyword"]').find('i').addClass('d-none');
+                if (res.data.adwordsPositions != null && res.data.adwordsPositions.length != 0) {
+                    lockedModule('TopPaidKeyword', res.userData.member);
+                    $.each(dataTopPaidKeyword, function (k, v) {
 
-                    let output = {};
-                    output.phrase = v.phrase;
-                    output.position = v.position;
-                    output.volume = v.volume;
-                    output.cpc = v.cpc;
-                    output.traffic = v.traffic;
-                    columns.push(output)
+                        let output = {};
+                        output.phrase = v.phrase;
+                        output.position = v.position;
+                        output.volume = v.volume;
+                        output.cpc = v.cpc;
+                        output.traffic = v.traffic;
+                        columns.push(output)
 
-                })
-                return columns;
+                    })
+                    return columns;
+                } else {
+                    $('.parent-TopPaidKeyword').attr('style', 'height:300px!important').addClass('empty-state')
+                    $(".TopPaidKeyword").addClass('d-none')
+                    $("#DataTables_Table_1_paginate").attr('style', 'display:none!important');
+                    $('#DataTables_Table_1_length').attr('style', 'display:none!important')
+
+                    return columns;
+                }
             },
         },
         drawCallback: function (settings) { },
@@ -309,8 +323,10 @@ $(document).ready(function () {
         destroy: true,
         initComplete: function (settings, json) {
             // $("table.dataTable thead th").css("padding", "10px");
-            // $("table#TopPaidKeyword tbody tr td").css("padding", "15px 10px!important");
+            // $('#DataTables_Table_1_paginate').attr('style','margin-top: 15px;!important')
+            $('#DataTables_Table_1_length').attr('style', 'display:none!important')
         }
     }
     )
+
 })
