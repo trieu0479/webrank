@@ -552,8 +552,6 @@ const PositionChart = async (data, method) => {
 const CompetitorMapChart = async (data, method) => {
     if (data.status == "success") {
         if (data && data.data) {
-            console.log(data, 'đâsdsad');
-
             if (data.data.adwordsCompetitors != null && data.data.adwordsCompetitors.length != 0) {
                 let myarr = []
                 let myarrchart = []

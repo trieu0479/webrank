@@ -72,7 +72,6 @@ $(document).ready(function () {
             dataSrc: function (res) {
                 let dataMainCompetitor = res.data.adwordsCompetitors;
                 let columns = [];
-                console.log(res, 'khanh');
 
                 $('.similarReloadTask[data-task="MainCompetitor"]').find('i').addClass('d-none');
                 if (res.data.adwordsCompetitors != null && res.data.adwordsCompetitors.length != 0) {
