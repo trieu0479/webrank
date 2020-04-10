@@ -2,15 +2,18 @@
 var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 
-var localUrl = new URL(location.href);
-var domain = localUrl.searchParams.get('domain');
+// var localUrl = new URL(location.href);
+// var domain = localUrl.searchParams.get('domain');
 
 
 function lockedModule(boxWidgetName, level) {
+    // console.log(boxWidgetName);
+
     var freeModule = [];
-    var VIPModule = ["TopPaidKeyword", "MainCompetitor", "PositionChart", "CompetitorMapChart", "getScrapedSearchAds", "PaidPageTable", "adwordsMonthlyFullTrend"];
+    var VIPModule = ["PositionChart", "CompetitorMapChart", "getScrapedSearchAds", "PaidPageTable", "adwordsMonthlyFullTrend"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
+
             //ngoai le 
             if (boxWidgetName == 'getMarketingMixOverviewDaily') boxWidgetName = 'getMarketingMixOverview';
             if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
@@ -28,7 +31,7 @@ function lockedModule(boxWidgetName, level) {
 
 const api = async (method, domain) => {
     let methodName = method;
-    if (method == "ggAdsOverview" || method == "TopPaidKeyword" || method == "PositionChart" || method == "PaidPageTable" || method == "getScrapedSearchAds") {
+    if (method == "ggAdsOverview" || method == "TopPaidKeyword" || method == "PositionChart" || method == "PaidPageTables" || method == "getScrapedSearchAds") {
         method = "adwordsPositions"
     }
     if (method == "adwordsMonthlyFullTrend") {
@@ -50,20 +53,12 @@ const api = async (method, domain) => {
                     case 'adwordsMonthlyFullTrend':
                         adwordsMonthlyFullTrend(data, method);
                         break;
-                    // case 'TopPaidKeyword':
-                    //     TopPaidKeyword(data, method);
-                    //     break;
                     case 'PositionChart':
                         PositionChart(data, method);
                         break;
-                    // case "MainCompetitor":
-                    //     MainCompetitor(data, method)
-                    //     break;
                     case "CompetitorMapChart":
                         CompetitorMapChart(data, method)
                         break;
-                    // case "PaidPageTable":
-                    //     PaidPageTable(data, method); break;
                     case "getScrapedSearchAds":
                         getScrapedSearchAds(data, method);
                         break;
@@ -156,11 +151,14 @@ const ggAdsOverview = async (data, method) => {
 
 
 const adwordsMonthlyFullTrend = async (data, method) => {
-
+    $('.widget-PublicSherTable').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
+    <a class="similarReloadTask text-muted" data-task="adwordsMonthlyFullTrend" href="javascript:;"><i class="fal fa-sync"></i></a>
+    </div>`)
     if (data.status == "success") {
 
-        if (data && data.data && data.data.adwordsMonthlyFullTrend) {
+        if (data && data.data && data.data.adwordsMonthlyFullTrend && data.data.adwordsMonthlyFullTrend.length != 0) {
             var res = data.data.adwordsMonthlyFullTrend;
+
             const render = async (name, res) => {
                 var gandate, gantraffic, dateString;
                 let dataChart = [];
@@ -412,264 +410,237 @@ const adwordsMonthlyFullTrend = async (data, method) => {
     }
 }
 
-// const TopPaidKeyword = async (data, method) => {
-//     if (!data.data.length) {
-//         $('#TopPaidKeyword_wrapper').addClass('empty-state');
-//         $('#TopPaidKeyword_wrapper').css('min-height', '361px')
-//     }
-   
-// }
-
-
-
-
 const PositionChart = async (data, method) => {
-
+    $(".PositionChart").attr('style', 'height:300px!important')
     if (data.status = "success") {
         if (data && data.data) {
             if (data.data.adwordsPositions == null) {
                 $('.PositionChart').addClass('empty-state');
                 $('.PositionChart').removeClass('is-loading');
-                return;
-            }
-            var res = data.data.adwordsPositions;
-            //  console.log(res);
+            } else {
+                var res = data.data.adwordsPositions;
 
-            let dataChart = {
-                keys: ['1', '2-3', 'Others'],
-                values: [],
-                counted: []
-            }
-            let count = [0, 0, 0];
-            let counted = [0, 0, 0];
-            for (let i = 0; i < res.length; i++) {
-                if (res[i].position == 1) {
-                    count[0]++;
-
-                } else if (res[i].position == 2 || res[i].position == 3) {
-                    count[1]++;
-
-                } else {
-                    count[2]++;
+                let dataChart = {
+                    keys: ['1', '2-3', 'Others'],
+                    values: [],
+                    counted: []
                 }
-            }
+                let count = [0, 0, 0];
+                let counted = [0, 0, 0];
+                for (let i = 0; i < res.length; i++) {
+                    if (res[i].position == 1) {
+                        count[0]++;
 
-            counted = [100 - count[0], 100 - count[1], 100 - count[2]]
-            dataChart.values.push(count)
-            dataChart.counted.push(counted)
+                    } else if (res[i].position == 2 || res[i].position == 3) {
+                        count[1]++;
 
-            let yMax = 100;
-            for (var i = 0; i < data.length; i++) {
-                dataChart.push(yMax);
-            }
-            let option = {
-                xAxis: {
-                    type: 'category',
-                    data: dataChart.keys,
-                    axisTick: {
-                        show: false
-                    },
-                    axisLine: {
-                        show: false
-                    },
-                    stack: 0,
-
-                },
-                color: customColors,
-                yAxis: {
-                    type: 'value',
-                    data: ['0', '50', '100'],
-                    axisTick: {
-                        show: false
-                    },
-                    axisLine: {
-                        show: false
-                    },
-                    stack: 0,
-                    axisLabel: {
-                        formatter: (value, index) => (value = value + '%'),
-                    },
-                },
-                tooltip: {
-                    trigger: "axis",
-                    backgroundColor: 'rgb(255, 255, 255, 1)',
-                    borderColor: 'rgb(101,155,250)',
-                    borderWidth: 1,
-                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                    axisPointer: {
-                        type: 'shadow'
-                    },
-                    formatter: params => {
-                        let {
-                            name,
-                            value,
-                            seriesName,
-                            marker,
-                            color,
-                            dataIndex
-                        } = params[0];
-
-                        return `
-                        <div class="text-dark">
-                        <div class="text-dark border-bottom pb-1 text-center">${name} <span style="color:${color};font-weight:bold;opacity:.8"></span> <br> </div>
-                     <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#AEDFFF"></span>   ${ 'Paid positions'} <span style="color:${color};font-weight:bold">${(value)}</span> <br>
-                           
-                        </div> 
-                        `;
-
+                    } else {
+                        count[2]++;
                     }
-                },
-                series: [{
-                    data: dataChart.values[0],
-                    type: 'bar',
-                    stack: '广告',
-                },
-                {
-                    data: dataChart.counted[0],
-                    type: 'bar',
-                    stack: '广告',
-                    color: '#FFE5CD'
                 }
-                ]
-            };
-            var myChart = document.getElementsByClassName('PositionChart');
-            var charts = [];
-            for (var i = 0; i < myChart.length; i++) {
-                var chart = echarts.init(myChart[i]);
-                chart.setOption(option);
-                charts.push(chart);
+
+                counted = [100 - count[0], 100 - count[1], 100 - count[2]]
+                dataChart.values.push(count)
+                dataChart.counted.push(counted)
+
+                let yMax = 100;
+                for (var i = 0; i < data.length; i++) {
+                    dataChart.push(yMax);
+                }
+                let option = {
+                    xAxis: {
+                        type: 'category',
+                        data: dataChart.keys,
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        stack: 0,
+
+                    },
+                    color: customColors,
+                    yAxis: {
+                        type: 'value',
+                        data: ['0', '50', '100'],
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        stack: 0,
+                        axisLabel: {
+                            formatter: (value, index) => (value = value + '%'),
+                        },
+                    },
+                    tooltip: {
+                        trigger: "axis",
+                        backgroundColor: 'rgb(255, 255, 255, 1)',
+                        borderColor: 'rgb(101,155,250)',
+                        borderWidth: 1,
+                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                        axisPointer: {
+                            type: 'shadow'
+                        },
+                        formatter: params => {
+                            let {
+                                name,
+                                value,
+                                seriesName,
+                                marker,
+                                color,
+                                dataIndex
+                            } = params[0];
+
+                            return `
+                            <div class="text-dark">
+                            <div class="text-dark border-bottom pb-1 text-center">${name} <span style="color:${color};font-weight:bold;opacity:.8"></span> <br> </div>
+                         <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#AEDFFF"></span>   ${ 'Paid positions'} <span style="color:${color};font-weight:bold">${(value)}</span> <br>
+                               
+                            </div> 
+                            `;
+
+                        }
+                    },
+                    series: [{
+                        data: dataChart.values[0],
+                        type: 'bar',
+                        stack: '广告',
+                    },
+                    {
+                        data: dataChart.counted[0],
+                        type: 'bar',
+                        stack: '广告',
+                        color: '#FFE5CD'
+                    }
+                    ]
+                };
+                var myChart = document.getElementsByClassName('PositionChart');
+                var charts = [];
+                for (var i = 0; i < myChart.length; i++) {
+                    var chart = echarts.init(myChart[i]);
+                    chart.setOption(option);
+                    charts.push(chart);
+                }
+
+
+                window.onresize = function () {
+                    for (var i = 0; i < charts.length; ++i) {
+                        charts[i].resize();
+                    }
+                };
+                await $(`.PositionChart`).removeClass('is-loading');
             }
 
-
-            window.onresize = function () {
-                for (var i = 0; i < charts.length; ++i) {
-                    charts[i].resize();
-                }
-            };
-            await $(`.CompetitorMapChart`).removeClass('is-loading');
         } else {
-            $(`.CompetitorMapChart`).removeClass('is-loading');
-            $(`.CompetitorMapChart`).addClass('empty-state');
-
+            $(`.PositionChart`).removeClass('is-loading');
+            $(`.PositionChart`).addClass('empty-state');
         }
 
 
     } else {
-        //console.log(`PositionChart failed`);
+        $(`.PositionChart`).removeClass('is-loading');
+        $(`.PositionChart`).addClass('empty-state');
 
     }
 }
 
 
-
-
-
-// const MainCompetitor = async (data, method) => {
-// }
-
 const CompetitorMapChart = async (data, method) => {
     if (data.status == "success") {
         if (data && data.data) {
-            if (data.data.adwordsCompetitors == null) {
-                $('.CompetitorMapChart').addClass('empty-state');
-                $('.CompetitorMapChart').removeClass('is-loading');
-                return;
-            }
-            if (data.data.adwordsCompetitors.length <= 0) {
-                $('.CompetitorMapChart').addClass('empty-state');
-                $('.CompetitorMapChart').removeClass('is-loading');
-                return;
-            }
+            if (data.data.adwordsCompetitors != null && data.data.adwordsCompetitors.length != 0) {
+                let myarr = []
+                let myarrchart = []
+                let myarrChartName = [];
+                let series = [];
+                var res = data.data.adwordsCompetitors;
+                $.each(res, (index, item) => {
+                    if (index < 7) {
+                        let obj = {}
+                        obj.domain = item.domain
+                        obj.adwordsKeywords = item.adwordsKeywords
+                        obj.traffic = item.traffic
+                        obj.commonKeywords = item.commonKeywords
+                        myarr.push(obj)
 
-            let myarr = []
-            let myarrchart = []
-            let myarrChartName = [];
-            let series = [];
-            var res = data.data.adwordsCompetitors;
-            $.each(res, (index, item) => {
-                if (index < 7) {
-                    let obj = {}
-                    obj.domain = item.domain
-                    obj.adwordsKeywords = item.adwordsKeywords
-                    obj.traffic = item.traffic
-                    obj.commonKeywords = item.commonKeywords
-                    myarr.push(obj)
+                    }
+                })
+                var filterArr = myarr.filter(function (myarr) {
+                    return myarr.domain != "";
+                });
 
-                }
-            })
-            var filterArr = myarr.filter(function (myarr) {
-                return myarr.domain != "";
-            });
-
-            // phan getCompetitorReportChart
-            $.each(filterArr, (index, item) => {
-                if (index < 7) {
-                    let arr = []
-                    arr.push(item.adwordsKeywords)
-                    arr.push((item.traffic))
-                    arr.push(item.commonKeywords)
-                    arr.push(item.domain)
-                    myarrchart.push(arr)
-                    myarrChartName.push(item.domain)
-                }
-            })
+                // phan getCompetitorReportChart
+                $.each(filterArr, (index, item) => {
+                    if (index < 7) {
+                        let arr = []
+                        arr.push(item.adwordsKeywords)
+                        arr.push((item.traffic))
+                        arr.push(item.commonKeywords)
+                        arr.push(item.domain)
+                        myarrchart.push(arr)
+                        myarrChartName.push(item.domain)
+                    }
+                })
 
 
-            myarrchart.forEach((v, i) => {
-                if (i < 7) {
-                    let obj = {}
-                    //  console.log(v);
+                myarrchart.forEach((v, i) => {
+                    if (i < 7) {
+                        let obj = {}
+                        //  console.log(v);
 
-                    obj.name = v[3],
-                        obj.type = 'scatter',
-                        obj.symbolSize = function (data) {
-                            // console.log(data);
-                            return kFormatter(data[2]);
-                        },
-                        obj.emphasis = {
-                            label: {
-                                show: false,
-                                formatter: function (param) {
-                                    return kFormatter(param.data[3]);
-                                },
-                                // position: 'top'
+                        obj.name = v[3],
+                            obj.type = 'scatter',
+                            obj.symbolSize = function (data) {
+                                // console.log(data);
+                                return kFormatter(data[2]);
                             },
-                            top: '40%'
+                            obj.emphasis = {
+                                label: {
+                                    show: false,
+                                    formatter: function (param) {
+                                        return kFormatter(param.data[3]);
+                                    },
+                                    // position: 'top'
+                                },
+                                top: '40%'
 
-                        },
-                        obj.itemStyle = {
-                            shadowBlur: 10,
-                            shadowColor: 'rgba(120, 36, 50, 0.5)',
-                            shadowOffsetY: 5,
-                            // radius: ["40%", "60%"],
-                            // center: ["50%", "35%"],
-                            top: '40%'
-                        },
-                        obj.data = [v]
-                    series.push(obj)
-                }
-            });
-            let myChart = document.getElementsByClassName(`CompetitorMapChart`);
-            let option = {
-                tooltip: {
-                    trigger: "axis",
-                    backgroundColor: 'rgb(255, 255, 255, 1)',
-                    borderColor: 'rgb(101,155,250)',
-                    borderWidth: 1,
-                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                    formatter: params => {
+                            },
+                            obj.itemStyle = {
+                                shadowBlur: 10,
+                                shadowColor: 'rgba(120, 36, 50, 0.5)',
+                                shadowOffsetY: 5,
+                                // radius: ["40%", "60%"],
+                                // center: ["50%", "35%"],
+                                top: '40%'
+                            },
+                            obj.data = [v]
+                        series.push(obj)
+                    }
+                });
+                let myChart = document.getElementsByClassName(`CompetitorMapChart`);
+                let option = {
+                    tooltip: {
+                        trigger: "axis",
+                        backgroundColor: 'rgb(255, 255, 255, 1)',
+                        borderColor: 'rgb(101,155,250)',
+                        borderWidth: 1,
+                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                        formatter: params => {
 
-                        let {
-                            name,
-                            value,
-                            seriesName,
-                            marker,
-                            color
-                        } = params[0];
+                            let {
+                                name,
+                                value,
+                                seriesName,
+                                marker,
+                                color
+                            } = params[0];
 
-                        // name = moment(name).format('DD MMMM YYYY');
+                            // name = moment(name).format('DD MMMM YYYY');
 
-                        return `
+                            return `
                                 <div class="text-dark">
                                 <div class="text-dark  border-bottom pb-1">${ marker + " " + seriesName} <span style="color:${color};font-weight:bold;opacity:.8"></span> <br> </div>
                                     ${ 'Keywords'} <span style="color:${color};font-weight:bold">${kFormatter(value[0])}</span> <br>
@@ -678,72 +649,76 @@ const CompetitorMapChart = async (data, method) => {
                                 </div> 
                                 `;
 
+                        }
+                    },
+
+                    xAxis: {
+                        splitLine: {
+                            lineStyle: {
+                                type: 'category'
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        },
+                        axisLabel: {
+                            formatter: (value, index) => (value = kFormatter(value)),
+                        },
+                    },
+                    yAxis: {
+                        splitLine: {
+                            lineStyle: {
+                                type: 'value'
+                            },
+                            axisTick: {
+                                show: false
+                            },
+
+                        },
+                        axisLabel: {
+                            formatter: (value, index) => (value = kFormatter(value)),
+                        },
+                        scale: true
+                    },
+                    legend: {
+                        left: 30,
+                        data: myarrChartName
+                    },
+                    series: series
+                };
+
+                var charts = [];
+                for (var i = 0; i < myChart.length; i++) {
+                    var chart = echarts.init(myChart[i]);
+                    chart.setOption(option);
+                    charts.push(chart);
+                }
+
+
+                window.onresize = function () {
+                    for (var i = 0; i < charts.length; ++i) {
+                        charts[i].resize();
                     }
-                },
-
-                xAxis: {
-                    splitLine: {
-                        lineStyle: {
-                            type: 'category'
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                    },
-                    axisLabel: {
-                        formatter: (value, index) => (value = kFormatter(value)),
-                    },
-                },
-                yAxis: {
-                    splitLine: {
-                        lineStyle: {
-                            type: 'value'
-                        },
-                        axisTick: {
-                            show: false
-                        },
-
-                    },
-                    axisLabel: {
-                        formatter: (value, index) => (value = kFormatter(value)),
-                    },
-                    scale: true
-                },
-                legend: {
-                    left: 30,
-                    data: myarrChartName
-                },
-                series: series
-            };
-
-            var charts = [];
-            for (var i = 0; i < myChart.length; i++) {
-                var chart = echarts.init(myChart[i]);
-                chart.setOption(option);
-                charts.push(chart);
+                };
+                new ResizeSensor($(`.CompetitorMapChart`), function () {
+                    chart.resize();
+                });
+                await $(`.similarReloadTask[data-task="CompetitorMapChart"]`).find('i').removeClass('fa-spin');
+                await $(`.CompetitorMapChart`).removeClass('is-loading');
+            } else {
+                $('.CompetitorMapChart').addClass('empty-state').attr('style', 'height:305px!important');
+                $('.CompetitorMapChart').removeClass('is-loading');
             }
 
-
-            window.onresize = function () {
-                for (var i = 0; i < charts.length; ++i) {
-                    charts[i].resize();
-                }
-            };
-            new ResizeSensor($(`.CompetitorMapChart`), function () {
-                chart.resize();
-            });
-            // await $(`.similarReloadTask[data-task="CompetitorMapChart"]`).find('i').removeClass('fa-spin');
-            await $(`.CompetitorMapChart`).removeClass('is-loading');
-            // return table
-            // }
         } else {
-            // $(`#myTabContent`).removeClass('is-loading');
-            $(`.CompetitorMapChart`).removeClass('is-loading');
+            $(`.CompetitorMapChart`).removeClass('is-loading').attr('style', 'height:305px!important');
             $(`.CompetitorMapChart`).addClass('empty-state');
 
         }
     } else {
-        // console.log(`.CompetitorMapChart failed`);
+        $(`.CompetitorMapChart`).removeClass('is-loading').attr('style', 'height:305px!important');
+        $(`.CompetitorMapChart`).addClass('empty-state');
+
     }
 
 
@@ -751,10 +726,6 @@ const CompetitorMapChart = async (data, method) => {
 
 
 }
-
-// const PaidPageTable = async (data, method) => {
-// }
-
 
 const getScrapedSearchAds = async (data, method) => {
     if (data.data.adwordsPositions.length <= 0) {

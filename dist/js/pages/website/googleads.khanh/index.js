@@ -36,6 +36,20 @@ $(document).ready(function () {
         api('CompetitorMapChart', localDomain)
     }
 
+    var input = {};
+    input.headerTitle = "Đối Thủ Cạnh Tranh";
+    input.headerTime = "12.2019 - 02.2020";
+    input.widgetTask = "MainCompetitor";
+    input.widgetContainer = "widget-MainCompetitor";
+    createADataTable(input);
+
+    var input = {};
+    input.headerTitle = "Từ Khóa Quảng Cáo";
+    input.headerTime = "12.2019 - 02.2020";
+    input.widgetTask = "TopPaidKeyword";
+    input.widgetContainer = "widget-TopPaidKeyword";
+    createADataTable(input);
+
     $(".similarReloadTask").click(function () {
         if ($(this).find('i').hasClass('fa-spin')) { $(this).find('i').removeClass('fa-spin'); return; }
         let task = $(this).data("task");

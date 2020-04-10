@@ -18,8 +18,8 @@
             </div>
         </div>
         <div id="parent-TopPaidKeyword" style="position: relative">
-            <div class="mt toppaidkey">
-                <table id="TopPaidKeyword" class="table table-striped parent-TopPaidKeyword" style="width:100%;"></table>       
+            <div class="mt toppaidkey parent-TopPaidKeyword">
+                <table id="TopPaidKeyword" class="table table-striped " style="width:100%;"></table>       
             </div>
         </div>
 

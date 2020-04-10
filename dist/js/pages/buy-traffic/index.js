@@ -26,7 +26,7 @@ function htmlOrder() {
                         </div>
                     </div>
                     <div class="d-flex no-block flex-column mt-4"> 
-                        <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-2">Thời gian xem trang</div> 
+                        <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-2">Thời gian xem trang <span class="font-12 text-muted">*Chi phí có thể thay đổi nếu bạn tăng thời gian xem trang</span></div> 
                         <div class="d-flex no-block">
                             <div class="d-flex no-block w-50">
                                 <select class="select-min" style="width: 30%"></select>
@@ -38,6 +38,7 @@ function htmlOrder() {
                             <div class="w-50 d-flex no-block align-self-center">
                                 <div class="font-12 text-muted align-self-center font-gg font-gg">*Chi phí có thể thay đổi nếu bạn tăng thời gian xem trang</div>
                             </div> 
+                            
                         </div> 
                     </div>
                     <div class="d-flex no-block flex-column mt-4 bg-white">

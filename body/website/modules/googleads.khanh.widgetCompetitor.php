@@ -10,7 +10,7 @@
                 </svg>
             </div>
             <div class="col-auto pl-0">
-                <div class="text-capitalize font-weight-bold"><?= _("Đối Thủ Cạnh Tranh") ?></div>
+                <div class="text-capitalize font-weight-bold">Đối Thủ Cạnh Tranh</div>
                 <div class="text-muted similarDates font-10">12.2019 - 02.2020</div>
             </div>
             <div class="ml-auto d-flex no-block align-items-center pr-3">
@@ -18,8 +18,8 @@
             </div>
         </div>
         <div id="Parent-MainCompetitor" style="position: relative">
-            <div class="mt-3 maincompetitor">
-                <table id="MainCompetitor" class="table table-striped parent-MainCompetitor" style="width:100%;"></table>
+            <div class="mt-3 maincompetitor parent-MainCompetitor">
+                <table id="MainCompetitor" class="table table-striped " style="width:100%;"></table>
             </div>
         </div>
     </div>
