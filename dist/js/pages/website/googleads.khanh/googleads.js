@@ -158,7 +158,6 @@ const adwordsMonthlyFullTrend = async (data, method) => {
 
         if (data && data.data && data.data.adwordsMonthlyFullTrend && data.data.adwordsMonthlyFullTrend.length != 0) {
             var res = data.data.adwordsMonthlyFullTrend;
-            console.log(res.length, 'khanh');
 
             const render = async (name, res) => {
                 var gandate, gantraffic, dateString;
