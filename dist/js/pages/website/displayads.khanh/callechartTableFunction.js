@@ -1,25 +1,4 @@
 import api from './displayAdsTable.js';
-
-// function insertToLg(data) {
-//   let post = {};
-//   post.logData = data;
-//   $.post(`//localapi.trazk.com/fff/quangcao.php?task=insertToLog&userToken=${userToken}&toolName=WebsiteTraffic`, post, function (data) {
-//     data = JSON.parse(data);
-//   })
-// }
-// var fullWebsite = new URL(location.href);
-// var website = fullWebsite.searchParams.get("domain");
-// // let obj_limit = Promise.resolve(checkVIP("WebsiteTraffic"));
-// // obj_limit.then(data => {
-// //   let todayUsed = data.todayUsed;
-// //   let limit = data.limit;
-// //   if (todayUsed == limit) {
-// //     showUpVip("1")
-// //   } else {
-// //     insertToLg(website)
-// //   }
-// // })
-
 $(document).ready(() => {
 
   var localUrl = new URL(location.href);
@@ -62,14 +41,7 @@ $(document).ready(() => {
     })
     return table;
   }
-  // if (!originalDomain) {
-  //   // Hien thi popup
-  //   getDomain().then(data =>
-  //     data.value ?
-  //       (location.href = `?action=result&domain=${data.value}`) :
-  //       (location.href = `?action=index`)
-  //   );
-  // } else {
+
   let domain = originalDomain.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
   $('body').on('click', '.similarReloadTask', async function () {
     let task = $(this).data("task");
@@ -89,7 +61,6 @@ $(document).ready(() => {
 
   })
   api("getWebsiteAdsVisitsOverview", domain);
-  // api("getHeader", domain);
   api("getTrafficDisplayAdvertisingAds", domain);
 
   //các table 
@@ -186,7 +157,6 @@ $(document).ready(() => {
       ajax: {
         url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}&userToken=${userToken}`,
         dataSrc: (json) => {
-          console.log(json, 'khanh');
 
           lockedModule('getTrafficDisplayAdvertisingWebsitesTable', json.userData.member);
           if (json && json.data && json.data.data && json.data.data.Data && json.data.data.Data.Records.length != 0) {

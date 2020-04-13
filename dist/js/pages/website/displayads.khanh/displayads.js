@@ -1,12 +1,9 @@
 //US,GB,AU,FR,
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 
-var localUrl = new URL(location.href);
-var domain = localUrl.searchParams.get('domain');
-
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
-    var VIPModule = ["SampleAdsasHTML", "topPublicSher", "getAllImageTable", "PublicSherTable", "getWebsiteAdsIntelDisplay", "getTrafficDestinationAds", "adwordsMonthlyFullTrend", "adTypeOverview", "displayDevice"];
+    var VIPModule = ["SampleAdsasHTML", "topPublicSher", "adTypeOverview", "displayDevice"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             //ngoai le 
@@ -31,13 +28,13 @@ const api = async (method, domain) => {
     if (method == "displayAdsOverview" || method == "adTypeOverview") {
         method = "displayAdsOverview"
     }
-    if (method == "SampleAdsasImage" || method == "getAllImageTable") {
+    if (method == "SampleAdsasImage") {
         method = "bannerAds"
     }
-    if (method == "SampleAdsasHTML" || method == "getAllHTMLTable") {
+    if (method == "SampleAdsasHTML") {
         method = "htmlAds"
     }
-    if (method == "SampleAdsasText" || method == "getAllTextTable") {
+    if (method == "SampleAdsasText") {
         method = "textAds"
     }
     if (method == "displayDevice") {
@@ -48,9 +45,6 @@ const api = async (method, domain) => {
     }
     if (method == "topPublicSher" || method == "getDisplayGenderChart" || method == "getDisplayAgeChart") {
         method = "publishersOveview"
-    }
-    if (method == "PublicSherTable") {
-        method = "publishersDetail"
     }
 
     try {
@@ -108,7 +102,6 @@ const api = async (method, domain) => {
 function kFormatter(num) {
     return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
 }
-
 
 // header DisPlay
 const displayAdsOverview = async (data, method) => {
@@ -792,24 +785,19 @@ $(document).ready(function () {
         let task = $(this).data("task");
 
         $(this).find('i').addClass('fa-spin');
-        if (task == "getTrafficDisplayAdvertisingAds" || task == "getTrafficDestinationAds" || task == "getTrafficDisplayAdvertisingWebsitesTable") {
-            return;
+        if (task == "SampleAds") {
+            $('.sample-image-ads').html('')
+            $('.sample-html-ads').html('')
+            $('.sample-text-ads').html('')
+            $('.sample-image-ads').html('')
+            await api("SampleAdsasImage", domain).then((res) => $(this).find('i').removeClass('fa-spin'))
+            await api("SampleAdsasHTML", domain).then((res) => $(this).find('i').removeClass('fa-spin'))
+            await api("SampleAdsasText", domain).then((res) => $(this).find('i').removeClass('fa-spin'))
+        } else {
+            await api(task, domain).then((res) => $(this).find('i').removeClass('fa-spin'))
         }
-        else {
-            if (task == "PublicSherTable") {
-                $(this).parent().html('')
-            }
-            if (task == "SampleAds") {
-                $('.sample-image-ads').html('')
-                $('.sample-html-ads').html('')
-                $('.sample-text-ads').html('')
-                $('.sample-image-ads').html('')
-                await api("SampleAdsasImage", localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-                await api("SampleAdsasHTML", localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-                await api("SampleAdsasText", localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-            }
-            await api(task, localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-        }
+
+
     })
 
     $('#Tabsample a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
