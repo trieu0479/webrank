@@ -3488,7 +3488,7 @@ span.sub-tilte-content,
     left: 0;
     height: 18px;
     width: 18px;
-    margin: 3px 5px;
+    margin: 3px 0px;
 }
 
 .kt-checkbox.kt-checkbox--bold>span {
@@ -3598,3 +3598,19 @@ span.sub-tilte-content,
     height: 6px;
     border-radius: 100%!important;
 } 
+
+.ads-is-loading:before {
+    content: "" !important;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    margin-top: -12px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    border-top-color: #fff;
+    animation: Fb .6s linear infinite;
+}
