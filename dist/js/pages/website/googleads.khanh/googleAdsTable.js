@@ -156,6 +156,7 @@ $(document).ready(function () {
                 let stt = 1;
                 $('.similarReloadTask[data-task="PaidPageTable"]').find('i').addClass('d-none');
                 if (res.data.adwordsPositions != null && res.data.adwordsPositions.length != 0) {
+                    lockedModule('PaidPageTable', res.userData.member);
                     $.each(dataPaidPageTable, function (k, v) {
                         let output = {};
                         output.stt = stt;

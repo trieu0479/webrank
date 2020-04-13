@@ -31,11 +31,11 @@
                     <?php require_once(__DIR__ . "/modules/master.navbar.php") ?>
                 </div>
 
-                <div class="col-12" id="Parent-displayAdsOverview" style="position: relative">
+                <div class="col-12 mb-0" id="Parent-displayAdsOverview" style="position: relative">
                     <div class="row displayAdsOverview"></div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12 mb-0">
                     <?php require_once(__DIR__ . "/modules/displayads.khanh.widgetSampleAds.php") ?>
                 </div>
 
@@ -75,7 +75,7 @@
                     <div class="widget-getTrafficDisplayAdvertisingWebsitesTable"></div>
                 </div>
 
-                <div class="col-12 p-0">
+                <div class="col-12 p-0 mb-0">
                     <?php require_once(__DIR__ . "/modules/displayads.widgetDisplayDevice.php") ?>
                 </div>
 

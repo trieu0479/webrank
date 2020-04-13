@@ -17,8 +17,12 @@ function lockedModule(boxWidgetName, level) {
         }
     } else if (level == 'free') {
         if (VIPModule.includes(boxWidgetName)) {
-            if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
+            $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+            if (boxWidgetName == 'SampleAdsasImage' && boxWidgetName == 'SampleAds') {
+                $(".parent-" + boxWidgetName).addClass("locked");
+                $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+            }
         }
     }
 }
@@ -97,7 +101,7 @@ const api = async (method, domain) => {
             })
 
     } catch (error) {
-        //console.log(error);
+        console.log(error);
 
     }
 }

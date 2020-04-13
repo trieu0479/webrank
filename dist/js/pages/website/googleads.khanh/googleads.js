@@ -10,7 +10,7 @@ function lockedModule(boxWidgetName, level) {
     // console.log(boxWidgetName);
 
     var freeModule = [];
-    var VIPModule = ["PositionChart", "CompetitorMapChart", "getScrapedSearchAds", "PaidPageTable", "adwordsMonthlyFullTrend"];
+    var VIPModule = ["PositionChart", "CompetitorMapChart", "getScrapedSearchAds", "adwordsMonthlyFullTrend"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
 
@@ -23,6 +23,7 @@ function lockedModule(boxWidgetName, level) {
         }
     } else if (level == 'free') {
         if (VIPModule.includes(boxWidgetName)) {
+            $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
         }
     }
@@ -411,7 +412,7 @@ const adwordsMonthlyFullTrend = async (data, method) => {
 }
 
 const PositionChart = async (data, method) => {
-    $(".PositionChart").attr('style', 'height:300px!important')
+    $(".PositionChart").attr('style', 'height:304px!important')
     if (data.status = "success") {
         if (data && data.data) {
             if (data.data.adwordsPositions == null) {
