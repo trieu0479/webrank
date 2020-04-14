@@ -627,9 +627,61 @@ async function postData(url,data) {
     return await $.post(url,data);
 }
 
+async function getData(url) {
+    return await $.getJSON(url);
+}
+
+function appendTable() {
+
+    getData(`http://localapi.trazk.com/2020/api/buytraffic/index.php?task=getListOrderTraffic&userToken=${userToken}`).then(data => {
+        console.log(data);
+        data.data.forEach(val => {
+            $("#tableTraffic").append(`<tr>
+                                        <td class="font-gg font-15 font-weight-bold">${numeral(val.dailyTraffic).format("0,0")} IP</td>
+                                        <td class="">
+                                            <span class="position-relative text-dark font-gg font-15 font-weight-bold">                                        
+                                                ${numeral(val.vndPrice).format("0,0")}
+                                                <span class="position-absolute text-dark font-gg font-10 font-weight-500" style="top: -5px">
+                                                    vnd
+                                                </span>
+                                            </span>
+                                        </td>
+                                        <td class="font-gg font-15"><a href="#">https://${val.websiteURL}</a></td>
+                                        <td class="font-gg font-15 text-center d-flex no-block">
+                                            <span class="rounded text-dark text-center font-13 font-weight-500">
+                                                30
+                                            </span>
+                                            <a class="font-gg font-14 ml-auto mr-5" href="#">Lịch sử</a>
+                                        </td>
+                                        <td class="font-gg font-13 font-weight-500 ${(status == "INACTIVE") ? "text-info" : "text-danger"} position-relative">
+                                            <span class="${(status == "INACTIVE") ? "bg-info" : "bg-warning"} d-inline-block position-absolute" style="bottom: 42%; left: 2px; padding: 8px 8px 0 0; width: 8px; height: 8px; border-radius: 50%"></span>
+                                            ${(status == "INACTIVE") ? "Chưa chạy" : "Đang chạy"}
+                                        </td>
+                                        <td class="font-gg font-15">
+                                            ${(status == "INACTIVE") ? `<i class="fad fa-play-circle mr-3 font-20 text-info cursor-pointer"></i> ` : `<i class="fad fa-pause-circle mr-3 font-20 text-info cursor-pointer"></i>`}
+                                            
+                                        
+                                            <i class="fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
+                                        </td> 
+                                        <td class="font-gg font-15">
+                                            <span class="px-3 py-2 font-14 font-weight-500 bg-info rounded cursor-pointer">Thay đổi</span>
+                                        </td>
+                                    </tr>`);
+        })
+    })
+
+}
+
 $(document).ready(() => {    
+    appendTable();
+
     let obj_data = {};
     let arr_keywords_google = [];
+
+    postData(`http://localapi.trazk.com/2020/api/buytraffic/index.php?task=getCostOfOrderTraffic&userToken=${userToken}`,"").then(data => {
+        console.log(data);
+    })
+
     
     $(".btn-submitOrder").click(() => {
         showPopupOrder(obj_data);
@@ -753,6 +805,9 @@ $(document).ready(() => {
                                     </span>`);
             arr_keywords_google.push(val);
             $(this).val("");
+            if(!$(".error-configGoogle").hasClass("d-none")) {
+                $(".error-configGoogle").addClass("d-none")
+            }
         }
     })
 

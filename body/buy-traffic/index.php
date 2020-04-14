@@ -189,50 +189,9 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="font-gg font-15">100 IP</td>
-                                        <td class="font-gg font-15">3.000</td>
-                                        <td class="font-gg font-15"><a href="#">https://webrank.vn</a></td>
-                                        <td class="font-gg font-15 text-center">
-                                            <span class="px-3 py-1 rounded mr-4 text-success text-center font-13 font-weight-bold">
-                                                30
-                                            </span>
-                                        </td>
-                                        <td class="font-gg font-13 font-weight-500 text-danger position-relative">
-                                            <span class="bg-warning d-inline-block position-absolute" style="bottom: 42%; left: 2px; padding: 8px 8px 0 0; width: 8px; height: 8px; border-radius: 50%"></span>Đang chạy
-                                        </td>
-                                        <td class="font-gg font-15">
-                                            <i class="fad fa-pause-circle mr-2 font-17 text-info cursor-pointer"></i>
-                                            <i class="fad fa-play-circle mr-2 font-17 text-success cursor-pointer"></i> 
-                                            <i class="fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
-                                        </td> 
-                                        <td class="font-gg font-15">
-                                            <span class="px-3 py-2 font-14 font-weight-500 bg-info rounded cursor-pointer">Thay đổi</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-gg font-15">200 IP</td>
-                                        <td class="font-gg font-15">6.000</td>
-                                        <td class="font-gg font-15"><a href="#">https://webrank.vn</a></td>
-                                        <td class="font-gg font-15 text-center">
-                                            <span class="px-3 py-1 rounded mr-4 text-success text-center font-13 font-weight-bold">
-                                                1000
-                                            </span>
-                                        </td>
-                                        <td class="font-gg font-13 font-weight-500 text-info position-relative">
-                                            <span class="bg-info d-inline-block position-absolute" style="bottom: 42%; left: 2px; padding: 8px 8px 0 0; width: 8px; height: 8px; border-radius: 50%"></span>
-                                            Chưa chạy
-                                        </td>
-                                        <td class="font-gg font-15">
-                                            <i class="fad fa-pause-circle mr-2 font-17 text-info cursor-pointer"></i>
-                                            <i class="fad fa-play-circle mr-2 font-17 text-success cursor-pointer"></i> 
-                                            <i class="fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
-                                        </td> 
-                                        <td class="font-gg font-15">
-                                            <span class="px-3 py-2 font-14 font-weight-500 bg-info rounded cursor-pointer">Thay đổi</span>
-                                        </td>
-                                    </tr>
+                                <tbody id="tableTraffic">
+                                    
+                                    
                                 </tbody>
                             </table>
                         </div>
