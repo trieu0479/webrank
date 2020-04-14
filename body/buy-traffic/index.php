@@ -166,7 +166,8 @@
                     <div class="text-left bg-white rounded">
                         <div class="px-4 py-2 border-bottom d-flex no-block">
                             <div class="align-self-center font-gg font-weight-500 font-16">
-                                Ngân sách: 200,000 <sup>vnd</sup>
+                                Ngân sách: <span class="budget font-gg font-weight-500 font-16 ">200,000</span> <sup>vnd</sup>
+                                <span class="recharge px-2 py-1 font-gg font-11 bg-warning rounded-pill font-weight-500 cursor-pointer">Nạp tiền</span>
                             </div>
                             <div class="ml-auto">
                                 <button class="btn-submitOrder btn btn-outline-info font-gg font-13 d-flex no-block"><i class="align-self-center fad fa-plus-circle font-16 mr-2"></i>Mua Traffic</button>
@@ -189,50 +190,9 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="font-gg font-15">100 IP</td>
-                                        <td class="font-gg font-15">3.000</td>
-                                        <td class="font-gg font-15"><a href="#">https://webrank.vn</a></td>
-                                        <td class="font-gg font-15 text-center">
-                                            <span class="px-3 py-1 rounded mr-4 text-success text-center font-13 font-weight-bold">
-                                                30
-                                            </span>
-                                        </td>
-                                        <td class="font-gg font-13 font-weight-500 text-danger position-relative">
-                                            <span class="bg-warning d-inline-block position-absolute" style="bottom: 42%; left: 2px; padding: 8px 8px 0 0; width: 8px; height: 8px; border-radius: 50%"></span>Đang chạy
-                                        </td>
-                                        <td class="font-gg font-15">
-                                            <i class="fad fa-pause-circle mr-2 font-17 text-info cursor-pointer"></i>
-                                            <i class="fad fa-play-circle mr-2 font-17 text-success cursor-pointer"></i> 
-                                            <i class="fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
-                                        </td> 
-                                        <td class="font-gg font-15">
-                                            <span class="px-3 py-2 font-14 font-weight-500 bg-info rounded cursor-pointer">Thay đổi</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-gg font-15">200 IP</td>
-                                        <td class="font-gg font-15">6.000</td>
-                                        <td class="font-gg font-15"><a href="#">https://webrank.vn</a></td>
-                                        <td class="font-gg font-15 text-center">
-                                            <span class="px-3 py-1 rounded mr-4 text-success text-center font-13 font-weight-bold">
-                                                1000
-                                            </span>
-                                        </td>
-                                        <td class="font-gg font-13 font-weight-500 text-info position-relative">
-                                            <span class="bg-info d-inline-block position-absolute" style="bottom: 42%; left: 2px; padding: 8px 8px 0 0; width: 8px; height: 8px; border-radius: 50%"></span>
-                                            Chưa chạy
-                                        </td>
-                                        <td class="font-gg font-15">
-                                            <i class="fad fa-pause-circle mr-2 font-17 text-info cursor-pointer"></i>
-                                            <i class="fad fa-play-circle mr-2 font-17 text-success cursor-pointer"></i> 
-                                            <i class="fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
-                                        </td> 
-                                        <td class="font-gg font-15">
-                                            <span class="px-3 py-2 font-14 font-weight-500 bg-info rounded cursor-pointer">Thay đổi</span>
-                                        </td>
-                                    </tr>
+                                <tbody id="tableTraffic">
+                                    
+                                    
                                 </tbody>
                             </table>
                         </div>
