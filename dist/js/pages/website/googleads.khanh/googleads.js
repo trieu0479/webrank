@@ -551,6 +551,8 @@ const PositionChart = async (data, method) => {
 
 const CompetitorMapChart = async (data, method) => {
     if (data.status == "success") {
+        console.log(data, 'CompetitorMapChart');
+
         if (data && data.data) {
             if (data.data.adwordsCompetitors != null && data.data.adwordsCompetitors.length != 0) {
                 let myarr = []
@@ -707,25 +709,27 @@ const CompetitorMapChart = async (data, method) => {
                 await $(`.similarReloadTask[data-task="CompetitorMapChart"]`).find('i').removeClass('fa-spin');
                 await $(`.CompetitorMapChart`).removeClass('is-loading');
             } else {
+                console.log('khanh');
                 $('.CompetitorMapChart').addClass('empty-state').attr('style', 'height:305px!important');
                 $('.CompetitorMapChart').removeClass('is-loading');
+                $('.parent-CompetitorMapChart').removeClass('locked').addClass('khanh');
+                $('.parent-CompetitorMapChart .widgetBody .center').addClass('d-none')
             }
 
         } else {
             $(`.CompetitorMapChart`).removeClass('is-loading').attr('style', 'height:305px!important');
             $(`.CompetitorMapChart`).addClass('empty-state');
+            $('.parent-CompetitorMapChart').removeClass('locked').addClass('khanh');
+            $('.parent-CompetitorMapChart .widgetBody .center').addClass('d-none')
 
         }
     } else {
         $(`.CompetitorMapChart`).removeClass('is-loading').attr('style', 'height:305px!important');
         $(`.CompetitorMapChart`).addClass('empty-state');
+        $('.parent-CompetitorMapChart ').removeClass('locked');
+        $('.parent-CompetitorMapChart .widgetBody .center').addClass('d-none')
 
     }
-
-
-
-
-
 }
 
 const getScrapedSearchAds = async (data, method) => {
