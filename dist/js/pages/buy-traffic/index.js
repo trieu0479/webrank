@@ -637,7 +637,7 @@ function appendTable() {
         console.log(data);
         data.data.forEach(val => {
             $("#tableTraffic").append(`<tr>
-                                        <td class="font-gg font-15 font-weight-bold">${numeral(val.dailyTraffic).format("0,0")} IP</td>
+                                        <td class="font-gg font-14 font-weight-bold">${numeral(val.dailyTraffic).format("0,0")} IP</td>
                                         <td class="">
                                             <span class="position-relative text-dark font-gg font-15 font-weight-bold">                                        
                                                 ${numeral(val.vndPrice).format("0,0")}
@@ -651,16 +651,13 @@ function appendTable() {
                                             <span class="rounded text-dark text-center font-13 font-weight-500">
                                                 30
                                             </span>
-                                            <a class="font-gg font-14 ml-auto mr-5" href="#">Lịch sử</a>
+                                            <a class="font-gg font-14 ml-5" href="#">Lịch sử</a>
                                         </td>
-                                        <td class="font-gg font-13 font-weight-500 ${(status == "INACTIVE") ? "text-info" : "text-danger"} position-relative">
-                                            <span class="${(status == "INACTIVE") ? "bg-info" : "bg-warning"} d-inline-block position-absolute" style="bottom: 42%; left: 2px; padding: 8px 8px 0 0; width: 8px; height: 8px; border-radius: 50%"></span>
-                                            ${(status == "INACTIVE") ? "Chưa chạy" : "Đang chạy"}
+                                        <td class="">
+                                            <span class="${(val.status == "INACTIVE") ? "bg-info" : "bg-success"} px-2 py-1 rounded-pill font-gg font-10 font-weight-bold"> ${(val.status == "INACTIVE") ? "Chưa Chạy" : "Đang Chạy"}</span>
                                         </td>
                                         <td class="font-gg font-15">
-                                            ${(status == "INACTIVE") ? `<i class="fad fa-play-circle mr-3 font-20 text-info cursor-pointer"></i> ` : `<i class="fad fa-pause-circle mr-3 font-20 text-info cursor-pointer"></i>`}
-                                            
-                                        
+                                            ${(val.status == "INACTIVE") ? `<i class="fad fa-play-circle mr-3 font-20 text-info cursor-pointer"></i> ` : `<i class="fad fa-pause-circle mr-3 font-20 text-success cursor-pointer"></i>`}
                                             <i class="fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
                                         </td> 
                                         <td class="font-gg font-15">
