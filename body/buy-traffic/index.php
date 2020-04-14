@@ -166,7 +166,8 @@
                     <div class="text-left bg-white rounded">
                         <div class="px-4 py-2 border-bottom d-flex no-block">
                             <div class="align-self-center font-gg font-weight-500 font-16">
-                                Ngân sách: 200,000 <sup>vnd</sup>
+                                Ngân sách: <span class="budget font-gg font-weight-500 font-16 ">200,000</span> <sup>vnd</sup>
+                                <span class="recharge px-2 py-1 font-gg font-11 bg-warning rounded-pill font-weight-500 cursor-pointer">Nạp tiền</span>
                             </div>
                             <div class="ml-auto">
                                 <button class="btn-submitOrder btn btn-outline-info font-gg font-13 d-flex no-block"><i class="align-self-center fad fa-plus-circle font-16 mr-2"></i>Mua Traffic</button>

@@ -534,7 +534,7 @@ function htmlCost(data,timeToRun) {
                         <div class="col-12 mt-3">
                             <div class="font-14 text-muted font-gg mb-3">
                                 ${(yourBank < sumPrice) ? `*Số dư tài khoản không đủ. Vui lòng <a href="javascript:void(0);" class="refill-money font-gg font-14 font-weight-bold">nạp thêm tiền</a> để sử dụng dịch vụ này !`
-                                : ""}
+                                : `*Vui lòng bấm <a href="javascript:void(0);" class="btn-next font-gg font-14 font-weight-bold">tiếp tục</a> để tạo chiến dịch !`}
                             </div> 
                         </div>
                     </div>
@@ -548,6 +548,23 @@ function htmlCost(data,timeToRun) {
                         tục</button>
                 </div>
             </div> `
+}
+
+function showPopupSuccess(timeToRun, startTime, endTime) {
+    Swal.fire({  
+        type:"success",
+        html: `<div class="font-gg font-15 text-dark font-weight-500">
+                Bạn đã order traffic thành công, thời gian chạy là <span class="font-gg font-15 text-info font-weight-bold">${timeToRun} ngày</span>, bắt đầu từ <span class="text-danger font-gg font-15 font-weight-500">${moment(startTime).format("H:mm DD/MM/YYYY")} - ${moment(endTime).format("H:mm DD/MM/YYYY")}</span> !
+            </div>`,
+        confirmButtonText: "Xác Nhận",
+        showConfirmButton: true,
+        showCloseButton: true,
+        allowOutsideClick: false,
+        width: 500,
+        position: "top",
+        onOpen: () => { 
+        }, 
+    })
 }
 
 function showPopupCost(obj_data,data,timeToRun) {
@@ -571,10 +588,31 @@ function showPopupCost(obj_data,data,timeToRun) {
                 showPopupOrder(obj_data);
             })
 
-            $(".btn-next").click(() => {
-                postData(`http://localapi.trazk.com/2020/api/buytraffic/index.php?task=orderNewTraffic&userToken=${userToken}`, obj_data).then(data => {
-                    console.log(data);
-                })
+            $(".btn-next").click(() => { 
+                postData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=orderNewTraffic&userToken=${userToken}`, obj_data).then(data => {
+                    data = JSON.parse(data);
+                    if(data.data.status == "Order traffic của bạn đã thực hiện hoàn tất. Bấm RUN để chạy tăng traffic") {
+                        let obj = {
+                            urlids: data.data.data.urlids,
+                            timeToRun: data.data.data.timeToRun
+                        }
+
+                        return obj;
+                    }
+                }).then(res => {
+                    if(res.urlids) {
+                        let post = {
+                            urlids,
+                            etime: "1"
+                        }
+                        postData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=startRunTraffic&userToken=${userToken}`,post).then(data => {
+                            data = JSON.parse(data);
+                            if(data.data.status == "success") {
+                                showPopupSuccess(res.timeToRun, startTime, endTime);
+                            }
+                        })
+                    }
+                })  
             })
         }, 
     })
@@ -599,7 +637,10 @@ function htmlRecharge() {
                             </tbody></table>
                         </div>
                         <div class="font-gg pt-2">
-                        <div class="mb-2">Số tiền <span class="text-danger font-gg font-weight-bold font-16 number-money">2,500,000<sup class="font-12 font-gg font-weight-none" style="top: -9px;">vnd</sup></span>  với nội dung chuyển khoản như sau : (copy toàn bộ)</div>
+                        <div class="mb-2">
+                            Số tiền
+                            <span class="text-danger font-gg font-weight-bold font-16 number-money"> 2,000,000<sup class="font-12 font-gg font-weight-none" style="top: -9px;">vnd</sup>
+                            </span>  với nội dung chuyển khoản như sau : (copy toàn bộ)</div>
                             <div id="coppy-code" class="w-35 m-auto text-info bg-white-2 px-3 py-2 font-weight-bold font-16" style="border: 1px #ccc dashed;">FFF10004535</div>
                             <input type="text" class="d-none" id="input-code">
                         </div>
@@ -622,6 +663,27 @@ function showPopupRecharge() {
         }, 
     })
 }
+
+function showPopupAction(action,urlids) {
+    Swal.fire({ 
+        // title: `<div class="font-gg font-18 font-weight-bold ">${(action == "pause") ? "Tạm Dừng" : (action == "active") ? "Chạy" : "Xóa" } Chiến Dịch</div>`,
+        type: (action == "pause") ? "info" : (action == "question") ? "Chạy" : "question",
+        html: `<div class="font-gg font-15 text-dark font-weight-500">
+                    ${(action == "pause") ? "Nếu bạn đừng chiến dịch, bạn có thể chạy lại ngay lập tức. Tuy nhiên chi phí ngày bạn dừng vẫn bị trừ !" 
+                    : (action == "delete") ? "Chiến dịch này đã được tính phí, nếu bạn xóa hệ thống sẽ không hoàn trả phí đã tính. Bạn chắc chắn muốn xóa ?"
+                    : "Bạn muốn chạy chiến dịch này ?"}
+                </div>`,
+        position: "top",
+        confirmButtonText: "Xác Nhận",
+        showConfirmButton: true,
+        showCloseButton: true,
+        allowOutsideClick: false,
+        width: 500, 
+        onOpen: () => {
+           console.log(urlids);
+        }, 
+    })
+} 
 
 async function postData(url,data) {
     return await $.post(url,data);
@@ -648,7 +710,7 @@ function appendTable() {
                                         </td>
                                         <td class="font-gg font-15"><a href="#">https://${val.websiteURL}</a></td>
                                         <td class="font-gg font-15 text-center d-flex no-block">
-                                            <span class="rounded text-dark text-center font-13 font-weight-500">
+                                            <span class="rounded text-dark text-center font-14 font-weight-bold">
                                                 30
                                             </span>
                                             <a class="font-gg font-14 ml-5" href="#">Lịch sử</a>
@@ -657,26 +719,46 @@ function appendTable() {
                                             <span class="${(val.status == "INACTIVE") ? "bg-info" : "bg-success"} px-2 py-1 rounded-pill font-gg font-10 font-weight-bold"> ${(val.status == "INACTIVE") ? "Chưa Chạy" : "Đang Chạy"}</span>
                                         </td>
                                         <td class="font-gg font-15">
-                                            ${(val.status == "INACTIVE") ? `<i class="fad fa-play-circle mr-3 font-20 text-info cursor-pointer"></i> ` : `<i class="fad fa-pause-circle mr-3 font-20 text-success cursor-pointer"></i>`}
-                                            <i class="fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
+                                            ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" class="active fad fa-play-circle mr-3 font-20 text-info cursor-pointer"></i> ` : `<i data-urlids="${val.urlids}"  class="pause fad fa-pause-circle mr-3 font-20 text-success cursor-pointer"></i>`}
+                                            <i data-urlids="${val.urlids}" class="delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
                                         </td> 
                                         <td class="font-gg font-15">
                                             <span class="px-3 py-2 font-14 font-weight-500 bg-info rounded cursor-pointer">Thay đổi</span>
                                         </td>
                                     </tr>`);
         })
+
+        $(".pause").click(function() {
+            let urlids = $(this).data("urlids");
+            showPopupAction("pause",urlids);
+        })
+
+        $(".active").click(function() {
+            let urlids = $(this).data("urlids");
+            showPopupAction("active",urlids);
+        })
+
+        $(".delete").click(function() {
+            let urlids = $(this).data("urlids");
+            showPopupAction("delete",urlids);
+        })
     })
 
 }
 
 $(document).ready(() => {    
+    showPopupSuccess(2,"2020-04-14 15:33:43","2020-04-16 15:33:43")
     appendTable();
-
     let obj_data = {};
     let arr_keywords_google = [];
 
+    $(".recharge").click(() => {
+        showPopupRecharge();
+    })
+
     postData(`http://localapi.trazk.com/2020/api/buytraffic/index.php?task=getCostOfOrderTraffic&userToken=${userToken}`,"").then(data => {
-        console.log(data);
+        data= JSON.parse(data);
+        $(".budget").text(numeral(data.data.yourBank).format("0,0"))
     })
 
     
