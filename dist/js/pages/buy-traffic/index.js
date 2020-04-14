@@ -1,11 +1,10 @@
-function htmlOrder() {
+function htmlOrder(obj_data) { 
     // <div class="align-self-center font-gg text-muted font-12 ml-2">*Nếu bạn cần thêm <span class="font-gg font-weight-bold font-13 text-muted">Traffic</span> mỗi ngày, vui lòng <a href="#">liên hệ</a></div>
-
     return `<div class="text-left mb-3"> 
                 <div class="mt-2 px-4 py-3"> 
                     <div class="text-left d-flex no-block flex-column">
                         <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">URL</div>
-                        <input id="input-url" value="" type="text" class="font-13 text-muted form-control" placeholder="domain chính hoặc 1 đường dẫn"/>
+                        <input id="input-url" value="${(Object.values(obj_data).length > 0) ? obj_data.websiteURL : ""}" type="text" class="font-13 text-muted form-control" placeholder="domain chính hoặc 1 đường dẫn"/>
                     </div>
                     <div class="d-flex no-block flex-column mt-4"> 
                         <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">Traffic mỗi ngày</div> 
@@ -223,10 +222,10 @@ function htmlConfigGoogle(array_keywords) {
     </div>`;
 }
 
-function showPopupOrder(obj) {
+function showPopupOrder(obj_data) {
     Swal.fire({ 
         title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Mua traffic cho website</div>`,
-        html: htmlOrder(),
+        html: htmlOrder(obj_data),
         showConfirmButton: false,
         showCloseButton: true,
         allowOutsideClick: false,
@@ -497,52 +496,53 @@ function htmlCost(data,timeToRun) {
     let vndPrice = data.data.vndPrice;
     let yourBank = data.data.yourBank;
     let day = timeToRun;
-    let sumPrice = vndPrice*day;
+    let sumPrice = vndPrice*day;  
 
-
-    return `<div class="text-left mt-2 d-flex align-items-center" style="height: 250px">
-                <div class="row px-4 py-3">
-                    <div class="col-12 col-md-4">
-                        <div class="bg-info-2 border-info py-4 px-5 text-info border rounded" style="border-width: 2px!important; height:120px">
-                            <div class="title-ads font-14 font-gg">
-                                Chi Phí 1 Ngày
+    return `<div class="text-left mt-2 d-flex align-items-center px-4 py-3" style="height: 250px"> 
+                <div class="w-100">
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <div class="bg-info-2 border-info py-4 px-5 text-info border rounded" style="border-width: 2px!important; height:120px">
+                                <div class="title-ads font-14 font-gg">
+                                    Chi Phí 1 Ngày
+                                </div>
+                                <div class="d-flex no-block justify-content-center mt-3">
+                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(vndPrice).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
+                                </div>
                             </div>
-                            <div class="d-flex no-block justify-content-center mt-3">
-                                <span class="number-cost display-7 font-weight-500 font-gg">${numeral(vndPrice).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="col-12 col-md-4">
-                        <div class="bg-danger-2 border-danger py-4 px-5 text-danger border rounded" style="border-width: 2px!important; height:120px">
-                            <div class="title-ads font-14 font-gg">
-                                Chi Phí Cho 5 Ngày
-                            </div>
-                            <div class="d-flex no-block justify-content-center mt-3">
-                            <span class="number-cost display-7 font-weight-500 font-gg">${numeral(sumPrice).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="bg-success-2 border-success py-4 px-5 text-success border rounded" style="border-width: 2px!important; height:120px">
-                            <div class="title-ads font-14 font-gg">
-                                Ngân Sách
-                            </div>
-                            <div class="d-flex no-block justify-content-center mt-3">
-                            <span class="number-cost display-7 font-weight-500 font-gg">${numeral(yourBank).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 mt-3">
-                        <div class="font-14 text-muted font-gg mb-3">
-                            ${(yourBank < sumPrice) ? `*Số dư tài khoản không đủ. Vui lòng <a href="javascript:void(0);" class="refill-money font-gg font-14 font-weight-bold">nạp thêm tiền</a> để sử dụng dịch vụ này !`
-                            : ""}
                         </div> 
+                        <div class="col-12 col-md-4">
+                            <div class="bg-danger-2 border-danger py-4 px-5 text-danger border rounded" style="border-width: 2px!important; height:120px">
+                                <div class="title-ads font-14 font-gg">
+                                    Chi Phí Cho 5 Ngày
+                                </div>
+                                <div class="d-flex no-block justify-content-center mt-3">
+                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(sumPrice).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="bg-success-2 border-success py-4 px-5 text-success border rounded" style="border-width: 2px!important; height:120px">
+                                <div class="title-ads font-14 font-gg">
+                                    Ngân Sách
+                                </div>
+                                <div class="d-flex no-block justify-content-center mt-3">
+                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(yourBank).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="font-14 text-muted font-gg mb-3">
+                                ${(yourBank < sumPrice) ? `*Số dư tài khoản không đủ. Vui lòng <a href="javascript:void(0);" class="refill-money font-gg font-14 font-weight-bold">nạp thêm tiền</a> để sử dụng dịch vụ này !`
+                                : ""}
+                            </div> 
+                        </div>
                     </div>
-                </div>
+                </div> 
             </div> 
             <div class="text-center border-top"> 
                 <div class="d-flex justify-content-between px-4 py-4">
-                    <a href="#" class="align-self-center btn btn-secondary font-14 font-weight-500 font-gg px-4">Quay
+                    <a href="#" class="btn-back align-self-center btn btn-secondary font-14 font-weight-500 font-gg px-4">Quay
                         lại</a> 
                     <button type="button" ${(yourBank < sumPrice) ? "disabled" : ""} class="ml-auto btn-next align-self-center btn btn-primary font-14 font-weight-500 font-gg px-4">Tiếp
                         tục</button>
@@ -550,7 +550,7 @@ function htmlCost(data,timeToRun) {
             </div> `
 }
 
-function showPopupCost(data,timeToRun) {
+function showPopupCost(obj_data,data,timeToRun) {
     Swal.fire({ 
         title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Chi Phí Traffic</div>`,
         html: htmlCost(data,timeToRun),
@@ -564,14 +564,23 @@ function showPopupCost(data,timeToRun) {
             $(".swal2-title").addClass("mb-0 w-100"); 
 
             $(".refill-money").click(() => {
-                showPopupMoney();
+                showPopupRecharge();
+            })
+            
+            $(".btn-back").click(() => {
+                showPopupOrder(obj_data);
             })
 
+            $(".btn-next").click(() => {
+                postData(`http://localapi.trazk.com/2020/api/buytraffic/index.php?task=orderNewTraffic&userToken=${userToken}`, obj_data).then(data => {
+                    console.log(data);
+                })
+            })
         }, 
     })
 }
 
-function htmlMoney() {
+function htmlRecharge() {
     return `<div class="px-4 pb-2"> 
                     <div class="text-center mt-0 content-vcb">
                         <div class="font-gg fontsize-14 font-weight-500 mb-3">
@@ -598,10 +607,10 @@ function htmlMoney() {
                 </div>`
 }
 
-function showPopupMoney() {
+function showPopupRecharge() {
     Swal.fire({ 
         title: `<div class="font-gg font-18 font-weight-bold ">Nạp Tiền Traffic</div>`,
-        html: htmlMoney(),
+        html: htmlRecharge(),
         position: "top",
         confirmButtonText: "ĐÃ HOÀN TẤT CHUYỂN KHOẢN",
         showConfirmButton: true,
@@ -618,34 +627,12 @@ async function postData(url,data) {
     return await $.post(url,data);
 }
 
-$(document).ready(() => {  
-    let obj_direct = {};
-    let obj_google = {};
-    let obj_facebook = {};
+$(document).ready(() => {    
+    let obj_data = {};
     let arr_keywords_google = [];
-
-    let obj = {
-        dailyTraffic: "",
-        websiteURL: "",
-        area: [],
-        mrate: "",
-        trafficSource: "",
-        st: {
-            minTime: "",
-            maxTime: "",
-        },
-        subpage: {
-            minPage: "",
-            maxPage: "",
-            minTime: "",
-            maxTime: "",
-        },
-        startTime: "",
-        timeToRun: "",
-    }
     
     $(".btn-submitOrder").click(() => {
-        showPopupOrder(obj);
+        showPopupOrder(obj_data);
     }) 
 
     $("body").on("click", ".btn-cost", () => { 
@@ -676,7 +663,7 @@ $(document).ready(() => {
                 trafficSource.push(temp) 
             } 
 
-            let post = {
+            obj_data = {
                 dailyTraffic,
                 websiteURL,
                 area,
@@ -696,11 +683,10 @@ $(document).ready(() => {
                 startTime: moment().format('YYYY-MM-DD')
             }  
 
-            postData(`http://localapi.trazk.com/2020/api/buytraffic/index.php?task=getCostOfOrderTraffic&userToken=${userToken}`,post).then(data => {
+            postData(`http://localapi.trazk.com/2020/api/buytraffic/index.php?task=getCostOfOrderTraffic&userToken=${userToken}`,obj_data).then(data => {
        
-                data = JSON.parse(data);
-                console.log(data);
-                showPopupCost(data,timeToRun);
+                data = JSON.parse(data);  
+                showPopupCost(obj_data,data,timeToRun);
             })
             
         } else {
@@ -743,8 +729,7 @@ $(document).ready(() => {
 
     
     $("body").on("click",".close-modal-configGoogle",function() {
-        if(arr_keywords_google.length > 0) { 
-            obj_google.surl = arr_keywords_google;  
+        if(arr_keywords_google.length > 0) {  
             $(".modal-config").remove();
             $(".kt-checkbox").removeClass("bg-white").css("z-index","0");
             $(".config-rate").css("z-index","6");
