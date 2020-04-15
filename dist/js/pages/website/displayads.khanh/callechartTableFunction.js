@@ -65,9 +65,9 @@ $(document).ready(() => {
 
   //các table 
 
-//   $('.widget-getTrafficDestinationAds .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
-//      <span class="similarReloadTask" data-task="getTrafficDestinationAds"><i class="fal fa-sync"></i></span>
-//  </div>`)
+  //   $('.widget-getTrafficDestinationAds .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
+  //      <span class="similarReloadTask" data-task="getTrafficDestinationAds"><i class="fal fa-sync"></i></span>
+  //  </div>`)
   initDatatable(
     'getTrafficDestinationAds',
     {
@@ -149,15 +149,12 @@ $(document).ready(() => {
     <span class="similarReloadTask" data-task="getTrafficDisplayAdvertisingWebsitesTable"><i class="fal fa-sync"></i></span>
 </div>`)
 
-
-
   initDatatable(
     'getTrafficDisplayAdvertisingWebsitesTable',
     {
       ajax: {
         url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}&userToken=${userToken}`,
         dataSrc: (json) => {
-
           lockedModule('getTrafficDisplayAdvertisingWebsitesTable', json.userData.member);
           if (json && json.data && json.data.data && json.data.data.Data && json.data.data.Data.Records.length != 0) {
             let { Data: newData } = json.data.data;
@@ -168,11 +165,12 @@ $(document).ready(() => {
               return [];
             }
           }
-
           else {
             $('.parent-getTrafficDisplayAdvertisingWebsitesTable #DataTables_Table_1_wrapper').css('min-height', '268px');
             $('.parent-getTrafficDisplayAdvertisingWebsitesTable #DataTables_Table_1_wrapper').addClass('empty-state')
             $('table.getTrafficDisplayAdvertisingWebsitesTable tbody tr td.dataTables_empty').addClass('d-none')
+            $('table.getTrafficDisplayAdvertisingWebsitesTable thead').addClass('d-none')
+            $('#DataTables_Table_1_wrapper .dataTables_scroll').addClass('d-none')
             return [];
           }
 
@@ -233,37 +231,39 @@ $(document).ready(() => {
     ajax: {
       url: `//localapi.trazk.com/webdata/v3.php?task=getAdvertisingDisplayDetail&domain=${domain}&page=1&method[publishersDetail]=true&userToken=${userToken}`,
       dataSrc: function (res) {
-        if (res.data.publishersDetail == null) {
-
-          $('.parent-PublicSherTable #DataTables_Table_2_wrapper').addClass('empty-state');
-          $('.parent-PublicSherTable #DataTables_Table_2_wrapper').removeClass('is-loading');
-          $('.parent-PublicSherTable #DataTables_Table_2_wrapper tbody tr td').html('')
-          return;
-        }
         lockedModule('PublicSherTable', res.userData.member);
-        let arrPublicSherTable = res.data.publishersDetail.data;
-        let columns = [];
-        var stt = 1;
-        $('.parent-PublicSherTable #DataTables_Table_2_wrapper .dt-buttons').addClass('resize-dl')
-        $.each(arrPublicSherTable, function (k, v) {
-          let output = {};
-          output.stt = stt;
-          output.domain = v.domain;
-          output.title = v.title;
-          output.description = v.description;
-          output.adsCount = v.adsCount;
-          output.mediaAdsCount = v.mediaAdsCount;
-          output.htmlAdsCount = v.htmlAdsCount;
-          output.textAdsCount = v.textAdsCount;
-          output.timesSeen = v.timesSeen;
-          output.media = numeral(v.mediaAdsCount * 100 / (v.mediaAdsCount + v.htmlAdsCount + v.textAdsCount)).format('0,0')
-          output.html = numeral(v.htmlAdsCount * 100 / (v.mediaAdsCount + v.htmlAdsCount + v.textAdsCount)).format('0,0')
-          output.text = numeral(v.textAdsCount * 100 / (v.mediaAdsCount + v.htmlAdsCount + v.textAdsCount)).format('0,0')
+        if (res.data.publishersDetail.data.length == 0) {
+          $('.parent-PublicSherTable #DataTables_Table_2_wrapper').addClass('empty-state').removeClass('is-loading');
+          $('.parent-PublicSherTable #DataTables_Table_2_wrapper .dt-buttons').attr('style',"display:none!important")
+          $('.parent-PublicSherTable #DataTables_Table_2_wrapper #DataTables_Table_2').addClass('d-none')
+          $('.parent-PublicSherTable #DataTables_Table_2_paginate').attr('style',"display:none!important")
+          return;
+        } else {
+          
+          let arrPublicSherTable = res.data.publishersDetail.data;
+          let columns = [];
+          var stt = 1;
+          $('.parent-PublicSherTable #DataTables_Table_2_wrapper .dt-buttons').addClass('resize-dl')
+          $.each(arrPublicSherTable, function (k, v) {
+            let output = {};
+            output.stt = stt;
+            output.domain = v.domain;
+            output.title = v.title;
+            output.description = v.description;
+            output.adsCount = v.adsCount;
+            output.mediaAdsCount = v.mediaAdsCount;
+            output.htmlAdsCount = v.htmlAdsCount;
+            output.textAdsCount = v.textAdsCount;
+            output.timesSeen = v.timesSeen;
+            output.media = numeral(v.mediaAdsCount * 100 / (v.mediaAdsCount + v.htmlAdsCount + v.textAdsCount)).format('0,0')
+            output.html = numeral(v.htmlAdsCount * 100 / (v.mediaAdsCount + v.htmlAdsCount + v.textAdsCount)).format('0,0')
+            output.text = numeral(v.textAdsCount * 100 / (v.mediaAdsCount + v.htmlAdsCount + v.textAdsCount)).format('0,0')
+            stt += 1;
+            columns.push(output)
+          })
+          return columns;
+        }
 
-          stt += 1;
-          columns.push(output)
-        })
-        return columns;
       },
     },
     drawCallback: function (settings) { },
