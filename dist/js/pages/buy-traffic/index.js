@@ -679,7 +679,7 @@ function htmlCost(data,timeToRun) {
                                             <td class="font-gg font-13 font-weight-bold">Chi phí ${timeToRun} ngày</td>
                                             <td class="">
                                                 <div class="d-flex no-block justify-content-center">
-                                                    <span class="font-weight-500 font-18 font-gg text-danger">${numeral(sumPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15;">vnd</sup></span>
+                                                    <span class="font-weight-500 font-18 font-gg text-danger">${numeral(sumPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -687,7 +687,7 @@ function htmlCost(data,timeToRun) {
                                             <td class="font-gg font-13 font-weight-bold">Ngân sách hiện tại</td>
                                             <td class="">
                                                 <div class="d-flex no-block justify-content-center">
-                                                    <span class="font-weight-500 font-19 font-gg text-info" style="font-size: 19px;">${numeral(yourBank).format(0,0)}<sup class="font-12 font-gg" style="top: -15;">vnd</sup></span>
+                                                    <span class="font-weight-500 font-19 font-gg text-info" style="font-size: 19px;">${numeral(yourBank).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
                                                 </div>    
                                             </td>
                                         </tr>
@@ -695,7 +695,7 @@ function htmlCost(data,timeToRun) {
                                             <td class="font-gg font-13 font-weight-bold">Ngân sách sau khi thanh toán</td>
                                             <td class="">
                                                 <div class="d-flex no-block justify-content-center">
-                                                    <span class="font-weight-500 font-gg text-success" style="font-size: 21px;">${numeral(yourBank - sumPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15;">vnd</sup></span>
+                                                    <span class="font-weight-500 font-gg text-success" style="font-size: 21px;">${numeral(yourBank - sumPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
                                                 </div>    
                                             </td>
                                         </tr>
