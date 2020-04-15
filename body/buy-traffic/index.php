@@ -65,7 +65,7 @@
                                             </div>
                                         </div>
                                         <div class="">
-                                            <button type="button" class="font-gg btn btn-outline-warning"
+                                            <button type="button" data-price="20000" class="btn-buy-now font-gg btn btn-outline-warning"
                                                 style="width: 130px; border-radius: 20px">Mua ngay</button>
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                                             <div class="mb-2">
                                                 <span
                                                     class="position-relative text-info font-gg font-16 font-weight-bold">
-                                                    100.000
+                                                    100,000
                                                     <span
                                                         class="position-absolute text-info font-gg font-10 font-weight-500"
                                                         style="top: -5px">
@@ -91,11 +91,11 @@
                                                 </span>
                                             </div>
                                             <div class="font-gg font-weight-bold font-16 text-muted mb-3">
-                                                2000 visitor
+                                                2,000 visitor
                                             </div>
                                         </div>
                                         <div class="">
-                                            <button type="button" class="font-gg btn btn-outline-info"
+                                            <button type="button" data-price="100000" class="btn-buy-now font-gg btn btn-outline-info"
                                                 style="width: 130px; border-radius: 20px">Mua ngay</button>
                                         </div>
                                     </div>
@@ -112,7 +112,7 @@
                                             <div class="mb-2">
                                                 <span
                                                     class="position-relative text-danger font-gg font-16 font-weight-bold">
-                                                    300.000
+                                                    300,000
                                                     <span
                                                         class="position-absolute text-danger font-gg font-10 font-weight-500"
                                                         style="top: -5px">
@@ -121,11 +121,11 @@
                                                 </span>
                                             </div>
                                             <div class="font-gg font-weight-bold font-16 text-muted mb-3">
-                                                7000 visitor
+                                                7,000 visitor
                                             </div>
                                         </div>
                                         <div class="">
-                                            <button type="button" class="btn btn-outline-danger"
+                                            <button type="button" data-price="300000" class="btn-buy-now font-gg btn btn-outline-danger"
                                                 style="width: 130px; border-radius: 20px">Mua ngay</button>
                                         </div>
                                     </div>
@@ -162,7 +162,7 @@
                 
             </div>
             <div class="row justify-content-center">
-                <div class="col-12"  style="max-width: 1080px">
+                <div class="col-12"  style="max-width: 1100px">
                     <div class="text-left bg-white rounded">
                         <div class="px-4 py-2 border-bottom d-flex no-block">
                             <div class="align-self-center font-gg font-weight-500 font-16">
@@ -177,6 +177,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
+                                        <th class="font-gg font-13 font-weight-bold" scope="col">Ngày chạy</th>
                                         <th class="font-gg font-13 font-weight-bold" scope="col">Gói</th>
                                         <th class="font-gg font-13 font-weight-bold" scope="col">Chi
                                             phí/ngày</th>
@@ -185,6 +186,7 @@
                                             nay</th>
                                         <th class="font-gg font-13 font-weight-bold" scope="col">Tình trạng
                                         </th>
+                                        <th class="font-gg font-13 font-weight-bold" scope="col">Ngày kết thúc</th> 
                                         <th class="font-gg font-13 font-weight-bold" scope="col">Tác vụ</th> 
                                         <th class="font-gg font-13 font-weight-bold" scope="col">Cấu hình
                                         </th>
