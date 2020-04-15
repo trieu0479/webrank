@@ -660,44 +660,53 @@ function htmlCost(data,timeToRun) {
     let day = timeToRun;
     let sumPrice = vndPrice*day;  
 
-    return `<div class="text-left mt-2 d-flex align-items-center px-4 py-3" style="height: 250px"> 
+    return `<div class="text-left mt-2 d-flex align-items-center px-4 py-3 mb-5"> 
                 <div class="w-100">
                     <div class="row">
-                        <div class="col-12 col-md-4">
-                            <div class="bg-info-2 border-info py-4 px-5 text-info border rounded" style="border-width: 2px!important; height:120px">
-                                <div class="title-ads font-14 font-gg">
-                                    Chi Phí 1 Ngày
-                                </div>
-                                <div class="d-flex no-block justify-content-center mt-3">
-                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(vndPrice).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="col-12 col-md-4">
-                            <div class="bg-danger-2 border-danger py-4 px-5 text-danger border rounded" style="border-width: 2px!important; height:120px">
-                                <div class="title-ads font-14 font-gg">
-                                    Chi Phí Cho ${timeToRun} Ngày
-                                </div>
-                                <div class="d-flex no-block justify-content-center mt-3">
-                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(sumPrice).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                                </div>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-left"> 
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Đơn giá 1 ngày</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-17 font-gg text-primary">${numeral(vndPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
+                                                </div>    
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Chi phí ${timeToRun} ngày</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-18 font-gg text-danger">${numeral(sumPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15;">vnd</sup></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Ngân sách hiện tại</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-19 font-gg text-info" style="font-size: 19px;">${numeral(yourBank).format(0,0)}<sup class="font-12 font-gg" style="top: -15;">vnd</sup></span>
+                                                </div>    
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Ngân sách sau khi thanh toán</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-gg text-success" style="font-size: 21px;">${numeral(yourBank - sumPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15;">vnd</sup></span>
+                                                </div>    
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="bg-success-2 border-success py-4 px-5 text-success border rounded" style="border-width: 2px!important; height:120px">
-                                <div class="title-ads font-14 font-gg">
-                                    Ngân Sách
-                                </div>
-                                <div class="d-flex no-block justify-content-center mt-3">
-                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(yourBank).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-3">
-                            <div class="font-14 text-muted font-gg mb-3">
-                                ${(yourBank < sumPrice) ? `*Số dư tài khoản không đủ. Vui lòng <a href="javascript:void(0);" class="refill-money font-gg font-14 font-weight-bold">nạp thêm tiền</a> để sử dụng dịch vụ này !`
-                                : `*Vui lòng bấm <a href="javascript:void(0);" class="btn-next font-gg font-14 font-weight-bold">tiếp tục</a> để tạo chiến dịch !`}
-                            </div> 
+                        <div class="col-12">
+                            <div class="font-gg font-weight-500 text-muted font-13">
+                            ${(yourBank >= sumPrice) ? "(*) sau khi thực hiện thanh toán nếu không thể thực hiện tăng traffic hệ thống sẽ bồi hoàn trả lại phí cho bạn !"
+                            : "(*) số dư tài khoản không đủ. Vui lòng <a class='refill-money font-gg font-weight-bold font-14' href='javascript: void(0);'>nạp thêm tiền</a> để sử dụng dịch vụ này !"}</div>
                         </div>
                     </div>
                 </div> 
@@ -706,8 +715,7 @@ function htmlCost(data,timeToRun) {
                 <div class="d-flex justify-content-between px-4 py-4">
                     <a href="#" class="btn-back align-self-center btn btn-secondary font-14 font-weight-500 font-gg px-4">Quay
                         lại</a> 
-                    <button type="button" ${(yourBank < sumPrice) ? "disabled" : ""} class="ml-auto btn-next btn-next-text align-self-center btn btn-primary font-14 font-weight-500 font-gg px-4">Tiếp
-                        tục</button>
+                    <button type="button" ${(yourBank < sumPrice) ? "disabled" : ""} class="ml-auto btn-next btn-next-text align-self-center btn btn-primary font-14 font-weight-500 font-gg px-4">Thanh toán</button>
                 </div>
             </div> `
 }
@@ -774,12 +782,12 @@ function showPopupActionError(task) {
 
 function showPopupCost(obj_data,data,timeToRun) {
     Swal.fire({ 
-        title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Chi Phí Traffic</div>`,
+        title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Chi Phí Mua Traffic</div>`,
         html: htmlCost(data,timeToRun),
         showConfirmButton: false,
         showCloseButton: true,
         allowOutsideClick: false,
-        width: 900,
+        width: 700,
         position: "top",
         onOpen: () => {
             $(".swal2-popup").addClass("px-0 py-0"); 
@@ -975,6 +983,17 @@ function renderTable() {
         if(data && data.data) {
 
             data.data.forEach(val => {
+                let websiteURL = val.websiteURL; 
+                let websiteURLreplace = websiteURL;
+                if(websiteURL.indexOf("http") != -1) {
+                    websiteURL = websiteURL.replace("http://", "");
+                    websiteURL = websiteURL.replace("https://", "");
+                }
+
+                if(websiteURL.indexOf("/") != -1) { 
+                    websiteURLreplace = websiteURL.slice(0,websiteURL.indexOf("/"))
+                }
+
                 $("#tableTraffic").append(`<tr data-urlids="${val.urlids}">
                                             <td class="font-gg font-14 font-weight-500">${moment(val.startTime).format("H:mm DD/MM/YYYY")}</td>
                                             <td class="font-gg font-14 font-weight-bold">${numeral(val.dailyTraffic).format("0,0")} IP</td>
@@ -986,7 +1005,16 @@ function renderTable() {
                                                     </span>
                                                 </span>
                                             </td>
-                                            <td class="font-gg font-15"><a href="#">${(val.websiteURL.indexOf("http") != -1) ? val.websiteURL : "https://" + val.websiteURL}</a></td>
+                                            <td class="font-gg font-15">
+                                                <div class="font-gg text-dark font-weight-500" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1;">
+                                                    <a target="blank" href="https://${websiteURL}">
+                                                    <img class="mr-2" src="https://www.google.com/s2/favicons?domain=${websiteURLreplace}">
+                                                    ${websiteURLreplace}
+                                                    </a>
+                                                    <a target="blank" href="https://${websiteURL}"><i class="fal text-muted fa-external-link-square-alt ml-1"></i></a>
+
+                                                </div>
+                                            </td>
                                             <td class="font-gg font-15 text-center d-flex no-block">
                                                 <span class="traffic-today rounded text-dark text-center font-14 font-weight-bold">
                                                     0
