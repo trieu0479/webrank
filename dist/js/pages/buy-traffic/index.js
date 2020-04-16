@@ -61,7 +61,7 @@ function htmlOrder(obj_data) {
                                 <select class="select-max" style="width: 30%"></select> 
                             </div> 
                             <div class="w-50 d-flex no-block align-self-center">
-                                <div class="font-12 text-muted align-self-center font-gg font-gg">*Chi phí có thể thay đổi nếu bạn tăng thời gian xem trang</div>
+                                <div class="d-none font-12 text-muted align-self-center font-gg font-gg">*Chi phí có thể thay đổi nếu bạn tăng thời gian xem trang</div>
                             </div> 
                             
                         </div> 
@@ -460,7 +460,7 @@ function appendSelectCountry(area) {
 function appendSelectTimeMaxAndMin(st) {
     for(let i = 1; i <= 90; i++) {
         if(i > 1) {
-            $(".select-max").append(`<option ${(st != undefined && st.max == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);   
+            $(".select-max").append(`<option ${(st != undefined && st.max == i*10) ? "selected" : (i == 6) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);   
         } 
 
         if(i != 90) {
@@ -518,7 +518,7 @@ function appendSelectSubPage(subpage) {
 }
 
 function appendSelectTimeRun(timeToRun) {
-    for (let i = 2; i <= 30; i++) {
+    for (let i = 1; i <= 30; i++) {
         $(".select-time-run").append(`<option ${(timeToRun != undefined && timeToRun == i) ? "selected" : ""} value="${i}">${i} ngày</option>`);
     }
 
