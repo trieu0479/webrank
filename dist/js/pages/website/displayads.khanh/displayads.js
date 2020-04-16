@@ -1,6 +1,25 @@
 //US,GB,AU,FR,
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 
+function appendHTML(arr) {
+    for (const key in arr) {
+        let html = `
+        <div class="col-12 mb-0">
+                    <div class="row-public-footer d-flex">
+                        <div class="row-percent-highlight" style="width:${numeral(arr[key].percentage).format('0,0') + '%'}"></div>
+                        <div class="left-public d-flex align-items-center h-100">
+                            <div class="category-pb cate-1 font-12 line-height-18">${arr[key].name}</div>
+                        </div>
+                        <div class="right-public">
+                            <div class="percent count-buss text-info">${arr[key].percentage + '%'}</div>
+                        </div>
+                    </div>
+                </div>
+        `
+        $('#topPublishersCategories').append(html)
+    }
+}
+
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
     var VIPModule = ["SampleAdsasHTML", "topPublicSher", "adTypeOverview", "displayDevice"];
@@ -406,7 +425,6 @@ const getDisplayCountryChart = async (data, method) => {
 // ----------Quảng Cáo Theo Giới Tính--------------------
 const getDisplayGenderChart = async (data, method) => {
     var res = data.data.publishersOveview.gender;
-    console.log(data, 'getDisplayGenderChart');
     let value_male, value_female;
     value_male = res.male
     value_female = res.female
@@ -540,11 +558,8 @@ const getDisplayGenderChart = async (data, method) => {
             await $(`.getDisplayGenderChart`).removeClass('is-loading');
 
         } else {
-            console.log('dádasdas');
-
             $('.getDisplayGenderChart').addClass('empty-state').removeClass('is-loading')
         }
-
     } else {
         $('.getDisplayGenderChart').addClass('empty-state').removeClass('is-loading')
     }
@@ -589,7 +604,7 @@ const getDisplayAgeChart = async (data, method) => {
 
     if (data.status == "success") {
         // render chart
-        if (value_18 != 0 && value_25 != 0 && value_35 != 0 && value_45 != 0 && value_55 !=0 && value_65 !=0 && res.length!=0) {
+        if (value_18 != 0 && value_25 != 0 && value_35 != 0 && value_45 != 0 && value_55 != 0 && value_65 != 0 && res.length != 0) {
             let myChart = document.getElementsByClassName('getDisplayAgeChart');
             let option = {
                 color: ['#646c9a', '#48465b', '#0abb87', '#ffb822', '#fd397a', '#5d78ff'],
@@ -720,29 +735,10 @@ const getDisplayAgeChart = async (data, method) => {
 // ----------------Top Publisher's Categories------------
 const topPublicSher = async (data, method) => {
     var res = data.data.publishersOveview.categories;
-    if (res.length <= 0) {
+    if (res.length == 0) {
         $('.list-public').addClass('empty-state')
-    }
-    {
-        $('.cate-1').html(res['0'].name)
-        $('.count-buss').html(res['0'].percentage + '%')
-        $('#hl-buss').css('width', (numeral(res['0'].percentage).format('0,0') + '%'))
-    } {
-        $('.cate-2').html(res['1'].name)
-        $('.count-art').html(res['1'].percentage + '%')
-        $('#hl-art').css('width', (numeral(res['1'].percentage).format('0,0') + '%'))
-    } {
-        $('.cate-3').html(res['2'].name)
-        $('.count-internet').html(res['2'].percentage + '%')
-        $('#hl-it').css('width', (numeral(res['2'].percentage).format('0,0') + '%'))
-    } {
-        $('.cate-4').html(res['3'].name)
-        $('.count-job').html(res['3'].percentage + '%')
-        $('#hl-job').css('width', (numeral(res['3'].percentage).format('0,0') + '%'))
-    } {
-        $('.cate-5').html(res['4'].name)
-        $('.count-people').html(res['4'].percentage + '%')
-        $('#hl-pp').css('width', (numeral(res['4'].percentage).format('0,0') + '%'))
+    } else {
+        appendHTML(res)
     }
     await $(`.similarReloadTask[data-task="topPublicSher"]`).find('i').removeClass('fa-spin');
 
