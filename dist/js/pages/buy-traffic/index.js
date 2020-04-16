@@ -1226,6 +1226,11 @@ function getTrafficHistory(urlids) {
     })
 }
 
+function CheckIsValidDomain(domain) {
+    var reg = new RegExp(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
+    return domain.match(reg);
+}
+
 $(document).ready(() => {     
     renderTable();
 
@@ -1252,21 +1257,21 @@ $(document).ready(() => {
 
     $("body").on("click", ".btn-cost", () => { 
         let array_checked = arrayChecked("input[type=checkbox][name=source]");
-        if(array_checked.length > 0) {
-
-            let trafficSource =  [];
-            let websiteURL = $("#input-url").val();
-            let dailyTraffic = $(".select-traffic").val();
-            let area = $(".select-country").val();
-            let mrate = $(".device-mobile span").text().trim().replace(/\D/g,"");
-            let max = $(".select-max").val();
-            let min = $(".select-min").val();
-            let minPage = $(".select-min-page").val();
-            let maxPage = $(".select-max-page").val();
-            let minTime = $(".select-min-time").val();
-            let maxTime = $(".select-max-time").val();
-            let timeToRun = $(".select-time-run").val();
+        let trafficSource =  [];
+        let websiteURL = $("#input-url").val();
+        let dailyTraffic = $(".select-traffic").val();
+        let area = $(".select-country").val();
+        let mrate = $(".device-mobile span").text().trim().replace(/\D/g,"");
+        let max = $(".select-max").val();
+        let min = $(".select-min").val();
+        let minPage = $(".select-min-page").val();
+        let maxPage = $(".select-max-page").val();
+        let minTime = $(".select-min-time").val();
+        let maxTime = $(".select-max-time").val();
+        let timeToRun = $(".select-time-run").val();
             
+        if(array_checked.length > 0 && area.length > 0 && CheckIsValidDomain(websiteURL)) {
+
             for (let i = 0; i < array_checked.length; i++) { 
 
                 let temp = {
@@ -1305,7 +1310,21 @@ $(document).ready(() => {
             })
             
         } else {
+            if (!CheckIsValidDomain(websiteURL)) {
+                Swal.showValidationMessage(
+                    `Lỗi: URL không hợp lệ !`);
+                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+            } else if(area.length == 0) {
+                Swal.showValidationMessage(
+                    `Lỗi: Bạn vui lòng chọn quốc gia !`);
+                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
 
+            } else if(array_checked.length == 0) {
+                Swal.showValidationMessage(
+                    `Lỗi: Bạn vui lòng chọn nguồn truy cập !`);
+                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+
+            } 
         }
     }) 
 
