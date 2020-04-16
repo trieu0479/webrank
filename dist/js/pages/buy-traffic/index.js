@@ -471,19 +471,19 @@ function appendSelectTimeMaxAndMin(st) {
     $('.select-max,.select-min').select2();
 
     $('.select-min').on('select2:select', function (e) {
-        let min = e.params.data.id; 
-        let max = $('.select-max').val();
-        
-        if(min >= max) {
+        let min = +e.params.data.id; 
+        let max = +$('.select-max').val(); 
+
+        if(min >= max) { 
             $('.select-max').val(`${+min + 10}`).trigger('change');
         }
 
     });
 
     $(".select-max").on('select2:select', function (e) {
-        let max = e.params.data.id; 
-        let min = $('.select-min').val();
-
+        let max = +e.params.data.id; 
+        let min = +$('.select-min').val();
+                
         if(max <= min) {
             $('.select-min').val(`${+max - 10}`).trigger('change');
         }
@@ -740,6 +740,26 @@ function showPopupOrderSuccess(timeToRun, startTime, endTime) {
     })
 }
 
+function showPopupOrderError(msg) {
+    Swal.fire({  
+        type:"error",
+        html: `<div class="font-gg font-15 text-dark font-weight-500">
+                 ${msg} !
+            </div>`,
+        confirmButtonText: "Xác Nhận",
+        showConfirmButton: true,
+        showCloseButton: true,
+        allowOutsideClick: false,
+        width: 500,
+        position: "top",
+        onOpen: () => { 
+        }, 
+        onClose: () => {
+            location.reload();
+        }
+    })
+}
+
 function showPopupActionSuccess(task) {
     Swal.fire({  
         type:"success",
@@ -813,9 +833,12 @@ function showPopupCost(obj_data,data,timeToRun) {
                         }
 
                         return obj;
+                    } else {
+                        return {msg: data.data.msg}
                     }
-                }).then(res => {
-                    if(res.urlids) {
+
+                }).then(res => { 
+                    if(res.urlids != undefined) {
                         let post = {
                             urlids: res.urlids,
                             etime: "1"
@@ -824,8 +847,12 @@ function showPopupCost(obj_data,data,timeToRun) {
                             data = JSON.parse(data);
                             if(data.data.status == "success") {
                                 showPopupOrderSuccess(res.timeToRun, data.data.startTime, data.data.endTime);
-                            } 
+                            } else {
+                                showPopupOrderError(data.data.msg)
+                            }
                         })
+                    } else {
+                        showPopupOrderError(res.msg)
                     }
                 })  
             })
@@ -988,12 +1015,12 @@ function renderTable() {
                 let websiteURL = val.websiteURL; 
                 let websiteURLreplace = websiteURL;
                 if(websiteURL.indexOf("http") != -1) {
-                    websiteURL = websiteURL.replace("http://", "");
-                    websiteURL = websiteURL.replace("https://", "");
+                    websiteURLreplace = websiteURL.replace("http://", "");
+                    websiteURLreplace = websiteURL.replace("https://", "");  
                 }
 
-                if(websiteURL.indexOf("/") != -1) { 
-                    websiteURLreplace = websiteURL.slice(0,websiteURL.indexOf("/"))
+                if(websiteURLreplace.indexOf("/") != -1) {  
+                    websiteURLreplace = websiteURLreplace.slice(0,websiteURLreplace.indexOf("/")); 
                 }
 
                 $("#tableTraffic").append(`<tr data-urlids="${val.urlids}">
@@ -1009,11 +1036,11 @@ function renderTable() {
                                             </td>
                                             <td class="font-gg font-15">
                                                 <div class="font-gg text-dark font-weight-500" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1;">
-                                                    <a target="blank" href="https://${websiteURL}">
+                                                    <a target="blank" href="${(websiteURL.indexOf("http") < 0) ? "https://" + websiteURL : websiteURL}">
                                                     <img class="mr-2" src="https://www.google.com/s2/favicons?domain=${websiteURLreplace}">
                                                     ${websiteURLreplace}
                                                     </a>
-                                                    <a target="blank" href="https://${websiteURL}"><i class="fal text-muted fa-external-link-square-alt ml-1"></i></a>
+                                                    <a target="blank" href="${(websiteURL.indexOf("http") < 0) ? "https://" + websiteURL : websiteURL}"><i class="fal text-muted fa-external-link-square-alt ml-1"></i></a>
 
                                                 </div>
                                             </td>

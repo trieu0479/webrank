@@ -3607,7 +3607,7 @@ const getTrafficOverviewCustomerResources = async(task, data) => {
             let items0 = data.data.trafficTrend.items[0];
             $(`.getTrafficOverviewCustomerResources `).removeClass('empty-state');
             $('.getTrafficOverviewCustomerResources ').attr('style', 'min-height:300px')
-            let dataTrafficSources = ["social", "direct", "referral", "paid", "rank", "search"];
+            let dataTrafficSources = ["social", "direct", "referral", "paid", "search"];
             let dataChart = [];
             let datanamechart = [];
             $.each(items0, (index, item) => {
@@ -3646,7 +3646,7 @@ const getTrafficOverviewCustomerResources = async(task, data) => {
                     bottom: '5%',
                     left: 'center',
                     orient: 'horizontal',
-                    width: 500,
+                    width: 600,
                     //right: 100,
                     //top: 50,
                     //bottom: 20,
