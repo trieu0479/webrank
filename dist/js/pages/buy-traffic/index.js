@@ -494,14 +494,14 @@ function appendSelectTimeMaxAndMin(st) {
 }
 
 function appendSelectSubPage(subpage) {
-    for (let i = 1; i <= 2; i++) { 
+    for (let i = 1; i <= 3; i++) { 
         if(i == 1) {
             $(".select-min-page").append(`<option ${(subpage != undefined && subpage.minPage == i) ? "selected" : ""} value="${i}">${i} trang</option>`);
             $(".select-min-time").append(`<option ${(subpage != undefined && subpage.minTime == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
         
         } else {
-            $(".select-max-page").append(`<option ${(subpage != undefined && subpage.maxPage == i) ? "selected" : (i == 2) ? "selected" : ""} value="${i}">${i} trang</option>`);
-            $(".select-max-time").append(`<option ${(subpage != undefined && subpage.maxTime == i*10) ? "selected" : (i == 2) ? "selected" : ""}  value="${i*10}">${i*10} s</option>`);
+            $(".select-max-page").append(`<option ${(subpage != undefined && subpage.maxPage == i) ? "selected" : (i == 3) ? "selected" : ""} value="${i}">${i} trang</option>`);
+            $(".select-max-time").append(`<option ${(subpage != undefined && subpage.maxTime == i*10) ? "selected" : (i == 3) ? "selected" : ""}  value="${i*10}">${i*10} s</option>`);
         }
         
     }
