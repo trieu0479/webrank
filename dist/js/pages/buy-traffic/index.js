@@ -744,7 +744,7 @@ function showPopupActionSuccess(task) {
     Swal.fire({  
         type:"success",
         html: `<div class="font-gg font-15 text-dark font-weight-500">
-                ${(task == "pauseRunTraffic") ? "Tạm dừng chiến dịch thành công !" : "Xóa chiến dịch thành công !"}
+                ${(task == "pauseRunTraffic") ? "Tạm dừng chiến dịch thành công !" : (task == "startRunTraffic") ? "Chạy chiến dịch thành công" : "Xóa chiến dịch thành công !"}
             </div>`,
         confirmButtonText: "Xác Nhận",
         showConfirmButton: true,
@@ -764,7 +764,7 @@ function showPopupActionError(task) {
     Swal.fire({  
         type:"error",
         html: `<div class="font-gg font-15 text-dark font-weight-500">
-                ${(task == "pauseRunTraffic") ? "Lỗi hệ thống tạm dừng chiến dịch không thành công." : "Lỗi hệ thống xóa chiến dịch không thành công."}  Vui lòng thử lại !
+                ${(task == "pauseRunTraffic") ? "Lỗi hệ thống tạm dừng chiến dịch không thành công." : (task == "startRunTraffic") ? "Lỗi hệ thống chạy chiến dịch không thành công." : "Lỗi hệ thống xóa chiến dịch không thành công."}  Vui lòng thử lại !
             </div>`,
         confirmButtonText: "Xác Nhận",
         showConfirmButton: true,
@@ -953,7 +953,8 @@ function showPopupAction(timeToRun, action,urlids) {
                 data = JSON.parse(data);
                 if(data.data.status == "success") {
                     if(task == "startRunTraffic")
-                        showPopupOrderSuccess(timeToRun, data.data.startTime, data.data.endTime);
+                        // showPopupOrderSuccess(timeToRun, data.data.startTime, data.data.endTime);
+                        showPopupActionSuccess(task);
                     else {
                         showPopupActionSuccess(task);
                     }
