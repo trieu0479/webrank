@@ -494,14 +494,14 @@ function appendSelectTimeMaxAndMin(st) {
 }
 
 function appendSelectSubPage(subpage) {
-    for (let i = 1; i <= 2; i++) { 
+    for (let i = 1; i <= 3; i++) { 
         if(i == 1) {
             $(".select-min-page").append(`<option ${(subpage != undefined && subpage.minPage == i) ? "selected" : ""} value="${i}">${i} trang</option>`);
             $(".select-min-time").append(`<option ${(subpage != undefined && subpage.minTime == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
         
         } else {
-            $(".select-max-page").append(`<option ${(subpage != undefined && subpage.maxPage == i) ? "selected" : (i == 2) ? "selected" : ""} value="${i}">${i} trang</option>`);
-            $(".select-max-time").append(`<option ${(subpage != undefined && subpage.maxTime == i*10) ? "selected" : (i == 2) ? "selected" : ""}  value="${i*10}">${i*10} s</option>`);
+            $(".select-max-page").append(`<option ${(subpage != undefined && subpage.maxPage == i) ? "selected" : (i == 3) ? "selected" : ""} value="${i}">${i} trang</option>`);
+            $(".select-max-time").append(`<option ${(subpage != undefined && subpage.maxTime == i*10) ? "selected" : (i == 3) ? "selected" : ""}  value="${i*10}">${i*10} s</option>`);
         }
         
     }
@@ -1051,13 +1051,13 @@ function renderTable() {
                                                 <a class="history font-gg font-14 ml-5" href="javascript: void(0);">Lịch sử</a>
                                             </td>
                                             <td class="">
-                                                <span class="${(val.status == "INACTIVE") ? "bg-info" : "bg-success"} px-2 py-1 rounded-pill font-gg font-10 font-weight-bold"> ${(val.status == "INACTIVE") ? "Chưa Chạy" : "Đang Chạy"}</span>
+                                                <span class="${(val.status == "INACTIVE") ? "bg-info" : (val.status == "EXPIRED") ? "bg-warning" : "bg-success"} px-2 py-1 rounded-pill font-gg font-10 font-weight-bold"> ${(val.status == "INACTIVE") ? "Chưa Chạy" : (val.status == "EXPIRED") ? "Hết Hạn" : "Đang Chạy"}</span>
                                             </td>
                                             <td class="font-gg font-14 font-weight-500">${moment(val.endTime).format("H:mm DD/MM/YYYY")}</td>
                                             <td class="font-gg font-15">
-                                                ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 active fad fa-play-circle font-20 text-info cursor-pointer"></i> ` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="ml-2 pause fad fa-pause-circle font-20 text-success cursor-pointer"></i>`}
+                                                ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 active fad fa-play-circle font-20 text-info cursor-pointer"></i> ` : (val.status == "EXPIRED") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="ml-2 pause fad fa-pause-circle font-20 text-success cursor-pointer"></i>`}
                                             </td> 
-                                            <td class="font-gg font-15">
+                                            <td class="font-gg font-15 d-none">
                                                 <button type="buttom" data-urlids="${val.urlids}" class="edit btn btn-info py-1 px-2 font-13 font-weight-500 rounded ">Thay đổi</button>
                                             </td>
                                         </tr>`);
