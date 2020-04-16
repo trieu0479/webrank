@@ -3614,3 +3614,7 @@ span.sub-tilte-content,
     border-top-color: #fff;
     animation: Fb .6s linear infinite;
 }
+
+.white-space-nowrap{
+    white-space: nowrap;
+}

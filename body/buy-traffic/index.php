@@ -174,18 +174,18 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="font-gg font-13 font-weight-bold" scope="col">Ngày chạy</th>
-                                        <th class="font-gg font-13 font-weight-bold" scope="col">Gói</th>
-                                        <th class="font-gg font-13 font-weight-bold" scope="col">Chi
+                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">Ngày chạy</th>
+                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">Gói</th>
+                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">Chi
                                             phí/ngày</th>
-                                        <th class="font-gg font-13 font-weight-bold" scope="col">URL</th>
-                                        <th class="font-gg font-13 font-weight-bold" scope="col">Traffic hôm
+                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">URL</th>
+                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">Traffic hôm
                                             nay</th>
-                                        <th class="font-gg font-13 font-weight-bold" scope="col">Tình trạng
+                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">Tình trạng
                                         </th>
-                                        <th class="font-gg font-13 font-weight-bold" scope="col">Ngày kết thúc</th> 
-                                        <th class="font-gg font-13 font-weight-bold" scope="col">Tác vụ</th> 
-                                        <th class="font-gg font-13 font-weight-bold d-none" scope="col">Cấu hình
+                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">Ngày kết thúc</th> 
+                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">Tác vụ</th> 
+                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap d-none" scope="col">Cấu hình
                                         </th>
                                     </tr>
                                 </thead>
