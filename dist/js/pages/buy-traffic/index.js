@@ -471,19 +471,19 @@ function appendSelectTimeMaxAndMin(st) {
     $('.select-max,.select-min').select2();
 
     $('.select-min').on('select2:select', function (e) {
-        let min = e.params.data.id; 
-        let max = $('.select-max').val();
-        
-        if(min >= max) {
+        let min = +e.params.data.id; 
+        let max = +$('.select-max').val(); 
+
+        if(min >= max) { 
             $('.select-max').val(`${+min + 10}`).trigger('change');
         }
 
     });
 
     $(".select-max").on('select2:select', function (e) {
-        let max = e.params.data.id; 
-        let min = $('.select-min').val();
-
+        let max = +e.params.data.id; 
+        let min = +$('.select-min').val();
+                
         if(max <= min) {
             $('.select-min').val(`${+max - 10}`).trigger('change');
         }
