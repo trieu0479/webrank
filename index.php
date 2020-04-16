@@ -8,7 +8,7 @@ if (empty($userToken))  $userToken = $demoToken;
 if (empty($view)) $view = "website";
 if (empty($action)) $action = "index";
 
-
+if ($view == "website"){
 switch ($action) {
     case "index": 
         $meta['title'] = "Công cụ phân tích website - phân tích đối thủ";
@@ -39,7 +39,17 @@ switch ($action) {
 
     break;
    }
+}else{
+    switch($view){
+        case "buy-traffic":
+            $meta['title'] = "Công cụ tăng traffic website & youtube";
+            $meta['description'] = "Công cụ tăng traffic website, traffic youtube miễn phí. Traffic Việt Nam và hoàn toàn từ người dùng thật. Thử ngay";
+            $meta['image'] = "https://webrank.vn/assets/images/social/cong-cu-tang-traffic.png";
 
+
+
+    }
+}
 
 require_once('modules/header.php') ;
 ?>
