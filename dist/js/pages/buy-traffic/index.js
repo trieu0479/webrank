@@ -955,7 +955,7 @@ function showPopupAction(timeToRun, action,urlids) {
                     if(task == "startRunTraffic")
                         showPopupOrderSuccess(timeToRun, data.data.startTime, data.data.endTime);
                     else {
-                        showPopupAction(task);
+                        showPopupActionSuccess(task);
                     }
                 } else {
                     showPopupActionError(task);
@@ -978,6 +978,7 @@ async function getData(url) {
 }
 
 function renderTable() {
+    // <i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
 
     getData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=getListOrderTraffic&userToken=${userToken}`).then(data => {
         if(data && data.data) {
@@ -1026,8 +1027,7 @@ function renderTable() {
                                             </td>
                                             <td class="font-gg font-14 font-weight-500">${moment(val.endTime).format("H:mm DD/MM/YYYY")}</td>
                                             <td class="font-gg font-15">
-                                                ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="active fad fa-play-circle mr-3 font-20 text-info cursor-pointer"></i> ` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="pause fad fa-pause-circle mr-3 font-20 text-success cursor-pointer"></i>`}
-                                                <i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
+                                                ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 active fad fa-play-circle font-20 text-info cursor-pointer"></i> ` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="ml-2 pause fad fa-pause-circle font-20 text-success cursor-pointer"></i>`}
                                             </td> 
                                             <td class="font-gg font-15">
                                                 <button type="buttom" data-urlids="${val.urlids}" class="edit btn btn-info py-1 px-2 font-13 font-weight-500 rounded ">Thay đổi</button>
