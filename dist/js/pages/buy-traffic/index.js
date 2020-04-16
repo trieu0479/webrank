@@ -1270,7 +1270,7 @@ $(document).ready(() => {
         let maxTime = $(".select-max-time").val();
         let timeToRun = $(".select-time-run").val();
             
-        if(array_checked.length > 0 && area.length > 0 && CheckIsValidDomain(websiteURL)) {
+        if(array_checked.length > 0 && area.length > 0 && websiteURL != "") {
 
             for (let i = 0; i < array_checked.length; i++) { 
 
@@ -1310,7 +1310,7 @@ $(document).ready(() => {
             })
             
         } else {
-            if (!CheckIsValidDomain(websiteURL)) {
+            if (websiteURL == "") {
                 Swal.showValidationMessage(
                     `Lỗi: URL không hợp lệ !`);
                 $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
