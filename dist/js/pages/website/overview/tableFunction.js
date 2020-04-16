@@ -516,7 +516,12 @@ $(document).ready(() => {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getTrafficOverview&domain=${localDomain}&page=1&method[all]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
                     lockedModule('getSubdomains', json.userData.member);
-                    return json.data.trafficBySubDomain
+                    if (json.data.trafficBySubDomain && json.data.trafficBySubDomain != undefined) {
+                        return json.data.trafficBySubDomain
+                    } else {
+                        $('.parent-getSubdomains').html('').addClass('empty-state')
+                        return []
+                    }
                 },
             },
             drawCallback: function(settings) {},
