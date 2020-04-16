@@ -1,4 +1,30 @@
 function htmlOrder(obj_data) { 
+    let direct = {};
+    let google = {};
+    let facebook = {};
+
+    if(obj_data.trafficSource != undefined) {
+        obj_data.trafficSource.forEach(val => {
+            if(val.type == 0) {
+                direct = {
+                    rate: val.rate
+                };
+            } 
+            
+            if(val.type == 2) {
+                google = {
+                    rate: val.rate
+                };
+            } 
+            
+            if (val.type == 1) {
+                facebook = {
+                    rate: val.rate
+                };
+            }
+        })
+    }
+
     // <div class="align-self-center font-gg text-muted font-12 ml-2">*Nếu bạn cần thêm <span class="font-gg font-weight-bold font-13 text-muted">Traffic</span> mỗi ngày, vui lòng <a href="#">liên hệ</a></div>
     return `<div class="text-left mb-3"> 
                 <div class="mt-2 px-4 py-3"> 
@@ -44,35 +70,35 @@ function htmlOrder(obj_data) {
                         <div class="config-rate position-relative align-self-centermb-2" style="z-index: 6">
                             <div class="font-gg font-weight-bold font-13 w-100">
                                 Nguồn truy cập
-                            <span class="d-none cursor-pointer show-modal-rate ml-1 rounded-pill px-2 py-1 bg-info font-10 font-weight-500 font-gg">Chia tỉ lệ</span>
+                            <span class=" ${(obj_data.trafficSource != undefined && obj_data.trafficSource.length > 1) ? "" : "d-none"} cursor-pointer show-modal-rate ml-1 rounded-pill px-2 py-1 bg-info font-10 font-weight-500 font-gg">Chia tỉ lệ</span>
                             </div>
                         </div> 
                         <div class="w-100">
                             <div class="w-100 d-flex no-block justify-content-between position-relative">
                                 <div>
                                     <label class="kt-checkbox kt-checkbox--bold kt-checkbox--brand" for="checkbox-direct">
-                                        <input class="" type="checkbox" id="checkbox-direct" name="source" value="Direct">
+                                        <input ${(direct.rate != undefined) ? "checked" : ""} class="" type="checkbox" id="checkbox-direct" name="source" value="Direct">
                                         <p class="font-gg font-weight-500 font-13 text-muted d-inline">
-                                            Trực tiếp <p class="ratioDirect font-weight-500 font-13 text-dark font-gg d-inline-block ml-1" style="opacity: 0; width: 50px"></p>
+                                            Trực tiếp <p class="ratioDirect font-weight-500 font-13 text-dark font-gg d-inline-block ml-1" style="opacity: ${(direct.rate != undefined) ? "1" : "0"}; width: 50px">${(direct.rate != undefined) ? direct.rate + "%" : ""}</p>
                                         </p>
                                         <span></span>
                                     </label>
                                 </div>
                                 <div>
                                     <label class="kt-checkbox kt-checkbox--bold kt-checkbox--brand rounded" for="checkbox-google">
-                                        <input class="" type="checkbox" id="checkbox-google" name="source" value="Google">
+                                        <input ${(google.rate != undefined) ? "checked" : ""} class="" type="checkbox" id="checkbox-google" name="source" value="Google">
                                         <p class="font-gg font-weight-500 font-13 text-muted d-inline">
-                                            Google <p class="ratioGoogle font-weight-500 font-13 text-dark font-gg d-inline-block ml-1" style="opacity: 0; width: 50px"></p>
+                                            Google <p class="ratioGoogle font-weight-500 font-13 text-dark font-gg d-inline-block ml-1" style="opacity: ${(google.rate != undefined) ? "1" : "0"}; width: 50px">${(google.rate != undefined) ? google.rate + "%" : ""}</p>
                                         </p>
                                         <span class="ml-1"></span>
                                     </label>
-                                    <span data-name="Google" class="cursor-pointer show-modal-config ml-1 rounded-pill px-2 py-1 bg-warning font-10 font-weight-500 font-gg" style="opacity: 0">Cấu hình</span>
+                                    <span data-name="Google" class="cursor-pointer show-modal-config ml-1 rounded-pill px-2 py-1 bg-warning font-10 font-weight-500 font-gg" style="opacity: ${(google.rate != undefined) ? "1" : "0"}">Cấu hình</span>
                                 </div>
                                 <div>
                                     <label class="kt-checkbox kt-checkbox--bold kt-checkbox--brand rounded" for="checkbox-facebook">
-                                        <input class="" type="checkbox" id="checkbox-facebook" name="source" value="Facebook">
+                                        <input ${(facebook.rate != undefined) ? "checked" : ""} class="" type="checkbox" id="checkbox-facebook" name="source" value="Facebook">
                                         <p class="font-gg font-weight-500 font-13 text-muted d-inline">
-                                            Facebook <p class="ratioFacebook font-weight-500 font-13 text-dark font-gg d-inline-block ml-1" style="opacity: 0; width: 50px"></p>
+                                            Facebook <p class="ratioFacebook font-weight-500 font-13 text-dark font-gg d-inline-block ml-1" style="opacity: ${(facebook.rate != undefined) ? "1" : "0"}; width: 50px">${(facebook.rate != undefined) ? facebook.rate + "%" : ""}</p>
                                         </p>
                                         <span></span>
                                     </label>
@@ -113,18 +139,18 @@ function htmlOrder(obj_data) {
                         <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-4">Tỉ lệ mobile/pc</div> 
                         <div class="position-relative w-100 mt-1">
                             <div class="position-absolute device-mobile" style="top: -17px; left: 5px">
-                                <i class="fas fa-mobile-alt mr-2 font-13"></i><span class="font-weight-500 font-16 text-dark">10%</span>
+                                <i class="fas fa-mobile-alt mr-2 font-13"></i><span class="font-weight-500 font-16 text-dark">${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"}</span>
                             </div>
                             <div class="position-absolute device-pc" style="top: -17px; right: 0">
-                                <span class="font-weight-500 font-16 mr-2 text-dark">90%</span><i class="fas fa-desktop font-13"></i>
+                                <span class="font-weight-500 font-16 mr-2 text-dark">${(obj_data.mrate != undefined) ? 100 - +obj_data.mrate + "%" : "90%"}</span><i class="fas fa-desktop font-13"></i>
                             </div>
                             <div class="w-100 position-relative" style="opacity: 0; z-index: 10">
                                 <input id="my-range" type="range" min="0" step="1" max="100" value="10" class="w-100 cursor-pointer">
                             </div>
                             <div class="w-100 position-absolute" style="top: 9px">
-                                <div class="ads-thumb " style="left: 10%; transform: translateX(-10%);"></div>
+                                <div class="ads-thumb " style="left: ${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"}; transform: translateX(-${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"});"></div>
                                 <div class="ads-track">
-                                    <div class="ads-fill" style="width: 10%;"></div>
+                                    <div class="ads-fill" style="width: ${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"};"></div>
                                 </div>
                             </div>
                         </div>
@@ -349,7 +375,7 @@ function htmlConfigGoogle(array_keywords) {
     </div>`;
 }
 
-function showPopupOrder(obj_data) {
+function showPopupOrder(obj_data) { 
     Swal.fire({ 
         title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Mua traffic cho website</div>`,
         html: htmlOrder(obj_data),
@@ -359,11 +385,12 @@ function showPopupOrder(obj_data) {
         width: 700,
         position: "top",
         onOpen: () => {
-            appendSelectTraffic();
-            appendSelectCountry();
-            appendSelectTimeMaxAndMin();
-            appendSelectSubPage();
-            appendSelectTimeRun();
+            console.log(obj_data)
+            appendSelectTraffic(obj_data.dailyTraffic);
+            appendSelectCountry(obj_data.area);
+            appendSelectTimeMaxAndMin(obj_data.st);
+            appendSelectSubPage(obj_data.subpage);
+            appendSelectTimeRun(obj_data.timeToRun);
 
             $(".select2-selection").addClass("border").css("height","38px");
             $(".select2-dropdown.select2-dropdown--below").addClass("border");
@@ -374,15 +401,15 @@ function showPopupOrder(obj_data) {
     })
 }
 
-function appendSelectTraffic() {
+function appendSelectTraffic(dailyTraffic) {
     for(let i = 1; i <= 10; i++) {
-        $(".select-traffic").append(`<option value="${i*100}">${i*100}</option>`);
+        $(".select-traffic").append(`<option ${(dailyTraffic != undefined && dailyTraffic == i*100) ? "selected" : ""} value="${i*100}">${i*100}</option>`);
     }
 
     $('.select-traffic').select2(); 
 }
 
-function appendSelectCountry() {
+function appendSelectCountry(area) {
     let arr_country = [
         {
             name: "Vietnam",
@@ -412,9 +439,17 @@ function appendSelectCountry() {
         }
     ];
 
-    arr_country.forEach(val => {
-        $(".select-country").append(`<option ${(val.name == "Vietnam") ? "selected" : ""} value="${val.name}">${val.text}</option>`);
-    })
+    if(area != undefined) {
+        arr_country.forEach(val => {
+            area.forEach(item => {
+                $(".select-country").append(`<option ${(val.name == item) ? "selected" : ""} value="${val.name}">${val.text}</option>`);
+            })
+        })
+    } else {
+        arr_country.forEach(val => { 
+            $(".select-country").append(`<option ${(val.name == "Vietnam") ? "selected" : ""} value="${val.name}">${val.text}</option>`);
+        })
+    }
 
     $('.select-country').select2({
         placeholder: "Chọn Quốc Gia"
@@ -422,14 +457,14 @@ function appendSelectCountry() {
  
 }
 
-function appendSelectTimeMaxAndMin() {
+function appendSelectTimeMaxAndMin(st) {
     for(let i = 1; i <= 90; i++) {
         if(i > 1) {
-            $(".select-max").append(`<option value="${i*10}">${i*10} s</option>`);   
+            $(".select-max").append(`<option ${(st != undefined && st.max == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);   
         } 
 
         if(i != 90) {
-            $(".select-min").append(`<option value="${i*10}">${i*10} s</option>`);
+            $(".select-min").append(`<option ${(st != undefined && st.min == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
         }
     } 
 
@@ -458,15 +493,15 @@ function appendSelectTimeMaxAndMin() {
 
 }
 
-function appendSelectSubPage() {
+function appendSelectSubPage(subpage) {
     for (let i = 1; i <= 3; i++) { 
         if(i == 1) {
-            $(".select-min-page").append(`<option value="${i}">${i} trang</option>`);
-            $(".select-min-time").append(`<option value="${i*10}">${i*10} s</option>`);
+            $(".select-min-page").append(`<option ${(subpage != undefined && subpage.minPage == i) ? "selected" : ""} value="${i}">${i} trang</option>`);
+            $(".select-min-time").append(`<option ${(subpage != undefined && subpage.minTime == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
         
         } else {
-            $(".select-max-page").append(`<option ${(i == 3) ? "selected" : ""} value="${i}">${i} trang</option>`);
-            $(".select-max-time").append(`<option ${(i == 3) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
+            $(".select-max-page").append(`<option ${(subpage != undefined && subpage.maxPage == i) ? "selected" : (i == 3) ? "selected" : ""} value="${i}">${i} trang</option>`);
+            $(".select-max-time").append(`<option ${(subpage != undefined && subpage.maxTime == i*10) ? "selected" : (i == 3) ? "selected" : ""}  value="${i*10}">${i*10} s</option>`);
         }
         
     }
@@ -482,9 +517,9 @@ function appendSelectSubPage() {
     });
 }
 
-function appendSelectTimeRun() {
+function appendSelectTimeRun(timeToRun) {
     for (let i = 2; i <= 30; i++) {
-        $(".select-time-run").append(`<option value="${i}">${i} ngày</option>`);
+        $(".select-time-run").append(`<option ${(timeToRun != undefined && timeToRun == i) ? "selected" : ""} value="${i}">${i} ngày</option>`);
     }
 
     $('.select-time-run').select2({
@@ -625,44 +660,53 @@ function htmlCost(data,timeToRun) {
     let day = timeToRun;
     let sumPrice = vndPrice*day;  
 
-    return `<div class="text-left mt-2 d-flex align-items-center px-4 py-3" style="height: 250px"> 
+    return `<div class="text-left mt-2 d-flex align-items-center px-4 py-3 mb-5"> 
                 <div class="w-100">
                     <div class="row">
-                        <div class="col-12 col-md-4">
-                            <div class="bg-info-2 border-info py-4 px-5 text-info border rounded" style="border-width: 2px!important; height:120px">
-                                <div class="title-ads font-14 font-gg">
-                                    Chi Phí 1 Ngày
-                                </div>
-                                <div class="d-flex no-block justify-content-center mt-3">
-                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(vndPrice).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="col-12 col-md-4">
-                            <div class="bg-danger-2 border-danger py-4 px-5 text-danger border rounded" style="border-width: 2px!important; height:120px">
-                                <div class="title-ads font-14 font-gg">
-                                    Chi Phí Cho 5 Ngày
-                                </div>
-                                <div class="d-flex no-block justify-content-center mt-3">
-                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(sumPrice).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                                </div>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-left"> 
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Đơn giá 1 ngày</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-17 font-gg text-primary">${numeral(vndPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
+                                                </div>    
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Chi phí ${timeToRun} ngày</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-18 font-gg text-danger">${numeral(sumPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Ngân sách hiện tại</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-19 font-gg text-info" style="font-size: 19px;">${numeral(yourBank).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
+                                                </div>    
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Ngân sách sau khi thanh toán</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-gg text-success" style="font-size: 21px;">${numeral(yourBank - sumPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
+                                                </div>    
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="bg-success-2 border-success py-4 px-5 text-success border rounded" style="border-width: 2px!important; height:120px">
-                                <div class="title-ads font-14 font-gg">
-                                    Ngân Sách
-                                </div>
-                                <div class="d-flex no-block justify-content-center mt-3">
-                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(yourBank).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-3">
-                            <div class="font-14 text-muted font-gg mb-3">
-                                ${(yourBank < sumPrice) ? `*Số dư tài khoản không đủ. Vui lòng <a href="javascript:void(0);" class="refill-money font-gg font-14 font-weight-bold">nạp thêm tiền</a> để sử dụng dịch vụ này !`
-                                : `*Vui lòng bấm <a href="javascript:void(0);" class="btn-next font-gg font-14 font-weight-bold">tiếp tục</a> để tạo chiến dịch !`}
-                            </div> 
+                        <div class="col-12">
+                            <div class="font-gg font-weight-500 text-muted font-13">
+                            ${(yourBank >= sumPrice) ? "(*) sau khi thực hiện thanh toán nếu không thể thực hiện tăng traffic hệ thống sẽ bồi hoàn trả lại phí cho bạn !"
+                            : "(*) số dư tài khoản không đủ. Vui lòng <a class='refill-money font-gg font-weight-bold font-14' href='javascript: void(0);'>nạp thêm tiền</a> để sử dụng dịch vụ này !"}</div>
                         </div>
                     </div>
                 </div> 
@@ -671,8 +715,7 @@ function htmlCost(data,timeToRun) {
                 <div class="d-flex justify-content-between px-4 py-4">
                     <a href="#" class="btn-back align-self-center btn btn-secondary font-14 font-weight-500 font-gg px-4">Quay
                         lại</a> 
-                    <button type="button" ${(yourBank < sumPrice) ? "disabled" : ""} class="ml-auto btn-next btn-next-text align-self-center btn btn-primary font-14 font-weight-500 font-gg px-4">Tiếp
-                        tục</button>
+                    <button type="button" ${(yourBank < sumPrice) ? "disabled" : ""} class="ml-auto btn-next btn-next-text align-self-center btn btn-primary font-14 font-weight-500 font-gg px-4">Thanh toán</button>
                 </div>
             </div> `
 }
@@ -739,12 +782,12 @@ function showPopupActionError(task) {
 
 function showPopupCost(obj_data,data,timeToRun) {
     Swal.fire({ 
-        title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Chi Phí Traffic</div>`,
+        title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Chi Phí Mua Traffic</div>`,
         html: htmlCost(data,timeToRun),
         showConfirmButton: false,
         showCloseButton: true,
         allowOutsideClick: false,
-        width: 900,
+        width: 700,
         position: "top",
         onOpen: () => {
             $(".swal2-popup").addClass("px-0 py-0"); 
@@ -940,6 +983,17 @@ function renderTable() {
         if(data && data.data) {
 
             data.data.forEach(val => {
+                let websiteURL = val.websiteURL; 
+                let websiteURLreplace = websiteURL;
+                if(websiteURL.indexOf("http") != -1) {
+                    websiteURL = websiteURL.replace("http://", "");
+                    websiteURL = websiteURL.replace("https://", "");
+                }
+
+                if(websiteURL.indexOf("/") != -1) { 
+                    websiteURLreplace = websiteURL.slice(0,websiteURL.indexOf("/"))
+                }
+
                 $("#tableTraffic").append(`<tr data-urlids="${val.urlids}">
                                             <td class="font-gg font-14 font-weight-500">${moment(val.startTime).format("H:mm DD/MM/YYYY")}</td>
                                             <td class="font-gg font-14 font-weight-bold">${numeral(val.dailyTraffic).format("0,0")} IP</td>
@@ -951,7 +1005,16 @@ function renderTable() {
                                                     </span>
                                                 </span>
                                             </td>
-                                            <td class="font-gg font-15"><a href="#">${(val.websiteURL.indexOf("http") != -1) ? val.websiteURL : "https://" + val.websiteURL}</a></td>
+                                            <td class="font-gg font-15">
+                                                <div class="font-gg text-dark font-weight-500" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1;">
+                                                    <a target="blank" href="https://${websiteURL}">
+                                                    <img class="mr-2" src="https://www.google.com/s2/favicons?domain=${websiteURLreplace}">
+                                                    ${websiteURLreplace}
+                                                    </a>
+                                                    <a target="blank" href="https://${websiteURL}"><i class="fal text-muted fa-external-link-square-alt ml-1"></i></a>
+
+                                                </div>
+                                            </td>
                                             <td class="font-gg font-15 text-center d-flex no-block">
                                                 <span class="traffic-today rounded text-dark text-center font-14 font-weight-bold">
                                                     0
