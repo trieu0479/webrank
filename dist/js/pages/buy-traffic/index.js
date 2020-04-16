@@ -139,18 +139,18 @@ function htmlOrder(obj_data) {
                         <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-4">Tỉ lệ mobile/pc</div> 
                         <div class="position-relative w-100 mt-1">
                             <div class="position-absolute device-mobile" style="top: -17px; left: 5px">
-                                <i class="fas fa-mobile-alt mr-2 font-13"></i><span class="font-weight-500 font-16 text-dark">${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"}</span>
+                                <i class="fas fa-mobile-alt mr-2 font-13"></i><span class="font-weight-500 font-16 text-dark">${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "50%"}</span>
                             </div>
                             <div class="position-absolute device-pc" style="top: -17px; right: 0">
-                                <span class="font-weight-500 font-16 mr-2 text-dark">${(obj_data.mrate != undefined) ? 100 - +obj_data.mrate + "%" : "90%"}</span><i class="fas fa-desktop font-13"></i>
+                                <span class="font-weight-500 font-16 mr-2 text-dark">${(obj_data.mrate != undefined) ? 100 - +obj_data.mrate + "%" : "50%"}</span><i class="fas fa-desktop font-13"></i>
                             </div>
                             <div class="w-100 position-relative" style="opacity: 0; z-index: 10">
-                                <input id="my-range" type="range" min="0" step="1" max="100" value="10" class="w-100 cursor-pointer">
+                                <input id="my-range" type="range" min="0" step="1" max="100" value="${(obj_data.mrate != undefined) ? obj_data.mrate : "50"}" class="w-100 cursor-pointer">
                             </div>
                             <div class="w-100 position-absolute" style="top: 9px">
-                                <div class="ads-thumb " style="left: ${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"}; transform: translateX(-${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"});"></div>
+                                <div class="ads-thumb " style="left: ${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "50%"}; transform: translateX(-${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "50%"});"></div>
                                 <div class="ads-track">
-                                    <div class="ads-fill" style="width: ${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"};"></div>
+                                    <div class="ads-fill" style="width: ${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "50%"};"></div>
                                 </div>
                             </div>
                         </div>
