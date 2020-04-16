@@ -955,7 +955,7 @@ function showPopupAction(timeToRun, action,urlids) {
                     if(task == "startRunTraffic")
                         showPopupOrderSuccess(timeToRun, data.data.startTime, data.data.endTime);
                     else {
-                        showPopupAction(task);
+                        showPopupActionSuccess(task);
                     }
                 } else {
                     showPopupActionError(task);
@@ -978,6 +978,7 @@ async function getData(url) {
 }
 
 function renderTable() {
+    // <i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
 
     getData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=getListOrderTraffic&userToken=${userToken}`).then(data => {
         if(data && data.data) {
@@ -1026,8 +1027,7 @@ function renderTable() {
                                             </td>
                                             <td class="font-gg font-14 font-weight-500">${moment(val.endTime).format("H:mm DD/MM/YYYY")}</td>
                                             <td class="font-gg font-15">
-                                                ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="active fad fa-play-circle mr-3 font-20 text-info cursor-pointer"></i> ` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="pause fad fa-pause-circle mr-3 font-20 text-success cursor-pointer"></i>`}
-                                                <i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
+                                                ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 active fad fa-play-circle font-20 text-info cursor-pointer"></i> ` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="ml-2 pause fad fa-pause-circle font-20 text-success cursor-pointer"></i>`}
                                             </td> 
                                             <td class="font-gg font-15">
                                                 <button type="buttom" data-urlids="${val.urlids}" class="edit btn btn-info py-1 px-2 font-13 font-weight-500 rounded ">Thay đổi</button>
@@ -1226,6 +1226,11 @@ function getTrafficHistory(urlids) {
     })
 }
 
+function CheckIsValidDomain(domain) {
+    var reg = new RegExp(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
+    return domain.match(reg);
+}
+
 $(document).ready(() => {     
     renderTable();
 
@@ -1252,21 +1257,21 @@ $(document).ready(() => {
 
     $("body").on("click", ".btn-cost", () => { 
         let array_checked = arrayChecked("input[type=checkbox][name=source]");
-        if(array_checked.length > 0) {
-
-            let trafficSource =  [];
-            let websiteURL = $("#input-url").val();
-            let dailyTraffic = $(".select-traffic").val();
-            let area = $(".select-country").val();
-            let mrate = $(".device-mobile span").text().trim().replace(/\D/g,"");
-            let max = $(".select-max").val();
-            let min = $(".select-min").val();
-            let minPage = $(".select-min-page").val();
-            let maxPage = $(".select-max-page").val();
-            let minTime = $(".select-min-time").val();
-            let maxTime = $(".select-max-time").val();
-            let timeToRun = $(".select-time-run").val();
+        let trafficSource =  [];
+        let websiteURL = $("#input-url").val();
+        let dailyTraffic = $(".select-traffic").val();
+        let area = $(".select-country").val();
+        let mrate = $(".device-mobile span").text().trim().replace(/\D/g,"");
+        let max = $(".select-max").val();
+        let min = $(".select-min").val();
+        let minPage = $(".select-min-page").val();
+        let maxPage = $(".select-max-page").val();
+        let minTime = $(".select-min-time").val();
+        let maxTime = $(".select-max-time").val();
+        let timeToRun = $(".select-time-run").val();
             
+        if(array_checked.length > 0 && area.length > 0 && CheckIsValidDomain(websiteURL)) {
+
             for (let i = 0; i < array_checked.length; i++) { 
 
                 let temp = {
@@ -1305,7 +1310,21 @@ $(document).ready(() => {
             })
             
         } else {
+            if (!CheckIsValidDomain(websiteURL)) {
+                Swal.showValidationMessage(
+                    `Lỗi: URL không hợp lệ !`);
+                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+            } else if(area.length == 0) {
+                Swal.showValidationMessage(
+                    `Lỗi: Bạn vui lòng chọn quốc gia !`);
+                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
 
+            } else if(array_checked.length == 0) {
+                Swal.showValidationMessage(
+                    `Lỗi: Bạn vui lòng chọn nguồn truy cập !`);
+                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+
+            } 
         }
     }) 
 
