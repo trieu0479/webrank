@@ -52,7 +52,7 @@
                                     <div class="px-3 py-3 w-100">
                                         <div class="">
                                             <div class="mb-2">
-                                                <span class="position-relative text-warning font-gg font-16 font-weight-bold">20,000
+                                                <span class="position-relative text-warning font-gg font-16 font-weight-bold">30,000
                                                 <span
                                                         class="position-absolute text-warning font-gg font-10 font-weight-500"
                                                         style="top: -5px">
@@ -61,11 +61,11 @@
                                                 </span>
                                             </div>
                                             <div class="font-gg font-weight-bold font-16 mb-3 text-muted">
-                                                400 visitor
+                                                1,000 visitor
                                             </div>
                                         </div>
                                         <div class="">
-                                            <button type="button" data-price="20000" class="btn-buy-now font-gg btn btn-outline-warning"
+                                            <button type="button" data-price="30000" class="btn-buy-now font-gg btn btn-outline-warning"
                                                 style="width: 130px; border-radius: 20px">Mua ngay</button>
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                                             <div class="mb-2">
                                                 <span
                                                     class="position-relative text-info font-gg font-16 font-weight-bold">
-                                                    100,000
+                                                    150,000
                                                     <span
                                                         class="position-absolute text-info font-gg font-10 font-weight-500"
                                                         style="top: -5px">
@@ -91,7 +91,7 @@
                                                 </span>
                                             </div>
                                             <div class="font-gg font-weight-bold font-16 text-muted mb-3">
-                                                2,000 visitor
+                                                5,000 visitor
                                             </div>
                                         </div>
                                         <div class="">
@@ -121,7 +121,7 @@
                                                 </span>
                                             </div>
                                             <div class="font-gg font-weight-bold font-16 text-muted mb-3">
-                                                7,000 visitor
+                                                10,000 visitor
                                             </div>
                                         </div>
                                         <div class="">
