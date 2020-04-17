@@ -90,7 +90,7 @@
                                                 <td class="font-gg font-14 font-weight-500">FFF Contact</td>
                                                 <td class="">
                                                     <div class="d-flex no-block justify-content-center">
-                                                        <span class="font-weight-500 font-15 font-gg">199,000<sup
+                                                        <span class="font-weight-500 font-16 font-gg">199,000<sup
                                                                 class="font-12 font-gg"
                                                                 style="top: -15px;">vnd</sup></span>
                                                     </div>
@@ -108,7 +108,7 @@
                                                 <td class="font-gg font-14 font-weight-500">FFF Chat</td>
                                                 <td class="">
                                                     <div class="d-flex no-block justify-content-center">
-                                                        <span class="font-weight-500 font-15 font-gg">199,000<sup
+                                                        <span class="font-weight-500 font-16 font-gg">199,000<sup
                                                                 class="font-12 font-gg"
                                                                 style="top: -15px;">vnd</sup></span>
                                                     </div>
@@ -126,7 +126,7 @@
                                                 <td class="font-gg font-14 font-weight-500">Google Ads</td>
                                                 <td class="">
                                                     <div class="d-flex no-block justify-content-center">
-                                                        <span class="font-weight-500 font-15 font-gg">2,500,000<sup
+                                                        <span class="font-weight-500 font-16 font-gg">2,500,000<sup
                                                                 class="font-12 font-gg"
                                                                 style="top: -15px;">vnd</sup></span>
                                                     </div>
@@ -144,7 +144,7 @@
                                                 <td class="font-gg font-14 font-weight-500">FFF Traffic</td>
                                                 <td class="">
                                                     <div class="d-flex no-block justify-content-center">
-                                                        <span class="font-weight-500 font-15 font-gg">199,000<sup
+                                                        <span class="font-weight-500 font-16 font-gg">199,000<sup
                                                                 class="font-12 font-gg"
                                                                 style="top: -15px;">vnd</sup></span>
                                                     </div>
@@ -162,7 +162,7 @@
                                                 <td class="font-gg font-14 font-weight-500">FFF CRM</td>
                                                 <td class="">
                                                     <div class="d-flex no-block justify-content-center">
-                                                        <span class="font-weight-500 font-15 font-gg">199,000<sup
+                                                        <span class="font-weight-500 font-16 font-gg">199,000<sup
                                                                 class="font-12 font-gg"
                                                                 style="top: -15px;">vnd</sup></span>
                                                     </div>
