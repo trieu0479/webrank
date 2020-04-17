@@ -887,66 +887,70 @@ function htmlRecharge(price = "") {
 }
 
 function showPopupRecharge(price = "") {
-    Swal.fire({ 
-        title: `<div class="font-gg font-18 font-weight-bold ">Nạp Tiền Traffic</div>`,
-        html: htmlRecharge(price),
-        position: "top",
-        confirmButtonText: "ĐÃ HOÀN TẤT CHUYỂN KHOẢN",
-        showConfirmButton: true,
-        showCloseButton: true,
-        allowOutsideClick: false,
-        width: 600, 
-        onOpen: () => {
-            $(".input-budget").keyup(function() {
-                let val = $(this).val();
-                if (val.length >= 4) {
-                    $(this).val(numeral(val).format("0,0"));
-                    if(val.length >= 5) {
-                        val = val.replace(/\,/g,""); 
-                        getData(`//localapi.trazk.com/fff/user.php?task=getBankCodeBuyATool&userToken=${userToken}&price=${val}&toolName=buytraffic`).then(data => {
-                            $("#coppy-code").text(data.data.msg);
-                        })
-                    }
-                }
-            }) 
-
-            getData(`//localapi.trazk.com/fff/user.php?task=getBankCodeBuyATool&userToken=${userToken}&price=${(price != "") ? price : "100000"}&toolName=buytraffic`).then(data => {
-                $("#coppy-code").text(data.data.msg);
-            })  
-
-        }, 
-        preConfirm: async () => {
-            await $.get(
-                `//localapi.trazk.com/fff/user.php?task=checkPayment&invoiceId=${$("#coppy-code").text().trim()}&userToken=${userToken}`,
-                function (res) {
-                    res = JSON.parse(res);
-                    if (res && res.data.status == "error") {
-                        if (res.data.msg == "Waiting bank transation") {
-                            Swal.showValidationMessage(
-                                `Lỗi: Hệ thống chưa nhận được số tiền chuyển khoản của bạn.`);
-                            $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
-                        } else if (res.data.msg == "wrong invoice amount and income amount") {
-                            Swal.showValidationMessage(
-                                `Lỗi: Số tiền chuyển khoản khác với số tiền yêu cầu thanh toán. Vui lòng liên hệ hỗ trợ viên`
-                            );
-                            $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
-                        } else if (res.data.msg == "invoice id error") {
-                            Swal.showValidationMessage(`Lỗi: Mã chuyển khoản không hợp lệ`);
-                            $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
-                        } else {
-                            Swal.showValidationMessage(
-                                `Lỗi: Hệ thông chưa nhận được chuyển khoản hoặc CID bị lỗi`);
-                            $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+    if (userToken == userTokenDemo) {
+        showLoginModal();
+    } else {
+        Swal.fire({ 
+            title: `<div class="font-gg font-18 font-weight-bold ">Nạp Tiền Traffic</div>`,
+            html: htmlRecharge(price),
+            position: "top",
+            confirmButtonText: "ĐÃ HOÀN TẤT CHUYỂN KHOẢN",
+            showConfirmButton: true,
+            showCloseButton: true,
+            allowOutsideClick: false,
+            width: 600, 
+            onOpen: () => {
+                $(".input-budget").keyup(function() {
+                    let val = $(this).val();
+                    if (val.length >= 4) {
+                        $(this).val(numeral(val).format("0,0"));
+                        if(val.length >= 5) {
+                            val = val.replace(/\,/g,""); 
+                            getData(`//localapi.trazk.com/fff/user.php?task=getBankCodeBuyATool&userToken=${userToken}&price=${val}&toolName=buytraffic`).then(data => {
+                                $("#coppy-code").text(data.data.msg);
+                            })
                         }
-                    } else {
-                        location.reload();
                     }
-                })
-
-            return [];
-        }
-        
-    })
+                }) 
+    
+                getData(`//localapi.trazk.com/fff/user.php?task=getBankCodeBuyATool&userToken=${userToken}&price=${(price != "") ? price : "100000"}&toolName=buytraffic`).then(data => {
+                    $("#coppy-code").text(data.data.msg);
+                })  
+    
+            }, 
+            preConfirm: async () => {
+                await $.get(
+                    `//localapi.trazk.com/fff/user.php?task=checkPayment&invoiceId=${$("#coppy-code").text().trim()}&userToken=${userToken}`,
+                    function (res) {
+                        res = JSON.parse(res);
+                        if (res && res.data.status == "error") {
+                            if (res.data.msg == "Waiting bank transation") {
+                                Swal.showValidationMessage(
+                                    `Lỗi: Hệ thống chưa nhận được số tiền chuyển khoản của bạn.`);
+                                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                            } else if (res.data.msg == "wrong invoice amount and income amount") {
+                                Swal.showValidationMessage(
+                                    `Lỗi: Số tiền chuyển khoản khác với số tiền yêu cầu thanh toán. Vui lòng liên hệ hỗ trợ viên`
+                                );
+                                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                            } else if (res.data.msg == "invoice id error") {
+                                Swal.showValidationMessage(`Lỗi: Mã chuyển khoản không hợp lệ`);
+                                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                            } else {
+                                Swal.showValidationMessage(
+                                    `Lỗi: Hệ thông chưa nhận được chuyển khoản hoặc CID bị lỗi`);
+                                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                            }
+                        } else {
+                            location.reload();
+                        }
+                    })
+    
+                return [];
+            }
+            
+        })
+    }
 }
 
 function showPopupAction(timeToRun, action,urlids) {
