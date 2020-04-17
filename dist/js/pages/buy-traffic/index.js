@@ -52,18 +52,14 @@ function htmlOrder(obj_data) {
                     </div>
                     <div class="d-flex no-block flex-column mt-4"> 
                         <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-2">Thời gian xem trang <span class="font-12 text-muted">*Chi phí có thể thay đổi nếu bạn tăng thời gian xem trang</span></div> 
-                        <div class="d-flex no-block">
-                            <div class="d-flex no-block w-50">
-                                <select class="select-min" style="width: 30%"></select>
+                        <div class="d-flex">
+                            <div class="d-flex no-block w-100 w-md-50">
+                                <select class="select-min w-50 w-md-30"></select>
                                 <div class="text-center mt-1 align-self-center" style="width: 20%"> 
                                     <i class="fad fa-wave-sine text-dark"></i>
                                 </div>
-                                <select class="select-max" style="width: 30%"></select> 
-                            </div> 
-                            <div class="w-50 d-flex no-block align-self-center">
-                                <div class="d-none font-12 text-muted align-self-center font-gg font-gg">*Chi phí có thể thay đổi nếu bạn tăng thời gian xem trang</div>
-                            </div> 
-                            
+                                <select class="select-max w-50 w-md-30"></select> 
+                            </div>   
                         </div> 
                     </div>
                     <div class="d-flex no-block flex-column mt-4 bg-white">
@@ -78,7 +74,7 @@ function htmlOrder(obj_data) {
                                 <div>
                                     <label class="kt-checkbox kt-checkbox--bold kt-checkbox--brand" for="checkbox-direct">
                                         <input ${(direct.rate != undefined) ? "checked" : ""} class="" type="checkbox" id="checkbox-direct" name="source" value="Direct">
-                                        <p class="font-gg font-weight-500 font-13 text-muted d-inline">
+                                        <p class="d-flex flex-column d-md-block font-gg font-weight-500 font-13 text-muted d-inline">
                                             Trực tiếp <p class="ratioDirect font-weight-500 font-13 text-dark font-gg d-inline-block ml-1" style="opacity: ${(direct.rate != undefined) ? "1" : "0"}; width: 50px">${(direct.rate != undefined) ? direct.rate + "%" : ""}</p>
                                         </p>
                                         <span></span>
@@ -108,29 +104,29 @@ function htmlOrder(obj_data) {
                     </div>
                     <div class="d-flex no-block flex-column mt-4"> 
                         <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-2">Trang con</div> 
-                        <div class="d-flex no-block">
-                            <div class="d-flex no-block flex-column w-50">
+                        <div class="d-flex">
+                            <div class="mb-3 mb-md-0 d-flex no-block flex-column w-100 w-md-50 ">
                                 <div class="font-gg font-12 text-muted mb-1 w-100">
                                     Số trang con
                                 </div>
                                 <div class="w-100 d-flex no-block">
-                                    <select class="select-min-page" style="width: 30%"></select>
+                                    <select class="select-min-page w-50 w-md-30"></select>
                                     <div class="text-center mt-1 align-self-center" style="width: 20%"> 
                                         <i class="fad fa-wave-sine text-dark"></i>
                                     </div>
-                                    <select class="select-max-page" style="width: 30%"></select> 
+                                    <select class="select-max-page w-50 w-md-30"></select> 
                                 </div> 
                             </div> 
-                            <div class="d-flex no-block flex-column w-50">
+                            <div class="d-flex no-block flex-column w-100 w-md-50">
                                 <div class="font-gg font-12 text-muted mb-1 w-100">
                                     Thời gian xem trang con
                                 </div>
                                 <div class="w-100 d-flex no-block">
-                                    <select class="select-min-time" style="width: 30%"></select>
+                                    <select class="select-min-time w-50 w-md-30"></select>
                                     <div class="text-center mt-1 align-self-center" style="width: 20%"> 
                                         <i class="fad fa-wave-sine text-dark"></i>
                                     </div>
-                                    <select class="select-max-time" style="width: 30%"></select> 
+                                    <select class="select-max-time w-50 w-md-30"></select> 
                                 </div> 
                             </div> 
                         </div> 
@@ -471,19 +467,19 @@ function appendSelectTimeMaxAndMin(st) {
     $('.select-max,.select-min').select2();
 
     $('.select-min').on('select2:select', function (e) {
-        let min = e.params.data.id; 
-        let max = $('.select-max').val();
-        
-        if(min >= max) {
+        let min = +e.params.data.id; 
+        let max = +$('.select-max').val(); 
+
+        if(min >= max) { 
             $('.select-max').val(`${+min + 10}`).trigger('change');
         }
 
     });
 
     $(".select-max").on('select2:select', function (e) {
-        let max = e.params.data.id; 
-        let min = $('.select-min').val();
-
+        let max = +e.params.data.id; 
+        let min = +$('.select-min').val();
+                
         if(max <= min) {
             $('.select-min').val(`${+max - 10}`).trigger('change');
         }
@@ -494,14 +490,14 @@ function appendSelectTimeMaxAndMin(st) {
 }
 
 function appendSelectSubPage(subpage) {
-    for (let i = 1; i <= 2; i++) { 
+    for (let i = 1; i <= 3; i++) { 
         if(i == 1) {
             $(".select-min-page").append(`<option ${(subpage != undefined && subpage.minPage == i) ? "selected" : ""} value="${i}">${i} trang</option>`);
             $(".select-min-time").append(`<option ${(subpage != undefined && subpage.minTime == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
         
         } else {
-            $(".select-max-page").append(`<option ${(subpage != undefined && subpage.maxPage == i) ? "selected" : (i == 2) ? "selected" : ""} value="${i}">${i} trang</option>`);
-            $(".select-max-time").append(`<option ${(subpage != undefined && subpage.maxTime == i*10) ? "selected" : (i == 2) ? "selected" : ""}  value="${i*10}">${i*10} s</option>`);
+            $(".select-max-page").append(`<option ${(subpage != undefined && subpage.maxPage == i) ? "selected" : (i == 3) ? "selected" : ""} value="${i}">${i} trang</option>`);
+            $(".select-max-time").append(`<option ${(subpage != undefined && subpage.maxTime == i*10) ? "selected" : (i == 3) ? "selected" : ""}  value="${i*10}">${i*10} s</option>`);
         }
         
     }
@@ -740,6 +736,26 @@ function showPopupOrderSuccess(timeToRun, startTime, endTime) {
     })
 }
 
+function showPopupOrderError(msg) {
+    Swal.fire({  
+        type:"error",
+        html: `<div class="font-gg font-15 text-dark font-weight-500">
+                 ${msg} !
+            </div>`,
+        confirmButtonText: "Xác Nhận",
+        showConfirmButton: true,
+        showCloseButton: true,
+        allowOutsideClick: false,
+        width: 500,
+        position: "top",
+        onOpen: () => { 
+        }, 
+        onClose: () => {
+            location.reload();
+        }
+    })
+}
+
 function showPopupActionSuccess(task) {
     Swal.fire({  
         type:"success",
@@ -813,9 +829,12 @@ function showPopupCost(obj_data,data,timeToRun) {
                         }
 
                         return obj;
+                    } else {
+                        return {msg: data.data.msg}
                     }
-                }).then(res => {
-                    if(res.urlids) {
+
+                }).then(res => { 
+                    if(res.urlids != undefined) {
                         let post = {
                             urlids: res.urlids,
                             etime: "1"
@@ -824,8 +843,12 @@ function showPopupCost(obj_data,data,timeToRun) {
                             data = JSON.parse(data);
                             if(data.data.status == "success") {
                                 showPopupOrderSuccess(res.timeToRun, data.data.startTime, data.data.endTime);
-                            } 
+                            } else {
+                                showPopupOrderError(data.data.msg)
+                            }
                         })
+                    } else {
+                        showPopupOrderError(res.msg)
                     }
                 })  
             })
@@ -988,19 +1011,19 @@ function renderTable() {
                 let websiteURL = val.websiteURL; 
                 let websiteURLreplace = websiteURL;
                 if(websiteURL.indexOf("http") != -1) {
-                    websiteURL = websiteURL.replace("http://", "");
-                    websiteURL = websiteURL.replace("https://", "");
+                    websiteURLreplace = websiteURL.replace("http://", "");
+                    websiteURLreplace = websiteURL.replace("https://", "");  
                 }
 
-                if(websiteURL.indexOf("/") != -1) { 
-                    websiteURLreplace = websiteURL.slice(0,websiteURL.indexOf("/"))
+                if(websiteURLreplace.indexOf("/") != -1) {  
+                    websiteURLreplace = websiteURLreplace.slice(0,websiteURLreplace.indexOf("/")); 
                 }
 
                 $("#tableTraffic").append(`<tr data-urlids="${val.urlids}">
-                                            <td class="font-gg font-14 font-weight-500">${moment(val.startTime).format("H:mm DD/MM/YYYY")}</td>
-                                            <td class="font-gg font-14 font-weight-bold">${numeral(val.dailyTraffic).format("0,0")} IP</td>
+                                            <td class="font-gg font-14 font-weight-500 white-space-nowrap">${moment(val.startTime).format("H:mm DD/MM/YYYY")}</td>
+                                            <td class="font-gg font-14 font-weight-bold white-space-nowrap">${numeral(val.dailyTraffic).format("0,0")} IP</td>
                                             <td class="">
-                                                <span class="position-relative text-dark font-gg font-15 font-weight-bold">                                        
+                                                <span class="position-relative text-dark font-gg font-15 font-weight-bold white-space-nowrap">                                        
                                                     ${numeral(val.vndPrice).format("0,0")}
                                                     <span class="position-absolute text-dark font-gg font-10 font-weight-500" style="top: -5px">
                                                         vnd
@@ -1008,29 +1031,29 @@ function renderTable() {
                                                 </span>
                                             </td>
                                             <td class="font-gg font-15">
-                                                <div class="font-gg text-dark font-weight-500" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1;">
-                                                    <a target="blank" href="https://${websiteURL}">
+                                                <div class="white-space-nowrap font-gg text-dark font-weight-500">
+                                                    <a target="blank" href="${(websiteURL.indexOf("http") < 0) ? "https://" + websiteURL : websiteURL}">
                                                     <img class="mr-2" src="https://www.google.com/s2/favicons?domain=${websiteURLreplace}">
                                                     ${websiteURLreplace}
                                                     </a>
-                                                    <a target="blank" href="https://${websiteURL}"><i class="fal text-muted fa-external-link-square-alt ml-1"></i></a>
+                                                    <a target="blank" href="${(websiteURL.indexOf("http") < 0) ? "https://" + websiteURL : websiteURL}"><i class="fal text-muted fa-external-link-square-alt ml-1"></i></a>
 
                                                 </div>
                                             </td>
-                                            <td class="font-gg font-15 text-center d-flex no-block">
+                                            <td class="font-gg font-15 text-center d-flex no-block white-space-nowrap">
                                                 <span class="traffic-today rounded text-dark text-center font-14 font-weight-bold">
                                                     0
                                                 </span>
                                                 <a class="history font-gg font-14 ml-5" href="javascript: void(0);">Lịch sử</a>
                                             </td>
-                                            <td class="">
-                                                <span class="${(val.status == "INACTIVE") ? "bg-info" : "bg-success"} px-2 py-1 rounded-pill font-gg font-10 font-weight-bold"> ${(val.status == "INACTIVE") ? "Chưa Chạy" : "Đang Chạy"}</span>
+                                            <td class="white-space-nowrap">
+                                                <span class="${(val.status == "INACTIVE") ? "bg-info" : (val.status == "EXPIRED") ? "bg-warning" : "bg-success"} px-2 py-1 rounded-pill font-gg font-10 font-weight-bold"> ${(val.status == "INACTIVE") ? "Chưa Chạy" : (val.status == "EXPIRED") ? "Hết Hạn" : "Đang Chạy"}</span>
                                             </td>
-                                            <td class="font-gg font-14 font-weight-500">${moment(val.endTime).format("H:mm DD/MM/YYYY")}</td>
+                                            <td class="font-gg font-14 font-weight-500 white-space-nowrap">${moment(val.endTime).format("H:mm DD/MM/YYYY")}</td>
                                             <td class="font-gg font-15">
-                                                ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 active fad fa-play-circle font-20 text-info cursor-pointer"></i> ` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="ml-2 pause fad fa-pause-circle font-20 text-success cursor-pointer"></i>`}
+                                                ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 active fad fa-play-circle font-20 text-info cursor-pointer"></i> ` : (val.status == "EXPIRED") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="ml-2 pause fad fa-pause-circle font-20 text-success cursor-pointer"></i>`}
                                             </td> 
-                                            <td class="font-gg font-15">
+                                            <td class="font-gg font-15 d-none">
                                                 <button type="buttom" data-urlids="${val.urlids}" class="edit btn btn-info py-1 px-2 font-13 font-weight-500 rounded ">Thay đổi</button>
                                             </td>
                                         </tr>`);
