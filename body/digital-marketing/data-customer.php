@@ -42,10 +42,10 @@
                                 </div>
                             </div> 
                             <div class="mb-3 w-100"> 
-                                <iframe class="iframeContainer-maxlead" width="100%" height="100%" scrolling="no" id="iframeContainer-maxlead" src="http://widgets.editor.local/demo/003/maxLead_CallButton/demo_url.php?url=https://fff.com.vn" allowtransparency="true" frameborder="0"></iframe>
+                                <img class="w-100 rounded border" src="./dist/images/danh-sach-khach-hang.png">
                             </div>
                             <div class="mb-4 bg-dark-2 px-3 py-2 text-left">
-                                <div class="font-gg font-weight-500 font-14">FFF App là ứng dụng dùng trên di động, giúp bạn theo dõi và quản lý khách hàng mọi lúc mọi nơi.</div>
+                                <div class="font-gg font-14">FFF App là ứng dụng dùng trên di động, giúp bạn theo dõi và quản lý khách hàng mọi lúc mọi nơi.</div>
                             </div>
                             <div class="">
                                 <button class="btn-skip btn btn-info font-gg font-15 font-weight-500 px-4 mr-3">Bỏ qua công cụ này</button>

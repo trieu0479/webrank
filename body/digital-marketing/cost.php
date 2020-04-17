@@ -51,7 +51,7 @@
                             <img class="w-100 rounded border" src="https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-9/92869674_641618219717908_7877177192906489856_o.jpg?_nc_cat=103&_nc_sid=730e14&_nc_oc=AQn9Q13fRvTd32KHabaik_tD5KS4Q3SL1ElqymxfeorIkZn4zfF-3RiFZmfGCGVWXzI&_nc_ht=scontent.fsgn2-2.fna&oh=9ccad1596771e23c50e22682d6a9a86c&oe=5EBFA057">
                         </div>
                         <div class="mb-4 bg-dark-2 px-3 py-2 text-left">
-                            <div class="font-gg font-14">Webrank công cụ phân tíchi và tăng traffic
+                            <div class="font-gg font-weight-500 font-14">Webrank công cụ phân tíchi và tăng traffic
                                 website, Bạn có thể điều chỉnh lượng traffic mỗi ngày nhanh chóng & dễ dàng</div>
                         </div>
                         <div class="">

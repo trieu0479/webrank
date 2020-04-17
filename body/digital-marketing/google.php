@@ -50,7 +50,7 @@
                             
                             </div>
                             <div class="mb-4 bg-dark-2 px-3 py-2 text-left">
-                                <div class="font-gg font-weight-500 font-14">Google Ads là công cụ quảng cáo của Google, Google chỉ tính chi phí khi khách hàng bấm chuột vào quảng cáo.</div>
+                                <div class="font-gg font-14">Google Ads là công cụ quảng cáo của Google, Google chỉ tính chi phí khi khách hàng bấm chuột vào quảng cáo.</div>
                             </div>
                             <div class="">
                                 <button class="btn-skip btn btn-info font-gg font-15 font-weight-500 px-4 mr-3">Bỏ qua công cụ này</button>
