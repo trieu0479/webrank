@@ -74,7 +74,7 @@ function htmlOrder(obj_data) {
                                 <div>
                                     <label class="kt-checkbox kt-checkbox--bold kt-checkbox--brand" for="checkbox-direct">
                                         <input ${(direct.rate != undefined) ? "checked" : ""} class="" type="checkbox" id="checkbox-direct" name="source" value="Direct">
-                                        <p class="d-flex flex-column d-md-block font-gg font-weight-500 font-13 text-muted d-inline">
+                                        <p class="font-gg font-weight-500 font-13 text-muted d-inline">
                                             Trực tiếp <p class="ratioDirect font-weight-500 font-13 text-dark font-gg d-inline-block ml-1" style="opacity: ${(direct.rate != undefined) ? "1" : "0"}; width: 50px">${(direct.rate != undefined) ? direct.rate + "%" : ""}</p>
                                         </p>
                                         <span></span>
@@ -495,7 +495,7 @@ function appendSelectSubPage(subpage) {
             $(".select-min-page").append(`<option ${(subpage != undefined && subpage.minPage == i) ? "selected" : ""} value="${i}">${i} trang</option>`);
             $(".select-min-time").append(`<option ${(subpage != undefined && subpage.minTime == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
         
-        } else {
+        } else if(i == 3) {
             $(".select-max-page").append(`<option ${(subpage != undefined && subpage.maxPage == i) ? "selected" : (i == 3) ? "selected" : ""} value="${i}">${i} trang</option>`);
             $(".select-max-time").append(`<option ${(subpage != undefined && subpage.maxTime == i*10) ? "selected" : (i == 3) ? "selected" : ""}  value="${i*10}">${i*10} s</option>`);
         }
@@ -504,12 +504,12 @@ function appendSelectSubPage(subpage) {
 
     $('.select-min-page, .select-max-page').select2({
         placeholder: "Số trang",
-        allowClear: true
+        // allowClear: true
     });
 
     $('.select-min-time, .select-max-time').select2({
         placeholder: "Số giây",
-        allowClear: true
+        // allowClear: true
     });
 }
 
