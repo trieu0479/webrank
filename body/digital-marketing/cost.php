@@ -186,8 +186,11 @@
                             <div class="mb-5 text-left">
                                 <div class="font-gg text-muted font-14">
                                     Nếu bạn không thể liên hệ với hỗ trợ viên, vui lòng gọi Hotline
-                                    <span class="font-gg font-weight-500 text-danger">0984 66 80 68 - 0901 47 48
-                                        46</span>
+                                    <span class="font-gg font-weight-500 text-danger">
+                                        <a href="tel:0984 66 80 68" class="font-gg font-weight-500 text-danger">0984 66 80 68</a>
+                                         - 
+                                        <a href="tel:0984 66 80 68" class="font-gg font-weight-500 text-danger">0901 47 48 46</a>
+                                    </span>
                                 </div>
                             </div>
                             <div class="">
