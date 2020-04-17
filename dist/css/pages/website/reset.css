@@ -467,6 +467,10 @@
     margin-bottom: 7px;
 }
 
+.parent-organicPositions table.dataTable tbody tr td {
+    padding: 15px 10px
+}
+
 
 /* css cua dung dep trai */
 
