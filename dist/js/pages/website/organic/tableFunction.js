@@ -366,6 +366,7 @@ $(document).ready(() => {
             },
             drawCallback: function(settings) {
                 $('[data-toggle="tooltip"]').tooltip();
+
             },
             columns: [{
                     title: "Stt",
@@ -430,7 +431,7 @@ $(document).ready(() => {
             },
             initComplete: function(settings, json) {
                 $("table.dataTable thead th").css("padding", "10px");
-                $("table.dataTable tbody tr td").css("padding", "15px 10px");
+                // $(".parent-organicPositions table.dataTable tbody tr td").css("padding", "15px 10px");
                 $(`#table-manager-cidads_wrapper`).css("overflow", "auto")
                 $(`.organicPositions`).css("text-align", "left")
                 renderSparkline("organicPositions");
@@ -445,5 +446,4 @@ $(document).ready(() => {
             }
         }
     )
-
 })
