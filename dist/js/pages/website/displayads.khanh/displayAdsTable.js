@@ -2,57 +2,50 @@ const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#64
 
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
-    var VIPModule = ["getWebsiteAdsVisitsOverview","getTrafficDestinationAds","getTrafficDisplayAdvertisingAds","getWebsiteAdsIntelDisplay","getScrapedSearchAds"];
+    var VIPModule = ["getTrafficDestinationAds", "getWebsiteAdsVisitsOverview"];
     if (level == 'demo') {
-        if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {            
+        if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
         }
     } else if (level == 'free') {
         if (VIPModule.includes(boxWidgetName)) {
-            if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
+            $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
         }
     }
 }
 
-const api = async (task, domain,reload=0) => {
+const api = async (task, domain, reload = 0) => {
     domain;
     try {
         return await $.ajax({
-                url: `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`,
-                type: "GET"
-            })
-            .then(data => {              
-                    switch (task) {                      
-                        case "getDesktopVsMobileVisits":
-                            getDesktopVsMobileVisits(task, data);
-                            break;
-                     
-                        case "getTrafficDisplayAdvertisingAds":                           
-                            getTrafficDisplayAdvertisingAds(task, data);
-                            break;                                                                                                                              
-                        case "getTrafficSourcesSearchDetails":
-                            getTrafficSourcesSearchDetails(task, data);
-                            break;                        
-                        case "getTrafficDestinationAds":                           
-                            getTrafficDestinationAds(task, data);
-                            break;                        
-                        case "getWebsiteAdsVisitsOverview":                          
-                            getWebsiteAdsVisitsOverview(task, data, domain);
-                            break;                       
-                        default:
-                            break;
-                    }
-                    lockedModule(task, data.userData.member)
-                    return;                
+            url: `//localapi.trazk.com/webdata/v3.1.php?task=${task}&domain=${domain}&reload=${reload}&userToken=${userToken}`,
+            type: "GET"
+        })
+            .then(data => {
+                switch (task) {
+                    case "getTrafficDisplayAdvertisingAds":
+                        getTrafficDisplayAdvertisingAds(task, data);
+                        break;
+                    case "getTrafficDestinationAds":
+                        getTrafficDestinationAds(task, data);
+                        break;
+                    case "getWebsiteAdsVisitsOverview":
+                        getWebsiteAdsVisitsOverview(task, data, domain);
+                        break;
+                    default:
+                        break;
+                }
+                lockedModule(task, data.userData.member)
+                return;
             });
     } catch (error) {
         console.error(error);
     }
 };
 
-//done
+//Truy Cập Quảng Cáo Hiển Thị
 const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
     let html = `<div class="bg-white shadow-sm rounded h-100">
     <div class="row border-bottom m-0 py-2">
@@ -74,7 +67,7 @@ const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
             <a class="similarReloadTask text-muted" data-task="getWebsiteAdsVisitsOverview"><i class="fal fa-sync"></i></a>
         </div>
     </div>
-    <div id="Parent-getWebsiteAdsVisitsOverview">
+    <div id="Parent-getWebsiteAdsVisitsOverview" class="">
         <div class="row rounded m-0 p-b-10 justify-content-center py-5" style="height: 270px">
             <div class="col-auto py-5 is-loading font-number h1 text-center parent-getWebsiteAdsVisitsOverview" id="getWebsiteAdsVisitsOverview">
             </div>
@@ -82,8 +75,8 @@ const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
     </div>
    </div>`
 
- $('.getWebsiteAdsVisitsOverview').html('').html(html)
- 
+    $('.getWebsiteAdsVisitsOverview').html('').html(html)
+
 
     if (data.status == "success") {
         if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data &&
@@ -101,168 +94,17 @@ const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
             $(`#getWebsiteAdsVisitsOverview`).parent().removeClass('empty-state');
         } else {
             $(`#getWebsiteAdsVisitsOverview`).removeClass('is-loading');
-              $('#Parent-getWebsiteAdsVisitsOverview').addClass('empty-state')
-              $('#Parent-getWebsiteAdsVisitsOverview').css('min-height','268px')
+            $('#Parent-getWebsiteAdsVisitsOverview').addClass('empty-state')
+            $('#Parent-getWebsiteAdsVisitsOverview').css('min-height', '268px')
         }
     } else {
         console.log(`${task} failed`);
     }
 }
 
-const getDesktopVsMobileVisits = async (task, data) => {
-    if (data.status == "success") {
-        let {
-            data: visits
-        } = data.data;
-
-        if (visits == null || visits.percentDesktop == 0 && visits.percentMobile == 0 && visits.totalDesktop == 0 && visits.totalMobile == 0 && visits.totalTraffic == 0) {
-            await $(`#${task}, #totalTraffic`).removeClass('is-loading').addClass("empty-state");
-            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-        } else {
-            const {
-                percentDesktop,
-                percentMobile,
-                totalDesktop,
-                totalMobile,
-                totalTraffic
-            } = visits;
-
-            let dataChart = [{
-                    name: 'Máy tính',
-                    value: percentDesktop
-                },
-                {
-                    name: 'Điện thoại',
-                    value: percentMobile
-                }
-            ];
-
-            // render chart
-
-            let ele = document.getElementById(task);
-
-            let myChart = echarts.init(ele);
-
-            let option = {
-                color: ['#a29bfe', '#00cec9'],
-                legend: {
-                    top: "25%",
-                    left: '60%',
-                    data: ['Máy tính', 'Điện thoại'],
-                    itemWidth: 20,
-                    itemHeight: 14,
-                    width: 10,
-                    textStyle: {
-                        fontFamily: 'Arial',
-                        lineHeight: 16
-                    },
-                    formatter: function (name) {
-                        let value = name == 'Máy tính' ? totalDesktop : totalMobile;
-                        return `${name}\n(${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')})`;
-                    }
-                },
-                series: [{
-                    type: 'pie',
-                    legendHoverLink: false,
-                    minAngle: 20,
-                    radius: ["50%", "80%"],
-                    center: ["30%", "50%"],
-                    avoidLabelOverlap: false,
-                    itemStyle: {
-                        normal: {
-                            borderColor: '#ffffff',
-                            borderWidth: 5,
-                        },
-                    },
-                    label: {
-                        normal: {
-                            show: false,
-                            position: 'center',
-                            formatter: '{text|{b}}\n{value|{d}%}',
-                            rich: {
-                                text: {
-                                    color: "#666",
-                                    fontSize: 12,
-                                    fontFamily: 'Arial',
-                                    align: 'center',
-                                    verticalAlign: 'middle',
-                                    padding: 5
-                                },
-                                value: {
-                                    color: "#8693F3",
-                                    fontSize: 24,
-                                    align: 'center',
-                                    verticalAlign: 'middle',
-                                },
-                            }
-                        },
-                        emphasis: {
-                            show: true,
-                            textStyle: {
-                                fontSize: 46,
-                            }
-                        }
-                    },
-                    data: dataChart
-                }]
-            };
-            myChart.setOption(option);
-
-
-            new ResizeSensor($(`#${task}`), function () {
-                myChart.resize();
-                setTimeout(function () {
-                    myChart.dispatchAction({
-                        type: 'highlight',
-                        seriesIndex: 0,
-                        dataIndex: 0
-                    });
-                }, 1000);
-            });
-
-            setTimeout(function () {
-                myChart.dispatchAction({
-                    type: 'highlight',
-                    seriesIndex: 0,
-                    dataIndex: 0
-                });
-
-                myChart.on('mouseover', function (params) {
-                    if (params.name == dataChart[0].name) {
-                        myChart.dispatchAction({
-                            type: 'highlight',
-                            seriesIndex: 0,
-                            dataIndex: 0
-                        });
-                    } else {
-                        myChart.dispatchAction({
-                            type: 'downplay',
-                            seriesIndex: 0,
-                            dataIndex: 0
-                        });
-                    }
-                });
-
-                myChart.on('mouseout', function (params) {
-                    myChart.dispatchAction({
-                        type: 'highlight',
-                        seriesIndex: 0,
-                        dataIndex: 0
-                    });
-                });
-            }, 1000);
-
-            await $(`#${task}, #totalTraffic`).removeClass('is-loading');
-            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-            $(`#totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
-        }
-    } else {
-        console.log(`${task} failed`);
-    }
-};
-
+// Kênh Quảng Cáo
 const getTrafficDisplayAdvertisingAds = async (task, data) => {
-    
+
     if (data.status == "success") {
         let {
             data: traffic
@@ -301,7 +143,7 @@ const getTrafficDisplayAdvertisingAds = async (task, data) => {
             let option = {
                 color: masterColor,
                 legend: {
-                    bottom:'5',
+                    bottom: '5',
                     orient: 'horizontal',
                     left: '5%',
                 },
@@ -361,8 +203,8 @@ const getTrafficDisplayAdvertisingAds = async (task, data) => {
                     charts[i].resize();
                 }
             };
-    
-    
+
+
 
             new ResizeSensor($(`.${task}`), function () {
                 chart.resize();
@@ -416,20 +258,22 @@ const getTrafficDisplayAdvertisingAds = async (task, data) => {
     }
 };
 
+// Trang Nguồn Quảng Cáo Hiển Thị
 const getTrafficDestinationAds = async (task, data) => {
-    if (data.data.data.length<=0) { 
+
+    if (data.data.data.length <= 0) {
         $('.parent-getTrafficDestinationAds').addClass('empty-state')
     }
     $(`#${task}`).html('');
     let {
         data: TrafficDestinationAds
     } = data.data.data;
-    
+
     $.each(TrafficDestinationAds, (index, site) => {
-        
-        if (site != null){
-        if (site.Domain == "grid.upgrade") return;
-        let html = `
+
+        if (site != null) {
+            if (site.Domain == "grid.upgrade") return;
+            let html = `
         <tr>
             <td><a title="${site.Domain}" href="index.php?view=traffic-website&action=result&domain=${site.Domain}"><img src="${site.Favicon}" class="p-1 mr-2 border rounded bg-secondary" />${site.Domain}</a></td>
             <td class="text-right">${numeral(site.Share).format('0.00%')}</td>
@@ -441,7 +285,10 @@ const getTrafficDestinationAds = async (task, data) => {
             <!--<div class="col-2 text-right ${(!site.Change) ? 'text-muted' : (site.Change > 0 ? 'text-success positive' : 'text-danger negative')}">${(!site.Change) ? '-' : ((site.Change.toString().charAt(0) === '-' ? numeral(Math.abs(site.Change)).format('0.00%') : numeral(site.Change).format('0.00%')))}</div> -->
         </tr>
         `
-        $(`#${task}`).append(html);
+            console.log(html, 'đdsadadas');
+            $(`#${task}`).append(html);
+
+
         }
     })
 

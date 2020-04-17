@@ -3423,20 +3423,21 @@ span.sub-tilte-content,
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #03a9f3!important
+    background-color: #ebedf2!important;
+    color: #74788d!important;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #03a9f3!important;
-    border: 1px solid #03a9f3!important;
-    color: #fff!important;
+    background-color: #ebedf2!important;
+    border: 1px solid #ebedf2!important;
+    color: #74788d!important;
     margin: 3px!important; 
     padding: 0 5px!important;
     font-size: 12px!important; 
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: #fff!important;
+    color: #74788d!important;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered { 
@@ -3487,7 +3488,7 @@ span.sub-tilte-content,
     left: 0;
     height: 18px;
     width: 18px;
-    margin: 3px 5px;
+    margin: 3px 0px;
 }
 
 .kt-checkbox.kt-checkbox--bold>span {
@@ -3597,3 +3598,23 @@ span.sub-tilte-content,
     height: 6px;
     border-radius: 100%!important;
 } 
+
+.ads-is-loading:before {
+    content: "" !important;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    margin-top: -12px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    border-top-color: #fff;
+    animation: Fb .6s linear infinite;
+}
+
+.white-space-nowrap{
+    white-space: nowrap;
+}

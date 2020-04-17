@@ -1,12 +1,28 @@
 //US,GB,AU,FR,
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 
-var localUrl = new URL(location.href);
-var domain = localUrl.searchParams.get('domain');
+function appendHTML(arr) {
+    for (const key in arr) {
+        let html = `
+        <div class="col-12 mb-0">
+                    <div class="row-public-footer d-flex">
+                        <div class="row-percent-highlight" style="width:${numeral(arr[key].percentage).format('0,0') + '%'}"></div>
+                        <div class="left-public d-flex align-items-center h-100">
+                            <div class="category-pb cate-1 font-12 line-height-18">${arr[key].name}</div>
+                        </div>
+                        <div class="right-public">
+                            <div class="percent count-buss text-info">${arr[key].percentage + '%'}</div>
+                        </div>
+                    </div>
+                </div>
+        `
+        $('#topPublishersCategories').append(html)
+    }
+}
 
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
-    var VIPModule = ["SampleAdsasHTML", "topPublicSher", "getAllImageTable", "PublicSherTable", "getWebsiteAdsIntelDisplay", "getTrafficDestinationAds", "adwordsMonthlyFullTrend", "adTypeOverview", "displayDevice"];
+    var VIPModule = ["SampleAdsasHTML", "topPublicSher", "adTypeOverview", "displayDevice"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             //ngoai le 
@@ -17,8 +33,12 @@ function lockedModule(boxWidgetName, level) {
         }
     } else if (level == 'free') {
         if (VIPModule.includes(boxWidgetName)) {
-            if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
+            $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+            if (boxWidgetName == 'SampleAdsasImage' && boxWidgetName == 'SampleAds') {
+                $(".parent-" + boxWidgetName).addClass("locked");
+                $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+            }
         }
     }
 }
@@ -27,13 +47,13 @@ const api = async (method, domain) => {
     if (method == "displayAdsOverview" || method == "adTypeOverview") {
         method = "displayAdsOverview"
     }
-    if (method == "SampleAdsasImage" || method == "getAllImageTable") {
+    if (method == "SampleAdsasImage") {
         method = "bannerAds"
     }
-    if (method == "SampleAdsasHTML" || method == "getAllHTMLTable") {
+    if (method == "SampleAdsasHTML") {
         method = "htmlAds"
     }
-    if (method == "SampleAdsasText" || method == "getAllTextTable") {
+    if (method == "SampleAdsasText") {
         method = "textAds"
     }
     if (method == "displayDevice") {
@@ -44,9 +64,6 @@ const api = async (method, domain) => {
     }
     if (method == "topPublicSher" || method == "getDisplayGenderChart" || method == "getDisplayAgeChart") {
         method = "publishersOveview"
-    }
-    if (method == "PublicSherTable") {
-        method = "publishersDetail"
     }
 
     try {
@@ -97,14 +114,13 @@ const api = async (method, domain) => {
             })
 
     } catch (error) {
-        //console.log(error);
+        console.log(error);
 
     }
 }
 function kFormatter(num) {
     return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
 }
-
 
 // header DisPlay
 const displayAdsOverview = async (data, method) => {
@@ -152,6 +168,7 @@ const SampleAdsasImage = async (data, method) => {
 
     if (data.data.bannerAds == "") {
         $('.sample-image-ads').addClass('empty-state')
+        $('#btn-view-image').addClass('d-none')
     }
     data.data.bannerAds.forEach((val, index) => {
         if (index < 5) {
@@ -176,6 +193,7 @@ const SampleAdsasImage = async (data, method) => {
 const SampleAdsasHTML = async (data, method) => {
     if (data.data.htmlAds == '') {
         $('.sample-html-ads').addClass('empty-state')
+        $('#btn-view-html').addClass('d-none')
     }
     data.data.htmlAds.forEach((val, index) => {
         if (index < 5) {
@@ -202,6 +220,7 @@ const SampleAdsasHTML = async (data, method) => {
 const SampleAdsasText = async (data, method) => {
     if (data.data.textAds == '') {
         $('#sample-text-ads').addClass('empty-state')
+        $('#btn-view-text').addClass('d-none')
     }
     data.data.textAds.forEach((val, index) => {
         if (index < 5) {
@@ -250,153 +269,156 @@ const getDisplayCountryChart = async (data, method) => {
                 value_fr = res[i].v;
             } else {
                 value_other += res[i].v;
-
-
             }
         }
-        let dataChart = [{
-            name: 'United States',
-            value: value_us
-        },
-        {
-            name: 'United Kingdom',
-            value: value_gb
-        },
-        {
-            name: 'Australia',
-            value: value_au
-        },
-        {
-            name: 'France',
-            value: value_fr
-        },
-        {
-            name: 'Other',
-            value: value_other
-        },
-
-        ];
-
-        // render chart        
-        let myChart = document.getElementsByClassName('getDisplayCountryChart');
-
-        let option = {
-            color: masterColor,
-            legend: {
-                bottom: '20',
-                orient: 'horizontal',
-                left: '10%',
-                data: ['United States', 'United Kingdom', 'Australia', 'France', 'Other'],
-
+        if (value_other != 0) {
+            let dataChart = [{
+                name: 'United States',
+                value: value_us
             },
-            series: [{
-                type: 'pie',
-                legendHoverLink: false,
-                minAngle: 20,
-                radius: ["40%", "60%"],
-                center: ["50%", "35%"],
-                avoidLabelOverlap: false,
-                itemStyle: {
-                    normal: {
-                        borderColor: '#ffffff',
-                        borderWidth: 5,
-                    },
+            {
+                name: 'United Kingdom',
+                value: value_gb
+            },
+            {
+                name: 'Australia',
+                value: value_au
+            },
+            {
+                name: 'France',
+                value: value_fr
+            },
+            {
+                name: 'Other',
+                value: value_other
+            },
+
+            ];
+
+            // render chart        
+            let myChart = document.getElementsByClassName('getDisplayCountryChart');
+
+            let option = {
+                color: masterColor,
+                legend: {
+                    bottom: '20',
+                    orient: 'horizontal',
+                    left: '10%',
+                    data: ['United States', 'United Kingdom', 'Australia', 'France', 'Other'],
+
                 },
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center',
-                        formatter: '{text|{b}}\n{value|{d}%}',
-                        rich: {
-                            text: {
-                                color: "#666",
-                                fontSize: 12,
-                                fontFamily: 'Arial',
-                                align: 'center',
-                                verticalAlign: 'middle',
-                                padding: 5
-                            },
-                            value: {
-                                color: "#8693F3",
-                                fontSize: 24,
-                                align: 'center',
-                                verticalAlign: 'middle',
-                            },
+                series: [{
+                    type: 'pie',
+                    legendHoverLink: false,
+                    minAngle: 20,
+                    radius: ["40%", "60%"],
+                    center: ["50%", "35%"],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#ffffff',
+                            borderWidth: 5,
+                        },
+                    },
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center',
+                            formatter: '{text|{b}}\n{value|{d}%}',
+                            rich: {
+                                text: {
+                                    color: "#666",
+                                    fontSize: 12,
+                                    fontFamily: 'Arial',
+                                    align: 'center',
+                                    verticalAlign: 'middle',
+                                    padding: 5
+                                },
+                                value: {
+                                    color: "#8693F3",
+                                    fontSize: 24,
+                                    align: 'center',
+                                    verticalAlign: 'middle',
+                                },
+                            }
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: 46,
+                            }
                         }
                     },
-                    emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: 46,
-                        }
-                    }
-                },
-                data: dataChart
-            }]
-        };
-        var charts = [];
-        for (var i = 0; i < myChart.length; i++) {
-            var chart = echarts.init(myChart[i]);
-            chart.setOption(option);
-            charts.push(chart);
-        }
-
-
-        window.onresize = function () {
-            for (var i = 0; i < charts.length; ++i) {
-                charts[i].resize();
+                    data: dataChart
+                }]
+            };
+            var charts = [];
+            for (var i = 0; i < myChart.length; i++) {
+                var chart = echarts.init(myChart[i]);
+                chart.setOption(option);
+                charts.push(chart);
             }
-        };
 
-        new ResizeSensor($(`.getDisplayCountryChart`), function () {
-            chart.resize();
+
+            window.onresize = function () {
+                for (var i = 0; i < charts.length; ++i) {
+                    charts[i].resize();
+                }
+            };
+
+            new ResizeSensor($(`.getDisplayCountryChart`), function () {
+                chart.resize();
+                setTimeout(function () {
+                    chart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0,
+                        dataIndex: 0
+                    });
+                }, 1000);
+            });
+
             setTimeout(function () {
                 chart.dispatchAction({
                     type: 'highlight',
                     seriesIndex: 0,
                     dataIndex: 0
                 });
-            }, 1000);
-        });
 
-        setTimeout(function () {
-            chart.dispatchAction({
-                type: 'highlight',
-                seriesIndex: 0,
-                dataIndex: 0
-            });
+                chart.on('mouseover', function (params) {
+                    if (params.name == dataChart[0].name) {
+                        chart.dispatchAction({
+                            type: 'highlight',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    } else {
+                        chart.dispatchAction({
+                            type: 'downplay',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    }
+                });
 
-            chart.on('mouseover', function (params) {
-                if (params.name == dataChart[0].name) {
+                chart.on('mouseout', function (params) {
                     chart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
-                } else {
-                    chart.dispatchAction({
-                        type: 'downplay',
-                        seriesIndex: 0,
-                        dataIndex: 0
-                    });
-                }
-            });
-
-            chart.on('mouseout', function (params) {
-                chart.dispatchAction({
-                    type: 'highlight',
-                    seriesIndex: 0,
-                    dataIndex: 0
                 });
-            });
-        }, 1000);
+            }, 1000);
 
-        await $(`.getDisplayCountryChart`).removeClass('is-loading');
-        await $(`.similarReloadTask[data-task="getDisplayCountryChart"]`).find('i').removeClass('fa-spin');
-        // $(`#totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
+            await $(`.getDisplayCountryChart`).removeClass('is-loading');
+            await $(`.similarReloadTask[data-task="getDisplayCountryChart"]`).find('i').removeClass('fa-spin');
+            // $(`#totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
+        } else {
+            $('.getDisplayCountryChart').addClass('empty-state').removeClass('is-loading')
+        }
+
 
     } else {
-        $('.getDisplayCountryChart').addClass('empty-state')
+        $('.getDisplayCountryChart').addClass('empty-state').removeClass('is-loading')
     }
 }
 
@@ -407,134 +429,139 @@ const getDisplayGenderChart = async (data, method) => {
     value_male = res.male
     value_female = res.female
 
-    let dataChart = [{
-        name: 'Male',
-        value: value_male
-    },
-    {
-        name: 'Female',
-        value: value_female
-    }
-    ];
-
     // render chart gender
     if (data.status = "success") {
-        let myChart = document.getElementsByClassName('getDisplayGenderChart');
+        if (value_male != 0 && value_female != 0 && res.length != 0) {
 
-        let option = {
-            color: ['#0abb87', '#ffb822'],
-            legend: {
-                bottom: '20',
-                orient: 'horizontal',
-                left: '30%',
+
+            let dataChart = [{
+                name: 'Male',
+                value: value_male
             },
-            series: [{
-                type: 'pie',
-                legendHoverLink: false,
-                minAngle: 20,
-                radius: ["40%", "60%"],
-                center: ["50%", "35%"],
-                avoidLabelOverlap: false,
-                itemStyle: {
-                    normal: {
-                        borderColor: '#ffffff',
-                        borderWidth: 5,
-                    },
-                },
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center',
-                        formatter: '{text|{b}}\n{value|{d}%}',
-                        rich: {
-                            text: {
-                                color: "#666",
-                                fontSize: 12,
-                                fontFamily: 'Arial',
-                                align: 'center',
-                                verticalAlign: 'middle',
-                                padding: 5
-                            },
-                            value: {
-                                color: "#8693F3",
-                                fontSize: 24,
-                                align: 'center',
-                                verticalAlign: 'middle',
-                            },
-                        }
-                    },
-                    emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: 46,
-                        }
-                    }
-                },
-                data: dataChart
-            }]
-        }
-        var charts = [];
-        for (var i = 0; i < myChart.length; i++) {
-            var chart = echarts.init(myChart[i]);
-            chart.setOption(option);
-            charts.push(chart);
-        }
-
-
-        window.onresize = function () {
-            for (var i = 0; i < charts.length; ++i) {
-                charts[i].resize();
+            {
+                name: 'Female',
+                value: value_female
             }
-        };
+            ];
+            let myChart = document.getElementsByClassName('getDisplayGenderChart');
+
+            let option = {
+                color: ['#0abb87', '#ffb822'],
+                legend: {
+                    bottom: '20',
+                    orient: 'horizontal',
+                    left: '30%',
+                },
+                series: [{
+                    type: 'pie',
+                    legendHoverLink: false,
+                    minAngle: 20,
+                    radius: ["40%", "60%"],
+                    center: ["50%", "35%"],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#ffffff',
+                            borderWidth: 5,
+                        },
+                    },
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center',
+                            formatter: '{text|{b}}\n{value|{d}%}',
+                            rich: {
+                                text: {
+                                    color: "#666",
+                                    fontSize: 12,
+                                    fontFamily: 'Arial',
+                                    align: 'center',
+                                    verticalAlign: 'middle',
+                                    padding: 5
+                                },
+                                value: {
+                                    color: "#8693F3",
+                                    fontSize: 24,
+                                    align: 'center',
+                                    verticalAlign: 'middle',
+                                },
+                            }
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: 46,
+                            }
+                        }
+                    },
+                    data: dataChart
+                }]
+            }
+            var charts = [];
+            for (var i = 0; i < myChart.length; i++) {
+                var chart = echarts.init(myChart[i]);
+                chart.setOption(option);
+                charts.push(chart);
+            }
 
 
-        new ResizeSensor($(`.getDisplayGenderChart`), function () {
-            chart.resize();
+            window.onresize = function () {
+                for (var i = 0; i < charts.length; ++i) {
+                    charts[i].resize();
+                }
+            };
+
+
+            new ResizeSensor($(`.getDisplayGenderChart`), function () {
+                chart.resize();
+                setTimeout(function () {
+                    chart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0,
+                        dataIndex: 0
+                    });
+                }, 1000);
+            });
+
             setTimeout(function () {
                 chart.dispatchAction({
                     type: 'highlight',
                     seriesIndex: 0,
                     dataIndex: 0
                 });
-            }, 1000);
-        });
 
-        setTimeout(function () {
-            chart.dispatchAction({
-                type: 'highlight',
-                seriesIndex: 0,
-                dataIndex: 0
-            });
+                chart.on('mouseover', function (params) {
+                    if (params.name == dataChart[0].name) {
+                        chart.dispatchAction({
+                            type: 'highlight',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    } else {
+                        chart.dispatchAction({
+                            type: 'downplay',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    }
+                });
 
-            chart.on('mouseover', function (params) {
-                if (params.name == dataChart[0].name) {
+                chart.on('mouseout', function (params) {
                     chart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
-                } else {
-                    chart.dispatchAction({
-                        type: 'downplay',
-                        seriesIndex: 0,
-                        dataIndex: 0
-                    });
-                }
-            });
-
-            chart.on('mouseout', function (params) {
-                chart.dispatchAction({
-                    type: 'highlight',
-                    seriesIndex: 0,
-                    dataIndex: 0
                 });
-            });
-        }, 1000);
+            }, 1000);
 
-        await $(`.getDisplayGenderChart`).removeClass('is-loading');
+            await $(`.getDisplayGenderChart`).removeClass('is-loading');
 
+        } else {
+            $('.getDisplayGenderChart').addClass('empty-state').removeClass('is-loading')
+        }
     } else {
-        $('.getDisplayGenderChart').addClass('empty-state')
+        $('.getDisplayGenderChart').addClass('empty-state').removeClass('is-loading')
     }
 
 }
@@ -577,121 +604,125 @@ const getDisplayAgeChart = async (data, method) => {
 
     if (data.status == "success") {
         // render chart
-        let myChart = document.getElementsByClassName('getDisplayAgeChart');
-        let option = {
-            color: ['#646c9a', '#48465b', '#0abb87', '#ffb822', '#fd397a', '#5d78ff'],
-            legend: {
-                data: ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'],
-                bottom: '20',
-                orient: 'horizontal',
-                left: '10%',
+        if (value_18 != 0 && value_25 != 0 && value_35 != 0 && value_45 != 0 && value_55 != 0 && value_65 != 0 && res.length != 0) {
+            let myChart = document.getElementsByClassName('getDisplayAgeChart');
+            let option = {
+                color: ['#646c9a', '#48465b', '#0abb87', '#ffb822', '#fd397a', '#5d78ff'],
+                legend: {
+                    data: ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'],
+                    bottom: '20',
+                    orient: 'horizontal',
+                    left: '10%',
 
-            },
-            series: [{
-                type: 'pie',
-                legendHoverLink: false,
-                minAngle: 20,
-                radius: ["40%", "60%"],
-                center: ["50%", "35%"],
-                avoidLabelOverlap: false,
-                itemStyle: {
-                    normal: {
-                        borderColor: '#ffffff',
-                        borderWidth: 5,
-                    },
                 },
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center',
-                        formatter: '{text|{b}}\n{value|{d}%}',
-                        rich: {
-                            text: {
-                                color: "#666",
-                                fontSize: 12,
-                                fontFamily: 'Arial',
-                                align: 'center',
-                                verticalAlign: 'middle',
-                                padding: 5
-                            },
-                            value: {
-                                color: "#8693F3",
-                                fontSize: 24,
-                                align: 'center',
-                                verticalAlign: 'middle',
-                            },
+                series: [{
+                    type: 'pie',
+                    legendHoverLink: false,
+                    minAngle: 20,
+                    radius: ["40%", "60%"],
+                    center: ["50%", "35%"],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#ffffff',
+                            borderWidth: 5,
+                        },
+                    },
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center',
+                            formatter: '{text|{b}}\n{value|{d}%}',
+                            rich: {
+                                text: {
+                                    color: "#666",
+                                    fontSize: 12,
+                                    fontFamily: 'Arial',
+                                    align: 'center',
+                                    verticalAlign: 'middle',
+                                    padding: 5
+                                },
+                                value: {
+                                    color: "#8693F3",
+                                    fontSize: 24,
+                                    align: 'center',
+                                    verticalAlign: 'middle',
+                                },
+                            }
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: 46,
+                            }
                         }
                     },
-                    emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: 46,
-                        }
-                    }
-                },
-                data: dataChart
-            }]
-        };
+                    data: dataChart
+                }]
+            };
 
-        var charts = [];
-        for (var i = 0; i < myChart.length; i++) {
-            var chart = echarts.init(myChart[i]);
-            chart.setOption(option);
-            charts.push(chart);
-        }
-        window.onresize = function () {
-            for (var i = 0; i < charts.length; ++i) {
-                charts[i].resize();
+            var charts = [];
+            for (var i = 0; i < myChart.length; i++) {
+                var chart = echarts.init(myChart[i]);
+                chart.setOption(option);
+                charts.push(chart);
             }
-        };
+            window.onresize = function () {
+                for (var i = 0; i < charts.length; ++i) {
+                    charts[i].resize();
+                }
+            };
 
 
-        new ResizeSensor($(`.getDisplayAgeChart`), function () {
-            chart.resize();
+            new ResizeSensor($(`.getDisplayAgeChart`), function () {
+                chart.resize();
+                setTimeout(function () {
+                    chart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0,
+                        dataIndex: 0
+                    });
+                }, 1000);
+            });
+
             setTimeout(function () {
                 chart.dispatchAction({
                     type: 'highlight',
                     seriesIndex: 0,
                     dataIndex: 0
                 });
-            }, 1000);
-        });
 
-        setTimeout(function () {
-            chart.dispatchAction({
-                type: 'highlight',
-                seriesIndex: 0,
-                dataIndex: 0
-            });
+                chart.on('mouseover', function (params) {
+                    if (params.name == dataChart[0].name) {
+                        chart.dispatchAction({
+                            type: 'highlight',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    } else {
+                        chart.dispatchAction({
+                            type: 'downplay',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    }
+                });
 
-            chart.on('mouseover', function (params) {
-                if (params.name == dataChart[0].name) {
+                chart.on('mouseout', function (params) {
                     chart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
-                } else {
-                    chart.dispatchAction({
-                        type: 'downplay',
-                        seriesIndex: 0,
-                        dataIndex: 0
-                    });
-                }
-            });
-
-            chart.on('mouseout', function (params) {
-                chart.dispatchAction({
-                    type: 'highlight',
-                    seriesIndex: 0,
-                    dataIndex: 0
                 });
-            });
-        }, 1000);
+            }, 1000);
 
-        await $(`.getDisplayAgeChart`).removeClass('is-loading');
-        // await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-        // $(`#totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
+            await $(`.getDisplayAgeChart`).removeClass('is-loading');
+            // await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+            // $(`#totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
+        } else {
+            $('.getDisplayAgeChart').addClass('empty-state').removeClass('is-loading')
+        }
 
     } else {
         $('.getDisplayAgeChart').addClass('empty-state')
@@ -704,29 +735,10 @@ const getDisplayAgeChart = async (data, method) => {
 // ----------------Top Publisher's Categories------------
 const topPublicSher = async (data, method) => {
     var res = data.data.publishersOveview.categories;
-    if (res.length <= 0) {
+    if (res.length == 0) {
         $('.list-public').addClass('empty-state')
-    }
-    {
-        $('.cate-1').html(res['0'].name)
-        $('.count-buss').html(res['0'].percentage + '%')
-        $('#hl-buss').css('width', (numeral(res['0'].percentage).format('0,0') + '%'))
-    } {
-        $('.cate-2').html(res['1'].name)
-        $('.count-art').html(res['1'].percentage + '%')
-        $('#hl-art').css('width', (numeral(res['1'].percentage).format('0,0') + '%'))
-    } {
-        $('.cate-3').html(res['2'].name)
-        $('.count-internet').html(res['2'].percentage + '%')
-        $('#hl-it').css('width', (numeral(res['2'].percentage).format('0,0') + '%'))
-    } {
-        $('.cate-4').html(res['3'].name)
-        $('.count-job').html(res['3'].percentage + '%')
-        $('#hl-job').css('width', (numeral(res['3'].percentage).format('0,0') + '%'))
-    } {
-        $('.cate-5').html(res['4'].name)
-        $('.count-people').html(res['4'].percentage + '%')
-        $('#hl-pp').css('width', (numeral(res['4'].percentage).format('0,0') + '%'))
+    } else {
+        appendHTML(res)
     }
     await $(`.similarReloadTask[data-task="topPublicSher"]`).find('i').removeClass('fa-spin');
 
@@ -788,24 +800,19 @@ $(document).ready(function () {
         let task = $(this).data("task");
 
         $(this).find('i').addClass('fa-spin');
-        if (task == "getTrafficDisplayAdvertisingAds" || task == "getTrafficDestinationAds" || task == "getTrafficDisplayAdvertisingWebsitesTable") {
-            return;
+        if (task == "SampleAds") {
+            $('.sample-image-ads').html('')
+            $('.sample-html-ads').html('')
+            $('.sample-text-ads').html('')
+            $('.sample-image-ads').html('')
+            await api("SampleAdsasImage", domain).then((res) => $(this).find('i').removeClass('fa-spin'))
+            await api("SampleAdsasHTML", domain).then((res) => $(this).find('i').removeClass('fa-spin'))
+            await api("SampleAdsasText", domain).then((res) => $(this).find('i').removeClass('fa-spin'))
+        } else {
+            await api(task, domain).then((res) => $(this).find('i').removeClass('fa-spin'))
         }
-        else {
-            if (task == "PublicSherTable") {
-                $(this).parent().html('')
-            }
-            if (task == "SampleAds") {
-                $('.sample-image-ads').html('')
-                $('.sample-html-ads').html('')
-                $('.sample-text-ads').html('')
-                $('.sample-image-ads').html('')
-                await api("SampleAdsasImage", localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-                await api("SampleAdsasHTML", localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-                await api("SampleAdsasText", localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-            }
-            await api(task, localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
-        }
+
+
     })
 
     $('#Tabsample a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

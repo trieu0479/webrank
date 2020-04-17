@@ -2,16 +2,16 @@ import api from './echartFunctions.js';
 $(document).ready(function() {
     api("getHeader", localDomain);
     api("estmatedWorth", localDomain);
-    api("getTrafficAndEngagementVisitsMonthly", localDomain);
-    api("getWebsiteGeography", localDomain);
-    api("getMarketingMixOverviewDaily", localDomain);
+    //api("getTrafficAndEngagementVisitsMonthly", localDomain);
+    // api("getWebsiteGeography", localDomain);
+    //api("getMarketingMixOverviewDaily", localDomain);
     api("getDomainBackLinkDetail", localDomain);
     api("getTrafficSocial", localDomain);
     api("getDomainOverviewV2", localDomain);
     //api('getScrapedSearchAds', localDomain)
     //api('adwordsCompetitorsOverview', localDomain)
     //api('getTraffic30Days', localDomain)
-        // ORGANIC
+    // ORGANIC
     var input = {};
     input.headerTitle = "Chi tiết truy cập theo từ khoá tự nhiên- Có thương hiệu";
     input.headerTime = "12.2019 - 02.2020";
@@ -55,13 +55,23 @@ $(document).ready(function() {
     input.widgetTask = "getTrafficOverviewCustomerResources";
     input.widgetContainer = "widget-getTrafficOverviewCustomerResources";
     createAWidgets(input)
+
     var input = {};
     input.headerTitle = "Phân tích nguồn khách hàng";
     input.headerTime = "12.2019 - 02.2020";
     input.widgetTask = "getTrafficOverviewCustomerSourceAnalysis";
     input.widgetContainer = "widget-getTrafficOverviewCustomerSourceAnalysis";
     createAWidgets(input)
-        // CHART MOI NHAT
+
+    var input = {};
+    input.headerTitle = "Subdomains";
+    input.headerTime = "12.2019 - 02.2020";
+    input.widgetTask = "getSubdomains";
+    input.widgetContainer = "widget-getSubdomains";
+    createADataTable(input);
+
+    // HET CHART MOI NHAT
+    /*
     var input = {};
     input.headerTitle = "Truy cập theo tháng";
     input.headerTime = "12.2019 - 02.2020";
@@ -79,14 +89,15 @@ $(document).ready(function() {
     if (createAWidgets(input)) {
         api("getTrafficSourcesOverview", localDomain);
     }
+
+        */
+
     var input = {};
     input.headerTitle = "Truy cập theo tiết bị";
     input.headerTime = "12.2019 - 02.2020";
     input.widgetTask = "getDesktopVsMobileVisits";
     input.widgetContainer = "widget-getDesktopVsMobileVisits";
-    if (createAWidgets(input)) {
-        api("getDesktopVsMobileVisits", localDomain);
-    }
+    createAWidgets(input)
     var input = {};
     input.headerTitle = "Giới tính khách hàng";
     input.headerTime = "12.2019 - 02.2020";
