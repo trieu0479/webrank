@@ -41,10 +41,10 @@
                                     Trước khi marketing nên bổ xung thêm các công cụ để thu data khách hàng. 
                                 </div>
                             </div> 
-                            <div class="mb-3 w-100"> 
-                                <iframe class="iframeContainer-maxlead" width="100%" height="500" scrolling="no" id="iframeContainer-maxlead" src="http://themes.trazk.com/003/maxLead_CallButton/preview_url.php?url=https://fff.com.vn&widgetId=5e9275b4dc572" allowtransparency="true" frameborder="0"></iframe>
+                            <div class="mb-2 w-100"> 
+                                <iframe class="iframeContainer-maxlead border" width="100%" height="500" scrolling="no" id="iframeContainer-maxlead" src="http://themes.trazk.com/003/maxLead_CallButton/preview_url.php?url=https://fff.com.vn&widgetId=5e9275b4dc572" allowtransparency="true" frameborder="0"></iframe>
                             </div>
-                            <div class="mb-4 bg-dark-2 px-3 py-2 text-left">
+                            <div class="mb-5 text-muted text-left">
                                 <div class="font-gg font-14">MaxContact giúp khách hàng dễ dàng tìm thấy thông tin liên hệ của bạn. Công cụ này giúp tăng thêm đến 30% khách hàng liên lạc.</div>
                             </div>
                             <div class="">

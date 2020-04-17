@@ -26,7 +26,7 @@
             <div class="row mt-5 justify-content-center"> 
                 <div class="col-12 text-center" style="max-width: 700px">
                     <div class="pb-5">
-                        <div class="bg-white px-3 py-5 rounded shadow-sm">
+                        <div class="bg-white px-4 py-5 rounded shadow-sm">
                             <div class="mb-5">
                                 <div class="font-gg font-weight-bold font-18">
                                     Bổ xung thông tin

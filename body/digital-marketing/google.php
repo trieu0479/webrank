@@ -24,11 +24,17 @@
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);" 
                             href="<?=$rootURL?>">Widget</a> 
                     </div>
+                    <div class="align-self-center mr-3">
                     <i class="fas fa-chevron-right text-muted"></i>
                     </div>
-                    <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a 
-                            href="<?=$rootURL?>">Google Ads</a> 
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="<?=$rootURL?>">Chat bot</a> </div>
+                    <div class="align-self-center mr-3">
+                    <i class="fas fa-chevron-right text-muted"></i>
                     </div>
+                    <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a
+                            href="<?=$rootURL?>">Google Ads</a> </div>
+                    <div class="align-self-center mr-3">
 
                 </div>
 
@@ -46,11 +52,11 @@
                                     Đưa website của bạn lên top Google Search nhanh chóng, bạn chủ động quản lý vị trí quảng cáo và chi phí chi trả cho Google
                                 </div>
                             </div> 
-                            <div class="mb-3 w-100" style="height: 400px"> 
-                            
+                            <div class="mb-3 w-100"> 
+                                <img class="border rounded" src="./dist/images/google-ads.png" alt="">
                             </div>
-                            <div class="mb-4 bg-dark-2 px-3 py-2 text-left">
-                                <div class="font-gg font-14">Google Ads là công cụ quảng cáo của Google, Google chỉ tính chi phí khi khách hàng bấm chuột vào quảng cáo.</div>
+                            <div class="mb-5 text-left">
+                                <div class="font-gg font-14 text-muted">Google Ads là công cụ quảng cáo của Google, Google chỉ tính chi phí khi khách hàng bấm chuột vào quảng cáo.</div>
                             </div>
                             <div class="">
                                 <button class="btn-skip btn btn-info font-gg font-15 font-weight-500 px-4 mr-3">Bỏ qua công cụ này</button>

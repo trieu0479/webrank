@@ -19,14 +19,18 @@
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
                             href="<?=$rootURL?>">Contact</a> </div>
                     <div class="align-self-center mr-3">
-                    <i class="fas fa-chevron-right text-muted"></i>
+                        <i class="fas fa-chevron-right text-muted"></i>
                     </div>
-                    <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a 
+                    <div class="align-self-center font-14 mr-3"> <a  style="color: rgba(79,80,80,.7);" 
                             href="<?=$rootURL?>">Widget</a> 
                     </div>
-
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a 
+                            href="<?=$rootURL?>">Chat bot</a> 
+                    </div>
                 </div>
-
             </div>
             <!-- sub menu --> 
             <div class="row mt-5 justify-content-center"> 
@@ -41,11 +45,11 @@
                                     Trước khi marketing nên bổ xung thêm các công cụ để thu data khách hàng. 
                                 </div>
                             </div> 
-                            <div class="mb-3 w-100"> 
-                                <iframe class="iframeContainer-maxlead" width="100%" height="100%" scrolling="no" id="iframeContainer-maxlead" src="http://widgets.editor.local/demo/003/maxLead_CallButton/demo_url.php?url=https://fff.com.vn" allowtransparency="true" frameborder="0"></iframe>
+                            <div class="mb-2 w-100"> 
+                                <iframe class="iframeContainer-maxlead border" width="100%" height="500px" scrolling="no" id="iframeContainer-maxlead" src="http://widgets.editor.local/demo/003/maxLead_CallButton/demo_url.php?url=https://fff.com.vn" allowtransparency="true" frameborder="0"></iframe>
                             </div>
-                            <div class="mb-4 bg-dark-2 px-3 py-2 text-left">
-                                <div class="font-gg font-14">Chatbot giúp bạn chăm sóc, giới thiệu sản phẩm cho khách hàng, đồng thời lấy số điện thoại của khách hàng ngay cả khi bạn không online.</div>
+                            <div class="mb-5 text-left">
+                                <div class="font-gg font-14 text-muted">Chatbot giúp bạn chăm sóc, giới thiệu sản phẩm cho khách hàng, đồng thời lấy số điện thoại của khách hàng ngay cả khi bạn không online.</div>
                             </div>
                             <div class="">
                                 <button class="btn-skip btn btn-info font-gg font-15 font-weight-500 px-4 mr-3">Bỏ qua công cụ này</button>

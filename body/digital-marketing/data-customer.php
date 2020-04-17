@@ -10,7 +10,7 @@
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
-                    <div class="align-self-center font-14 mr-3" > <a style="color: rgba(79,80,80,.7);"
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
                             href="<?=$rootURL?>">Marketing</a>
                     </div>
                     <div class="align-self-center mr-3">
@@ -19,11 +19,33 @@
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
                             href="<?=$rootURL?>">Contact</a> </div>
                     <div class="align-self-center mr-3">
-                    <i class="fas fa-chevron-right text-muted"></i>
+                        <i class="fas fa-chevron-right text-muted"></i>
                     </div>
-                    <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a 
-                            href="<?=$rootURL?>">Widget</a> 
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="<?=$rootURL?>">Widget</a>
                     </div>
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="<?=$rootURL?>">Chat bot</a> </div>
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="<?=$rootURL?>">Google Ads</a> </div>
+                    <div class="align-self-center mr-3">
+                    </div>
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="<?=$rootURL?>">Traffic Website</a> </div> 
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a
+                            href="<?=$rootURL?>">Data Customer</a> </div> 
 
                 </div>
 
@@ -44,8 +66,8 @@
                             <div class="mb-3 w-100"> 
                                 <img class="w-100 rounded border" src="./dist/images/danh-sach-khach-hang.png">
                             </div>
-                            <div class="mb-4 bg-dark-2 px-3 py-2 text-left">
-                                <div class="font-gg font-14">FFF App là ứng dụng dùng trên di động, giúp bạn theo dõi và quản lý khách hàng mọi lúc mọi nơi.</div>
+                            <div class="mb-5 text-left">
+                                <div class="font-gg font-14 text-muted">FFF App là ứng dụng dùng trên di động, giúp bạn theo dõi và quản lý khách hàng mọi lúc mọi nơi.</div>
                             </div>
                             <div class="">
                                 <button class="btn-skip btn btn-info font-gg font-15 font-weight-500 px-4 mr-3">Bỏ qua công cụ này</button>
