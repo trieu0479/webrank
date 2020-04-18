@@ -359,7 +359,10 @@ function htmlConfigGoogle(array_keywords) {
         <div class="px-4 py-3">
             <div class="text-left d-flex no-block flex-column">
                 <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">Thêm từ khóa</div>
-                <input id="input-keywords" value="" type="text" class="font-13 text-muted form-control" placeholder="Nhập từ khóa"/>
+                <div class="d-flex">
+                    <input id="input-keywords" value="" type="text" class="font-13 text-muted form-control" placeholder="Nhập từ khóa"/>
+                    <button class="ml-3 btn-keywords btn btn-primary font-gg font-14 px-4">Thêm</button>
+                </div>
                 <div class="keywords mt-2">
                     ${(content != "") ? content : ""}
                 </div>
@@ -1437,17 +1440,24 @@ $(document).ready(() => {
         $(".config-rate").css("z-index","0");
     })
 
-    $("body").on("keypress","#input-keywords", function(e) {
-        let val = $(this).val().trim()
-        if(e.which == 13 && val != "" && val != arr_keywords_google[arr_keywords_google.indexOf(val)]) {
+    $("body").on("click",".btn-keywords",function() {
+        let val = $("#input-keywords").val().trim();
+        if(val != "" && val != arr_keywords_google[arr_keywords_google.indexOf(val)]) {
             $(".keywords").append(`<span class="font-11 px-2 py-1 text-box-catelog text-white bg-info">
-                                        ${val}<i class="position-relative delete-keywords ml-3 cursor-pointer far fa-times"></i>
-                                    </span>`);
+            ${val}<i class="position-relative delete-keywords ml-3 cursor-pointer far fa-times"></i>
+                </span>`);
             arr_keywords_google.push(val);
-            $(this).val("");
+            $("#input-keywords").val("");
             if(!$(".error-configGoogle").hasClass("d-none")) {
-                $(".error-configGoogle").addClass("d-none")
+             $(".error-configGoogle").addClass("d-none")
             }
+        }
+    })
+
+    $("body").on("keypress","#input-keywords", function(e) {
+        let val = $(this).val().trim();
+        if(e.which == 13 && val != "") {
+           $(".btn-keywords").click();
         }
     })
 

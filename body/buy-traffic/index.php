@@ -167,7 +167,7 @@
                                 <span class="recharge px-2 py-1 font-gg font-11 bg-warning rounded-pill font-weight-500 cursor-pointer">Nạp tiền</span>
                             </div>
                             <div class="ml-auto">
-                                <button class="btn-submitOrder btn btn-outline-info font-gg font-13 d-flex no-block"><i class="align-self-center fad fa-plus-circle font-16 mr-2"></i>Mua Traffic</button>
+                                <button class="btn-submitOrder btn btn-outline-info font-gg font-13 d-flex no-block"><i class="align-self-center fad fa-plus-circle font-16 mr-2"></i>Tạo chiến dịch</button>
                             </div>
                         </div>
                         <div class="table-responsive">
