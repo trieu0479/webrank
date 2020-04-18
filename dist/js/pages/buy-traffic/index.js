@@ -30,7 +30,7 @@ function htmlOrder(obj_data) {
                 <div class="mt-2 px-4 py-3"> 
                     <div class="text-left d-flex no-block flex-column">
                         <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">URL (dường dẫn 1 trang bạn muốn tăng traffic)</div>
-                        <input id="input-url" value="${(Object.values(obj_data).length > 0) ? obj_data.websiteURL : ""}" type="text" class="font-13 text-muted form-control" placeholder="domain chính hoặc 1 đường dẫn"/>
+                        <input id="input-url" value="${(Object.values(obj_data).length > 0) ? obj_data.websiteURL : ""}" type="text" class="font-13 text-muted form-control" placeholder="Domain chính hoặc 1 đường dẫn"/>
                     </div>
                     <div class="d-flex no-block flex-column mt-4"> 
                         <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">Traffic mỗi ngày</div> 
