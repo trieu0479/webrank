@@ -398,7 +398,7 @@ function showPopupOrder(obj_data) {
 }
 
 function appendSelectTraffic(dailyTraffic) {
-    for(let i = 1; i <= 10; i++) {
+    for(let i = 1; i <= 30; i++) {
         $(".select-traffic").append(`<option ${(dailyTraffic != undefined && dailyTraffic == i*100) ? "selected" : ""} value="${i*100}">${i*100}</option>`);
     }
 
