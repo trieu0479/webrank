@@ -4,7 +4,7 @@ import apiBackLink from './backLinkEchart.js';
 
 $(document).ready(function () {
 
-    
+
     var localUrl = new URL(location.href);
     var localDomain = localUrl.searchParams.get('domain');
 
@@ -51,7 +51,10 @@ $(document).ready(function () {
     createADataTable(input);
 
     $(".similarReloadTask").click(function () {
-        if ($(this).find('i').hasClass('fa-spin')) { $(this).find('i').removeClass('fa-spin'); return; }
+        if ($(this).find('i').hasClass('fa-spin')) {
+            $(this).find('i').removeClass('fa-spin');
+            return;
+        }
         let task = $(this).data("task");
         $(this).find('i').addClass('fa-spin');
         apiBackLink(task, localDomain, 1);
