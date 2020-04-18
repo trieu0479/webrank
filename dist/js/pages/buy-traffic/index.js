@@ -429,10 +429,37 @@ function appendSelectCountry(area) {
         },
         {
             name: "Americas",
-            value: "",
+            value: 256,
             text: "Châu Mỹ"
 
+        },
+        {
+            name: "United States",
+            value: 18980864,
+            text: "US"
+
+        },
+        {
+            name: "Canada",
+            value: 16990208,
+            text: "Canada"
+        },
+        {
+            name: "Germany",
+            value: 33890304,
+            text: "Đức"
+        },
+        {
+            name: "UK",
+            value: 34197504,
+            text: "UK"
+        },
+        {
+            name: "France",
+            value: 34156544,
+            text: "Pháp"
         }
+        
     ];
 
     if(area != undefined) {
