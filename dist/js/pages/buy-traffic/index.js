@@ -821,6 +821,7 @@ function showPopupCost(obj_data,data,timeToRun) {
                 $(".btn-next-text").attr("disabled", "disabled").html(`<i class="fa fa-spin fa-spinner mr-2"></i> Đang xử lý`);
 
                 postData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=orderNewTraffic&userToken=${userToken}`, obj_data).then(data => {
+                    
                     data = JSON.parse(data);
                     if(data.data.status == "Order traffic của bạn đã thực hiện hoàn tất. Bấm RUN để chạy tăng traffic") {
                         let obj = {
@@ -832,8 +833,10 @@ function showPopupCost(obj_data,data,timeToRun) {
                     } else {
                         return {msg: data.data.msg}
                     }
+                    
 
                 }).then(res => { 
+                    
                     if(res.urlids != undefined) {
                         let post = {
                             urlids: res.urlids,
@@ -850,6 +853,7 @@ function showPopupCost(obj_data,data,timeToRun) {
                     } else {
                         showPopupOrderError(res.msg)
                     }
+                    
                 })  
             })
         }, 

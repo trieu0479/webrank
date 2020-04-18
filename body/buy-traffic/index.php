@@ -95,7 +95,7 @@
                                             </div>
                                         </div>
                                         <div class="">
-                                            <button type="button" data-price="100000" class="btn-buy-now font-gg btn btn-outline-info"
+                                            <button type="button" data-price="150000" class="btn-buy-now font-gg btn btn-outline-info"
                                                 style="width: 130px; border-radius: 20px">Mua ngay</button>
                                         </div>
                                     </div>
