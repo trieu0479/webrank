@@ -152,9 +152,7 @@ const ggAdsOverview = async (data, method) => {
 
 
 const adwordsMonthlyFullTrend = async (data, method) => {
-    $('.widget-PublicSherTable').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
-    <a class="similarReloadTask text-muted" data-task="adwordsMonthlyFullTrend" href="javascript:;"><i class="fal fa-sync"></i></a>
-    </div>`)
+    // $('.widget-PublicSherTable').append(``)
     if (data.status == "success") {
 
         if (data && data.data && data.data.adwordsMonthlyFullTrend && data.data.adwordsMonthlyFullTrend.length != 0) {
@@ -401,6 +399,8 @@ const adwordsMonthlyFullTrend = async (data, method) => {
             $(`#myTabContent`).removeClass('is-loading');
             $(`#EstimateChart`).removeClass('is-loading');
             $(`#EstimateChart`).addClass('empty-state');
+            $('#KeywordsChart').addClass('empty-state');
+            $('#CostChart').addClass('empty-state');
         }
 
     } else {
@@ -533,6 +533,7 @@ const PositionChart = async (data, method) => {
                     }
                 };
                 await $(`.PositionChart`).removeClass('is-loading');
+                await $('.similarReloadTask[data-task="PositionChart"]').find('i').removeClass('fa-spin');
             }
 
         } else {
@@ -551,7 +552,6 @@ const PositionChart = async (data, method) => {
 
 const CompetitorMapChart = async (data, method) => {
     if (data.status == "success") {
-        console.log(data, 'CompetitorMapChart');
 
         if (data && data.data) {
             if (data.data.adwordsCompetitors != null && data.data.adwordsCompetitors.length != 0) {
@@ -709,7 +709,6 @@ const CompetitorMapChart = async (data, method) => {
                 await $(`.similarReloadTask[data-task="CompetitorMapChart"]`).find('i').removeClass('fa-spin');
                 await $(`.CompetitorMapChart`).removeClass('is-loading');
             } else {
-                console.log('khanh');
                 $('.CompetitorMapChart').addClass('empty-state').attr('style', 'height:305px!important');
                 $('.CompetitorMapChart').removeClass('is-loading');
                 $('.parent-CompetitorMapChart').removeClass('locked').addClass('khanh');

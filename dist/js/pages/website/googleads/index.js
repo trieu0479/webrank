@@ -44,9 +44,9 @@ $(document).ready(function () {
         let task = $(this).data("task");
 
         $(this).find('i').addClass('fa-spin');
-        if (task == "adwordsMonthlyFullTrend") {
-            $(this).parent().html('')
-        }
+        // if (task == "adwordsMonthlyFullTrend") {
+        //     $(this).parent().html('')
+        // }
         await api(task, localDomain).then((res) => $(this).find('i').removeClass('fa-spin'))
 
     })

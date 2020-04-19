@@ -1720,7 +1720,6 @@ const getTrafficDisplayAdvertisingWebsitesTable = async (task, data, domain) => 
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}&userToken=${userToken}`,
                 dataSrc: (json) => {
-                    console.log('khanh', json);
 
                     lockedModule('getTrafficDisplayAdvertisingWebsitesTable', json.userData.member);
                     if (json.status == "success") {
@@ -1730,7 +1729,6 @@ const getTrafficDisplayAdvertisingWebsitesTable = async (task, data, domain) => 
                             $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_processing').removeClass('d-none')
                             return newData.Records.filter(item => item.Domain != "grid.upgrade")
                         } else {
-                            console.log('sssssssssss');
                             $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper').css('min-height', '268px');
                             $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper').addClass('empty-state')
                             $('table.getTrafficDisplayAdvertisingWebsitesTable tbody tr td.dataTables_empty').addClass('d-none')
