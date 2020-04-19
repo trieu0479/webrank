@@ -29,8 +29,8 @@ function htmlOrder(obj_data) {
     return `<div class="text-left mb-3"> 
                 <div class="mt-2 px-4 py-3"> 
                     <div class="text-left d-flex no-block flex-column">
-                        <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">URL</div>
-                        <input id="input-url" value="${(Object.values(obj_data).length > 0) ? obj_data.websiteURL : ""}" type="text" class="font-13 text-muted form-control" placeholder="domain chính hoặc 1 đường dẫn"/>
+                        <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">URL (dường dẫn 1 trang bạn muốn tăng traffic)</div>
+                        <input id="input-url" value="${(Object.values(obj_data).length > 0) ? obj_data.websiteURL : ""}" type="text" class="font-13 text-muted form-control" placeholder="Domain chính hoặc 1 đường dẫn"/>
                     </div>
                     <div class="d-flex no-block flex-column mt-4"> 
                         <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">Traffic mỗi ngày</div> 
@@ -52,18 +52,14 @@ function htmlOrder(obj_data) {
                     </div>
                     <div class="d-flex no-block flex-column mt-4"> 
                         <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-2">Thời gian xem trang <span class="font-12 text-muted">*Chi phí có thể thay đổi nếu bạn tăng thời gian xem trang</span></div> 
-                        <div class="d-flex no-block">
-                            <div class="d-flex no-block w-50">
-                                <select class="select-min" style="width: 30%"></select>
+                        <div class="d-flex">
+                            <div class="d-flex no-block w-100 w-md-50">
+                                <select class="select-min w-50 w-md-30"></select>
                                 <div class="text-center mt-1 align-self-center" style="width: 20%"> 
                                     <i class="fad fa-wave-sine text-dark"></i>
                                 </div>
-                                <select class="select-max" style="width: 30%"></select> 
-                            </div> 
-                            <div class="w-50 d-flex no-block align-self-center">
-                                <div class="font-12 text-muted align-self-center font-gg font-gg">*Chi phí có thể thay đổi nếu bạn tăng thời gian xem trang</div>
-                            </div> 
-                            
+                                <select class="select-max w-50 w-md-30"></select> 
+                            </div>   
                         </div> 
                     </div>
                     <div class="d-flex no-block flex-column mt-4 bg-white">
@@ -108,29 +104,29 @@ function htmlOrder(obj_data) {
                     </div>
                     <div class="d-flex no-block flex-column mt-4"> 
                         <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-2">Trang con</div> 
-                        <div class="d-flex no-block">
-                            <div class="d-flex no-block flex-column w-50">
+                        <div class="d-flex">
+                            <div class="mb-3 mb-md-0 d-flex no-block flex-column w-100 w-md-50 ">
                                 <div class="font-gg font-12 text-muted mb-1 w-100">
                                     Số trang con
                                 </div>
                                 <div class="w-100 d-flex no-block">
-                                    <select class="select-min-page" style="width: 30%"></select>
+                                    <select class="select-min-page w-50 w-md-30"></select>
                                     <div class="text-center mt-1 align-self-center" style="width: 20%"> 
                                         <i class="fad fa-wave-sine text-dark"></i>
                                     </div>
-                                    <select class="select-max-page" style="width: 30%"></select> 
+                                    <select class="select-max-page w-50 w-md-30"></select> 
                                 </div> 
                             </div> 
-                            <div class="d-flex no-block flex-column w-50">
+                            <div class="d-flex no-block flex-column w-100 w-md-50">
                                 <div class="font-gg font-12 text-muted mb-1 w-100">
                                     Thời gian xem trang con
                                 </div>
                                 <div class="w-100 d-flex no-block">
-                                    <select class="select-min-time" style="width: 30%"></select>
+                                    <select class="select-min-time w-50 w-md-30"></select>
                                     <div class="text-center mt-1 align-self-center" style="width: 20%"> 
                                         <i class="fad fa-wave-sine text-dark"></i>
                                     </div>
-                                    <select class="select-max-time" style="width: 30%"></select> 
+                                    <select class="select-max-time w-50 w-md-30"></select> 
                                 </div> 
                             </div> 
                         </div> 
@@ -139,18 +135,18 @@ function htmlOrder(obj_data) {
                         <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-4">Tỉ lệ mobile/pc</div> 
                         <div class="position-relative w-100 mt-1">
                             <div class="position-absolute device-mobile" style="top: -17px; left: 5px">
-                                <i class="fas fa-mobile-alt mr-2 font-13"></i><span class="font-weight-500 font-16 text-dark">${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"}</span>
+                                <i class="fas fa-mobile-alt mr-2 font-13"></i><span class="font-weight-500 font-16 text-dark">${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "50%"}</span>
                             </div>
                             <div class="position-absolute device-pc" style="top: -17px; right: 0">
-                                <span class="font-weight-500 font-16 mr-2 text-dark">${(obj_data.mrate != undefined) ? 100 - +obj_data.mrate + "%" : "90%"}</span><i class="fas fa-desktop font-13"></i>
+                                <span class="font-weight-500 font-16 mr-2 text-dark">${(obj_data.mrate != undefined) ? 100 - +obj_data.mrate + "%" : "50%"}</span><i class="fas fa-desktop font-13"></i>
                             </div>
                             <div class="w-100 position-relative" style="opacity: 0; z-index: 10">
-                                <input id="my-range" type="range" min="0" step="1" max="100" value="10" class="w-100 cursor-pointer">
+                                <input id="my-range" type="range" min="0" step="1" max="100" value="${(obj_data.mrate != undefined) ? obj_data.mrate : "50"}" class="w-100 cursor-pointer">
                             </div>
                             <div class="w-100 position-absolute" style="top: 9px">
-                                <div class="ads-thumb " style="left: ${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"}; transform: translateX(-${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"});"></div>
+                                <div class="ads-thumb " style="left: ${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "50%"}; transform: translateX(-${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "50%"});"></div>
                                 <div class="ads-track">
-                                    <div class="ads-fill" style="width: ${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "10%"};"></div>
+                                    <div class="ads-fill" style="width: ${(obj_data.mrate != undefined) ? obj_data.mrate + "%" : "50%"};"></div>
                                 </div>
                             </div>
                         </div>
@@ -363,7 +359,10 @@ function htmlConfigGoogle(array_keywords) {
         <div class="px-4 py-3">
             <div class="text-left d-flex no-block flex-column">
                 <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">Thêm từ khóa</div>
-                <input id="input-keywords" value="" type="text" class="font-13 text-muted form-control" placeholder="Nhập từ khóa"/>
+                <div class="d-flex">
+                    <input id="input-keywords" value="" type="text" class="font-13 text-muted form-control" placeholder="Nhập từ khóa"/>
+                    <button class="ml-3 btn-keywords btn btn-primary font-gg font-14 px-4">Thêm</button>
+                </div>
                 <div class="keywords mt-2">
                     ${(content != "") ? content : ""}
                 </div>
@@ -402,7 +401,7 @@ function showPopupOrder(obj_data) {
 }
 
 function appendSelectTraffic(dailyTraffic) {
-    for(let i = 1; i <= 10; i++) {
+    for(let i = 1; i <= 30; i++) {
         $(".select-traffic").append(`<option ${(dailyTraffic != undefined && dailyTraffic == i*100) ? "selected" : ""} value="${i*100}">${i*100}</option>`);
     }
 
@@ -433,10 +432,37 @@ function appendSelectCountry(area) {
         },
         {
             name: "Americas",
-            value: "",
+            value: 256,
             text: "Châu Mỹ"
 
+        },
+        {
+            name: "United States",
+            value: 18980864,
+            text: "US"
+
+        },
+        {
+            name: "Canada",
+            value: 16990208,
+            text: "Canada"
+        },
+        {
+            name: "Germany",
+            value: 33890304,
+            text: "Đức"
+        },
+        {
+            name: "UK",
+            value: 34197504,
+            text: "UK"
+        },
+        {
+            name: "France",
+            value: 34156544,
+            text: "Pháp"
         }
+        
     ];
 
     if(area != undefined) {
@@ -460,7 +486,7 @@ function appendSelectCountry(area) {
 function appendSelectTimeMaxAndMin(st) {
     for(let i = 1; i <= 90; i++) {
         if(i > 1) {
-            $(".select-max").append(`<option ${(st != undefined && st.max == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);   
+            $(".select-max").append(`<option ${(st != undefined && st.max == i*10) ? "selected" : (i == 6) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);   
         } 
 
         if(i != 90) {
@@ -471,19 +497,19 @@ function appendSelectTimeMaxAndMin(st) {
     $('.select-max,.select-min').select2();
 
     $('.select-min').on('select2:select', function (e) {
-        let min = e.params.data.id; 
-        let max = $('.select-max').val();
-        
-        if(min >= max) {
+        let min = +e.params.data.id; 
+        let max = +$('.select-max').val(); 
+
+        if(min >= max) { 
             $('.select-max').val(`${+min + 10}`).trigger('change');
         }
 
     });
 
     $(".select-max").on('select2:select', function (e) {
-        let max = e.params.data.id; 
-        let min = $('.select-min').val();
-
+        let max = +e.params.data.id; 
+        let min = +$('.select-min').val();
+                
         if(max <= min) {
             $('.select-min').val(`${+max - 10}`).trigger('change');
         }
@@ -499,7 +525,7 @@ function appendSelectSubPage(subpage) {
             $(".select-min-page").append(`<option ${(subpage != undefined && subpage.minPage == i) ? "selected" : ""} value="${i}">${i} trang</option>`);
             $(".select-min-time").append(`<option ${(subpage != undefined && subpage.minTime == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
         
-        } else {
+        } else if(i == 3) {
             $(".select-max-page").append(`<option ${(subpage != undefined && subpage.maxPage == i) ? "selected" : (i == 3) ? "selected" : ""} value="${i}">${i} trang</option>`);
             $(".select-max-time").append(`<option ${(subpage != undefined && subpage.maxTime == i*10) ? "selected" : (i == 3) ? "selected" : ""}  value="${i*10}">${i*10} s</option>`);
         }
@@ -508,17 +534,17 @@ function appendSelectSubPage(subpage) {
 
     $('.select-min-page, .select-max-page').select2({
         placeholder: "Số trang",
-        allowClear: true
+        // allowClear: true
     });
 
     $('.select-min-time, .select-max-time').select2({
         placeholder: "Số giây",
-        allowClear: true
+        // allowClear: true
     });
 }
 
 function appendSelectTimeRun(timeToRun) {
-    for (let i = 2; i <= 30; i++) {
+    for (let i = 1; i <= 30; i++) {
         $(".select-time-run").append(`<option ${(timeToRun != undefined && timeToRun == i) ? "selected" : ""} value="${i}">${i} ngày</option>`);
     }
 
@@ -660,44 +686,53 @@ function htmlCost(data,timeToRun) {
     let day = timeToRun;
     let sumPrice = vndPrice*day;  
 
-    return `<div class="text-left mt-2 d-flex align-items-center px-4 py-3" style="height: 250px"> 
+    return `<div class="text-left mt-2 d-flex align-items-center px-4 py-3 mb-5"> 
                 <div class="w-100">
                     <div class="row">
-                        <div class="col-12 col-md-4">
-                            <div class="bg-info-2 border-info py-4 px-5 text-info border rounded" style="border-width: 2px!important; height:120px">
-                                <div class="title-ads font-14 font-gg">
-                                    Chi Phí 1 Ngày
-                                </div>
-                                <div class="d-flex no-block justify-content-center mt-3">
-                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(vndPrice).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="col-12 col-md-4">
-                            <div class="bg-danger-2 border-danger py-4 px-5 text-danger border rounded" style="border-width: 2px!important; height:120px">
-                                <div class="title-ads font-14 font-gg">
-                                    Chi Phí Cho ${timeToRun} Ngày
-                                </div>
-                                <div class="d-flex no-block justify-content-center mt-3">
-                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(sumPrice).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                                </div>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-left"> 
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Đơn giá 1 ngày</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-17 font-gg text-primary">${numeral(vndPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
+                                                </div>    
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Chi phí ${timeToRun} ngày</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-18 font-gg text-danger">${numeral(sumPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Ngân sách hiện tại</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-19 font-gg text-info" style="font-size: 19px;">${numeral(yourBank).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
+                                                </div>    
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-gg font-13 font-weight-bold">Ngân sách sau khi thanh toán</td>
+                                            <td class="">
+                                                <div class="d-flex no-block justify-content-center">
+                                                    <span class="font-weight-500 font-gg text-success" style="font-size: 21px;">${numeral(yourBank - sumPrice).format(0,0)}<sup class="font-12 font-gg" style="top: -15px;">vnd</sup></span>
+                                                </div>    
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="bg-success-2 border-success py-4 px-5 text-success border rounded" style="border-width: 2px!important; height:120px">
-                                <div class="title-ads font-14 font-gg">
-                                    Ngân Sách
-                                </div>
-                                <div class="d-flex no-block justify-content-center mt-3">
-                                    <span class="number-cost display-7 font-weight-500 font-gg">${numeral(yourBank).format("0,0")}<sup class="font-12 font-gg font-weight-500" style="top: -20px;">vnd</sup></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-3">
-                            <div class="font-14 text-muted font-gg mb-3">
-                                ${(yourBank < sumPrice) ? `*Số dư tài khoản không đủ. Vui lòng <a href="javascript:void(0);" class="refill-money font-gg font-14 font-weight-bold">nạp thêm tiền</a> để sử dụng dịch vụ này !`
-                                : `*Vui lòng bấm <a href="javascript:void(0);" class="btn-next font-gg font-14 font-weight-bold">tiếp tục</a> để tạo chiến dịch !`}
-                            </div> 
+                        <div class="col-12">
+                            <div class="font-gg font-weight-500 text-muted font-13">
+                            ${(yourBank >= sumPrice) ? "(*) sau khi thực hiện thanh toán nếu không thể thực hiện tăng traffic hệ thống sẽ bồi hoàn trả lại phí cho bạn !"
+                            : "(*) số dư tài khoản không đủ. Vui lòng <a class='refill-money font-gg font-weight-bold font-14' href='javascript: void(0);'>nạp thêm tiền</a> để sử dụng dịch vụ này !"}</div>
                         </div>
                     </div>
                 </div> 
@@ -706,8 +741,7 @@ function htmlCost(data,timeToRun) {
                 <div class="d-flex justify-content-between px-4 py-4">
                     <a href="#" class="btn-back align-self-center btn btn-secondary font-14 font-weight-500 font-gg px-4">Quay
                         lại</a> 
-                    <button type="button" ${(yourBank < sumPrice) ? "disabled" : ""} class="ml-auto btn-next btn-next-text align-self-center btn btn-primary font-14 font-weight-500 font-gg px-4">Tiếp
-                        tục</button>
+                    <button type="button" ${(yourBank < sumPrice) ? "disabled" : ""} class="ml-auto btn-next btn-next-text align-self-center btn btn-primary font-14 font-weight-500 font-gg px-4">Thanh toán</button>
                 </div>
             </div> `
 }
@@ -732,11 +766,31 @@ function showPopupOrderSuccess(timeToRun, startTime, endTime) {
     })
 }
 
+function showPopupOrderError(msg) {
+    Swal.fire({  
+        type:"error",
+        html: `<div class="font-gg font-15 text-dark font-weight-500">
+                 ${msg} !
+            </div>`,
+        confirmButtonText: "Xác Nhận",
+        showConfirmButton: true,
+        showCloseButton: true,
+        allowOutsideClick: false,
+        width: 500,
+        position: "top",
+        onOpen: () => { 
+        }, 
+        onClose: () => {
+            location.reload();
+        }
+    })
+}
+
 function showPopupActionSuccess(task) {
     Swal.fire({  
         type:"success",
         html: `<div class="font-gg font-15 text-dark font-weight-500">
-                ${(task == "pauseRunTraffic") ? "Tạm dừng chiến dịch thành công !" : "Xóa chiến dịch thành công !"}
+                ${(task == "pauseRunTraffic") ? "Tạm dừng chiến dịch thành công !" : (task == "startRunTraffic") ? "Chạy chiến dịch thành công" : "Xóa chiến dịch thành công !"}
             </div>`,
         confirmButtonText: "Xác Nhận",
         showConfirmButton: true,
@@ -756,7 +810,7 @@ function showPopupActionError(task) {
     Swal.fire({  
         type:"error",
         html: `<div class="font-gg font-15 text-dark font-weight-500">
-                ${(task == "pauseRunTraffic") ? "Lỗi hệ thống tạm dừng chiến dịch không thành công." : "Lỗi hệ thống xóa chiến dịch không thành công."}  Vui lòng thử lại !
+                ${(task == "pauseRunTraffic") ? "Lỗi hệ thống tạm dừng chiến dịch không thành công." : (task == "startRunTraffic") ? "Lỗi hệ thống chạy chiến dịch không thành công." : "Lỗi hệ thống xóa chiến dịch không thành công."}  Vui lòng thử lại !
             </div>`,
         confirmButtonText: "Xác Nhận",
         showConfirmButton: true,
@@ -774,12 +828,12 @@ function showPopupActionError(task) {
 
 function showPopupCost(obj_data,data,timeToRun) {
     Swal.fire({ 
-        title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Chi Phí Traffic</div>`,
+        title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Chi Phí Mua Traffic</div>`,
         html: htmlCost(data,timeToRun),
         showConfirmButton: false,
         showCloseButton: true,
         allowOutsideClick: false,
-        width: 900,
+        width: 700,
         position: "top",
         onOpen: () => {
             $(".swal2-popup").addClass("px-0 py-0"); 
@@ -797,6 +851,7 @@ function showPopupCost(obj_data,data,timeToRun) {
                 $(".btn-next-text").attr("disabled", "disabled").html(`<i class="fa fa-spin fa-spinner mr-2"></i> Đang xử lý`);
 
                 postData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=orderNewTraffic&userToken=${userToken}`, obj_data).then(data => {
+                    
                     data = JSON.parse(data);
                     if(data.data.status == "Order traffic của bạn đã thực hiện hoàn tất. Bấm RUN để chạy tăng traffic") {
                         let obj = {
@@ -805,9 +860,14 @@ function showPopupCost(obj_data,data,timeToRun) {
                         }
 
                         return obj;
+                    } else {
+                        return {msg: data.data.msg}
                     }
-                }).then(res => {
-                    if(res.urlids) {
+                    
+
+                }).then(res => { 
+                    
+                    if(res.urlids != undefined) {
                         let post = {
                             urlids: res.urlids,
                             etime: "1"
@@ -816,9 +876,14 @@ function showPopupCost(obj_data,data,timeToRun) {
                             data = JSON.parse(data);
                             if(data.data.status == "success") {
                                 showPopupOrderSuccess(res.timeToRun, data.data.startTime, data.data.endTime);
-                            } 
+                            } else {
+                                showPopupOrderError(data.data.msg)
+                            }
                         })
+                    } else {
+                        showPopupOrderError(res.msg)
                     }
+                    
                 })  
             })
         }, 
@@ -856,66 +921,70 @@ function htmlRecharge(price = "") {
 }
 
 function showPopupRecharge(price = "") {
-    Swal.fire({ 
-        title: `<div class="font-gg font-18 font-weight-bold ">Nạp Tiền Traffic</div>`,
-        html: htmlRecharge(price),
-        position: "top",
-        confirmButtonText: "ĐÃ HOÀN TẤT CHUYỂN KHOẢN",
-        showConfirmButton: true,
-        showCloseButton: true,
-        allowOutsideClick: false,
-        width: 600, 
-        onOpen: () => {
-            $(".input-budget").keyup(function() {
-                let val = $(this).val();
-                if (val.length >= 4) {
-                    $(this).val(numeral(val).format("0,0"));
-                    if(val.length >= 5) {
-                        val = val.replace(/\,/g,""); 
-                        getData(`//localapi.trazk.com/fff/user.php?task=getBankCodeBuyATool&userToken=${userToken}&price=${val}&toolName=buytraffic`).then(data => {
-                            $("#coppy-code").text(data.data.msg);
-                        })
-                    }
-                }
-            }) 
-
-            getData(`//localapi.trazk.com/fff/user.php?task=getBankCodeBuyATool&userToken=${userToken}&price=${(price != "") ? price : "100000"}&toolName=buytraffic`).then(data => {
-                $("#coppy-code").text(data.data.msg);
-            })  
-
-        }, 
-        preConfirm: async () => {
-            await $.get(
-                `//localapi.trazk.com/fff/user.php?task=checkPayment&invoiceId=${$("#coppy-code").text().trim()}&userToken=${userToken}`,
-                function (res) {
-                    res = JSON.parse(res);
-                    if (res && res.data.status == "error") {
-                        if (res.data.msg == "Waiting bank transation") {
-                            Swal.showValidationMessage(
-                                `Lỗi: Hệ thống chưa nhận được số tiền chuyển khoản của bạn.`);
-                            $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
-                        } else if (res.data.msg == "wrong invoice amount and income amount") {
-                            Swal.showValidationMessage(
-                                `Lỗi: Số tiền chuyển khoản khác với số tiền yêu cầu thanh toán. Vui lòng liên hệ hỗ trợ viên`
-                            );
-                            $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
-                        } else if (res.data.msg == "invoice id error") {
-                            Swal.showValidationMessage(`Lỗi: Mã chuyển khoản không hợp lệ`);
-                            $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
-                        } else {
-                            Swal.showValidationMessage(
-                                `Lỗi: Hệ thông chưa nhận được chuyển khoản hoặc CID bị lỗi`);
-                            $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+    if (userToken == userTokenDemo) {
+        showLoginModal();
+    } else {
+        Swal.fire({ 
+            title: `<div class="font-gg font-18 font-weight-bold ">Nạp Tiền Traffic</div>`,
+            html: htmlRecharge(price),
+            position: "top",
+            confirmButtonText: "ĐÃ HOÀN TẤT CHUYỂN KHOẢN",
+            showConfirmButton: true,
+            showCloseButton: true,
+            allowOutsideClick: false,
+            width: 600, 
+            onOpen: () => {
+                $(".input-budget").keyup(function() {
+                    let val = $(this).val();
+                    if (val.length >= 4) {
+                        $(this).val(numeral(val).format("0,0"));
+                        if(val.length >= 5) {
+                            val = val.replace(/\,/g,""); 
+                            getData(`//localapi.trazk.com/fff/user.php?task=getBankCodeBuyATool&userToken=${userToken}&price=${val}&toolName=buytraffic`).then(data => {
+                                $("#coppy-code").text(data.data.msg);
+                            })
                         }
-                    } else {
-                        location.reload();
                     }
-                })
-
-            return [];
-        }
-        
-    })
+                }) 
+    
+                getData(`//localapi.trazk.com/fff/user.php?task=getBankCodeBuyATool&userToken=${userToken}&price=${(price != "") ? price : "100000"}&toolName=buytraffic`).then(data => {
+                    $("#coppy-code").text(data.data.msg);
+                })  
+    
+            }, 
+            preConfirm: async () => {
+                await $.get(
+                    `//localapi.trazk.com/fff/user.php?task=checkPayment&invoiceId=${$("#coppy-code").text().trim()}&userToken=${userToken}`,
+                    function (res) {
+                        res = JSON.parse(res);
+                        if (res && res.data.status == "error") {
+                            if (res.data.msg == "Waiting bank transation") {
+                                Swal.showValidationMessage(
+                                    `Lỗi: Hệ thống chưa nhận được số tiền chuyển khoản của bạn.`);
+                                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                            } else if (res.data.msg == "wrong invoice amount and income amount") {
+                                Swal.showValidationMessage(
+                                    `Lỗi: Số tiền chuyển khoản khác với số tiền yêu cầu thanh toán. Vui lòng liên hệ hỗ trợ viên`
+                                );
+                                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                            } else if (res.data.msg == "invoice id error") {
+                                Swal.showValidationMessage(`Lỗi: Mã chuyển khoản không hợp lệ`);
+                                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                            } else {
+                                Swal.showValidationMessage(
+                                    `Lỗi: Hệ thông chưa nhận được chuyển khoản hoặc CID bị lỗi`);
+                                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                            }
+                        } else {
+                            location.reload();
+                        }
+                    })
+    
+                return [];
+            }
+            
+        })
+    }
 }
 
 function showPopupAction(timeToRun, action,urlids) {
@@ -945,9 +1014,10 @@ function showPopupAction(timeToRun, action,urlids) {
                 data = JSON.parse(data);
                 if(data.data.status == "success") {
                     if(task == "startRunTraffic")
-                        showPopupOrderSuccess(timeToRun, data.data.startTime, data.data.endTime);
+                        // showPopupOrderSuccess(timeToRun, data.data.startTime, data.data.endTime);
+                        showPopupActionSuccess(task);
                     else {
-                        showPopupAction(task);
+                        showPopupActionSuccess(task);
                     }
                 } else {
                     showPopupActionError(task);
@@ -970,38 +1040,58 @@ async function getData(url) {
 }
 
 function renderTable() {
+    // <i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
 
     getData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=getListOrderTraffic&userToken=${userToken}`).then(data => {
         if(data && data.data) {
 
             data.data.forEach(val => {
+                let websiteURL = val.websiteURL; 
+                let websiteURLreplace = websiteURL;
+                if(websiteURL.indexOf("http") != -1) {
+                    websiteURLreplace = websiteURL.replace("http://", "");
+                    websiteURLreplace = websiteURL.replace("https://", "");  
+                }
+
+                if(websiteURLreplace.indexOf("/") != -1) {  
+                    websiteURLreplace = websiteURLreplace.slice(0,websiteURLreplace.indexOf("/")); 
+                }
+
                 $("#tableTraffic").append(`<tr data-urlids="${val.urlids}">
-                                            <td class="font-gg font-14 font-weight-500">${moment(val.startTime).format("H:mm DD/MM/YYYY")}</td>
-                                            <td class="font-gg font-14 font-weight-bold">${numeral(val.dailyTraffic).format("0,0")} IP</td>
+                                            <td class="font-gg font-14 font-weight-500 white-space-nowrap">${moment(val.startTime).format("H:mm DD/MM/YYYY")}</td>
+                                            <td class="font-gg font-14 font-weight-bold white-space-nowrap">${numeral(val.dailyTraffic).format("0,0")} IP</td>
                                             <td class="">
-                                                <span class="position-relative text-dark font-gg font-15 font-weight-bold">                                        
+                                                <span class="position-relative text-dark font-gg font-15 font-weight-bold white-space-nowrap">                                        
                                                     ${numeral(val.vndPrice).format("0,0")}
                                                     <span class="position-absolute text-dark font-gg font-10 font-weight-500" style="top: -5px">
                                                         vnd
                                                     </span>
                                                 </span>
                                             </td>
-                                            <td class="font-gg font-15"><a href="#">${(val.websiteURL.indexOf("http") != -1) ? val.websiteURL : "https://" + val.websiteURL}</a></td>
-                                            <td class="font-gg font-15 text-center d-flex no-block">
+                                            <td class="font-gg font-15">
+                                                <div class="white-space-nowrap font-gg text-dark font-weight-500">
+                                                    <a target="blank" href="${(websiteURL.indexOf("http") < 0) ? "https://" + websiteURL : websiteURL}">
+                                                    <img class="mr-2" src="https://www.google.com/s2/favicons?domain=${websiteURLreplace}">
+                                                    ${websiteURLreplace}
+                                                    </a>
+                                                    <a target="blank" href="${(websiteURL.indexOf("http") < 0) ? "https://" + websiteURL : websiteURL}"><i class="fal text-muted fa-external-link-square-alt ml-1"></i></a>
+
+                                                </div>
+                                            </td>
+                                            <td class="font-gg font-15 text-center d-flex no-block white-space-nowrap">
                                                 <span class="traffic-today rounded text-dark text-center font-14 font-weight-bold">
                                                     0
                                                 </span>
                                                 <a class="history font-gg font-14 ml-5" href="javascript: void(0);">Lịch sử</a>
                                             </td>
-                                            <td class="">
-                                                <span class="${(val.status == "INACTIVE") ? "bg-info" : "bg-success"} px-2 py-1 rounded-pill font-gg font-10 font-weight-bold"> ${(val.status == "INACTIVE") ? "Chưa Chạy" : "Đang Chạy"}</span>
+                                            <td class="white-space-nowrap">
+                                                <span class="${(val.status == "INACTIVE") ? "bg-info" : (val.status == "EXPIRED") ? "bg-warning" : "bg-success"} px-2 py-1 rounded-pill font-gg font-10 font-weight-bold"> ${(val.status == "INACTIVE") ? "Chưa Chạy" : (val.status == "EXPIRED") ? "Hết Hạn" : "Đang Chạy"}</span>
                                             </td>
-                                            <td class="font-gg font-14 font-weight-500">${moment(val.endTime).format("H:mm DD/MM/YYYY")}</td>
+                                            <td class="font-gg font-14 font-weight-500 white-space-nowrap">${moment(val.endTime).format("H:mm DD/MM/YYYY")}</td>
                                             <td class="font-gg font-15">
-                                                ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="active fad fa-play-circle mr-3 font-20 text-info cursor-pointer"></i> ` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="pause fad fa-pause-circle mr-3 font-20 text-success cursor-pointer"></i>`}
-                                                <i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>
+                                                ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 active fad fa-play-circle font-20 text-info cursor-pointer"></i> ` : (val.status == "EXPIRED") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="ml-2 pause fad fa-pause-circle font-20 text-success cursor-pointer"></i>`}
                                             </td> 
-                                            <td class="font-gg font-15">
+                                            <td class="font-gg font-15 d-none">
                                                 <button type="buttom" data-urlids="${val.urlids}" class="edit btn btn-info py-1 px-2 font-13 font-weight-500 rounded ">Thay đổi</button>
                                             </td>
                                         </tr>`);
@@ -1198,6 +1288,11 @@ function getTrafficHistory(urlids) {
     })
 }
 
+function CheckIsValidDomain(domain) {
+    var reg = new RegExp(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
+    return domain.match(reg);
+}
+
 $(document).ready(() => {     
     renderTable();
 
@@ -1224,21 +1319,21 @@ $(document).ready(() => {
 
     $("body").on("click", ".btn-cost", () => { 
         let array_checked = arrayChecked("input[type=checkbox][name=source]");
-        if(array_checked.length > 0) {
-
-            let trafficSource =  [];
-            let websiteURL = $("#input-url").val();
-            let dailyTraffic = $(".select-traffic").val();
-            let area = $(".select-country").val();
-            let mrate = $(".device-mobile span").text().trim().replace(/\D/g,"");
-            let max = $(".select-max").val();
-            let min = $(".select-min").val();
-            let minPage = $(".select-min-page").val();
-            let maxPage = $(".select-max-page").val();
-            let minTime = $(".select-min-time").val();
-            let maxTime = $(".select-max-time").val();
-            let timeToRun = $(".select-time-run").val();
+        let trafficSource =  [];
+        let websiteURL = $("#input-url").val();
+        let dailyTraffic = $(".select-traffic").val();
+        let area = $(".select-country").val();
+        let mrate = $(".device-mobile span").text().trim().replace(/\D/g,"");
+        let max = $(".select-max").val();
+        let min = $(".select-min").val();
+        let minPage = $(".select-min-page").val();
+        let maxPage = $(".select-max-page").val();
+        let minTime = $(".select-min-time").val();
+        let maxTime = $(".select-max-time").val();
+        let timeToRun = $(".select-time-run").val();
             
+        if(array_checked.length > 0 && area.length > 0 && websiteURL != "") {
+
             for (let i = 0; i < array_checked.length; i++) { 
 
                 let temp = {
@@ -1277,7 +1372,21 @@ $(document).ready(() => {
             })
             
         } else {
+            if (websiteURL == "") {
+                Swal.showValidationMessage(
+                    `Lỗi: URL không hợp lệ !`);
+                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+            } else if(area.length == 0) {
+                Swal.showValidationMessage(
+                    `Lỗi: Bạn vui lòng chọn quốc gia !`);
+                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
 
+            } else if(array_checked.length == 0) {
+                Swal.showValidationMessage(
+                    `Lỗi: Bạn vui lòng chọn nguồn truy cập !`);
+                $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+
+            } 
         }
     }) 
 
@@ -1331,17 +1440,24 @@ $(document).ready(() => {
         $(".config-rate").css("z-index","0");
     })
 
-    $("body").on("keypress","#input-keywords", function(e) {
-        let val = $(this).val().trim()
-        if(e.which == 13 && val != "" && val != arr_keywords_google[arr_keywords_google.indexOf(val)]) {
+    $("body").on("click",".btn-keywords",function() {
+        let val = $("#input-keywords").val().trim();
+        if(val != "" && val != arr_keywords_google[arr_keywords_google.indexOf(val)]) {
             $(".keywords").append(`<span class="font-11 px-2 py-1 text-box-catelog text-white bg-info">
-                                        ${val}<i class="position-relative delete-keywords ml-3 cursor-pointer far fa-times"></i>
-                                    </span>`);
+            ${val}<i class="position-relative delete-keywords ml-3 cursor-pointer far fa-times"></i>
+                </span>`);
             arr_keywords_google.push(val);
-            $(this).val("");
+            $("#input-keywords").val("");
             if(!$(".error-configGoogle").hasClass("d-none")) {
-                $(".error-configGoogle").addClass("d-none")
+             $(".error-configGoogle").addClass("d-none")
             }
+        }
+    })
+
+    $("body").on("keypress","#input-keywords", function(e) {
+        let val = $(this).val().trim();
+        if(e.which == 13 && val != "") {
+           $(".btn-keywords").click();
         }
     })
 

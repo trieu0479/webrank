@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="css/lib/bootstrap.min.css">
     <link rel="stylesheet" href="css/content.min.css">
     <link rel="stylesheet" href="css/font.min.css">
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MFS4FQC');</script>
 </head>
  
 <body>
@@ -276,12 +281,13 @@
                         </div>
                     </a>
                 </div> -->
+                <div class="title font-14 pb-2 pl-2 pr-2">Báo cáo traffic, seo, google ads, backlink, social tất cả trong một tại webrank.vn</div>
                 <a class="button" target="top" id="more-traffic">
                     <button class="btn btn-more">
                         <i class="fas fa-search-plus"></i> Báo cáo chi tiết
                     </button>
                 </a>
-                <div class="title font-14 pt-1 pl-1 pr-1">Báo cáo traffic, seo, google ads, backlink, social tất cả trong một tại webrank.vn</div>
+               
             </div>
 
 
@@ -297,5 +303,6 @@
 <script src="js/lib/ResizeSensor.js"></script>
 <script src="js/shared.min.js"></script>
 <script src="js/lib/echarts.min.js"></script>
-
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFS4FQC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </html>
