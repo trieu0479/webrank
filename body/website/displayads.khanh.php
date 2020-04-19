@@ -34,22 +34,19 @@
                 <div class="col-12 mb-0" id="Parent-displayAdsOverview" style="position: relative">
                     <div class="row displayAdsOverview"></div>
                 </div>
-
                 <div class="col-12 mb-0">
                     <?php require_once(__DIR__ . "/modules/displayads.khanh.widgetSampleAds.php") ?>
                 </div>
 
-                <div class="col-12 col-lg-4 ">
-                    <div class="widget-getDisplayCountryChart">
-                    </div>
+                <div class="col-12 col-lg-4">
+                    <div class="widget-getDisplayCountryChart"></div>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="widget-getDisplayGenderChart"></div>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <div class="widget-getDisplayGenderChart">
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <div class="widget-getDisplayAgeChart">
-                    </div>
+                    <div class="widget-getDisplayAgeChart"></div>
                 </div>
 
                 <div class="col-12 col-lg-6">
@@ -60,15 +57,15 @@
                 </div>
 
                 <div class="col-12 col-lg-6">
-                    <?php require_once(__DIR__ . "/modules/displayads.khanh.widgetToppublicsher.php") ?>
+                    <?php require_once(__DIR__ . "/modules/displayads.khanh.widgetToppublicsher.php")?>
                 </div>
-                
+
                 <div class="col-12 col-lg-6">
                     <?php require_once(__DIR__ . "/modules/displayads.khanh.widgetAdtypes.php") ?>
                 </div>
 
                 <div class="col-12 col-lg-4">
-                    <div class="getWebsiteAdsVisitsOverview"></div>
+                    <div class="widget-getWebsiteAdsVisitsOverview ssss"></div>
                 </div>
 
                 <div class="col-12 col-lg-8">
@@ -82,7 +79,6 @@
                 <div class="col-12">
                     <div class="widget-PublicSherTable"></div>
                 </div>
-
             </div>
 
         </div>
@@ -98,5 +94,3 @@
 <script src="<?= $rootURL ?>/dist/js/pages/my-function/init-function.js"></script>
 <script type="module" src="<?= $rootURL ?>/dist/js/pages/website/master.js?v=<?= $version ?>"></script>
 <script type="module" src="<?= $rootURL ?>/dist/js/pages/website/displayads.khanh/index.js?v=<?= $version ?>"></script>
-<script type="module"
-    src="<?= $rootURL ?>/dist/js/pages/website/displayads.khanh/callechartTableFunction.js?v=<?= $version ?>"></script>
