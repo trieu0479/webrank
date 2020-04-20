@@ -72,14 +72,11 @@ $(document).ready(function () {
             dataSrc: function (res) {
                 let dataMainCompetitor = res.data.adwordsCompetitors;
                 let columns = [];
-
+                lockedModule('MainCompetitor', res.userData.member);
                 $('.similarReloadTask[data-task="MainCompetitor"]').find('i').addClass('d-none');
                 if (res.data.adwordsCompetitors != null && res.data.adwordsCompetitors.length != 0) {
-
-                    lockedModule('MainCompetitor', res.userData.member);
-
+                    $('#DataTables_Table_0_paginate').attr('style', 'margin-top: 15px')
                     $.each(dataMainCompetitor, function (k, v) {
-
                         let output = {};
                         output.domain = v.domain;
                         output.competitionLvl = v.competitionLvl;
@@ -90,9 +87,9 @@ $(document).ready(function () {
                     })
                     return columns;
                 } else {
-                    $('.parent-MainCompetitor').addClass('empty-state').attr('style', 'height:300px!important');
+                    $('.parent-MainCompetitor').addClass('empty-state').attr('style', 'height:314px!important');
                     $(".MainCompetitor").addClass('d-none')
-                    $("#DataTables_Table_0_paginate").attr('style', 'display:none!important');
+                    $('#DataTables_Table_0_paginate').attr('style', 'display:none!important;margin-top: 15px')
                     return columns;
                 }
             },
@@ -140,8 +137,7 @@ $(document).ready(function () {
         initComplete: function (settings, json) {
             $("table.dataTable thead th").css("padding", "10px");
             $("table.MainCompetitor tbody tr td").css("padding", "15px 10px!important");
-            $('#DataTables_Table_0_length').attr('style', 'display:none!important')
-            $('#DataTables_Table_0_paginate').attr('style', 'margin-top: 15px;!important')
+            $('#DataTables_Table_0_length').addClass('d-none')
         }
     }
     )
@@ -154,9 +150,10 @@ $(document).ready(function () {
                 let dataPaidPageTable = res.data.adwordsPositions;
                 let columns = [];
                 let stt = 1;
+                lockedModule('PaidPageTable', res.userData.member);
                 $('.similarReloadTask[data-task="PaidPageTable"]').find('i').addClass('d-none');
                 if (res.data.adwordsPositions != null && res.data.adwordsPositions.length != 0) {
-                    lockedModule('PaidPageTable', res.userData.member);
+                    
                     $.each(dataPaidPageTable, function (k, v) {
                         let output = {};
                         output.stt = stt;
@@ -168,10 +165,7 @@ $(document).ready(function () {
                         stt += 1;
                         columns.push(output)
 
-
                     })
-
-                    //  console.log(columns);
                     return columns;
                 } else {
                     $('#PaidPageTable_wrapper').addClass('empty-state');
@@ -260,9 +254,9 @@ $(document).ready(function () {
             dataSrc: function (res) {
                 let dataTopPaidKeyword = res.data.adwordsPositions;
                 let columns = [];
+                lockedModule('TopPaidKeyword', res.userData.member);
                 $('.similarReloadTask[data-task="TopPaidKeyword"]').find('i').addClass('d-none');
                 if (res.data.adwordsPositions != null && res.data.adwordsPositions.length != 0) {
-                    lockedModule('TopPaidKeyword', res.userData.member);
                     $.each(dataTopPaidKeyword, function (k, v) {
 
                         let output = {};

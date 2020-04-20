@@ -53,6 +53,8 @@ $(document).ready(function () {
     $(".similarReloadTask").click(function () {
         if ($(this).find('i').hasClass('fa-spin')) { $(this).find('i').removeClass('fa-spin'); return; }
         let task = $(this).data("task");
+        console.log('dsadasdsad',task);
+        
         $(this).find('i').addClass('fa-spin');
         api(task, localDomain, 1);
     })

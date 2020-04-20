@@ -192,9 +192,9 @@ else {
 
 
 const adwordsMonthlyFullTrend = async(data, method) => {
-    $('.widget-PublicSherTable').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
-    <a class="similarReloadTask text-muted" data-task="adwordsMonthlyFullTrend" href="javascript:;"><i class="fal fa-sync"></i></a>
-</div>`)
+//     $('.widget-PublicSherTable').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
+//     <a class="similarReloadTask text-muted" data-task="adwordsMonthlyFullTrend" href="javascript:;"><i class="fal fa-sync"></i></a>
+// </div>`)
     if (data.status == "success") {
         if (data && data.data && data.data.adwordsMonthlyFullTrend) {
             var res = data.data.adwordsMonthlyFullTrend;
