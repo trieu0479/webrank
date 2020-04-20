@@ -1,5 +1,20 @@
+import ClassFuncs from "./core.js"; 
+
 $(document).ready(() => {
-    $(".btn-use").click(() => {
-        window.location.href = "./?view=digital-marketing&action=cost";
+
+    let classFuncs = new ClassFuncs(); 
+
+
+    $(".btn-skip,.btn-use").click(function() {
+        console.log($(this));
+        if($(this).hasClass("btn-use")) { 
+            classFuncs.setSession(classFuncs.action,1);
+        } else {
+            classFuncs.setSession(classFuncs.action,0);
+        }
+
+        classFuncs.setAction("cost");
+        classFuncs.location();
     })
+
 })

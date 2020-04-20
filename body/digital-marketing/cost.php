@@ -3,55 +3,48 @@
         <div class="page-content pt-0">
             <!-- sub menu -->
             <div class="sub-header border-bottom pl-4 pt-3 pb-3 bg-white">
-                <div class="d-flex no-block">
-
-                    <div class="align-self-center font-14 mr-3">
-                        <a href="./" class="" style="color: rgba(79,80,80,.7);">Phân tích</a>
+                <div class="d-flex no-block"> 
+                <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="./?view=digital-marketing&action=index">Marketing</a>
                     </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="<?=$rootURL?>">Marketing</a>
+                            href="/?view=digital-marketing&action=contact">Contact</a> </div>
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="/?view=digital-marketing&action=tool-widget">Widget</a>
                     </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="<?=$rootURL?>">Contact</a> </div>
+                            href="/?view=digital-marketing&action=tool-chatbot">Chat bot</a> </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="<?=$rootURL?>">Widget</a>
-                    </div>
-                    <div class="align-self-center mr-3">
-                        <i class="fas fa-chevron-right text-muted"></i>
-                    </div>
-                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="<?=$rootURL?>">Chat bot</a> </div>
-                    <div class="align-self-center mr-3">
-                        <i class="fas fa-chevron-right text-muted"></i>
-                    </div>
-                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="<?=$rootURL?>">Google Ads</a> </div>
+                            href="/?view=digital-marketing&action=google">Google Ads</a> </div>
                     <div class="align-self-center mr-3">
                     </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="<?=$rootURL?>">Traffic Website</a> </div>
+                            href="/?view=digital-marketing&action=traffic-website">Traffic Website</a> </div> 
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="/?view=digital-marketing&action=data-customer">Data Customer</a> </div> 
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a
-                            href="<?=$rootURL?>">Data Customer</a> </div>
-                    <div class="align-self-center mr-3">
-                        <i class="fas fa-chevron-right text-muted"></i>
-                    </div>
-                    <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a
-                            href="<?=$rootURL?>">Cost</a> </div>
+                            href="/?view=digital-marketing&action=cost">Cost</a> </div>
                 </div>
 
             </div>
@@ -71,112 +64,11 @@
                             <div class="w-100">
                                 <div class="table-responsive">
                                     <table class="table table-bordered text-left">
-                                        <tbody>
+                                        <tbody class="table-tool">
                                             <tr>
                                                 <td class="w-5 text-center font-gg font-13 font-weight-bold">Chọn</td>
                                                 <td class="text-center font-gg font-13 font-weight-bold">Công cụ</td>
                                                 <td class="text-center font-gg font-13 font-weight-bold">Phí hàng tháng
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">
-                                                    <label class="pl-3 kt-checkbox kt-checkbox--bold kt-checkbox--brand"
-                                                        for="checkbox-direct">
-                                                        <input class="" type="checkbox" id="checkbox-direct"
-                                                            name="source" value="Direct">
-                                                        <span></span>
-                                                    </label>
-                                                </td>
-                                                <td class="font-gg font-14 font-weight-500">FFF Contact</td>
-                                                <td class="">
-                                                    <div class="d-flex no-block justify-content-center">
-                                                        <span class="font-weight-500 font-16 font-gg">199,000<sup
-                                                                class="font-12 font-gg"
-                                                                style="top: -15px;">vnd</sup></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">
-                                                    <label class="pl-3 kt-checkbox kt-checkbox--bold kt-checkbox--brand"
-                                                        for="checkbox-direct">
-                                                        <input class="" type="checkbox" id="checkbox-direct"
-                                                            name="source" value="Direct">
-                                                        <span></span>
-                                                    </label>
-                                                </td>
-                                                <td class="font-gg font-14 font-weight-500">FFF Chat</td>
-                                                <td class="">
-                                                    <div class="d-flex no-block justify-content-center">
-                                                        <span class="font-weight-500 font-16 font-gg">199,000<sup
-                                                                class="font-12 font-gg"
-                                                                style="top: -15px;">vnd</sup></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">
-                                                    <label class="pl-3 kt-checkbox kt-checkbox--bold kt-checkbox--brand"
-                                                        for="checkbox-direct">
-                                                        <input class="" type="checkbox" id="checkbox-direct"
-                                                            name="source" value="Direct">
-                                                        <span></span>
-                                                    </label>
-                                                </td>
-                                                <td class="font-gg font-14 font-weight-500">Google Ads</td>
-                                                <td class="">
-                                                    <div class="d-flex no-block justify-content-center">
-                                                        <span class="font-weight-500 font-16 font-gg">2,500,000<sup
-                                                                class="font-12 font-gg"
-                                                                style="top: -15px;">vnd</sup></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">
-                                                    <label class="pl-3 kt-checkbox kt-checkbox--bold kt-checkbox--brand"
-                                                        for="checkbox-direct">
-                                                        <input class="" type="checkbox" id="checkbox-direct"
-                                                            name="source" value="Direct">
-                                                        <span></span>
-                                                    </label>
-                                                </td>
-                                                <td class="font-gg font-14 font-weight-500">FFF Traffic</td>
-                                                <td class="">
-                                                    <div class="d-flex no-block justify-content-center">
-                                                        <span class="font-weight-500 font-16 font-gg">199,000<sup
-                                                                class="font-12 font-gg"
-                                                                style="top: -15px;">vnd</sup></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">
-                                                    <label class="pl-3 kt-checkbox kt-checkbox--bold kt-checkbox--brand"
-                                                        for="checkbox-direct">
-                                                        <input class="" type="checkbox" id="checkbox-direct"
-                                                            name="source" value="Direct">
-                                                        <span></span>
-                                                    </label>
-                                                </td>
-                                                <td class="font-gg font-14 font-weight-500">FFF CRM</td>
-                                                <td class="">
-                                                    <div class="d-flex no-block justify-content-center">
-                                                        <span class="font-weight-500 font-16 font-gg">199,000<sup
-                                                                class="font-12 font-gg"
-                                                                style="top: -15px;">vnd</sup></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td class="font-gg font-14 font-weight-500">Tổng phí</td>
-                                                <td class="">
-                                                    <div class="d-flex no-block justify-content-center">
-                                                        <span class="font-weight-500 font-16 font-gg">3,296,000<sup
-                                                                class="font-12 font-gg"
-                                                                style="top: -15px;">vnd</sup></span>
-                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -185,7 +77,7 @@
                             </div>
                             <div class="mb-5 text-left">
                                 <div class="font-gg text-muted font-14">
-                                    Nếu bạn không thể liên hệ với hỗ trợ viên, vui lòng gọi Hotline
+                                    Nếu bạn không thể liên hệ với hỗ trợ viên, vui lòng gọi Hotline  
                                     <span class="font-gg font-weight-500 text-danger">
                                         <a href="tel:0984 66 80 68" class="font-gg font-weight-500 text-danger">0984 66 80 68</a>
                                          - 
@@ -208,4 +100,4 @@
     </div>
 </div>
 <script src="<?=$rootURL?>/dist/js/pages/my-function/init-function.js"></script>
-<script src="<?=$rootURL?>/dist/js/pages/digital-marketing/cost.js"></script>
+<script type="module" src="<?=$rootURL?>/dist/js/pages/digital-marketing/cost.js"></script>

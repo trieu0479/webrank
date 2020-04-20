@@ -31,7 +31,7 @@ $(document).ready(() => {
     $(".btn-submit").click(() => {
         let val = $(".input-submit").val();
         if(checkIsValidDomain(val)) {
-            window.location.href = "/?view=digital-marketing&action=contact";
+            window.location.href = `/?view=digital-marketing&action=contact&website=${val}`;
         } else {
             showPopupError();
         }

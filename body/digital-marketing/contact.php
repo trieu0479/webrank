@@ -3,21 +3,15 @@
         <div class="page-content pt-0">
             <!-- sub menu -->
             <div class="sub-header border-bottom pl-4 pt-3 pb-3 bg-white">
-                <div class="d-flex no-block">
-                    <div class="align-self-center font-14 mr-3">
-                        <a href="./" class="" style="color: rgba(79,80,80,.7);">Phân tích</a>
+                <div class="d-flex no-block"> 
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="./?view=digital-marketing&action=index">Marketing</a>
                     </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
-                    <div class="align-self-center font-14 mr-3" > <a style="color: rgba(79,80,80,.7);"
-                            href="<?=$rootURL?>">Marketing</a>
-                    </div>
-                    <div class="align-self-center mr-3">
-                        <i class="fas fa-chevron-right text-muted"></i>
-                    </div>
-                    <div class="align-self-center font-14" style="color: rgba(79,80,80,.7);"> <a 
-                            href="<?=$rootURL?>">Contact</a> </div>
+                    <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a
+                            href="/?view=digital-marketing&action=contact">Contact</a> </div>
 
                 </div>
 
@@ -42,7 +36,7 @@
                                 </div> 
                                 <div class="text-left d-flex no-block flex-column mb-4">
                                     <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">Số điện thoại</div>
-                                    <input id="input-phone" value="" type="text" class="font-13 text-muted form-control" placeholder="Nhập số điện thoại">
+                                    <input id="input-phone" value="" type="text" class="font-13 text-muted form-control" placeholder="Nhập số điện thoại" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>  
                                 <div class="text-left d-flex no-block flex-column">
                                     <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">Email</div>
@@ -60,4 +54,4 @@
     </div>
 </div>
 <script src="<?=$rootURL?>/dist/js/pages/my-function/init-function.js"></script>
-<script src="<?=$rootURL?>/dist/js/pages/digital-marketing/contact.js"></script>
+<script type="module" src="<?=$rootURL?>/dist/js/pages/digital-marketing/contact.js"></script>
