@@ -506,7 +506,8 @@ $(document).ready(() => {
                         
             </div>
             `;
-            $('#bannerPageAds').append(html)
+            $('#bannerPageAds').append(html);
+            $('#logo-company').append(`<img src="${res.data.imageURI}" class="" alt="" style="border-radius: 11px;">`)
         }
     })
     initDatatable(
@@ -557,4 +558,68 @@ $(document).ready(() => {
             }
         }
     )
+
+    function swalsosanh(domain) {
+        Swal.fire({
+            title: 'Hãy nhập website để so sánh',
+            html: `<input id="swal-input1" class="swal2-input text-lowercase" value=${domain} placeholder="Nhập website của bạn">` +
+                `<div class="text-white font-16 bg-dark m-auto shadow-sm" style="height: 60px; width: 60px; line-height: 60px;border-radius: 60px">VS</div>` +
+                `<input id="swal-input2" value="" class="swal2-input text-lowercase"  placeholder="Nhập website của đối thủ">`,
+            focusConfirm: false,
+            showCloseButton: true,
+            confirmButtonText: 'So Sánh',
+            width: 600,
+            padding: '4em',
+            onOpen: () => {
+                $('#swal-input2').focus()
+                $('#swal-input2').keypress(event => {
+                    if (event.which == 13) {
+                        $('.swal2-confirm').click();
+                    }
+                })
+            },
+            preConfirm: () => {
+                if ($('#swal-input1').val() == "" || $('#swal-input2').val() == "") {
+                    Swal.showValidationMessage(`Vui lòng nhập đủ website`)
+                } else {
+                    if ($('#swal-input1').val() == $('#swal-input2').val()) {
+                        Swal.showValidationMessage(`Hai website không được trùng`)
+                    }
+                }
+                return [
+                    $('#swal-input1').val(),
+                    $('#swal-input2').val()
+                ]
+            }
+        }).then((result) => {
+            // console.log(result);
+            if (result.value) {
+                location.href = `${rootURL}/?view=traffic-website&action=compare&domain1=${result.value[0].toLowerCase()}&domain2=${result.value[1].toLowerCase()}`;
+            }
+        })
+    }
+    $.getJSON(`//localapi.trazk.com/bigdata/index.php?task=getDomainInformationWithBigData&domain=${localDomain}&userToken=${userToken}`, function(res) {
+        let domainData = res.data.domainData
+        let websiteContact = res.data.websiteContact
+        let html_left = `
+                <div class="title-logo">${domainData.domain}</div>
+                <span class="email-infoweb mr-3" style=""><i class="fad fa-envelope mr-1  font-15" style="color: #74788d;"></i> ${websiteContact.email.replace(/[\(\)\[\]{}'"]/g, "")}</span>
+                <span class="email-infoweb"><i class="fal fa-phone-alt mr-1 font-15"></i>${websiteContact.phone.replace(/[\(\)\[\]{}'"]/g, "")}</span>
+            `;
+        let html_info = `
+            <div><i class="fas fa-map-marker-alt mr-2 text-info"></i>${(domainData.owner.address != undefined) ? domainData.owner.address:'Chưa cập nhật'}</div>
+            <div>${(domainData.owner.ownerName == '') ? domainData.registrarName : domainData.owner.ownerName}</div>
+            <div>${websiteContact.phone.replace(/[\(\)\[\]{}'"]/g, "")}</div>
+            <div>${websiteContact.email.replace(/[\(\)\[\]{}'"]/g, "")}</div>
+            <div>${moment(domainData.creationDate).format('DD MMMM YYYY')}</div>
+        `
+        $('.wapper-decrip').html(html_left)
+        $('.info-user-api').html(html_info)
+        $('.btn-truycap').attr('href', `https://${domainData.domain}`)
+        $('body').on('click', '.btn-sosanh', function() {
+            swalsosanh(domainData.domain)
+        })
+    })
+
+
 })
