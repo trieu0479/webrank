@@ -28,32 +28,32 @@
                             <div class="sub-list info  position-absolute bg-white border rounded"> 
                                 <div class="px-3 py-3">
                                     <a class="text-dark font-gg font-13" href="https://admin.fff.com.vn/account/index.php?userToken=UEh3SXZLTlVHK1hFazNmL1dCWXlrREhMYkd0UFVUOHREN0d6QnY3OHY1bz06OkZnoNMGxEGIuv1a_aVJbvo&amp;view=user&amp;action=information">
-                                        <i class="mr-3 fad fa-user-tie font-17" style="color: rgb(157, 172, 199);"></i> Thông tin tài khoản
+                                        <i class="mr-3 fad fa-user-tie font-16" style="color: rgb(157, 172, 199);"></i> Thông tin tài khoản
                                     </a>
                                 </div>
                                 <div class="px-3 py-3">
                                     <a class="text-dark font-gg font-13" href="https://admin.fff.com.vn/account/index.php?userToken=UEh3SXZLTlVHK1hFazNmL1dCWXlrREhMYkd0UFVUOHREN0d6QnY3OHY1bz06OkZnoNMGxEGIuv1a_aVJbvo&view=user&action=adword-management">
-                                        <i class="mr-3 fad fa-bring-forward font-17" style="color: rgb(157, 172, 199);"></i> Quản lý AdWords
+                                        <i class="mr-3 fad fa-bring-forward font-16" style="color: rgb(157, 172, 199);"></i> Quản lý AdWords
                                     </a>
                                 </div>
                                 <div class="px-3 py-3">
                                     <a class="text-dark font-gg font-13" href="https://admin.fff.com.vn/account/index.php?userToken=UEh3SXZLTlVHK1hFazNmL1dCWXlrREhMYkd0UFVUOHREN0d6QnY3OHY1bz06OkZnoNMGxEGIuv1a_aVJbvo&view=user&action=website-management">
-                                        <i class="mr-3 fad fa-browser font-17" style="color: rgb(157, 172, 199);"></i> Quản lý website
+                                        <i class="mr-3 fad fa-browser font-16" style="color: rgb(157, 172, 199);"></i> Quản lý website
                                     </a>
                                 </div>
                                 <div class="px-3 py-3">
                                     <a class="text-dark font-gg font-13" href="https://admin.fff.com.vn/account/index.php?userToken=UEh3SXZLTlVHK1hFazNmL1dCWXlrREhMYkd0UFVUOHREN0d6QnY3OHY1bz06OkZnoNMGxEGIuv1a_aVJbvo&view=user&action=payment-table">
-                                        <i class="mr-3 fad fa-gem font-17" style="color: rgb(157, 172, 199);"></i> Nâng cấp VIP
+                                        <i class="mr-3 fad fa-gem font-16" style="color: rgb(157, 172, 199);"></i> Nâng cấp VIP
                                     </a>
                                 </div>
                                 <div class="px-3 py-3">
                                     <a class="text-dark font-gg font-13" href="https://admin.fff.com.vn/account/index.php?userToken=UEh3SXZLTlVHK1hFazNmL1dCWXlrREhMYkd0UFVUOHREN0d6QnY3OHY1bz06OkZnoNMGxEGIuv1a_aVJbvo&view=user&action=payment-history">
-                                        <i class="mr-3 fad fa-calendar-alt font-17" style="color: rgb(157, 172, 199);"></i> Lịch sử thanh toán
+                                        <i class="mr-3 fad fa-calendar-alt font-16" style="color: rgb(157, 172, 199);"></i> Lịch sử thanh toán
                                     </a>
                                 </div>
                                 <div class="px-3 py-3">
                                     <a class="text-dark font-gg font-13" href="#">
-                                        <i class="mr-3 fa fa-power-off font-17" style="color: rgb(157, 172, 199);"></i> Thoát
+                                        <i class="mr-3 fa fa-power-off font-16" style="color: rgb(157, 172, 199);"></i> Thoát
                                     </a>
                                 </div>
                             </div>
