@@ -80,19 +80,8 @@
                     </div>
                 </div>
             </div>
-            <!-- header menu -->
-
-            <!-- sub menu -->
-            <!-- <div class="sub-header border-bottom pl-4 pt-3 pb-3 bg-white">
-                <div class="d-flex no-block">
-                
-                    <div class="align-self-center font-14" style="color: rgba(79,80,80,.7);"> <a
-                            href="<?=$rootURL?>">My Projects</a> </div>
-
-                </div>
-
-            </div> -->
-            <!-- sub menu -->
+            <!-- header menu --> 
+            
             <div class="row justify-content-center mt-5">
                 <div class="col-12 text-center" style="max-width: 1480px">
                     <div class="bg-white rounded">
