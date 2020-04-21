@@ -3543,7 +3543,6 @@ const getTrafficOverview = async(task, data) => {
         getTrafficOverviewCustomerResources('getTrafficOverviewCustomerResources', data);
         getTrafficOverviewCustomerSourceAnalysis('getTrafficOverviewCustomerSourceAnalysis ', data);
         getTimeMobileDesktop('getTimeMobileDesktop', data);
-        getCrunchBase('getCrunchBase', data);
         trafficByGeo('trafficByGeo', data);
         getDesktopVsMobileVisits('getDesktopVsMobileVisits', data);
         lockedModule('getDesktopVsMobileVisits', data.userData.member);
@@ -4098,18 +4097,7 @@ const getTimeMobileDesktop = async(task, data) => {
     })
     await $(`#getTimeMobileDesktop `).removeClass('is-loading');
 }
-const getCrunchBase = async(task, data) => {
-    // if (data.data.crunchbase[0].domain) {
-    //     let dataweb = data.data.crunchbase[0]
-    //     let category = data.data.crunchbase[0].category_list.replace(/[\"|\[\]]/g, "").split(",")
 
-    //     category.forEach((v) => {
-    //         $('.category-web').append(`<span class="wapper-category mr-1">${v}</span>`)
-    //     })
-    // } else {
-    //     // $('.wapper-widget-company .wapper-companyweb').addClass('empty-state')
-    // }
-}
 const trafficByGeo = async(task, data) => {
     let percentcont = data.data.trafficByGeo
     let contry = []
