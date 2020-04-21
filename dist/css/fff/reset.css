@@ -3661,6 +3661,9 @@ span.sub-tilte-content,
     background-color: #EDF1F5;  
 } 
 
+#tableProjects tr td {
+    vertical-align: middle;
+}
  
 
 
