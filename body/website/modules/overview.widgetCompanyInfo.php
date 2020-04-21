@@ -1,7 +1,7 @@
 <div class="wapper-widget-company bg-white rounded p-4">
     <!-- <div class="widget-info mb-3">Thông tin Website</div> -->
-    <div class="parent-getCrunchBase-gggg">
-        <div class="wapper-companywebdfgvdfbdfgb">
+    <div class="parent-getCrunchBase">
+        <div class="wapper-companyweb">
             <div class="row">
                 <div class="col-7 mb-0">
                     <div class="d-flex">
