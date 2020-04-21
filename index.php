@@ -56,6 +56,6 @@ require_once('modules/header.php') ;
 
 <body class="skin-dark"> 
 <div id="main-wrapper">
-<?php require_once('modules/top.php');?>
+<?php if($view != "projects" ) require_once('modules/top.php');?>
 <?php require_once("body/".$view."/".$action.".php");?> 
 <?php require_once("modules/footer.php");?>

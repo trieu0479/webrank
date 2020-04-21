@@ -3618,3 +3618,19 @@ span.sub-tilte-content,
 .white-space-nowrap{
     white-space: nowrap;
 }
+
+/* view=projects */
+
+#projects .sub-list {
+    display: none;
+    width: 200px;
+    top: 40px
+}
+
+#projects .header-menu:hover .sub-list {
+   display: block;
+   transition: all 0.3s; 
+   z-index: 999;
+}
+
+/* end view=projects */
