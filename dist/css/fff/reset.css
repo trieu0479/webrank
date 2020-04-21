@@ -3621,16 +3621,42 @@ span.sub-tilte-content,
 
 /* view=projects */
 
-#projects .sub-list {
+#projects .header-menu {
+    color: rgb(157, 172, 199); 
+    padding: 10px 30px;
+}
+
+#projects .header-menu .menu-icon {
+    color: rgb(157, 172, 199);
+}
+
+#projects .header-menu .sub-list {
     display: none;
     width: 200px;
-    top: 40px
+    color: #333;
+    top: 40px; 
+    transition: all 0.3s; 
+    z-index: 999; 
+}
+
+#projects .header-menu .info { 
+    top: 48px; 
+    width: 70% ; 
+    left: 70px;
+}
+
+#projects .header-menu:hover .menu-icon{
+    color: rgb(238,101,94);
 }
 
 #projects .header-menu:hover .sub-list {
    display: block;
-   transition: all 0.3s; 
-   z-index: 999;
 }
+
+.sub-list div:hover {
+    background-color: #EDF1F5; 
+}
+
+
 
 /* end view=projects */
