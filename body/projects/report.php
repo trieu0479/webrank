@@ -105,13 +105,14 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="bg-white rounded">
+                    <div class="bg-white rounded h-100">
                         <div class="d-flex no-block border-bottom px-4 py-3">
                             <div class="font-14 font-weight-bold font-gg">Báo cáo Google Ads</div>
+                            <div class="ml-auto font-gg font-weight-bold font-11 bg-success px-3 py-1 rounded-pill">Đã mua</div>
                         </div>
                         <div class="row px-4 py-4">
                             <div class="col-6 mb-4">
-                                <div class="bg-white shadow-sm rounded">
+                                <div class="bg-white shadow-sm rounded border">
                                     <div class="d-flex m-0 py-2 px-3 no-block">
                                         <div class="col-auto pl-0">
                                             <div class="text-capitalize font-weight-bold"> Chi phí </div>
@@ -136,7 +137,7 @@
                                 </div>
                             </div>
                             <div class="col-6 mb-4">
-                                <div class="bg-white shadow-sm rounded">
+                                <div class="bg-white shadow-sm rounded border">
                                     <div class="d-flex m-0 py-2 px-3 no-block">
                                         <div class="col-auto pl-0">
                                             <div class="text-capitalize font-weight-bold"> Hiển thị </div>
@@ -160,8 +161,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 mb-4">
-                                <div class="bg-white shadow-sm rounded">
+                            <div class="col-6">
+                                <div class="bg-white shadow-sm rounded border">
                                     <div class="d-flex m-0 py-2 px-3 no-block">
                                         <div class="col-auto pl-0">
                                             <div class="text-capitalize font-weight-bold"> Click chuột </div>
@@ -185,8 +186,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 mb-4">
-                                <div class="bg-white shadow-sm rounded">
+                            <div class="col-6">
+                                <div class="bg-white shadow-sm rounded border">
                                     <div class="d-flex m-0 py-2 px-3 no-block">
                                         <div class="col-auto pl-0">
                                             <div class="text-capitalize font-weight-bold"> Conversion </div>
@@ -210,14 +211,41 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12 mt-5">
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-info font-gg font-14 px-4">Xem đầy đủ</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div> 
                 <div class="col-6">
-                    <div class="bg-white rounded" style="height: 500px">
-
+                    <div class="bg-white rounded h-100">
+                        <div class="d-flex no-block border-bottom px-4 py-3">
+                            <div class="font-14 font-weight-bold font-gg">Báo cáo Google Ads</div>
+                            <div class="ml-auto font-gg font-weight-bold font-11 bg-warning px-3 py-1 rounded-pill">Chưa mua</div>
+                        </div>
+                        <div class="row px-4 py-4"> 
+                            <div class="col-12">
+                                <div class="">
+                                    <div class="mb-3"> 
+                                        <div class="font-gg font-weight-500 font-14 text-muted">
+                                            Google Ads website của bạn lên top Google Search nhanh chóng, bạn chủ động quản lý vị trí quảng cáo và chi phí chi trả cho Google.
+                                        </div>
+                                    </div> 
+                                    <div class="w-100 text-center"> 
+                                        <img class="border rounded" src="./dist/images/google-ads.png" alt="" height="290px">
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-info font-gg font-14 px-4">Sử dụng công cụ này</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     </div>
