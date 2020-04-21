@@ -95,17 +95,17 @@
             <!-- sub menu -->
             <div class="row justify-content-center mt-5">
                 <div class="col-12 text-center" style="max-width: 1480px">
-                    <div class="mb-3 bg-white rounded">
+                    <div class="bg-white rounded">
                         <div class="d-flex no-block px-4 py-3 border-bottom">
                             <div class="font-gg font-14 font-weight-bold align-self-center">
                                 Dự án của bạn
                             </div>
                             <div class="ml-auto align-self-center">
-                                <button class="btn btn-info font-gg font-14 px-3">Thêm dự án</button>
+                                <button class="btn btn-info font-gg font-14 px-3 d-flex no-block"><i class="align-self-center fad fa-plus-circle font-16 mr-2"></i>Thêm dự án</button>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-striped mb-0">
                                 <thead>
                                     <tr>
                                         <th class="text-left font-gg font-12 font-weight-bold white-space-nowrap"
@@ -130,6 +130,10 @@
                                         <th class="text-left font-gg font-12 font-weight-bold white-space-nowrap"
                                             scope="col">
                                             Trạng thái
+                                        </th>
+                                        <th class="text-left font-gg font-12 font-weight-bold white-space-nowrap"
+                                            scope="col">
+                                            Action
                                         </th>
                                     </tr>
                                 </thead>
@@ -158,6 +162,11 @@
                                         <td class="text-left font-gg font-13 font-weight-500 white-space-nowrap">
                                             <span class="rounded-pill px-2 bg-success py-1 font-weight-bold font-10">Đã thanh toán</span>
                                         </td>
+                                        <td class="text-left white-space-nowrap">
+                                            <button type="button" class="btn btn-outline-info font-gg font-13 font-weight-500 ">
+                                                <i class="fad fa-eye mr-2"></i>Xem báo cáo
+                                            </button>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="text-left font-gg font-13 font-weight-500 white-space-nowrap"
@@ -182,6 +191,11 @@
                                         </td>
                                         <td class="text-left font-gg font-13 font-weight-500 white-space-nowrap">
                                             <span class="rounded-pill px-2 bg-warning py-1 font-weight-bold font-10">Chưa thanh toán</span>
+                                        </td>
+                                        <td class="text-left white-space-nowrap">
+                                            <button type="button" class="btn btn-outline-info font-gg font-13 font-weight-500 ">
+                                                <i class="fad fa-eye mr-2"></i>Xem báo cáo
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
