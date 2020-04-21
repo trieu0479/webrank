@@ -3633,16 +3633,20 @@ span.sub-tilte-content,
 #projects .header-menu .sub-list {
     display: none;
     width: 200px;
-    color: #333;
+    color: #343a40;
     top: 40px; 
     transition: all 0.3s; 
-    z-index: 999; 
+    z-index: 1; 
 }
 
 #projects .header-menu .info { 
     top: 48px; 
-    width: 70% ; 
+    width: 70%; 
     left: 70px;
+}
+
+#projects .header-menu .info div a {
+    color: #343a40!important;
 }
 
 #projects .header-menu:hover .menu-icon{
@@ -3653,9 +3657,11 @@ span.sub-tilte-content,
    display: block;
 }
 
-.sub-list div:hover {
-    background-color: #EDF1F5; 
-}
+#projects .sub-list div:hover {
+    background-color: #EDF1F5;  
+} 
+
+ 
 
 
 
