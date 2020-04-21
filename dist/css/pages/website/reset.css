@@ -415,56 +415,84 @@
     text-overflow: ellipsis;
 }
 
-.logo-company {
-    width: 140px;
-    height: 140px;
-    flex-shrink: 0;
+#logo-company {
+    margin-right: 22px;
+    display: flex;
+    align-items: center;
 }
 
-.widget-info {
-    font-size: 19px;
+.email-infoweb {
+    color: #74788d;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.btn-sosanh {
+    background: #52DC90;
+    color: #fff;
+    padding: 6px 26px;
+    display: inline-block;
+    border-radius: 6px;
     font-weight: 600;
-    font-family: sans-serif;
 }
 
-.titlenameweb {
+.btn-sosanh:hover {
+    color: #fff;
+}
+
+.btn-truycap {
+    margin-left: 13px;
+    border: 1px solid #098ae3;
+    padding: 6px 19px;
+    border-radius: 6px;
+    display: inline-block;
+    font-weight: 600;
+    transition: 0.5s
+}
+
+.btn-truycap:hover {
+    background: #098ae3;
+    color: #fff;
+}
+
+.info-user-im div {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #48465b;
+}
+
+.info-user-api div {
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: #74788d;
+}
+
+.title-logo {
+    font-size: 24px;
+    color: #14a1fc;
+    font-weight: bold;
+}
+
+.rank-logo-web {
     font-size: 16px;
-    font-weight: 700;
-    font-family: sans-serif;
+    color: #777;
 }
 
-.content-website {
-    margin-bottom: 12px;
-    margin-top: 4px;
-    display: inline-block;
-    color: rgb(117, 117, 117);
-    line-height: 1.5;
+.title-web {
+    font-weight: 200;
+    color: #777;
+    font-size: 18px;
+    text-transform: capitalize;
 }
 
-.wapper-category {
-    background-color: rgba(69, 87, 92, 0.15);
-    color: rgb(69, 87, 92);
-    padding: 6px 7px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-size: 12px;
-    border-radius: 14px;
-    display: inline-block;
+.info-und div {
+    font-size: 14px;
+    margin: 8px 0;
 }
 
-.info-comp i {
-    color: rgb(166, 176, 179);
-    font-size: 15px;
-}
-
-.info-comp span {
-    width: 30px;
-}
-
-.info-comp p {
-    font-size: 12px;
-    color: #333333;
-    margin-bottom: 7px;
+.info-web-use div {
+    margin: 8px 0;
 }
 
 .parent-organicPositions table.dataTable tbody tr td {

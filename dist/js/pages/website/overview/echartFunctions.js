@@ -131,6 +131,7 @@ const getHeader = async data => {
     $(".similarRank .similarCountryRank").text('#' + numeral(similarCountryRank).format('0,0'));
     $(".similarHeader .similarTitle").html(similarTitle);
     $(".similarHeader .similarDescription").html(similarDescription);
+    $(".text-description").html(similarDescription);
     $(".similarHeader .similarTags").html(
         '<p class="font-bold mb-2"><i class="far fa-tag font-14"></i> Từ khoá: </p>' +
         similarTags.map(tag => `<span><a href="./index.php?view=keywords&action=keywords-overview&keyword=${tag}"  data-type="keyword" class="changeURL" data-input="${tag}" class="text-muted"><i class="far fa-search"></i> ${tag}</a></span>`).join("")
@@ -4098,60 +4099,16 @@ const getTimeMobileDesktop = async(task, data) => {
     await $(`#getTimeMobileDesktop `).removeClass('is-loading');
 }
 const getCrunchBase = async(task, data) => {
-    if (data.data.crunchbase[0].domain) {
-        let dataweb = data.data.crunchbase[0]
-        let category = data.data.crunchbase[0].category_list.replace(/[\"|\[\]]/g, "").split(",")
-        let html = `
-        <div class="row">
-            <div class="col-2">
-                <div class="logo-company">
-                    <img src="${dataweb.logo_url}" alt="" class="w-100">
-                </div>
-            </div>
-            <div class="col-10">
-                <div>
-                    <div class="title-companyweb d-flex justify-content-start">
-                        <span class="titlenameweb">${dataweb.name}</span>
-                        <div class="social-network" style="line-height: 24px;">
-                            <span class="iconsfb"><a href="${dataweb.facebook_url}"><i class="fab fa-facebook-f font-16 text-black-50 mx-1"></i></a></span>
-                            <span class="iconstwitter"><a href="${dataweb.linkedin_url}"><i class="fab fa-twitter font-16 text-black-50 mx-1"></i></a></span>
-                            <span class="iconslinked"><a href="${dataweb.twitter_url}"><i class="fab fa-linkedin-in font-16 text-black-50 mx-1"></i></a></span>
-                        </div>
-                    </div>
-                    <div class="content-website">${dataweb.short_description}</div>
-                    <div class="category-web">
-                    </div>
-                    <div class="wapper-companyinfo mt-3">
-                        <div class="info-comp d-flex justify-content-start">
-                            <span data-toggle="tooltip" data-placement="left" title="Địa chỉ công ty"><i class="fas fa-map-marker-alt mr-2"></i></span>
-                            <p>${dataweb.address_full}</p>
-                        </div>
-                        <div class="info-comp d-flex justify-content-start">
-                            <span  data-toggle="tooltip" data-placement="left" title="Số lượng nhân viên">
-                                <i class="fas fa-users"></i>
-                            </span>
-                            <p>${dataweb.employee_count}</p>
-                        </div>
-                        <div class="info-comp d-flex justify-content-start">
-                            <span  data-toggle="tooltip" data-placement="left" title="Tổng số vốn">
-                                <i class="fas fa-sack"></i>
-                            </span>
-                            <span>$${numeral(dataweb.total_funding_usd).format("0,0")}</span>
-                        </div>
-                        <div class="font-13 mt-2">
-                            Ngày thành lập: ${moment(dataweb.founded_on).format('DD MMMM YYYY')}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`;
-        $('.wapper-companyweb').html(html)
-        category.forEach((v) => {
-            $('.category-web').append(`<span class="wapper-category mr-1">${v}</span>`)
-        })
-    } else {
-        $('.wapper-widget-company .wapper-companyweb').addClass('empty-state')
-    }
+    // if (data.data.crunchbase[0].domain) {
+    //     let dataweb = data.data.crunchbase[0]
+    //     let category = data.data.crunchbase[0].category_list.replace(/[\"|\[\]]/g, "").split(",")
+
+    //     category.forEach((v) => {
+    //         $('.category-web').append(`<span class="wapper-category mr-1">${v}</span>`)
+    //     })
+    // } else {
+    //     // $('.wapper-widget-company .wapper-companyweb').addClass('empty-state')
+    // }
 }
 const trafficByGeo = async(task, data) => {
     let percentcont = data.data.trafficByGeo
