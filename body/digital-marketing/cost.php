@@ -3,48 +3,53 @@
         <div class="page-content pt-0">
             <!-- sub menu -->
             <div class="sub-header border-bottom pl-4 pt-3 pb-3 bg-white">
-                <div class="d-flex no-block"> 
-                <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                <div class="d-flex no-block">
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
                             href="./?view=digital-marketing&action=index">Marketing</a>
                     </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=contact">Contact</a> </div>
-                    <div class="align-self-center mr-3">
-                        <i class="fas fa-chevron-right text-muted"></i>
-                    </div>
-                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=tool-widget">Widget</a>
+                            href="/?view=digital-marketing&action=contact&website=<?=$_GET['website']?>">Contact</a>
                     </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=tool-chatbot">Chat bot</a> </div>
-                    <div class="align-self-center mr-3">
-                        <i class="fas fa-chevron-right text-muted"></i>
-                    </div>
-                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=google">Google Ads</a> </div>
-                    <div class="align-self-center mr-3">
+                            href="/?view=digital-marketing&action=tool-widget&website=<?=$_GET['website']?>">Widget</a>
                     </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=traffic-website">Traffic Website</a> </div> 
+                            href="/?view=digital-marketing&action=tool-chatbot&website=<?=$_GET['website']?>">Chat
+                            bot</a> </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=data-customer">Data Customer</a> </div> 
+                            href="/?view=digital-marketing&action=google&website=<?=$_GET['website']?>">Google Ads</a>
+                    </div>
+                    <div class="align-self-center mr-3">
+                    </div>
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="/?view=digital-marketing&action=traffic-website&website=<?=$_GET['website']?>">Traffic
+                            Website</a> </div>
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="/?view=digital-marketing&action=data-customer&website=<?=$_GET['website']?>">Data
+                            Customer</a> </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a
-                            href="/?view=digital-marketing&action=cost">Cost</a> </div>
+                            href="/?view=digital-marketing&action=cost&website=<?=$_GET['website']?>">Cost</a> </div>
                 </div>
 
             </div>
@@ -77,11 +82,13 @@
                             </div>
                             <div class="mb-5 text-left">
                                 <div class="font-gg text-muted font-14">
-                                    Nếu bạn không thể liên hệ với hỗ trợ viên, vui lòng gọi Hotline  
+                                    Nếu bạn không thể liên hệ với hỗ trợ viên, vui lòng gọi Hotline
                                     <span class="font-gg font-weight-500 text-danger">
-                                        <a href="tel:0984 66 80 68" class="font-gg font-weight-500 text-danger">0984 66 80 68</a>
-                                         - 
-                                        <a href="tel:0984 66 80 68" class="font-gg font-weight-500 text-danger">0901 47 48 46</a>
+                                        <a href="tel:0984 66 80 68" class="font-gg font-weight-500 text-danger">0984 66
+                                            80 68</a>
+                                        -
+                                        <a href="tel:0984 66 80 68" class="font-gg font-weight-500 text-danger">0901 47
+                                            48 46</a>
                                     </span>
                                 </div>
                             </div>

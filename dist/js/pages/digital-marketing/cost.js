@@ -48,12 +48,46 @@ $(document).ready(() => {
             showLoginModal();
 
         } else {
+            let arr_checked_tool = classFuncs.arrayCheckedTool(); 
 
-            if($(this).hasClass("btn-pay-now")) { 
-                classFuncs.showPopupRecharge(classFuncs.getSumPrice());
-            } else {
-                
+            let tools = [];
+
+            arr_checked_tool.forEach((val,index) => {
+                let temp = {
+                    toolName: val.toolName,
+                    status: val.status
+                }
+
+                tools.push(temp);
+            })
+
+            
+            let post = {
+                domain: classFuncs.website,
+                tools
             }
+
+            classFuncs.createNewOrder(post).then(res => {
+               return res; 
+            }).then(res => {
+                if(res != "") {
+                    let post = {
+                        toolKey: res,
+                        totalCost: classFuncs.sumPrice,
+                        discountCost: 0
+                    }
+                    classFuncs.updateOrderCost(post).then(data => {
+                        console.log(data);
+                    })
+                }
+            })
+            
+            // classFuncs.getListMyOrder().then(data => console.log(data));
+            // if($(this).hasClass("btn-pay-now")) { 
+            //     classFuncs.showPopupRecharge(classFuncs.getSumPrice());
+            // } else {
+                
+            // }
         }
     })
     
