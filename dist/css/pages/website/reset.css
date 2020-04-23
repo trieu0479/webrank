@@ -423,8 +423,12 @@
 
 .email-infoweb {
     color: #74788d;
-    font-weight: 500;
-    font-size: 13px;
+    font-size: 12px;
+    display: inline-block;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }
 
 .btn-sosanh {
@@ -460,6 +464,7 @@
     font-weight: 500;
     margin-bottom: 6px;
     color: #48465b;
+    min-width: 100px;
 }
 
 .info-user-api div {
