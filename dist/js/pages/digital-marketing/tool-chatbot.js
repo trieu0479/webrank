@@ -4,7 +4,7 @@ $(document).ready(() => {
 
     let classFuncs = new ClassFuncs(); 
 
-    // $(".iframeContainer-maxlead").attr("src",`http://themes.trazk.com/003/maxLead_CallButton/preview_url.php?url=${classFuncs.getWebsite()}&widgetId=5e9275b4dc572`)
+    $(".iframeContainer-maxlead").attr("src",`http://demochat.fff.com.vn/chat/iframe.php?url=${classFuncs.getWebsite()}`)
 
     $(".btn-skip,.btn-use").click(function() {
         console.log($(this));

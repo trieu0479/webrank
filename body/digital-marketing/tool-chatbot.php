@@ -40,7 +40,7 @@
                                 </div>
                             </div> 
                             <div class="mb-2 w-100"> 
-                                <iframe class="iframeContainer-maxlead border" width="100%" height="500px" scrolling="no" id="iframeContainer-maxlead" src="http://widgets.editor.local/demo/003/maxLead_CallButton/demo_url.php?url=https://fff.com.vn" allowtransparency="true" frameborder="0"></iframe>
+                                <iframe class="iframeContainer-maxlead border" width="100%" height="500px" scrolling="no" id="iframeContainer-maxlead" src="" allowtransparency="true" frameborder="0"></iframe>
                             </div>
                             <div class="mb-5 text-left">
                                 <div class="font-gg font-14 text-muted">Chatbot giúp bạn chăm sóc, giới thiệu sản phẩm cho khách hàng, đồng thời lấy số điện thoại của khách hàng ngay cả khi bạn không online.</div>
