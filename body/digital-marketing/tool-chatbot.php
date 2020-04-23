@@ -31,7 +31,7 @@
                 <div class="col-12 text-center" style="max-width: 800px">
                     <div class="pb-5">
                         <div class="bg-white px-3 py-5 rounded shadow-sm">
-                            <div class="mb-5">
+                            <div class="mb-4">
                                 <div class="font-gg font-weight-bold font-18">
                                     Tự động chăm khách
                                 </div>
@@ -39,8 +39,8 @@
                                     Trước khi marketing nên bổ xung thêm các công cụ để thu data khách hàng. 
                                 </div>
                             </div> 
-                            <div class="mb-2 w-100"> 
-                                <iframe class="iframeContainer-maxlead border" width="100%" height="500px" scrolling="no" id="iframeContainer-maxlead" src="" allowtransparency="true" frameborder="0"></iframe>
+                            <div class="mb-3 w-100"> 
+                                <img class="border rounded" src="./dist/images/chatbot.gif" alt="">
                             </div>
                             <div class="mb-5 text-left">
                                 <div class="font-gg font-14 text-muted">Chatbot giúp bạn chăm sóc, giới thiệu sản phẩm cho khách hàng, đồng thời lấy số điện thoại của khách hàng ngay cả khi bạn không online.</div>
