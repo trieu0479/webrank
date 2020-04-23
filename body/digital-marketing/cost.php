@@ -94,9 +94,9 @@
                             </div>
                             <div class="">
                                 <button
-                                    class="btn-pay-later btn btn-info font-gg font-15 font-weight-500 px-4 mr-3">Thanh
+                                    class="btn-pay-later btn btn-secondary font-gg font-15 font-weight-500 px-4 mr-3">Thanh
                                     toán sau</button>
-                                <button class="btn-pay-now btn btn-danger font-gg font-15 font-weight-500 px-4">Thanh
+                                <button class="btn-pay-now btn btn-info font-gg font-15 font-weight-500 px-4">Thanh
                                     toán ngay</button>
                             </div>
                         </div>
