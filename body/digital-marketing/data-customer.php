@@ -11,35 +11,35 @@
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=contact">Contact</a> </div>
+                            href="/?view=digital-marketing&action=contact&website=<?=$_GET['website']?>">Contact</a> </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=tool-widget">Widget</a>
-                    </div>
-                    <div class="align-self-center mr-3">
-                        <i class="fas fa-chevron-right text-muted"></i>
-                    </div>
-                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=tool-chatbot">Chat bot</a> </div>
-                    <div class="align-self-center mr-3">
-                        <i class="fas fa-chevron-right text-muted"></i>
-                    </div>
-                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=google">Google Ads</a> </div>
-                    <div class="align-self-center mr-3">
+                            href="/?view=digital-marketing&action=tool-widget&website=<?=$_GET['website']?>">Widget</a>
                     </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=traffic-website">Traffic Website</a> </div> 
+                            href="/?view=digital-marketing&action=tool-chatbot&website=<?=$_GET['website']?>">Chat bot</a> </div>
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="/?view=digital-marketing&action=google&website=<?=$_GET['website']?>">Google Ads</a> </div>
+                    <div class="align-self-center mr-3">
+                    </div>
+                    <div class="align-self-center mr-3">
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                    <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
+                            href="/?view=digital-marketing&action=traffic-website&website=<?=$_GET['website']?>">Traffic Website</a> </div> 
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a
-                            href="/?view=digital-marketing&action=data-customer">Data Customer</a> </div> 
+                            href="/?view=digital-marketing&action=data-customer&website=<?=$_GET['website']?>">Data Customer</a> </div> 
 
                 </div>
 
