@@ -4,7 +4,7 @@ $(document).ready(() => {
 
     let classFuncs = new ClassFuncs(); 
 
-    $(".iframeContainer-maxlead").attr("src",`http://demochat.fff.com.vn/chat/iframe.php?url=${classFuncs.getWebsite()}`)
+    $(".iframeContainer-maxlead").attr("src",`https://demochat.fff.com.vn/chat/iframe.php?url=${classFuncs.getWebsite()}`)
 
     $(".btn-skip,.btn-use").click(function() {
         console.log($(this));

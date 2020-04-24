@@ -143,7 +143,7 @@
                                             - Số lượng visitor khi chạy thực tế có thể nhiều hơn (hoặc ít hơn) 1 chút so với số lượng bạn mua
                                         </div>
                                         <div class="font-gg font-13 font-weight-500 text-muted">
-                                            - Bạn có thể điều chỉnh số lượng visitor theo từng URL riêng lẻ  <a href="https://help.fff.com.vn/cong-cu-quang-cao/mua-tai-khoan-google-ads-tu-3f-solutions/quy-trinh-hoan-tien"
+                                            - Bạn có thể điều chỉnh số lượng visitor theo từng URL riêng lẻ  <a href="https://help.fff.com.vn/cong-cu-seo/cong-cu-tang-traffic-website-youtube"
                                                 class="font-weight-500">hướng dẫn sử dụng</a>
                                         </div>
                                        

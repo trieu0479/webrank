@@ -22,18 +22,8 @@
                     </div>
                 </div>
                 <div class="col-5">
-                    <div class="d-flex mt-3">
-                        <div class="info-user-im">
-                            <div >Địa chỉ</div>
-                            <div>Chủ sở hữu :</div>
-                            <div>Phone :</div>
-                            <div>Email :</div>
-                            <div>Ngày thành lập :</div>
-                        </div>
-                        <div class="info-user-api ml-5">
-                            
-                        </div>
-                    </div>
+                    <div class="info-user-api"></div>
+                    
                 </div>
             </div>
         </div>
