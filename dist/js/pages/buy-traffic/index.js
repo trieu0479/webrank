@@ -484,12 +484,12 @@ function appendSelectCountry(area) {
 }
 
 function appendSelectTimeMaxAndMin(st) {
-    for(let i = 1; i <= 90; i++) {
+    for(let i = 1; i <= 18; i++) {
         if(i > 1) {
             $(".select-max").append(`<option ${(st != undefined && st.max == i*10) ? "selected" : (i == 6) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);   
         } 
 
-        if(i != 90) {
+        if(i != 18) {
             $(".select-min").append(`<option ${(st != undefined && st.min == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
         }
     } 
@@ -1314,7 +1314,9 @@ $(document).ready(() => {
     }) 
     
     $("body").on("click",".btn-submitOrder", () => {
-        showPopupOrder(obj_data);
+        if (userToken != userTokenDemo)
+            showPopupOrder(obj_data);
+        else showLoginModal();
     }) 
 
     $("body").on("click", ".btn-cost", () => { 

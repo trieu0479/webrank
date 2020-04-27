@@ -27,7 +27,7 @@
                     <a href="https://admin.fff.com.vn/go.php?userToken=<?=$userToken?>&view=account">Dashboard</a>
                 </li>
                 
-                <li class="nav-item active d-none d-lg-block dropdown-list-a">
+                <li class="nav-item  d-none d-lg-block dropdown-list-a">
                     <a  class=" dropdown-toggle"  href="https://admin.fff.com.vn/insight/?view=default&action=index&userToken=<?=$userToken?>" id="navbarDropdown" role="button" data-toggle="" aria-haspopup="true" aria-expanded="false" href="#">Phân Tích</a>
                     <div class="dropdown-menu-li  animate  slideIn" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="https://go.fff.com.vn/?view=market&action=index&userToken=<?=$userToken?>"><i class="fad fa-lightbulb-on font-18 mr-2"></i><span class="font-13">Dữ liệu thị trường Việt Nam</span> </a>
@@ -80,6 +80,9 @@
                         
                         <a class="dropdown-item" href="https://admin.fff.com.vn/quangcao/?view=adsreport&action=index&userToken=<?=$userToken?>"><i class="fad fa-chart-pie font-18 mr-2"></i> <span class="font-13">Báo cáo quảng cáo</span> </a>
                     </div>
+                </li>
+                <li class="nav-item active  d-none d-lg-block">
+                <a href="https://webrank.vn?view=buy-traffic&userToken=<?=$userToken?>">Traffic</a>
                 </li>
                 <li class="nav-item d-none d-lg-block">
                     <a href="https://admin.fff.com.vn/go.php?userToken=<?=$userToken?>&view=leadhunter">Tìm khách</a>
