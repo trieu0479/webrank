@@ -152,7 +152,7 @@ function htmlOrder(obj_data,urlid = "") {
                         </div>
                     </div> 
                     <div class="mt-4 text-center"> 
-                        <button type="button" data-urlid="${urlid}" class="btn-cost btn btn-info ml-4">Tính Chi Phí</button>
+                        <button type="button" data-urlid="${urlid}" class="btn-cost btn btn-info ml-4">${(urlid != "") ? "Cập nhật chiến dịch" : "Tính Chi Phí"}</button>
                     </div>
                 </div>
             </div>`;
