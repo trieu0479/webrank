@@ -168,11 +168,11 @@ function showPopupEdit(data,urlid) {
         width: 700,
         position: "top",
         onOpen: () => {
-            appendSelectTraffic(data.dailyTraffic);
+            appendSelectTraffic(data.dailyTraffic,urlid);
             appendSelectCountry(data.area);
-            appendSelectTimeMaxAndMin(data.st);
+            appendSelectTimeMaxAndMin(data.st,urlid);
             appendSelectSubPage(data.subpage);
-            appendSelectTimeRun(data.timeToRun);
+            appendSelectTimeRun(data.timeToRun,urlid);
 
 
             $(".select2-selection").addClass("border").css("height","38px");
@@ -297,12 +297,16 @@ function showPopupOrder(obj_data) {
     })
 }
 
-function appendSelectTraffic(dailyTraffic) {
+function appendSelectTraffic(dailyTraffic, urlid = "") {
     for(let i = 1; i <= 30; i++) {
         $(".select-traffic").append(`<option ${(dailyTraffic != undefined && dailyTraffic == i*100) ? "selected" : ""} value="${i*100}">${i*100}</option>`);
     }
 
     $('.select-traffic').select2(); 
+
+    if(urlid != "") { 
+        $(".select-traffic").prop("disabled", true);
+    }
 }
 
 function appendSelectCountry(area) {
@@ -380,7 +384,7 @@ function appendSelectCountry(area) {
  
 }
 
-function appendSelectTimeMaxAndMin(st) {
+function appendSelectTimeMaxAndMin(st,urlid =  "") {
     for(let i = 1; i <= 18; i++) {
         if(i > 1) {
             $(".select-max").append(`<option ${(st != undefined && st.max == i*10) ? "selected" : (i == 6) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);   
@@ -413,6 +417,10 @@ function appendSelectTimeMaxAndMin(st) {
             
     });
 
+    if(urlid != "") {
+        $(".select-max,.select-min").prop("disabled", true);
+    }
+
 
 }
 
@@ -440,7 +448,7 @@ function appendSelectSubPage(subpage) {
     });
 }
 
-function appendSelectTimeRun(timeToRun) {
+function appendSelectTimeRun(timeToRun,urlid = "") {
     for (let i = 1; i <= 30; i++) {
         $(".select-time-run").append(`<option ${(timeToRun != undefined && timeToRun == i) ? "selected" : ""} value="${i}">${i} ngày</option>`);
     }
@@ -448,6 +456,10 @@ function appendSelectTimeRun(timeToRun) {
     $('.select-time-run').select2({
         placeholder: "Số ngày", 
     });
+
+    if(urlid != "") { 
+        $(".select-time-run").prop("disabled", true);
+    }
 
 }
 
