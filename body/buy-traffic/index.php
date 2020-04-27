@@ -185,7 +185,7 @@
                                         </th>
                                         <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">Ngày kết thúc</th> 
                                         <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">Tác vụ</th> 
-                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap d-none" scope="col">Cấu hình
+                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">Cấu hình
                                         </th>
                                     </tr>
                                 </thead>
