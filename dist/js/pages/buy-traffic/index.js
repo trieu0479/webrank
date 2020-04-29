@@ -1,3 +1,6 @@
+var obj_data = {};
+var arr_keywords_google = [];
+
 function htmlOrder(obj_data,urlid = "") { 
     let direct = {};
     let google = {};
@@ -234,7 +237,7 @@ function modalRate(array) {
     </div>`;
 }
 
-function htmlConfigGoogle(array_keywords) {  
+function htmlConfigGoogle(array_keywords) {   
     let content = "";
     if(array_keywords.length > 0) {
         for(let i = 0; i < array_keywords.length; i++) {
@@ -1030,6 +1033,11 @@ function renderTable() {
                 let urlids = $(this).data("urlids");
                 getData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=getCurrentConfig&userToken=${userToken}&urlids=${urlids}`).then(data => {
                     if(data.data.data) {     
+                        data.data.data.trafficSource.forEach(val => {
+                            if(val.type == "2") {
+                                arr_keywords_google = val.surl;
+                            }
+                        })  
                         showPopupEdit(data.data.data,urlids);
                     }
                 })
@@ -1149,11 +1157,12 @@ function renderChartBar(selector,dataChart) {
         series: [{
             name: 'Traffic',
             data: dataChart.values,
-            type: 'bar',
+            type: 'line',
             itemStyle: {
                 color: '#54a0ff',
                 barBorderColor: '#54a0ff'
             },
+            symbol: "none",
             label: {
                 show: true,
                 position: 'top',
@@ -1208,9 +1217,6 @@ function CheckIsValidDomain(domain) {
 
 $(document).ready(() => {     
     renderTable();
-
-    let obj_data = {};
-    let arr_keywords_google = [];
 
     $(".btn-buy-now").click(function() {
         let price = $(this).data("price");
