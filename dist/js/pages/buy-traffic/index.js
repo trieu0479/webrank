@@ -593,10 +593,10 @@ function showModalRate(this_) {
 }
 
 function htmlCost(data,timeToRun) {
-    let vndPrice = data.data.vndPrice;
-    let yourBank = data.data.yourBank;
-    let day = timeToRun;
-    let sumPrice = vndPrice*day;  
+    let vndPrice = parseInt(data.data.vndPrice);
+    let yourBank = parseInt(data.data.yourBank);
+    let day = parseInt(timeToRun);
+    let sumPrice = vndPrice*day;     
 
     return `<div class="text-left mt-2 d-flex align-items-center px-4 py-3 mb-5"> 
                 <div class="w-100">
