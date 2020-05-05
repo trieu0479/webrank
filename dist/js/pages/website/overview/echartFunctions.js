@@ -526,8 +526,8 @@ const estmatedWorth = async(task, data) => {
 
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    var freeModule = [];
-    var VIPModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor', "getCrunchBase", "getTimeMobileDesktop", "getTrafficOverview", "getTrafficOverviewCustomerResources", "getTrafficOverviewCustomerSourceAnalysis", "getTrafficOverviewCustomerResources"];
+    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor', "getCrunchBase","getTimeMobileDesktop","getTrafficOverview","getTrafficOverviewCustomerResources","getTrafficOverviewCustomerSourceAnalysis","getTrafficOverviewCustomerResources"];
+    var VIPModule = [];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             //ngoai le
@@ -2292,7 +2292,7 @@ const getSimilarSites = async(task, data) => {
                     })
                 });
             })
-            var html_descript = `<div class="bg-white pl-4 pt-3 mb-0 pb-3 mx-3 pr-4 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
+            var html_descript = `<div class="bg-white pl-4 pt-3 mb-0 pb-3 mx-3 pr-4 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
                 <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
                     <div class="description-goads">Thêm đối thủ cạnh tranh, theo dõi và nhận báo cáo hàng ngày về đối thủ của bạn. Chỉ 199,000 vnđ/tháng</div>
                 </div>
@@ -2442,7 +2442,7 @@ const getScrapedSearchAds = async(boxName, data) => {
             $('.description-goads').html(`Đưa website [xxx] lên top Google bằng Google Ads, tặng mã khuyến mãi quảng cáo Google Ads trị giá 1.350.000 vnđ.`)
             $('.btn-noads').html(`<a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/quangcao/?view=buy-account&action=index">Mua tài khoản quảng cáo</a>`)
         }
-        //  console.log(SearchAds);        
+        //  console.log(SearchAds);
         $(`#getScrapedSearchAds .carousel-inner`).html('');
         $(`#getScrapedSearchAds .carousel-indicators`).html('');
         $("#row-getPaidSearchCompetitorsTableV1").show();
