@@ -15,7 +15,7 @@
                                 </div>
                                 <div class="col-auto pl-0">
                                     <div class="text-capitalize font-weight-bold">
-                                        <?=_(" Mẫu quảng cáo tìm kiếm trả phí")?></div>
+                                        Mẫu quảng cáo tìm kiếm trả phí></div>
                                     <div class="text-muted data-headerTimes font-10"></div>
                                 </div>
                                 <div class="ml-auto d-flex no-block align-items-center pr-3">

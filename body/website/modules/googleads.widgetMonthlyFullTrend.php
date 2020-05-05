@@ -15,12 +15,12 @@
                 </svg>
             </div>
             <div class="col-auto pl-0">
-                <div class="text-capitalize font-weight-bold"><?= _("Lịch sử Quảng Cáo") ?>
+                <div class="text-capitalize font-weight-bold">Lịch sử Quảng Cáo
                 </div>
                 <div class="text-muted similarDates font-10">12.2019 - 02.2020</div>
             </div>
             <div class="ml-auto d-flex no-block align-items-center pr-3">
-                <a class="similarReloadTask text-muted" data-task="adwordsMonthlyFullTrend" href="javascript:;"><i
+                <a class="similarReloadTask text-muted" data-task="adwordsMonthlyFullTrend" href="javascript: void(0);"><i
                         class="fal fa-sync"></i></a>
             </div>
         </div>

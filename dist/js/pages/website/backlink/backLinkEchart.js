@@ -33,7 +33,7 @@ function appendHtml(arr, name) {
 
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
-    var VIPModule = [];
+    var VIPModule = ["referringDomains","total_backlink","categories-refdomains","anchors-cloud","backlinkTypes"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             $(".parent-" + boxWidgetName).addClass("locked");
@@ -41,7 +41,8 @@ function lockedModule(boxWidgetName, level) {
         }
     } else if (level == 'free') {
         if (VIPModule.includes(boxWidgetName)) {
-            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+            $(".parent-" + boxWidgetName).addClass("locked");
+            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow btn-lift-vip" href="javascript:void(0)" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
         }
     }
 }
@@ -124,7 +125,7 @@ const overViewBackLinks = async (data, method) => {
     if (data.status == "success") {
         let myChartinternet_users_percentage = echarts.init(document.getElementById('pieChart'), "light");
 
-       
+
         let frequency_of_internet_use = data.data.backlinksOverview;
         let option = {
             backgroundColor: "#fff",
@@ -342,7 +343,7 @@ const categoriesRefDomain = async (data, method) => {
                             ${numeral(item).format('0%')}
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -361,6 +362,7 @@ const categoriesRefDomain = async (data, method) => {
 }
 
 const referringDomains = async (data, method) => {
+
     if (data.status == "success") {
         let refDomains = data.data.backlinksOverview.historical.domain_stat
         let newLinksByWeeks = [];

@@ -3,8 +3,7 @@ var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c
 const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 
 var localUrl = new URL(location.href);
-var domain = localUrl.searchParams.get('domain');
-
+var domain = localUrl.searchParams.get('domain'); 
 
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
@@ -21,7 +20,7 @@ function lockedModule(boxWidgetName, level) {
     } else if (level == 'free') {
         if (VIPModule.includes(boxWidgetName)) {
             $(".parent-" + boxWidgetName).addClass("locked");
-            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow btn-lift-vip" href="javascript: void(0)" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
         }
     }
 }

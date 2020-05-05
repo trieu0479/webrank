@@ -53,7 +53,7 @@ $('body').on('click', '.btn-compare', function (event) {
 })
 
 const getHeader = async data => {
-    // Get value Header  
+    // Get value Header
     const {
         data: similarHeader,
     } = data.data;
@@ -334,7 +334,7 @@ const api = async (task, domain, reload = 0) => {
                 if (task == 'buildFeatureImage') {
                     return;
                 }
-                // if (spinClass)spinClass.find('i').addClass('fa-spin'); 
+                // if (spinClass)spinClass.find('i').addClass('fa-spin');
                 let isEmpty = false;
                 let temp = 0;
 
@@ -2309,11 +2309,11 @@ const getWebsiteGeography = async (task, data) => {
 }
 
 
-// Social 
+// Social
 
 // Lượt Truy Cập Xã Hội
 const getTrafficSocial = async (task, data, domain) => {
-
+    lockedModule('getTrafficSocial', data.userData.member);
     if (data.status == "success") {
 
 
@@ -2326,7 +2326,7 @@ const getTrafficSocial = async (task, data, domain) => {
             $("#TotalSocialVisits").removeClass("is-loading");
             // $("#TotalSocialVisits").html(`Tổng ${numeral(SearchTotal).format("0,0")}`);
 
-            // Tổng Số Lượt Truy Cập Xã Hội 
+            // Tổng Số Lượt Truy Cập Xã Hội
             $('.trafficSocial').html('').html(numeral(SearchTotal).format("0.0a"))
             $('.costTrafficSocial').html('').html(numeral(SearchTotal*0.12).format('0,0$'))
 
@@ -2485,7 +2485,7 @@ const getTrafficSocial = async (task, data, domain) => {
                 $.each(Volumes, (name, data) => {
                     dataChart.values.push(data[0]);
                 })
-                
+
                 let ele = document.getElementById("getSocialVisits");
 
                 let myChart = echarts.init(ele, "light");
@@ -2508,7 +2508,7 @@ const getTrafficSocial = async (task, data, domain) => {
                                 seriesName: name1,
                                 value: val1
                             } = params[0];
-                            
+
                             name = moment(name).format('DD MMMM YYYY');
 
                             val1 = numeral(val1).format('0,0');
@@ -2609,8 +2609,7 @@ const getTrafficSocial = async (task, data, domain) => {
 
 // Kênh Xã Hội
 const getTrafficSourcesSocial = async (task, data) => {
-    // //console.log(data);
-
+    lockedModule('getTrafficSourcesSocial', data.userData.member);
     if (data.status == "success") {
         if (data.data.haveData == false) {
             $('.getTrafficSourcesSocial').addClass('empty-state').removeClass('is-loading')
@@ -2618,7 +2617,7 @@ const getTrafficSourcesSocial = async (task, data) => {
             let {
                 data: traffic
             } = data.data;
-            
+
             $(`.${task}`).css('height','235px')
             $(`.widget-${task} .bg-white `).addClass('h-100')
             $(`.widget-${task} .widgetBody `).addClass('pt-5 pb-4')
@@ -2759,7 +2758,7 @@ const getTrafficSourcesSocial = async (task, data) => {
                         charts[i].resize();
                     }
                 };
-                
+
             new ResizeSensor($(`.${task}`), function() {
                 chart.resize();
                 setTimeout(function() {

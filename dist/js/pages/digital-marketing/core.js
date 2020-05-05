@@ -71,7 +71,7 @@ export default class ClassFuncs {
         return email.match(reg);
     }
 
-    //fuction html popup
+    //function html popup
     htmlPopupRecharge(price = "") {
         return `<div class="px-4 pb-2"> 
                         <div class="text-center mt-0 content-vcb">
@@ -223,23 +223,97 @@ export default class ClassFuncs {
         })
     }
 
+    async postData(url,data) {
+        return await $.post(url,data);
+    }
+
+    async createNewOrder(data) {
+        return await this.postData(`//localapi.trazk.com/2020/api/digitalmarketing/index.php?task=createNewOrder&userToken=${userToken}`,data).then(data => {
+            data = JSON.parse(data);
+            if(data.data.status == "success") {
+                return data.data.toolKey;
+            } else {
+                return "";
+            }
+        })
+    }
+
+    async updateOrder(data) {
+        return await this.postData(`//localapi.trazk.com/2020/api/digitalmarketing/index.php?task=updateOrder&userToken=${userToken}`,data).then(data => {
+            data = JSON.parse(data);
+            if(data.data.status == "success") {
+                return true;
+            } else {
+                return false;
+            }
+        })
+    }
     
+    async getListMyOrder() {
+        return await this.getData(`//localapi.trazk.com/2020/api/digitalmarketing/index.php?task=getListMyOrder&userToken=${userToken}`).then(data => {
+            return data.data.items;
+        })
+    }
+
+    async getToolKeyMyOrder() {
+       return await this.getListMyOrder().then(data => {  
+           if(data.length > 0) { 
+               return data[data.length - 1].toolKey;
+            }
+            
+            else {
+                return "";
+            }
+        });
+    } 
+
+    async updateOrderCost(data) {
+        return await this.postData(`//localapi.trazk.com/2020/api/digitalmarketing/index.php?task=updateOrderCost&userToken=${userToken}`,data).then(data => {
+            data = JSON.parse(data);
+            console.log(data);
+            if(data.data.status == "success") {
+                return true;
+            } else {
+                return false;
+            }
+        })
+    }
+
     // function event
+    arrayCheckedTool() {
+        let array = [];
+        $(".fff-tool").each(function () { 
+            let val = $(this).val(); 
+            let status = "";
+            if($(this).prop("checked")) {
+                status = "like";
+            } else {
+                status = "dislike";
+            }
+
+            let temp = {
+                toolName: val,
+                status
+            }
+
+            array.push(temp); 
+        })
+
+        return array;
+    }
 
     checkedTool(this_, obj) {
-        let sumPrice = 0;
-
+        let sumPrice = 0; 
         obj.forEach(i => {
             $(".fff-tool").each(function () {
                 if($(this).prop("checked")) {
                     let val = $(this).val();
                     if(i.id == val) { 
-                        sumPrice += i.price;
+                        sumPrice += i.price; 
                     }
                 }
             })
         })
-
         this.setSumPrice(sumPrice);
         $(".sum-price").html(numeral(sumPrice).format("0,0") + `<sup class="font-12 font-gg" style="top: -15px;">vnd</sup>`);
     } 

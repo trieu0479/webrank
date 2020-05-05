@@ -601,17 +601,25 @@ $(document).ready(() => {
     $.getJSON(`//localapi.trazk.com/bigdata/index.php?task=getDomainInformationWithBigData&domain=${localDomain}&userToken=${userToken}`, function(res) {
         let domainData = res.data.domainData
         let websiteContact = res.data.websiteContact
+        var email = websiteContact.email.replace(/[\(\)\[\]{}'"]/g, "");
+        if (email == null || email =='null') email = "chưa xác định";
+
+        var phone = websiteContact.phone.replace(/[\(\)\[\]{}'"]/g, "");
+        if (phone == null || phone =='null') phone = "chưa xác định";
+        
+
         let html_left = `
                 <div class="title-logo">${domainData.domain}</div>
-                <span class="email-infoweb mr-3" style=""><i class="fad fa-envelope mr-1  font-15" style="color: #74788d;"></i> ${websiteContact.email.replace(/[\(\)\[\]{}'"]/g, "")}</span>
-                <span class="email-infoweb"><i class="fal fa-phone-alt mr-1 font-15"></i>${websiteContact.phone.replace(/[\(\)\[\]{}'"]/g, "")}</span>
+                <span class="email-infoweb mr-3" style=""><i class="fad fa-envelope mr-1  font-15" style="color: #74788d;"></i> ${email}</span>
+                <span class="email-infoweb"><i class="fal fa-phone-alt mr-1 font-15"></i>${phone}</span>
             `;
+        
         let html_info = `
-            <div><i class="fas fa-map-marker-alt mr-2 text-info"></i>${(domainData.owner.address != undefined) ? domainData.owner.address:'Chưa cập nhật'}</div>
-            <div>${(domainData.owner.ownerName == '') ? domainData.registrarName : domainData.owner.ownerName}</div>
-            <div>${websiteContact.phone.replace(/[\(\)\[\]{}'"]/g, "")}</div>
-            <div>${websiteContact.email.replace(/[\(\)\[\]{}'"]/g, "")}</div>
-            <div>${moment(domainData.creationDate).format('DD MMMM YYYY')}</div>
+            <div><strong>Địa chỉ:</strong> <i class="fas fa-map-marker-alt mr-2 text-info"></i>${(domainData.owner.address != undefined) ? domainData.owner.address:'Chưa cập nhật'}</div>
+            <div><strong>Sở hữu:</strong> ${(domainData.owner.ownerName == '') ? domainData.registrarName : domainData.owner.ownerName}</div>
+            <div><strong>Phone:</strong> ${phone}</div>
+            <div class="email-infoweb"><strong>Email:</strong> ${email}</div>
+            <div><strong>Thành lập ngảy:</strong> ${moment(domainData.creationDate).format('DD MMMM YYYY')}</div>
         `
         $('.wapper-decrip').html(html_left)
         $('.info-user-api').html(html_info)

@@ -1,4 +1,7 @@
-function htmlOrder(obj_data) { 
+var obj_data = {};
+var arr_keywords_google = [];
+
+function htmlOrder(obj_data,urlid = "") { 
     let direct = {};
     let google = {};
     let facebook = {};
@@ -152,135 +155,33 @@ function htmlOrder(obj_data) {
                         </div>
                     </div> 
                     <div class="mt-4 text-center"> 
-                        <button type="button" class="btn-cost btn btn-info ml-4">Tính Chi Phí</button>
+                        <button type="button" data-urlid="${urlid}" class="btn-cost btn btn-info ml-4">${(urlid != "") ? "Cập nhật chiến dịch" : "Tính Chi Phí"}</button>
                     </div>
                 </div>
             </div>`;
 }
 
-function htmlEdit() {
-    return `<div class="text-left mb-3"> 
-    <div class="mt-2 px-4 py-3"> 
-        <div class="d-flex no-block flex-column"> 
-            <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-2">Quốc gia</div> 
-            <div class="w-100">
-                <select class="select-country" name="states[]" multiple="multiple" style="width: 100%"></select>
-            </div>
-        </div>
-        <div class="d-flex no-block flex-column mt-4 bg-white">
-            <div class="config-rate position-relative align-self-centermb-2" style="z-index: 6">
-                <div class="font-gg font-weight-bold font-13 w-100">
-                    Nguồn truy cập
-                <span class="d-none cursor-pointer show-modal-rate ml-1 rounded-pill px-2 py-1 bg-info font-10 font-weight-500 font-gg">Chia tỉ lệ</span>
-                </div>
-            </div> 
-            <div class="w-100">
-                <div class="w-100 d-flex no-block justify-content-between position-relative">
-                    <div>
-                        <label class="kt-checkbox kt-checkbox--bold kt-checkbox--brand" for="checkbox-direct">
-                            <input class="" type="checkbox" id="checkbox-direct" name="source" value="Direct">
-                            <p class="font-gg font-weight-500 font-13 text-muted d-inline">
-                                Trực tiếp <p class="ratioDirect font-weight-500 font-13 text-dark font-gg d-inline-block ml-1" style="opacity: 0; width: 50px"></p>
-                            </p>
-                            <span></span>
-                        </label>
-                    </div>
-                    <div>
-                        <label class="kt-checkbox kt-checkbox--bold kt-checkbox--brand rounded" for="checkbox-google">
-                            <input class="" type="checkbox" id="checkbox-google" name="source" value="Google">
-                            <p class="font-gg font-weight-500 font-13 text-muted d-inline">
-                                Google <p class="ratioGoogle font-weight-500 font-13 text-dark font-gg d-inline-block ml-1" style="opacity: 0; width: 50px"></p>
-                            </p>
-                            <span class="ml-1"></span>
-                        </label>
-                        <span data-name="Google" class="cursor-pointer show-modal-config ml-1 rounded-pill px-2 py-1 bg-warning font-10 font-weight-500 font-gg" style="opacity: 0">Cấu hình</span>
-                    </div>
-                    <div>
-                        <label class="kt-checkbox kt-checkbox--bold kt-checkbox--brand rounded" for="checkbox-facebook">
-                            <input class="" type="checkbox" id="checkbox-facebook" name="source" value="Facebook">
-                            <p class="font-gg font-weight-500 font-13 text-muted d-inline">
-                                Facebook <p class="ratioFacebook font-weight-500 font-13 text-dark font-gg d-inline-block ml-1" style="opacity: 0; width: 50px"></p>
-                            </p>
-                            <span></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex no-block flex-column mt-4"> 
-            <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-4">Tỉ lệ mobile/pc</div> 
-            <div class="position-relative w-100 mt-1">
-                <div class="position-absolute device-mobile" style="top: -17px; left: 5px">
-                    <i class="fas fa-mobile-alt mr-2 font-13"></i><span class="font-weight-500 font-16 text-dark">10%</span>
-                </div>
-                <div class="position-absolute device-pc" style="top: -17px; right: 0">
-                    <span class="font-weight-500 font-16 mr-2 text-dark">90%</span><i class="fas fa-desktop font-13"></i>
-                </div>
-                <div class="w-100 position-relative" style="opacity: 0; z-index: 10">
-                    <input id="my-range" type="range" min="0" step="1" max="100" value="10" class="w-100 cursor-pointer">
-                </div>
-                <div class="w-100 position-absolute" style="top: 9px">
-                    <div class="ads-thumb " style="left: 10%; transform: translateX(-10%);"></div>
-                    <div class="ads-track">
-                        <div class="ads-fill" style="width: 10%;"></div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-        <div class="mt-4 text-center"> 
-            <button type="button" class="btn-save btn btn-info ml-4">Lưu Thay Đổi</button>
-        </div>
-    </div>
-</div>`;
-}
-
-function showPopupEdit(urlids) {
+function showPopupEdit(data,urlid) {
     Swal.fire({ 
-        title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Thay đổi order</div>`,
-        html: htmlEdit(),
+        title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Cập nhật order</div>`,
+        html: htmlOrder(data,urlid),
         showConfirmButton: false,
         showCloseButton: true,
         allowOutsideClick: false,
         width: 700,
         position: "top",
         onOpen: () => {
-            appendSelectCountry(); 
+            appendSelectTraffic(data.dailyTraffic,urlid);
+            appendSelectCountry(data.area);
+            appendSelectTimeMaxAndMin(data.st,urlid);
+            appendSelectSubPage(data.subpage);
+            appendSelectTimeRun(data.timeToRun,urlid);
+
 
             $(".select2-selection").addClass("border").css("height","38px");
             $(".select2-dropdown.select2-dropdown--below").addClass("border");
             $(".swal2-popup").addClass("px-0 py-0"); 
             $(".swal2-title").addClass("mb-0 w-100"); 
-            
-            $(".btn-save").click(() => {
-                let area = $(".select-country").val();
-                let array_checked = arrayChecked("input[type=checkbox][name=source]");
-                let mrate = $(".device-mobile span").text().trim().replace(/\D/g,"");
-                let trafficSource = [];
-
-                for (let i = 0; i < array_checked.length; i++) { 
-
-                    let temp = {
-                        type: (array_checked[i] == "Direct") ? "0" : (array_checked[i] == "Google") ? "2" : "1",
-                        rate: $(`.ratio${array_checked[i]}`).text().trim().replace(/\D/g,""),
-                        surl: (array_checked[i] == "Direct") ? "https://facebook.com" : (array_checked[i] == "Google") ? arr_keywords_google : "",
-                    }
-    
-                    trafficSource.push(temp) 
-                } 
-
-                let post = {
-                    area,
-                    mrate,
-                    trafficSource,
-                    urlids
-                }
-
-                postData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=editOrderTraffic&userToken=${userToken}`,post).then(data => {
-                    data = JSON.parse(data);  
-                    console.log(data);
-                })
-                
-            })
         }, 
     })
 }
@@ -336,7 +237,7 @@ function modalRate(array) {
     </div>`;
 }
 
-function htmlConfigGoogle(array_keywords) {  
+function htmlConfigGoogle(array_keywords) {   
     let content = "";
     if(array_keywords.length > 0) {
         for(let i = 0; i < array_keywords.length; i++) {
@@ -383,8 +284,7 @@ function showPopupOrder(obj_data) {
         allowOutsideClick: false,
         width: 700,
         position: "top",
-        onOpen: () => {
-            console.log(obj_data)
+        onOpen: () => { 
             appendSelectTraffic(obj_data.dailyTraffic);
             appendSelectCountry(obj_data.area);
             appendSelectTimeMaxAndMin(obj_data.st);
@@ -400,12 +300,16 @@ function showPopupOrder(obj_data) {
     })
 }
 
-function appendSelectTraffic(dailyTraffic) {
+function appendSelectTraffic(dailyTraffic, urlid = "") {
     for(let i = 1; i <= 30; i++) {
         $(".select-traffic").append(`<option ${(dailyTraffic != undefined && dailyTraffic == i*100) ? "selected" : ""} value="${i*100}">${i*100}</option>`);
     }
 
     $('.select-traffic').select2(); 
+
+    if(urlid != "") { 
+        $(".select-traffic").prop("disabled", true);
+    }
 }
 
 function appendSelectCountry(area) {
@@ -483,13 +387,13 @@ function appendSelectCountry(area) {
  
 }
 
-function appendSelectTimeMaxAndMin(st) {
-    for(let i = 1; i <= 90; i++) {
+function appendSelectTimeMaxAndMin(st,urlid =  "") {
+    for(let i = 1; i <= 18; i++) {
         if(i > 1) {
             $(".select-max").append(`<option ${(st != undefined && st.max == i*10) ? "selected" : (i == 6) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);   
         } 
 
-        if(i != 90) {
+        if(i != 18) {
             $(".select-min").append(`<option ${(st != undefined && st.min == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
         }
     } 
@@ -515,6 +419,10 @@ function appendSelectTimeMaxAndMin(st) {
         }
             
     });
+
+    if(urlid != "") {
+        $(".select-max,.select-min").prop("disabled", true);
+    }
 
 
 }
@@ -543,7 +451,7 @@ function appendSelectSubPage(subpage) {
     });
 }
 
-function appendSelectTimeRun(timeToRun) {
+function appendSelectTimeRun(timeToRun,urlid = "") {
     for (let i = 1; i <= 30; i++) {
         $(".select-time-run").append(`<option ${(timeToRun != undefined && timeToRun == i) ? "selected" : ""} value="${i}">${i} ngày</option>`);
     }
@@ -551,6 +459,10 @@ function appendSelectTimeRun(timeToRun) {
     $('.select-time-run').select2({
         placeholder: "Số ngày", 
     });
+
+    if(urlid != "") { 
+        $(".select-time-run").prop("disabled", true);
+    }
 
 }
 
@@ -681,10 +593,10 @@ function showModalRate(this_) {
 }
 
 function htmlCost(data,timeToRun) {
-    let vndPrice = data.data.vndPrice;
-    let yourBank = data.data.yourBank;
-    let day = timeToRun;
-    let sumPrice = vndPrice*day;  
+    let vndPrice = parseInt(data.data.vndPrice);
+    let yourBank = parseInt(data.data.yourBank);
+    let day = parseInt(timeToRun);
+    let sumPrice = vndPrice*day;     
 
     return `<div class="text-left mt-2 d-flex align-items-center px-4 py-3 mb-5"> 
                 <div class="w-100">
@@ -790,7 +702,7 @@ function showPopupActionSuccess(task) {
     Swal.fire({  
         type:"success",
         html: `<div class="font-gg font-15 text-dark font-weight-500">
-                ${(task == "pauseRunTraffic") ? "Tạm dừng chiến dịch thành công !" : (task == "startRunTraffic") ? "Chạy chiến dịch thành công" : "Xóa chiến dịch thành công !"}
+                ${(task == "pauseRunTraffic") ? "Tạm dừng chiến dịch thành công !" : (task == "startRunTraffic") ? "Chạy chiến dịch thành công" : (task == "editOrderTraffic") ? "Cập nhật chiến dịch thành công" : "Xóa chiến dịch thành công !"}
             </div>`,
         confirmButtonText: "Xác Nhận",
         showConfirmButton: true,
@@ -810,7 +722,7 @@ function showPopupActionError(task) {
     Swal.fire({  
         type:"error",
         html: `<div class="font-gg font-15 text-dark font-weight-500">
-                ${(task == "pauseRunTraffic") ? "Lỗi hệ thống tạm dừng chiến dịch không thành công." : (task == "startRunTraffic") ? "Lỗi hệ thống chạy chiến dịch không thành công." : "Lỗi hệ thống xóa chiến dịch không thành công."}  Vui lòng thử lại !
+                ${(task == "pauseRunTraffic") ? "Lỗi hệ thống tạm dừng chiến dịch không thành công." : (task == "startRunTraffic") ? "Lỗi hệ thống cật nhật chiến dịch không thành công." : (task == "editOrderTraffic") ?  "Lỗi hệ thống chạy chiến dịch không thành công." : "Lỗi hệ thống xóa chiến dịch không thành công."}  Vui lòng thử lại !
             </div>`,
         confirmButtonText: "Xác Nhận",
         showConfirmButton: true,
@@ -1091,8 +1003,8 @@ function renderTable() {
                                             <td class="font-gg font-15">
                                                 ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 active fad fa-play-circle font-20 text-info cursor-pointer"></i> ` : (val.status == "EXPIRED") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="ml-2 pause fad fa-pause-circle font-20 text-success cursor-pointer"></i>`}
                                             </td> 
-                                            <td class="font-gg font-15 d-none">
-                                                <button type="buttom" data-urlids="${val.urlids}" class="edit btn btn-info py-1 px-2 font-13 font-weight-500 rounded ">Thay đổi</button>
+                                            <td class="font-gg font-15">
+                                                <button type="buttom" data-urlids="${val.urlids}" class="edit btn btn-info py-1 px-2 font-13 font-weight-500 rounded "><i class="fad fa-edit mr-2"></i>Thay đổi</button>
                                             </td>
                                         </tr>`);
             })
@@ -1117,9 +1029,18 @@ function renderTable() {
                 showPopupAction(timeToRun,"delete",urlids);
             })
     
-            $(".edit").click(function() {
-                let urlids = $(this).data("urlids"); 
-                showPopupEdit(urlids);
+            $(".edit").click(function() { 
+                let urlids = $(this).data("urlids");
+                getData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=getCurrentConfig&userToken=${userToken}&urlids=${urlids}`).then(data => {
+                    if(data.data.data) {     
+                        data.data.data.trafficSource.forEach(val => {
+                            if(val.type == "2") {
+                                arr_keywords_google = val.surl;
+                            }
+                        })  
+                        showPopupEdit(data.data.data,urlids);
+                    }
+                })
             })
     
             $(".history").click(function() {
@@ -1236,11 +1157,12 @@ function renderChartBar(selector,dataChart) {
         series: [{
             name: 'Traffic',
             data: dataChart.values,
-            type: 'bar',
+            type: 'line',
             itemStyle: {
                 color: '#54a0ff',
                 barBorderColor: '#54a0ff'
             },
+            symbol: "none",
             label: {
                 show: true,
                 position: 'top',
@@ -1296,9 +1218,6 @@ function CheckIsValidDomain(domain) {
 $(document).ready(() => {     
     renderTable();
 
-    let obj_data = {};
-    let arr_keywords_google = [];
-
     $(".btn-buy-now").click(function() {
         let price = $(this).data("price");
         showPopupRecharge(price)
@@ -1314,10 +1233,13 @@ $(document).ready(() => {
     }) 
     
     $("body").on("click",".btn-submitOrder", () => {
-        showPopupOrder(obj_data);
+        if (userToken != userTokenDemo)
+            showPopupOrder(obj_data);
+        else showLoginModal();
     }) 
 
-    $("body").on("click", ".btn-cost", () => { 
+    $("body").on("click", ".btn-cost", function() { 
+        let urlid = $(this).data("urlid");
         let array_checked = arrayChecked("input[type=checkbox][name=source]");
         let trafficSource =  [];
         let websiteURL = $("#input-url").val();
@@ -1365,11 +1287,23 @@ $(document).ready(() => {
                 startTime: moment().format('YYYY-MM-DD')
             }  
 
-            postData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=getCostOfOrderTraffic&userToken=${userToken}`,obj_data).then(data => {
+            if(urlid != "") { 
+                obj_data.urlid = urlid;
+                postData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=editOrderTraffic&userToken=${userToken}`,obj_data).then(data => {
+                    data = JSON.parse(data);
+                    if(data.data.status == "Edit Success") {
+                        showPopupActionSuccess("editOrderTraffic");
+                    } else {
+                        showPopupActionError("editOrderTraffic");
+                    }
+                })
+            } else { 
+                postData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=getCostOfOrderTraffic&userToken=${userToken}`,obj_data).then(data => {
        
-                data = JSON.parse(data);  
-                showPopupCost(obj_data,data,timeToRun);
-            })
+                    data = JSON.parse(data);  
+                    showPopupCost(obj_data,data,timeToRun);
+                })
+            }
             
         } else {
             if (websiteURL == "") {

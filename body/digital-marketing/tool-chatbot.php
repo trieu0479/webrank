@@ -11,18 +11,18 @@
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=contact">Contact</a> </div>
+                            href="/?view=digital-marketing&action=contact&website=<?=$_GET['website']?>">Contact</a> </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3"> <a style="color: rgba(79,80,80,.7);"
-                            href="/?view=digital-marketing&action=tool-widget">Widget</a>
+                            href="/?view=digital-marketing&action=tool-widget&website=<?=$_GET['website']?>">Widget</a>
                     </div>
                     <div class="align-self-center mr-3">
                         <i class="fas fa-chevron-right text-muted"></i>
                     </div>
                     <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);"> <a
-                            href="/?view=digital-marketing&action=tool-chatbot">Chat bot</a>
+                            href="/?view=digital-marketing&action=tool-chatbot&website=<?=$_GET['website']?>">Chat bot</a>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="col-12 text-center" style="max-width: 800px">
                     <div class="pb-5">
                         <div class="bg-white px-3 py-5 rounded shadow-sm">
-                            <div class="mb-5">
+                            <div class="mb-4">
                                 <div class="font-gg font-weight-bold font-18">
                                     Tự động chăm khách
                                 </div>
@@ -39,8 +39,8 @@
                                     Trước khi marketing nên bổ xung thêm các công cụ để thu data khách hàng. 
                                 </div>
                             </div> 
-                            <div class="mb-2 w-100"> 
-                                <iframe class="iframeContainer-maxlead border" width="100%" height="500px" scrolling="no" id="iframeContainer-maxlead" src="http://widgets.editor.local/demo/003/maxLead_CallButton/demo_url.php?url=https://fff.com.vn" allowtransparency="true" frameborder="0"></iframe>
+                            <div class="mb-3 w-100"> 
+                                <img class="border rounded" src="./dist/images/chatbot.gif" alt="">
                             </div>
                             <div class="mb-5 text-left">
                                 <div class="font-gg font-14 text-muted">Chatbot giúp bạn chăm sóc, giới thiệu sản phẩm cho khách hàng, đồng thời lấy số điện thoại của khách hàng ngay cả khi bạn không online.</div>
