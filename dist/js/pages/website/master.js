@@ -44,11 +44,11 @@ const datatableLanguage = {
     }
 };
 //init datatable
-const initDatatable = function(select, tableOptions) {
+const initDatatable = function (select, tableOptions) {
     const table = $(`#${select}`).DataTable(tableOptions);
     $(table.table().header()).addClass('text-center');
     //reload click handle
-    $(`.${select}`).click(function(event) {
+    $(`.${select}`).click(function (event) {
         $(event.target).addClass('fa-spin');
         $(`.${select}-container`).addClass('is-loading').block({
             overlayCSS: {
@@ -125,8 +125,8 @@ $(document).ready(() => {
         return true;
     }
     window.lockedModule = function lockedModule(boxWidgetName, level) {
-        var freeModule = ["getKeywords", "getWebsiteGeography", "banckLinksOverview", "getAdvertisingSearchDetail", "getOrganicKeywordsBrandedTable", "getSimilarSites", "organicPositions","getSubdomains"];
-        var VIPModule = ["topBackLinks", "getTrafficDisplayAdvertisingWebsitesTable", "organicCompetitors", "getOrganicKeywordsNonBrandedTable", "organicPositions","TopPaidKeyword","MainCompetitor", "PaidPageTable","PublicSherTable","getTrafficDestinationAds"];
+        var freeModule = ["getKeywords", "getWebsiteGeography", "banckLinksOverview", "getAdvertisingSearchDetail", "getOrganicKeywordsBrandedTable", "getSimilarSites", "organicPositions", "getSubdomains"];
+        var VIPModule = ["topBackLinks", "getTrafficDisplayAdvertisingWebsitesTable", "organicCompetitors", "getOrganicKeywordsNonBrandedTable", "organicPositions", "TopPaidKeyword", "MainCompetitor", "PaidPageTable", "PublicSherTable", "getTrafficDestinationAds"];
         if (level == 'demo') {
             if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
                 $(".parent-" + boxWidgetName).addClass("locked");
@@ -135,8 +135,118 @@ $(document).ready(() => {
         } else if (level == 'free') {
             if (VIPModule.includes(boxWidgetName)) {
                 $(".parent-" + boxWidgetName).addClass("locked");
-                $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+                $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary btn-lift-vip" href="javascript:void(0)" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
             }
         }
     }
+
+    function showBuyPackage() {
+        Swal.fire({
+            width: 600,
+            padding: `0 2.25rem 2.25rem`,
+            html: `<div> 
+            <div class="panel-heading mb-3 font-weight-bold font-16 border-bottom pb-3">Nâng cấp VIP bộ công cụ phân tích</div>
+    
+            <div class="text-left mt-4 content-vcb">
+                <div class="text-left font-gg font-14 mb-2 font-weight-500">Bao gồm : <span class="font-gg font-14 mb-1 font-weight-bold">Phân tích từ khóa & Phân tích website</span></div>
+                <div class="text-left mb-2">Bạn hãy thực hiện chuyển khoản Số tiền <span class="text-danger font-gg font-weight-bold font-16 number-money">199.000<sup class="font-12 font-gg font-weight-none" style="top: -9px;">vnd</sup></span> với nội dung chuyển khoản như sau (nhớ copy toàn bộ)</div>
+                <div class="text-center mb-4"><div id="coppy-code" class="w-35 m-auto text-info bg-white-2 px-3 py-2 font-weight-bold font-16" style="border: 1px #ccc dashed;">FFF10006096</div></div>
+                <div class="font-gg mb-1 pl-3">
+                    <table class="table table-borderless table-sm">
+                        <tbody><tr>
+                            <td>Số tài khoản: <span class="text-danger font-gg font-weight-bold">0071003773058</span></td>
+                            <td>Chủ tài khoản: <span class="font-gg">LÊ ĐẶNG HẢI NAM</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ngân hàng: <span class="font-gg ">Vietcombank</span></td>
+                            <td>Chi nhánh: <span class="font-gg ">VCB Quận 10 Tp.HCM</span></td>
+                        </tr>
+                    </tbody></table>
+                
+                </div> 
+    
+            </> 
+            <div class="font-gg mt-4 text-center">
+                    <button class="btn btn-outline btn-ConfirmPayment btn-info btn-sm mr-3">Tôi đã chuyển khoản</button>
+                    <input type="hidden" id="invoiceId" name="invoiceId" value="">
+                    <button class="btn btn-default btn-WaitingPayment  btn-danger btn-sm">Tôi chuyển khoản sau</button>
+            </div> 
+            
+        </div>`,
+            showConfirmButton: false,
+            showCloseButton: true,
+            onOpen: () => {
+                $(".swal2-confirm").parent().addClass("d-none mt-2")
+                var post = {};
+                post.amount = "199000";
+                post.tools = "phantich";
+                post.userToken = userToken;
+
+                $.post(`//localapi.trazk.com/fff/payment.php?task=createInvoice&userToken=${userToken}`, post,
+                    function (data) {
+                        data = JSON.parse(data);
+
+                        $(".swal2-confirm").parent().removeClass("d-none");
+                        $("#coppy-code").text("FFF" + data.invoiceId);
+                        $("#invoiceId").val(data.invoiceId)
+
+
+                    })
+                $(".btn-ConfirmPayment").click(function () {
+                    var cid = $("#selectAdword").val();
+                    var website = $("#selectWebsite").val();
+                    $.get(
+                        `//localapi.trazk.com/fff/user.php?task=checkPaymentVipTool&invoiceId=${$("#invoiceId").val().trim()}&userToken=${userToken}&cid=${cid}&website=${website}`,
+                        function (res) {
+                            res = JSON.parse(res);
+                            if (res && res.data.status == "error") {
+                                if (res.data.msg == "Waiting bank transation") {
+                                    Swal.showValidationMessage(
+                                        `Lỗi: Hệ thống chưa nhận được số tiền chuyển khoản của bạn.`);
+                                    $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                                } else if (res.data.msg == "wrong invoice amount and income amount") {
+                                    Swal.showValidationMessage(
+                                        `Lỗi: Số tiền chuyển khoản khác với số tiền yêu cầu thanh toán. Vui lòng liên hệ hỗ trợ viên`
+                                    );
+                                    $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                                } else if (res.data.msg == "invoice id error") {
+                                    Swal.showValidationMessage(`Lỗi: Mã chuyển khoản không hợp lệ`);
+                                    $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                                } else {
+                                    Swal.showValidationMessage(
+                                        `Lỗi: Hệ thông chưa nhận được chuyển khoản hoặc CID bị lỗi`);
+                                    $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                                }
+                            } else {
+                                window.location.href = "?view=user&action=payment-history&userToken=" + userToken + "&invoiceId=" + $("#invoiceId").val().trim();
+                            }
+                        })
+                })
+                $(".btn-WaitingPayment").click(function () {
+                    var cid = $("#selectAdword").val();
+                    var website = $("#selectWebsite").val();
+                    $.getJSON(`//localapi.trazk.com/fff/payment.php?task=updateWaitingInvoice&invoiceId=${$("#invoiceId").val().trim()}&userToken=${userToken}&cid=${cid}&website=${website}`, function (res) {
+                        if (res && res.status == "error") {
+                            Swal.showValidationMessage(
+                                `Lỗi: Hệ thống không thấy xác nhận Invoice này`);
+                            $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
+                        } else {
+                            window.location.href = "?view=user&action=payment-history&tab=pending&userToken=" + userToken
+                        }
+                    });
+                });
+
+
+                $('[data-toggle="tooltip"]').tooltip();
+
+            }
+        })
+
+    }
+
+
+    $("body").on("click", ".btn-lift-vip", function () {
+        showBuyPackage();
+
+    })
 });
