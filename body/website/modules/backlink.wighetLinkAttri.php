@@ -7,15 +7,15 @@
                             Link Attributes</div>
                         <div class="text-muted similarDates font-10"></div>
                     </div>
-                    <div class="col-12">
-                      
+                    <div class="col-12 parent-backlinkTypes">
+
                         <div style="height: 150px" class="px-3">
                             <table class="w-100">
                                 <tbody id="linkAttributes">
-                                   
+
                                 </tbody>
                             </table>
-                            
+
                         </div>
                     </div>
                 </div>
