@@ -29,7 +29,7 @@
                     <div class="">Cải thiện traffic giúp cải thiện thứ hạng và giá trị website. Chỉ 50 vnd/1 traffic thử ngay</div>
                 </div>
                 <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                    <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="https://webrank.vn/?view=buy-traffic&userToken=<?=$userToken?>>Mua Traffic</a>
+                    <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="https://webrank.vn/?view=buy-traffic&userToken=<?=$userToken?>">Mua Traffic</a>
                 </div>
             </div>
         </div>

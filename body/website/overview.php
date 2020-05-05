@@ -236,44 +236,40 @@
                         </div>
                     </div>
                       <!-- backlink-->
-                        <div class="row">
-                            <div class="col-12 col-lg-8">
-                                <div class="widget-banckLinksOverview"></div>
-                            </div>
-                            <div class="col-12 col-lg-4">
-                                <?require_once(__DIR__."/modules/overview.widgetBacklink.php")?>
-                            </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-8">
+                            <div class="widget-banckLinksOverview"></div>
                         </div>
+                        <div class="col-12 col-lg-4">
+                            <?require_once(__DIR__."/modules/overview.widgetBacklink.php")?>
+                        </div>
+                    </div>
                         <!-- backlink-->
-                        <div class="bg-white pl-4 pt-3 pb-3 pr-4 mb-0 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
-                <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
-                    <h4 style="text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện traffic Website</h4>
-                    <div class="">Cải thiện traffic giúp cải thiện thứ hạng và giá trị website. Chỉ 50 vnd/1 traffic thử ngay</div>
-                </div>
-                <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                    <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="">Mua Traffic</a>
-                </div>
-            </div>
+                    <div class="bg-white pl-4 pt-3 pb-3 pr-4 mb-0 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
+                        <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
+                            <h4 style="text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện traffic Website</h4>
+                            <div class="">Cải thiện traffic giúp cải thiện thứ hạng và giá trị website. Chỉ 50 vnd/1 traffic thử ngay</div>
+                        </div>
+                        <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
+                            <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="">Mua Traffic</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 ">
                     <div class="widget-getKeywords"></div>
-
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <?require_once(__DIR__."/modules/overview.geomap.php")?>
-                    
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="widget-getSimilarSites"></div>
-                    
                 </div>
-                
             </div>
             <div class="row">
                 <div class="col-12">
@@ -281,10 +277,9 @@
                 </div>
             </div>
             <div class="row">
-                    <div class="col-12">
-                        <?require_once(__DIR__."/modules/overview.widgetCompanyInfo.php")?>
-                    </div>
-                    
+                <div class="col-12">
+                    <?require_once(__DIR__."/modules/overview.widgetCompanyInfo.php")?>
+                </div>
             </div>
           <!--het  -->
 
