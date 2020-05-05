@@ -1,22 +1,15 @@
 // import counterUp from '../counterup2/index.js';
 
 // const counter = document.querySelector('.counter');
-
-var domain = '';
-
+const url = new URL(location.href);
+let domain1 = url.searchParams.get("domain1")
+let domain2 = url.searchParams.get("domain2")
+let website = [domain1, domain2]
+var domain
 const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 
 const getHeader = async data => {
     // Get value Header 
-
-    let {
-        website: domain1
-    } = data[0].data;
-
-    let {
-        website: domain2
-    } = data[1].data;
-
     for (var i = 0; i < data.length; i++) {
         domain = data[i];
 
@@ -112,7 +105,7 @@ const getHeader = async data => {
 
 
         // Popup nhap website
-        const getDomain = async () => {
+        const getDomain = async() => {
             const result = await Swal.fire({
                 title: 'Hãy nhập website để so sánh',
                 html: `<input id="swal-input1" class="swal2-input text-lowercase" value=${domain1} placeholder="Nhập website của bạn">` +
@@ -130,7 +123,7 @@ const getHeader = async data => {
                 onOpen: () => {
                     $('#swal-input2').focus();
                     $('#swal-input2').keypress(event => (event.which == 13) ? $('.swal2-confirm').click() : null);
-                    
+
                 },
                 preConfirm: () => {
                     if (document.getElementById('swal-input1').value == "" || document.getElementById('swal-input2').value == "") {
@@ -167,7 +160,7 @@ const getHeader = async data => {
             `.${idDomain} .similarHeader .changeWebSite`
         ).click(() => {
             getDomain().then(data => {
-                if (data) { 
+                if (data) {
                     location.href = `?view=traffic-website&action=compare&domain1=${data.value[0].toLowerCase()}&domain2=${data.value[1].toLowerCase()}`;
                     // changeURLCompare(data.value[0].toLowerCase(), data.value[1].toLowerCase());
                 }
@@ -187,9 +180,7 @@ const getHeader = async data => {
     }
 };
 
-const api = async (task, domain1, domain2) => {
-    domain;
-
+const api = async(task, domain1, domain2) => {
     var dataCompare = [];
     // dataCompare['domains'] = [domain1, domain2]; 
 
@@ -218,11 +209,6 @@ const api = async (task, domain1, domain2) => {
                                     case "getDesktopVsMobileVisits":
                                         getDesktopVsMobileVisits(task, dataCompare, domain1, domain2);
                                         break;
-                                    case "getEngagementVisitsDaily":
-                                    case "getEngagementVisitsWeekly":
-                                    case "getEngagementVisitsMonthly":
-                                        getEngagementVisits(task, data);
-                                        break;
                                     case "getWebDemographicsGender":
                                         getWebDemographicsGender(task, dataCompare, domain1, domain2);
                                         break;
@@ -247,24 +233,6 @@ const api = async (task, domain1, domain2) => {
                                     case "getTrafficSourcesSearch":
                                         getTrafficSourcesSearch(task, dataCompare, domain1, domain2);
                                         break;
-                                    case "getGetAudienceInterests":
-                                        getGetAudienceInterests(task, data);
-                                        break;
-                                    case "getTopReferrals":
-                                        getTopReferrals(task, data);
-                                        break;
-                                    case "getTrafficDestinationReferrals":
-                                        getTrafficDestinationReferrals(task, data);
-                                        break;
-                                    case "getTrafficSourcesSearchDetails":
-                                        getTrafficSourcesSearchDetails(task, data);
-                                        break;
-                                    case "getTopIncomingAds":
-                                        getTopIncomingAds(task, data);
-                                        break;
-                                    case "getTrafficDestinationAds":
-                                        getTrafficDestinationAds(task, data);
-                                        break;
                                     case "getWebsiteGeography":
                                         getWebsiteGeography(task, dataCompare);
                                         break;
@@ -280,48 +248,13 @@ const api = async (task, domain1, domain2) => {
                                     case "getSearchBrandedKeywords":
                                         getSearchBrandedKeywords(task, dataCompare, domain1, domain2);
                                         break;
-                                    case "getOrganicKeywordsNonBrandedTable":
-                                    case "getOrganicKeywordsBrandedTable":
-                                        getOrganicKeywordsTable(task, data);
-                                        break;
-                                    case "getPaidSearchCompetitorsTable":
-                                        getPaidSearchCompetitorsTable(task, data);
-                                        break;
-                                    case "getPaidKeywordsTable":
-                                        getPaidKeywordsTable(task, data);
-                                        break;
-                                    case "getTrendingKeywordsTable":
-                                        getTrendingKeywordsTable(task, data);
-                                        break;
                                     case "getTrafficAndEngagementOverviewMonthly": // mới
                                         getTrafficAndEngagementOverviewMonthly(task, dataCompare);
-                                        break;
-                                    case "getTrafficAndEngagementVisitsDaily":
-                                    case "getTrafficAndEngagementVisitsWeekly":
-                                    case "getTrafficAndEngagementVisitsMonthly":
-                                        getTrafficAndEngagementVisits(task, data, domain);
                                         break;
                                     case "getUniqueUsersMonthly":
                                         getUniqueUsersMonthly(task, dataCompare);
                                         break;
-                                    case "getTrafficAndEngagementAvgVisitDurationDaily":
-                                    case "getTrafficAndEngagementAvgVisitDurationWeekly":
-                                    case "getTrafficAndEngagementAvgVisitDurationMonthly":
-                                        getTrafficAndEngagementAvgVisitDuration(task, data, domain);
-                                        break;
-                                    case "getTrafficAndEngagementPagesPerVisitDaily":
-                                    case "getTrafficAndEngagementPagesPerVisitWeekly":
-                                    case "getTrafficAndEngagementPagesPerVisitMonthly":
-                                        getTrafficAndEngagementPagesPerVisit(task, data, domain);
-                                        break;
-                                    case "getTrafficAndEngagementBounceRateDaily":
-                                    case "getTrafficAndEngagementBounceRateWeekly":
-                                    case "getTrafficAndEngagementBounceRateMonthly":
-                                        getTrafficAndEngagementBounceRate(task, data, domain);
-                                        break;
                                     case "getMarketingMixOverviewDaily":
-                                        // case "getMarketingMixOverviewWeekly":
-                                        // case "getMarketingMixOverviewMonthly":
                                         getMarketingMixOverview(task, dataCompare);
                                         break;
                                     case "getTrafficSourcesTotalReferrals":
@@ -349,11 +282,7 @@ const api = async (task, domain1, domain2) => {
                         console.log('buildFeatureImage', data.data.data);
                         return;
                     }
-
                 }
-
-
-
             });
     } catch (error) {
         console.error(error);
@@ -402,24 +331,16 @@ const checkData = (data, task) => {
     return false;
 }
 
-const getTrafficDisplayPaidOutgoingAdsTable = async (task, data, domain1, domain2) => {
+const getTrafficDisplayPaidOutgoingAdsTable = async(task, data, domain1, domain2) => {
     if (data[0].status == "success" && data[1].status == "success") {
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
+        let idDomain1 = domain1.replace(/\./g, "");
+        let idDomain2 = domain2.replace(/\./g, "");
 
         let temp = 0; // check null all
 
         for (let i = 0; i < data.length; i++) {
             if (data[i] && data[i].data && data[i].data.data) {
-
-                let {
-                    website: domain
-                } = data[i].data;
-
-                let idDomain = domain.replace(".", "");
-                idDomain = idDomain.replace(".", "");
+                let idDomain = website[i].replace(/\./g, "");
 
                 let TrafficDisplayPaidOutgoingAdsTable = data[i].data.data;
 
@@ -498,9 +419,9 @@ const getTrafficDisplayPaidOutgoingAdsTable = async (task, data, domain1, domain
                 myChart.setOption(option);
 
 
-                new ResizeSensor($(`#${idDomain + task}`), function () {
+                new ResizeSensor($(`#${idDomain + task}`), function() {
                     myChart.resize();
-                    setTimeout(function () {
+                    setTimeout(function() {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -509,14 +430,14 @@ const getTrafficDisplayPaidOutgoingAdsTable = async (task, data, domain1, domain
                     }, 1000);
                 });
 
-                setTimeout(function () {
+                setTimeout(function() {
                     myChart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
 
-                    myChart.on('mouseover', function (params) {
+                    myChart.on('mouseover', function(params) {
                         if (params.name == dataChart[0].name) {
                             myChart.dispatchAction({
                                 type: 'highlight',
@@ -532,7 +453,7 @@ const getTrafficDisplayPaidOutgoingAdsTable = async (task, data, domain1, domain
                         }
                     });
 
-                    myChart.on('mouseout', function (params) {
+                    myChart.on('mouseout', function(params) {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -565,7 +486,7 @@ const getTrafficDisplayPaidOutgoingAdsTable = async (task, data, domain1, domain
     }
 }
 
-const getWebsiteAdsVisitsOverview = async (task, data) => {
+const getWebsiteAdsVisitsOverview = async(task, data) => {
     if (data[0].status == "success" && data[1].status == "success") {
 
         let temp = 0;
@@ -576,14 +497,11 @@ const getWebsiteAdsVisitsOverview = async (task, data) => {
                 website: domain
             } = data[i].data;
 
-            let idDomain = domain.replace(".", "");
-            idDomain = idDomain.replace(".", "");
-
-
+            let idDomain = website[i].replace(/\./g, "");
             if (data[i] && data[i].data && data[i].data.data && data[i].data.data.Data && data[i].data.data.Data.Data &&
-                data[i].data.data.Data.Data[domain].AdsTotal > 0) {
+                data[i].data.data.Data.Data[website[i]].AdsTotal > 0) {
 
-                let WebsiteAdsVisitsOverview = data[i].data.data.Data.Data[domain];
+                let WebsiteAdsVisitsOverview = data[i].data.data.Data.Data[website[i]];
 
                 let AdsTotal = WebsiteAdsVisitsOverview.AdsTotal;
 
@@ -612,7 +530,7 @@ const getWebsiteAdsVisitsOverview = async (task, data) => {
     }
 }
 
-const getTrafficAndEngagementOverviewMonthly = async (task, data) => {
+const getTrafficAndEngagementOverviewMonthly = async(task, data) => {
 
     if (data[0].status == "success" && data[1].status == "success") {
         for (let i = 0; i < data.length; i++) {
@@ -624,29 +542,21 @@ const getTrafficAndEngagementOverviewMonthly = async (task, data) => {
                 website: domain2
             } = data[1].data;
 
-            let idDomain1 = domain1.replace(".", "");
-            idDomain1 = idDomain1.replace(".", "");
-            let idDomain2 = domain2.replace(".", "");
-            idDomain2 = idDomain2.replace(".", "");
-
+            let idDomain1 = domain1.replace(/\./g, "")
+            let idDomain2 = domain2.replace(/\./g, "")
             if (data[i] && data[i].data && data[i].data.data) {
-                const {
-                    website: similarDomain
-                } = data[i].data;
-
-                let idDomain = similarDomain.replace(".", "");
-                idDomain = idDomain.replace(".", "");
-                /*
-                let {
-                    Data
-                } = data[i].data.data.Data;
-                //let TrafficAndEngagementOverviewMonthly = Data[0];
-                */
+                let idDomain = website[i].replace(/\./g, "")
+                    /*
+                    let {
+                        Data
+                    } = data[i].data.data.Data;
+                    //let TrafficAndEngagementOverviewMonthly = Data[0];
+                    */
 
                 var TrafficAndEngagementOverviewMonthly = null
-                if (data[i].data.data.Data.AvgMonthVisits){
+                if (data[i].data.data.Data.AvgMonthVisits) {
                     TrafficAndEngagementOverviewMonthly = data[i].data.data.Data;
-                }else{
+                } else {
                     TrafficAndEngagementOverviewMonthly = data[i].data.data.Data.Data[0];
                 }
 
@@ -672,267 +582,56 @@ const getTrafficAndEngagementOverviewMonthly = async (task, data) => {
     }
 }
 
-const getTrafficAndEngagementVisits = async (task, data, domain) => {
-
-    if (data.status == "success") {
-        if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
-            let {
-                Data
-            } = data.data.data.Data;
-
-            let TrafficAndEngagementVisits = Data[domain];
-
-            let Desktop = TrafficAndEngagementVisits.Desktop[0];
-            let Mobile = TrafficAndEngagementVisits['Mobile Web'][0];
-
-            let dataChartDesktop = {
+const getUniqueUsersMonthly = async(task, data) => {
+    let series = []
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
+            let dataChart = {
                 keys: [],
                 values: []
             };
-
-
-
-            Desktop.map(desktop => {
-                let key = desktop.Key;
-                let value = desktop.Value;
-                dataChartDesktop.keys.push(key);
-                dataChartDesktop.values.push(value);
-            });
-
-            let dataChartMobile = {
-                keys: [],
-                values: []
-            };
-
-            Mobile.map(mobile => {
-                let key = mobile.Key;
-                let value = mobile.Value;
-                dataChartMobile.keys.push(key);
-                dataChartMobile.values.push(value);
-            });
-
-            let ele = document.getElementById("getTrafficAndEngagement--MonthlyVisits");
-
-            let myChart = echarts.init(ele);
-
-            let option = {
-                tooltip: {
-                    trigger: "axis",
-                    backgroundColor: 'rgba(255, 255, 255, 1)',
-                    borderColor: 'rgba(93,120,255,1)',
-                    borderWidth: 1,
-                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                    formatter: params => {
-                        // console.log(params);
-                        let {
-                            name
-                        } = params[0];
-                        let detail = "";
-                        params.forEach((p, i) => {
-                            let {
-                                marker,
-                                color,
-                                seriesName,
-                                value
-                            } = p;
-
-                            value = numeral(value).format("0,0");
-
-
-                            detail += `${marker} ${seriesName} <span style="color:${color};font-weight:bold">${value}</span>
-                            <br/>`
-                        })
-                        name = moment(name).format('DD MMMM YYYY');
-                        return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
-                    <div class="text-dark pt-2">${detail}</div>`;
-
-                    }
-                },
-                legend: {
-                    data: ['Desktop', 'Mobile']
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis: [{
-                    type: 'category',
-                    boundaryGap: false,
-                    data: dataChartDesktop.keys,
-                    axisLine: {
-                        lineStyle: {
-                            color: "#ccc"
-                        }
-                    },
-                    axisTick: {
-                        interval: (i, v) => {
-                            if (task == 'getTrafficAndEngagementVisitsWeekly') {
-                                return (parseInt(v.slice(-2)) < 7)
-                            } else {
-                                return (v.slice(-2) == '01')
-                            }
-                        },
-                    },
-                    axisLabel: {
-                        margin: 10,
-                        textStyle: {
-                            color: "#999"
-                        },
-                        fontFamily: 'Arial',
-                        interval: (i, v) => {
-                            if (task == 'getTrafficAndEngagementVisitsWeekly') {
-                                return (parseInt(v.slice(-2)) < 7)
-                            } else {
-                                return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
-                            }
-                        },
-                        formatter: (value, index) => {
-                            if (task == 'getTrafficAndEngagementVisitsWeekly') {
-                                return moment(value).format('MM-YYYY');
-                            } else {
-                                return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
-                            }
-                        },
-
-                    },
-                }],
-                yAxis: [{
-                    type: "value",
-                    axisLine: {
-                        show: false
-                    },
-                    axisTick: {
-                        show: false
-                    },
-                    axisLabel: {
-                        margin: 10,
-                        textStyle: {
-                            color: "#ccc"
-                        },
-                        fontFamily: 'Arial',
-                        formatter: (value, index) => (value = numeral(value).format("0a"))
-                    },
-                    splitLine: {
-                        show: true,
-                        lineStyle: {
-                            color: 'rgba(0,0,0,0.1)'
-                        }
-                    },
-                }, ],
-                series: [{
-                        name: 'Desktop',
-                        type: 'line',
-                        stack: "0",
-                        areaStyle: {
-                            color: 'rgb(79, 141, 249)'
-                        },
-                        symbol: "none",
-                        itemStyle: {
-                            color: 'rgb(79, 141, 249)'
-                        },
-                        data: dataChartDesktop.values
-                    },
-                    {
-                        name: 'Mobile',
-                        type: 'line',
-                        stack: "0",
-                        areaStyle: {
-                            color: "rgb(140, 210, 255)"
-                        },
-                        symbol: "none",
-                        itemStyle: {
-                            color: "rgb(140, 210, 255)"
-                        },
-                        data: dataChartMobile.values
-                    }
-                ]
-            };
-
-
-            myChart.setOption(option);
-            new ResizeSensor($(`#getTrafficAndEngagement--MonthlyVisits`), function () {
-                myChart.resize();
-            });
-
-            await $(`#getTrafficAndEngagement`).removeClass('is-loading');
-            $(`#getTrafficAndEngagement--MonthlyVisits`).removeClass('is-loading');
-            $(`#getTrafficAndEngagement--MonthlyVisits`).removeClass('empty-state');
-
-            const lastdate = dataChartMobile.keys.length;
-            $('.similarDates').text(`${moment(dataChartMobile.keys[0]).format("MM/YYYY")} - ${moment(dataChartMobile.keys[lastdate - 1]).format("MM/YYYY")}`);
-        } else {
-            $(`#getTrafficAndEngagement`).removeClass('is-loading');
-            $(`#getTrafficAndEngagement--MonthlyVisits`).removeClass('is-loading');
-            $(`#getTrafficAndEngagement--MonthlyVisits`).addClass('empty-state');
-        }
-
-    } else {
-        console.log(`${task} failed`);
-    }
-}
-
-const getUniqueUsersMonthly = async (task, data) => {
-
-    if (data[0].status == "success" && data[0].status == "success") {
-        const {
-            website: domain1
-        } = data[0].data;
-
-        const {
-            website: domain2
-        } = data[1].data;
-        let idDomain1 = domain1.replace(".", "");
-        let idDomain2 = domain2.replace(".", "");
-
-        let dataChartDomain1 = {
-            keys: [],
-            values: []
-        };
-
-        let dataChartDomain2 = {
-            keys: [],
-            values: []
-        };
-        for (let i = 0; i < data.length; i++) {
 
             if (data[i] && data[i].data && data[i].data.data && data[i].data.data.Data && data[i].data.data.Data.Data) {
-
-                const {
-                    website: similarDomain
-                } = data[i].data;
 
                 let {
                     Data
                 } = data[i].data.data.Data;
 
-                let UniqueUsersMonthly = Data[similarDomain];
+
+                let UniqueUsersMonthly = Data[website[i]];
                 let totals = UniqueUsersMonthly.Total[0];
 
-                if (domain1 == similarDomain) {
-                    totals.map(total => {
-                        let key = total.Key;
-                        let value = total.Value;
-                        dataChartDomain1.keys.push(key);
-                        dataChartDomain1.values.push(value);
-                    });
-                }
-
-                if (domain2 == similarDomain) {
-                    totals.map(total => {
-                        let key = total.Key;
-                        let value = total.Value;
-                        dataChartDomain2.keys.push(key);
-                        dataChartDomain2.values.push(value);
-                    });
-                }
-
-
+                totals.map(total => {
+                    let key = total.Key;
+                    let value = total.Value;
+                    dataChart.keys.push(key);
+                    dataChart.values.push((value == null) ? 0 : value);
+                });
+                let temp = {}
+                temp.name = website[i],
+                    temp.data = (dataChart.values.length > 0) ? dataChart.values : [0, 0, 0],
+                    temp.type = "line",
+                    temp.symbol = "circle",
+                    temp.symbolSize = 10,
+                    temp.showSymbol = true,
+                    temp.hoverAnimation = false,
+                    temp.lineStyle = {
+                        normal: {
+                            width: 2,
+                            shadowBlur: 10,
+                            shadowOffsetY: 10
+                        }
+                    },
+                    temp.itemStyle = {
+                        normal: {
+                            borderWidth: 10
+                        }
+                    }
+                series.push(temp)
                 if (i != 0) {
                     let ele = document.getElementById(task);
 
-                    let myChart = echarts.init(ele);
+                    let myChart = echarts.init(ele, "light");
 
                     let option = {
                         tooltip: {
@@ -942,7 +641,6 @@ const getUniqueUsersMonthly = async (task, data) => {
                             borderWidth: 1,
                             extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
                             formatter: params => {
-                                // console.log(params);
                                 let {
                                     name
                                 } = params[0];
@@ -978,7 +676,7 @@ const getUniqueUsersMonthly = async (task, data) => {
                         xAxis: {
                             type: "category",
                             boundaryGap: false,
-                            data: dataChartDomain1.keys,
+                            data: dataChart.keys,
                             axisLine: {
                                 lineStyle: {
                                     color: "#ccc"
@@ -1022,63 +720,15 @@ const getUniqueUsersMonthly = async (task, data) => {
                                 }
                             },
                         },
-                        series: [{
-                            name: domain1,
-                            data: dataChartDomain1.values,
-                            type: "line",
-                            // smooth: true,
-                            symbol: "circle",
-                            symbolSize: 10,
-                            showSymbol: true,
-                            hoverAnimation: false,
-                            lineStyle: {
-                                normal: {
-                                    width: 2,
-                                    shadowColor: "rgba(0,0,0,0.4)",
-                                    shadowBlur: 10,
-                                    shadowOffsetY: 10
-                                }
-                            },
-                            itemStyle: {
-                                normal: {
-                                    color: "#57606f",
-                                    borderColor: "rgb(44, 44, 84, 0.2)",
-                                    borderWidth: 10
-                                }
-                            }
-                        }, {
-                            name: domain2,
-                            data: dataChartDomain2.values,
-                            type: "line",
-                            // smooth: true,
-                            symbol: "circle",
-                            symbolSize: 10,
-                            showSymbol: true,
-                            hoverAnimation: false,
-                            lineStyle: {
-                                normal: {
-                                    width: 2,
-                                    shadowColor: "rgba(0,0,0,0.4)",
-                                    shadowBlur: 10,
-                                    shadowOffsetY: 10
-                                }
-                            },
-                            itemStyle: {
-                                normal: {
-                                    color: "#4b7bec",
-                                    borderColor: "rgba(0,112,220,0.2)",
-                                    borderWidth: 10
-                                }
-                            }
-                        }, ]
+                        series: series
                     };
                     myChart.setOption(option);
-                    new ResizeSensor($(`#getUniqueUsersMonthly`), function () {
+                    new ResizeSensor($(`#getUniqueUsersMonthly`), function() {
                         myChart.resize();
                     });
 
-                    const lastdate = dataChartDomain1.keys.length;
-                    $('.similarDates').text(`${moment(dataChartDomain1.keys[0]).format("MM/YYYY")} - ${moment(dataChartDomain1.keys[lastdate - 1]).format("MM/YYYY")}`);
+                    const lastdate = dataChart.keys.length;
+                    $('.similarDates').text(`${moment(dataChart.keys[0]).format("MM/YYYY")} - ${moment(dataChart.keys[lastdate - 1]).format("MM/YYYY")}`);
 
                     await $(`#getUniqueUsersMonthly`).removeClass('is-loading');
                     $(`#getUniqueUsersMonthly`).removeClass('empty-state');
@@ -1088,688 +738,17 @@ const getUniqueUsersMonthly = async (task, data) => {
                 $(`#getUniqueUsersMonthly`).removeClass('is-loading')
                 $(`#getUniqueUsersMonthly`).addClass('empty-state')
             }
-        }
-
-
-
-    } else {
-        console.log(`${task} failed`);
-    }
-}
-
-const getTrafficAndEngagementAvgVisitDuration = async (task, data, domain) => {
-
-    if (data.status == "success") {
-        if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
-            let {
-                Data
-            } = data.data.data.Data;
-
-            let TrafficAndEngagementAvgVisitDuration = Data[domain];
-
-            let Desktop = TrafficAndEngagementAvgVisitDuration.Desktop[0];
-            let Mobile = TrafficAndEngagementAvgVisitDuration.MobileWeb[0];
-
-            let dataChartDesktop = {
-                keys: [],
-                values: []
-            };
-
-
-
-            Desktop.map(desktop => {
-                let key = desktop.Key;
-                let value = desktop.Value;
-                dataChartDesktop.keys.push(key);
-                dataChartDesktop.values.push(value);
-            });
-
-            let dataChartMobile = {
-                keys: [],
-                values: []
-            };
-
-            Mobile.map(mobile => {
-                let key = mobile.Key;
-                let value = mobile.Value;
-                dataChartMobile.keys.push(key);
-                dataChartMobile.values.push(value);
-            });
-
-
-            let ele = document.getElementById("getTrafficAndEngagement--AvgVisitDuration");
-
-            let myChart = echarts.init(ele);
-
-            let option = {
-                tooltip: {
-                    trigger: "axis",
-                    backgroundColor: 'rgba(255, 255, 255, 1)',
-                    borderColor: 'rgba(93,120,255,1)',
-                    borderWidth: 1,
-                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                    formatter: params => {
-                        // console.log(params);
-                        let {
-                            name
-                        } = params[0];
-                        let {
-                            marker: mrkr1,
-                            color: color1,
-                            seriesName: name1,
-                            value: val1
-                        } = params[0];
-                        let {
-                            marker: mrkr2,
-                            color: color2,
-                            seriesName: name2,
-                            value: val2
-                        } = params[1];
-
-                        name = moment(name).format('DD MMMM YYYY');
-
-                        val1 = numeral(val1).format('00:00:00');
-                        val2 = numeral(val2).format('00:00:00');
-
-                        return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
-                    <div class="text-dark pt-2">
-                        ${mrkr1} ${name1} <span style="color:${color1};font-weight:bold">${val1}</span>
-                        <br/>
-                        ${mrkr2} ${name2} <span style="color:${color2};font-weight:bold">${val2}</span>
-                    </div>`;
-                    }
-                },
-                legend: {
-                    data: ['Desktop', 'Mobile']
-                },
-                grid: {
-                    right: "5%"
-                },
-                xAxis: {
-                    type: "category",
-                    boundaryGap: false,
-                    data: dataChartDesktop.keys,
-                    axisLine: {
-                        lineStyle: {
-                            color: "#ccc"
-                        }
-                    },
-                    axisTick: {
-                        interval: (i, v) => {
-                            if (task == 'getTrafficAndEngagementAvgVisitDurationWeekly') {
-                                return (parseInt(v.slice(-2)) < 7)
-                            } else {
-                                return (v.slice(-2) == '01')
-                            }
-                        },
-                    },
-                    axisLabel: {
-                        margin: 10,
-                        textStyle: {
-                            color: "#999"
-                        },
-                        fontFamily: 'Arial',
-                        interval: (i, v) => {
-                            if (task == 'getTrafficAndEngagementAvgVisitDurationWeekly') {
-                                return (parseInt(v.slice(-2)) < 7)
-                            } else {
-                                return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
-                            }
-                        },
-                        formatter: (value, index) => {
-                            if (task == 'getTrafficAndEngagementAvgVisitDurationWeekly') {
-                                return moment(value).format('MM-YYYY');
-                            } else {
-                                return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
-                            }
-                        },
-
-                    },
-                },
-                yAxis: {
-                    type: "value",
-                    axisLine: {
-                        show: false
-                    },
-                    axisTick: {
-                        show: false
-                    },
-                    axisLabel: {
-                        margin: 10,
-                        textStyle: {
-                            color: "#ccc"
-                        },
-                        fontFamily: 'Arial',
-                        formatter: (value, index) => (value = numeral(value).format("00:00:00"))
-                    },
-                    splitLine: {
-                        show: true,
-                        lineStyle: {
-                            color: 'rgba(0,0,0,0.1)'
-                        }
-                    },
-                },
-                series: [{
-                        name: 'Desktop',
-                        data: dataChartDesktop.values,
-                        type: "line",
-                        symbol: (task == "getTrafficAndEngagementAvgVisitDurationDaily") ? "none" : "circle",
-                        symbolSize: 10,
-                        showSymbol: true,
-                        hoverAnimation: false,
-                        lineStyle: {
-                            normal: {
-                                width: 2,
-                                shadowColor: "rgba(0,0,0,0.4)",
-                                shadowBlur: 10,
-                                shadowOffsetY: 10
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: "rgb(79, 141, 249)",
-                                borderColor: "rgb(79, 141, 249, 0.2)",
-                                borderWidth: 10
-                            }
-                        }
-                    },
-                    {
-                        name: 'Mobile',
-                        data: dataChartMobile.values,
-                        type: "line",
-                        symbol: (task == "getTrafficAndEngagementAvgVisitDurationDaily") ? "none" : "circle",
-                        symbolSize: 10,
-                        showSymbol: true,
-                        hoverAnimation: false,
-                        lineStyle: {
-                            normal: {
-                                width: 2,
-                                shadowColor: "rgba(0,0,0,0.4)",
-                                shadowBlur: 10,
-                                shadowOffsetY: 10
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: "rgb(140, 210, 255)",
-                                borderColor: "rgb(140, 210, 255, 0.2)",
-                                borderWidth: 10
-                            }
-                        }
-
-                    }
-                ]
-            };
-            myChart.setOption(option);
-            new ResizeSensor($(`#getTrafficAndEngagement--AvgVisitDuration`), function () {
-                myChart.resize();
-            });
-
-            await $(`#getTrafficAndEngagement--AvgVisitDuration`).removeClass('is-loading');
-            $(`#getTrafficAndEngagement--AvgVisitDuration`).removeClass('empty-state');
         } else {
-            $(`#getTrafficAndEngagement--AvgVisitDuration`).removeClass('is-loading');
-            $(`#getTrafficAndEngagement--AvgVisitDuration`).addClass('empty-state');
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 }
 
-const getTrafficAndEngagementPagesPerVisit = async (task, data, domain) => {
-
-    if (data.status == "success") {
-        if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
-            let {
-                Data
-            } = data.data.data.Data;
-
-            let TrafficAndEngagementPagesPerVisit = Data[domain];
-
-            let Desktop = TrafficAndEngagementPagesPerVisit.Desktop[0];
-            let Mobile = TrafficAndEngagementPagesPerVisit.MobileWeb[0];
-
-            let dataChartDesktop = {
-                keys: [],
-                values: []
-            };
-
-            Desktop.map(desktop => {
-                let key = desktop.Key;
-                let value = desktop.Value;
-                dataChartDesktop.keys.push(key);
-                dataChartDesktop.values.push(value);
-            });
-
-            let dataChartMobile = {
-                keys: [],
-                values: []
-            };
-
-            Mobile.map(mobile => {
-                let key = mobile.Key;
-                let value = mobile.Value;
-                dataChartMobile.keys.push(key);
-                dataChartMobile.values.push(value);
-            });
-
-
-            let ele = document.getElementById("getTrafficAndEngagement--PagesPerVisit");
-
-            let myChart = echarts.init(ele);
-
-            let option = {
-                tooltip: {
-                    trigger: "axis",
-                    backgroundColor: 'rgba(255, 255, 255, 1)',
-                    borderColor: 'rgba(93,120,255,1)',
-                    borderWidth: 1,
-                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                    formatter: params => {
-                        // console.log(params);
-                        let {
-                            name
-                        } = params[0];
-                        let {
-                            marker: mrkr1,
-                            color: color1,
-                            seriesName: name1,
-                            value: val1
-                        } = params[0];
-                        let {
-                            marker: mrkr2,
-                            color: color2,
-                            seriesName: name2,
-                            value: val2
-                        } = params[1];
-
-                        name = moment(name).format('DD MMMM YYYY');
-
-                        val1 = numeral(val1).format('0.00');
-                        val2 = numeral(val2).format('0.00');
-
-                        return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
-                    <div class="text-dark pt-2">
-                        ${mrkr1} ${name1} <span style="color:${color1};font-weight:bold">${val1}</span>
-                        <br/>
-                        ${mrkr2} ${name2} <span style="color:${color2};font-weight:bold">${val2}</span>
-                    </div>`;
-                    }
-                },
-                legend: {
-                    data: ['Desktop', 'Mobile']
-                },
-                grid: {
-                    right: "5%"
-                },
-                xAxis: {
-                    type: "category",
-                    boundaryGap: false,
-                    data: dataChartDesktop.keys,
-                    axisLine: {
-                        lineStyle: {
-                            color: "#ccc"
-                        }
-                    },
-                    axisTick: {
-                        interval: (i, v) => {
-                            if (task == 'getTrafficAndEngagementPagesPerVisitWeekly') {
-                                return (parseInt(v.slice(-2)) < 7)
-                            } else {
-                                return (v.slice(-2) == '01')
-                            }
-                        },
-                    },
-                    axisLabel: {
-                        margin: 10,
-                        textStyle: {
-                            color: "#999"
-                        },
-                        fontFamily: 'Arial',
-                        interval: (i, v) => {
-                            if (task == 'getTrafficAndEngagementPagesPerVisitWeekly') {
-                                return (parseInt(v.slice(-2)) < 7)
-                            } else {
-                                return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
-                            }
-                        },
-                        formatter: (value, index) => {
-                            if (task == 'getTrafficAndEngagementPagesPerVisitWeekly') {
-                                return moment(value).format('MM-YYYY');
-                            } else {
-                                return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
-                            }
-                        },
-
-                    },
-                },
-                yAxis: {
-                    type: "value",
-                    axisLine: {
-                        show: false
-                    },
-                    axisTick: {
-                        show: false
-                    },
-                    axisLabel: {
-                        margin: 10,
-                        textStyle: {
-                            color: "#ccc"
-                        },
-                        fontFamily: 'Arial',
-                        // formatter: (value, index) => (value = numeral(value).format("0a"))
-                    },
-                    splitLine: {
-                        show: true,
-                        lineStyle: {
-                            color: 'rgba(0,0,0,0.1)'
-                        }
-                    },
-                },
-                series: [{
-                        name: 'Desktop',
-                        data: dataChartDesktop.values,
-                        type: "line",
-                        symbol: (task == "getTrafficAndEngagementPagesPerVisitDaily") ? "none" : "circle",
-                        symbolSize: 10,
-                        showSymbol: true,
-                        hoverAnimation: false,
-                        lineStyle: {
-                            normal: {
-                                width: 2,
-                                shadowColor: "rgba(0,0,0,0.4)",
-                                shadowBlur: 10,
-                                shadowOffsetY: 10
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: "rgb(79, 141, 249)",
-                                borderColor: "rgb(79, 141, 249, 0.2)",
-                                borderWidth: 10
-                            }
-                        }
-                    },
-                    {
-                        name: 'Mobile',
-                        data: dataChartMobile.values,
-                        type: "line",
-                        symbol: (task == "getTrafficAndEngagementPagesPerVisitDaily") ? "none" : "circle",
-                        symbolSize: 10,
-                        showSymbol: true,
-                        hoverAnimation: false,
-                        lineStyle: {
-                            normal: {
-                                width: 2,
-                                shadowColor: "rgba(0,0,0,0.4)",
-                                shadowBlur: 10,
-                                shadowOffsetY: 10
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: "rgb(140, 210, 255)",
-                                borderColor: "rgb(140, 210, 255, 0.2)",
-                                borderWidth: 10
-                            }
-                        }
-
-                    }
-                ]
-            };
-            myChart.setOption(option);
-            new ResizeSensor($(`#getTrafficAndEngagement--PagesPerVisit`), function () {
-                myChart.resize();
-            });
-
-            await $(`#getTrafficAndEngagement--PagesPerVisit`).removeClass('is-loading');
-            $(`#getTrafficAndEngagement---PagesPerVisit`).removeClass('empty-state');
-        } else {
-            $(`#getTrafficAndEngagement--PagesPerVisit`).removeClass('is-loading');
-            $(`#getTrafficAndEngagement---PagesPerVisit`).addClass('empty-state');
-        }
-
-    } else {
-        console.log(`${task} failed`);
-    }
-}
-
-const getTrafficAndEngagementBounceRate = async (task, data, domain) => {
-
-    if (data.status == "success") {
-        if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
-            let {
-                Data
-            } = data.data.data.Data;
-
-            let TrafficAndEngagementBounceRate = Data[domain];
-
-            let Desktop = TrafficAndEngagementBounceRate.Desktop[0];
-            let Mobile = TrafficAndEngagementBounceRate.MobileWeb[0];
-
-            let dataChartDesktop = {
-                keys: [],
-                values: []
-            };
-
-            Desktop.map(desktop => {
-                let key = desktop.Key;
-                let value = desktop.Value;
-                dataChartDesktop.keys.push(key);
-                dataChartDesktop.values.push(value);
-            });
-
-            let dataChartMobile = {
-                keys: [],
-                values: []
-            };
-
-            Mobile.map(mobile => {
-                let key = mobile.Key;
-                let value = mobile.Value;
-                dataChartMobile.keys.push(key);
-                dataChartMobile.values.push(value);
-            });
-
-
-            let ele = document.getElementById("getTrafficAndEngagement--BounceRate");
-
-            let myChart = echarts.init(ele);
-
-            let option = {
-                tooltip: {
-                    trigger: "axis",
-                    backgroundColor: 'rgba(255, 255, 255, 1)',
-                    borderColor: 'rgba(93,120,255,1)',
-                    borderWidth: 1,
-                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                    formatter: params => {
-                        // console.log(params);
-                        let {
-                            name
-                        } = params[0];
-                        let {
-                            marker: mrkr1,
-                            color: color1,
-                            seriesName: name1,
-                            value: val1
-                        } = params[0];
-                        let {
-                            marker: mrkr2,
-                            color: color2,
-                            seriesName: name2,
-                            value: val2
-                        } = params[1];
-
-                        name = moment(name).format('DD MMMM YYYY');
-
-                        val1 = numeral(val1).format('0.00%');
-                        val2 = numeral(val2).format('0.00%');
-
-                        return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
-                    <div class="text-dark pt-2">
-                        ${mrkr1} ${name1} <span style="color:${color1};font-weight:bold">${val1}</span>
-                        <br/>
-                        ${mrkr2} ${name2} <span style="color:${color2};font-weight:bold">${val2}</span>
-                    </div>`;
-                    }
-                },
-                legend: {
-                    data: ['Desktop', 'Mobile']
-                },
-                grid: {
-                    right: "5%"
-                },
-                xAxis: {
-                    type: "category",
-                    boundaryGap: false,
-                    data: dataChartDesktop.keys,
-                    axisLine: {
-                        lineStyle: {
-                            color: "#ccc"
-                        }
-                    },
-                    axisTick: {
-                        interval: (i, v) => {
-                            if (task == 'getTrafficAndEngagementBounceRateWeekly') {
-                                return (parseInt(v.slice(-2)) < 7)
-                            } else {
-                                return (v.slice(-2) == '01')
-                            }
-                        },
-                    },
-                    axisLabel: {
-                        margin: 10,
-                        textStyle: {
-                            color: "#999"
-                        },
-                        fontFamily: 'Arial',
-                        interval: (i, v) => {
-                            if (task == 'getTrafficAndEngagementBounceRateWeekly') {
-                                return (parseInt(v.slice(-2)) < 7)
-                            } else {
-                                return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
-                            }
-                        },
-                        formatter: (value, index) => {
-                            if (task == 'getTrafficAndEngagementBounceRateWeekly') {
-                                return moment(value).format('MM-YYYY');
-                            } else {
-                                return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
-                            }
-                        },
-
-                    },
-                },
-                yAxis: {
-                    type: "value",
-                    axisLine: {
-                        show: false
-                    },
-                    axisTick: {
-                        show: false
-                    },
-                    axisLabel: {
-                        margin: 10,
-                        textStyle: {
-                            color: "#ccc"
-                        },
-                        fontFamily: 'Arial',
-                        formatter: (value, index) => (value = numeral(value).format("0%"))
-                    },
-                    splitLine: {
-                        show: true,
-                        lineStyle: {
-                            color: 'rgba(0,0,0,0.1)'
-                        }
-                    },
-                },
-                series: [{
-                        name: 'Desktop',
-                        data: dataChartDesktop.values,
-                        type: "line",
-                        symbol: (task == "getTrafficAndEngagementBounceRateDaily") ? "none" : "circle",
-                        symbolSize: 10,
-                        showSymbol: true,
-                        hoverAnimation: false,
-                        lineStyle: {
-                            normal: {
-                                width: 2,
-                                shadowColor: "rgba(0,0,0,0.4)",
-                                shadowBlur: 10,
-                                shadowOffsetY: 10
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: "rgb(79, 141, 249)",
-                                borderColor: "rgb(79, 141, 249, 0.2)",
-                                borderWidth: 10
-                            }
-                        }
-                    },
-                    {
-                        name: 'Mobile',
-                        data: dataChartMobile.values,
-                        type: "line",
-                        symbol: (task == "getTrafficAndEngagementBounceRateDaily") ? "none" : "circle",
-                        symbolSize: 10,
-                        showSymbol: true,
-                        hoverAnimation: false,
-                        lineStyle: {
-                            normal: {
-                                width: 2,
-                                shadowColor: "rgba(0,0,0,0.4)",
-                                shadowBlur: 10,
-                                shadowOffsetY: 10
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: "rgb(140, 210, 255)",
-                                borderColor: "rgb(140, 210, 255, 0.2)",
-                                borderWidth: 10
-                            }
-                        }
-
-                    }
-                ]
-            };
-            myChart.setOption(option);
-            new ResizeSensor($(`#getTrafficAndEngagement--BounceRate`), function () {
-                myChart.resize();
-            });
-
-            await $(`#getTrafficAndEngagement--BounceRate`).removeClass('is-loading');
-            $(`#getTrafficAndEngagement--BounceRate`).removeClass('empty-state');
-        } else {
-            $(`#getTrafficAndEngagement--BounceRate`).removeClass('is-loading');
-            $(`#getTrafficAndEngagement--BounceRate`).addClass('empty-state');
-        }
-    } else {
-        console.log(`${task} failed`);
-    }
-}
-
-const getMarketingMixOverview = async (task, data) => {
-    if (data[0].status == "success" && data[0].status == "success") {
-        let {
-            website: domain1
-        } = data[0].data;
-        let {
-            website: domain2
-        } = data[0].data;
-
-        let idDomain1 = domain1.replace(".", "");
-        let idDomain2 = domain2.replace(".", "");
-
-        for (let i = 0; i < data.length; i++) {
+const getMarketingMixOverview = async(task, data) => {
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
             if (data[i] && data[i].data && data[i].data.data && data[i].data.data.Data) {
-                let {
-                    website: domain
-                } = data[i].data;
-                let idDomain = domain.replace(".", "");
-                idDomain = idDomain.replace(".", "");
+                let idDomain = website[i].replace(/\./g, "")
 
                 let {
                     DailyData,
@@ -1778,8 +757,7 @@ const getMarketingMixOverview = async (task, data) => {
                 } = data[i].data.data.Data;
 
                 if (Object.values(DailyData).length != 0 || Object.values(WeeklyData).length != 0 || Object.values(MonthlyData).length != 0) {
-                    // let { TrafficShare, AverageDuration, PagesPerVisit, BounceRate } = DataMarket; 
-                    const run = async (taskName, temp) => {
+                    const run = async(taskName, temp) => {
                         let DataMarket;
                         if (temp == "Daily") {
                             DataMarket = data[i].data.data.Data.DailyData;
@@ -2095,7 +1073,7 @@ const getMarketingMixOverview = async (task, data) => {
                                 };
                                 myChart.setOption(option);
 
-                                new ResizeSensor($(`#${idDomain}getMarketingMixOverview--${taskName}`), function () {
+                                new ResizeSensor($(`#${idDomain}getMarketingMixOverview--${taskName}`), function() {
                                     myChart.resize();
                                 });
 
@@ -2113,13 +1091,13 @@ const getMarketingMixOverview = async (task, data) => {
 
                     run('TrafficShare', "Weekly");
 
-                    $(`#getMarketingMixOverview a[data-toggle="tab"]`).on('shown.bs.tab', function (e) {
+                    $(`#getMarketingMixOverview a[data-toggle="tab"]`).on('shown.bs.tab', function(e) {
 
 
                         var taskName = $(e.target).data('task'); // activated tab 
                         let ele = document.getElementById(`${idDomain}getMarketingMixOverview--${taskName}`);
                         echarts.dispose(ele);
-                        
+
 
                         run(taskName, "Weekly");
 
@@ -2144,21 +1122,21 @@ const getMarketingMixOverview = async (task, data) => {
                         //     </label>
                         // </fieldset>`)
 
-                        
-                        $("input[type=radio][name=getMarketingMixOverview]").change(function () {
+
+                        $("input[type=radio][name=getMarketingMixOverview]").change(function() {
                             let ele2 = document.getElementById(`${idDomain}getMarketingMixOverview--${taskName}`);
                             echarts.dispose(ele2);
                             if (this.value == "setgetMarketingMixOverviewDaily") {
-                                run(taskName, "Daily");  
+                                run(taskName, "Daily");
                             } else if (this.value == "setgetMarketingMixOverviewWeekly") {
                                 run(taskName, "Weekly");
                             } else
                                 run(taskName, "Monthly");
-                            
+
                         })
                     });
 
-                    $("input[type=radio][name=getMarketingMixOverview]").change(function () {
+                    $("input[type=radio][name=getMarketingMixOverview]").change(function() {
 
                         //alert(this.value); 
 
@@ -2181,38 +1159,25 @@ const getMarketingMixOverview = async (task, data) => {
                 $(`#${idDomain}getMarketingMixOverview`).removeClass('is-loading');
                 $(`#${idDomain}getMarketingMixOverview`).addClass('empty-state');
             }
+
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 }
 
-const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => {
-    if (data[0].status == "success" && data[1].status == "success") {
+const getTrafficSourcesTotalReferrals = async(task, data, domain1, domain2) => {
+    let series = []
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
+            let idDomain1 = website[0].replace(/\./g, "")
+            let idDomain2 = website[1].replace(/\./g, "")
 
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
-
-        let dataChartDomain1 = {
-            keys: [],
-            values: []
-        };
-
-        let dataChartDomain2 = {
-            keys: [],
-            values: []
-        };
-
-
-        for (let i = 0; i < data.length; i++) {
-
-            let {
-                website: domain
-            } = data[i].data;
-            let idDomain = domain.replace(".", "");
-            idDomain = idDomain.replace(".", "");
+            let dataChart = {
+                keys: [],
+                values: []
+            };
+            let idDomain = website[i].replace(/\./g, "")
 
             if (data[i] && data[i].data && data[i].data.data) {
 
@@ -2220,7 +1185,7 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                     Data
                 } = data[i].data.data;
 
-                let TrafficSourcesTotalReferrals = Data.dictionary[domain];
+                let TrafficSourcesTotalReferrals = Data.dictionary[website[i]];
 
                 let SearchTotal = TrafficSourcesTotalReferrals.SearchTotal;
                 let VolumeTotal = TrafficSourcesTotalReferrals.VolumeTotal;
@@ -2247,8 +1212,7 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                 let myChartPie = echarts.init(elePie);
 
                 let optionPie = {
-                    color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] :
-                        ['#4b7bec', 'rgba(0,112,220,0.5)'],
+                    color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] : ['#4b7bec', 'rgba(0,112,220,0.5)'],
                     legend: {
                         bottom: "-2%",
                         right: "30%",
@@ -2308,9 +1272,9 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                 myChartPie.setOption(optionPie);
 
 
-                new ResizeSensor($(`#${idDomain}getTotalSocialVisits`), function () {
+                new ResizeSensor($(`#${idDomain}getTotalSocialVisits`), function() {
                     myChartPie.resize();
-                    setTimeout(function () {
+                    setTimeout(function() {
                         myChartPie.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -2319,14 +1283,14 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                     }, 1000);
                 });
 
-                setTimeout(function () {
+                setTimeout(function() {
                     myChartPie.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
 
-                    myChartPie.on('mouseover', function (params) {
+                    myChartPie.on('mouseover', function(params) {
                         if (params.name == dataChartPie[0].name) {
                             myChartPie.dispatchAction({
                                 type: 'highlight',
@@ -2342,7 +1306,7 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                         }
                     });
 
-                    myChartPie.on('mouseout', function (params) {
+                    myChartPie.on('mouseout', function(params) {
                         myChartPie.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -2359,30 +1323,39 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                 let Dates = TrafficSourcesTotalReferrals.Dates;
 
                 let Volumes = TrafficSourcesTotalReferrals.Volumes;
+                $.each(Dates, (idx, val) => {
+                    dataChart.keys.push(val);
+                })
 
-
-                if (domain1 == domain) {
-                    $.each(Dates, (idx, val) => {
-                        dataChartDomain1.keys.push(val);
-                    })
-
-                    $.each(Volumes, (name, data) => {
-                        dataChartDomain1.values.push(data[0]);
-                    })
-                } else {
-                    $.each(Dates, (idx, val) => {
-                        dataChartDomain2.keys.push(val);
-                    })
-
-                    $.each(Volumes, (name, data) => {
-                        dataChartDomain2.values.push(data[0]);
-                    })
-                }
-
+                $.each(Volumes, (name, data) => {
+                    // console.log(data)
+                    dataChart.values.push((data[0] == null) ? 0 : data[0]);
+                })
+                let temp = {}
+                temp.name = website[i],
+                    temp.data = (dataChart.values.length > 0) ? dataChart.values : [0, 0, 0],
+                    temp.type = 'line',
+                    temp.symbol = "circle",
+                    temp.symbolSize = 10,
+                    temp.showSymbol = true,
+                    temp.hoverAnimation = false,
+                    temp.lineStyle = {
+                        normal: {
+                            width: 2,
+                            shadowBlur: 10,
+                            shadowOffsetY: 10
+                        }
+                    },
+                    temp.itemStyle = {
+                        normal: {
+                            borderWidth: 10
+                        }
+                    }
+                series.push(temp)
                 if (i != 0) {
                     let ele = document.getElementById(`getReferralVisits`);
 
-                    let myChart = echarts.init(ele);
+                    let myChart = echarts.init(ele, "light");
 
                     let option = {
                         tooltip: {
@@ -2392,7 +1365,6 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                             borderWidth: 1,
                             extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
                             formatter: params => {
-                                // console.log(params);
                                 let {
                                     name
                                 } = params[0];
@@ -2422,12 +1394,12 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                             right: "5%"
                         },
                         legend: {
-                            data: [`${idDomain1}`, `${idDomain2}`]
+                            data: website
                         },
                         xAxis: {
                             type: "category",
                             boundaryGap: false,
-                            data: dataChartDomain1.keys,
+                            data: dataChart.keys,
                             axisLine: {
                                 lineStyle: {
                                     color: "#ccc"
@@ -2471,58 +1443,10 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                                 }
                             },
                         },
-                        series: [{
-                                name: idDomain1,
-                                data: dataChartDomain1.values,
-                                type: 'line',
-                                symbol: "circle",
-                                symbolSize: 10,
-                                showSymbol: true,
-                                hoverAnimation: false,
-                                lineStyle: {
-                                    normal: {
-                                        width: 2,
-                                        shadowColor: "rgba(0,0,0,0.4)",
-                                        shadowBlur: 10,
-                                        shadowOffsetY: 10
-                                    }
-                                },
-                                itemStyle: {
-                                    normal: {
-                                        color: "#57606f",
-                                        borderColor: "rgb(44, 44, 84, 0.2)",
-                                        borderWidth: 10
-                                    }
-                                }
-                            }, {
-                                name: idDomain2,
-                                data: dataChartDomain2.values,
-                                type: 'line',
-                                symbol: "circle",
-                                symbolSize: 10,
-                                showSymbol: true,
-                                hoverAnimation: false,
-                                lineStyle: {
-                                    normal: {
-                                        width: 2,
-                                        shadowColor: "rgba(0,0,0,0.4)",
-                                        shadowBlur: 10,
-                                        shadowOffsetY: 10
-                                    }
-                                },
-                                itemStyle: {
-                                    normal: {
-                                        color: "#4b7bec",
-                                        borderColor: "rgba(0,112,220,0.2)",
-                                        borderWidth: 10
-                                    }
-                                }
-                            },
-
-                        ]
+                        series: series
                     };
                     myChart.setOption(option);
-                    new ResizeSensor($(`#getReferralVisits`), function () {
+                    new ResizeSensor($(`#getReferralVisits`), function() {
                         myChart.resize();
                     });
 
@@ -2531,6 +1455,7 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                 }
             } else {
                 if (dataChartDomain1.keys.length > 0 || dataChartDomain2.keys.length > 0) {
+                    console.log(idDomain1)
                     let ele = document.getElementById(`getReferralVisits`);
 
                     let myChart = echarts.init(ele);
@@ -2673,7 +1598,7 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                         ]
                     };
                     myChart.setOption(option);
-                    new ResizeSensor($(`#getReferralVisits`), function () {
+                    new ResizeSensor($(`#getReferralVisits`), function() {
                         myChart.resize();
                     });
 
@@ -2686,41 +1611,30 @@ const getTrafficSourcesTotalReferrals = async (task, data, domain1, domain2) => 
                 $(`#${idDomain}getTotalReferralVisits`).removeClass('is-loading');
                 $(`#${idDomain}getTotalReferralVisits`).parent().addClass('empty-state');
             }
-        }
 
-    } else {
-        console.log(`${task} failed`);
+        } else {
+            console.log(`${task} failed`);
+        }
     }
 }
 
-const getTrafficSocial = async (task, data, domain1, domain2) => {
-    if (data[0].status == "success" && data[1].status == "success") {
+const getTrafficSocial = async(task, data, domain1, domain2) => {
+    let series = []
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
 
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
-
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
-
-        let dataChartDomain1 = {
-            keys: [],
-            values: []
-        };
-
-        let dataChartDomain2 = {
-            keys: [],
-            values: []
-        };
-
-        for (let i = 0; i < data.length; i++) {
-
+            let idDomain1 = website[0].replace(/\./g, "")
+            let idDomain2 = website[1].replace(/\./g, "")
+            let dataChart = {
+                keys: [],
+                values: []
+            };
             if (data[i] && data[i].data && data[i].data.data) {
 
                 let {
                     website: domain
                 } = data[i].data;
-                let idDomain = domain.replace(".", "");
-                idDomain = idDomain.replace(".", "");
+                let idDomain = website[i].replace(/\./g, "")
                 let TrafficSocial = data[i].data.data;
 
                 let SearchTotal = TrafficSocial.SearchTotal;
@@ -2749,8 +1663,7 @@ const getTrafficSocial = async (task, data, domain1, domain2) => {
                 let myChartPie = echarts.init(elePie);
 
                 let optionPie = {
-                    color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] :
-                        ['#4b7bec', 'rgba(0,112,220,0.5)'],
+                    color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] : ['#4b7bec', 'rgba(0,112,220,0.5)'],
                     legend: {
                         bottom: "-2%",
                         right: "35%",
@@ -2810,9 +1723,9 @@ const getTrafficSocial = async (task, data, domain1, domain2) => {
                 myChartPie.setOption(optionPie);
 
 
-                new ResizeSensor($(`#${idDomain}getTotalSocialVisits`), function () {
+                new ResizeSensor($(`#${idDomain}getTotalSocialVisits`), function() {
                     myChartPie.resize();
-                    setTimeout(function () {
+                    setTimeout(function() {
                         myChartPie.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -2821,14 +1734,14 @@ const getTrafficSocial = async (task, data, domain1, domain2) => {
                     }, 1000);
                 });
 
-                setTimeout(function () {
+                setTimeout(function() {
                     myChartPie.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
 
-                    myChartPie.on('mouseover', function (params) {
+                    myChartPie.on('mouseover', function(params) {
                         if (params.name == dataChartPie[0].name) {
                             myChartPie.dispatchAction({
                                 type: 'highlight',
@@ -2844,7 +1757,7 @@ const getTrafficSocial = async (task, data, domain1, domain2) => {
                         }
                     });
 
-                    myChartPie.on('mouseout', function (params) {
+                    myChartPie.on('mouseout', function(params) {
                         myChartPie.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -2861,30 +1774,34 @@ const getTrafficSocial = async (task, data, domain1, domain2) => {
                 let Dates = TrafficSocial.Dates;
 
                 let Volumes = TrafficSocial.Volumes;
+                $.each(Dates, (idx, val) => {
+                    dataChart.keys.push(val);
+                })
 
-                if (domain1 == domain) {
-
-                    $.each(Dates, (idx, val) => {
-                        dataChartDomain1.keys.push(val);
-                    })
-
-                    $.each(Volumes, (name, value) => {
-                        dataChartDomain1.values.push(value[0]);
-                    })
-                } else {
-
-                    $.each(Dates, (idx, val) => {
-
-                        dataChartDomain2.keys.push(val);
-
-                    })
-
-                    $.each(Volumes, (name, value) => {
-                        dataChartDomain2.values.push(value[0]);
-                    })
-                }
-
-
+                $.each(Volumes, (name, value) => {
+                    dataChart.values.push((value[0] == null) ? 0 : value[0]);
+                })
+                let temp = {}
+                temp.name = website[i],
+                    temp.data = (dataChart.values.length > 0) ? dataChart.values : [0, 0, 0],
+                    temp.type = 'line',
+                    temp.symbol = "circle",
+                    temp.symbolSize = 10,
+                    temp.showSymbol = true,
+                    temp.hoverAnimation = false,
+                    temp.lineStyle = {
+                        normal: {
+                            width: 2,
+                            shadowBlur: 10,
+                            shadowOffsetY: 10
+                        }
+                    },
+                    temp.itemStyle = {
+                        normal: {
+                            borderWidth: 10
+                        }
+                    }
+                series.push(temp)
                 if (i != 0) {
                     let ele = document.getElementById("getSocialVisits");
 
@@ -2933,7 +1850,7 @@ const getTrafficSocial = async (task, data, domain1, domain2) => {
                         xAxis: {
                             type: "category",
                             boundaryGap: false,
-                            data: dataChartDomain1.keys,
+                            data: dataChart.keys,
                             axisLine: {
                                 lineStyle: {
                                     color: "#ccc"
@@ -2977,58 +1894,10 @@ const getTrafficSocial = async (task, data, domain1, domain2) => {
                                 }
                             },
                         },
-                        series: [{
-                                name: idDomain1,
-                                data: dataChartDomain1.values,
-                                type: 'line',
-                                symbol: "circle",
-                                symbolSize: 10,
-                                showSymbol: true,
-                                hoverAnimation: false,
-                                lineStyle: {
-                                    normal: {
-                                        width: 2,
-                                        shadowColor: "rgba(0,0,0,0.4)",
-                                        shadowBlur: 10,
-                                        shadowOffsetY: 10
-                                    }
-                                },
-                                itemStyle: {
-                                    normal: {
-                                        color: "#57606f",
-                                        borderColor: "rgb(44, 44, 84, 0.2)",
-                                        borderWidth: 10
-                                    }
-                                }
-                            }, {
-                                name: idDomain2,
-                                data: dataChartDomain2.values,
-                                type: 'line',
-                                symbol: "circle",
-                                symbolSize: 10,
-                                showSymbol: true,
-                                hoverAnimation: false,
-                                lineStyle: {
-                                    normal: {
-                                        width: 2,
-                                        shadowColor: "rgba(0,0,0,0.4)",
-                                        shadowBlur: 10,
-                                        shadowOffsetY: 10
-                                    }
-                                },
-                                itemStyle: {
-                                    normal: {
-                                        color: "#4b7bec",
-                                        borderColor: "rgba(0,112,220,0.2)",
-                                        borderWidth: 10
-                                    }
-                                }
-                            },
-
-                        ]
+                        series: series
                     };
                     myChart.setOption(option);
-                    new ResizeSensor($(`#getSocialVisits`), function () {
+                    new ResizeSensor($(`#getSocialVisits`), function() {
                         myChart.resize();
                     });
 
@@ -3043,318 +1912,76 @@ const getTrafficSocial = async (task, data, domain1, domain2) => {
                 $(`#getTotalSocialVisits`).parent().addClass('empty-state');
 
             }
-        }
 
-    } else {
-        console.log(`${task} failed`);
+
+        } else {
+            console.log(`${task} failed`);
+        }
     }
 }
 
-const getEngagementVisits = async (task, data) => {
-    if (data.status == "success") {
-
-        let {
-            data: EngagementVisits
-        } = data.data;
-
-        // prepare data
-
-        let visits = EngagementVisits[0];
-
-        let temp = true;
-
-        visits.map(visit => {
-            if (visit.Value == null) {
-                temp = false;
-            }
-        });
-
-        if (!temp) {
-            await $(`#getEngagementVisits`).removeClass("is-loading").addClass('empty-state');
-            await $(`.similarReloadTask[data-task="getEngagementVisits"]`).find('i').removeClass('fa-spin');
-        } else {
-
+const getWebDemographicsAge = async(task, data, domain1, domain2) => {
+    let series = []
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
             let dataChart = {
                 keys: [],
                 values: []
             };
-
-            visits.map(visit => {
-                let key = visit.Key;
-                let value = numeral(visit.Value).format("0");
-                dataChart.keys.push(key);
-                dataChart.values.push(value);
-            });
-
-            // render chart
-
-            let ele = document.getElementById("getEngagementVisits");
-
-            let myChart = echarts.init(ele);
-
-            let option = {
-                tooltip: {
-                    trigger: "axis",
-                    backgroundColor: 'rgba(255, 255, 255, 1)',
-                    borderColor: 'rgba(93,120,255,1)',
-                    borderWidth: 1,
-                    formatter: (params) => {
-                        let {
-                            name,
-                            value
-                        } = params[0];
-                        name = moment(name).format("DD MMMM YYYY");
-                        value = numeral(value).format('0,0');
-                        return `<div class="text-capitalize border-bottom pb-1 text-dark">${name}</div>
-                <div class="text-dark pt-2">${domain} <span class="font-weight-bold text-success">${value}</span></div>`;
-                    },
-                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);'
-                },
-                grid: {
-                    right: "5%"
-                },
-                xAxis: {
-                    type: "category",
-                    boundaryGap: false,
-                    data: dataChart.keys,
-                    axisLine: {
-                        lineStyle: {
-                            color: "#ccc"
-                        }
-                    },
-                    axisTick: {
-                        interval: (i, v) => {
-                            if (task == 'getEngagementVisitsWeekly') {
-                                return (parseInt(v.slice(-2)) < 7)
-                            } else {
-                                return (v.slice(-2) == '01')
-                            }
-                        },
-                    },
-                    axisLabel: {
-                        margin: 10,
-                        textStyle: {
-                            color: "#999"
-                        },
-                        fontFamily: 'Arial',
-                        interval: (i, v) => {
-                            if (task == 'getEngagementVisitsWeekly') {
-                                return (parseInt(v.slice(-2)) < 7)
-                            } else {
-                                return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
-                            }
-                        },
-                        formatter: (value, index) => {
-                            if (task == 'getEngagementVisitsWeekly') {
-                                return moment(value).format('MM-YYYY');
-                            } else {
-                                return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
-                            }
-                        }
-                    },
-                    axisPointer: {
-                        lineStyle: {
-                            color: "#5d78ff",
-                            type: "dashed"
-                        }
-                    }
-                },
-                yAxis: {
-                    type: "value",
-                    axisLine: {
-                        show: false
-                    },
-                    axisTick: {
-                        show: false
-                    },
-                    axisLabel: {
-                        margin: 10,
-                        textStyle: {
-                            color: "#999"
-                        },
-                        fontFamily: 'Arial',
-                        formatter: (value, index) => (value = numeral(value).format("0a"))
-                    },
-                    splitLine: {
-                        show: true,
-                        lineStyle: {
-                            color: 'rgba(0,0,0,0.05)'
-                        }
-                    },
-                },
-                series: [{
-                    data: dataChart.values,
-                    type: "line",
-                    // smooth: true,
-                    symbol: "circle",
-                    symbolSize: 10,
-                    hoverAnimation: false,
-                    showSymbol: (task == 'getEngagementVisitsWeekly' || task == 'getEngagementVisitsMonthly') ? true : false,
-                    // lineStyle: {
-                    //   normal: {
-                    //     width: 2,
-                    //     shadowColor: "rgba(0,0,0,0.4)",
-                    //     shadowBlur: 10,
-                    //     shadowOffsetY: 10
-                    //   }
-                    // },
-                    // itemStyle: {
-                    //   normal: {
-                    //     color: "rgb(25, 123, 251)",
-                    //     borderColor: "rgba(25, 123, 251, 0.2)",
-                    //     borderWidth: 12
-                    //   }
-                    // }
-                    lineStyle: {
-                        normal: {
-                            width: 1
-                        }
-                    },
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgba(93,120,255,.5)'
-                            }, {
-                                offset: 0.8,
-                                color: 'rgba(93,120,255,.05)'
-                            }], false),
-                            shadowColor: 'rgba(0, 0, 0, 0.1)',
-                            shadowBlur: 10
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: 'rgba(93,120,255,1)',
-                            borderColor: 'rgba(93,120,255,.2)',
-                            borderWidth: 12
-                        }
-                    },
-                }]
-            };
-            myChart.setOption(option);
-
-            new ResizeSensor($(`#getEngagementVisits`), function () {
-                myChart.resize();
-            });
-
-            await $(`#getEngagementVisits`).removeClass("is-loading");
-            await $(`.similarReloadTask[data-task="getEngagementVisits"]`).find('i').removeClass('fa-spin');
-
-            const lastdate = dataChart.keys.length;
-            $('.similarDates').text(`${moment(dataChart.keys[0]).format("MM/YYYY")} - ${moment(dataChart.keys[lastdate - 1]).format("MM/YYYY")}`);
-        }
-    } else {
-        console.log(`${task} failed`);
-    }
-};
-
-const getWebDemographicsAge = async (task, data, domain1, domain2) => {
-    if (data[0].status == "success" && data[1].status == "success") {
-
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
-
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
-
-        let dataChartDomain1 = {
-            keys: [],
-            values: []
-        };
-
-        let dataChartDomain2 = {
-            keys: [],
-            values: []
-        };
-
-        for (let i = 0; i < data.length; i++) {
             if (data[i] && data[i].data) {
-
                 let {
-                    website: domain,
                     data: traffic
                 } = data[i].data;
-
-                let idDomain = domain.replace(".", "");
-                idDomain = idDomain.replace(".", "");
-
-                let temp = true;
-
                 $.each(traffic, (index, item) => {
-                    if (item == null) {
-                        temp = false;
+                        if (item == null) {
+                            temp = false;
+                        }
+                    })
+                    // prepare data
+                $.each(traffic, (index, item) => {
+                    let key, value;
+                    switch (index) {
+                        case 'Age18To24':
+                            key = '18 - 24';
+                            break;
+                        case 'Age25To34':
+                            key = '25 - 34';
+                            break;
+                        case 'Age35To44':
+                            key = '35 - 44';
+                            break;
+                        case 'Age45To54':
+                            key = '45 - 54';
+                            break;
+                        case 'Age55To64':
+                            key = '55 - 64';
+                            break;
+                        default:
+                            key = '65 trở lên';
+                            break;
                     }
-                })
+                    value = numeral(item).format("0.0");
+                    dataChart.keys.push(key);
+                    dataChart.values.push((value == null) ? 0 : value);
+                });
 
-
-                // prepare data
-                if (domain1 == domain) {
-
-                    $.each(traffic, (index, item) => {
-                        let key, value;
-                        switch (index) {
-                            case 'Age18To24':
-                                key = '18 - 24';
-                                break;
-                            case 'Age25To34':
-                                key = '25 - 34';
-                                break;
-                            case 'Age35To44':
-                                key = '35 - 44';
-                                break;
-                            case 'Age45To54':
-                                key = '45 - 54';
-                                break;
-                            case 'Age55To64':
-                                key = '55 - 64';
-                                break;
-                            default:
-                                key = '65 trở lên';
-                                break;
-                        }
-                        value = numeral(item).format("0.0");
-                        dataChartDomain1.keys.push(key);
-                        dataChartDomain1.values.push(value);
-                    });
-                } else {
-
-
-                    $.each(traffic, (index, item) => {
-                        let key, value;
-                        switch (index) {
-                            case 'Age18To24':
-                                key = '18 - 24';
-                                break;
-                            case 'Age25To34':
-                                key = '25 - 34';
-                                break;
-                            case 'Age35To44':
-                                key = '35 - 44';
-                                break;
-                            case 'Age45To54':
-                                key = '45 - 54';
-                                break;
-                            case 'Age55To64':
-                                key = '55 - 64';
-                                break;
-                            default:
-                                key = '65 trở lên';
-                                break;
-                        }
-                        value = numeral(item).format("0.0");
-                        dataChartDomain2.keys.push(key);
-                        dataChartDomain2.values.push(value);
-                    });
-                }
-
-                // render chart
+                let tem = {}
+                tem.name = website[i],
+                    tem.data = dataChart.values,
+                    tem.type = "line",
+                    // smooth = true,
+                    tem.symbol = "circle",
+                    tem.symbolSize = 10,
+                    tem.showSymbol = true,
+                    tem.hoverAnimation = false,
+                    series.push(tem)
+                    // render chart
 
                 if (i != 0) {
 
                     let ele = document.getElementById(task);
 
-                    let myChart = echarts.init(ele);
+                    let myChart = echarts.init(ele, "light");
 
                     let option = {
                         tooltip: {
@@ -3399,7 +2026,7 @@ const getWebDemographicsAge = async (task, data, domain1, domain2) => {
                         xAxis: {
                             type: "category",
                             boundaryGap: false,
-                            data: dataChartDomain1.keys,
+                            data: dataChart.keys,
                             axisLine: {
                                 lineStyle: {
                                     color: "#ccc"
@@ -3442,60 +2069,12 @@ const getWebDemographicsAge = async (task, data, domain1, domain2) => {
                                 }
                             },
                         },
-                        series: [{
-                            name: domain1,
-                            data: dataChartDomain1.values,
-                            type: "line",
-                            // smooth: true,
-                            symbol: "circle",
-                            symbolSize: 10,
-                            showSymbol: true,
-                            hoverAnimation: false,
-                            lineStyle: {
-                                normal: {
-                                    width: 2,
-                                    shadowColor: "rgba(0,0,0,0.4)",
-                                    shadowBlur: 10,
-                                    shadowOffsetY: 10,
-                                }
-                            },
-                            itemStyle: {
-                                normal: {
-                                    color: "#57606f",
-                                    borderColor: "rgb(44, 44, 84, 0.2)",
-                                    borderWidth: 10
-                                }
-                            }
-                        }, {
-                            name: domain2,
-                            data: dataChartDomain2.values,
-                            type: "line",
-                            // smooth: true,
-                            symbol: "circle",
-                            symbolSize: 10,
-                            showSymbol: true,
-                            hoverAnimation: false,
-                            lineStyle: {
-                                normal: {
-                                    width: 2,
-                                    shadowColor: "rgba(0,0,0,0.4)",
-                                    shadowBlur: 10,
-                                    shadowOffsetY: 10
-                                }
-                            },
-                            itemStyle: {
-                                normal: {
-                                    color: "#4b7bec",
-                                    borderColor: "rgba(0,112,220,0.2)",
-                                    borderWidth: 10
-                                }
-                            }
-                        }, ]
+                        series: series
                     };
                     myChart.setOption(option);
 
 
-                    new ResizeSensor($(`#${task}`), function () {
+                    new ResizeSensor($(`#${task}`), function() {
                         myChart.resize();
                     });
 
@@ -3510,129 +2089,87 @@ const getWebDemographicsAge = async (task, data, domain1, domain2) => {
                     $(`#${task}`).addClass('empty-state');
                 }
             }
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 };
 
-const getTrafficSourcesOverview = async (task, data) => {
-    if (data[0].status == "success" && data[1].status == "success") {
-
-        const {
-            website: domain1
-        } = data[0].data;
-
-        const {
-            website: domain2
-        } = data[1].data;
-        let idDomain1 = domain1.replace(".", "");
-        let idDomain2 = domain2.replace(".", "");
-
-        let dataChartDomain1 = {
-            keys: [],
-            values: []
-        };
-
-        let dataChartDomain2 = {
-            keys: [],
-            values: []
-        };
-
-        for (let i = 0; i < data.length; i++) {
-
+const getTrafficSourcesOverview = async(task, data) => {
+    let series = []
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
+            let dataChart = {
+                keys: [],
+                values: []
+            };
             let {
-                website: domain,
                 data: traffic
             } = data[i].data;
 
             // prepare data
+            $.each(traffic, (index, item) => {
+                let key = index;
+                let value = numeral(item).format("0");
+                if (key == "Organic Search") {
+                    dataChart.keys[0] = "Tìm kiếm tự nhiên";
+                    dataChart.values[0] = value;
+                }
 
-            if (domain1 == domain) {
-                $.each(traffic, (index, item) => {
-                    let key = index;
-                    let value = numeral(item).format("0");
-                    if (key == "Organic Search") {
-                        dataChartDomain1.keys[0] = "Tìm kiếm tự nhiên";
-                        dataChartDomain1.values[0] = value;
-                    }
+                if (key == "Paid Search") {
+                    dataChart.keys[1] = "Tìm kiếm trả phí";
+                    dataChart.values[1] = value;
+                }
 
-                    if (key == "Paid Search") {
-                        dataChartDomain1.keys[1] = "Tìm kiếm trả phí";
-                        dataChartDomain1.values[1] = value;
-                    }
+                if (key == "Paid Referrals") {
+                    dataChart.keys[2] = "Quảng cáo hiển thị";
+                    dataChart.values[2] = value;
+                }
 
-                    if (key == "Paid Referrals") {
-                        dataChartDomain1.keys[2] = "Quảng cáo hiển thị";
-                        dataChartDomain1.values[2] = value;
-                    }
+                if (key == "Social") {
+                    dataChart.keys[3] = "Mạng xã hội";
+                    dataChart.values[3] = value;
+                }
 
-                    if (key == "Social") {
-                        dataChartDomain1.keys[3] = "Mạng xã hội";
-                        dataChartDomain1.values[3] = value;
-                    }
+                if (key == "Referrals") {
+                    dataChart.keys[4] = "Liên kết ngoài";
+                    dataChart.values[4] = value;
+                }
 
-                    if (key == "Referrals") {
-                        dataChartDomain1.keys[4] = "Liên kết ngoài";
-                        dataChartDomain1.values[4] = value;
-                    }
+                if (key == "Mail") {
+                    dataChart.keys[5] = "Mail";
+                    dataChart.values[5] = value;
+                }
 
-                    if (key == "Mail") {
-                        dataChartDomain1.keys[5] = "Mail";
-                        dataChartDomain1.values[5] = value;
-                    }
+                if (key == "Direct") {
+                    dataChart.keys[6] = "Trực tiếp";
+                    dataChart.values[6] = value;
+                }
 
-                    if (key == "Direct") {
-                        dataChartDomain1.keys[6] = "Trực tiếp";
-                        dataChartDomain1.values[6] = value;
-                    }
-
-                });
-            }
-
-            if (domain2 == domain) {
-                $.each(traffic, (index, item) => {
-                    let key = index;
-                    let value = numeral(item).format("0");
-                    if (key == "Organic Search") {
-                        dataChartDomain2.keys[0] = "Tìm kiếm tự nhiên";
-                        dataChartDomain2.values[0] = value;
-                    }
-
-                    if (key == "Paid Search") {
-                        dataChartDomain2.keys[1] = "Tìm kiếm trả phí";
-                        dataChartDomain2.values[1] = value;
-                    }
-
-                    if (key == "Paid Referrals") {
-                        dataChartDomain2.keys[2] = "Quảng cáo hiển thị";
-                        dataChartDomain2.values[2] = value;
-                    }
-
-                    if (key == "Social") {
-                        dataChartDomain2.keys[3] = "Mạng xã hội";
-                        dataChartDomain2.values[3] = value;
-                    }
-
-                    if (key == "Referrals") {
-                        dataChartDomain2.keys[4] = "Liên kết ngoài";
-                        dataChartDomain2.values[4] = value;
-                    }
-
-                    if (key == "Mail") {
-                        dataChartDomain2.keys[5] = "Mail";
-                        dataChartDomain2.values[5] = value;
-                    }
-
-                    if (key == "Direct") {
-                        dataChartDomain2.keys[6] = "Trực tiếp";
-                        dataChartDomain2.values[6] = value;
-                    }
-                });
-            }
-
+            });
             // render chart
-
+            let temp = {}
+            temp.name = website[i],
+                temp.type = 'bar',
+                temp.barWidth = 60,
+                temp.data = dataChart.values,
+                temp.itemStyle = {
+                    normal: {
+                        // color: "#57606f",
+                        // color: function (params) {
+                        //     var num = customColors.length;
+                        //     return customColors[params.dataIndex % num]
+                        // },
+                        "label": {
+                            "show": true,
+                            "position": "top",
+                            formatter: function(p) {
+                                return p.value > 1000000 ? numeral(p.value).format("0.0a") : numeral(p.value).format("0,0");
+                            }
+                        }
+                    }
+                }
+            series.push(temp)
             if (i != 0) {
                 let ele = document.getElementById(task);
 
@@ -3664,7 +2201,7 @@ const getTrafficSourcesOverview = async (task, data) => {
                     },
                     xAxis: {
                         type: 'category',
-                        data: dataChartDomain1.keys,
+                        data: dataChart.keys,
                         axisLine: {
                             lineStyle: {
                                 color: 'rgba(0,0,0,0.05)'
@@ -3702,86 +2239,39 @@ const getTrafficSourcesOverview = async (task, data) => {
                             show: false
                         }
                     },
-                    series: [{
-                        name: domain1,
-                        type: 'bar',
-                        barWidth: 60,
-                        data: dataChartDomain1.values,
-                        itemStyle: {
-                            normal: {
-                                color: "#57606f",
-                                // color: function (params) {
-                                //     var num = customColors.length;
-                                //     return customColors[params.dataIndex % num]
-                                // },
-                                "label": {
-                                    "show": true,
-                                    "position": "top",
-                                    formatter: function (p) {
-                                        return p.value > 1000000 ? numeral(p.value).format("0.0a") : numeral(p.value).format("0,0");
-                                    }
-                                }
-                            }
-                        },
-                    }, {
-                        name: domain2,
-                        type: 'bar',
-                        barWidth: 60,
-                        data: dataChartDomain2.values,
-                        itemStyle: {
-                            normal: {
-                                color: "#4b7bec",
-                                // color: function (params) {
-                                //     var num = customColors.length;
-                                //     return customColors[params.dataIndex % num]
-                                // },
-                                "label": {
-                                    "show": true,
-                                    "position": "top",
-                                    formatter: function (p) {
-                                        return p.value > 1000000 ? numeral(p.value).format("0.0a") : numeral(p.value).format("0,0");
-                                    }
-                                }
-                            }
-                        },
-                    }]
+                    series: series
                 };
                 myChart.setOption(option);
 
 
-                new ResizeSensor($(`#${task}`), function () {
+                new ResizeSensor($(`#${task}`), function() {
                     myChart.resize();
                 });
 
                 await $(`#${task}`).removeClass('is-loading');
                 await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
             }
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 };
 
-const getWebDemographicsGender = async (task, data, domain1, domain2) => {
-    if (data[0].status == "success" && data[1].status == "success") {
+const getWebDemographicsGender = async(task, data, domain1, domain2) => {
+    for (let i = 0; i < data.length; i++) {
+        if (data[0].status == "success" && data[1].status == "success") {
 
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
+            let idDomain1 = domain1.replace(/\./g, "")
 
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
+            let idDomain2 = domain2.replace(/\./g, "")
 
-        for (let i = 0; i < data.length; i++) {
 
             if (data[i] && data[i].data) {
-
                 let {
                     data: visits,
-                    website: domain
                 } = data[i].data;
 
-                let idDomain = domain.replace(".", "");
-                idDomain = idDomain.replace(".", "");
+                let idDomain = website[i].replace(/\./g, "")
 
                 // prepare data
 
@@ -3791,7 +2281,6 @@ const getWebDemographicsGender = async (task, data, domain1, domain2) => {
                 } = visits;
 
                 if (Male && Female) {
-
                     let dataChart = [{
                             name: 'Nam',
                             value: Male
@@ -3808,8 +2297,7 @@ const getWebDemographicsGender = async (task, data, domain1, domain2) => {
                     let myChart = echarts.init(ele);
 
                     let option = {
-                        color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] :
-                            ['#4b7bec', 'rgba(0,112,220,0.5)'],
+                        color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] : ['#4b7bec', 'rgba(0,112,220,0.5)'],
                         legend: {
                             top: "30%",
                             left: '65%',
@@ -3869,9 +2357,9 @@ const getWebDemographicsGender = async (task, data, domain1, domain2) => {
                     myChart.setOption(option);
 
 
-                    new ResizeSensor($(`#${idDomain + task}`), function () {
+                    new ResizeSensor($(`#${idDomain + task}`), function() {
                         myChart.resize();
-                        setTimeout(function () {
+                        setTimeout(function() {
                             myChart.dispatchAction({
                                 type: 'highlight',
                                 seriesIndex: 0,
@@ -3880,14 +2368,14 @@ const getWebDemographicsGender = async (task, data, domain1, domain2) => {
                         }, 1000);
                     });
 
-                    setTimeout(function () {
+                    setTimeout(function() {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
                             dataIndex: 0
                         });
 
-                        myChart.on('mouseover', function (params) {
+                        myChart.on('mouseover', function(params) {
                             if (params.name == dataChart[0].name) {
                                 myChart.dispatchAction({
                                     type: 'highlight',
@@ -3903,7 +2391,7 @@ const getWebDemographicsGender = async (task, data, domain1, domain2) => {
                             }
                         });
 
-                        myChart.on('mouseout', function (params) {
+                        myChart.on('mouseout', function(params) {
                             myChart.dispatchAction({
                                 type: 'highlight',
                                 seriesIndex: 0,
@@ -3939,28 +2427,21 @@ const getWebDemographicsGender = async (task, data, domain1, domain2) => {
                     $(`#${idDomain2+ task}`).addClass('empty-state');
                 }
             }
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 };
 
-const getDesktopVsMobileVisits = async (task, data, domain1, domain2) => {
-    if (data[0].status == "success" && data[1].status == "success") {
-
-        for (let i = 0; i < data.length; i++) {
-
-
+const getDesktopVsMobileVisits = async(task, data, domain1, domain2) => {
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
             let {
-                website: domain,
                 data: visits
             } = data[i].data;
 
-            let idDomain = domain.replace(".", "");
-            idDomain = idDomain.replace(".", "");
-
-            // prepare data
-
+            let idDomain = website[i].replace(/\./g, "")
+                // prepare data
             const {
                 percentDesktop,
                 percentMobile,
@@ -3972,7 +2453,6 @@ const getDesktopVsMobileVisits = async (task, data, domain1, domain2) => {
                 await $(`#${task}, #totalTraffic`).removeClass('is-loading').addClass("empty-state");
                 await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
             } else {
-
                 let dataChart = [{
                         name: 'Máy tính',
                         value: percentDesktop
@@ -3989,8 +2469,7 @@ const getDesktopVsMobileVisits = async (task, data, domain1, domain2) => {
                 let myChart = echarts.init(ele);
 
                 let option = {
-                    color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] :
-                        ['#4b7bec', 'rgba(0,112,220,0.5)'],
+                    color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] : ['#4b7bec', 'rgba(0,112,220,0.5)'],
                     legend: {
                         top: "25%",
                         left: '60%',
@@ -4002,7 +2481,7 @@ const getDesktopVsMobileVisits = async (task, data, domain1, domain2) => {
                             fontFamily: 'Arial',
                             lineHeight: 16
                         },
-                        formatter: function (name) {
+                        formatter: function(name) {
                             let value = name == 'Máy tính' ? totalDesktop : totalMobile;
                             return `${name}\n(${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')})`;
                         }
@@ -4055,9 +2534,9 @@ const getDesktopVsMobileVisits = async (task, data, domain1, domain2) => {
                 myChart.setOption(option);
 
 
-                new ResizeSensor($(`#${idDomain + task}`), function () {
+                new ResizeSensor($(`#${idDomain + task}`), function() {
                     myChart.resize();
-                    setTimeout(function () {
+                    setTimeout(function() {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -4066,14 +2545,14 @@ const getDesktopVsMobileVisits = async (task, data, domain1, domain2) => {
                     }, 1000);
                 });
 
-                setTimeout(function () {
+                setTimeout(function() {
                     myChart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
 
-                    myChart.on('mouseover', function (params) {
+                    myChart.on('mouseover', function(params) {
                         if (params.name == dataChart[0].name) {
                             myChart.dispatchAction({
                                 type: 'highlight',
@@ -4089,7 +2568,7 @@ const getDesktopVsMobileVisits = async (task, data, domain1, domain2) => {
                         }
                     });
 
-                    myChart.on('mouseout', function (params) {
+                    myChart.on('mouseout', function(params) {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -4101,39 +2580,24 @@ const getDesktopVsMobileVisits = async (task, data, domain1, domain2) => {
                 await $(`#${idDomain + task}, #totalTraffic`).removeClass('is-loading');
                 await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
                 $(`.${idDomain} #totalTraffic h1`).text(totalTraffic >= 1000000 ? numeral(totalTraffic).format('0.00a') : numeral(totalTraffic).format("0,0"));
-
-                // Start counting, do this on DOM ready or with Waypoints.
-                // counterUp(counter, {
-                //     duration: 1000,
-                //     delay: 16,
-                // })
             }
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 };
 
-const getSearchBrandedKeywords = async (task, data, domain1, domain2) => {
-
-    if (data[0].status == "success" && data[1].status == "success") {
-
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
-
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
-
-        for (let i = 0; i < data.length; i++) {
+const getSearchBrandedKeywords = async(task, data, domain1, domain2) => {
+    for (let i = 0; i < data.length; i++) {
+        if (data[0].status == "success" && data[1].status == "success") {
+            let idDomain1 = domain1.replace(/\./g, "");
+            let idDomain2 = domain2.replace(/\./g, "");
             if (data[i] && data[i].data) {
-
                 let {
                     data: visits,
-                    website: domain
                 } = data[i].data;
 
-                let idDomain = domain.replace(".", "");
-                idDomain = idDomain.replace(".", "");
+                let idDomain = website[i].replace(/\./g, "");
 
                 // prepare data
 
@@ -4159,8 +2623,7 @@ const getSearchBrandedKeywords = async (task, data, domain1, domain2) => {
                 let myChart = echarts.init(ele);
 
                 let option = {
-                    color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] :
-                        ['#4b7bec', 'rgba(0,112,220,0.5)'],
+                    color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] : ['#4b7bec', 'rgba(0,112,220,0.5)'],
                     legend: {
                         top: "25%",
                         left: '60%',
@@ -4172,7 +2635,7 @@ const getSearchBrandedKeywords = async (task, data, domain1, domain2) => {
                             fontFamily: 'Arial',
                             lineHeight: 16
                         },
-                        formatter: function (name) {
+                        formatter: function(name) {
                             let value = name == 'Có thương hiệu' ? Branded : NoneBranded;
                             return `${name}\n(${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')})`;
                         }
@@ -4225,9 +2688,9 @@ const getSearchBrandedKeywords = async (task, data, domain1, domain2) => {
                 myChart.setOption(option);
 
 
-                new ResizeSensor($(`#${idDomain + task}`), function () {
+                new ResizeSensor($(`#${idDomain + task}`), function() {
                     myChart.resize();
-                    setTimeout(function () {
+                    setTimeout(function() {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -4236,14 +2699,14 @@ const getSearchBrandedKeywords = async (task, data, domain1, domain2) => {
                     }, 1000);
                 });
 
-                setTimeout(function () {
+                setTimeout(function() {
                     myChart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
 
-                    myChart.on('mouseover', function (params) {
+                    myChart.on('mouseover', function(params) {
                         if (params.name == dataChart[0].name) {
                             myChart.dispatchAction({
                                 type: 'highlight',
@@ -4259,7 +2722,7 @@ const getSearchBrandedKeywords = async (task, data, domain1, domain2) => {
                         }
                     });
 
-                    myChart.on('mouseout', function (params) {
+                    myChart.on('mouseout', function(params) {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -4279,164 +2742,21 @@ const getSearchBrandedKeywords = async (task, data, domain1, domain2) => {
                     $(`#${idDomain2+ task}`).addClass('empty-state');
                 }
             }
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 };
 
-const getOrganicKeywordsTable = async (task, data) => {
-    const renderName = '#getOrganicKeywordsTable';
-
-    let {
-        Data: item
-    } = data.data.data;
-
-    if (item[0].SearchTerm == "grid.upgrade") {
-        $(renderName).addClass('empty-state');
-    } else {
-        $(renderName).html(`
-        <div class="row mx-0 px-2 align-items-center text-muted">
-            <div class="col-2 font-10">Từ khoá</div>
-            <div class="col-1 font-10">CPC</div>
-            <div class="col-1 font-10 text-right">Vị trí</div>
-            <div class="col-2 font-10 text-right">Lượt tìm kiếm</div>
-            <div class="col-6 font-10 text-center">Tỷ lệ truy cập</div>
-        </div>
-        `);
-
-        $.each(item, (index, keyword) => {
-
+const getTrafficSourcesSearch = async(task, data, domain1, domain2) => {
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
             let {
-                CPC,
-                DestUrlOrganic,
-                SearchTerm,
-                KwVolume,
-                TotalShare,
-                Change,
-                PositionOrganic
-            } = keyword;
-
-            DestUrlOrganic[0].Value == "N/A" ? DestUrlOrganic = 'javascript:;' : DestUrlOrganic = DestUrlOrganic[0].Value;
-            PositionOrganic = PositionOrganic[0].Value;
-            if (SearchTerm == "grid.upgrade") return;
-            if (!Change) Change = 'NaN';
-
-            $(renderName).append(`
-        <div class="row mx-0 p-2 align-items-center">
-            <div class="col-2 text-truncate pb-0"><a href="${DestUrlOrganic}" title="${DestUrlOrganic == 'javascript:;' ? SearchTerm : DestUrlOrganic}">${SearchTerm}</a></div>
-            <div class="col-1">$${CPC}</div>
-            <div class="col-1 text-right">${PositionOrganic}</div>
-            <div class="col-2 text-right">${numeral(KwVolume).format('0,0')}</div>
-            <div class="col-2 text-right">${numeral(TotalShare).format('0.00%')}</div>
-            <div class="col-2">
-                <div class="progress">
-                    <div class="progress-bar bg-primary" style="width: ${numeral(TotalShare).format('0.00%')}; height:14px;" role="progressbar"></div>
-                </div>
-            </div>
-            <div class="col-2 text-right ${Change == 'NaN' ? 'text-muted' : (Change > 0 ? 'text-success positive' : 'text-danger negative')}">${Change == 'NaN' ? '-' : ((Change.toString().charAt(0) === '-' ? numeral(Math.abs(Change)).format('0.00%') : numeral(Change).format('0.00%')))}</div>
-        </div>
-        `);
-        })
-    }
-
-    $(renderName).perfectScrollbar();
-
-    await $(renderName).removeClass('is-loading');
-}
-
-const getTrendingKeywordsTable = async (task, data) => {
-
-    let {
-        Data: item
-    } = data.data.data;
-
-    if (item[0].SearchTerm == "grid.upgrade") {
-        $(`#${task}`).addClass('empty-state');
-    } else {
-        $(`#${task}`).html(`
-        <div class="row mx-0 px-2 align-items-center text-muted">
-            <div class="col-2 font-10">Từ khoá</div>
-            <div class="col-auto font-10 px-3">CPC</div>
-            <div class="col-2 font-10 text-center">Tự nhiên / Trả phí</div>
-            <div class="col-1 font-10 text-center">Vị trí</div>
-            <div class="col-1 font-10 text-right">Lượt tìm kiếm</div>
-            <div class="col-3 font-10 text-center">Tỷ lệ truy cập</div>
-            <div class="col font-10">Website đích</div>
-        </div>
-        `);
-
-        $.each(item, (index, keyword) => {
-
-            let {
-                CPC,
-                Organic,
-                Paid,
-                DestUrlOrganic,
-                DestUrlPaid,
-                SearchTerm,
-                KwVolume,
-                TotalShare,
-                Change,
-                PositionOrganic,
-                PositionPaid
-            } = keyword;
-
-            let DestUrl = DestUrlOrganic[0].Value == "N/A" ? (DestUrlPaid[0].Value == "N/A" ? 'javascript:;' : DestUrlPaid[0].Value) : DestUrlOrganic[0].Value;
-
-            PositionOrganic = PositionOrganic[0].Value;
-            PositionPaid = PositionPaid[0].Value;
-            if (SearchTerm == "grid.upgrade") return;
-            if (!Change) Change = 'NaN';
-
-            $(`#${task}`).append(`
-        <div class="row mx-0 p-2 align-items-center">
-            <div class="col-2 text-truncate pb-0">${SearchTerm}</div>
-            <div class="col-auto">$${numeral(CPC).format('0.00')}</div>
-            <div class="col-2 d-inline-flex">${numeral(Organic).format('0.00%')}
-                <div class="progress w-50 mx-2">
-                <div class="progress-bar bg-primary" style="width: ${numeral(Organic).format('0.00%')}; height:19px;" role="progressbar"></div>
-                </div>
-                ${numeral(Paid).format('0.00%')}
-            </div>
-            <div class="col-1 text-center">${PositionOrganic} / ${PositionPaid}</div>
-            <div class="col-1 text-right">${numeral(KwVolume).format('0,0')}</div>
-            <div class="col-1 text-right">${numeral(TotalShare).format('0.00%')}</div>
-            <div class="col-1">
-                <div class="progress">
-                    <div class="progress-bar bg-primary" style="width: ${numeral(TotalShare).format('0.00%')}; height:19px;" role="progressbar"></div>
-                </div>
-            </div>
-            <div class="col-1 text-right ${Change == 'NaN' ? 'text-muted' : (Change > 0 ? 'text-success positive' : 'text-danger negative')}">${Change == 'NaN' ? '-' : ((Change.toString().charAt(0) === '-' ? numeral(Math.abs(Change)).format('0.00%') : numeral(Change).format('0.00%')))}</div>
-            <div class="col text-truncate pb-0"><a href="${DestUrl}" title="${DestUrl == 'javascript:;' ? SearchTerm : DestUrl}">${DestUrl == 'javascript:;' ? '-' : DestUrl}</a></div>
-        </div>
-        `);
-        })
-    }
-
-    $(`#${task}`).perfectScrollbar();
-
-    await $(`#${task}`).removeClass('is-loading');
-}
-
-const getTrafficSourcesSearch = async (task, data, domain1, domain2) => {
-    if (data[0].status == "success" && data[1].status == "success") {
-
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
-
-        for (let i = 0; i < data.length; i++) {
-
-            let {
-                website: domain,
                 data: traffic
             } = data[i].data;
             let temp = true;
 
-            let idDomain = domain.replace(".", "");
-            idDomain = idDomain.replace(".", "");
+            let idDomain = website[i].replace(/\./g, "");
             $.each(traffic, (index, value) => {
                 if (index == "Organic") {
                     if (value == 0) {
@@ -4453,8 +2773,6 @@ const getTrafficSourcesSearch = async (task, data, domain1, domain2) => {
                 await $(`#${idDomain+task}`).removeClass('is-loading').addClass('empty-state');
                 await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
             } else {
-
-                // prepare data
 
                 let dataChart = [];
 
@@ -4473,8 +2791,7 @@ const getTrafficSourcesSearch = async (task, data, domain1, domain2) => {
                 let myChart = echarts.init(ele);
 
                 let option = {
-                    color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] :
-                        ['#4b7bec', 'rgba(0,112,220,0.5)'],
+                    color: (domain1 == domain) ? ['#57606f', 'rgba(44, 44, 84,0.5)'] : ['#4b7bec', 'rgba(0,112,220,0.5)'],
                     legend: {
                         top: "20%",
                         left: '60%',
@@ -4536,9 +2853,9 @@ const getTrafficSourcesSearch = async (task, data, domain1, domain2) => {
                 myChart.setOption(option);
 
 
-                new ResizeSensor($(`#${idDomain+task}`), function () {
+                new ResizeSensor($(`#${idDomain+task}`), function() {
                     myChart.resize();
-                    setTimeout(function () {
+                    setTimeout(function() {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -4547,14 +2864,14 @@ const getTrafficSourcesSearch = async (task, data, domain1, domain2) => {
                     }, 1000);
                 });
 
-                setTimeout(function () {
+                setTimeout(function() {
                     myChart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
 
-                    myChart.on('mouseover', function (params) {
+                    myChart.on('mouseover', function(params) {
                         if (params.name == dataChart[0].name) {
                             myChart.dispatchAction({
                                 type: 'highlight',
@@ -4570,7 +2887,7 @@ const getTrafficSourcesSearch = async (task, data, domain1, domain2) => {
                         }
                     });
 
-                    myChart.on('mouseout', function (params) {
+                    myChart.on('mouseout', function(params) {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -4582,38 +2899,33 @@ const getTrafficSourcesSearch = async (task, data, domain1, domain2) => {
                 await $(`#${idDomain+task}`).removeClass('is-loading');
                 await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
             }
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 };
 
-const getTrafficDisplayAdvertisingAds = async (task, data, domain1, domain2) => {
-    if (data[0].status == "success" && data[1].status == "success") {
+const getTrafficDisplayAdvertisingAds = async(task, data, domain1, domain2) => {
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
 
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
+            let idDomain1 = domain1.replace(/\./g, "");
 
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
+            let idDomain2 = domain2.replace(/\./g, "");
 
-        $(`#${idDomain1 + task}`).removeClass('is-loading');
-        $(`#${idDomain1 + task}`).removeClass('empty-state');
+            $(`#${idDomain1 + task}`).removeClass('is-loading');
+            $(`#${idDomain1 + task}`).removeClass('empty-state');
 
-        $(`#${idDomain2 + task}`).removeClass('is-loading');
-        $(`#${idDomain2 + task}`).removeClass('empty-state');
+            $(`#${idDomain2 + task}`).removeClass('is-loading');
+            $(`#${idDomain2 + task}`).removeClass('empty-state');
 
-        let temp = 0;
-        for (let i = 0; i < data.length; i++) {
+            let temp = 0;
             if (data[i] && data[i].data) {
-
                 let {
                     data: traffic,
-                    website: domain
                 } = data[i].data;
 
-                let idDomain = domain.replace(".", "");
-                idDomain = idDomain.replace(".", "");
+                let idDomain = website[i].replace(/\./g, "");
                 // prepare data
 
                 let dataChart = [];
@@ -4705,9 +3017,9 @@ const getTrafficDisplayAdvertisingAds = async (task, data, domain1, domain2) => 
                 myChart.setOption(option);
 
 
-                new ResizeSensor($(`#${idDomain + task}`), function () {
+                new ResizeSensor($(`#${idDomain + task}`), function() {
                     myChart.resize();
-                    setTimeout(function () {
+                    setTimeout(function() {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -4716,14 +3028,14 @@ const getTrafficDisplayAdvertisingAds = async (task, data, domain1, domain2) => 
                     }, 1000);
                 });
 
-                setTimeout(function () {
+                setTimeout(function() {
                     myChart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
 
-                    myChart.on('mouseover', function (params) {
+                    myChart.on('mouseover', function(params) {
                         if (params.name == dataChart[0].name) {
                             myChart.dispatchAction({
                                 type: 'highlight',
@@ -4739,7 +3051,7 @@ const getTrafficDisplayAdvertisingAds = async (task, data, domain1, domain2) => 
                         }
                     });
 
-                    myChart.on('mouseout', function (params) {
+                    myChart.on('mouseout', function(params) {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -4762,34 +3074,26 @@ const getTrafficDisplayAdvertisingAds = async (task, data, domain1, domain2) => 
                     $(".getTrafficDisplayAdvertisingAds").addClass("d-none");
                 }
             }
+
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 };
 
-const getTrafficSourcesSocial = async (task, data, domain1, domain2) => {
+const getTrafficSourcesSocial = async(task, data, domain1, domain2) => {
+    for (let i = 0; i < data.length; i++) {
+        if (data[0].status == "success" && data[1].status == "success") {
 
-    if (data[0].status == "success" && data[1].status == "success") {
+            let idDomain1 = domain1.replace(/\./g, "");
 
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
-
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
-
-
-        for (let i = 0; i < data.length; i++) {
-
+            let idDomain2 = domain2.replace(/\./g, "");
             if (data[i] && data[i].data) {
-
                 let {
                     data: traffic,
-                    website: domain
                 } = data[i].data;
 
-                let idDomain = domain.replace(".", "");
-                idDomain = idDomain.replace(".", "");
+                let idDomain = website[i].replace(/\./g, "");
 
                 // prepare data
 
@@ -4921,9 +3225,9 @@ const getTrafficSourcesSocial = async (task, data, domain1, domain2) => {
                 myChart.setOption(option);
 
 
-                new ResizeSensor($(`#${idDomain + task}`), function () {
+                new ResizeSensor($(`#${idDomain + task}`), function() {
                     myChart.resize();
-                    setTimeout(function () {
+                    setTimeout(function() {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -4932,14 +3236,14 @@ const getTrafficSourcesSocial = async (task, data, domain1, domain2) => {
                     }, 1000);
                 });
 
-                setTimeout(function () {
+                setTimeout(function() {
                     myChart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
 
-                    myChart.on('mouseover', function (params) {
+                    myChart.on('mouseover', function(params) {
                         if (params.name == dataChart[0].name) {
                             myChart.dispatchAction({
                                 type: 'highlight',
@@ -4955,7 +3259,7 @@ const getTrafficSourcesSocial = async (task, data, domain1, domain2) => {
                         }
                     });
 
-                    myChart.on('mouseout', function (params) {
+                    myChart.on('mouseout', function(params) {
                         myChart.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
@@ -4975,395 +3279,143 @@ const getTrafficSourcesSocial = async (task, data, domain1, domain2) => {
                     $(`#${idDomain2 + task}`).addClass("empty-state");
                 }
             }
+
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 };
 
-const getTrafficDisplayPaidOutgoingAds = async (task, data) => {
-
-    if (data[0].status == "success" && data[1].status == "success") {
-        let {
-            website: domain1
-        } = data[0].data;
-        let {
-            website: domain2
-        } = data[1].data;
-
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
-
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
-
-        let dataChartDomain1 = {
-            keys: [],
-            values: []
-        };
-
-        let dataChartDomain2 = {
-            keys: [],
-            values: []
-        };
-
-        let temp = 0; // check null all
-
-        for (let i = 0; i < data.length; i++) {
-            let {
-                website: domain
-            } = data[i].data;
-            let idDomain = domain.replace(".", "");
-            idDomain = idDomain.replace(".", "");
+const getTrafficDisplayPaidOutgoingAds = async(task, data) => {
+    let series = []
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
+            let dataChart = {
+                keys: [],
+                values: []
+            };
+            let temp = 0; // check null all
+            let idDomain = website[i].replace(/\./g, "");
             if (data[i] && data[i].data && data[i].data.data) {
-
                 let TrafficDisplayPaidOutgoingAds = data[i].data.data;
-                if (TrafficDisplayPaidOutgoingAds.Dates && TrafficDisplayPaidOutgoingAds.VolumeTotal && TrafficDisplayPaidOutgoingAds.Volumes) {
+                let VolumeTotal = TrafficDisplayPaidOutgoingAds.VolumeTotal;
+                $(`#${idDomain}getTotalOutgoingAdVisits`).removeClass("is-loading");
+                $(`#${idDomain}getTotalOutgoingAdVisits`).html(`${numeral(VolumeTotal).format("0,0")}`);
+                let Dates = TrafficDisplayPaidOutgoingAds.Dates;
+                let Volumes = TrafficDisplayPaidOutgoingAds.Volumes;
 
-                    let VolumeTotal = TrafficDisplayPaidOutgoingAds.VolumeTotal;
+                $.each(Dates, (idx, val) => {
+                    dataChart.keys.push(val);
+                })
+                $.each(Volumes, (name, data) => {
+                    dataChart.values.push(data[1]);
+                })
+                let tem = {}
+                tem.name = website[i],
+                    tem.data = (dataChart.values.length > 0) ? dataChart.values : [0, 0, 0],
+                    tem.type = 'line',
+                    tem.symbol = "circle",
+                    tem.symbolSize = 10,
+                    tem.showSymbol = true,
+                    tem.hoverAnimation = false,
+                    series.push(tem)
+                if (i == (data.length - 1)) {
+                    let ele = document.getElementById("getOutgoingAds");
+                    let myChart = echarts.init(ele, "light");
+                    let option = {
+                        tooltip: {
+                            trigger: "axis",
+                            backgroundColor: 'rgba(255, 255, 255, 1)',
+                            borderColor: 'rgba(93,120,255,1)',
+                            borderWidth: 1,
+                            extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                            formatter: params => {
+                                let {
+                                    name
+                                } = params[0];
+                                let detail = "";
+                                params.forEach((p, i) => {
 
-                    $(`#${idDomain}getTotalOutgoingAdVisits`).removeClass("is-loading");
-                    $(`#${idDomain}getTotalOutgoingAdVisits`).html(`${numeral(VolumeTotal).format("0,0")}`);
-
-
-
-                    let Dates = TrafficDisplayPaidOutgoingAds.Dates;
-
-                    let Volumes = TrafficDisplayPaidOutgoingAds.Volumes;
-
-                    if (domain1 == domain) {
-                        $.each(Dates, (idx, val) => {
-                            dataChartDomain1.keys.push(val);
-                        })
-
-                        $.each(Volumes, (name, data) => {
-                            dataChartDomain1.values.push(data[1]);
-                        })
-                    } else {
-                        $.each(Dates, (idx, val) => {
-                            dataChartDomain2.keys.push(val);
-                        })
-
-                        $.each(Volumes, (name, data) => {
-                            dataChartDomain2.values.push(data[1]);
-                        })
-                    }
-
-
-                    if (i != 0) {
-                        let ele = document.getElementById("getOutgoingAds");
-
-                        let myChart = echarts.init(ele, "light");
-
-                        let option = {
-                            tooltip: {
-                                trigger: "axis",
-                                backgroundColor: 'rgba(255, 255, 255, 1)',
-                                borderColor: 'rgba(93,120,255,1)',
-                                borderWidth: 1,
-                                extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                                formatter: params => {
-                                    // console.log(params);
                                     let {
-                                        name
-                                    } = params[0];
-                                    let detail = "";
-                                    params.forEach((p, i) => {
+                                        marker,
+                                        color,
+                                        seriesName,
+                                        value
+                                    } = p;
 
-                                        let {
-                                            marker,
-                                            color,
-                                            seriesName,
-                                            value
-                                        } = p;
-
-                                        value = numeral(value).format("0,0");
+                                    value = numeral(value).format("0,0");
 
 
-                                        detail += `${marker} ${seriesName} <span style="color:${color};font-weight:bold">${value}</span>
-                                        <br/>`
-                                    })
-                                    name = moment(name).format('DD MMMM YYYY');
-                                    return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
-                                <div class="text-dark pt-2">${detail}</div>`;
+                                    detail += `${marker} ${seriesName} <span style="color:${color};font-weight:bold">${value}</span>
+                                    <br/>`
+                                })
+                                name = moment(name).format('DD MMMM YYYY');
+                                return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
+                            <div class="text-dark pt-2">${detail}</div>`;
 
+                            }
+                        },
+                        grid: {
+                            right: "5%"
+                        },
+                        legend: {
+                            data: [`${domain1}`, `${domain2}`]
+                        },
+                        xAxis: {
+                            type: "category",
+                            boundaryGap: false,
+                            data: dataChart.keys,
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#ccc"
                                 }
                             },
-                            grid: {
-                                right: "5%"
-                            },
-                            legend: {
-                                data: [`${idDomain1}`, `${idDomain2}`]
-                            },
-                            xAxis: {
-                                type: "category",
-                                boundaryGap: false,
-                                data: (dataChartDomain1.keys.length > 0) ? dataChartDomain1.keys : dataChartDomain2.keys,
-                                axisLine: {
-                                    lineStyle: {
-                                        color: "#ccc"
-                                    }
+                            axisLabel: {
+                                margin: 10,
+                                textStyle: {
+                                    color: "#ccc"
                                 },
-                                axisLabel: {
-                                    margin: 10,
-                                    textStyle: {
-                                        color: "#ccc"
-                                    },
-                                    fontFamily: 'Arial',
-                                    formatter: (value, index) => moment(value).format('MM-YYYY')
+                                fontFamily: 'Arial',
+                                formatter: (value, index) => moment(value).format('MM-YYYY')
+                            },
+                            axisPointer: {
+                                lineStyle: {
+                                    color: "rgb(25, 123, 251)",
+                                    type: "dashed"
+                                }
+                            }
+                        },
+                        yAxis: {
+                            type: "value",
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                            axisLabel: {
+                                margin: 10,
+                                textStyle: {
+                                    color: "#ccc"
                                 },
-                                axisPointer: {
-                                    lineStyle: {
-                                        color: "rgb(25, 123, 251)",
-                                        type: "dashed"
-                                    }
+                                fontFamily: 'Arial',
+                                formatter: (value, index) => (value = numeral(value).format("0a"))
+                            },
+                            splitLine: {
+                                show: true,
+                                lineStyle: {
+                                    color: 'rgba(0,0,0,0.1)'
                                 }
                             },
-                            yAxis: {
-                                type: "value",
-                                axisLine: {
-                                    show: false
-                                },
-                                axisTick: {
-                                    show: false
-                                },
-                                axisLabel: {
-                                    margin: 10,
-                                    textStyle: {
-                                        color: "#ccc"
-                                    },
-                                    fontFamily: 'Arial',
-                                    formatter: (value, index) => (value = numeral(value).format("0a"))
-                                },
-                                splitLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        color: 'rgba(0,0,0,0.1)'
-                                    }
-                                },
-                            },
-                            series: [{
-                                    name: idDomain1,
-                                    data: dataChartDomain1.values,
-                                    type: 'line',
-                                    symbol: "circle",
-                                    symbolSize: 10,
-                                    showSymbol: true,
-                                    hoverAnimation: false,
-                                    lineStyle: {
-                                        normal: {
-                                            width: 2,
-                                            shadowColor: "rgba(0,0,0,0.4)",
-                                            shadowBlur: 10,
-                                            shadowOffsetY: 10
-                                        }
-                                    },
-                                    itemStyle: {
-                                        normal: {
-                                            color: "#57606f",
-                                            borderColor: "rgb(44, 44, 84, 0.2)",
-                                            borderWidth: 10
-                                        }
-                                    }
-                                }, {
-                                    name: idDomain2,
-                                    data: dataChartDomain2.values,
-                                    type: 'line',
-                                    symbol: "circle",
-                                    symbolSize: 10,
-                                    showSymbol: true,
-                                    hoverAnimation: false,
-                                    lineStyle: {
-                                        normal: {
-                                            width: 2,
-                                            shadowColor: "rgba(0,0,0,0.4)",
-                                            shadowBlur: 10,
-                                            shadowOffsetY: 10
-                                        }
-                                    },
-                                    itemStyle: {
-                                        normal: {
-                                            color: "#4b7bec",
-                                            borderColor: "rgba(0,112,220,0.2)",
-                                            borderWidth: 10
-                                        }
-                                    }
-                                },
-
-                            ]
-                        };
-                        myChart.setOption(option);
-                        new ResizeSensor($(`#getOutgoingAds`), function () {
-                            myChart.resize();
-                        });
-
-                        await $(`#getOutgoingAds`).removeClass('is-loading');
-                        $(`#getOutgoingAds`).removeClass('empty-state');
-                    }
-                } else {
-                    if (dataChartDomain1.keys.length > 0 || dataChartDomain2.keys.length > 0) {
-                        let ele = document.getElementById("getOutgoingAds");
-
-                        let myChart = echarts.init(ele, "light");
-
-                        let option = {
-                            tooltip: {
-                                trigger: "axis",
-                                backgroundColor: 'rgba(255, 255, 255, 1)',
-                                borderColor: 'rgba(93,120,255,1)',
-                                borderWidth: 1,
-                                extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                                formatter: params => {
-                                    // console.log(params);
-                                    let {
-                                        name
-                                    } = params[0];
-                                    let detail = "";
-                                    params.forEach((p, i) => {
-
-                                        let {
-                                            marker,
-                                            color,
-                                            seriesName,
-                                            value
-                                        } = p;
-
-                                        value = numeral(value).format("0,0");
-
-
-                                        detail += `${marker} ${seriesName} <span style="color:${color};font-weight:bold">${value}</span>
-                                        <br/>`
-                                    })
-                                    name = moment(name).format('DD MMMM YYYY');
-                                    return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
-                                <div class="text-dark pt-2">${detail}</div>`;
-
-                                }
-                            },
-                            grid: {
-                                right: "5%"
-                            },
-                            legend: {
-                                data: [`${idDomain1}`, `${idDomain2}`]
-                            },
-                            xAxis: {
-                                type: "category",
-                                boundaryGap: false,
-                                data: (dataChartDomain1.keys.length > 0) ? dataChartDomain1.keys : dataChartDomain2.keys,
-                                axisLine: {
-                                    lineStyle: {
-                                        color: "#ccc"
-                                    }
-                                },
-                                axisLabel: {
-                                    margin: 10,
-                                    textStyle: {
-                                        color: "#ccc"
-                                    },
-                                    fontFamily: 'Arial',
-                                    formatter: (value, index) => moment(value).format('MM-YYYY')
-                                },
-                                axisPointer: {
-                                    lineStyle: {
-                                        color: "rgb(25, 123, 251)",
-                                        type: "dashed"
-                                    }
-                                }
-                            },
-                            yAxis: {
-                                type: "value",
-                                axisLine: {
-                                    show: false
-                                },
-                                axisTick: {
-                                    show: false
-                                },
-                                axisLabel: {
-                                    margin: 10,
-                                    textStyle: {
-                                        color: "#ccc"
-                                    },
-                                    fontFamily: 'Arial',
-                                    formatter: (value, index) => (value = numeral(value).format("0a"))
-                                },
-                                splitLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        color: 'rgba(0,0,0,0.1)'
-                                    }
-                                },
-                            },
-                            series: [{
-                                    name: idDomain1,
-                                    data: dataChartDomain1.values,
-                                    type: 'line',
-                                    symbol: "circle",
-                                    symbolSize: 10,
-                                    showSymbol: true,
-                                    hoverAnimation: false,
-                                    lineStyle: {
-                                        normal: {
-                                            width: 2,
-                                            shadowColor: "rgba(0,0,0,0.4)",
-                                            shadowBlur: 10,
-                                            shadowOffsetY: 10
-                                        }
-                                    },
-                                    itemStyle: {
-                                        normal: {
-                                            color: "rgb(79, 141, 249)",
-                                            borderColor: "rgb(79, 141, 249, 0.2)",
-                                            borderWidth: 10
-                                        }
-                                    }
-                                }, {
-                                    name: idDomain2,
-                                    data: dataChartDomain2.values,
-                                    type: 'line',
-                                    symbol: "circle",
-                                    symbolSize: 10,
-                                    showSymbol: true,
-                                    hoverAnimation: false,
-                                    lineStyle: {
-                                        normal: {
-                                            width: 2,
-                                            shadowColor: "rgba(0,0,0,0.4)",
-                                            shadowBlur: 10,
-                                            shadowOffsetY: 10
-                                        }
-                                    },
-                                    itemStyle: {
-                                        normal: {
-                                            color: "rgb(140, 210, 255)",
-                                            borderColor: "rgb(140, 210, 255, 0.2)",
-                                            borderWidth: 10
-                                        }
-                                    }
-                                },
-
-                            ]
-                        };
-                        myChart.setOption(option);
-                        new ResizeSensor($(`#getOutgoingAds`), function () {
-                            myChart.resize();
-                        });
-
-                        await $(`#getOutgoingAds`).removeClass('is-loading');
-                        $(`#getOutgoingAds`).removeClass('empty-state');
-                    } else {
-                        $(`#getOutgoingAds`).removeClass('is-loading');
-                        $(`#getOutgoingAds`).addClass('empty-state');
-                    }
-
-                    temp++;
-
-                    if (temp == 2) {
-                        $(`.getTotalOutgoingAdVisits`).addClass("d-none");
-                        $(`.getOutgoingAds`).addClass("d-none");
-                    }
-
-                    $(`#${idDomain}getTotalOutgoingAdVisits`).removeClass('is-loading');
-                    $(`#${idDomain}getTotalOutgoingAdVisits`).parent().addClass('empty-state');
+                        },
+                        series: series
+                    };
+                    myChart.setOption(option);
+                    new ResizeSensor($(`#getOutgoingAds`), function() {
+                        myChart.resize();
+                    });
+                    await $(`#getOutgoingAds`).removeClass('is-loading');
+                    $(`#getOutgoingAds`).removeClass('empty-state');
                 }
             } else {
                 $(`#getOutgoingAds`).removeClass('is-loading');
@@ -5378,123 +3430,10 @@ const getTrafficDisplayPaidOutgoingAds = async (task, data) => {
                     $(`.getOutgoingAds`).addClass("d-none");
                 }
             }
-        }
-
-
-    } else {
-        console.log(`${task} failed`);
-    }
-
-
-}
-
-const getGetAudienceInterests = async (task, data) => {
-    if (data.status == "success") {
-        const {
-            data: traffic
-        } = data.data;
-
-        var dataChart = [];
-
-        $.each(traffic, (index, visit) => {
-            dataChart.push([
-                visit.Name,
-                numeral(numeral(visit.Value).format('0.0%').replace('%', '').replace('.', '')).format('0') * 3
-            ]);
-        });
-
-        WordCloud(document.getElementById(task), {
-            list: dataChart,
-            fontFamily: 'Google Sans',
-            color: 'random-dark'
-        });
-
-        await $(`#${task}`).removeClass('is-loading');
-        await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-    } else {
-        console.log(`${task} failed`);
-    }
-
-}
-
-const getTopReferrals = async (task, data) => {
-    $(`#${task}`).html('');
-    let {
-        Data: topReferrals
-    } = data.data.data;
-
-    if (!topReferrals || topReferrals.length == 0) {
-        $(`#${task}`).removeClass('is-loading').addClass('empty-state');
-        return;
-    }
-
-    $.each(topReferrals, (index, site) => {
-        if (site.Domain == "grid.upgrade") return;
-        site.Favicon = "https://files.fff.com.vn/f.php?url=" + btoa(site.Favicon);
-        $(`#${task}`).append(`
-        <div class="row m-0 p-10 align-items-center">
-            <div class="col-4 text-truncate pb-0"><a title="${site.Domain}" href="website-analysis.php?view=similar&action=result&domain=${site.Domain}"><img src="${site.Favicon}" class="p-1 mr-2 border rounded bg-secondary" />${site.Domain}</a></div>
-            <div class="col-2 text-right">${numeral(site.Share).format('0.00%')}</div>
-            <div class="col-4">
-                <div class="progress">
-                    <div class="progress-bar bg-primary" style="width: ${numeral(site.Share).format('0.00%')}; height:14px;" role="progressbar"></div>
-                </div>
-            </div>
-            <div class="col-2 text-right ${site.Change == 'NaN' ? 'text-muted' : (site.Change > 0 ? 'text-success positive' : 'text-danger negative')}">${site.Change == 'NaN' ? '-' : ((site.Change.toString().charAt(0) === '-' ? numeral(Math.abs(site.Change)).format('0.00%') : numeral(site.Change).format('0.00%')))}</div>
-        </div>
-        `);
-    })
-
-    await $(`#${task}`).removeClass('is-loading');
-    await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-}
-
-const getPaidSearchCompetitorsTable = async (task, data) => {
-    $(`#${task}`).html('');
-    let {
-        Data
-    } = data.data.data;
-
-    if (!Data) {
-        $(`#${task}`).addClass('empty-state');
-    } else {
-
-        let {
-            Records,
-            TotalCount
-        } = Data;
-
-        if ((Records[0] && Records[0].Domain && Records[0].Domain == "grid.upgrade") || Records.length == 0) {
-            $(`#${task}`).addClass('empty-state');
         } else {
-            $.each(Records, (index, site) => {
-                let {
-                    Category,
-                    Domain,
-                    Favicon,
-                    Score: Share
-                } = site;
-                if (Domain == "grid.upgrade") return;
-                $(`#${task}`).append(`
-            <div class="row m-0 p-10 align-items-center">
-                <div class="col-6 text-truncate pb-0"><a title="${Domain}" href="website-analysis.php?view=similar&action=result&domain=${Domain}"><img src="${Favicon}" class="p-1 mr-2 border rounded bg-secondary" />${Domain}</a></div>
-                <div class="col-2 text-right">${numeral(Share).format('0.00%')}</div>
-                <div class="col-4">
-                <div class="progress">
-                    <div class="progress-bar bg-primary" style="width: ${numeral(Share).format('0.00%')}; height:14px;" role="progressbar"></div>
-                </div>
-                </div>
-            </div>
-            </div>
-            `);
-            })
+            console.log(`${task} failed`);
         }
     }
-
-    $(`#${task}`).perfectScrollbar();
-
-    await $(`#${task}`).removeClass('is-loading');
-    await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
 }
 
 const deduplicate = arr => {
@@ -5509,28 +3448,16 @@ const deduplicate = arr => {
     return ans;
 }
 
-const getWebsiteGeography = async (task, data) => {
-    let {
-        website: domain1
-    } = data[0].data;
-
-    let {
-        website: domain2
-    } = data[1].data;
+const getWebsiteGeography = async(task, data) => {
+    let dataChart = [];
 
     for (let i = 0; i < data.length; i++) {
 
-        let dataChart = [];
-
         let others = 0;
-
-
         let {
             data: WebsiteGeography,
             website: domain
         } = data[i].data;
-
-
         let temp = WebsiteGeography;
 
 
@@ -5558,8 +3485,7 @@ const getWebsiteGeography = async (task, data) => {
             dataChart.push(itemOther);
         }
 
-        let idDomain = domain.replace(".", "");
-        idDomain = idDomain.replace(".", "");
+        let idDomain = website[i].replace(/\./g, "");
 
         let ele = document.getElementById(`${idDomain}getWebsiteGeography`);
 
@@ -5623,9 +3549,9 @@ const getWebsiteGeography = async (task, data) => {
         };
 
         myChart.setOption(option);
-        new ResizeSensor($(`#${idDomain}getWebsiteGeography`), function () {
+        new ResizeSensor($(`#${idDomain}getWebsiteGeography`), function() {
             myChart.resize();
-            setTimeout(function () {
+            setTimeout(function() {
                 myChart.dispatchAction({
                     type: 'highlight',
                     seriesIndex: 0,
@@ -5634,14 +3560,14 @@ const getWebsiteGeography = async (task, data) => {
             }, 1000);
         });
 
-        setTimeout(function () {
+        setTimeout(function() {
             myChart.dispatchAction({
                 type: 'highlight',
                 seriesIndex: 0,
                 dataIndex: 0
             });
 
-            myChart.on('mouseover', function (params) {
+            myChart.on('mouseover', function(params) {
                 if (params.name == dataChart[0].name) {
                     myChart.dispatchAction({
                         type: 'highlight',
@@ -5657,7 +3583,7 @@ const getWebsiteGeography = async (task, data) => {
                 }
             });
 
-            myChart.on('mouseout', function (params) {
+            myChart.on('mouseout', function(params) {
                 myChart.dispatchAction({
                     type: 'highlight',
                     seriesIndex: 0,
@@ -5669,231 +3595,20 @@ const getWebsiteGeography = async (task, data) => {
         await $(`#${idDomain}getWebsiteGeography`).removeClass('is-loading');
         $(`#${idDomain}getWebsiteGeography`).removeClass('empty-state');
     }
-
-
-
 }
 
-const getTrafficDestinationAds = async (task, data) => {
-    $(`#${task}`).html('');
-    let {
-        data: TrafficDestinationAds
-    } = data.data;
-
-    $.each(TrafficDestinationAds, (index, site) => {
-        if (site.Domain == "grid.upgrade") return;
-        $(`#${task}`).append(`
-        <div class="row m-0 p-10 align-items-center">
-            <div class="col-4 text-truncate pb-0"><a title="${site.Domain}" href="website-analysis.php?view=similar&action=result&domain=${site.Domain}"><img src="${site.Favicon}" class="p-1 mr-2 border rounded bg-secondary" />${site.Domain}</a></div>
-            <div class="col-2 text-right">${numeral(site.Share).format('0.00%')}</div>
-            <div class="col-4">
-                <div class="progress">
-                    <div class="progress-bar bg-primary" style="width: ${numeral(site.Share).format('0.00%')}; height:14px;" role="progressbar"></div>
-                </div>
-            </div>
-            <div class="col-2 text-right ${(!site.Change) ? 'text-muted' : (site.Change > 0 ? 'text-success positive' : 'text-danger negative')}">${(!site.Change) ? '-' : ((site.Change.toString().charAt(0) === '-' ? numeral(Math.abs(site.Change)).format('0.00%') : numeral(site.Change).format('0.00%')))}</div>
-        </div>
-        `);
-    })
-
-    await $(`#${task}`).removeClass('is-loading');
-    await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-}
-
-const getTopIncomingAds = async (task, data) => {
-    $(`#${task}`).html('');
-
-    let {
-        data: TopIncomingAds
-    } = data.data;
-
-    $.each(TopIncomingAds, (index, site) => {
-        if (site.Domain == "grid.upgrade") return;
-        $(`#${task}`).append(`
-        <div class="row m-0 p-10 align-items-center">
-            <div class="col-4 text-truncate pb-0"><a title="${site.Domain}" href="website-analysis.php?view=similar&action=result&domain=${site.Domain}"><img src="${site.Favicon}" class="p-1 mr-2 border rounded bg-secondary" />${site.Domain}</a></div>
-            <div class="col-2 text-right">${numeral(site.Share).format('0.00%')}</div>
-            <div class="col-4">
-                <div class="progress">
-                    <div class="progress-bar bg-primary" style="width: ${numeral(site.Share).format('0.00%')}; height:14px;" role="progressbar"></div>
-                </div>
-            </div>
-            <div class="col-2 text-right ${!site.Change ? 'text-muted' : (site.Change > 0 ? 'text-success positive' : 'text-danger negative')}">${!site.Change ? '-' : ((site.Change.toString().charAt(0) === '-' ? numeral(Math.abs(site.Change)).format('0.00%') : numeral(site.Change).format('0.00%')))}</div>
-        </div>
-        `);
-    })
-
-
-    await $(`#${task}`).removeClass('is-loading');
-    await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-}
-
-const getTrafficSourcesSearchDetails = async (task, data) => {
-    $(`#${task}`).html(`
-    <div class="row mx-0 px-2 align-items-center text-muted">
-        <div class="col-3 font-10">Từ khoá</div>
-        <div class="col-1 font-10">CPC</div>
-        <div class="col-2 font-10 text-right">Lượt tìm kiếm</div>
-        <div class="col-6 font-10 text-center">Truy cập</div>
-    </div>
-    `);
-    let {
-        data: TrafficSourcesSearchDetails
-    } = data.data;
-
-
-
-    $.each(TrafficSourcesSearchDetails, (index, site) => {
-
-        let {
-            CPC,
-            SearchTerm,
-            KwVolume,
-            Domain,
-            Change,
-            Share
-        } = site;
-
-        // console.log(CPC, SearchTerm, KwVolume, Domain, Change, Share);
-
-        if (Domain == "grid.upgrade") return;
-        if (!Change) Change = 'NaN';
-
-        $(`#${task}`).append(`
-        <div class="row mx-0 p-10 align-items-center">
-            <div class="col-3 text-truncate pb-0" title="${SearchTerm}">${SearchTerm}</div>
-            <div class="col-1">$${CPC}</div>
-            <div class="col-2 text-right">${numeral(KwVolume).format('0,0')}</div>
-            <div class="col-2 text-right">${numeral(Share).format('0.00%')}</div>
-            <div class="col-2">
-                <div class="progress">
-                    <div class="progress-bar bg-primary" style="width: ${numeral(Share).format('0.00%')}; height:14px;" role="progressbar"></div>
-                </div>
-            </div>
-            <div class="col-2 text-right ${Change == 'NaN' ? 'text-muted' : (Change > 0 ? 'text-success positive' : 'text-danger negative')}">${Change == 'NaN' ? '-' : ((Change.toString().charAt(0) === '-' ? numeral(Math.abs(Change)).format('0.00%') : numeral(Change).format('0.00%')))}</div>
-        </div>
-        `);
-    })
-
-    $(`#${task}`).perfectScrollbar();
-
-    await $(`#${task}`).removeClass('is-loading');
-    await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-}
-
-const getPaidKeywordsTable = async (task, data) => {
-
-    let {
-        Data
-    } = data.data.data;
-
-    if (Data[0].SearchTerm == 'grid.upgrade') {
-        $(`#${task}`).addClass('empty-state');
-    } else {
-        $(`#${task}`).html(`
-        <div class="row mx-0 px-2 align-items-center text-muted">
-            <div class="col-2 font-10">Từ khoá</div>
-            <div class="col-1 font-10">CPC</div>
-            <div class="col-1 font-10 text-center">Vị trí</div>
-            <div class="col-auto font-10">Lượt tìm kiếm</div>
-            <div class="col font-10 text-center">Truy cập</div>
-            <div class="col font-10">Website đích</div>
-        </div>
-        `);
-
-
-        $.each(Data, (index, site) => {
-
-            let {
-                CPC,
-                SearchTerm,
-                KwVolume,
-                Domain,
-                Change,
-                TotalShare,
-                PositionPaid,
-                DestUrlPaid
-            } = site;
-
-            DestUrlPaid = DestUrlPaid[0].Value == "N/A" ? '-' : DestUrlPaid[0].Value;
-
-            if (SearchTerm == "grid.upgrade") return;
-            if (!Change) Change = 'NaN';
-
-            $(`#${task}`).append(`
-        <div class="row mb-1 mx-0 p-10 align-items-center">
-            <div class="col-2 text-truncate pb-0" title="${SearchTerm}">${SearchTerm}</div>
-            <div class="col-1">$${CPC}</div>
-            <div class="col-1 text-center">${PositionPaid[0].Value}</div>
-            <div class="col text-right">${numeral(KwVolume).format('0,0')}</div>
-            <div class="col-1 text-right">${numeral(TotalShare).format('0.00%')}</div>
-            <div class="col-1">
-            <div class="progress">
-                <div class="progress-bar bg-primary" style="width: ${numeral(TotalShare).format('0.00%')}; height:14px;" role="progressbar"></div>
-            </div>
-            </div>
-            <div class="col text-right ${Change == 'NaN' ? 'text-muted' : (Change > 0 ? 'text-success positive' : 'text-danger negative')}">${Change == 'NaN' ? '-' : ((Change.toString().charAt(0) === '-' ? numeral(Math.abs(Change)).format('0.00%') : numeral(Change).format('0.00%')))}</div>
-            <div class="col-3 text-truncate pb-0"><a target="_blank" href="${DestUrlPaid == '-' ? '#' : DestUrlPaid}" title="${DestUrlPaid == '-' ? '' : DestUrlPaid}">${DestUrlPaid == '-' ? DestUrlPaid : DestUrlPaid + '<i class="fal fa-external-link fa-1x ml-1"></i>'}</a></div>
-            </div>
-        `);
-        })
-    }
-    $(`#${task}`).perfectScrollbar();
-    await $(`#${task}`).removeClass('is-loading');
-    await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-}
-
-const getTrafficDestinationReferrals = async (task, data) => {
-    $(`#${task}`).html('');
-    let {
-        data: TrafficDestinationReferrals
-    } = data.data;
-
-    $.each(TrafficDestinationReferrals, (index, site) => {
-        if (site.Domain == "grid.upgrade") return;
-        $(`#${task}`).append(`
-        <div class="row m-0 p-10 align-items-center">
-            <div class="col-4 text-truncate pb-0"><a title="${site.Domain}" href="website-analysis.php?view=similar&action=result&domain=${site.Domain}"><img src="${site.Favicon}" class="p-1 mr-2 border rounded bg-secondary" />${site.Domain}</a></div>
-            <div class="col-2 text-right">${numeral(site.Share).format('0.00%')}</div>
-            <div class="col-4">
-                <div class="progress">
-                    <div class="progress-bar bg-primary" style="width: ${numeral(site.Share).format('0.00%')}; height:14px;" role="progressbar"></div>
-                </div>
-            </div>
-            <div class="col-2 text-right ${site.Change == 'NaN' ? 'text-muted' : (site.Change > 0 ? 'text-success positive' : 'text-danger negative')}">${site.Change == 'NaN' ? '-' : ((site.Change.toString().charAt(0) === '-' ? numeral(Math.abs(site.Change)).format('0.00%') : numeral(site.Change).format('0.00%')))}</div>
-        </div>
-        `);
-    })
-
-    await $(`#${task}`).removeClass('is-loading');
-    await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-}
-
-const getSearchOrganicPaidOverview = async (task, data, domain1, domain2) => {
-    if (data[0].status == "success" && data[0].status == "success") {
-
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
-
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
-
-        for (let i = 0; i < data.length; i++) {
-            let {
-                website: domain
-            } = data[i].data;
-            let idDomain = domain.replace(".", "");
-            idDomain = idDomain.replace(".", "");
+const getSearchOrganicPaidOverview = async(task, data, domain1, domain2) => {
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
+            let idDomain = website[i].replace(/\./g, "");
             if (data[i] && data[i].data) {
                 let {
                     TrafficShare,
                     AverageDuration,
                     PagesPerVisit,
                     BounceRate
-                } = data[i].data.data;
-
+                } = data[i].data.data[website[i]];
                 const run = async taskName => {
-
                     let SearchOrganicPaidOverview;
 
                     switch (taskName) {
@@ -5913,17 +3628,12 @@ const getSearchOrganicPaidOverview = async (task, data, domain1, domain2) => {
                             break;
                     }
 
-                    // console.log(SearchOrganicPaidOverview);
-
-
-
                     // prepare data
 
                     let dataChart = {
                         keys: [],
                         values: [],
                     };
-
                     let {
                         BreakDown,
                         Total
@@ -6221,7 +3931,7 @@ const getSearchOrganicPaidOverview = async (task, data, domain1, domain2) => {
                     myChart.setOption(option);
 
 
-                    new ResizeSensor($(`#${task}`), function () {
+                    new ResizeSensor($(`#${task}`), function() {
                         myChart.resize();
                     });
 
@@ -6232,7 +3942,7 @@ const getSearchOrganicPaidOverview = async (task, data, domain1, domain2) => {
 
                 run('TrafficShare');
 
-                $('#getSearchOrganicPaidOverview a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                $('#getSearchOrganicPaidOverview a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
                     var taskName = $(e.target).data('task'); // activated tab 
                     run(taskName);
                 });
@@ -6247,39 +3957,34 @@ const getSearchOrganicPaidOverview = async (task, data, domain1, domain2) => {
                     $(`#${idDomain + id}`).addClass('empty-state');
                 }
             }
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 };
 
-const getWebsiteAdsIntelDisplay = async (task, data, domain1, domain2) => {  
-    if (data[0].status == "success" && data[1].status == "success") {
+const getWebsiteAdsIntelDisplay = async(task, data, domain1, domain2) => {
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
 
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
+            let idDomain1 = domain1.replace(/\./g, "");
 
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
+            let idDomain2 = domain2.replace(/\./g, "");
 
-        $(`#${idDomain1 + task} .carousel-inner`).removeClass('is-loading');
-        $(`#${idDomain1 + task} .carousel-inner `).removeClass('empty-state');
+            $(`#${idDomain1 + task} .carousel-inner`).removeClass('is-loading');
+            $(`#${idDomain1 + task} .carousel-inner `).removeClass('empty-state');
 
-        $(`#${idDomain2 + task} .carousel-inner`).removeClass('is-loading');
-        $(`#${idDomain2 + task} .carousel-inner `).removeClass('empty-state');
+            $(`#${idDomain2 + task} .carousel-inner`).removeClass('is-loading');
+            $(`#${idDomain2 + task} .carousel-inner `).removeClass('empty-state');
 
-        let temp = 0; 
-               
-        for(let i = 0; i < data.length; i++) {
-            if(data && data[i].data)
-            {  
+            let temp = 0;
+
+            if (data && data[i].data) {
                 let {
                     data: WebsiteAdsIntelDisplay,
-                    website: domain
                 } = data[i].data;
 
-                let idDomain = domain.replace(".","");
-                    idDomain = idDomain.replace(".","");
+                let idDomain = website[i].replace(/\./g, "");
 
                 $(`#${idDomain + task} .carousel-inner`).html('');
                 $(`#${idDomain + task} .carousel-indicators`).html('');
@@ -6359,56 +4064,51 @@ const getWebsiteAdsIntelDisplay = async (task, data, domain1, domain2) => {
                     $("#getWebsiteAdsIntelDisplay").addClass("d-none");
                 }
             }
+
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 };
 
-const getScrapedSearchAds = async (task, data, domain1, domain2) => {
-    if (data[0].status == "success" && data[1].status == "success") {
+const getScrapedSearchAds = async(task, data, domain1, domain2) => {
+    // console.log(data)
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].status == "success") {
 
-        let idDomain1 = domain1.replace(".", "");
-        idDomain1 = idDomain1.replace(".", "");
+            let idDomain1 = domain1.replace(/\./g, "");
 
-        let idDomain2 = domain2.replace(".", "");
-        idDomain2 = idDomain2.replace(".", "");
+            let idDomain2 = domain2.replace(/\./g, "");
 
-        $(`#${idDomain1 + task} .carousel-inner`).removeClass('is-loading');
-        $(`#${idDomain1 + task} .carousel-inner `).removeClass('empty-state');
+            $(`#${idDomain1 + task} .carousel-inner`).removeClass('is-loading');
+            $(`#${idDomain1 + task} .carousel-inner `).removeClass('empty-state');
 
-        $(`#${idDomain2 + task} .carousel-inner`).removeClass('is-loading');
-        $(`#${idDomain2 + task} .carousel-inner `).removeClass('empty-state');
+            $(`#${idDomain2 + task} .carousel-inner`).removeClass('is-loading');
+            $(`#${idDomain2 + task} .carousel-inner `).removeClass('empty-state');
 
-        let temp = 0;
-        for (let i = 0; i < data.length; i++) {
+            let temp = 0;
             if (data[i] && data[i].data) {
 
                 let {
                     data: SearchAds,
-                    website: webdomain
                 } = data[i].data;
 
-                let idDomain = webdomain.replace(".", "");
-                idDomain = idDomain.replace(".", "");
+                let idDomain = website[i].replace(/\./g, "");
 
                 $(`#${idDomain + task} .carousel-inner`).html('');
                 $(`#${idDomain + task} .carousel-indicators`).html('');
-
-                await $.each(SearchAds, (index, value) => {
-
+                // console.log(SearchAds)
+                $.each((SearchAds) ? SearchAds : SearchAds[`${website[i]}`], (index, value) => {
+                    // console.log(value)
                     if (index < 5) {
                         $(`#${idDomain + task} .carousel-indicators`).append(`
                     <li data-target="#${idDomain + task}" data-slide-to="${index}" class="my-0 border-0 bg-favorite text-white text-center rounded-circle ${index == 0 ? 'active' : ''}" style="width:20px;height:20px;text-indent:0;">${index + 1}</li>
                     `);
                     }
-
                     let {
                         Type
                     } = value;
-
                     let carouselItem = '';
-
                     if (Type == "Text") {
                         let {
                             Description,
@@ -6537,13 +4237,14 @@ const getScrapedSearchAds = async (task, data, domain1, domain2) => {
                     $("#getScrapedSearchAds").addClass("d-none");
                 }
             }
+
+        } else {
+            console.log(`${task} failed`);
         }
-    } else {
-        console.log(`${task} failed`);
     }
 };
 
-const getSimilarSites = async (task, data, domain1) => {
+const getSimilarSites = async(task, data, domain1) => {
     if (data[0] && data[0].data) {
         $(`#${task}`).html('');
         let {
@@ -6561,15 +4262,15 @@ const getSimilarSites = async (task, data, domain1) => {
                 <span class="changeURL" data-type="website" data-input="${site.Domain}">${site.Domain}</span>
             </a>`).appendTo(`#${task} .similarSites:last-child`)
                 .append(compareNode);
-            compareNode.click(function (e) {
-                e.preventDefault(); 
+            compareNode.click(function(e) {
+                e.preventDefault();
                 domain2 = $(this).data('domain');
-               
+
             });
         })
 
-          // Popup nhap website
-          const getDomain = async () => {
+        // Popup nhap website
+        const getDomain = async() => {
             const result = await Swal.fire({
                 title: 'Hãy nhập website để so sánh',
                 html: `<input id="swal-input1" class="swal2-input text-lowercase" value=${domain1} placeholder="Nhập website của bạn">` +
@@ -6587,8 +4288,8 @@ const getSimilarSites = async (task, data, domain1) => {
                 onOpen: () => {
                     $('#swal-input2').focus()
                     $('#swal-input2').keypress(event => {
-                        if(event.which == 13) {
-                            $('.swal2-confirm').click(); 
+                        if (event.which == 13) {
+                            $('.swal2-confirm').click();
                         }
                     })
                 },
@@ -6610,9 +4311,9 @@ const getSimilarSites = async (task, data, domain1) => {
                         document.getElementById('swal-input2').value
                     ]
                 }
-            }) 
-            if (result.dismiss == undefined) { 
-                return result; 
+            })
+            if (result.dismiss == undefined) {
+                return result;
             }
 
         };
@@ -6620,8 +4321,8 @@ const getSimilarSites = async (task, data, domain1) => {
         // Change website
         $(
             `.similarSites  .changeWebSite`
-        ).click(() => { 
-            getDomain().then(data => { 
+        ).click(() => {
+            getDomain().then(data => {
                 if (data) {
                     location.href = `?action=compare&domain1=${data.value[0].toLowerCase()}&domain2=${data.value[1].toLowerCase()}`;
                     // changeURLCompare(data.value[0].toLowerCase(), data.value[1].toLowerCase());
