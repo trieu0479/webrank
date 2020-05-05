@@ -12,7 +12,7 @@
                 <!-- /ddd -->
             </div>
             <div class="col-auto pl-0">
-                <div class="text-capitalize font-weight-bold"><?= _("Trang Landing page quảng cáo") ?></div>
+                <div class="text-capitalize font-weight-bold">Trang Landing page quảng cáo</div>
                 <div class="text-muted similarDates font-10">12.2019 - 02.2020</div>
             </div>
             <div class="ml-auto d-flex no-block align-items-center pr-3">

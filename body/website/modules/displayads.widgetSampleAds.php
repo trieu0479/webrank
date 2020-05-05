@@ -11,11 +11,11 @@
                 </svg>
             </div>
             <div class="col-auto pl-0">
-                <div class="text-capitalize font-weight-bold"><?= _("Mẫu Quảng Cáo") ?></div>
+                <div class="text-capitalize font-weight-bold">Mẫu Quảng Cáo</div>
                 <div class="text-muted data-headerTimes font-10"></div>
             </div>
             <div class="ml-auto d-flex no-block align-items-center pr-3">
-                <a class="similarReloadTask text-muted" data-task="SampleAds" href="javascript:;"><i class="fal fa-sync"></i></a>
+                <a class="similarReloadTask text-muted" data-task="SampleAds" href="javascript: void(0);"><i class="fal fa-sync"></i></a>
             </div>
         </div>
         <div class="col-12 col-lg-12 bg-white shadow-sm rounded w-100" style="min-height:300px">
@@ -87,7 +87,7 @@
                 </svg>
             </div>
             <div class="col-auto pl-0">
-                <div class="text-capitalize font-weight-bold"><?= _("Sample Ads") ?></div>
+                <div class="text-capitalize font-weight-bold">Sample Ads</div>
                 <div class="text-muted similarDates font-10">12.2019 - 02.2020</div>
             </div>
             <div class="asns-popup__close-button">
