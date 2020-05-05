@@ -1,7 +1,7 @@
-import api from './compareFunctions.js';
+import api from '/dist/dist/js/pages/traffic-website/compareFunctions.js';
 
 $(document).ready(() => {
-
+    console.log(1)
     const url = new URL(location.href);
     const originalDomain1 = url.searchParams.get("domain1") || url.pathname.split("/")[2];
     const originalDomain2 = url.searchParams.get("domain2") || url.pathname.split("/")[2];

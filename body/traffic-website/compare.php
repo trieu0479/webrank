@@ -2348,4 +2348,4 @@ $(document).ready(() => {
 var isLogin = '<?=$isLogin?>';
 </script>
 <!-- <script src="dist/js/pages/changeURL.js?v=1.8"></script> -->
-<script type="module" src="dist/dist/js/pages/traffic-website/compare.js?v=1.8"></script>
+<script type="module" src="dist/js/pages/traffic-website/compare-backup.js"></script>
