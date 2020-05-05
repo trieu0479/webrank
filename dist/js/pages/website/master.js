@@ -141,15 +141,16 @@ $(document).ready(() => {
     }
 
     function showBuyPackage() {
+        $.getJSON(`//localapi.trazk.com/fff/user.php?task=getMySupporter&userToken=${userToken}`, function(data) {
+        console.log(data);
         Swal.fire({
-            width: 600,
+            width: 700,
             padding: `0 2.25rem 2.25rem`,
             html: `<div> 
             <div class="panel-heading mb-3 font-weight-bold font-16 border-bottom pb-3">Nâng cấp VIP bộ công cụ phân tích</div>
     
             <div class="text-left mt-4 content-vcb">
-                <div class="text-left font-gg font-14 mb-2 font-weight-500">Bao gồm : <span class="font-gg font-14 mb-1 font-weight-bold">Phân tích từ khóa & Phân tích website</span></div>
-                <div class="text-left mb-2">Bạn hãy thực hiện chuyển khoản Số tiền <span class="text-danger font-gg font-weight-bold font-16 number-money">199.000<sup class="font-12 font-gg font-weight-none" style="top: -9px;">vnd</sup></span> với nội dung chuyển khoản như sau (nhớ copy toàn bộ)</div>
+                <div class="text-left mb-3">Bạn thực hiện chuyển khoản Số tiền <span class="text-danger font-gg font-weight-bold font-16 number-money">199.000<sup class="font-12 font-gg font-weight-none" style="top: -9px;">vnd</sup></span> với nội dung chuyển khoản như sau (nhớ copy toàn bộ)</div>
                 <div class="text-center mb-4"><div id="coppy-code" class="w-35 m-auto text-info bg-white-2 px-3 py-2 font-weight-bold font-16" style="border: 1px #ccc dashed;">FFF10006096</div></div>
                 <div class="font-gg mb-1 pl-3">
                     <table class="table table-borderless table-sm">
@@ -171,7 +172,16 @@ $(document).ready(() => {
                     <input type="hidden" id="invoiceId" name="invoiceId" value="">
                     <button class="btn btn-default btn-WaitingPayment  btn-danger btn-sm">Tôi chuyển khoản sau</button>
             </div> 
-            
+            <div class="mt-3 text-left d-flex justify-content-center"> 
+                <div class="">
+                    <img class="rounded-circle" width="80px" height="80px" src="${data.data.data.avatar}">
+                </div>
+                <div class="ml-3 align-self-center">
+                    <div class="mb-2 font-gg font-14 font-weight-500">Hỗ trợ viên: ${data.data.data.fullname}</div>
+                    <div class="mb-2 font-gg font-14">Hỗ trợ qua di động/zalo: <a href="tel:${data.data.data.phone}" class="text-danger font-14 font-weight-500">${data.data.data.phone}</a></div>
+                    <div class="font-gg font-14">Nếu bạn cần thêm hỗ trợ khác, vui lòng liên hệ hotline <span class="text-danger font-14 font-weight-500"><a href="tel:0984 66 80 68" class="text-danger font-14 font-weight-500">0984 66 80 68</a> - <a href="tel:0901 47 48 46" class="text-danger font-14 font-weight-500">0901 47 48 46</a></span></div>
+                </div>
+            </div>    
         </div>`,
             showConfirmButton: false,
             showCloseButton: true,
@@ -231,7 +241,7 @@ $(document).ready(() => {
                                 `Lỗi: Hệ thống không thấy xác nhận Invoice này`);
                             $(".swal2-validation-message").addClass("font-gg font-14 mt-2");
                         } else {
-                            window.location.href = "?view=user&action=payment-history&tab=pending&userToken=" + userToken
+                            window.location.href = `https://admin.fff.com.vn/account/index.php?view=user&action=payment-history&tab=pending&userToken=${userToken}`;
                         }
                     });
                 });
@@ -241,6 +251,7 @@ $(document).ready(() => {
 
             }
         })
+    })
 
     }
 
