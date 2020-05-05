@@ -11,7 +11,7 @@
                                             </svg>
                                         </div>
                                         <div class="col-auto pl-0">
-                                            <div class="text-capitalize font-weight-bold"><?= _(" Mẫu quảng cáo hiển thị") ?>
+                                            <div class="text-capitalize font-weight-bold">Mẫu quảng cáo hiển thị
                                             </div>
                                             <div class="text-muted similarDates font-10">03/2019 - 02/2020</div>
                                         </div>

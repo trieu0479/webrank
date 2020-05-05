@@ -4,7 +4,7 @@ var domain = url.searchParams.get('domain');
 
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
-    var VIPModule = ["SampleAdsasHTML", "topPublicSher", "getAllImageTable", "PublicSherTable", "getWebsiteAdsIntelDisplay", "getTrafficDestinationAds", "adwordsMonthlyFullTrend", "adTypeOverview", "displayDevice"];
+    var VIPModule = ["getDisplayCountryChart","getDisplayGenderChart","getDisplayAgeChart","getTrafficDisplayAdvertisingAds","getWebsiteAdsVisitsOverview","SampleAdsasHTML", "topPublicSher", "getAllImageTable", "PublicSherTable", "getWebsiteAdsIntelDisplay", "getTrafficDestinationAds", "adwordsMonthlyFullTrend", "adTypeOverview", "displayDevice"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             //ngoai le 
@@ -17,7 +17,7 @@ function lockedModule(boxWidgetName, level) {
         if (VIPModule.includes(boxWidgetName)) {
             $(".parent-" + boxWidgetName).addClass("locked");
             if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
-            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow btn-lift-vip" href="javascript: void(0)" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
         }
     }
 }

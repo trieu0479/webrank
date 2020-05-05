@@ -87,7 +87,7 @@
                 </svg>
             </div>
             <div class="col-auto pl-0">
-                <div class="text-capitalize font-weight-bold"><?= _("Sample Ads") ?></div>
+                <div class="text-capitalize font-weight-bold">Sample Ads</div>
                 <div class="text-muted similarDates font-10">12.2019 - 02.2020</div>
             </div>
             <div class="asns-popup__close-button">
