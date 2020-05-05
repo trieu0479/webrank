@@ -499,6 +499,23 @@
     padding: 15px 10px
 }
 
+.text-desscription {
+    position: relative;
+}
+
+.text-desscription::before {
+    position: absolute;
+    display: block;
+    width: .3rem;
+    border-radius: 4px;
+    width: 4px;
+    border-radius: 4px;
+    height: 100%;
+    left: .8rem;
+    content: "";
+    background: #0abb87
+}
+
 
 /* css cua dung dep trai */
 
