@@ -2330,10 +2330,10 @@ $(document).ready(() => {
     }, 5000); 
 </script>
 
-<script src="assets/js/wordcloud2.js"></script>
-<script src="assets/js/ResizeSensor.js"></script>
+<script src="<?=$rootURL?>/assets/js/wordcloud2.js?v=<?=$version?>"></script>
+<script src="<?=$rootURL?>/assets/js/ResizeSensor.js?v=<?=$version?>"></script>
 <script>
 var isLogin = '<?=$isLogin?>';
 </script>
 <!-- <script src="dist/js/pages/changeURL.js?v=1.8"></script> -->
-<script type="module" src="dist/js/pages/traffic-website/compare-backup.js"></script>
+<script type="module" src="<?=$rootURL?>/dist/js/pages/traffic-website/compare-backup.js?v=<?=$version?>"></script>
