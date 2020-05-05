@@ -49,7 +49,7 @@ $(document).ready(() => {
 
     var arrNameContry = [];
     $.get(`//localapi.trazk.com/webdata/v3.php?task=countryIsoName&userToken=${userToken}`, function (res) {
-        arrNameContry = res.data 
+        arrNameContry = res.data
 
     })
     // Quá»‘c Gia
@@ -59,7 +59,7 @@ $(document).ready(() => {
             ajax: {
                 url: `https://localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
-                    
+                    lockedModule('getDataContry', json.userData.member);
                     let dataContry = json.data.backlinksOverview.geodomains;
                     let columns = [];
                     let total = [];
@@ -135,6 +135,7 @@ $(document).ready(() => {
             ajax: {
                 url: `//localapi.trazk.com/webdata/v3.php?task=getDomainBackLinkDetail&domain=${localDomain}&page=1&method[backlinksOverview]=true&userToken=${userToken}`,
                 dataSrc: (json) => {
+                    lockedModule('getDataZones', json.userData.member);
                     let getDataZones = json.data.backlinksOverview.zones;
                     let columns = [];
                     let total = [];
@@ -302,7 +303,7 @@ $(document).ready(() => {
                             url_target = data.target_url.substring(7);
                             icon = ""
                         }
-                        return `<div class="text-left">${data.anchor}</div> 
+                        return `<div class="text-left">${data.anchor}</div>
                                 <div class="text-left text-hidden" style="width:250px">
                                 ${icon}<a href="${data.target_url}">${url_target}</a>
                                 </div>

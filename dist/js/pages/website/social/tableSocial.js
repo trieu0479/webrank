@@ -38,20 +38,19 @@ $(document).ready(() => {
     })
     return table;
   }
-  // Trang Web Xã Hội 
+  // Trang Web Xã Hội
   initDatatable(
     'getTrafficSocialTableDetail',
     {
       ajax: {
-        url: `//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDetail&domain=${localDomain}`,
+        url: `//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDetail&domain=${localDomain}&userToken=${userToken}`,
         dataSrc: (json) => {
-          // console.log(json);
-
+          // lockedModule('getTrafficSocialTableDetail',"");
           if (json && json.data && json.data.data && json.data.data.Data) {
 
 
             let { Data: newData } = json.data.data;
-            
+
             $(`#DataTables_Table_0_wrapper .dataTables_scrollHead table.dataTable`).addClass('d-block').removeClass('d-none')
             $(`#DataTables_Table_0_processing.dataTables_processing`).css('display', 'none').addClass('d-none')
             return newData.Records.filter(item => item.Page != "grid.upgrade")
@@ -81,7 +80,7 @@ $(document).ready(() => {
                     <div class="col-4">${numeral(data).format('0.00%')}</div>
                     <div class="col">
                       <div class="progress rounded progress-custom w-70 my-auto">
-                          <div class="progress-bar text-info" style="width: ${numeral(data).format('0%')}; height:14px;" role="progressbar"></div> 
+                          <div class="progress-bar text-info" style="width: ${numeral(data).format('0%')}; height:14px;" role="progressbar"></div>
                       </div>
                     </div>
                     <div class="col-4">
@@ -115,14 +114,14 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
     total+=socialChanel[key].Visits
   }
   $('.socialChannel').html('').html(numeral(socialChanel.length).format('0,0a'))
-  
+
 })
 
   // Quảng Cáo Khu Vực Tương Tự
 
   $.get(`//localapi.trazk.com/webdata/facebook.php?task=findFanpageByDomain&domain=${localDomain}&userToken=${userToken}`, function (res) {
     let fbId = res.data.fbId;
-    
+
     let logo = res.data.imageURI;
     let name = res.data.name;
     let iconBlue = '';
@@ -146,7 +145,7 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
                     <div class="p-2 mb-4 rounded-circle bg-primary" style="width:115px;height:115px;background-image: url('${res.data.imageURI}');background-size: cover;background-position: center;background-repeat: no-repeat;border:2px solid white"></div>
                     <div class="p-2 mb-2 mb-lg-5 pl-3">
                     <div class="font-16 font-weight-bold text-white">${res.data.name} <img class="ml-n1" src="${iconBlue}" style="width:20px">
-                              
+
                     </div>
                     <div class="font-12 text-white">@${res.data.pageAlias}</div>
                     <div class="font-12 text-white">${res.data.category} - <span>${numeral(res.data.likes).format("0,0")} likes</span></div>
@@ -156,8 +155,8 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
                     <div class="font-12 text-dark p-5"><i class="far fa-flag-alt"></i> Trang được tạo <span>${moment(res.data.pageCreationDate).format('MMMM DD YYYY')}</span><div>
                     </div>
                     </div>
-                  
-                   
+
+
         </div>
         `;
       $('#bannerPageAds').append(html)
@@ -220,7 +219,7 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
                                             </div>
                                         </div>
                                     </div>
-  
+
                                     <div class="row rounded">
                                         <div class="col-12 mb-0">
                                             <div class="d-flex mb-3">
@@ -257,13 +256,13 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
                                                                     style="font-size:10px!important;padding:5px 10px!important;">${data[key].cards[item].cta_text}</button>
                                                             </a>
                                                         </div>
-  
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-  
+
                                 </div>
                             </div>
             `;
@@ -323,7 +322,7 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
                                             </div>
                                         </div>
                                     </div>
-  
+
                                     <div class="row rounded">
                                         <div class="col-12 mb-0">
                                             <div class="d-flex mb-3">
@@ -359,13 +358,13 @@ $.get(`//localapi.trazk.com/webdata/websiteapi.php?task=getTrafficSocialTableDet
                                                             style="font-size:10px!important;padding:5px 10px!important;">${data[key].post.cta_text}</button>
                                                           </a>
                                                         </div>
-  
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-  
+
                                 </div>
                             </div>
             `;

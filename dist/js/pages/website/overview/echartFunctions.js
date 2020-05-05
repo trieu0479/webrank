@@ -28,7 +28,7 @@ $.get(`//localapi.trazk.com/webdata/v3.php?task=countryIsoName&userToken=${userT
 
 })
 var domain_name = domain;
-
+var adsdescription;
 var arrDomain = [];
 var selectWebsite = "";
 
@@ -82,7 +82,7 @@ function updateMetaTitle(text) {
 
 }
 const getHeader = async data => {
-    // Get value Header  
+    // Get value Header
     const {
         data: similarHeader,
     } = data.data;
@@ -107,6 +107,8 @@ const getHeader = async data => {
         similarThumb = 'assets' + similarThumb;
         similarThumbMobile = similarThumb;
     }
+    console.log(similarThumb);
+    console.log(similarThumbMobile);
 
     // Check value Header
     if (!similarTags) similarTags = []; // set null = []
@@ -409,7 +411,7 @@ const api = async(task, domain, reload = 0) => {
                 if (task == 'buildFeatureImage') {
                     return;
                 }
-                // if (spinClass)spinClass.find('i').addClass('fa-spin'); 
+                // if (spinClass)spinClass.find('i').addClass('fa-spin');
                 let isEmpty = false;
                 let temp = 0;
                 switch (task) {
@@ -524,20 +526,21 @@ const estmatedWorth = async(task, data) => {
 
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor', "getCrunchBase", "getTrafficOverviewCustomerSourceAnalysis "];
+    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor', "getCrunchBase","getTimeMobileDesktop","getTrafficOverview","getTrafficOverviewCustomerResources","getTrafficOverviewCustomerSourceAnalysis","getTrafficOverviewCustomerResources"];
     var VIPModule = [];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
-            //ngoai le 
+            //ngoai le
             if (boxWidgetName == 'getMarketingMixOverviewDaily') boxWidgetName = 'getMarketingMixOverview';
             if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
-            //ngoai le 
+            //ngoai le
             $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
         }
     } else if (level == 'free') {
         if (VIPModule.includes(boxWidgetName)) {
-            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow" href="https://admin.fff.com.vn/account/index.php?view=user&action=payment-table&tools=phantich&userToken=${userToken}" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
+            $(".parent-" + boxWidgetName).addClass("locked");
+            $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow btn-lift-vip" href="javascript:void(0)" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
         }
     }
 }
@@ -2223,6 +2226,7 @@ const getSimilarSites = async(task, data) => {
             $(`.${task}`).attr('style', 'min-height:300px !important');
             // console.log("sssss");
             $(`.${task}`).html('');
+
             let {
                 data: SimilarSites,
                 website: domain
@@ -2288,13 +2292,15 @@ const getSimilarSites = async(task, data) => {
                     })
                 });
             })
-
-
-
-
-
-
-
+            var html_descript = `<div class="bg-white pl-4 pt-3 mb-0 pb-3 mx-3 pr-4 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
+                <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
+                    <div class="description-goads">Thêm đối thủ cạnh tranh, theo dõi và nhận báo cáo hàng ngày về đối thủ của bạn. Chỉ 199,000 vnđ/tháng</div>
+                </div>
+                <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4 btn-noads">
+                    <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/account/?view=user&action=payment-table">Phân tích đối thủ</a>
+                </div>
+            </div>`
+            $('.parent-getSimilarSites').parent().append(html_descript).addClass('pb-3')
             await $(`.${task}`).removeClass('is-loading');
             await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
         } else {
@@ -2430,7 +2436,13 @@ const getScrapedSearchAds = async(boxName, data) => {
     }
     if (data.status == "success") {
         var SearchAds = data.data.adwordsPositionsOverview;
-        //  console.log(SearchAds);        
+        adsdescription = SearchAds
+        console.log(adsdescription)
+        if (!adsdescription) {
+            $('.description-goads').html(`Đưa website [xxx] lên top Google bằng Google Ads, tặng mã khuyến mãi quảng cáo Google Ads trị giá 1.350.000 vnđ.`)
+            $('.btn-noads').html(`<a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/quangcao/?view=buy-account&action=index">Mua tài khoản quảng cáo</a>`)
+        }
+        //  console.log(SearchAds);
         $(`#getScrapedSearchAds .carousel-inner`).html('');
         $(`#getScrapedSearchAds .carousel-indicators`).html('');
         $("#row-getPaidSearchCompetitorsTableV1").show();
@@ -2461,8 +2473,8 @@ const getScrapedSearchAds = async(boxName, data) => {
                              <div class="bg-white shadow p-10 w-100">
                                  <a href="javascript:;" target="_blank" title="${visibleUrl}">
                                  ${title}
-                                 </a>   
-                                 <div class="text-success text-truncate pb-0">${visibleUrl}</div>                         
+                                 </a>
+                                 <div class="text-success text-truncate pb-0">${visibleUrl}</div>
                                  ${description}
                              </div>
                              </div>
@@ -2472,7 +2484,7 @@ const getScrapedSearchAds = async(boxName, data) => {
                                  <div class="col text-muted font-10">Tỉ lệ traffic: <span>${numeral(trafficPercent).format('0,0')} <sup>%</sup></span></div>
                                  <div class="col text-muted font-10">Chi phí: <span>${numeral(trafficCost).format('0,0')} <sup>$</sup></span></div>
                              </div>
-                             
+
                              <div class="mt-3 text-truncate pb-0"><span class="mr-1 bagInfo font-10 ">${moment.unix(crawledTime).format("DD MMM YYYY")}</span> <span class="font-10 text-muted">  Từ khoá: ${phrase}</span></div>
                              </div>
                          </div>
@@ -2507,7 +2519,7 @@ const getTrafficSocial = async(task, data, domain) => {
                 $("#TotalSocialVisits").removeClass("is-loading");
                 $("#TotalSocialVisits").html(`Tổng ${numeral(SearchTotal).format("0,0")}`);
 
-                // Tổng Số Lượt Truy Cập Xã Hội 
+                // Tổng Số Lượt Truy Cập Xã Hội
                 $("#totalSocailVisits").html(`${numeral(SearchTotal).format("0.000a")}`);
                 $("#percenTotalSocailVisits").html(`${numeral(TotalDesktopTraffic).format('0.00%')}`);
 
@@ -2784,7 +2796,7 @@ const getMarketingMixOverview = async(task, data) => {
                 } = data.data.data.Data;
 
                 if (Object.values(DailyData).length != 0 || Object.values(WeeklyData).length != 0 || Object.values(MonthlyData).length != 0) {
-                    // let { TrafficShare, AverageDuration, PagesPerVisit, BounceRate } = DataMarket; 
+                    // let { TrafficShare, AverageDuration, PagesPerVisit, BounceRate } = DataMarket;
                     const run = async(taskName, temp) => {
                         let DataMarket;
                         if (temp == "Daily") {
@@ -3122,7 +3134,7 @@ const getMarketingMixOverview = async(task, data) => {
                     $('#getMarketingMixOverview a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 
 
-                        var taskName = $(e.target).data('task'); // activated tab 
+                        var taskName = $(e.target).data('task'); // activated tab
                         let ele = document.getElementById(`getMarketingMixOverview--${taskName}`);
 
                         run(taskName, "Weekly");
@@ -3164,7 +3176,7 @@ const getMarketingMixOverview = async(task, data) => {
 
                     $("input[type=radio][name=getMarketingMixOverview]").change(function() {
 
-                        //alert(this.value); 
+                        //alert(this.value);
 
                         let ele = document.getElementById(`getMarketingMixOverview--TrafficShare`);
                         echarts.dispose(ele);
@@ -3207,7 +3219,7 @@ const SampleAdsasImage = async(task, data) => {
                             <img src="https://imgcdn.trazk.com/f.php?f=${btoa(val.mediaUrl)}">
                         </div>
                     </div>
-                    
+
                 </div>
             </div>`)
                 }
@@ -3230,7 +3242,7 @@ const googleAdsGDNOverview = async(task, data) => {
                             <img src="https://imgcdn.trazk.com/f.php?f=${btoa(val.mediaUrl)}">
                         </div>
                     </div>
-                    
+
                 </div>
             </div>`)
         })
@@ -3247,7 +3259,7 @@ const googleAdsGDNOverview = async(task, data) => {
                     </div>
                     <a href="#" class="text-contended pt-5">${val.text}</a>
                 </div>
-               
+
             </div>
         </div>`)
 
@@ -3264,9 +3276,9 @@ const SampleAdsasHTML = async(task, data) => {
         if (index < 5) {
             $(".sample-html-ads").append(`<div class="box-all">
             <div class="box-img">
-                <div class="image-media">                   
+                <div class="image-media">
                     <div class="image-sample">
-                     <iframe title="${val.id}" src="${val.documentUrl}?id=${val.id}" scrolling="no" loading="lazy" class="-HtmlItemStyles-item_html-B4E3Yn-" style="min-width: 760px;min-height: 476px;transform: scale(0.237047);transform-origin: center center;border:none"></iframe>   
+                     <iframe title="${val.id}" src="${val.documentUrl}?id=${val.id}" scrolling="no" loading="lazy" class="-HtmlItemStyles-item_html-B4E3Yn-" style="min-width: 760px;min-height: 476px;transform: scale(0.237047);transform-origin: center center;border:none"></iframe>
                     </div>
 
                 </div>
@@ -3299,7 +3311,7 @@ const SampleAdsasText = async(task, data) => {
                     <a href="#" class="text-contended pt-5">${val.text}</a>
                 </div>
                 <div class="footer-text mt-2">
-                    <a href="#" class="content-small font-12">${val.advertiser}</a>          
+                    <a href="#" class="content-small font-12">${val.advertiser}</a>
                     <p class="tseen">Xuất hiện: <small class="font-12">1</small>${val.daysSeen} ngày</p>
                 </div>
             </div>
@@ -3549,14 +3561,28 @@ const getTrafficOverview = async(task, data) => {
         lockedModule('getTimeMobileDesktop', data.userData.member);
         lockedModule('trafficByGeo', data.userData.member);
         lockedModule('getCrunchBase', data.userData.member);
-        lockedModule('getTrafficOverviewCustomerSourceAnalysis ', data.userData.member);
+        lockedModule('getTrafficOverviewCustomerSourceAnalysis', data.userData.member);
+        lockedModule('getTrafficOverviewCustomerResources', data.userData.member);
+
     }
     //--------Truy Cập Theo Tháng
 const getAccessMonthly = async(task, data) => {
+        // console.log(adsdescription);
+
         if (data.status == "success") {
             if (data.data && data.data.trafficTrend) {
                 let items0 = data.data.trafficTrend.items[0];
                 let items6 = data.data.trafficTrend.items;
+                setTimeout(function() {
+                    if (adsdescription && items0.visits < 10000) {
+                        $('.description-goads').html('Nhận thêm mã khuyến mãi Google Ads trị giá 1.350.000 vnđ, theo dõi IP và chặn click ảo phá quảng cáo chỉ 299,000 vnđ/tháng.')
+                        $('.link-a-ads').attr('href', 'https://admin.fff.com.vn/quangcao/?view=promotion&action=index')
+                    } else if (adsdescription && items0.visits >= 10000) {
+                        $('.description-goads').html('Theo dõi IP click quảng cáo, chặn click ảo nhận báo cáo chuyên sâu về quảng cáo Google Ads chỉ 299,000 vnđ/tháng.')
+                        $('.link-a-ads').attr('href', 'https://fffads.com/?view=follow-ip&action=index')
+                    }
+                }, 1500)
+
 
                 let MonthlyVisits = numeral(items0.visits).format("0,0");
                 let html = `
@@ -3600,6 +3626,9 @@ const getAccessMonthly = async(task, data) => {
         } else { console.log("error", task); }
     }
     //-------Nguồn Khách Hàng
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 const getTrafficOverviewCustomerResources = async(task, data) => {
     $('.similarReloadTask[data-task="getTrafficOverviewCustomerResources"]').attr('data-task', 'getTrafficOverview')
     if (data.status == "success") {
@@ -3615,11 +3644,11 @@ const getTrafficOverviewCustomerResources = async(task, data) => {
                     let key = index;
                     let value = +numeral(item).format("0");
                     let obj = {
-                        name: key,
+                        name: capitalizeFirstLetter(key),
                         value: value
                     }
                     let data_namechart = {
-                        name: key,
+                        name: capitalizeFirstLetter(key),
                         icon: 'circle',
                     }
                     datanamechart.push(data_namechart);
@@ -3705,6 +3734,7 @@ const getTrafficOverviewCustomerResources = async(task, data) => {
         } else {}
     } else { console.log("error", task); }
 }
+
 const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
     $('.similarReloadTask[data-task="getTrafficOverviewCustomerSourceAnalysis"]').attr('data-task', 'getTrafficOverview')
     if (data.status == "success") {
@@ -3880,7 +3910,7 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                 }
             };
             await $(`.getTrafficOverviewCustomerSourceAnalysis `).removeClass('is-loading');
-            //* update v7*/          
+            //* update v7*/
             //hết Phân tsích nguồn khách hàng
         } else {
 

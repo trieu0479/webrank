@@ -19,7 +19,7 @@
     </div>
     <div class="row">
         <div class="col-12 col-md-12 tab-content mt-1 mt-md-3">
-            <div class="tab-pane px-4 active is-loading" id="showRefDomain" role="tabpanel" style="height: 300px">
+            <div class="tab-pane px-4 active is-loading parent-referringDomains" id="showRefDomain" role="tabpanel" style="height: 300px">
             </div>
         </div>
     </div>
