@@ -28,7 +28,7 @@ $.get(`//localapi.trazk.com/webdata/v3.php?task=countryIsoName&userToken=${userT
 
 })
 var domain_name = domain;
-
+var adsdescription;
 var arrDomain = [];
 var selectWebsite = "";
 
@@ -107,6 +107,8 @@ const getHeader = async data => {
         similarThumb = 'assets' + similarThumb;
         similarThumbMobile = similarThumb;
     }
+    console.log(similarThumb);
+    console.log(similarThumbMobile);
 
     // Check value Header
     if (!similarTags) similarTags = []; // set null = []
@@ -2224,6 +2226,7 @@ const getSimilarSites = async(task, data) => {
             $(`.${task}`).attr('style', 'min-height:300px !important');
             // console.log("sssss");
             $(`.${task}`).html('');
+
             let {
                 data: SimilarSites,
                 website: domain
@@ -2289,13 +2292,15 @@ const getSimilarSites = async(task, data) => {
                     })
                 });
             })
-
-
-
-
-
-
-
+            var html_descript = `<div class="bg-white pl-4 pt-3 mb-0 pb-3 mx-3 pr-4 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
+                <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
+                    <div class="description-goads">Thêm đối thủ cạnh tranh, theo dõi và nhận báo cáo hàng ngày về đối thủ của bạn. Chỉ 199,000 vnđ/tháng</div>
+                </div>
+                <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4 btn-noads">
+                    <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/account/?view=user&action=payment-table">Phân tích đối thủ</a>
+                </div>
+            </div>`
+            $('.parent-getSimilarSites').parent().append(html_descript).addClass('pb-3')
             await $(`.${task}`).removeClass('is-loading');
             await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
         } else {
@@ -2431,6 +2436,12 @@ const getScrapedSearchAds = async(boxName, data) => {
     }
     if (data.status == "success") {
         var SearchAds = data.data.adwordsPositionsOverview;
+        adsdescription = SearchAds
+        console.log(adsdescription)
+        if (!adsdescription) {
+            $('.description-goads').html(`Đưa website [xxx] lên top Google bằng Google Ads, tặng mã khuyến mãi quảng cáo Google Ads trị giá 1.350.000 vnđ.`)
+            $('.btn-noads').html(`<a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/quangcao/?view=buy-account&action=index">Mua tài khoản quảng cáo</a>`)
+        }
         //  console.log(SearchAds);
         $(`#getScrapedSearchAds .carousel-inner`).html('');
         $(`#getScrapedSearchAds .carousel-indicators`).html('');
@@ -3556,10 +3567,22 @@ const getTrafficOverview = async(task, data) => {
     }
     //--------Truy Cập Theo Tháng
 const getAccessMonthly = async(task, data) => {
+        // console.log(adsdescription);
+
         if (data.status == "success") {
             if (data.data && data.data.trafficTrend) {
                 let items0 = data.data.trafficTrend.items[0];
                 let items6 = data.data.trafficTrend.items;
+                setTimeout(function() {
+                    if (adsdescription && items0.visits < 10000) {
+                        $('.description-goads').html('Nhận thêm mã khuyến mãi Google Ads trị giá 1.350.000 vnđ, theo dõi IP và chặn click ảo phá quảng cáo chỉ 299,000 vnđ/tháng.')
+                        $('.link-a-ads').attr('href', 'https://admin.fff.com.vn/quangcao/?view=promotion&action=index')
+                    } else if (adsdescription && items0.visits >= 10000) {
+                        $('.description-goads').html('Theo dõi IP click quảng cáo, chặn click ảo nhận báo cáo chuyên sâu về quảng cáo Google Ads chỉ 299,000 vnđ/tháng.')
+                        $('.link-a-ads').attr('href', 'https://fffads.com/?view=follow-ip&action=index')
+                    }
+                }, 1500)
+
 
                 let MonthlyVisits = numeral(items0.visits).format("0,0");
                 let html = `
@@ -3603,6 +3626,9 @@ const getAccessMonthly = async(task, data) => {
         } else { console.log("error", task); }
     }
     //-------Nguồn Khách Hàng
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 const getTrafficOverviewCustomerResources = async(task, data) => {
     $('.similarReloadTask[data-task="getTrafficOverviewCustomerResources"]').attr('data-task', 'getTrafficOverview')
     if (data.status == "success") {
@@ -3618,11 +3644,11 @@ const getTrafficOverviewCustomerResources = async(task, data) => {
                     let key = index;
                     let value = +numeral(item).format("0");
                     let obj = {
-                        name: key,
+                        name: capitalizeFirstLetter(key),
                         value: value
                     }
                     let data_namechart = {
-                        name: key,
+                        name: capitalizeFirstLetter(key),
                         icon: 'circle',
                     }
                     datanamechart.push(data_namechart);

@@ -28,4 +28,13 @@
             </div>
         </div>
     </div>
+    <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
+        <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
+            <!-- <h4 style="text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện Google Display Ads</h4> -->
+            <div class="description-goads">Website của bạn chưa thực hiện tối ưu cho chiến dịch digital marketing (quảng cáo qua mạng), bạn có muốn được chuyên gia tư vấn thêm không</div>
+        </div>
+        <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4 btn-noads">
+            <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="">Thuê chuyên gia</a>
+        </div>
+    </div>
 </div>
