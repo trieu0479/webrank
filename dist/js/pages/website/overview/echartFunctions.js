@@ -524,8 +524,8 @@ const estmatedWorth = async(task, data) => {
 
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    var freeModule = [];
-    var VIPModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor', "getCrunchBase","getTimeMobileDesktop","getTrafficOverview","getTrafficOverviewCustomerResources","getTrafficOverviewCustomerSourceAnalysis","getTrafficOverviewCustomerResources"];
+    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor', "getCrunchBase","getTimeMobileDesktop","getTrafficOverview","getTrafficOverviewCustomerResources","getTrafficOverviewCustomerSourceAnalysis","getTrafficOverviewCustomerResources"];
+    var VIPModule = [];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             //ngoai le
