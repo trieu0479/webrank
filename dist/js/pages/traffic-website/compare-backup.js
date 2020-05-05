@@ -1,7 +1,7 @@
 import api from '/dist/dist/js/pages/traffic-website/compareFunctions.js';
 
 $(document).ready(() => {
-    console.log(1)
+    // console.log(1)
     const url = new URL(location.href);
     const originalDomain1 = url.searchParams.get("domain1") || url.pathname.split("/")[2];
     const originalDomain2 = url.searchParams.get("domain2") || url.pathname.split("/")[2];
@@ -134,91 +134,91 @@ $(document).ready(() => {
         }
 
         //getTrendingKeywordsTable
-        initDatatable(
-            'getKeywords', {
-                ajax: {
-                    url: `//aapi.trazk.com/private/keywords/keywordPlannerDomain.php?limit=10&domain=${domain1}`,
-                    dataSrc: 'data',
-                },
-                drawCallback: function(settings) {
-                    // $('.getTrendingKeywordsTable-container').removeClass('is-loading').unblock();
-                    // $('.getTrendingKeywordsTable-container').find('.fa-spin').removeClass('fa-spin');
-                },
-                columns: [{
-                        title: 'Từ khoá',
-                        data: 0,
-                        render: data => `<a href="?view=keywords&action=keywords-overview&keyword=${data}&language=vn"  data-type="keyword" class="changeURL" data-input="${data}"><i class="child-hover far fa-search mr-1"></i> ${data}</a>`,
-                        // width: '180px'
-                    },
-                    {
-                        title: 'Xu hướng',
-                        data: 1,
-                        width: '100px'
-                    },
-                    {
-                        title: 'Điểm cạnh tranh',
-                        data: 2,
-                        width: '100px'
-                    },
-                    {
-                        title: 'Hiển thị',
-                        data: 3,
-                        width: '100px'
-                    },
-                    {
-                        title: 'Giá thấp nhất',
-                        data: 4,
-                        width: '100px'
-                    },
-                    {
-                        title: 'Giá cao nhất',
-                        data: 5,
-                        width: '100px'
-                    },
-                ],
-                "order": [
-                    [3, 'desc']
-                ],
-                columnDefs: [{
-                    targets: [3, 4, 5],
-                    className: 'text-right',
-                    render: $.fn.dataTable.render.number(',', '.', 0, '')
-                }, {
-                    targets: 2,
-                    className: 'text-center'
-                }],
-                language,
-                info: false,
-                autoWidth: false,
-                searching: false,
-                scrollY: '350px',
-                scrollCollapse: true,
-                paging: false,
-                processing: true,
-                drawCallback: function() {
-                    $('.lichsuHienThi').sparkline('html', {
-                        type: 'bar',
-                        width: '50px',
-                        height: '16px',
-                        spotColor: '',
-                        minSpotColor: '',
-                        maxSpotColor: '',
-                        highlightSpotColor: '',
-                        barColor: '#74b9ff',
-                        sliceColors: ['#1abc9c', '#e74c3c'],
-                        fillColor: 'rgba(61, 133, 222, 0.3)',
-                    })
-                },
-                initComplete: function(settings, json) {
-                    $(`#getKeywords_wrapper .dataTables_scrollBody`).perfectScrollbar();
-                    $(`#getKeywords_wrapper .dataTables_scrollHead table.dataTable`).attr('style', 'margin-top:0!important')
-                        // .find('thead').addClass('bg-secondary')
-                        .find('th').each(function(i) { $(this).addClass('border-top-0 border-bottom') });
-                    $(`.getKeywords-container`).removeClass('is-loading');
-                    $(`#getKeywords .dataTables_empty`).text("").addClass('empty-state');
-                }
-            }
-        )
+        // initDatatable(
+        //     'getKeywords', {
+        //         ajax: {
+        //             url: `//aapi.trazk.com/private/keywords/keywordPlannerDomain.php?limit=10&domain=${domain1}`,
+        //             dataSrc: 'data',
+        //         },
+        //         drawCallback: function(settings) {
+        //             // $('.getTrendingKeywordsTable-container').removeClass('is-loading').unblock();
+        //             // $('.getTrendingKeywordsTable-container').find('.fa-spin').removeClass('fa-spin');
+        //         },
+        //         columns: [{
+        //                 title: 'Từ khoá',
+        //                 data: 0,
+        //                 render: data => `<a href="?view=keywords&action=keywords-overview&keyword=${data}&language=vn"  data-type="keyword" class="changeURL" data-input="${data}"><i class="child-hover far fa-search mr-1"></i> ${data}</a>`,
+        //                 // width: '180px'
+        //             },
+        //             {
+        //                 title: 'Xu hướng',
+        //                 data: 1,
+        //                 width: '100px'
+        //             },
+        //             {
+        //                 title: 'Điểm cạnh tranh',
+        //                 data: 2,
+        //                 width: '100px'
+        //             },
+        //             {
+        //                 title: 'Hiển thị',
+        //                 data: 3,
+        //                 width: '100px'
+        //             },
+        //             {
+        //                 title: 'Giá thấp nhất',
+        //                 data: 4,
+        //                 width: '100px'
+        //             },
+        //             {
+        //                 title: 'Giá cao nhất',
+        //                 data: 5,
+        //                 width: '100px'
+        //             },
+        //         ],
+        //         "order": [
+        //             [3, 'desc']
+        //         ],
+        //         columnDefs: [{
+        //             targets: [3, 4, 5],
+        //             className: 'text-right',
+        //             render: $.fn.dataTable.render.number(',', '.', 0, '')
+        //         }, {
+        //             targets: 2,
+        //             className: 'text-center'
+        //         }],
+        //         language,
+        //         info: false,
+        //         autoWidth: false,
+        //         searching: false,
+        //         scrollY: '350px',
+        //         scrollCollapse: true,
+        //         paging: false,
+        //         processing: true,
+        //         drawCallback: function() {
+        //             $('.lichsuHienThi').sparkline('html', {
+        //                 type: 'bar',
+        //                 width: '50px',
+        //                 height: '16px',
+        //                 spotColor: '',
+        //                 minSpotColor: '',
+        //                 maxSpotColor: '',
+        //                 highlightSpotColor: '',
+        //                 barColor: '#74b9ff',
+        //                 sliceColors: ['#1abc9c', '#e74c3c'],
+        //                 fillColor: 'rgba(61, 133, 222, 0.3)',
+        //             })
+        //         },
+        //         initComplete: function(settings, json) {
+        //             $(`#getKeywords_wrapper .dataTables_scrollBody`).perfectScrollbar();
+        //             $(`#getKeywords_wrapper .dataTables_scrollHead table.dataTable`).attr('style', 'margin-top:0!important')
+        //                 // .find('thead').addClass('bg-secondary')
+        //                 .find('th').each(function(i) { $(this).addClass('border-top-0 border-bottom') });
+        //             $(`.getKeywords-container`).removeClass('is-loading');
+        //             $(`#getKeywords .dataTables_empty`).text("").addClass('empty-state');
+        //         }
+        //     }
+        // )
 
 
 

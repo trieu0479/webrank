@@ -15,7 +15,7 @@ if (!$checkDomain1 || !$checkDomain2) echo "<script>window.parent.location ='htt
 <div class="page-wrapper">
     <!-- <div class="bg-similar" style="height:500px"></div> -->
     <div class="container" style="padding-top: 0px!important;">
-        <div class="page-content pt-0">
+        <div class="pt-0">
             <div class="row d-none d-md-block">
                 <div class="col-12">
                     <div class="scroll-down d-none">
@@ -371,7 +371,7 @@ if (!$checkDomain1 || !$checkDomain2) echo "<script>window.parent.location ='htt
             </div> -->
             <!-- ĐÓNG chia sẻ -->
 
-            <div class="similarBody">
+            <div class="similarBody" style="background: #edf1f5">
                 <!--Tổng Truy Cập-->
                 <div class="row mt-5">
                     <div class="col-12 mb-5">
@@ -2279,8 +2279,7 @@ if (!$checkDomain1 || !$checkDomain2) echo "<script>window.parent.location ='htt
                 </div>
                 <!-- ĐÓNG website đối thủ -->
 
-                <div class="row">
-                    <!-- Từ khoá website -->
+                <!-- <div class="row">
                     <div class="col-12 mb-5">
                         <div class="bg-white shadow-sm rounded">
                             <div class="row border-bottom m-0 py-2">
@@ -2309,21 +2308,10 @@ if (!$checkDomain1 || !$checkDomain2) echo "<script>window.parent.location ='htt
                                 </div>
                             </div>
                             <table id="getKeywords" class="table table-striped" style="width:100%;height:100%;">
-                                <!-- <thead>
-                                    <tr>
-                                        <th>Từ khóa</th>
-                                        <th style="width:130px!important;text-align: center">Xu hướng <small>(12 tháng)</small></th>
-                                        <th style="width:180px!important;text-align:right">Điểm cạnh tranh <small>(từ 0-100)</small></th>
-                                        <th style="width:180px!important;text-align:right">Hiển thị <small>(số lần hiện quảng cáo)</small></th>
-                                        <th style="width:180px!important;text-align:right">Giá thấp nhất <sup>vnđ</sup> <small>(trên 1 click chuột)</small></th>
-                                        <th style="width:180px!important;text-align:right">Giá cao nhất <sup>vnđ</sup> <small>(trên 1 click chuột)</small></th>
-                                    </tr>
-                                </thead> -->
                             </table>
                         </div>
                     </div>
-                    <!-- ĐÓNG Từ khoá website -->
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -2335,7 +2323,7 @@ $(document).ready(() => {
             url: `//f.trazk.com/compare.php?domain1=<?=$domain1?>&domain2=<?=$domain2?>`,
             type: "GET"
         }).then(() => {  
-                console.log('buildFeatureImage-success');
+                // console.log('buildFeatureImage-success');
                 return; 
             }) 
         });

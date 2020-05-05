@@ -1328,7 +1328,7 @@ const getTrafficSourcesTotalReferrals = async(task, data, domain1, domain2) => {
                 })
 
                 $.each(Volumes, (name, data) => {
-                    console.log(data)
+                    // console.log(data)
                     dataChart.values.push((data[0] == null) ? 0 : data[0]);
                 })
                 let temp = {}
@@ -4072,6 +4072,7 @@ const getWebsiteAdsIntelDisplay = async(task, data, domain1, domain2) => {
 };
 
 const getScrapedSearchAds = async(task, data, domain1, domain2) => {
+    // console.log(data)
     for (let i = 0; i < data.length; i++) {
         if (data[i].status == "success") {
 
@@ -4096,8 +4097,9 @@ const getScrapedSearchAds = async(task, data, domain1, domain2) => {
 
                 $(`#${idDomain + task} .carousel-inner`).html('');
                 $(`#${idDomain + task} .carousel-indicators`).html('');
-
-                $.each(SearchAds[`${website[i]}`], (index, value) => {
+                // console.log(SearchAds)
+                $.each((SearchAds) ? SearchAds : SearchAds[`${website[i]}`], (index, value) => {
+                    // console.log(value)
                     if (index < 5) {
                         $(`#${idDomain + task} .carousel-indicators`).append(`
                     <li data-target="#${idDomain + task}" data-slide-to="${index}" class="my-0 border-0 bg-favorite text-white text-center rounded-circle ${index == 0 ? 'active' : ''}" style="width:20px;height:20px;text-indent:0;">${index + 1}</li>
