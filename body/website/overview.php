@@ -179,13 +179,13 @@
                     </div>
                     <div class="row">
                       <?php require_once(__DIR__ . "/modules/overview.widgetDisplayAds.php")?>               
-                      <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
+                      <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded wapper-display  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
                           <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
                               <h4 style="text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện Google Display Ads</h4>
-                              <div class="description-goads"></div>
+                              <div class="desciption-display"></div>
                           </div>
                           <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4 btn-noads">
-                              <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="">Dùng ngay</a>
+                              <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-display" data-toggle="tooltip" data-placement="top" title="" href="">Dùng ngay</a>
                           </div>
                       </div> 
                     </div>
@@ -217,7 +217,15 @@
                         </div>
                     </div>
                     <!--HẾT SOCIAL -->
-
+                    <!-- <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded wapper-display  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
+                          <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
+                              <h4 style="text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện Google Display Ads</h4>
+                              <div class="desciption-facebook"></div>
+                          </div>
+                          <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4 btn-noads">
+                              <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-facebook" data-toggle="tooltip" data-placement="top" title="" href="">Dùng ngay</a>
+                          </div>
+                      </div>  -->
                 </div>
             </div>
 
@@ -247,11 +255,11 @@
                         <!-- backlink-->
                     <div class="bg-white pl-4 pt-3 pb-3 pr-4 mb-0 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
                         <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
-                            <h4 style="text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện traffic Website</h4>
-                            <div class="">Cải thiện traffic giúp cải thiện thứ hạng và giá trị website. Chỉ 50 vnd/1 traffic thử ngay</div>
+                            <h4 style="text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện Backlink - SEO</h4>
+                            <div class="">Theo dõi và cải thiện chất lượng chiến dịch SEO (tối ưu Google Search) chỉ 199,000 vnd/tháng</div>
                         </div>
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
-                            <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="">Mua Traffic</a>
+                            <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="https://admin.com.vn/seo?userToken=<?=$userToken?>">Cải thiện SEO</a>
                         </div>
                     </div>
                 </div>

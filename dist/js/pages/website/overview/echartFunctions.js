@@ -28,7 +28,7 @@ $.get(`//localapi.trazk.com/webdata/v3.php?task=countryIsoName&userToken=${userT
 
 })
 var domain_name = domain;
-var adsdescription;
+var trafficdst;
 var arrDomain = [];
 var selectWebsite = "";
 
@@ -526,7 +526,7 @@ const estmatedWorth = async(task, data) => {
 
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor', "getCrunchBase","getTimeMobileDesktop","getTrafficOverview","getTrafficOverviewCustomerResources","getTrafficOverviewCustomerSourceAnalysis","getTrafficOverviewCustomerResources"];
+    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor', "getCrunchBase", "getTimeMobileDesktop", "getTrafficOverview", "getTrafficOverviewCustomerResources", "getTrafficOverviewCustomerSourceAnalysis", "getTrafficOverviewCustomerResources"];
     var VIPModule = [];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
@@ -2292,14 +2292,15 @@ const getSimilarSites = async(task, data) => {
                     })
                 });
             })
-            var html_descript = `<div class="bg-white pl-4 pt-3 mb-0 pb-3 mx-3 pr-4 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
+            var html_descript = `<div class="delete-phantich bg-white pl-4 pt-3 mb-0 pb-3 mx-3 pr-4 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
                 <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
-                    <div class="description-goads">Thêm đối thủ cạnh tranh, theo dõi và nhận báo cáo hàng ngày về đối thủ của bạn. Chỉ 199,000 vnđ/tháng</div>
+                    <div class="">Thêm đối thủ cạnh tranh, theo dõi và nhận báo cáo hàng ngày về đối thủ của bạn. Chỉ 199,000 vnđ/tháng</div>
                 </div>
                 <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4 btn-noads">
-                    <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/account/?view=user&action=payment-table">Phân tích đối thủ</a>
+                    <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/account/?view=user&action=payment-table">Phân tích đối thủ</a>
                 </div>
             </div>`
+            $('.delete-phantich').remove()
             $('.parent-getSimilarSites').parent().append(html_descript).addClass('pb-3')
             await $(`.${task}`).removeClass('is-loading');
             await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
@@ -2430,19 +2431,26 @@ const getDomainOverviewV2 = async(boxName, data) => {
     lockedModule('getListGoogleAdsCompetitor', data.userData.member);
 };
 const getScrapedSearchAds = async(boxName, data) => {
-
+    let des_true = true;
     if (data.data.adwordsPositionsOverview.length == 0) {
+        des_true = false
         $('#getScrapedSearchAds').addClass('empty-state')
+        $('.description-goads').html(`Đưa website ${domain} lên top Google bằng Google Ads, tặng mã khuyến mãi quảng cáo Google Ads trị giá 1.350.000 vnđ.`)
+        $('.btn-noads').html(`<a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/quangcao/?view=buy-account&action=index">Mua tài khoản quảng cáo</a>`)
     }
     if (data.status == "success") {
         var SearchAds = data.data.adwordsPositionsOverview;
-        adsdescription = SearchAds
-        console.log(adsdescription)
-        if (!adsdescription) {
-            $('.description-goads').html(`Đưa website [xxx] lên top Google bằng Google Ads, tặng mã khuyến mãi quảng cáo Google Ads trị giá 1.350.000 vnđ.`)
-            $('.btn-noads').html(`<a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/quangcao/?view=buy-account&action=index">Mua tài khoản quảng cáo</a>`)
-        }
-        //  console.log(SearchAds);
+        // adsdescription = SearchAds
+        // console.log(adsdescription)
+        setTimeout(function() {
+            if (des_true && SearchAds && trafficdst < 10000) {
+                $('.description-goads').html('Nhận thêm mã khuyến mãi Google Ads trị giá 1.350.000 vnđ, theo dõi IP và chặn click ảo phá quảng cáo chỉ 299,000 vnđ/tháng.')
+                $('.link-a-ads').attr('href', 'https://admin.fff.com.vn/quangcao/?view=promotion&action=index')
+            } else if (des_true && SearchAds && trafficdst >= 10000) {
+                $('.description-goads').html('Theo dõi IP click quảng cáo, chặn click ảo nhận báo cáo chuyên sâu về quảng cáo Google Ads chỉ 299,000 vnđ/tháng.')
+                $('.link-a-ads').attr('href', 'https://fffads.com/?view=follow-ip&action=index')
+            }
+        }, 1500)
         $(`#getScrapedSearchAds .carousel-inner`).html('');
         $(`#getScrapedSearchAds .carousel-indicators`).html('');
         $("#row-getPaidSearchCompetitorsTableV1").show();
@@ -2515,7 +2523,6 @@ const getTrafficSocial = async(task, data, domain) => {
                 let SearchTotal = TrafficSocial.SearchTotal;
                 let VolumeTotal = TrafficSocial.VolumeTotal;
                 let TotalDesktopTraffic = SearchTotal / VolumeTotal;
-
                 $("#TotalSocialVisits").removeClass("is-loading");
                 $("#TotalSocialVisits").html(`Tổng ${numeral(SearchTotal).format("0,0")}`);
 
@@ -3175,9 +3182,7 @@ const getMarketingMixOverview = async(task, data) => {
                     });
 
                     $("input[type=radio][name=getMarketingMixOverview]").change(function() {
-
                         //alert(this.value);
-
                         let ele = document.getElementById(`getMarketingMixOverview--TrafficShare`);
                         echarts.dispose(ele);
                         if (this.value == "setgetMarketingMixOverviewDaily") {
@@ -3228,6 +3233,17 @@ const SampleAdsasImage = async(task, data) => {
     } // DISPLAY ADS
 const googleAdsGDNOverview = async(task, data) => {
     lockedModule('SampleAds', data.userData.member);
+    let dislay_des = data.data.googleAdsGDNOverview.media.total
+    if (dislay_des > 0) $('.wapper-display').removeClass('d-flex').addClass('d-none')
+    setTimeout(function() {
+        if (dislay_des == 0 && trafficdst < 10000) {
+            $('.desciption-display').html('Thêm ngay chiến dịch quảng cáo Google Display Ads, xuất hiện quảng cáo bám duôi khách hàng, tăng tỉ lệ xuất hiện của thương hiệu và tỉ lệ chốt đơn ngay.')
+            $('.link-a-display').attr('href', 'https://fffads.com/?view=display&action=index')
+        } else if (dislay_des == 0 && trafficdst >= 10000) {
+            $('.desciption-display').html('Thêm chiến dịch quảng cáo Google Display Ads, giúp website của bạn xuất hiện trên những trang báo lớn nhất tại Việt Nam.')
+            $('.link-a-display').attr('href', 'https://fffads.com/?view=display&action=index')
+        }
+    }, 1500)
     if (data.data.googleAdsGDNOverview.media.data.length == 0) {
         $('.sample-image-ads').addClass('empty-state')
     } else {
@@ -3268,13 +3284,13 @@ const googleAdsGDNOverview = async(task, data) => {
     }
 }
 const SampleAdsasHTML = async(task, data) => {
-    $('.footer--bt-view').remove()
-    if (data.data.htmlAds == '') {
-        $('.sample-html-ads').addClass('empty-state')
-    }
-    data.data.htmlAds.forEach((val, index) => {
-        if (index < 5) {
-            $(".sample-html-ads").append(`<div class="box-all">
+        $('.footer--bt-view').remove()
+        if (data.data.htmlAds == '') {
+            $('.sample-html-ads').addClass('empty-state')
+        }
+        data.data.htmlAds.forEach((val, index) => {
+            if (index < 5) {
+                $(".sample-html-ads").append(`<div class="box-all">
             <div class="box-img">
                 <div class="image-media">
                     <div class="image-sample">
@@ -3288,12 +3304,20 @@ const SampleAdsasHTML = async(task, data) => {
                 </div>
             </div>
         </div>`)
-        }
-    })
-}
+            }
+        })
+    }
+    // function descriptbtn(ads,pos_des,pos_link,desciption1,desciption2){
+    //     if(ads && trafficitem < 10000){
+    //         $(`.${pos_des}`).html(desciption1)
+    //         $(`.${pos_link}`).html(desciption1)
+    //     }else if(ads && trafficitem >=10000){
+    //         $(`.${pos_des}`).html(desciption2)
+    //         $(`.${pos_link}`).html(desciption2)
+    //     }
+    // }
 const SampleAdsasText = async(task, data) => {
     $('.footer--bt-view').remove();
-    console.log(data);
 
     if (data.data.googleAdsGDNOverview.text.data.length == '') {
         $('.sample-text-ads').addClass('empty-state')
@@ -3566,6 +3590,13 @@ const getTrafficOverview = async(task, data) => {
 
     }
     //--------Truy Cập Theo Tháng
+function itemdescription(text) {
+    if (text < 10000) {
+        $('.description-companyinfo').html('Website của bạn chưa thực hiện tối ưu cho chiến dịch digital marketing (quảng cáo qua mạng), bạn có muốn được chuyên gia tư vấn thêm không')
+    } else if (text > 10000) {
+        $('.description-companyinfo').html('Bạn có muốn cải thiện chất lượng website và tăng bằng cách sử dụng bộ công cụ thu hút khách hàng và quản lý')
+    }
+}
 const getAccessMonthly = async(task, data) => {
         // console.log(adsdescription);
 
@@ -3573,17 +3604,8 @@ const getAccessMonthly = async(task, data) => {
             if (data.data && data.data.trafficTrend) {
                 let items0 = data.data.trafficTrend.items[0];
                 let items6 = data.data.trafficTrend.items;
-                setTimeout(function() {
-                    if (adsdescription && items0.visits < 10000) {
-                        $('.description-goads').html('Nhận thêm mã khuyến mãi Google Ads trị giá 1.350.000 vnđ, theo dõi IP và chặn click ảo phá quảng cáo chỉ 299,000 vnđ/tháng.')
-                        $('.link-a-ads').attr('href', 'https://admin.fff.com.vn/quangcao/?view=promotion&action=index')
-                    } else if (adsdescription && items0.visits >= 10000) {
-                        $('.description-goads').html('Theo dõi IP click quảng cáo, chặn click ảo nhận báo cáo chuyên sâu về quảng cáo Google Ads chỉ 299,000 vnđ/tháng.')
-                        $('.link-a-ads').attr('href', 'https://fffads.com/?view=follow-ip&action=index')
-                    }
-                }, 1500)
-
-
+                trafficdst = items0.visits
+                itemdescription(items0.visits)
                 let MonthlyVisits = numeral(items0.visits).format("0,0");
                 let html = `
                     <div class="px-3 py-4 pb-5" >
