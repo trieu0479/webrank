@@ -24,7 +24,7 @@
                         class="fal fa-sync"></i></a>
             </div>
         </div>
-        <div id="myTabContent" class="rounded is-loading" style="min-height:400px">
+        <div id="myTabContent" class="rounded is-loading parent-adwordsMonthlyFullTrend" style="min-height:400px">
             <ul class="nav nav-tabs customtab" role="tablist">
                 <li class="nav-item"> <a class="nav-link active" data-toggle="tab" data-task="EstimateChart"
                         href="#EstimateChart" role="tab"> <span class=""><i
