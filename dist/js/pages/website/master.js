@@ -125,7 +125,7 @@ $(document).ready(() => {
         return true;
     }
     window.lockedModule = function lockedModule(boxWidgetName, level) {
-        var freeModule = [  "getAdvertisingSearchDetail", "getSimilarSites", "organicPositions","getTrafficSocialTableDetail"];
+        var freeModule = [  "getAdvertisingSearchDetail", "getSimilarSites", "organicPositions","getTrafficSocialTableDetail","banckLinksOverview","getKeywords","getWebsiteGeography"];
         var VIPModule = ["topBackLinks", "getTrafficDisplayAdvertisingWebsitesTable", "organicCompetitors", "getOrganicKeywordsNonBrandedTable", "organicPositions", "TopPaidKeyword", "MainCompetitor", "PaidPageTable", "PublicSherTable", "getTrafficDestinationAds","getTrafficSourcesSocial","getTrafficSocial","referringDomains","getDataZones","getDataContry","getSubdomains","getOrganicKeywordsBrandedTable"];
         if (level == 'demo') {
             if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {

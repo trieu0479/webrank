@@ -526,7 +526,7 @@ const estmatedWorth = async (task, data) => {
 
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getMarketingMixOverviewDaily", "getTrafficSocial", "SampleAdsasImage", "SampleAds", "getTrafficOverviewCustomerSourceAnalysis"];
+    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getMarketingMixOverviewDaily", "getTrafficSocial", "SampleAdsasImage", "SampleAds", "getTrafficOverviewCustomerSourceAnalysis","getDomainBackLinkDetail","getSimilarSites"];
     var VIPModule = ["getTrafficOverview", "getTrafficOverviewCustomerResources","getDesktopVsMobileVisits","getWebDemographicsGender","getWebDemographicsAge","getTrafficOverviewCustomerSourceAnalysis","SampleAds","getTrafficSocial"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
