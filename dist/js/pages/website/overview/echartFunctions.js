@@ -526,7 +526,7 @@ const estmatedWorth = async (task, data) => {
 
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getMarketingMixOverviewDaily", "getTrafficSocial", "SampleAdsasImage", "SampleAds", "getTrafficOverviewCustomerSourceAnalysis","getDomainBackLinkDetail","getSimilarSites","getTrafficSourcesSearch","getTrafficSocial"];
+    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getMarketingMixOverviewDaily", "getTrafficSocial", "SampleAdsasImage", "SampleAds", "getTrafficOverviewCustomerSourceAnalysis","getDomainBackLinkDetail","getSimilarSites","getTrafficSourcesSearch","getTrafficSocial","getScrapedSearchAds","getListGoogleAdsCompetitor","getCrunchBase"];
     var VIPModule = ["getTrafficOverview", "getTrafficOverviewCustomerResources","getDesktopVsMobileVisits","getWebDemographicsGender","getWebDemographicsAge","getTrafficOverviewCustomerSourceAnalysis"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
@@ -3582,7 +3582,7 @@ const getTrafficOverview = async (task, data) => {
     lockedModule('getDesktopVsMobileVisits', data.userData.member);
     // lockedModule('getTimeMobileDesktop', data.userData.member);
     lockedModule('trafficByGeo', data.userData.member);
-    // lockedModule('getCrunchBase', data.userData.member);
+    lockedModule('getCrunchBase', data.userData.member);
     lockedModule('getTrafficOverview', data.userData.member);
     lockedModule('getTrafficOverviewCustomerSourceAnalysis', data.userData.member);
     lockedModule('getTrafficOverviewCustomerResources', data.userData.member);
