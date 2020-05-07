@@ -64,34 +64,16 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-4">
-                                <div class="card-traffic bg-white rounded shadow-sm d-flex no-block d-md-block">
-                                    <div class="image image-3 d-flex no-block justify-content-center px-5"
-                                        style="padding: 70px 0">
-                                        <i class="fad fa-users-class align-self-center text-danger"
-                                            style="font-size: 50px"></i>
+                                <div class="px-4 py-3">
+                                    <div class="rounded-circle bg-dark-2 shadow-sm m-auto d-flex no-block justify-content-center align-items-center"
+                                        style="width: 120px; height: 120px">
+                                        <i class="fab fa-youtube text-dark" style="font-size:60px"></i>
                                     </div>
-                                    <div class="w-100 px-3 py-3">
-                                        <div class="">
-                                            <div class="mb-2">
-                                                <span
-                                                    class="position-relative text-danger font-gg font-16 font-weight-bold">
-                                                    300,000
-                                                    <span
-                                                        class="position-absolute text-danger font-gg font-10 font-weight-500"
-                                                        style="top: -5px">
-                                                        vnd
-                                                    </span>
-                                                </span>
-                                            </div>
-                                            <div class="font-gg font-weight-bold font-16 text-muted mb-3">
-                                                10,000 visitor
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <button type="button" data-price="300000"
-                                                class="btn-buy-now font-gg btn btn-outline-danger"
-                                                style="width: 130px; border-radius: 20px">Mua ngay</button>
-                                        </div>
+                                    <div class="mt-4 text-dark fontsize-18 font-weight-500">
+                                        Traffic Tiktok
+                                    </div>
+                                    <div class="mt-3 font-gg font-13 text-muted">
+                                        Tăng truy cập cho website giúp cải thiện thứ hạng SEO bằng cách tăng Visitor
                                     </div>
                                 </div>
                             </div>
