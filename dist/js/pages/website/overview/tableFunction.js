@@ -261,6 +261,18 @@ $(document).ready(() => {
                         $(`.getKeywords_wrapper .getKeywords .dataTables_empty`).parent().parent().addClass('d-none')
                     }
                     renderSparkline("getKeywords");
+                    let html_keywords = `
+                    <div class="bg-white pl-4 pt-3 pb-3 pr-4 mx-3 mt-4 mb-0 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
+                        <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
+                            <h4 style="text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện từ khóa - SEO</h4>
+                            <div class="">Theo dõi và cải thiện chất lượng chiến dịch SEO (tối ưu Google Search) chỉ 199,000 vnd/tháng</div>
+                        </div>
+                        <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4">
+                            <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="">Cải thiện SEO</a>
+                        </div>
+                    </div>
+                    `
+                    $('.parent-getKeywords').parent().append(html_keywords).addClass('pb-3')
                 }
             }
         )
@@ -327,7 +339,7 @@ $(document).ready(() => {
             initComplete: function(settings, json) {
                 $(`.dataTables_scrollBody`).perfectScrollbar();
                 $('.organicCompetitors tbody').addClass('text-left');
-                $('.parent-banckLinksOverview .dataTables_scrollBody ').attr('style', 'max-height: 275px;');
+                $('.parent-banckLinksOverview .dataTables_scrollBody ').attr('style', 'max-height: 303px;');
                 $('.widget-banckLinksOverview .widgetHeader').remove()
             }
         }
@@ -492,7 +504,7 @@ $(document).ready(() => {
                         <div class="p-2 mb-4 rounded-circle bg-primary" style="width:115px;height:115px;background-image: url('${res.data.imageURI}');background-size: cover;background-position: center;background-repeat: no-repeat;border:2px solid white"></div>
                         <div class="p-2 mb-5 pl-3">
                         <div class="font-16 font-weight-bold text-white">${res.data.name} <img class="ml-n1" src="${iconBlue}" style="width:20px">
-                                    
+
                         </div>
                         <div class="font-12 text-white">@${res.data.pageAlias}</div>
                         <div class="font-12 text-white">${res.data.category} - <span>${numeral(res.data.likes).format("0,0")} likes</span></div>
@@ -502,8 +514,8 @@ $(document).ready(() => {
                         <div class="font-12 text-dark p-5"><i class="far fa-flag-alt"></i> Trang được tạo <span>${moment(res.data.pageCreationDate).format('MMMM DD YYYY')}</span><div>
                         </div>
                         </div>
-                        
-                        
+
+
             </div>
             `;
             $('#bannerPageAds').append(html);
@@ -602,18 +614,18 @@ $(document).ready(() => {
         let domainData = res.data.domainData
         let websiteContact = res.data.websiteContact
         var email = websiteContact.email.replace(/[\(\)\[\]{}'"]/g, "");
-        if (email == null || email =='null') email = "chưa xác định";
+        if (email == null || email == 'null') email = "chưa xác định";
 
         var phone = websiteContact.phone.replace(/[\(\)\[\]{}'"]/g, "");
-        if (phone == null || phone =='null') phone = "chưa xác định";
-        
+        if (phone == null || phone == 'null') phone = "chưa xác định";
+
 
         let html_left = `
                 <div class="title-logo">${domainData.domain}</div>
                 <span class="email-infoweb mr-3" style=""><i class="fad fa-envelope mr-1  font-15" style="color: #74788d;"></i> ${email}</span>
                 <span class="email-infoweb"><i class="fal fa-phone-alt mr-1 font-15"></i>${phone}</span>
             `;
-        
+
         let html_info = `
             <div><strong>Địa chỉ:</strong> <i class="fas fa-map-marker-alt mr-2 text-info"></i>${(domainData.owner.address != undefined) ? domainData.owner.address:'Chưa cập nhật'}</div>
             <div><strong>Sở hữu:</strong> ${(domainData.owner.ownerName == '') ? domainData.registrarName : domainData.owner.ownerName}</div>

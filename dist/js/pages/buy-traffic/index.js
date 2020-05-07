@@ -174,7 +174,7 @@ function showPopupEdit(data,urlid) {
             appendSelectTraffic(data.dailyTraffic,urlid);
             appendSelectCountry(data.area);
             appendSelectTimeMaxAndMin(data.st,urlid);
-            appendSelectSubPage(data.subpage);
+            appendSelectSubPage(data.subpage,urlid);
             appendSelectTimeRun(data.timeToRun,urlid);
 
 
@@ -390,7 +390,7 @@ function appendSelectCountry(area) {
 function appendSelectTimeMaxAndMin(st,urlid =  "") {
     for(let i = 1; i <= 18; i++) {
         if(i > 1) {
-            $(".select-max").append(`<option ${(st != undefined && st.max == i*10) ? "selected" : (i == 6) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);   
+            $(".select-max").append(`<option ${(st != undefined && st.max == i*10) ? "selected" : (i == 3) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);   
         } 
 
         if(i != 18) {
@@ -427,8 +427,14 @@ function appendSelectTimeMaxAndMin(st,urlid =  "") {
 
 }
 
-function appendSelectSubPage(subpage) {
-    for (let i = 1; i <= 3; i++) { 
+function appendSelectSubPage(subpage,urlid="") {
+    for (let i = 0; i <= 3; i++) { 
+        $(".select-min-page").append(`<option ${(subpage != undefined && subpage.minPage == i || i==1) ? "selected" : ""} value="${i}">${i} trang</option>`);
+        $(".select-min-time").append(`<option ${(subpage != undefined && subpage.minTime == i*10 || i==1) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
+
+        $(".select-max-page").append(`<option ${(subpage != undefined && subpage.maxPage == i || i==3) ? "selected" : (i == 3) ? "selected" : ""} value="${i}">${i} trang</option>`);
+        $(".select-max-time").append(`<option ${(subpage != undefined && subpage.maxTime == i*10 || i==3) ? "selected" : (i == 3) ? "selected" : ""}  value="${i*10}">${i*10} s</option>`);
+        /*
         if(i == 1) {
             $(".select-min-page").append(`<option ${(subpage != undefined && subpage.minPage == i) ? "selected" : ""} value="${i}">${i} trang</option>`);
             $(".select-min-time").append(`<option ${(subpage != undefined && subpage.minTime == i*10) ? "selected" : ""} value="${i*10}">${i*10} s</option>`);
@@ -437,6 +443,7 @@ function appendSelectSubPage(subpage) {
             $(".select-max-page").append(`<option ${(subpage != undefined && subpage.maxPage == i) ? "selected" : (i == 3) ? "selected" : ""} value="${i}">${i} trang</option>`);
             $(".select-max-time").append(`<option ${(subpage != undefined && subpage.maxTime == i*10) ? "selected" : (i == 3) ? "selected" : ""}  value="${i*10}">${i*10} s</option>`);
         }
+        */
         
     }
 
@@ -449,6 +456,13 @@ function appendSelectSubPage(subpage) {
         placeholder: "Số giây",
         // allowClear: true
     });
+
+    if(urlid != "") { 
+        $(".select-min-page").prop("disabled", true);
+        $(".select-min-time").prop("disabled", true);
+        $(".select-max-page").prop("disabled", true);
+        $(".select-max-time").prop("disabled", true);
+    }
 }
 
 function appendSelectTimeRun(timeToRun,urlid = "") {
@@ -1227,7 +1241,7 @@ $(document).ready(() => {
         showPopupRecharge();
     })
 
-    postData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=getCostOfOrderTraffic&userToken=${userToken}`,"").then(data => {
+    postData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=getCurrentBank&userToken=${userToken}`,"").then(data => {
         data= JSON.parse(data);
         $(".budget").text(numeral(data.data.yourBank).format("0,0"))
     }) 

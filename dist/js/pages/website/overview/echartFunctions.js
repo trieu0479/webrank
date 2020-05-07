@@ -23,19 +23,19 @@ function extractHostname(url) {
 }
 
 var arrNameContry = [];
-$.get(`//localapi.trazk.com/webdata/v3.php?task=countryIsoName&userToken=${userToken}`, function(res) {
+$.get(`//localapi.trazk.com/webdata/v3.php?task=countryIsoName&userToken=${userToken}`, function (res) {
     arrNameContry = res.data
 
 })
 var domain_name = domain;
-var adsdescription;
+var trafficdst;
 var arrDomain = [];
 var selectWebsite = "";
 
 // const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 const masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c9a'];
 
-$('body').on('click', '.btn-compare', function(event) {
+$('body').on('click', '.btn-compare', function (event) {
     Swal.fire({
         title: 'Hãy nhập website để so sánh',
         html: `<input id="swal-input1" class="swal2-input text-lowercase" value=${domain_name} placeholder="Nhập website của bạn">` +
@@ -176,7 +176,7 @@ const getHeader = async data => {
 
 
     // Popup nhap website
-    const getDomain = async() => {
+    const getDomain = async () => {
         const result = await Swal.fire({
             type: "info",
             title: "Hãy nhập một website cần phân tích",
@@ -208,7 +208,7 @@ const getHeader = async data => {
         });
     });
 
-    const getDomainCompare = async() => {
+    const getDomainCompare = async () => {
         const result = await Swal.fire({
             title: 'Hãy nhập website để so sánh',
             width: 600,
@@ -285,7 +285,7 @@ const getHeader = async data => {
 
                         $(".selectWebsite").html(selectWebsite);
 
-                        $("span").click(function() {
+                        $("span").click(function () {
                             $("#swal-input2").val($(this).data("domain"));
                             $(".selectWebsite").html("");
                             $('.swal2-confirm').css("opacity", "1")
@@ -294,7 +294,7 @@ const getHeader = async data => {
                         })
                     })
 
-                    $("span").click(function() {
+                    $("span").click(function () {
                         $("#swal-input2").val($(this).data("domain"));
                         $(".selectWebsite").html("");
                         $('.swal2-confirm').css("opacity", "1");
@@ -351,7 +351,7 @@ const getHeader = async data => {
 
 
 
-const api = async(task, domain, reload = 0) => {
+const api = async (task, domain, reload = 0) => {
     domain;
     let url = "";
     let method = '';
@@ -404,9 +404,9 @@ const api = async(task, domain, reload = 0) => {
     }
     try {
         return await $.ajax({
-                url: url,
-                type: "GET"
-            })
+            url: url,
+            type: "GET"
+        })
             .then(data => {
                 if (task == 'buildFeatureImage') {
                     return;
@@ -454,9 +454,9 @@ const api = async(task, domain, reload = 0) => {
                     case "SampleAdsasText":
                         SampleAdsasText(task, data);
                         break;
-                        // case "getDesktopVsMobileVisits": //sử dụng
-                        //     getDesktopVsMobileVisits(task, data);
-                        //     break;
+                    // case "getDesktopVsMobileVisits": //sử dụng
+                    //     getDesktopVsMobileVisits(task, data);
+                    //     break;
                     case "getWebDemographicsGender": //sử dung
                         getWebDemographicsGender(task, data);
                         break;
@@ -469,9 +469,9 @@ const api = async(task, domain, reload = 0) => {
                     case "getSimilarSites": //sử dụng
                         getSimilarSites(task, data);
                         break;
-                        // case "getWebsiteGeography": //sử dụng
-                        //     getWebsiteGeography(task, data);
-                        //     break;
+                    // case "getWebsiteGeography": //sử dụng
+                    //     getWebsiteGeography(task, data);
+                    //     break;
                     case "getTraffic30Days": //sử dụng
                         getTraffic30Days(task, data);
                         break;
@@ -518,7 +518,7 @@ const api = async(task, domain, reload = 0) => {
         // console.error(error);
     }
 };
-const estmatedWorth = async(task, data) => {
+const estmatedWorth = async (task, data) => {
     if (data.status == "success") {
         $('.money-website-price').html(`${numeral(data.data).format('0,0')}<span>USD</span>`);
     }
@@ -526,8 +526,8 @@ const estmatedWorth = async(task, data) => {
 
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
-    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getDomainBackLinkDetail", "getMarketingMixOverviewDaily", "getTrafficSocial", "getTrafficSourcesSearch", "SampleAdsasImage", "SampleAds", "getScrapedSearchAds", "getSimilarSites", 'getListGoogleAdsCompetitor', "getCrunchBase","getTimeMobileDesktop","getTrafficOverview","getTrafficOverviewCustomerResources","getTrafficOverviewCustomerSourceAnalysis","getTrafficOverviewCustomerResources"];
-    var VIPModule = [];
+    var freeModule = ["getDesktopVsMobileVisits", "getWebDemographicsGender", "getWebDemographicsAge", "getMarketingMixOverviewDaily", "getTrafficSocial", "SampleAdsasImage", "SampleAds", "getTrafficOverviewCustomerSourceAnalysis","getDomainBackLinkDetail","getSimilarSites"];
+    var VIPModule = ["getTrafficOverview", "getTrafficOverviewCustomerResources","getDesktopVsMobileVisits","getWebDemographicsGender","getWebDemographicsAge","getTrafficOverviewCustomerSourceAnalysis","SampleAds","getTrafficSocial"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
             //ngoai le
@@ -545,20 +545,20 @@ function lockedModule(boxWidgetName, level) {
     }
 }
 //sử dung truy cập theo tháng
-const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
+const getTrafficAndEngagementOverviewMonthly = async (task, data, domain) => {
 
-        // locked(id, data)
-        $('.date-access').html(moment(data.data.lastUpdate).format("MM.YYYY"))
-        if (data.status == "success") {
-            if (data && data.data && data.data.data && data.data.data.Data) {
-                var TrafficAndEngagementOverviewMonthly = null
-                if (data.data.data.Data.AvgMonthVisits) {
-                    TrafficAndEngagementOverviewMonthly = data.data.data.Data;
-                } else {
-                    TrafficAndEngagementOverviewMonthly = data.data.data.Data;
-                }
-                let MonthlyVisits = numeral(TrafficAndEngagementOverviewMonthly.AvgMonthVisits).format("0,0");
-                let html = `
+    // locked(id, data)
+    $('.date-access').html(moment(data.data.lastUpdate).format("MM.YYYY"))
+    if (data.status == "success") {
+        if (data && data.data && data.data.data && data.data.data.Data) {
+            var TrafficAndEngagementOverviewMonthly = null
+            if (data.data.data.Data.AvgMonthVisits) {
+                TrafficAndEngagementOverviewMonthly = data.data.data.Data;
+            } else {
+                TrafficAndEngagementOverviewMonthly = data.data.data.Data;
+            }
+            let MonthlyVisits = numeral(TrafficAndEngagementOverviewMonthly.AvgMonthVisits).format("0,0");
+            let html = `
                         <div class="px-3 py-4" >
                             <div class="title-ttc text-center mb-1 font-15">Tổng lượt truy cập</div>
                             <div class="">
@@ -590,116 +590,116 @@ const getTrafficAndEngagementOverviewMonthly = async(task, data, domain) => {
                             </div>
                         </div>
                 `;
-                $('.getTrafficAndEngagementOverviewMonthly').html(html)
-                $(`.getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
+            $('.getTrafficAndEngagementOverviewMonthly').html(html)
+            $(`.getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
 
-                let AvgVisitDuration = numeral(TrafficAndEngagementOverviewMonthly.AvgVisitDuration).format("0:00:00");
-                let PagesperVisit = numeral(TrafficAndEngagementOverviewMonthly.PagesPerVisit).format("0.00");
-                let BounceRate = numeral(TrafficAndEngagementOverviewMonthly.BounceRate).format("00.00%");
+            let AvgVisitDuration = numeral(TrafficAndEngagementOverviewMonthly.AvgVisitDuration).format("0:00:00");
+            let PagesperVisit = numeral(TrafficAndEngagementOverviewMonthly.PagesPerVisit).format("0.00");
+            let BounceRate = numeral(TrafficAndEngagementOverviewMonthly.BounceRate).format("00.00%");
 
 
-                var newDescription = "Website " + data.data.website + " có lượng người cập hàng tháng vào khoảng " + MonthlyVisits + " visitors và thời gian truy cập trung bình: " + AvgVisitDuration + " giây. Tỉ lệ thoát trang (bounce rate) hiện là " + BounceRate + "...";
-                $('meta[name="description"]').attr("content", newDescription);
-                $('meta[name="og:description"]').attr("content", newDescription);
+            var newDescription = "Website " + data.data.website + " có lượng người cập hàng tháng vào khoảng " + MonthlyVisits + " visitors và thời gian truy cập trung bình: " + AvgVisitDuration + " giây. Tỉ lệ thoát trang (bounce rate) hiện là " + BounceRate + "...";
+            $('meta[name="description"]').attr("content", newDescription);
+            $('meta[name="og:description"]').attr("content", newDescription);
 
-            } else {
-                // $(`#getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
-                // $(`#getTrafficAndEngagementOverviewMonthly`).addClass('empty-state');
-                // await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-            }
         } else {
+            // $(`#getTrafficAndEngagementOverviewMonthly`).removeClass('is-loading');
+            // $(`#getTrafficAndEngagementOverviewMonthly`).addClass('empty-state');
             // await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
         }
+    } else {
+        // await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
     }
-    //done
-    // TRUY CAP THEO THỜI GIAN -LƯỢT TRUY CẬP
-const getTrafficAndEngagementVisits = async(task, data, domain) => {
-        // console.log(data);
-        if (data.status == "success") {
-            if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
-                let {
-                    Data
-                } = data.data.data.Data;
-                let TrafficAndEngagementVisits = Data[domain];
-                // console.log(TrafficAndEngagementVisits);
-                let Desktop = TrafficAndEngagementVisits.Desktop[0];
-                let Mobile = TrafficAndEngagementVisits['Mobile Web'][0];
-                let dataChartDesktop = {
-                    keys: [],
-                    values: []
-                };
-                let dataChartMobile = {
-                    keys: [],
-                    values: []
-                };
-                let sum_time_access = {
-                    keys: [],
-                    values: []
-                };
-                if (Desktop == null || Mobile == null) {
-                    $(`#getTrafficAndEngagement`).removeClass('is-loading');
-                    $(`#getTrafficAndEngagement--MonthlyVisits`).removeClass('is-loading');
-                    $(`#getTrafficAndEngagement--MonthlyVisits`).addClass('empty-state');
-                } else {
-                    Desktop.map(desktop => {
-                        let key = desktop.Key;
-                        let value = desktop.Value;
-                        dataChartDesktop.keys.push(key);
-                        dataChartDesktop.values.push(value);
-                    });
-                    Mobile.map(mobile => {
-                        let key = mobile.Key;
-                        let value = mobile.Value;
-                        dataChartMobile.keys.push(key);
-                        dataChartMobile.values.push(value);
-                    });
-                    Desktop.map(function(num, idx) {
-                        let value = num.Value + dataChartMobile.values[idx];
-                        sum_time_access.keys.push(num.Key)
-                        sum_time_access.values.push(value)
-                    });
-                    // console.log(sum_time_access);
-                    let ele = document.getElementById("getTrafficAndEngagement--MonthlyVisits");
+}
+//done
+// TRUY CAP THEO THỜI GIAN -LƯỢT TRUY CẬP
+const getTrafficAndEngagementVisits = async (task, data, domain) => {
+    // console.log(data);
+    if (data.status == "success") {
+        if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
+            let {
+                Data
+            } = data.data.data.Data;
+            let TrafficAndEngagementVisits = Data[domain];
+            // console.log(TrafficAndEngagementVisits);
+            let Desktop = TrafficAndEngagementVisits.Desktop[0];
+            let Mobile = TrafficAndEngagementVisits['Mobile Web'][0];
+            let dataChartDesktop = {
+                keys: [],
+                values: []
+            };
+            let dataChartMobile = {
+                keys: [],
+                values: []
+            };
+            let sum_time_access = {
+                keys: [],
+                values: []
+            };
+            if (Desktop == null || Mobile == null) {
+                $(`#getTrafficAndEngagement`).removeClass('is-loading');
+                $(`#getTrafficAndEngagement--MonthlyVisits`).removeClass('is-loading');
+                $(`#getTrafficAndEngagement--MonthlyVisits`).addClass('empty-state');
+            } else {
+                Desktop.map(desktop => {
+                    let key = desktop.Key;
+                    let value = desktop.Value;
+                    dataChartDesktop.keys.push(key);
+                    dataChartDesktop.values.push(value);
+                });
+                Mobile.map(mobile => {
+                    let key = mobile.Key;
+                    let value = mobile.Value;
+                    dataChartMobile.keys.push(key);
+                    dataChartMobile.values.push(value);
+                });
+                Desktop.map(function (num, idx) {
+                    let value = num.Value + dataChartMobile.values[idx];
+                    sum_time_access.keys.push(num.Key)
+                    sum_time_access.values.push(value)
+                });
+                // console.log(sum_time_access);
+                let ele = document.getElementById("getTrafficAndEngagement--MonthlyVisits");
 
-                    let myChart = echarts.init(ele);
+                let myChart = echarts.init(ele);
 
-                    let option = {
-                        tooltip: {
-                            trigger: "axis",
-                            backgroundColor: 'rgba(255, 255, 255, 1)',
-                            borderColor: 'rgba(93,120,255,1)',
-                            borderWidth: 1,
-                            extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                            formatter: params => {
-                                // console.log(params);
-                                let {
-                                    name
-                                } = params[0];
-                                let {
-                                    marker: mrkr1,
-                                    color: color1,
-                                    seriesName: name1,
-                                    value: val1
-                                } = params[0];
-                                let {
-                                    marker: mrkr2,
-                                    color: color2,
-                                    seriesName: name2,
-                                    value: val2
-                                } = params[1];
-                                let {
-                                    marker: mrkr3,
-                                    color: color3,
-                                    seriesName: name3,
-                                    value: val3
-                                } = params[2];
+                let option = {
+                    tooltip: {
+                        trigger: "axis",
+                        backgroundColor: 'rgba(255, 255, 255, 1)',
+                        borderColor: 'rgba(93,120,255,1)',
+                        borderWidth: 1,
+                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                        formatter: params => {
+                            // console.log(params);
+                            let {
+                                name
+                            } = params[0];
+                            let {
+                                marker: mrkr1,
+                                color: color1,
+                                seriesName: name1,
+                                value: val1
+                            } = params[0];
+                            let {
+                                marker: mrkr2,
+                                color: color2,
+                                seriesName: name2,
+                                value: val2
+                            } = params[1];
+                            let {
+                                marker: mrkr3,
+                                color: color3,
+                                seriesName: name3,
+                                value: val3
+                            } = params[2];
 
-                                name = moment(name).format('DD MMMM YYYY');
-                                val1 = numeral(val1).format('0,0');
-                                val2 = numeral(val2).format('0,0');
-                                val3 = numeral(val3).format('0,0');
+                            name = moment(name).format('DD MMMM YYYY');
+                            val1 = numeral(val1).format('0,0');
+                            val2 = numeral(val2).format('0,0');
+                            val3 = numeral(val3).format('0,0');
 
-                                return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
+                            return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
                     <div class="text-dark pt-2">
                         ${mrkr3} ${name3} <span style="color:${color3};font-weight:bold">${val3}</span>
                         <br/>
@@ -707,162 +707,162 @@ const getTrafficAndEngagementVisits = async(task, data, domain) => {
                         <br/>
                         ${mrkr1} ${name1} <span style="color:${color1};font-weight:bold">${val1}</span>
                     </div>`;
+                        }
+                    },
+                    legend: {
+                        data: ['Desktop', 'Mobile', 'Tổng']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [{
+                        type: 'category',
+                        boundaryGap: false,
+                        data: dataChartDesktop.keys,
+                        axisLine: {
+                            lineStyle: {
+                                color: "#ccc"
                             }
                         },
-                        legend: {
-                            data: ['Desktop', 'Mobile', 'Tổng']
+                        axisTick: {
+                            interval: (i, v) => {
+                                if (task == 'getTrafficAndEngagementVisitsWeekly') {
+                                    return (parseInt(v.slice(-2)) < 7)
+                                } else {
+                                    return (v.slice(-2) == '01')
+                                }
+                            },
                         },
-                        grid: {
-                            left: '3%',
-                            right: '4%',
-                            bottom: '3%',
-                            containLabel: true
+                        axisLabel: {
+                            margin: 10,
+                            textStyle: {
+                                color: "#999"
+                            },
+                            fontFamily: 'Arial',
+                            interval: (i, v) => {
+                                if (task == 'getTrafficAndEngagementVisitsWeekly') {
+                                    return (parseInt(v.slice(-2)) < 7)
+                                } else {
+                                    return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
+                                }
+                            },
+                            formatter: (value, index) => {
+                                if (task == 'getTrafficAndEngagementVisitsWeekly') {
+                                    return moment(value).format('MM-YYYY');
+                                } else {
+                                    return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
+                                }
+                            },
+
                         },
-                        xAxis: [{
-                            type: 'category',
-                            boundaryGap: false,
-                            data: dataChartDesktop.keys,
-                            axisLine: {
-                                lineStyle: {
-                                    color: "#ccc"
-                                }
+                    }],
+                    yAxis: [{
+                        type: "value",
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLabel: {
+                            margin: 10,
+                            textStyle: {
+                                color: "#ccc"
                             },
-                            axisTick: {
-                                interval: (i, v) => {
-                                    if (task == 'getTrafficAndEngagementVisitsWeekly') {
-                                        return (parseInt(v.slice(-2)) < 7)
-                                    } else {
-                                        return (v.slice(-2) == '01')
-                                    }
-                                },
-                            },
-                            axisLabel: {
-                                margin: 10,
-                                textStyle: {
-                                    color: "#999"
-                                },
-                                fontFamily: 'Arial',
-                                interval: (i, v) => {
-                                    if (task == 'getTrafficAndEngagementVisitsWeekly') {
-                                        return (parseInt(v.slice(-2)) < 7)
-                                    } else {
-                                        return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
-                                    }
-                                },
-                                formatter: (value, index) => {
-                                    if (task == 'getTrafficAndEngagementVisitsWeekly') {
-                                        return moment(value).format('MM-YYYY');
-                                    } else {
-                                        return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
-                                    }
-                                },
-
-                            },
-                        }],
-                        yAxis: [{
-                            type: "value",
-                            axisLine: {
-                                show: false
-                            },
-                            axisTick: {
-                                show: false
-                            },
-                            axisLabel: {
-                                margin: 10,
-                                textStyle: {
-                                    color: "#ccc"
-                                },
-                                fontFamily: 'Arial',
-                                formatter: (value, index) => (value = numeral(value).format("0a"))
-                            },
-                            splitLine: {
-                                show: true,
-                                lineStyle: {
-                                    color: 'rgba(0,0,0,0.1)'
-                                }
-                            },
-                        }, ],
-                        series: [{
-                                name: 'Desktop',
-                                type: 'bar',
-                                stack: "0",
-                                areaStyle: {
-                                    color: '#5D78FF'
-                                },
-                                symbol: "none",
-                                itemStyle: {
-                                    color: '#5D78FF'
-                                },
-                                data: dataChartDesktop.values,
-                            },
-                            {
-                                name: 'Mobile',
-                                type: 'bar',
-                                stack: "0",
-                                areaStyle: {
-                                    color: "#34BFA3"
-                                },
-                                symbol: "none",
-                                itemStyle: {
-                                    color: "#34BFA3"
-                                },
-                                data: dataChartMobile.values,
-
-                            },
-                            {
-                                name: 'Tổng',
-                                type: 'line',
-                                stack: "0",
-
-                                data: sum_time_access.values,
-                                symbol: "circle",
-                                symbolSize: 10,
-                                showSymbol: true,
-                                hoverAnimation: false,
-                                lineStyle: {
-                                    normal: {
-                                        width: 2,
-                                        shadowColor: "rgba(0,0,0,0.4)",
-                                        shadowBlur: 10,
-                                        shadowOffsetY: 10
-                                    }
-                                },
-                                itemStyle: {
-                                    normal: {
-                                        color: "#FFB822",
-                                        borderColor: "rgba(241, 196, 15, 0.2)",
-                                        borderWidth: 10
-                                    }
-                                }
+                            fontFamily: 'Arial',
+                            formatter: (value, index) => (value = numeral(value).format("0a"))
+                        },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: 'rgba(0,0,0,0.1)'
                             }
-                        ]
-                    };
+                        },
+                    },],
+                    series: [{
+                        name: 'Desktop',
+                        type: 'bar',
+                        stack: "0",
+                        areaStyle: {
+                            color: '#5D78FF'
+                        },
+                        symbol: "none",
+                        itemStyle: {
+                            color: '#5D78FF'
+                        },
+                        data: dataChartDesktop.values,
+                    },
+                    {
+                        name: 'Mobile',
+                        type: 'bar',
+                        stack: "0",
+                        areaStyle: {
+                            color: "#34BFA3"
+                        },
+                        symbol: "none",
+                        itemStyle: {
+                            color: "#34BFA3"
+                        },
+                        data: dataChartMobile.values,
+
+                    },
+                    {
+                        name: 'Tổng',
+                        type: 'line',
+                        stack: "0",
+
+                        data: sum_time_access.values,
+                        symbol: "circle",
+                        symbolSize: 10,
+                        showSymbol: true,
+                        hoverAnimation: false,
+                        lineStyle: {
+                            normal: {
+                                width: 2,
+                                shadowColor: "rgba(0,0,0,0.4)",
+                                shadowBlur: 10,
+                                shadowOffsetY: 10
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: "#FFB822",
+                                borderColor: "rgba(241, 196, 15, 0.2)",
+                                borderWidth: 10
+                            }
+                        }
+                    }
+                    ]
+                };
 
 
-                    myChart.setOption(option);
-                    new ResizeSensor($(`#getTrafficAndEngagement--MonthlyVisits`), function() {
-                        myChart.resize();
-                    });
+                myChart.setOption(option);
+                new ResizeSensor($(`#getTrafficAndEngagement--MonthlyVisits`), function () {
+                    myChart.resize();
+                });
 
-                    await $(`#getTrafficAndEngagement`).removeClass('is-loading');
-                    $(`#getTrafficAndEngagement--MonthlyVisits`).removeClass('is-loading');
-                    $(`#getTrafficAndEngagement--MonthlyVisits`).removeClass('empty-state');
-
-                    const lastdate = dataChartMobile.keys.length;
-                    $('.similarDates').text(`${moment(dataChartMobile.keys[0]).format("MM/YYYY")} - ${moment(dataChartMobile.keys[lastdate - 1]).format("MM/YYYY")}`);
-                }
-            } else {
-                $(`#getTrafficAndEngagement`).removeClass('is-loading');
+                await $(`#getTrafficAndEngagement`).removeClass('is-loading');
                 $(`#getTrafficAndEngagement--MonthlyVisits`).removeClass('is-loading');
-                $(`#getTrafficAndEngagement--MonthlyVisits`).addClass('empty-state');
-            }
+                $(`#getTrafficAndEngagement--MonthlyVisits`).removeClass('empty-state');
 
+                const lastdate = dataChartMobile.keys.length;
+                $('.similarDates').text(`${moment(dataChartMobile.keys[0]).format("MM/YYYY")} - ${moment(dataChartMobile.keys[lastdate - 1]).format("MM/YYYY")}`);
+            }
         } else {
-            console.log(`${task} failed`);
+            $(`#getTrafficAndEngagement`).removeClass('is-loading');
+            $(`#getTrafficAndEngagement--MonthlyVisits`).removeClass('is-loading');
+            $(`#getTrafficAndEngagement--MonthlyVisits`).addClass('empty-state');
         }
+
+    } else {
+        console.log(`${task} failed`);
     }
-    //done
-const getUniqueUsersMonthly = async(task, data, domain) => {
+}
+//done
+const getUniqueUsersMonthly = async (task, data, domain) => {
 
     if (data.status == "success") {
         if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
@@ -970,35 +970,35 @@ const getUniqueUsersMonthly = async(task, data, domain) => {
                     },
                 },
                 series: [{
-                        name: domain,
-                        data: dataChart.values,
-                        type: "line",
-                        // smooth: true,
-                        symbol: "circle",
-                        symbolSize: 10,
-                        showSymbol: true,
-                        hoverAnimation: false,
-                        lineStyle: {
-                            normal: {
-                                width: 2,
-                                shadowColor: "rgba(0,0,0,0.4)",
-                                shadowBlur: 10,
-                                shadowOffsetY: 10
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: "rgb(79, 141, 249)",
-                                borderColor: "rgba(79, 141, 249, 0.2)",
-                                borderWidth: 10
-                            }
+                    name: domain,
+                    data: dataChart.values,
+                    type: "line",
+                    // smooth: true,
+                    symbol: "circle",
+                    symbolSize: 10,
+                    showSymbol: true,
+                    hoverAnimation: false,
+                    lineStyle: {
+                        normal: {
+                            width: 2,
+                            shadowColor: "rgba(0,0,0,0.4)",
+                            shadowBlur: 10,
+                            shadowOffsetY: 10
                         }
                     },
+                    itemStyle: {
+                        normal: {
+                            color: "rgb(79, 141, 249)",
+                            borderColor: "rgba(79, 141, 249, 0.2)",
+                            borderWidth: 10
+                        }
+                    }
+                },
 
                 ]
             };
             myChart.setOption(option);
-            new ResizeSensor($(`#getTrafficAndEngagement--MonthlyUniqueVisitors`), function() {
+            new ResizeSensor($(`#getTrafficAndEngagement--MonthlyUniqueVisitors`), function () {
                 myChart.resize();
             });
 
@@ -1016,7 +1016,7 @@ const getUniqueUsersMonthly = async(task, data, domain) => {
     }
 }
 
-const getTrafficAndEngagementAvgVisitDuration = async(task, data, domain) => {
+const getTrafficAndEngagementAvgVisitDuration = async (task, data, domain) => {
     // console.log(data);
 
     if (data.status == "success") {
@@ -1168,58 +1168,58 @@ const getTrafficAndEngagementAvgVisitDuration = async(task, data, domain) => {
                     },
                 },
                 series: [{
-                        name: 'Desktop',
-                        data: dataChartDesktop.values,
-                        type: "line",
-                        symbol: (task == "getTrafficAndEngagementAvgVisitDurationDaily") ? "none" : "circle",
-                        symbolSize: 10,
-                        showSymbol: true,
-                        hoverAnimation: false,
-                        lineStyle: {
-                            normal: {
-                                width: 2,
-                                shadowColor: "rgba(0,0,0,0.4)",
-                                shadowBlur: 10,
-                                shadowOffsetY: 10
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: "rgb(79, 141, 249)",
-                                borderColor: "rgb(79, 141, 249, 0.2)",
-                                borderWidth: 10
-                            }
+                    name: 'Desktop',
+                    data: dataChartDesktop.values,
+                    type: "line",
+                    symbol: (task == "getTrafficAndEngagementAvgVisitDurationDaily") ? "none" : "circle",
+                    symbolSize: 10,
+                    showSymbol: true,
+                    hoverAnimation: false,
+                    lineStyle: {
+                        normal: {
+                            width: 2,
+                            shadowColor: "rgba(0,0,0,0.4)",
+                            shadowBlur: 10,
+                            shadowOffsetY: 10
                         }
                     },
-                    {
-                        name: 'Mobile',
-                        data: dataChartMobile.values,
-                        type: "line",
-                        symbol: (task == "getTrafficAndEngagementAvgVisitDurationDaily") ? "none" : "circle",
-                        symbolSize: 10,
-                        showSymbol: true,
-                        hoverAnimation: false,
-                        lineStyle: {
-                            normal: {
-                                width: 2,
-                                shadowColor: "rgba(0,0,0,0.4)",
-                                shadowBlur: 10,
-                                shadowOffsetY: 10
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: "rgb(140, 210, 255)",
-                                borderColor: "rgb(140, 210, 255, 0.2)",
-                                borderWidth: 10
-                            }
+                    itemStyle: {
+                        normal: {
+                            color: "rgb(79, 141, 249)",
+                            borderColor: "rgb(79, 141, 249, 0.2)",
+                            borderWidth: 10
                         }
-
                     }
+                },
+                {
+                    name: 'Mobile',
+                    data: dataChartMobile.values,
+                    type: "line",
+                    symbol: (task == "getTrafficAndEngagementAvgVisitDurationDaily") ? "none" : "circle",
+                    symbolSize: 10,
+                    showSymbol: true,
+                    hoverAnimation: false,
+                    lineStyle: {
+                        normal: {
+                            width: 2,
+                            shadowColor: "rgba(0,0,0,0.4)",
+                            shadowBlur: 10,
+                            shadowOffsetY: 10
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: "rgb(140, 210, 255)",
+                            borderColor: "rgb(140, 210, 255, 0.2)",
+                            borderWidth: 10
+                        }
+                    }
+
+                }
                 ]
             };
             myChart.setOption(option);
-            new ResizeSensor($(`#getTrafficAndEngagement--AvgVisitDuration`), function() {
+            new ResizeSensor($(`#getTrafficAndEngagement--AvgVisitDuration`), function () {
                 myChart.resize();
             });
 
@@ -1234,228 +1234,228 @@ const getTrafficAndEngagementAvgVisitDuration = async(task, data, domain) => {
     }
 }
 
-const getTrafficAndEngagementPagesPerVisit = async(task, data, domain) => {
+const getTrafficAndEngagementPagesPerVisit = async (task, data, domain) => {
 
-        if (data.status == "success") {
-            if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
-                let {
-                    Data
-                } = data.data.data.Data;
+    if (data.status == "success") {
+        if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
+            let {
+                Data
+            } = data.data.data.Data;
 
-                let TrafficAndEngagementPagesPerVisit = Data[domain];
+            let TrafficAndEngagementPagesPerVisit = Data[domain];
 
-                let Desktop = TrafficAndEngagementPagesPerVisit.Desktop[0];
-                let Mobile = TrafficAndEngagementPagesPerVisit.MobileWeb[0];
+            let Desktop = TrafficAndEngagementPagesPerVisit.Desktop[0];
+            let Mobile = TrafficAndEngagementPagesPerVisit.MobileWeb[0];
 
-                let dataChartDesktop = {
-                    keys: [],
-                    values: []
-                };
+            let dataChartDesktop = {
+                keys: [],
+                values: []
+            };
 
-                Desktop.map(desktop => {
-                    let key = desktop.Key;
-                    let value = desktop.Value;
-                    dataChartDesktop.keys.push(key);
-                    dataChartDesktop.values.push(value);
-                });
+            Desktop.map(desktop => {
+                let key = desktop.Key;
+                let value = desktop.Value;
+                dataChartDesktop.keys.push(key);
+                dataChartDesktop.values.push(value);
+            });
 
-                let dataChartMobile = {
-                    keys: [],
-                    values: []
-                };
+            let dataChartMobile = {
+                keys: [],
+                values: []
+            };
 
-                Mobile.map(mobile => {
-                    let key = mobile.Key;
-                    let value = mobile.Value;
-                    dataChartMobile.keys.push(key);
-                    dataChartMobile.values.push(value);
-                });
+            Mobile.map(mobile => {
+                let key = mobile.Key;
+                let value = mobile.Value;
+                dataChartMobile.keys.push(key);
+                dataChartMobile.values.push(value);
+            });
 
 
-                let ele = document.getElementById("getTrafficAndEngagement--PagesPerVisit");
+            let ele = document.getElementById("getTrafficAndEngagement--PagesPerVisit");
 
-                let myChart = echarts.init(ele);
+            let myChart = echarts.init(ele);
 
-                let option = {
-                    tooltip: {
-                        trigger: "axis",
-                        backgroundColor: 'rgba(255, 255, 255, 1)',
-                        borderColor: 'rgba(93,120,255,1)',
-                        borderWidth: 1,
-                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                        formatter: params => {
-                            // console.log(params);
-                            let {
-                                name
-                            } = params[0];
-                            let {
-                                marker: mrkr1,
-                                color: color1,
-                                seriesName: name1,
-                                value: val1
-                            } = params[0];
-                            let {
-                                marker: mrkr2,
-                                color: color2,
-                                seriesName: name2,
-                                value: val2
-                            } = params[1];
+            let option = {
+                tooltip: {
+                    trigger: "axis",
+                    backgroundColor: 'rgba(255, 255, 255, 1)',
+                    borderColor: 'rgba(93,120,255,1)',
+                    borderWidth: 1,
+                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                    formatter: params => {
+                        // console.log(params);
+                        let {
+                            name
+                        } = params[0];
+                        let {
+                            marker: mrkr1,
+                            color: color1,
+                            seriesName: name1,
+                            value: val1
+                        } = params[0];
+                        let {
+                            marker: mrkr2,
+                            color: color2,
+                            seriesName: name2,
+                            value: val2
+                        } = params[1];
 
-                            name = moment(name).format('DD MMMM YYYY');
+                        name = moment(name).format('DD MMMM YYYY');
 
-                            val1 = numeral(val1).format('0.00');
-                            val2 = numeral(val2).format('0.00');
+                        val1 = numeral(val1).format('0.00');
+                        val2 = numeral(val2).format('0.00');
 
-                            return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
+                        return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
                     <div class="text-dark pt-2">
                         ${mrkr1} ${name1} <span style="color:${color1};font-weight:bold">${val1}</span>
                         <br/>
                         ${mrkr2} ${name2} <span style="color:${color2};font-weight:bold">${val2}</span>
                     </div>`;
+                    }
+                },
+                legend: {
+                    data: ['Desktop', 'Mobile']
+                },
+                grid: {
+                    right: "5%"
+                },
+                xAxis: {
+                    type: "category",
+                    boundaryGap: false,
+                    data: dataChartDesktop.keys,
+                    axisLine: {
+                        lineStyle: {
+                            color: "#ccc"
                         }
                     },
-                    legend: {
-                        data: ['Desktop', 'Mobile']
-                    },
-                    grid: {
-                        right: "5%"
-                    },
-                    xAxis: {
-                        type: "category",
-                        boundaryGap: false,
-                        data: dataChartDesktop.keys,
-                        axisLine: {
-                            lineStyle: {
-                                color: "#ccc"
+                    axisTick: {
+                        interval: (i, v) => {
+                            if (task == 'getTrafficAndEngagementPagesPerVisitWeekly') {
+                                return (parseInt(v.slice(-2)) < 7)
+                            } else {
+                                return (v.slice(-2) == '01')
                             }
                         },
-                        axisTick: {
-                            interval: (i, v) => {
-                                if (task == 'getTrafficAndEngagementPagesPerVisitWeekly') {
-                                    return (parseInt(v.slice(-2)) < 7)
-                                } else {
-                                    return (v.slice(-2) == '01')
-                                }
-                            },
+                    },
+                    axisLabel: {
+                        margin: 10,
+                        textStyle: {
+                            color: "#999"
                         },
-                        axisLabel: {
-                            margin: 10,
-                            textStyle: {
-                                color: "#999"
-                            },
-                            fontFamily: 'Arial',
-                            interval: (i, v) => {
-                                if (task == 'getTrafficAndEngagementPagesPerVisitWeekly') {
-                                    return (parseInt(v.slice(-2)) < 7)
-                                } else {
-                                    return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
-                                }
-                            },
-                            formatter: (value, index) => {
-                                if (task == 'getTrafficAndEngagementPagesPerVisitWeekly') {
-                                    return moment(value).format('MM-YYYY');
-                                } else {
-                                    return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
-                                }
-                            },
+                        fontFamily: 'Arial',
+                        interval: (i, v) => {
+                            if (task == 'getTrafficAndEngagementPagesPerVisitWeekly') {
+                                return (parseInt(v.slice(-2)) < 7)
+                            } else {
+                                return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
+                            }
+                        },
+                        formatter: (value, index) => {
+                            if (task == 'getTrafficAndEngagementPagesPerVisitWeekly') {
+                                return moment(value).format('MM-YYYY');
+                            } else {
+                                return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
+                            }
+                        },
 
-                        },
                     },
-                    yAxis: {
-                        type: "value",
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                        axisLabel: {
-                            margin: 10,
-                            textStyle: {
-                                color: "#ccc"
-                            },
-                            fontFamily: 'Arial',
-                            // formatter: (value, index) => (value = numeral(value).format("0a"))
-                        },
-                        splitLine: {
-                            show: true,
-                            lineStyle: {
-                                color: 'rgba(0,0,0,0.1)'
-                            }
-                        },
+                },
+                yAxis: {
+                    type: "value",
+                    axisLine: {
+                        show: false
                     },
-                    series: [{
-                            name: 'Desktop',
-                            data: dataChartDesktop.values,
-                            type: "line",
-                            symbol: (task == "getTrafficAndEngagementPagesPerVisitDaily") ? "none" : "circle",
-                            symbolSize: 10,
-                            showSymbol: true,
-                            hoverAnimation: false,
-                            lineStyle: {
-                                normal: {
-                                    width: 2,
-                                    shadowColor: "rgba(0,0,0,0.4)",
-                                    shadowBlur: 10,
-                                    shadowOffsetY: 10
-                                }
-                            },
-                            itemStyle: {
-                                normal: {
-                                    color: "rgb(79, 141, 249)",
-                                    borderColor: "rgb(79, 141, 249, 0.2)",
-                                    borderWidth: 10
-                                }
-                            }
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        margin: 10,
+                        textStyle: {
+                            color: "#ccc"
                         },
-                        {
-                            name: 'Mobile',
-                            data: dataChartMobile.values,
-                            type: "line",
-                            symbol: (task == "getTrafficAndEngagementPagesPerVisitDaily") ? "none" : "circle",
-                            symbolSize: 10,
-                            showSymbol: true,
-                            hoverAnimation: false,
-                            lineStyle: {
-                                normal: {
-                                    width: 2,
-                                    shadowColor: "rgba(0,0,0,0.4)",
-                                    shadowBlur: 10,
-                                    shadowOffsetY: 10
-                                }
-                            },
-                            itemStyle: {
-                                normal: {
-                                    color: "rgb(140, 210, 255)",
-                                    borderColor: "rgb(140, 210, 255, 0.2)",
-                                    borderWidth: 10
-                                }
-                            }
-
+                        fontFamily: 'Arial',
+                        // formatter: (value, index) => (value = numeral(value).format("0a"))
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(0,0,0,0.1)'
                         }
-                    ]
-                };
-                myChart.setOption(option);
-                new ResizeSensor($(`#getTrafficAndEngagement--PagesPerVisit`), function() {
-                    myChart.resize();
-                });
+                    },
+                },
+                series: [{
+                    name: 'Desktop',
+                    data: dataChartDesktop.values,
+                    type: "line",
+                    symbol: (task == "getTrafficAndEngagementPagesPerVisitDaily") ? "none" : "circle",
+                    symbolSize: 10,
+                    showSymbol: true,
+                    hoverAnimation: false,
+                    lineStyle: {
+                        normal: {
+                            width: 2,
+                            shadowColor: "rgba(0,0,0,0.4)",
+                            shadowBlur: 10,
+                            shadowOffsetY: 10
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: "rgb(79, 141, 249)",
+                            borderColor: "rgb(79, 141, 249, 0.2)",
+                            borderWidth: 10
+                        }
+                    }
+                },
+                {
+                    name: 'Mobile',
+                    data: dataChartMobile.values,
+                    type: "line",
+                    symbol: (task == "getTrafficAndEngagementPagesPerVisitDaily") ? "none" : "circle",
+                    symbolSize: 10,
+                    showSymbol: true,
+                    hoverAnimation: false,
+                    lineStyle: {
+                        normal: {
+                            width: 2,
+                            shadowColor: "rgba(0,0,0,0.4)",
+                            shadowBlur: 10,
+                            shadowOffsetY: 10
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: "rgb(140, 210, 255)",
+                            borderColor: "rgb(140, 210, 255, 0.2)",
+                            borderWidth: 10
+                        }
+                    }
 
-                await $(`#getTrafficAndEngagement--PagesPerVisit`).removeClass('is-loading');
-                $(`#getTrafficAndEngagement--PagesPerVisit`).removeClass('empty-state');
-            } else {
-                $(`#getTrafficAndEngagement--PagesPerVisit`).removeClass('is-loading');
-                $(`#getTrafficAndEngagement--PagesPerVisit`).addClass('empty-state');
-            }
+                }
+                ]
+            };
+            myChart.setOption(option);
+            new ResizeSensor($(`#getTrafficAndEngagement--PagesPerVisit`), function () {
+                myChart.resize();
+            });
 
+            await $(`#getTrafficAndEngagement--PagesPerVisit`).removeClass('is-loading');
+            $(`#getTrafficAndEngagement--PagesPerVisit`).removeClass('empty-state');
         } else {
-            console.log(`${task} failed`);
+            $(`#getTrafficAndEngagement--PagesPerVisit`).removeClass('is-loading');
+            $(`#getTrafficAndEngagement--PagesPerVisit`).addClass('empty-state');
         }
+
+    } else {
+        console.log(`${task} failed`);
     }
-    //Tỉ lệ truy cập từ tìm kiếm
-const getTrafficSourcesSearch = async(task, data) => {
+}
+//Tỉ lệ truy cập từ tìm kiếm
+const getTrafficSourcesSearch = async (task, data) => {
 
     $(`.${task}`).parents().parents().parents().removeClass('rounded').addClass('rounded-top')
-        // $(`.${task}`).attr('style', 'height: 250px;');
+    // $(`.${task}`).attr('style', 'height: 250px;');
     $('.precent-organicoverview').removeClass('d-none')
     if (data.status == "success") {
         $(`.${task}`).removeClass('empty-state');
@@ -1493,7 +1493,7 @@ const getTrafficSourcesSearch = async(task, data) => {
                 color: masterColor,
                 legend: {
                     bottom: "5%",
-                    formatter: function(name) {
+                    formatter: function (name) {
                         let value = name == 'Tự nhiên' ? dataChart[0].value * 100 : dataChart[1].value * 100;
                         return `${name}\n(${value}%)`;
                     }
@@ -1552,16 +1552,16 @@ const getTrafficSourcesSearch = async(task, data) => {
                 chart.setOption(option);
                 charts.push(chart);
             }
-            window.onresize = function() {
+            window.onresize = function () {
                 for (var i = 0; i < charts.length; ++i) {
                     charts[i].resize();
                 }
             };
             await $(`.${task}`).removeClass('is-loading');
             //v7
-            new ResizeSensor($(`.${task}`), function() {
+            new ResizeSensor($(`.${task}`), function () {
                 chart.resize();
-                setTimeout(function() {
+                setTimeout(function () {
                     chart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
@@ -1569,13 +1569,13 @@ const getTrafficSourcesSearch = async(task, data) => {
                     });
                 }, 1000);
             });
-            setTimeout(function() {
+            setTimeout(function () {
                 chart.dispatchAction({
                     type: 'highlight',
                     seriesIndex: 0,
                     dataIndex: 0
                 });
-                chart.on('mouseover', function(params) {
+                chart.on('mouseover', function (params) {
                     if (params.name == dataChart[0].name) {
                         chart.dispatchAction({
                             type: 'highlight',
@@ -1590,7 +1590,7 @@ const getTrafficSourcesSearch = async(task, data) => {
                         });
                     }
                 });
-                chart.on('mouseout', function(params) {
+                chart.on('mouseout', function (params) {
                     chart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
@@ -1605,225 +1605,225 @@ const getTrafficSourcesSearch = async(task, data) => {
         console.log(`${task} failed`);
     }
 };
-const getTrafficAndEngagementBounceRate = async(task, data, domain) => {
+const getTrafficAndEngagementBounceRate = async (task, data, domain) => {
 
-        if (data.status == "success") {
-            if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
-                let {
-                    Data
-                } = data.data.data.Data;
+    if (data.status == "success") {
+        if (data && data.data && data.data.data && data.data.data.Data && data.data.data.Data.Data) {
+            let {
+                Data
+            } = data.data.data.Data;
 
-                let TrafficAndEngagementBounceRate = Data[domain];
+            let TrafficAndEngagementBounceRate = Data[domain];
 
-                let Desktop = TrafficAndEngagementBounceRate.Desktop[0];
-                let Mobile = TrafficAndEngagementBounceRate.MobileWeb[0];
+            let Desktop = TrafficAndEngagementBounceRate.Desktop[0];
+            let Mobile = TrafficAndEngagementBounceRate.MobileWeb[0];
 
-                let dataChartDesktop = {
-                    keys: [],
-                    values: []
-                };
+            let dataChartDesktop = {
+                keys: [],
+                values: []
+            };
 
-                Desktop.map(desktop => {
-                    let key = desktop.Key;
-                    let value = desktop.Value;
-                    dataChartDesktop.keys.push(key);
-                    dataChartDesktop.values.push(value);
-                });
+            Desktop.map(desktop => {
+                let key = desktop.Key;
+                let value = desktop.Value;
+                dataChartDesktop.keys.push(key);
+                dataChartDesktop.values.push(value);
+            });
 
-                let dataChartMobile = {
-                    keys: [],
-                    values: []
-                };
+            let dataChartMobile = {
+                keys: [],
+                values: []
+            };
 
-                Mobile.map(mobile => {
-                    let key = mobile.Key;
-                    let value = mobile.Value;
-                    dataChartMobile.keys.push(key);
-                    dataChartMobile.values.push(value);
-                });
+            Mobile.map(mobile => {
+                let key = mobile.Key;
+                let value = mobile.Value;
+                dataChartMobile.keys.push(key);
+                dataChartMobile.values.push(value);
+            });
 
 
-                let ele = document.getElementById("getTrafficAndEngagement--BounceRate");
+            let ele = document.getElementById("getTrafficAndEngagement--BounceRate");
 
-                let myChart = echarts.init(ele);
+            let myChart = echarts.init(ele);
 
-                let option = {
-                    tooltip: {
-                        trigger: "axis",
-                        backgroundColor: 'rgba(255, 255, 255, 1)',
-                        borderColor: 'rgba(93,120,255,1)',
-                        borderWidth: 1,
-                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                        formatter: params => {
-                            // console.log(params);
-                            let {
-                                name
-                            } = params[0];
-                            let {
-                                marker: mrkr1,
-                                color: color1,
-                                seriesName: name1,
-                                value: val1
-                            } = params[0];
-                            let {
-                                marker: mrkr2,
-                                color: color2,
-                                seriesName: name2,
-                                value: val2
-                            } = params[1];
+            let option = {
+                tooltip: {
+                    trigger: "axis",
+                    backgroundColor: 'rgba(255, 255, 255, 1)',
+                    borderColor: 'rgba(93,120,255,1)',
+                    borderWidth: 1,
+                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                    formatter: params => {
+                        // console.log(params);
+                        let {
+                            name
+                        } = params[0];
+                        let {
+                            marker: mrkr1,
+                            color: color1,
+                            seriesName: name1,
+                            value: val1
+                        } = params[0];
+                        let {
+                            marker: mrkr2,
+                            color: color2,
+                            seriesName: name2,
+                            value: val2
+                        } = params[1];
 
-                            name = moment(name).format('DD MMMM YYYY');
+                        name = moment(name).format('DD MMMM YYYY');
 
-                            val1 = numeral(val1).format('0.00%');
-                            val2 = numeral(val2).format('0.00%');
+                        val1 = numeral(val1).format('0.00%');
+                        val2 = numeral(val2).format('0.00%');
 
-                            return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
+                        return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
                     <div class="text-dark pt-2">
                         ${mrkr1} ${name1} <span style="color:${color1};font-weight:bold">${val1}</span>
                         <br/>
                         ${mrkr2} ${name2} <span style="color:${color2};font-weight:bold">${val2}</span>
                     </div>`;
+                    }
+                },
+                legend: {
+                    data: ['Desktop', 'Mobile']
+                },
+                grid: {
+                    right: "5%"
+                },
+                xAxis: {
+                    type: "category",
+                    boundaryGap: false,
+                    data: dataChartDesktop.keys,
+                    axisLine: {
+                        lineStyle: {
+                            color: "#ccc"
                         }
                     },
-                    legend: {
-                        data: ['Desktop', 'Mobile']
-                    },
-                    grid: {
-                        right: "5%"
-                    },
-                    xAxis: {
-                        type: "category",
-                        boundaryGap: false,
-                        data: dataChartDesktop.keys,
-                        axisLine: {
-                            lineStyle: {
-                                color: "#ccc"
+                    axisTick: {
+                        interval: (i, v) => {
+                            if (task == 'getTrafficAndEngagementBounceRateWeekly') {
+                                return (parseInt(v.slice(-2)) < 7)
+                            } else {
+                                return (v.slice(-2) == '01')
                             }
                         },
-                        axisTick: {
-                            interval: (i, v) => {
-                                if (task == 'getTrafficAndEngagementBounceRateWeekly') {
-                                    return (parseInt(v.slice(-2)) < 7)
-                                } else {
-                                    return (v.slice(-2) == '01')
-                                }
-                            },
+                    },
+                    axisLabel: {
+                        margin: 10,
+                        textStyle: {
+                            color: "#999"
                         },
-                        axisLabel: {
-                            margin: 10,
-                            textStyle: {
-                                color: "#999"
-                            },
-                            fontFamily: 'Arial',
-                            interval: (i, v) => {
-                                if (task == 'getTrafficAndEngagementBounceRateWeekly') {
-                                    return (parseInt(v.slice(-2)) < 7)
-                                } else {
-                                    return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
-                                }
-                            },
-                            formatter: (value, index) => {
-                                if (task == 'getTrafficAndEngagementBounceRateWeekly') {
-                                    return moment(value).format('MM-YYYY');
-                                } else {
-                                    return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
-                                }
-                            },
+                        fontFamily: 'Arial',
+                        interval: (i, v) => {
+                            if (task == 'getTrafficAndEngagementBounceRateWeekly') {
+                                return (parseInt(v.slice(-2)) < 7)
+                            } else {
+                                return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
+                            }
+                        },
+                        formatter: (value, index) => {
+                            if (task == 'getTrafficAndEngagementBounceRateWeekly') {
+                                return moment(value).format('MM-YYYY');
+                            } else {
+                                return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
+                            }
+                        },
 
-                        },
                     },
-                    yAxis: {
-                        type: "value",
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                        axisLabel: {
-                            margin: 10,
-                            textStyle: {
-                                color: "#ccc"
-                            },
-                            fontFamily: 'Arial',
-                            formatter: (value, index) => (value = numeral(value).format("0%"))
-                        },
-                        splitLine: {
-                            show: true,
-                            lineStyle: {
-                                color: 'rgba(0,0,0,0.1)'
-                            }
-                        },
+                },
+                yAxis: {
+                    type: "value",
+                    axisLine: {
+                        show: false
                     },
-                    series: [{
-                            name: 'Desktop',
-                            data: dataChartDesktop.values,
-                            type: "line",
-                            symbol: (task == "getTrafficAndEngagementBounceRateDaily") ? "none" : "circle",
-                            symbolSize: 10,
-                            showSymbol: true,
-                            hoverAnimation: false,
-                            lineStyle: {
-                                normal: {
-                                    width: 2,
-                                    shadowColor: "rgba(0,0,0,0.4)",
-                                    shadowBlur: 10,
-                                    shadowOffsetY: 10
-                                }
-                            },
-                            itemStyle: {
-                                normal: {
-                                    color: "rgb(79, 141, 249)",
-                                    borderColor: "rgb(79, 141, 249, 0.2)",
-                                    borderWidth: 10
-                                }
-                            }
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        margin: 10,
+                        textStyle: {
+                            color: "#ccc"
                         },
-                        {
-                            name: 'Mobile',
-                            data: dataChartMobile.values,
-                            type: "line",
-                            symbol: (task == "getTrafficAndEngagementBounceRateDaily") ? "none" : "circle",
-                            symbolSize: 10,
-                            showSymbol: true,
-                            hoverAnimation: false,
-                            lineStyle: {
-                                normal: {
-                                    width: 2,
-                                    shadowColor: "rgba(0,0,0,0.4)",
-                                    shadowBlur: 10,
-                                    shadowOffsetY: 10
-                                }
-                            },
-                            itemStyle: {
-                                normal: {
-                                    color: "rgb(140, 210, 255)",
-                                    borderColor: "rgb(140, 210, 255, 0.2)",
-                                    borderWidth: 10
-                                }
-                            }
-
+                        fontFamily: 'Arial',
+                        formatter: (value, index) => (value = numeral(value).format("0%"))
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(0,0,0,0.1)'
                         }
-                    ]
-                };
-                myChart.setOption(option);
-                new ResizeSensor($(`#getTrafficAndEngagement--BounceRate`), function() {
-                    myChart.resize();
-                });
+                    },
+                },
+                series: [{
+                    name: 'Desktop',
+                    data: dataChartDesktop.values,
+                    type: "line",
+                    symbol: (task == "getTrafficAndEngagementBounceRateDaily") ? "none" : "circle",
+                    symbolSize: 10,
+                    showSymbol: true,
+                    hoverAnimation: false,
+                    lineStyle: {
+                        normal: {
+                            width: 2,
+                            shadowColor: "rgba(0,0,0,0.4)",
+                            shadowBlur: 10,
+                            shadowOffsetY: 10
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: "rgb(79, 141, 249)",
+                            borderColor: "rgb(79, 141, 249, 0.2)",
+                            borderWidth: 10
+                        }
+                    }
+                },
+                {
+                    name: 'Mobile',
+                    data: dataChartMobile.values,
+                    type: "line",
+                    symbol: (task == "getTrafficAndEngagementBounceRateDaily") ? "none" : "circle",
+                    symbolSize: 10,
+                    showSymbol: true,
+                    hoverAnimation: false,
+                    lineStyle: {
+                        normal: {
+                            width: 2,
+                            shadowColor: "rgba(0,0,0,0.4)",
+                            shadowBlur: 10,
+                            shadowOffsetY: 10
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: "rgb(140, 210, 255)",
+                            borderColor: "rgb(140, 210, 255, 0.2)",
+                            borderWidth: 10
+                        }
+                    }
 
-                await $(`#getTrafficAndEngagement--BounceRate`).removeClass('is-loading');
-                $(`#getTrafficAndEngagement--BounceRate`).removeClass('empty-state');
-            } else {
-                $(`#getTrafficAndEngagement--BounceRate`).removeClass('is-loading');
-                $(`#getTrafficAndEngagement--BounceRate`).addClass('empty-state');
-            }
+                }
+                ]
+            };
+            myChart.setOption(option);
+            new ResizeSensor($(`#getTrafficAndEngagement--BounceRate`), function () {
+                myChart.resize();
+            });
+
+            await $(`#getTrafficAndEngagement--BounceRate`).removeClass('is-loading');
+            $(`#getTrafficAndEngagement--BounceRate`).removeClass('empty-state');
         } else {
-            console.log(`${task} failed`);
+            $(`#getTrafficAndEngagement--BounceRate`).removeClass('is-loading');
+            $(`#getTrafficAndEngagement--BounceRate`).addClass('empty-state');
         }
+    } else {
+        console.log(`${task} failed`);
     }
-    // hết sử dụng truy cập thời gian
-    // SỬ DỤNG
-const getWebDemographicsAge = async(task, data) => {
+}
+// hết sử dụng truy cập thời gian
+// SỬ DỤNG
+const getWebDemographicsAge = async (task, data) => {
     if (data.status == "success") {
         let {
             data: traffic
@@ -1898,12 +1898,12 @@ const getWebDemographicsAge = async(task, data) => {
                     },
                     axisLabel: {
                         textStyle: {
-                            color: function(value, index) {
+                            color: function (value, index) {
                                 var num = masterColor.length;
                                 return masterColor[index % num]
                             }
                         },
-                        formatter: function(value, index) {
+                        formatter: function (value, index) {
                             return [
                                 '{title|' + value + '} '
                             ].join('\n')
@@ -1919,7 +1919,7 @@ const getWebDemographicsAge = async(task, data) => {
                     itemStyle: {
                         normal: {
                             barBorderRadius: 30,
-                            color: function(params) {
+                            color: function (params) {
                                 var num = masterColor.length;
                                 return masterColor[params.dataIndex % num]
                             },
@@ -1948,7 +1948,7 @@ const getWebDemographicsAge = async(task, data) => {
                 chart.setOption(option);
                 charts.push(chart);
             }
-            window.onresize = function() {
+            window.onresize = function () {
                 for (var i = 0; i < charts.length; ++i) {
                     charts[i].resize();
                 }
@@ -1963,7 +1963,7 @@ const getWebDemographicsAge = async(task, data) => {
     }
 };
 // SỬ DỤNG NGUỒN KHÁCH HÀNG
-const getTrafficSourcesOverview = async(task, data) => {
+const getTrafficSourcesOverview = async (task, data) => {
     $('.getTrafficSourcesOverview ').attr('style', 'min-height:300px')
     if (data.status == "success" && data.data.data) {
         $(`.${task}`).removeClass('empty-state');
@@ -1993,7 +1993,7 @@ const getTrafficSourcesOverview = async(task, data) => {
         });
         // console.log(traffic.Social);
         $('.precent-organicoverview').html(`${numeral((traffic.Social).toFixed(2)).format("0,0")}/${numeral(total).format("0,0")}`)
-            // render chart
+        // render chart
         let data_params_legend;
         let option = {
             color: masterColor,
@@ -2018,7 +2018,7 @@ const getTrafficSourcesOverview = async(task, data) => {
                 //top: 50,
                 //bottom: 20,
                 data: datanamechart,
-                formatter: function(name) {
+                formatter: function (name) {
                     let temp = dataChart.filter((val) => {
                         if (name == val.name)
                             return val;
@@ -2060,7 +2060,7 @@ const getTrafficSourcesOverview = async(task, data) => {
             chart.setOption(option);
             charts.push(chart);
         }
-        window.onresize = function() {
+        window.onresize = function () {
             for (var i = 0; i < charts.length; ++i) {
                 charts[i].resize();
             }
@@ -2073,7 +2073,7 @@ const getTrafficSourcesOverview = async(task, data) => {
     }
 };
 // SỬ DỤNG
-const getWebDemographicsGender = async(task, data) => {
+const getWebDemographicsGender = async (task, data) => {
     // console.log(data);
     if (data.status == "success") {
         // console.log("ddd");
@@ -2090,13 +2090,13 @@ const getWebDemographicsGender = async(task, data) => {
                 Female
             } = visits;
             let dataChart = [{
-                    name: 'Nam',
-                    value: Male
-                },
-                {
-                    name: 'Nữ',
-                    value: Female
-                }
+                name: 'Nam',
+                value: Male
+            },
+            {
+                name: 'Nữ',
+                value: Female
+            }
             ];
             let option = {
                 color: ['#ffb822', '#0abb87'],
@@ -2158,16 +2158,16 @@ const getWebDemographicsGender = async(task, data) => {
                 chart.setOption(option);
                 charts.push(chart);
             }
-            window.onresize = function() {
+            window.onresize = function () {
                 for (var i = 0; i < charts.length; ++i) {
                     charts[i].resize();
                 }
             };
             await $(`.${task}`).removeClass('is-loading');
             //* update v7*/
-            new ResizeSensor($(`.${task}`), function() {
+            new ResizeSensor($(`.${task}`), function () {
                 chart.resize();
-                setTimeout(function() {
+                setTimeout(function () {
                     chart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
@@ -2176,14 +2176,14 @@ const getWebDemographicsGender = async(task, data) => {
                 }, 1000);
             });
 
-            setTimeout(function() {
+            setTimeout(function () {
                 chart.dispatchAction({
                     type: 'highlight',
                     seriesIndex: 0,
                     dataIndex: 0
                 });
 
-                chart.on('mouseover', function(params) {
+                chart.on('mouseover', function (params) {
                     if (params.name == dataChart[0].name) {
                         chart.dispatchAction({
                             type: 'highlight',
@@ -2199,7 +2199,7 @@ const getWebDemographicsGender = async(task, data) => {
                     }
                 });
 
-                chart.on('mouseout', function(params) {
+                chart.on('mouseout', function (params) {
                     chart.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
@@ -2215,10 +2215,8 @@ const getWebDemographicsGender = async(task, data) => {
         console.log(`${task} failed`);
     }
 };
-// SỬ DỤNG
 
-// SỬ DỤNG
-const getSimilarSites = async(task, data) => {
+const getSimilarSites = async (task, data) => {
     if (data.status == 'success') {
         $(`.${task}`).addClass('text-left')
         if (data.data.data && data.data.haveData == true) {
@@ -2247,7 +2245,7 @@ const getSimilarSites = async(task, data) => {
             <span  data-type="website" data-input="${site.Domain}" >${site.Domain}</span>
         </a>`).appendTo(`.${task} .similarSites:last-child`)
                     .append(compareNode);
-                compareNode.click(function(e) {
+                compareNode.click(function (e) {
                     e.preventDefault();
                     domain2 = $(this).data('domain');
                     // if (domain_name && domain2) {
@@ -2292,14 +2290,15 @@ const getSimilarSites = async(task, data) => {
                     })
                 });
             })
-            var html_descript = `<div class="bg-white pl-4 pt-3 mb-0 pb-3 mx-3 pr-4 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
+            var html_descript = `<div class="delete-phantich bg-white pl-4 pt-3 mb-0 pb-3 mx-3 pr-4 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
                 <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
-                    <div class="description-goads">Thêm đối thủ cạnh tranh, theo dõi và nhận báo cáo hàng ngày về đối thủ của bạn. Chỉ 199,000 vnđ/tháng</div>
+                    <div class="">Thêm đối thủ cạnh tranh, theo dõi và nhận báo cáo hàng ngày về đối thủ của bạn. Chỉ 199,000 vnđ/tháng</div>
                 </div>
                 <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4 btn-noads">
-                    <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/account/?view=user&action=payment-table">Phân tích đối thủ</a>
+                    <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/account/?view=user&action=payment-table">Phân tích đối thủ</a>
                 </div>
             </div>`
+            $('.delete-phantich').remove()
             $('.parent-getSimilarSites').parent().append(html_descript).addClass('pb-3')
             await $(`.${task}`).removeClass('is-loading');
             await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
@@ -2314,135 +2313,142 @@ const getSimilarSites = async(task, data) => {
 }
 
 // getDomainBackLinkDetail
-const getDomainBackLinkDetail = async(task, data) => {
-        // console.log(data);
-        if (data.status == 'success') {
-            let dataBacklinkTypes = data.data.backlinksOverview;
-            let total = dataBacklinkTypes.text + dataBacklinkTypes.frame + dataBacklinkTypes.form + dataBacklinkTypes.image
-            let text = '';
-            let img = ''
-            let form = ''
-            let frame = ''
-            if (numeral(dataBacklinkTypes.text * 100 / total).format('0,0') < 1) {
-                text = "<1";
-            } else {
-                text = numeral(dataBacklinkTypes.text * 100 / total).format('0,0');
-            }
-            if (numeral(dataBacklinkTypes.image * 100 / total).format('0,0') < 1) {
-                img = "<1";
-            } else {
-                img = numeral(dataBacklinkTypes.image * 100 / total).format('0,0');
-            }
-            if (numeral(dataBacklinkTypes.form * 100 / total).format('0,0') < 1) {
-                form = "<1";
-            } else {
-                from = numeral(dataBacklinkTypes.form * 100 / total).format('0,0');
-            }
-            if (numeral(dataBacklinkTypes.frame * 100 / total).format('0,0') < 1) {
-                frame = "<1";
-            } else {
-                frame = numeral(dataBacklinkTypes.frame * 100 / total).format('0,0');
-            }
-            // Text
-            $('.text-score').html((numeral(dataBacklinkTypes.text).format('0.0a')));
-            $('.text-percent').html(text + '%')
-            $('.slider-fill-text').css('width', (numeral(dataBacklinkTypes.text * 100 / total).format('0,0') + '%'))
-                // Image
-            $('.image-score').html((numeral(dataBacklinkTypes.image).format('0.0a')));
-            $('.image-percent').html(img + '%')
-            $('.slider-fill-image').css('width', (numeral(dataBacklinkTypes.image * 100 / total).format('0,0') + '%'))
-                // Form
-            $('.form-score').html((numeral(dataBacklinkTypes.form).format('0.0a')));
-            $('.form-percent').html(form + '%')
-            $('.slider-fill-form').css('width', (numeral(dataBacklinkTypes.form * 100 / total).format('0,0') + '%'))
-                //  Frame
-            $('.frame-score').html((numeral(dataBacklinkTypes.frame).format('0.0a')));
-            $('.frame-percent').html(frame + '%')
-            $('.slider-fill-frame').css('width', (numeral(dataBacklinkTypes.frame * 100 / total).format('0,0') + '%'))
+const getDomainBackLinkDetail = async (task, data) => {
+    // console.log(data);
+    if (data.status == 'success') {
+        let dataBacklinkTypes = data.data.backlinksOverview;
+        let total = dataBacklinkTypes.text + dataBacklinkTypes.frame + dataBacklinkTypes.form + dataBacklinkTypes.image
+        let text = '';
+        let img = ''
+        let form = ''
+        let frame = ''
+        if (numeral(dataBacklinkTypes.text * 100 / total).format('0,0') < 1) {
+            text = "<1";
+        } else {
+            text = numeral(dataBacklinkTypes.text * 100 / total).format('0,0');
+        }
+        if (numeral(dataBacklinkTypes.image * 100 / total).format('0,0') < 1) {
+            img = "<1";
+        } else {
+            img = numeral(dataBacklinkTypes.image * 100 / total).format('0,0');
+        }
+        if (numeral(dataBacklinkTypes.form * 100 / total).format('0,0') < 1) {
+            form = "<1";
+        } else {
+            from = numeral(dataBacklinkTypes.form * 100 / total).format('0,0');
+        }
+        if (numeral(dataBacklinkTypes.frame * 100 / total).format('0,0') < 1) {
+            frame = "<1";
+        } else {
+            frame = numeral(dataBacklinkTypes.frame * 100 / total).format('0,0');
+        }
+        // Text
+        $('.text-score').html((numeral(dataBacklinkTypes.text).format('0.0a')));
+        $('.text-percent').html(text + '%')
+        $('.slider-fill-text').css('width', (numeral(dataBacklinkTypes.text * 100 / total).format('0,0') + '%'))
+        // Image
+        $('.image-score').html((numeral(dataBacklinkTypes.image).format('0.0a')));
+        $('.image-percent').html(img + '%')
+        $('.slider-fill-image').css('width', (numeral(dataBacklinkTypes.image * 100 / total).format('0,0') + '%'))
+        // Form
+        $('.form-score').html((numeral(dataBacklinkTypes.form).format('0.0a')));
+        $('.form-percent').html(form + '%')
+        $('.slider-fill-form').css('width', (numeral(dataBacklinkTypes.form * 100 / total).format('0,0') + '%'))
+        //  Frame
+        $('.frame-score').html((numeral(dataBacklinkTypes.frame).format('0.0a')));
+        $('.frame-percent').html(frame + '%')
+        $('.slider-fill-frame').css('width', (numeral(dataBacklinkTypes.frame * 100 / total).format('0,0') + '%'))
 
-            // ////////////////
-            // let datachart = [];
-            let api_chart = data.data.backlinksOverview
+        // ////////////////
+        // let datachart = [];
+        let api_chart = data.data.backlinksOverview
 
-            let option = {
-                color: ['#5d78ff', '#ffb822'],
-                legend: {
-                    top: "30%",
-                    left: '60%',
+        let option = {
+            color: ['#5d78ff', '#ffb822'],
+            legend: {
+                top: "30%",
+                left: '60%',
 
-                    data: ['Follow', 'NoFollow'],
-                    formatter: function(name) {
+                data: ['Follow', 'NoFollow'],
+                formatter: function (name) {
 
-                        let value = name == 'Follow' ? api_chart.follow : api_chart.nofollow;
-                        return `${name}\t\t\t ${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')}`;
+                    let value = name == 'Follow' ? api_chart.follow : api_chart.nofollow;
+                    return `${name}\t\t\t ${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')}`;
+                }
+            },
+            series: [{
+                type: 'pie',
+                minAngle: 20,
+                radius: ["40%", "70%"],
+                center: ["30%", "50%"],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    normal: {
+                        borderColor: '#ffffff',
+                        borderWidth: 5,
+                    },
+                },
+                label: {
+                    normal: {
+                        show: false,
+                    },
+                    emphasis: {
+                        show: false,
                     }
                 },
-                series: [{
-                    type: 'pie',
-                    minAngle: 20,
-                    radius: ["40%", "70%"],
-                    center: ["30%", "50%"],
-                    avoidLabelOverlap: false,
-                    itemStyle: {
-                        normal: {
-                            borderColor: '#ffffff',
-                            borderWidth: 5,
-                        },
-                    },
-                    label: {
-                        normal: {
-                            show: false,
-                        },
-                        emphasis: {
-                            show: false,
-                        }
-                    },
-                    data: [
-                        { value: api_chart.follow, name: 'Follow' },
-                        { value: api_chart.nofollow, name: 'NoFollow' },
-                    ]
-                }]
-            };
-            // myChart.setOption(option);
-            // Update v7
-            var containers = document.getElementsByClassName('chart-followvsnofollow');
-            var charts = [];
-            for (var i = 0; i < containers.length; i++) {
-                var chart = echarts.init(containers[i]);
-                chart.setOption(option);
-                charts.push(chart);
-            }
-            window.onresize = function() {
-                for (var i = 0; i < charts.length; ++i) {
-                    charts[i].resize();
-                }
-            };
-            await $(`.chart-followvsnofollow `).removeClass('is-loading');
-            //v7
+                data: [
+                    { value: api_chart.follow, name: 'Follow' },
+                    { value: api_chart.nofollow, name: 'NoFollow' },
+                ]
+            }]
+        };
+        // myChart.setOption(option);
+        // Update v7
+        var containers = document.getElementsByClassName('chart-followvsnofollow');
+        var charts = [];
+        for (var i = 0; i < containers.length; i++) {
+            var chart = echarts.init(containers[i]);
+            chart.setOption(option);
+            charts.push(chart);
         }
+        window.onresize = function () {
+            for (var i = 0; i < charts.length; ++i) {
+                charts[i].resize();
+            }
+        };
+        await $(`.chart-followvsnofollow `).removeClass('is-loading');
+        //v7
     }
-    //done
-const getDomainOverviewV2 = async(boxName, data) => {
+}
+//done
+const getDomainOverviewV2 = async (boxName, data) => {
     getScrapedSearchAds('getScrapedSearchAds', data)
-        // getTraffic30Days('getTraffic30Days', data)
+    // getTraffic30Days('getTraffic30Days', data)
     getListGoogleAdsCompetitor('getListGoogleAdsCompetitor', data)
     lockedModule('getScrapedSearchAds', data.userData.member);
     lockedModule('getListGoogleAdsCompetitor', data.userData.member);
 };
-const getScrapedSearchAds = async(boxName, data) => {
-
+const getScrapedSearchAds = async (boxName, data) => {
+    let des_true = true;
     if (data.data.adwordsPositionsOverview.length == 0) {
+        des_true = false
         $('#getScrapedSearchAds').addClass('empty-state')
+        $('.description-goads').html(`Đưa website ${domain} lên top Google bằng Google Ads, tặng mã khuyến mãi quảng cáo Google Ads trị giá 1.350.000 vnđ.`)
+        $('.btn-noads').html(`<a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/quangcao/?view=buy-account&action=index">Mua tài khoản quảng cáo</a>`)
     }
     if (data.status == "success") {
         var SearchAds = data.data.adwordsPositionsOverview;
-        adsdescription = SearchAds
-        console.log(adsdescription)
-        if (!adsdescription) {
-            $('.description-goads').html(`Đưa website [xxx] lên top Google bằng Google Ads, tặng mã khuyến mãi quảng cáo Google Ads trị giá 1.350.000 vnđ.`)
-            $('.btn-noads').html(`<a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="https://admin.fff.com.vn/quangcao/?view=buy-account&action=index">Mua tài khoản quảng cáo</a>`)
-        }
-        //  console.log(SearchAds);
+        // adsdescription = SearchAds
+        // console.log(adsdescription)
+        setTimeout(function () {
+            if (des_true && SearchAds && trafficdst < 10000) {
+                $('.description-goads').html('Nhận thêm mã khuyến mãi Google Ads trị giá 1.350.000 vnđ, theo dõi IP và chặn click ảo phá quảng cáo chỉ 299,000 vnđ/tháng.')
+                $('.link-a-ads').attr('href', 'https://admin.fff.com.vn/quangcao/?view=promotion&action=index')
+            } else if (des_true && SearchAds && trafficdst >= 10000) {
+                $('.description-goads').html('Theo dõi IP click quảng cáo, chặn click ảo nhận báo cáo chuyên sâu về quảng cáo Google Ads chỉ 299,000 vnđ/tháng.')
+                $('.link-a-ads').attr('href', 'https://fffads.com/?view=follow-ip&action=index')
+            }
+        }, 1500)
         $(`#getScrapedSearchAds .carousel-inner`).html('');
         $(`#getScrapedSearchAds .carousel-indicators`).html('');
         $("#row-getPaidSearchCompetitorsTableV1").show();
@@ -2465,7 +2471,7 @@ const getScrapedSearchAds = async(boxName, data) => {
                     } = value;
 
 
-                    (description != '') ? description = '<div class="text-muted">' + description + '</div>': null;
+                    (description != '') ? description = '<div class="text-muted">' + description + '</div>' : null;
                     carouselItem = `
                          <div class="carousel-item p-20 p-l-40 p-r-40 ${index == 0 ? 'active' : ''}">
                          <div class="similarAdsText rounded">
@@ -2507,641 +2513,640 @@ const getScrapedSearchAds = async(boxName, data) => {
 };
 
 // Lượt Truy Cập Xã Hội
-const getTrafficSocial = async(task, data, domain) => {
-        if (data.status == "success") {
-            if (data && data.data && data.data.data) {
-                let TrafficSocial = data.data.data;
+const getTrafficSocial = async (task, data, domain) => {
+    if (data.status == "success") {
+        if (data && data.data && data.data.data) {
+            let TrafficSocial = data.data.data;
 
-                let SearchTotal = TrafficSocial.SearchTotal;
-                let VolumeTotal = TrafficSocial.VolumeTotal;
-                let TotalDesktopTraffic = SearchTotal / VolumeTotal;
+            let SearchTotal = TrafficSocial.SearchTotal;
+            let VolumeTotal = TrafficSocial.VolumeTotal;
+            let TotalDesktopTraffic = SearchTotal / VolumeTotal;
+            $("#TotalSocialVisits").removeClass("is-loading");
+            $("#TotalSocialVisits").html(`Tổng ${numeral(SearchTotal).format("0,0")}`);
 
-                $("#TotalSocialVisits").removeClass("is-loading");
-                $("#TotalSocialVisits").html(`Tổng ${numeral(SearchTotal).format("0,0")}`);
+            // Tổng Số Lượt Truy Cập Xã Hội
+            $("#totalSocailVisits").html(`${numeral(SearchTotal).format("0.000a")}`);
+            $("#percenTotalSocailVisits").html(`${numeral(TotalDesktopTraffic).format('0.00%')}`);
 
-                // Tổng Số Lượt Truy Cập Xã Hội
-                $("#totalSocailVisits").html(`${numeral(SearchTotal).format("0.000a")}`);
-                $("#percenTotalSocailVisits").html(`${numeral(TotalDesktopTraffic).format('0.00%')}`);
+            let dataChartPie = [{
+                name: "Mạng xã hội",
+                value: SearchTotal
+            },
+            {
+                name: "Tổng",
+                value: VolumeTotal - SearchTotal
+            }
+            ]
 
-                let dataChartPie = [{
-                        name: "Mạng xã hội",
-                        value: SearchTotal
-                    },
-                    {
-                        name: "Tổng",
-                        value: VolumeTotal - SearchTotal
+            // render chart
+            let elePie = document.getElementById("getTotalSocialVisits");
+            let myChartPie = echarts.init(elePie);
+
+            let optionPie = {
+                color: masterColor,
+                legend: {
+                    bottom: "-2%",
+                    right: "25%",
+                    formatter: function (name) {
+                        let value = name == 'Tổng' ? dataChartPie[1].value : dataChartPie[0].value;
+                        return `${name}\n(${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')})`;
                     }
-                ]
-
-                // render chart
-                let elePie = document.getElementById("getTotalSocialVisits");
-                let myChartPie = echarts.init(elePie);
-
-                let optionPie = {
-                    color: masterColor,
-                    legend: {
-                        bottom: "-2%",
-                        right: "25%",
-                        formatter: function(name) {
-                            let value = name == 'Tổng' ? dataChartPie[1].value : dataChartPie[0].value;
-                            return `${name}\n(${value > 1000000 ? numeral(value).format('0.0a') : numeral(value).format('0,0')})`;
-                        }
-                    },
-                    series: [{
-                        type: 'pie',
-                        legendHoverLink: false,
-                        minAngle: 20,
-                        radius: ["45%", "70%"],
-                        center: ["45%", "45%"],
-                        avoidLabelOverlap: false,
-                        itemStyle: {
-                            normal: {
-                                borderColor: '#ffffff',
-                                borderWidth: 5,
-                            },
+                },
+                series: [{
+                    type: 'pie',
+                    legendHoverLink: false,
+                    minAngle: 20,
+                    radius: ["45%", "70%"],
+                    center: ["45%", "45%"],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#ffffff',
+                            borderWidth: 5,
                         },
-                        label: {
-                            normal: {
-                                show: false,
-                                position: 'center',
-                                formatter: '{text|{b}}\n{value|{d}%}',
-                                rich: {
-                                    text: {
-                                        color: "#666",
-                                        fontSize: 12,
-                                        align: 'center',
-                                        verticalAlign: 'middle',
-                                        padding: 5
-                                    },
-                                    value: {
-                                        color: "#8693F3",
-                                        fontSize: 24,
-                                        align: 'center',
-                                        verticalAlign: 'middle',
-                                    },
-                                }
-                            },
-                            emphasis: {
-                                show: true,
-                                textStyle: {
-                                    fontSize: 46,
-                                }
+                    },
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center',
+                            formatter: '{text|{b}}\n{value|{d}%}',
+                            rich: {
+                                text: {
+                                    color: "#666",
+                                    fontSize: 12,
+                                    align: 'center',
+                                    verticalAlign: 'middle',
+                                    padding: 5
+                                },
+                                value: {
+                                    color: "#8693F3",
+                                    fontSize: 24,
+                                    align: 'center',
+                                    verticalAlign: 'middle',
+                                },
                             }
                         },
-                        data: dataChartPie
-                    }]
-                };
-                myChartPie.setOption(optionPie);
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: 46,
+                            }
+                        }
+                    },
+                    data: dataChartPie
+                }]
+            };
+            myChartPie.setOption(optionPie);
 
 
-                new ResizeSensor($(`#getTotalSocialVisits`), function() {
-                    myChartPie.resize();
-                    setTimeout(function() {
-                        myChartPie.dispatchAction({
-                            type: 'highlight',
-                            seriesIndex: 0,
-                            dataIndex: 0
-                        });
-                    }, 1000);
-                });
-
-                setTimeout(function() {
+            new ResizeSensor($(`#getTotalSocialVisits`), function () {
+                myChartPie.resize();
+                setTimeout(function () {
                     myChartPie.dispatchAction({
                         type: 'highlight',
                         seriesIndex: 0,
                         dataIndex: 0
                     });
+                }, 1000);
+            });
 
-                    myChartPie.on('mouseover', function(params) {
-                        if (params.name == dataChartPie[0].name) {
-                            myChartPie.dispatchAction({
-                                type: 'highlight',
-                                seriesIndex: 0,
-                                dataIndex: 0
-                            });
-                        } else {
-                            myChartPie.dispatchAction({
-                                type: 'downplay',
-                                seriesIndex: 0,
-                                dataIndex: 0
-                            });
-                        }
-                    });
+            setTimeout(function () {
+                myChartPie.dispatchAction({
+                    type: 'highlight',
+                    seriesIndex: 0,
+                    dataIndex: 0
+                });
 
-                    myChartPie.on('mouseout', function(params) {
+                myChartPie.on('mouseover', function (params) {
+                    if (params.name == dataChartPie[0].name) {
                         myChartPie.dispatchAction({
                             type: 'highlight',
                             seriesIndex: 0,
                             dataIndex: 0
                         });
+                    } else {
+                        myChartPie.dispatchAction({
+                            type: 'downplay',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    }
+                });
+
+                myChartPie.on('mouseout', function (params) {
+                    myChartPie.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0,
+                        dataIndex: 0
                     });
-                }, 1000);
+                });
+            }, 1000);
 
-                await $(`#getTotalSocialVisits`).removeClass('is-loading');
-                await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
-                await $(`#getTotalSocialVisits`).removeClass('empty-state');
+            await $(`#getTotalSocialVisits`).removeClass('is-loading');
+            await $(`.similarReloadTask[data-task="${task}"]`).find('i').removeClass('fa-spin');
+            await $(`#getTotalSocialVisits`).removeClass('empty-state');
 
-                //
-                let Dates = TrafficSocial.Dates;
+            //
+            let Dates = TrafficSocial.Dates;
 
-                let dem = 0;
-                for (let i = 0; i < Dates.length; i++) {
-                    dem += i
-                }
-                // Date socail visits
-                let to = moment(Dates[0]).format('DD-YYYY');
-                let from = moment(Dates[dem]).format('DD-YYYY');
-                $('.similarDates').html(` ${to} - ${from}`)
+            let dem = 0;
+            for (let i = 0; i < Dates.length; i++) {
+                dem += i
+            }
+            // Date socail visits
+            let to = moment(Dates[0]).format('DD-YYYY');
+            let from = moment(Dates[dem]).format('DD-YYYY');
+            $('.similarDates').html(` ${to} - ${from}`)
 
-                let Volumes = TrafficSocial.Volumes;
+            let Volumes = TrafficSocial.Volumes;
 
-                let dataChart = {
-                    keys: [],
-                    values: []
-                };
+            let dataChart = {
+                keys: [],
+                values: []
+            };
 
-                $.each(Dates, (idx, val) => {
-                    dataChart.keys.push(val);
-                })
-                $.each(Volumes, (name, data) => {
-                    dataChart.values.push(data[0]);
-                })
+            $.each(Dates, (idx, val) => {
+                dataChart.keys.push(val);
+            })
+            $.each(Volumes, (name, data) => {
+                dataChart.values.push(data[0]);
+            })
 
-                let ele = document.getElementById("getSocialVisits");
+            let ele = document.getElementById("getSocialVisits");
 
-                let myChart = echarts.init(ele, "light");
+            let myChart = echarts.init(ele, "light");
 
-                let option = {
-                    tooltip: {
-                        trigger: "axis",
-                        backgroundColor: 'rgba(255, 255, 255, 1)',
-                        borderColor: 'rgba(93,120,255,1)',
-                        borderWidth: 1,
-                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                        formatter: params => {
+            let option = {
+                tooltip: {
+                    trigger: "axis",
+                    backgroundColor: 'rgba(255, 255, 255, 1)',
+                    borderColor: 'rgba(93,120,255,1)',
+                    borderWidth: 1,
+                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                    formatter: params => {
 
-                            let {
-                                name
-                            } = params[0];
-                            let {
-                                marker: mrkr1,
-                                color: color1,
-                                seriesName: name1,
-                                value: val1
-                            } = params[0];
+                        let {
+                            name
+                        } = params[0];
+                        let {
+                            marker: mrkr1,
+                            color: color1,
+                            seriesName: name1,
+                            value: val1
+                        } = params[0];
 
-                            name = moment(name).format('DD MMMM YYYY');
+                        name = moment(name).format('DD MMMM YYYY');
 
-                            val1 = numeral(val1).format('0,0');
+                        val1 = numeral(val1).format('0,0');
 
-                            return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
+                        return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
             <div class="text-dark pt-2">
                 ${mrkr1} Traffic <span style="color:${color1};font-weight:bold">${val1}</span>
             </div>`;
+                    }
+                },
+                grid: {
+                    right: "5%"
+                },
+                xAxis: {
+                    type: "category",
+                    boundaryGap: false,
+                    data: dataChart.keys,
+                    axisLine: {
+                        lineStyle: {
+                            color: "#ccc"
                         }
                     },
-                    grid: {
-                        right: "5%"
+                    axisLabel: {
+                        margin: 10,
+                        textStyle: {
+                            color: "#ccc"
+                        },
+                        fontFamily: 'Arial',
+                        formatter: (value, index) => moment(value).format('MM-YYYY')
                     },
-                    xAxis: {
-                        type: "category",
-                        boundaryGap: false,
-                        data: dataChart.keys,
-                        axisLine: {
-                            lineStyle: {
-                                color: "#ccc"
-                            }
+                    axisPointer: {
+                        lineStyle: {
+                            color: "rgb(25, 123, 251)",
+                            type: "dashed"
+                        }
+                    }
+                },
+                yAxis: {
+                    type: "value",
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        margin: 10,
+                        textStyle: {
+                            color: "#ccc"
                         },
-                        axisLabel: {
-                            margin: 10,
-                            textStyle: {
-                                color: "#ccc"
-                            },
-                            fontFamily: 'Arial',
-                            formatter: (value, index) => moment(value).format('MM-YYYY')
-                        },
-                        axisPointer: {
-                            lineStyle: {
-                                color: "rgb(25, 123, 251)",
-                                type: "dashed"
-                            }
+                        fontFamily: 'Arial',
+                        formatter: (value, index) => (value = numeral(value).format("0a"))
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(0,0,0,0.1)'
                         }
                     },
-                    yAxis: {
-                        type: "value",
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                        axisLabel: {
-                            margin: 10,
-                            textStyle: {
-                                color: "#ccc"
-                            },
-                            fontFamily: 'Arial',
-                            formatter: (value, index) => (value = numeral(value).format("0a"))
-                        },
-                        splitLine: {
-                            show: true,
-                            lineStyle: {
-                                color: 'rgba(0,0,0,0.1)'
-                            }
-                        },
+                },
+                series: [{
+                    name: domain,
+                    data: dataChart.values,
+                    type: 'line',
+                    stack: "0",
+                    areaStyle: {
+                        color: 'rgb(79, 141, 249)'
                     },
-                    series: [{
-                            name: domain,
-                            data: dataChart.values,
-                            type: 'line',
-                            stack: "0",
-                            areaStyle: {
-                                color: 'rgb(79, 141, 249)'
-                            },
-                            symbol: "none",
-                            itemStyle: {
-                                color: 'rgb(79, 141, 249)'
-                            },
-                        },
+                    symbol: "none",
+                    itemStyle: {
+                        color: 'rgb(79, 141, 249)'
+                    },
+                },
 
-                    ]
-                };
-                myChart.setOption(option);
-                new ResizeSensor($(`#getSocialVisits`), function() {
-                    myChart.resize();
-                });
+                ]
+            };
+            myChart.setOption(option);
+            new ResizeSensor($(`#getSocialVisits`), function () {
+                myChart.resize();
+            });
 
-                await $(`#getSocialVisits`).removeClass('is-loading');
-                $(`#getSocialVisits`).removeClass('empty-state');
-                $(`#getTotalSocialVisits`).parent().removeClass('empty-state');
-            } else {
-                $(`#getSocialVisits`).removeClass('is-loading');
-                $(`#getSocialVisits`).addClass('empty-state');
-                $(`#getTotalSocialVisits`).removeClass('is-loading');
-                $(`#getTotalSocialVisits`).parent().addClass('empty-state');
-
-            }
+            await $(`#getSocialVisits`).removeClass('is-loading');
+            $(`#getSocialVisits`).removeClass('empty-state');
+            $(`#getTotalSocialVisits`).parent().removeClass('empty-state');
         } else {
-            console.log(`${task} failed`);
+            $(`#getSocialVisits`).removeClass('is-loading');
+            $(`#getSocialVisits`).addClass('empty-state');
+            $(`#getTotalSocialVisits`).removeClass('is-loading');
+            $(`#getTotalSocialVisits`).parent().addClass('empty-state');
+
         }
+    } else {
+        console.log(`${task} failed`);
     }
-    //getMarketingMixOverview
-const getMarketingMixOverview = async(task, data) => {
-        if (data.status == "success") {
-            if (data && data.data && data.data.data && data.data.data.Data) {
-                let {
-                    DailyData,
-                    WeeklyData,
-                    MonthlyData
-                } = data.data.data.Data;
+}
+//getMarketingMixOverview
+const getMarketingMixOverview = async (task, data) => {
+    if (data.status == "success") {
+        if (data && data.data && data.data.data && data.data.data.Data) {
+            let {
+                DailyData,
+                WeeklyData,
+                MonthlyData
+            } = data.data.data.Data;
 
-                if (Object.values(DailyData).length != 0 || Object.values(WeeklyData).length != 0 || Object.values(MonthlyData).length != 0) {
-                    // let { TrafficShare, AverageDuration, PagesPerVisit, BounceRate } = DataMarket;
-                    const run = async(taskName, temp) => {
-                        let DataMarket;
-                        if (temp == "Daily") {
-                            DataMarket = data.data.data.Data.DailyData;
-                        } else if (temp == "Weekly") {
-                            DataMarket = data.data.data.Data.WeeklyData;
-                        } else {
-                            DataMarket = data.data.data.Data.MonthlyData;
-                        }
-
-                        if (Object.values(DataMarket).length != 0) {
-                            let {
-                                TrafficShare,
-                                AverageDuration,
-                                PagesPerVisit,
-                                BounceRate
-                            } = DataMarket;
-
-                            let MarketingMixOverview;
-
-                            switch (taskName) {
-                                case 'TrafficShare':
-                                    MarketingMixOverview = TrafficShare
-                                    break;
-                                case 'AverageDuration':
-                                    MarketingMixOverview = AverageDuration
-                                    break;
-                                case 'PagesPerVisit':
-                                    MarketingMixOverview = PagesPerVisit
-                                    break;
-                                case 'BounceRate':
-                                    MarketingMixOverview = BounceRate
-                                    break;
-                                default:
-                                    break;
-                            }
-
-
-                            let dataChart = {
-                                keys: [],
-                                values: [],
-                            };
-
-
-
-                            let {
-                                BreakDown,
-                                Total
-                            } = MarketingMixOverview.Data;
-
-                            let keys = [];
-                            let values = {
-                                Direct: [],
-                                DisplayAds: [],
-                                Email: [],
-                                OrganicSearch: [],
-                                PaidSearch: [],
-                                Referrals: [],
-                                Social: [],
-                            };
-
-
-                            $.each(BreakDown, (idx, val) => {
-                                keys.push(idx);
-
-                                $.each(val, (name, data) => {
-                                    if (name == 'Direct' && data)
-                                        values.Direct.push(data)
-                                    if (name == 'Display Ads' && data)
-                                        values.DisplayAds.push(data)
-                                    if (name == 'Email' && data)
-                                        values.Email.push(data)
-                                    if (name == 'Organic Search' && data)
-                                        values.OrganicSearch.push(data)
-                                    if (name == 'Paid Search' && data)
-                                        values.PaidSearch.push(data)
-                                    if (name == 'Referrals' && data)
-                                        values.Referrals.push(data)
-                                    if (name == 'Social' && data)
-                                        values.Social.push(data)
-                                })
-
-                            })
-
-                            dataChart.keys = keys;
-                            dataChart.values = values;
-
-                            if (dataChart.values.Direct.length == 0 && dataChart.values.DisplayAds.length == 0 &&
-                                dataChart.values.Email.length == 0 && dataChart.values.OrganicSearch.length == 0 &&
-                                dataChart.values.PaidSearch.length == 0 && dataChart.values.Referrals.length == 0 &&
-                                dataChart.values.Social.length == 0) {
-
-                                $(`#getMarketingMixOverview`).removeClass('is-loading');
-                                $(`#getMarketingMixOverview`).addClass('empty-state');
-                            } else {
-                                let ele = document.getElementById(`getMarketingMixOverview--${taskName}`);
-
-                                let myChart = echarts.init(ele, 'light');
-                                let option = {
-                                    tooltip: {
-                                        trigger: "axis",
-                                        backgroundColor: 'rgba(255, 255, 255, 1)',
-                                        borderColor: 'rgba(93,120,255,1)',
-                                        borderWidth: 1,
-                                        extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
-                                        formatter: params => {
-                                            // console.log(params);
-                                            let {
-                                                name
-                                            } = params[0];
-                                            let detail = "";
-                                            let format = "";
-                                            params.forEach((p, i) => {
-                                                if (p.value == null || p.value == "A")
-                                                    p.value == 0;
-                                                let {
-                                                    marker,
-                                                    color,
-                                                    seriesName,
-                                                    value
-                                                } = p;
-
-                                                switch (taskName) {
-                                                    case 'TrafficShare':
-                                                        format = '0,0';
-                                                        break;
-                                                    case 'AverageDuration':
-                                                        format = '00:00:00';
-                                                        break;
-                                                    case 'PagesPerVisit':
-                                                        format = '0';
-                                                        break;
-                                                    case 'BounceRate':
-                                                        format = '00.00%';
-                                                        break;
-                                                    default:
-                                                        break;
-
-                                                }
-                                                value = numeral(value).format(format);
-
-
-                                                detail += `${marker} ${seriesName} <span style="color:${color};font-weight:bold">${value}</span>
-                                            <br/>`
-                                            })
-                                            name = moment(name).format('DD MMMM YYYY');
-                                            return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
-                                    <div class="text-dark pt-2">${detail}`;
-
-                                        }
-                                    },
-                                    legend: {
-                                        data: ["Trực tiếp", "Mail", "Liên kết ngoài", "Mạng xã hội", "Tìm kiếm tự nhiên", "Tìm kiếm trả phí", "Quảng cáo hiển thị"],
-
-                                    },
-                                    grid: {
-                                        right: "5%"
-                                    },
-                                    xAxis: {
-                                        type: "category",
-                                        boundaryGap: false,
-                                        data: dataChart.keys,
-                                        axisLine: {
-                                            lineStyle: {
-                                                color: "#ccc"
-                                            }
-                                        },
-                                        axisTick: {
-                                            interval: (i, v) => {
-                                                if (task == 'Weekly') {
-                                                    return (parseInt(v.slice(-2)) < 7)
-                                                } else {
-                                                    return (v.slice(-2) == '01')
-                                                }
-                                            },
-                                        },
-                                        axisLabel: {
-                                            margin: 10,
-                                            textStyle: {
-                                                color: "#999"
-                                            },
-                                            fontFamily: 'Arial',
-                                            interval: (i, v) => {
-                                                if (temp == 'Weekly') {
-                                                    return (parseInt(v.slice(-2)) < 7)
-                                                } else {
-                                                    return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
-                                                }
-                                            },
-                                            formatter: (value, index) => {
-                                                if (task == 'Weekly') {
-                                                    return moment(value).format('MM-YYYY');
-                                                } else {
-                                                    return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
-                                                }
-                                            },
-
-                                        },
-                                    },
-                                    yAxis: {
-                                        type: "value",
-                                        axisLine: {
-                                            show: false
-                                        },
-                                        axisTick: {
-                                            show: false
-                                        },
-                                        axisLabel: {
-                                            margin: 10,
-                                            textStyle: {
-                                                color: "#ccc"
-                                            },
-                                            fontFamily: 'Arial',
-                                            // formatter: (value, index) => (value = numeral(value).format("0a")),
-                                            formatter: (value, index) => {
-                                                if (taskName == 'TrafficShare') {
-                                                    return numeral(value).format("0a")
-                                                } else if (taskName == 'AverageDuration') {
-                                                    return numeral(value).format("00:00:00")
-                                                } else if (taskName == 'PagesPerVisit') {
-                                                    return numeral(value).format("0")
-                                                } else {
-                                                    return numeral(value).format("00%")
-                                                }
-                                            },
-                                        },
-                                        splitLine: {
-                                            show: true,
-                                            lineStyle: {
-                                                color: 'rgba(0,0,0,0.1)'
-                                            }
-                                        },
-                                    },
-                                    series: [{
-                                            name: 'Trực tiếp',
-                                            data: (dataChart.values.Direct) ? dataChart.values.Direct : 0,
-                                            type: "line",
-                                            // smooth: true,
-                                            symbol: (temp == "Daily") ? "none" : "circle",
-                                            symbolSize: 10,
-                                            showSymbol: true,
-                                            hoverAnimation: false,
-
-                                        },
-                                        {
-                                            name: 'Mail',
-                                            data: dataChart.values.Email,
-                                            type: "line",
-                                            // smooth: true,
-                                            symbol: (temp == "Daily") ? "none" : "circle",
-                                            symbolSize: 10,
-                                            showSymbol: true,
-                                            hoverAnimation: false,
-
-                                        },
-                                        {
-                                            name: 'Liên kết ngoài',
-                                            data: dataChart.values.Referrals,
-                                            type: "line",
-                                            // smooth: true,
-                                            symbol: (temp == "Daily") ? "none" : "circle",
-                                            symbolSize: 10,
-                                            showSymbol: true,
-                                            hoverAnimation: false,
-
-                                        },
-                                        {
-                                            name: 'Mạng xã hội',
-                                            data: dataChart.values.Social,
-                                            type: "line",
-                                            // smooth: true,
-                                            symbol: (temp == "Daily") ? "none" : "circle",
-                                            symbolSize: 10,
-                                            showSymbol: true,
-                                            hoverAnimation: false,
-
-                                        },
-                                        {
-                                            name: 'Tìm kiếm tự nhiên',
-                                            data: dataChart.values.OrganicSearch,
-                                            type: "line",
-                                            // smooth: true,
-                                            symbol: (temp == "Daily") ? "none" : "circle",
-                                            symbolSize: 10,
-                                            showSymbol: true,
-                                            hoverAnimation: false,
-
-                                        },
-                                        {
-                                            name: 'Tìm kiếm trả phí',
-                                            data: dataChart.values.PaidSearch,
-                                            type: "line",
-                                            // smooth: true,
-                                            symbol: (temp == "Daily") ? "none" : "circle",
-                                            symbolSize: 10,
-                                            showSymbol: true,
-                                            hoverAnimation: false,
-
-                                        },
-                                        {
-                                            name: 'Quảng cáo hiển thị',
-                                            data: (dataChart.values.DisplayAds != 0) ? dataChart.values.DisplayAds : "NA",
-                                            type: "line",
-                                            // smooth: true,
-                                            symbol: (temp == "Daily") ? "none" : "circle",
-                                            symbolSize: 10,
-                                            showSymbol: true,
-                                            hoverAnimation: false,
-
-                                        }
-                                    ]
-                                };
-                                myChart.setOption(option);
-
-                                new ResizeSensor($(`#getMarketingMixOverview--${taskName}`), function() {
-                                    myChart.resize();
-                                });
-                                await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
-                                await $(`#getMarketingMixOverview--${taskName}`).removeClass('is-loading');
-                                await $(`#getMarketingMixOverview`).removeClass('is-loading');
-                                await $(`#getMarketingMixOverview`).removeClass('empty-state');
-
-                            }
-                        } else {
-                            $(`#getMarketingMixOverview`).removeClass('is-loading');
-                            $(`#getMarketingMixOverview`).addClass('empty-state');
-                            await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
-                        }
-
+            if (Object.values(DailyData).length != 0 || Object.values(WeeklyData).length != 0 || Object.values(MonthlyData).length != 0) {
+                // let { TrafficShare, AverageDuration, PagesPerVisit, BounceRate } = DataMarket;
+                const run = async (taskName, temp) => {
+                    let DataMarket;
+                    if (temp == "Daily") {
+                        DataMarket = data.data.data.Data.DailyData;
+                    } else if (temp == "Weekly") {
+                        DataMarket = data.data.data.Data.WeeklyData;
+                    } else {
+                        DataMarket = data.data.data.Data.MonthlyData;
                     }
 
+                    if (Object.values(DataMarket).length != 0) {
+                        let {
+                            TrafficShare,
+                            AverageDuration,
+                            PagesPerVisit,
+                            BounceRate
+                        } = DataMarket;
 
-                    run('TrafficShare', "Weekly");
+                        let MarketingMixOverview;
 
-                    $('#getMarketingMixOverview a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+                        switch (taskName) {
+                            case 'TrafficShare':
+                                MarketingMixOverview = TrafficShare
+                                break;
+                            case 'AverageDuration':
+                                MarketingMixOverview = AverageDuration
+                                break;
+                            case 'PagesPerVisit':
+                                MarketingMixOverview = PagesPerVisit
+                                break;
+                            case 'BounceRate':
+                                MarketingMixOverview = BounceRate
+                                break;
+                            default:
+                                break;
+                        }
 
 
-                        var taskName = $(e.target).data('task'); // activated tab
-                        let ele = document.getElementById(`getMarketingMixOverview--${taskName}`);
+                        let dataChart = {
+                            keys: [],
+                            values: [],
+                        };
 
-                        run(taskName, "Weekly");
 
-                        $("#TimeChartMarket").html("");
 
-                        $("#TimeChartMarket").html(`<fieldset>
+                        let {
+                            BreakDown,
+                            Total
+                        } = MarketingMixOverview.Data;
+
+                        let keys = [];
+                        let values = {
+                            Direct: [],
+                            DisplayAds: [],
+                            Email: [],
+                            OrganicSearch: [],
+                            PaidSearch: [],
+                            Referrals: [],
+                            Social: [],
+                        };
+
+
+                        $.each(BreakDown, (idx, val) => {
+                            keys.push(idx);
+
+                            $.each(val, (name, data) => {
+                                if (name == 'Direct' && data)
+                                    values.Direct.push(data)
+                                if (name == 'Display Ads' && data)
+                                    values.DisplayAds.push(data)
+                                if (name == 'Email' && data)
+                                    values.Email.push(data)
+                                if (name == 'Organic Search' && data)
+                                    values.OrganicSearch.push(data)
+                                if (name == 'Paid Search' && data)
+                                    values.PaidSearch.push(data)
+                                if (name == 'Referrals' && data)
+                                    values.Referrals.push(data)
+                                if (name == 'Social' && data)
+                                    values.Social.push(data)
+                            })
+
+                        })
+
+                        dataChart.keys = keys;
+                        dataChart.values = values;
+
+                        if (dataChart.values.Direct.length == 0 && dataChart.values.DisplayAds.length == 0 &&
+                            dataChart.values.Email.length == 0 && dataChart.values.OrganicSearch.length == 0 &&
+                            dataChart.values.PaidSearch.length == 0 && dataChart.values.Referrals.length == 0 &&
+                            dataChart.values.Social.length == 0) {
+
+                            $(`#getMarketingMixOverview`).removeClass('is-loading');
+                            $(`#getMarketingMixOverview`).addClass('empty-state');
+                        } else {
+                            let ele = document.getElementById(`getMarketingMixOverview--${taskName}`);
+
+                            let myChart = echarts.init(ele, 'light');
+                            let option = {
+                                tooltip: {
+                                    trigger: "axis",
+                                    backgroundColor: 'rgba(255, 255, 255, 1)',
+                                    borderColor: 'rgba(93,120,255,1)',
+                                    borderWidth: 1,
+                                    extraCssText: 'padding: 10px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);',
+                                    formatter: params => {
+                                        // console.log(params);
+                                        let {
+                                            name
+                                        } = params[0];
+                                        let detail = "";
+                                        let format = "";
+                                        params.forEach((p, i) => {
+                                            if (p.value == null || p.value == "A")
+                                                p.value == 0;
+                                            let {
+                                                marker,
+                                                color,
+                                                seriesName,
+                                                value
+                                            } = p;
+
+                                            switch (taskName) {
+                                                case 'TrafficShare':
+                                                    format = '0,0';
+                                                    break;
+                                                case 'AverageDuration':
+                                                    format = '00:00:00';
+                                                    break;
+                                                case 'PagesPerVisit':
+                                                    format = '0';
+                                                    break;
+                                                case 'BounceRate':
+                                                    format = '00.00%';
+                                                    break;
+                                                default:
+                                                    break;
+
+                                            }
+                                            value = numeral(value).format(format);
+
+
+                                            detail += `${marker} ${seriesName} <span style="color:${color};font-weight:bold">${value}</span>
+                                            <br/>`
+                                        })
+                                        name = moment(name).format('DD MMMM YYYY');
+                                        return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
+                                    <div class="text-dark pt-2">${detail}`;
+
+                                    }
+                                },
+                                legend: {
+                                    data: ["Trực tiếp", "Mail", "Liên kết ngoài", "Mạng xã hội", "Tìm kiếm tự nhiên", "Tìm kiếm trả phí", "Quảng cáo hiển thị"],
+
+                                },
+                                grid: {
+                                    right: "5%"
+                                },
+                                xAxis: {
+                                    type: "category",
+                                    boundaryGap: false,
+                                    data: dataChart.keys,
+                                    axisLine: {
+                                        lineStyle: {
+                                            color: "#ccc"
+                                        }
+                                    },
+                                    axisTick: {
+                                        interval: (i, v) => {
+                                            if (task == 'Weekly') {
+                                                return (parseInt(v.slice(-2)) < 7)
+                                            } else {
+                                                return (v.slice(-2) == '01')
+                                            }
+                                        },
+                                    },
+                                    axisLabel: {
+                                        margin: 10,
+                                        textStyle: {
+                                            color: "#999"
+                                        },
+                                        fontFamily: 'Arial',
+                                        interval: (i, v) => {
+                                            if (temp == 'Weekly') {
+                                                return (parseInt(v.slice(-2)) < 7)
+                                            } else {
+                                                return (v.slice(-2) == '01') ? moment(v).format("MM-YYYY") : ''
+                                            }
+                                        },
+                                        formatter: (value, index) => {
+                                            if (task == 'Weekly') {
+                                                return moment(value).format('MM-YYYY');
+                                            } else {
+                                                return (value.slice(-2) == '01') ? moment(value).format("MM-YYYY") : ''
+                                            }
+                                        },
+
+                                    },
+                                },
+                                yAxis: {
+                                    type: "value",
+                                    axisLine: {
+                                        show: false
+                                    },
+                                    axisTick: {
+                                        show: false
+                                    },
+                                    axisLabel: {
+                                        margin: 10,
+                                        textStyle: {
+                                            color: "#ccc"
+                                        },
+                                        fontFamily: 'Arial',
+                                        // formatter: (value, index) => (value = numeral(value).format("0a")),
+                                        formatter: (value, index) => {
+                                            if (taskName == 'TrafficShare') {
+                                                return numeral(value).format("0a")
+                                            } else if (taskName == 'AverageDuration') {
+                                                return numeral(value).format("00:00:00")
+                                            } else if (taskName == 'PagesPerVisit') {
+                                                return numeral(value).format("0")
+                                            } else {
+                                                return numeral(value).format("00%")
+                                            }
+                                        },
+                                    },
+                                    splitLine: {
+                                        show: true,
+                                        lineStyle: {
+                                            color: 'rgba(0,0,0,0.1)'
+                                        }
+                                    },
+                                },
+                                series: [{
+                                    name: 'Trực tiếp',
+                                    data: (dataChart.values.Direct) ? dataChart.values.Direct : 0,
+                                    type: "line",
+                                    // smooth: true,
+                                    symbol: (temp == "Daily") ? "none" : "circle",
+                                    symbolSize: 10,
+                                    showSymbol: true,
+                                    hoverAnimation: false,
+
+                                },
+                                {
+                                    name: 'Mail',
+                                    data: dataChart.values.Email,
+                                    type: "line",
+                                    // smooth: true,
+                                    symbol: (temp == "Daily") ? "none" : "circle",
+                                    symbolSize: 10,
+                                    showSymbol: true,
+                                    hoverAnimation: false,
+
+                                },
+                                {
+                                    name: 'Liên kết ngoài',
+                                    data: dataChart.values.Referrals,
+                                    type: "line",
+                                    // smooth: true,
+                                    symbol: (temp == "Daily") ? "none" : "circle",
+                                    symbolSize: 10,
+                                    showSymbol: true,
+                                    hoverAnimation: false,
+
+                                },
+                                {
+                                    name: 'Mạng xã hội',
+                                    data: dataChart.values.Social,
+                                    type: "line",
+                                    // smooth: true,
+                                    symbol: (temp == "Daily") ? "none" : "circle",
+                                    symbolSize: 10,
+                                    showSymbol: true,
+                                    hoverAnimation: false,
+
+                                },
+                                {
+                                    name: 'Tìm kiếm tự nhiên',
+                                    data: dataChart.values.OrganicSearch,
+                                    type: "line",
+                                    // smooth: true,
+                                    symbol: (temp == "Daily") ? "none" : "circle",
+                                    symbolSize: 10,
+                                    showSymbol: true,
+                                    hoverAnimation: false,
+
+                                },
+                                {
+                                    name: 'Tìm kiếm trả phí',
+                                    data: dataChart.values.PaidSearch,
+                                    type: "line",
+                                    // smooth: true,
+                                    symbol: (temp == "Daily") ? "none" : "circle",
+                                    symbolSize: 10,
+                                    showSymbol: true,
+                                    hoverAnimation: false,
+
+                                },
+                                {
+                                    name: 'Quảng cáo hiển thị',
+                                    data: (dataChart.values.DisplayAds != 0) ? dataChart.values.DisplayAds : "NA",
+                                    type: "line",
+                                    // smooth: true,
+                                    symbol: (temp == "Daily") ? "none" : "circle",
+                                    symbolSize: 10,
+                                    showSymbol: true,
+                                    hoverAnimation: false,
+
+                                }
+                                ]
+                            };
+                            myChart.setOption(option);
+
+                            new ResizeSensor($(`#getMarketingMixOverview--${taskName}`), function () {
+                                myChart.resize();
+                            });
+                            await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
+                            await $(`#getMarketingMixOverview--${taskName}`).removeClass('is-loading');
+                            await $(`#getMarketingMixOverview`).removeClass('is-loading');
+                            await $(`#getMarketingMixOverview`).removeClass('empty-state');
+
+                        }
+                    } else {
+                        $(`#getMarketingMixOverview`).removeClass('is-loading');
+                        $(`#getMarketingMixOverview`).addClass('empty-state');
+                        await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
+                    }
+
+                }
+
+
+                run('TrafficShare', "Weekly");
+
+                $('#getMarketingMixOverview a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+
+                    var taskName = $(e.target).data('task'); // activated tab
+                    let ele = document.getElementById(`getMarketingMixOverview--${taskName}`);
+
+                    run(taskName, "Weekly");
+
+                    $("#TimeChartMarket").html("");
+
+                    $("#TimeChartMarket").html(`<fieldset>
                     <input id="setgetMarketingMixOverviewDaily" class="radio-inline__input" type="radio"
                         name="getMarketingMixOverview" value="setgetMarketingMixOverviewDaily" />
                     <label class="radio-inline__label" for="setgetMarketingMixOverviewDaily">
@@ -3160,40 +3165,32 @@ const getMarketingMixOverview = async(task, data) => {
                     </label>
                 </fieldset>`)
 
-                        $("input[type=radio][name=getMarketingMixOverview]").change(function() {
+                    $("input[type=radio][name=getMarketingMixOverview]").change(function () {
 
-                            let ele = document.getElementById(`getMarketingMixOverview--${taskName}`);
+                        let ele = document.getElementById(`getMarketingMixOverview--${taskName}`);
 
-                            echarts.dispose(ele);
-                            if (this.value == "setgetMarketingMixOverviewDaily") {
-                                run(taskName, "Daily");
-                            } else if (this.value == "setgetMarketingMixOverviewWeekly") {
-                                run(taskName, "Weekly");
-                            } else
-                                run(taskName, "Monthly");
-                        })
-                    });
-
-                    $("input[type=radio][name=getMarketingMixOverview]").change(function() {
-
-                        //alert(this.value);
-
-                        let ele = document.getElementById(`getMarketingMixOverview--TrafficShare`);
                         echarts.dispose(ele);
                         if (this.value == "setgetMarketingMixOverviewDaily") {
-                            run("TrafficShare", "Daily");
+                            run(taskName, "Daily");
                         } else if (this.value == "setgetMarketingMixOverviewWeekly") {
-                            run("TrafficShare", "Weekly");
-                        } else {
-                            run("TrafficShare", "Monthly");
-                        }
+                            run(taskName, "Weekly");
+                        } else
+                            run(taskName, "Monthly");
                     })
-                } else {
-                    $(`#getMarketingMixOverview`).removeClass('is-loading');
-                    $(`#getMarketingMixOverview`).addClass('empty-state');
-                    await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
-                }
+                });
 
+                $("input[type=radio][name=getMarketingMixOverview]").change(function () {
+                    //alert(this.value);
+                    let ele = document.getElementById(`getMarketingMixOverview--TrafficShare`);
+                    echarts.dispose(ele);
+                    if (this.value == "setgetMarketingMixOverviewDaily") {
+                        run("TrafficShare", "Daily");
+                    } else if (this.value == "setgetMarketingMixOverviewWeekly") {
+                        run("TrafficShare", "Weekly");
+                    } else {
+                        run("TrafficShare", "Monthly");
+                    }
+                })
             } else {
                 $(`#getMarketingMixOverview`).removeClass('is-loading');
                 $(`#getMarketingMixOverview`).addClass('empty-state');
@@ -3201,18 +3198,24 @@ const getMarketingMixOverview = async(task, data) => {
             }
 
         } else {
-            console.log(`${task} failed`);
+            $(`#getMarketingMixOverview`).removeClass('is-loading');
+            $(`#getMarketingMixOverview`).addClass('empty-state');
+            await $(`.similarReloadTask[data-task="getMarketingMixOverviewDaily"]`).find('i').removeClass('fa-spin');
         }
+
+    } else {
+        console.log(`${task} failed`);
     }
-    // DISPLAY ADS
-const SampleAdsasImage = async(task, data) => {
-        $('.footer--bt-view').remove()
-        if (data.data.googleAdsGDNOverview.media.data.length == 0) {
-            $('.sample-image-ads').addClass('empty-state')
-        } else {
-            data.data.googleAdsGDNOverview.media.data.forEach((val, index) => {
-                if (index < 5) {
-                    $(".sample-image-ads").append(`<div class="box-all">
+}
+// DISPLAY ADS
+const SampleAdsasImage = async (task, data) => {
+    $('.footer--bt-view').remove()
+    if (data.data.googleAdsGDNOverview.media.data.length == 0) {
+        $('.sample-image-ads').addClass('empty-state')
+    } else {
+        data.data.googleAdsGDNOverview.media.data.forEach((val, index) => {
+            if (index < 5) {
+                $(".sample-image-ads").append(`<div class="box-all">
                 <div class="box-img">
                     <div class="image-media">
                         <div class="image-sample">
@@ -3222,12 +3225,23 @@ const SampleAdsasImage = async(task, data) => {
 
                 </div>
             </div>`)
-                }
-            })
-        }
-    } // DISPLAY ADS
-const googleAdsGDNOverview = async(task, data) => {
+            }
+        })
+    }
+} // DISPLAY ADS
+const googleAdsGDNOverview = async (task, data) => {
     lockedModule('SampleAds', data.userData.member);
+    let dislay_des = data.data.googleAdsGDNOverview.media.total
+    if (dislay_des > 0) $('.wapper-display').removeClass('d-flex').addClass('d-none')
+    setTimeout(function () {
+        if (dislay_des == 0 && trafficdst < 10000) {
+            $('.desciption-display').html('Thêm ngay chiến dịch quảng cáo Google Display Ads, xuất hiện quảng cáo bám duôi khách hàng, tăng tỉ lệ xuất hiện của thương hiệu và tỉ lệ chốt đơn ngay.')
+            $('.link-a-display').attr('href', 'https://fffads.com/?view=display&action=index')
+        } else if (dislay_des == 0 && trafficdst >= 10000) {
+            $('.desciption-display').html('Thêm chiến dịch quảng cáo Google Display Ads, giúp website của bạn xuất hiện trên những trang báo lớn nhất tại Việt Nam.')
+            $('.link-a-display').attr('href', 'https://fffads.com/?view=display&action=index')
+        }
+    }, 1500)
     if (data.data.googleAdsGDNOverview.media.data.length == 0) {
         $('.sample-image-ads').addClass('empty-state')
     } else {
@@ -3267,7 +3281,7 @@ const googleAdsGDNOverview = async(task, data) => {
 
     }
 }
-const SampleAdsasHTML = async(task, data) => {
+const SampleAdsasHTML = async (task, data) => {
     $('.footer--bt-view').remove()
     if (data.data.htmlAds == '') {
         $('.sample-html-ads').addClass('empty-state')
@@ -3291,9 +3305,17 @@ const SampleAdsasHTML = async(task, data) => {
         }
     })
 }
-const SampleAdsasText = async(task, data) => {
+// function descriptbtn(ads,pos_des,pos_link,desciption1,desciption2){
+//     if(ads && trafficitem < 10000){
+//         $(`.${pos_des}`).html(desciption1)
+//         $(`.${pos_link}`).html(desciption1)
+//     }else if(ads && trafficitem >=10000){
+//         $(`.${pos_des}`).html(desciption2)
+//         $(`.${pos_link}`).html(desciption2)
+//     }
+// }
+const SampleAdsasText = async (task, data) => {
     $('.footer--bt-view').remove();
-    console.log(data);
 
     if (data.data.googleAdsGDNOverview.text.data.length == '') {
         $('.sample-text-ads').addClass('empty-state')
@@ -3350,7 +3372,7 @@ function kFormatter(x) {
     return "1T+";
 
 }
-const getTraffic30Days = async(task, data) => {
+const getTraffic30Days = async (task, data) => {
 
     if (data.status == "success") {
         let ranksHistory = data.data.ranksHistory;
@@ -3418,35 +3440,35 @@ const getTraffic30Days = async(task, data) => {
                     }
                 }],
                 series: [{
-                        name: 'Paid Traffic',
-                        data: adsTraffic,
-                        type: 'bar',
-                        smooth: true,
-                        symbolSize: 10,
-                        label: {
-                            show: true,
-                            position: 'top',
-                            formatter: function(params) {
-                                return kFormatter(params.value)
-                            },
+                    name: 'Paid Traffic',
+                    data: adsTraffic,
+                    type: 'bar',
+                    smooth: true,
+                    symbolSize: 10,
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: function (params) {
+                            return kFormatter(params.value)
                         },
                     },
-                    {
-                        name: 'Organic Traffic',
-                        data: organicTraffic,
-                        type: 'line',
-                        smooth: true,
-                        symbolSize: 10,
-                        label: {
-                            show: true,
-                            position: 'top',
-                            formatter: function(params) {
-                                return kFormatter(params.value)
-                            },
+                },
+                {
+                    name: 'Organic Traffic',
+                    data: organicTraffic,
+                    type: 'line',
+                    smooth: true,
+                    symbolSize: 10,
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: function (params) {
+                            return kFormatter(params.value)
                         },
-
-
                     },
+
+
+                },
 
 
 
@@ -3456,7 +3478,7 @@ const getTraffic30Days = async(task, data) => {
 
 
             myChart.setOption(option);
-            new ResizeSensor($(`#showTraffic30Days`), function() {
+            new ResizeSensor($(`#showTraffic30Days`), function () {
                 myChart.resize();
             });
         };
@@ -3470,11 +3492,11 @@ const getTraffic30Days = async(task, data) => {
     }
 }
 
-const getListGoogleAdsCompetitor = async(task, data) => {
-    var initDatatable = function(select, tableOptions) {
+const getListGoogleAdsCompetitor = async (task, data) => {
+    var initDatatable = function (select, tableOptions) {
         const table = $(`.${select}`).DataTable(tableOptions);
         $(table.table().header()).addClass('text-center');
-        $(`.${select}`).click(function(event) {
+        $(`.${select}`).click(function (event) {
             $(`.${select}-container`).addClass('is-loading').block({
                 overlayCSS: {
                     backgroundColor: '#ccc',
@@ -3492,100 +3514,99 @@ const getListGoogleAdsCompetitor = async(task, data) => {
     }
     initDatatable(
         'getListGoogleAdsCompetitor', {
-            data: data.data.adwordsCompetitorsOverview,
-            drawCallback: function(settings) {},
-            columns: [{
-                    title: "Đối thủ",
-                    "data": data => `<a href="${rootURL}/rank/${data.domain}"><div class=""><img class="p-1 mr-2 border rounded bg-secondary" src="https://www.google.com/s2/favicons?domain=${data.domain}"> ${data.domain}</div></a>`,
-                    class: 'text-left',
+        data: data.data.adwordsCompetitorsOverview,
+        drawCallback: function (settings) { },
+        columns: [{
+            title: "Đối thủ",
+            "data": data => `<a href="${rootURL}/rank/${data.domain}"><div class=""><img class="p-1 mr-2 border rounded bg-secondary" src="https://www.google.com/s2/favicons?domain=${data.domain}"> ${data.domain}</div></a>`,
+            class: 'text-left',
 
-                },
-                {
-                    title: "Level",
-                    "data": data => `<div class="progress rounded progress-custom w-100 my-auto">
+        },
+        {
+            title: "Level",
+            "data": data => `<div class="progress rounded progress-custom w-100 my-auto">
                             <div class="progress-bar bg-warning" role="progressbar" style="width: ${(data.competitionLvl * 1000).toFixed(1)}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>`,
-                    class: 'text-left',
-                    width: '50'
-                },
-                {
-                    title: "Adwords",
-                    "data": data => `${numeral(data.adwordsKeywords).format('0,0')}`,
-                    class: 'text-right',
-                    width: '50'
-                },
-                {
-                    title: "Organic",
-                    "data": data => `${numeral(data.organicKeywords).format('0,0')}`,
-                    class: 'text-right',
-                    width: '50'
-                },
-            ],
-            "ordering": false,
-            info: false,
-            autoWidth: false,
-            searching: false,
-            scrollY: '325px',
-            scrollCollapse: true,
-            paging: false,
-            processing: true,
+            class: 'text-left',
+            width: '50'
+        },
+        {
+            title: "Adwords",
+            "data": data => `${numeral(data.adwordsKeywords).format('0,0')}`,
+            class: 'text-right',
+            width: '50'
+        },
+        {
+            title: "Organic",
+            "data": data => `${numeral(data.organicKeywords).format('0,0')}`,
+            class: 'text-right',
+            width: '50'
+        },
+        ],
+        "ordering": false,
+        info: false,
+        autoWidth: false,
+        searching: false,
+        scrollY: '325px',
+        scrollCollapse: true,
+        paging: false,
+        processing: true,
 
-            initComplete: function(settings, json) {
-                $("table.getAdvertisingSearchDetail thead th").css("padding", "10px");
-                // $(".dataTables_scrollBody table.getAdvertisingSearchDetail thead").html('')
-                $(".getAdvertisingSearchDetail tbody tr td").css("padding", "15px 10px!important");
-                $(".getAdvertisingSearchDetail tbody tr td:first-child").attr("style", "width:60px!important");
-                // $(".parent-getAdvertisingSearchDetail .dataTables_scrollBody ").attr("style", "height:325px!important");
-                if (data.data.adwordsCompetitorsTotal > 0) {
-                    $(".parent-getListGoogleAdsCompetitor").append(`
+        initComplete: function (settings, json) {
+            $("table.getAdvertisingSearchDetail thead th").css("padding", "10px");
+            // $(".dataTables_scrollBody table.getAdvertisingSearchDetail thead").html('')
+            $(".getAdvertisingSearchDetail tbody tr td").css("padding", "15px 10px!important");
+            $(".getAdvertisingSearchDetail tbody tr td:first-child").attr("style", "width:60px!important");
+            // $(".parent-getAdvertisingSearchDetail .dataTables_scrollBody ").attr("style", "height:325px!important");
+            if (data.data.adwordsCompetitorsTotal > 0) {
+                $(".parent-getListGoogleAdsCompetitor").append(`
                    <div class="text-right mt-4 pr-2"><a href="https://webrank.vn/index.php?view=website&amp;action=displayads&amp;domain=tiki.vn&amp;userToken=V3gxbEZwK0tXU3NMcXVQSnZyZ1R2OXpzUDVyMGU1Qi8yWUlPTUtraXI3OD06Orsjp4yqccrrQ4PR08Jl_F8"><button class="btn btn-primary btn-sm " style="padding: 4px 13px;">
                 <span class="content-btn">Xem toàn bộ (${data.data.adwordsCompetitorsTotal}) </span>
             </button></a></div>`)
-                } else {
-                    $(`.widget-getListGoogleAdsCompetitor`).addClass('empty-state');
-                    $(`.parent-getListGoogleAdsCompetitor`).hide();
-                }
+            } else {
+                $(`.widget-getListGoogleAdsCompetitor`).addClass('empty-state');
+                $(`.parent-getListGoogleAdsCompetitor`).hide();
             }
         }
+    }
     )
 }
 
-const getTrafficOverview = async(task, data) => {
-        getAccessMonthly('getTrafficOverview', data);
-        getTrafficOverviewCustomerResources('getTrafficOverviewCustomerResources', data);
-        getTrafficOverviewCustomerSourceAnalysis('getTrafficOverviewCustomerSourceAnalysis ', data);
-        getTimeMobileDesktop('getTimeMobileDesktop', data);
-        trafficByGeo('trafficByGeo', data);
-        getDesktopVsMobileVisits('getDesktopVsMobileVisits', data);
-        lockedModule('getDesktopVsMobileVisits', data.userData.member);
-        lockedModule('getTimeMobileDesktop', data.userData.member);
-        lockedModule('trafficByGeo', data.userData.member);
-        lockedModule('getCrunchBase', data.userData.member);
-        lockedModule('getTrafficOverviewCustomerSourceAnalysis', data.userData.member);
-        lockedModule('getTrafficOverviewCustomerResources', data.userData.member);
+const getTrafficOverview = async (task, data) => {
+    getAccessMonthly('getTrafficOverview', data);
+    getTrafficOverviewCustomerResources('getTrafficOverviewCustomerResources', data);
+    getTrafficOverviewCustomerSourceAnalysis('getTrafficOverviewCustomerSourceAnalysis ', data);
+    getTimeMobileDesktop('getTimeMobileDesktop', data);
+    trafficByGeo('trafficByGeo', data);
+    getDesktopVsMobileVisits('getDesktopVsMobileVisits', data);
+    lockedModule('getDesktopVsMobileVisits', data.userData.member);
+    // lockedModule('getTimeMobileDesktop', data.userData.member);
+    lockedModule('trafficByGeo', data.userData.member);
+    // lockedModule('getCrunchBase', data.userData.member);
+    lockedModule('getTrafficOverview', data.userData.member);
+    lockedModule('getTrafficOverviewCustomerSourceAnalysis', data.userData.member);
+    lockedModule('getTrafficOverviewCustomerResources', data.userData.member);
 
+}
+//--------Truy Cập Theo Tháng
+function itemdescription(text) {
+    if (text < 10000) {
+        $('.description-companyinfo').html('Website của bạn chưa thực hiện tối ưu cho chiến dịch digital marketing (quảng cáo qua mạng), bạn có muốn được chuyên gia tư vấn thêm không')
+    } else if (text > 10000) {
+        $('.description-companyinfo').html('Bạn có muốn cải thiện chất lượng website và tăng bằng cách sử dụng bộ công cụ thu hút khách hàng và quản lý')
     }
-    //--------Truy Cập Theo Tháng
-const getAccessMonthly = async(task, data) => {
-        // console.log(adsdescription);
+}
+const getAccessMonthly = async (task, data) => {
+    // console.log(adsdescription);
 
-        if (data.status == "success") {
-            if (data.data && data.data.trafficTrend) {
-                let items0 = data.data.trafficTrend.items[0];
-                let items6 = data.data.trafficTrend.items;
-                setTimeout(function() {
-                    if (adsdescription && items0.visits < 10000) {
-                        $('.description-goads').html('Nhận thêm mã khuyến mãi Google Ads trị giá 1.350.000 vnđ, theo dõi IP và chặn click ảo phá quảng cáo chỉ 299,000 vnđ/tháng.')
-                        $('.link-a-ads').attr('href', 'https://admin.fff.com.vn/quangcao/?view=promotion&action=index')
-                    } else if (adsdescription && items0.visits >= 10000) {
-                        $('.description-goads').html('Theo dõi IP click quảng cáo, chặn click ảo nhận báo cáo chuyên sâu về quảng cáo Google Ads chỉ 299,000 vnđ/tháng.')
-                        $('.link-a-ads').attr('href', 'https://fffads.com/?view=follow-ip&action=index')
-                    }
-                }, 1500)
-
-
-                let MonthlyVisits = numeral(items0.visits).format("0,0");
-                let html = `
+    if (data.status == "success") {
+        if (data.data && data.data.trafficTrend) {
+            let items0 = data.data.trafficTrend.items[0];
+            let items6 = data.data.trafficTrend.items;
+            trafficdst = items0.visits
+            itemdescription(items0.visits)
+            let MonthlyVisits = numeral(items0.visits).format("0,0");
+            let html = `
                     <div class="px-3 py-4 pb-5" >
                         <div class="title-ttc text-center mb-1 font-15">Tổng lượt truy cập</div>
                         <div class="d-flex ">
@@ -3617,19 +3638,19 @@ const getAccessMonthly = async(task, data) => {
                         </div>
                     </div>
                 `;
-                $('.getTrafficOverview').html(html)
-                $(`.getTrafficOverview`).removeClass('is-loading');
-                //Hết Truy Cập Theo Tháng
-            } else {
+            $('.getTrafficOverview').html(html)
+            $(`.getTrafficOverview`).removeClass('is-loading');
+            //Hết Truy Cập Theo Tháng
+        } else {
 
-            }
-        } else { console.log("error", task); }
-    }
-    //-------Nguồn Khách Hàng
+        }
+    } else { console.log("error", task); }
+}
+//-------Nguồn Khách Hàng
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-const getTrafficOverviewCustomerResources = async(task, data) => {
+const getTrafficOverviewCustomerResources = async (task, data) => {
     $('.similarReloadTask[data-task="getTrafficOverviewCustomerResources"]').attr('data-task', 'getTrafficOverview')
     if (data.status == "success") {
         if (data.data && data.data.trafficTrend) {
@@ -3680,7 +3701,7 @@ const getTrafficOverviewCustomerResources = async(task, data) => {
                     //top: 50,
                     //bottom: 20,
                     data: datanamechart,
-                    formatter: function(name) {
+                    formatter: function (name) {
                         let temp = dataChart.filter((val) => {
                             if (name == val.name)
                                 return val;
@@ -3722,7 +3743,7 @@ const getTrafficOverviewCustomerResources = async(task, data) => {
                 chart.setOption(option);
                 charts.push(chart);
             }
-            window.onresize = function() {
+            window.onresize = function () {
                 for (var i = 0; i < charts.length; ++i) {
                     charts[i].resize();
                 }
@@ -3731,11 +3752,11 @@ const getTrafficOverviewCustomerResources = async(task, data) => {
             //* update v7*/
             await $(`.similarReloadTask[data-task="getTrafficOverviewCustomerResources "]`).find('i').removeClass('fa-spin');
             //Hết Nguồn Khách Hàng
-        } else {}
+        } else { }
     } else { console.log("error", task); }
 }
 
-const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
+const getTrafficOverviewCustomerSourceAnalysis = async (task, data) => {
     $('.similarReloadTask[data-task="getTrafficOverviewCustomerSourceAnalysis"]').attr('data-task', 'getTrafficOverview')
     if (data.status == "success") {
 
@@ -3839,61 +3860,61 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                     },
                 },
                 series: [{
-                        name: 'Trực tiếp',
-                        data: chartmarketing.direct.reverse(),
-                        type: "line",
-                        symbol: "circle",
-                        smooth: true,
-                        symbolSize: 1,
-                        showSymbol: true,
-                        hoverAnimation: true,
+                    name: 'Trực tiếp',
+                    data: chartmarketing.direct.reverse(),
+                    type: "line",
+                    symbol: "circle",
+                    smooth: true,
+                    symbolSize: 1,
+                    showSymbol: true,
+                    hoverAnimation: true,
 
-                    },
-                    {
-                        name: 'Mạng xã hội',
-                        data: chartmarketing.social.reverse(),
-                        type: "line",
-                        symbol: "circle",
-                        smooth: true,
-                        symbolSize: 1,
-                        showSymbol: true,
-                        hoverAnimation: true,
+                },
+                {
+                    name: 'Mạng xã hội',
+                    data: chartmarketing.social.reverse(),
+                    type: "line",
+                    symbol: "circle",
+                    smooth: true,
+                    symbolSize: 1,
+                    showSymbol: true,
+                    hoverAnimation: true,
 
-                    },
-                    {
-                        name: 'Liên kết ngoài',
-                        data: chartmarketing.referral.reverse(),
-                        type: "line",
-                        symbol: "circle",
-                        smooth: true,
-                        symbolSize: 1,
-                        showSymbol: true,
-                        hoverAnimation: true,
+                },
+                {
+                    name: 'Liên kết ngoài',
+                    data: chartmarketing.referral.reverse(),
+                    type: "line",
+                    symbol: "circle",
+                    smooth: true,
+                    symbolSize: 1,
+                    showSymbol: true,
+                    hoverAnimation: true,
 
-                    },
+                },
 
-                    {
-                        name: 'Trả phí',
-                        data: chartmarketing.paid.reverse(),
-                        type: "line",
-                        symbol: "circle",
-                        smooth: true,
-                        symbolSize: 1,
-                        showSymbol: true,
-                        hoverAnimation: true,
+                {
+                    name: 'Trả phí',
+                    data: chartmarketing.paid.reverse(),
+                    type: "line",
+                    symbol: "circle",
+                    smooth: true,
+                    symbolSize: 1,
+                    showSymbol: true,
+                    hoverAnimation: true,
 
-                    },
-                    {
-                        name: 'Tìm kiếm',
-                        data: chartmarketing.search.reverse(),
-                        type: "line",
-                        symbol: "circle",
-                        smooth: true,
-                        symbolSize: 1,
-                        showSymbol: true,
-                        hoverAnimation: true,
+                },
+                {
+                    name: 'Tìm kiếm',
+                    data: chartmarketing.search.reverse(),
+                    type: "line",
+                    symbol: "circle",
+                    smooth: true,
+                    symbolSize: 1,
+                    showSymbol: true,
+                    hoverAnimation: true,
 
-                    }
+                }
                 ]
             };
             //* update v7*/
@@ -3904,7 +3925,7 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
                 chart.setOption(optionmarketing);
                 charts.push(chart);
             }
-            window.onresize = function() {
+            window.onresize = function () {
                 for (var i = 0; i < charts.length; ++i) {
                     charts[i].resize();
                 }
@@ -3917,11 +3938,11 @@ const getTrafficOverviewCustomerSourceAnalysis = async(task, data) => {
         }
     } else { console.log("error", task); }
 }
-const getTimeMobileDesktop = async(task, data) => {
+const getTimeMobileDesktop = async (task, data) => {
     let desktop = data.data.trafficTrend.desktop.items;
     let mobile = data.data.trafficTrend.mobile.items;
     let alldevices = data.data.trafficTrend.items;
-    const run = async(taskName, nameData) => {
+    const run = async (taskName, nameData) => {
         if (taskName == "visit") {
             $('#getTimedes-mob-btn li a').removeClass('active')
             $('#getTimedes-mob-btn li a[data-task="TrafficShare"]').addClass('active')
@@ -4056,46 +4077,46 @@ const getTimeMobileDesktop = async(task, data) => {
                 },
             },
             series: [{
-                    name: 'Desktop',
-                    data: chartMobileDesktop.desktop.reverse(),
-                    type: "bar",
-                    symbol: "circle",
-                    smooth: true,
-                    stack: '0',
-                    symbolSize: 1,
-                    showSymbol: true,
-                    hoverAnimation: true,
-                    lineStyle: {
-                        width: 3
-                    },
+                name: 'Desktop',
+                data: chartMobileDesktop.desktop.reverse(),
+                type: "bar",
+                symbol: "circle",
+                smooth: true,
+                stack: '0',
+                symbolSize: 1,
+                showSymbol: true,
+                hoverAnimation: true,
+                lineStyle: {
+                    width: 3
                 },
-                {
-                    name: 'Mobile',
-                    data: chartMobileDesktop.mobile.reverse(),
-                    type: "bar",
-                    symbol: "circle",
-                    smooth: true,
-                    stack: '0',
-                    symbolSize: 1,
-                    showSymbol: true,
-                    hoverAnimation: true,
-                    lineStyle: {
-                        width: 3
-                    },
+            },
+            {
+                name: 'Mobile',
+                data: chartMobileDesktop.mobile.reverse(),
+                type: "bar",
+                symbol: "circle",
+                smooth: true,
+                stack: '0',
+                symbolSize: 1,
+                showSymbol: true,
+                hoverAnimation: true,
+                lineStyle: {
+                    width: 3
                 },
-                {
-                    name: 'Tổng',
-                    data: chartMobileDesktop.tong.reverse(),
-                    type: "line",
-                    symbol: "circle",
-                    smooth: true,
-                    symbolSize: 1,
-                    showSymbol: true,
-                    hoverAnimation: true,
-                    lineStyle: {
-                        width: 3
-                    },
-                }
+            },
+            {
+                name: 'Tổng',
+                data: chartMobileDesktop.tong.reverse(),
+                type: "line",
+                symbol: "circle",
+                smooth: true,
+                symbolSize: 1,
+                showSymbol: true,
+                hoverAnimation: true,
+                lineStyle: {
+                    width: 3
+                },
+            }
             ]
         };
         //* update v7*/
@@ -4106,14 +4127,14 @@ const getTimeMobileDesktop = async(task, data) => {
             chart.setOption(optiondesktopmobile);
             charts.push(chart);
         }
-        window.onresize = function() {
+        window.onresize = function () {
             for (var i = 0; i < charts.length; ++i) {
                 charts[i].resize();
             }
         };
     }
     run('visit', 'visits')
-    $('#getTimedes-mob-btn li').click(function() {
+    $('#getTimedes-mob-btn li').click(function () {
         let idtab = $(this).find('a').attr('href')
         if (idtab == '#getTimeMobileDesktop--TrafficShare') {
             run('visit', 'visits')
@@ -4128,18 +4149,18 @@ const getTimeMobileDesktop = async(task, data) => {
     await $(`#getTimeMobileDesktop `).removeClass('is-loading');
 }
 
-const trafficByGeo = async(task, data) => {
+const trafficByGeo = async (task, data) => {
     let percentcont = data.data.trafficByGeo
     let contry = []
     let chartmap_data = []
     $.each(arrNameContry, (index, item) => {
-            let nameCountry = {
-                ele: index.toLowerCase(),
-                name: item
-            }
-            contry.push(nameCountry)
-        })
-        // console.log(contry);
+        let nameCountry = {
+            ele: index.toLowerCase(),
+            name: item
+        }
+        contry.push(nameCountry)
+    })
+    // console.log(contry);
     $.each(percentcont, (i, v) => {
         $.each(contry, (k, val) => {
             if (v.country == val.ele) {
@@ -4158,14 +4179,14 @@ const trafficByGeo = async(task, data) => {
         charts.push(chart);
         chart.showLoading();
     }
-    window.onresize = function() {
+    window.onresize = function () {
         for (var i = 0; i < charts.length; ++i) {
             charts[i].resize();
         }
     };
     await $(`.${task}`).removeClass('is-loading');
     //* update v7*/
-    $.getJSON(rootURL + '/assets/mapworld.geo.json', function(usaJson) {
+    $.getJSON(rootURL + '/assets/mapworld.geo.json', function (usaJson) {
         // console.log(usaJson)
         chart.hideLoading();
         echarts.registerMap('World', usaJson, {});
@@ -4174,7 +4195,7 @@ const trafficByGeo = async(task, data) => {
                 trigger: 'item',
                 showDelay: 0,
                 transitionDuration: 0.2,
-                formatter: function(params) {
+                formatter: function (params) {
                     let valueaaaa = (params.value != NaN) ? `${numeral(params.value).format('0.00')}` : 0;
                     if ((params.value == NaN)) {
                         // console.log("Đá")
@@ -4234,17 +4255,17 @@ const trafficByGeo = async(task, data) => {
         chart.setOption(option);
     })
 }
-const getDesktopVsMobileVisits = async(task, data) => {
+const getDesktopVsMobileVisits = async (task, data) => {
     $('.similarReloadTask[data-task="getDesktopVsMobileVisits"]').attr('data-task', 'getTrafficOverview')
     let percent = data.data.trafficTrend.items[0]
     let dataChart = [{
-            name: 'Máy tính',
-            value: percent.desktop_share * 100
-        },
-        {
-            name: 'Điện thoại',
-            value: percent.mobile_share * 100
-        }
+        name: 'Máy tính',
+        value: percent.desktop_share * 100
+    },
+    {
+        name: 'Điện thoại',
+        value: percent.mobile_share * 100
+    }
     ];
     // render chart
     let option = {
@@ -4310,15 +4331,15 @@ const getDesktopVsMobileVisits = async(task, data) => {
         chart.setOption(option);
         charts.push(chart);
     }
-    window.onresize = function() {
+    window.onresize = function () {
         for (var i = 0; i < charts.length; ++i) {
             charts[i].resize();
         }
     };
     await $(`.${task}`).removeClass('is-loading');
-    new ResizeSensor($(`.${task}`), function() {
+    new ResizeSensor($(`.${task}`), function () {
         chart.resize();
-        setTimeout(function() {
+        setTimeout(function () {
             chart.dispatchAction({
                 type: 'highlight',
                 seriesIndex: 0,
@@ -4326,13 +4347,13 @@ const getDesktopVsMobileVisits = async(task, data) => {
             });
         }, 1000);
     });
-    setTimeout(function() {
+    setTimeout(function () {
         chart.dispatchAction({
             type: 'highlight',
             seriesIndex: 0,
             dataIndex: 0
         });
-        chart.on('mouseover', function(params) {
+        chart.on('mouseover', function (params) {
             if (params.name == dataChart[0].name) {
                 chart.dispatchAction({
                     type: 'highlight',
@@ -4347,7 +4368,7 @@ const getDesktopVsMobileVisits = async(task, data) => {
                 });
             }
         });
-        chart.on('mouseout', function(params) {
+        chart.on('mouseout', function (params) {
             chart.dispatchAction({
                 type: 'highlight',
                 seriesIndex: 0,

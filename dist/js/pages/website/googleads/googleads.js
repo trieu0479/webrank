@@ -3,17 +3,17 @@ var masterColor = ['#5d78ff', '#fd397a', '#ffb822', '#0abb87', '#48465b', '#646c
 const customColors = ["#F2A695", "#89C3F8", "#0984e3", "#8693F3", "#FCC667", "#00cec9", "#ff7675"];
 
 var localUrl = new URL(location.href);
-var domain = localUrl.searchParams.get('domain'); 
+var domain = localUrl.searchParams.get('domain');
 
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
     var VIPModule = ["TopPaidKeyword","MainCompetitor","PositionChart","CompetitorMapChart","getScrapedSearchAds","PaidPageTable","adwordsMonthlyFullTrend"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
-            //ngoai le 
+            //ngoai le
             if (boxWidgetName == 'getMarketingMixOverviewDaily') boxWidgetName = 'getMarketingMixOverview';
             if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
-            //ngoai le 
+            //ngoai le
             $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
         }
@@ -66,7 +66,7 @@ const api = async(method, domain) => {
                         PaidPageTable(data, method);break;
                     case "getScrapedSearchAds":
                         getScrapedSearchAds(data, method);
-                        break;    
+                        break;
                     default:
                         break;
                 }
@@ -122,7 +122,7 @@ const renderSparkline = (task) => { //task ở đây là id cha
 
 const ggAdsOverview = async(data,method) => {
     let res = data.data.adwordsPositions;
-    var k, S, c = 0; //k:keword,S=traffic,c:trafficost      
+    var k, S, c = 0; //k:keword,S=traffic,c:trafficost
     res.reduce((weight, animal, index, animals) => {
         weight += animal.keywordDifficulty;
         k = weight;
@@ -140,8 +140,8 @@ const ggAdsOverview = async(data,method) => {
 
         return c;
     }, 0)
-   
-    $('.ggAdsOverview').append(`   
+
+    $('.ggAdsOverview').append(`
 <div class="col-12 col-lg-4 vc ">
 <div class="text-center bg-white p-3 align-items-center rounded">
     <div class="pt-5 pb-5">
@@ -149,8 +149,8 @@ const ggAdsOverview = async(data,method) => {
         <div class="money-appr similarGlobalRank text-danger tra-cost fontsize-44"></div>
     </div>
 </div>
-</div> 
-   
+</div>
+
 
 
 
@@ -176,8 +176,8 @@ const ggAdsOverview = async(data,method) => {
 
 `)
 
- 
-if (res.length <=0) {       
+
+if (res.length <=0) {
     $('.kwhard').html('0k')
     $('.visit').html('0k')
     $('.tra-cost').html('$' + '0k' + '<span>USD</span>')
@@ -221,19 +221,19 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                 dataChart = dataChart.slice(28, 40);
                 let dataChart_1 = {
                     keys: [],
-                    values: [],                    
+                    values: [],
                     positionsTrend: []
                 }
                 dataChart.forEach(val => {
-                    let x;                    
+                    let x;
                     dataChart_1.keys.push(val.keys)
                     dataChart_1.values.push(val.values);
-                    dataChart_1.positionsTrend.push(val.positionsTrend);                   
+                    dataChart_1.positionsTrend.push(val.positionsTrend);
                     // console.log(dataChart_1);
                 })
               //console.log( dataChart_1);
-              
-               
+
+
                 let series = [{
                     name: name,
                     type: 'bar',
@@ -246,7 +246,7 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                         show: name != "KeywordsChart" ? true:false,
                         position: 'top',
                         color: 'red',
-                        formatter: function (params) {                                                                                           
+                        formatter: function (params) {
                             return kFormatter(params.value)
                         },
                     },
@@ -272,7 +272,7 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                             show: true,
                             position: 'top',
                             color: 'red',
-                            formatter: function (params) {                                                                                           
+                            formatter: function (params) {
                                 return kFormatter(params.value)
                             },
                         },
@@ -345,8 +345,8 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                                       <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:rgb(250,187,50)"></span> Top 3  <span style="color:${color};" class="ml-4">${top3}</span> <br>
                                       <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#AEDFFF"></span>  4-9 &nbsp;&nbsp;&nbsp;<span style="color:${color};" class="ml-4">${top4}</span> <br>
                                       <span style="display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:rgb(79, 141, 249);"></span> 9++ <span style="color:${color};" class="ml-4">&nbsp;&nbsp;&nbsp;${top9}</span> <br>
-                                      <div class="text-dark text-capitalize border-top  pt-1">  Total  <span style="display:inline-block;margin-right:5px;width:10px;height:10px;" class="ml-3"></span><span style="color:${color};font-weight:bold" class="ml-2">${total}</span></div>                                            
-                                      </div> 
+                                      <div class="text-dark text-capitalize border-top  pt-1">  Total  <span style="display:inline-block;margin-right:5px;width:10px;height:10px;" class="ml-3"></span><span style="color:${color};font-weight:bold" class="ml-2">${total}</span></div>
+                                      </div>
                                       `;
                                     }
                                 })
@@ -355,8 +355,8 @@ const adwordsMonthlyFullTrend = async(data, method) => {
                                 // console.log(seriesName);
                                 return `<div class="text-dark text-capitalize border-bottom pb-1">${name}</div>
                                 <div class="text-dark pt-2">
-                                    ${ marker + " " + seriesName } <span style="color:${color};font-weight:bold">${numeral(value).format('0,0')}</span> 
-                                </div> 
+                                    ${ marker + " " + seriesName } <span style="color:${color};font-weight:bold">${numeral(value).format('0,0')}</span>
+                                </div>
                                 `;
                             }
                         }
@@ -474,7 +474,7 @@ const adwordsMonthlyFullTrend = async(data, method) => {
     }
 }
 
-const TopPaidKeyword = async(data, method) => {    
+const TopPaidKeyword = async(data, method) => {
     if (!data.data.length) {
         $('#TopPaidKeyword_wrapper').addClass('empty-state');
         $('#TopPaidKeyword_wrapper').css('min-height', '361px')
@@ -496,7 +496,7 @@ const TopPaidKeyword = async(data, method) => {
                         $('#TopPaidKeyword_wrapper').css('min-height', '361px')
                         $('#TopPaidKeyword tbody tr td').html('');
                         $('#TopPaidKeyword_paginate').html('')
-                    } 
+                    }
 
                     var res = data.data.adwordsPositions;
                     let columns = [];
@@ -655,8 +655,8 @@ const PositionChart = async(data, method) => {
                         <div class="text-dark">
                         <div class="text-dark border-bottom pb-1 text-center">${name } <span style="color:${color};font-weight:bold;opacity:.8"></span> <br> </div>
                      <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#AEDFFF"></span>   ${ 'Paid positions' } <span style="color:${color};font-weight:bold">${(value) }</span> <br>
-                           
-                        </div> 
+
+                        </div>
                         `;
 
                     }
@@ -733,7 +733,7 @@ const MainCompetitor = async(data, method) => {
                     var res = data.data.adwordsCompetitors;
                     let columns = [];
                     $.each(res, function(k, v) {
-                       
+
                         let output = {};
                         output.domain = v.domain;
                         output.competitionLvl = v.competitionLvl;
@@ -824,7 +824,7 @@ const CompetitorMapChart = async(data, method) => {
                     obj.traffic = item.traffic
                     obj.commonKeywords = item.commonKeywords
                     myarr.push(obj)
-                    
+
                 }
             })
             var filterArr = myarr.filter(function(myarr) {
@@ -905,7 +905,7 @@ const CompetitorMapChart = async(data, method) => {
                                     ${ 'Keywords' } <span style="color:${color};font-weight:bold">${ kFormatter(value[0]) }</span> <br>
                                     ${ 'Traffic' } <span style="color:${color};font-weight:bold">${ kFormatter(value[1]) }</span> <br>
                                     ${ 'Common Keywords' } <span style="color:${color};font-weight:bold">${ kFormatter(value[2]) }</span> <br>
-                                </div> 
+                                </div>
                                 `;
 
                     }
@@ -998,7 +998,7 @@ const PaidPageTable = async(data, method) => {
                         $('#PaidPageTable_wrapper').addClass('empty-state');
                         $('#PaidPageTable_wrapper').removeClass('is-loading');
                         $('#PaidPageTable_wrapper tbody tr td').html('')
-                    } 
+                    }
                     var res = data.data.adwordsPositions;
                     let columns = [];
                     var stt = 1;
@@ -1090,19 +1090,19 @@ const PaidPageTable = async(data, method) => {
         }
     )
 
-} 
+}
 
 
 const getScrapedSearchAds = async (data,method) => {
    if (data.data.adwordsPositions.length <=0) {
        $('#getScrapedSearchAds').addClass('empty-state')
    }
-    
+
     if (data.status == "success") {
-        var SearchAds  = data.data.adwordsPositions;        
-      //  console.log(SearchAds);        
+        var SearchAds  = data.data.adwordsPositions;
+      //  console.log(SearchAds);
         $(`#getScrapedSearchAds .carousel-inner`).html('');
-        $(`#getScrapedSearchAds .carousel-indicators`).html('');        
+        $(`#getScrapedSearchAds .carousel-indicators`).html('');
             $("#row-getPaidSearchCompetitorsTableV1").show();
             await $.each(SearchAds,(index, value) => {
                 if (value){
@@ -1110,20 +1110,20 @@ const getScrapedSearchAds = async (data,method) => {
                     $(`#getScrapedSearchAds .carousel-indicators`).append(`
                 <li data-target="#getScrapedSearchAds" data-slide-to="${index}" class="my-0 border-0 bg-favorite text-white text-center rounded-circle ${index == 0 ? 'active' : ''}" style="width:20px;height:20px;text-indent:0;">${index + 1}</li>
                 `);
-                }                
-                
+                }
+
                 let carouselItem = '';
  {
                     let {
                         description,
-                        visibleUrl,                       
+                        visibleUrl,
                         phrase,
-                        keywordDifficulty,                        
+                        keywordDifficulty,
                         position,
                         title,
                     } = value;
-                    
-                    if (index < 5) {                        
+
+                    if (index < 5) {
                         (description != '') ? description = '<div class="text-muted">' + description + '</div>': null;
                         carouselItem = `
                     <div class="carousel-item p-20 p-l-40 p-r-40 ${index == 0 ? 'active' : ''}">
@@ -1132,8 +1132,8 @@ const getScrapedSearchAds = async (data,method) => {
                         <div class="border bg-white shadow p-10 w-100">
                             <a href="javascript:;" target="_blank" title="${visibleUrl}">
                             ${title}
-                            </a>   
-                            <div class="text-success text-truncate pb-0">${visibleUrl}</div>                         
+                            </a>
+                            <div class="text-success text-truncate pb-0">${visibleUrl}</div>
                             ${description}
                         </div>
                         </div>
@@ -1154,13 +1154,13 @@ const getScrapedSearchAds = async (data,method) => {
                     </div>
                     `
                     }
-                } 
-               
-                $(`#getScrapedSearchAds .carousel-inner`).append(carouselItem);            
+                }
+
+                $(`#getScrapedSearchAds .carousel-inner`).append(carouselItem);
             }});
 
             $('.keywords-list').perfectScrollbar();
-        
+
         await $(`#getScrapedSearchAds .carousel-inner`).removeClass('is-loading');
         await $(`.similarReloadTask[data-task="getScrapedSearchAds"]`).find('i').removeClass('fa-spin');
     } else {
@@ -1174,7 +1174,7 @@ function log(obj) {
 }
 
 // $(document).ready(function() {
-  
+
 // })
 
 export default api;

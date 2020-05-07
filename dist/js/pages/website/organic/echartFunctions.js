@@ -69,14 +69,14 @@ const api = async(task, domain, reload = 0) => {
         console.error(error);
     }
 };
- 
+
 // check vip-free-demo user
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
-    var VIPModule = ["trafficKeywordTrend", "getAdvertisingSearchDetail", "getTrafficSourcesSearch", "getSearchBrandedKeywords", "getSearchOrganicPaidOverview"];
+    var VIPModule = ["trafficKeywordTrend", "getAdvertisingSearchDetail", "getTrafficSourcesSearch", "getSearchBrandedKeywords", "getSearchOrganicPaidOverview","getDomainOrganicDetail"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
-            //ngoai le 
+            //ngoai le
 
             $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
@@ -1009,7 +1009,7 @@ const getAdvertisingSearchDetail = async(task, data) => {
                             ${ 'Keywords'} <span style="color:${color};font-weight:bold">${kFormatter(value[0])}</span> <br>
                             ${ 'Traffic'} <span style="color:${color};font-weight:bold">${kFormatter(value[1])}</span> <br>
                             ${ 'Common Keywords'} <span style="color:${color};font-weight:bold">${kFormatter(value[2])}</span> <br>
-                        </div> 
+                        </div>
                         `;
                     }
                 },
@@ -1072,7 +1072,9 @@ const getAdvertisingSearchDetail = async(task, data) => {
         console.log(`${task} failed`);
     }
 };
+
 const getDomainOrganicDetail = async(task, data) => {
+    lockedModule('trafficKeywordTrend', data.userData.member)
     if (data.status == 'success') {
         if (data.data || data.data.organicOverview) {
             let trend_month = {

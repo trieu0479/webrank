@@ -4,19 +4,18 @@ var domain = url.searchParams.get('domain');
 
 function lockedModule(boxWidgetName, level) {
     var freeModule = [];
-    var VIPModule = ["getDisplayCountryChart","getDisplayGenderChart","getDisplayAgeChart","getTrafficDisplayAdvertisingAds","getWebsiteAdsVisitsOverview","SampleAdsasHTML", "topPublicSher", "getAllImageTable", "PublicSherTable", "getWebsiteAdsIntelDisplay", "getTrafficDestinationAds", "adwordsMonthlyFullTrend", "adTypeOverview", "displayDevice"];
+    var VIPModule = ["getDisplayCountryChart","getDisplayGenderChart","getDisplayAgeChart","getTrafficDisplayAdvertisingAds","getWebsiteAdsVisitsOverview","SampleAds", "topPublicSher", "getAllImageTable", "PublicSherTable", "getWebsiteAdsIntelDisplay", "getTrafficDestinationAds", "adwordsMonthlyFullTrend", "adTypeOverview", "displayDevice"];
     if (level == 'demo') {
         if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
-            //ngoai le 
+            //ngoai le
 
-            //ngoai le 
+            //ngoai le
             $(".parent-" + boxWidgetName).addClass("locked");
             $(".parent-" + boxWidgetName).parent().prepend('<div class="center"><a class="btn btn-info shadow btn-showLoginModal" href="#" ><i class="fas fa-unlock"></i> Đăng nhập để xem data</a></div>');
         }
     } else if (level == 'free') {
         if (VIPModule.includes(boxWidgetName)) {
             $(".parent-" + boxWidgetName).addClass("locked");
-            if (boxWidgetName == 'SampleAdsasImage') boxWidgetName = 'SampleAds';
             $(".parent-" + boxWidgetName).parent().prepend(`<div class="center"><a class="btn btn-primary shadow btn-lift-vip" href="javascript: void(0)" ><i class="fas fa-gem"></i> Nâng VIP để xem data</a></div>`);
         }
     }
@@ -226,13 +225,13 @@ const initDatatableClass = function (select, tableOptions) {
 // ------------------------------init function--------------------------
 
 const displayAdsOverview = async (data, task) => {
-   
+
     let first = new Date(data.data.displayAdsOverview.firstSeen);
     let last = new Date(data.data.displayAdsOverview.lastSeen);
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Augu", "Sep", "Oct", "Nov", "Dec"];
     $('.displayAdsOverview').append(`
     <div class="col-12 col-lg-4">
-        <div class="bg-white p-3 align-items-center text-center rounded">    
+        <div class="bg-white p-3 align-items-center text-center rounded">
             <div class="pt-5 pb-5">
                 <div class="fontsize-14 ">Quảng Cáo</div>
                 <div class="money-appr text-info fontsize-32 kwhard ads"></div>
@@ -241,13 +240,13 @@ const displayAdsOverview = async (data, task) => {
     </div>
     <div class="col-12 col-lg-4 ">
         <div class="bg-white p-3 align-items-center text-center rounded">
-    
+
             <div class="pt-5 pb-5">
                 <div class="fontsize-14 ">Publicshers</div>
                 <div class="money-appr similarCountryRank text-success publisher fontsize-32"></div>
             </div>
         </div>
-    
+
     </div>
     <div class="col-12 col-lg-4 ">
         <div class="text-center bg-white p-3 align-items-center rounded">
@@ -258,7 +257,7 @@ const displayAdsOverview = async (data, task) => {
         </div>
     </div>
     `)
-    
+
     $('.ads').html(kFormatter(data.data.displayAdsOverview.adsOverall))
     $('.publisher').html(kFormatter(data.data.displayAdsOverview.domainOverall))
     $('.timeseen').html(kFormatter(data.data.displayAdsOverview.timesSeen));
@@ -266,7 +265,7 @@ const displayAdsOverview = async (data, task) => {
     $('.lastseen').html(last.getDay() == 0 ? 31 + '&nbsp;' + monthNames[last.getMonth()] + ',&nbsp' + last.getFullYear() : last.getDay() + '&nbsp;' + monthNames[last.getMonth()] + ',&nbsp' + last.getFullYear());
 }
 const SampleAdsasImage = async (data, task) => {
-
+    lockedModule('SampleAds', data.userData.member);
     if (data.data.bannerAds == "") {
         $('.sample-image-ads').addClass('empty-state')
     }
@@ -296,11 +295,11 @@ const SampleAdsasHTML = async (data, task) => {
         if (index < 5) {
             $(".sample-html-ads").append(`<div class="box-all">
             <div class="box-img">
-                <div class="image-media">                   
+                <div class="image-media">
                     <div class="image-sample">
-                     <iframe title="${val.id}" src="${val.documentUrl}?id=${val.id}" scrolling="no" loading="lazy" class="-HtmlItemStyles-item_html-B4E3Yn-" style="min-width: 760px;min-height: 476px;transform: scale(0.237047);transform-origin: center center;border:none"></iframe>   
+                     <iframe title="${val.id}" src="${val.documentUrl}?id=${val.id}" scrolling="no" loading="lazy" class="-HtmlItemStyles-item_html-B4E3Yn-" style="min-width: 760px;min-height: 476px;transform: scale(0.237047);transform-origin: center center;border:none"></iframe>
                     </div>
-                    
+
                 </div>
                 <div class="text-sample pt-2">
                     <span class="dayseen">Ghi nhận:<span class="seen-img pl-1 font-11">${val.daysSeen}&nbsp;ngày</span> </span>
@@ -329,7 +328,7 @@ const SampleAdsasText = async (data, task) => {
                     <a href="#" class="text-contended pt-5">${val.text}</a>
                 </div>
                 <div class="footer-text mt-2">
-                    <a href="#" class="content-small font-12">${val.advertiser}</a>          
+                    <a href="#" class="content-small font-12">${val.advertiser}</a>
                     <p class="tseen">Ghi nhận: <small class="font-11">${val.daysSeen}</small>&nbsp;ngày</p>
                 </div>
             </div>
@@ -431,7 +430,7 @@ const getDisplayCountryChart = async (data, task) => {
 
         ];
 
-        // render chart        
+        // render chart
         let myChart = document.getElementsByClassName('getDisplayCountryChart');
 
         let option = {
@@ -630,10 +629,10 @@ const getDisplayGenderChart = async (data, task) => {
                 // top: "5%",
                 // // orient: 'horizontal',
                 // left: '60%',
-                // data: ['Male', 'Female'],                
+                // data: ['Male', 'Female'],
                 // itemWidth: 20,
                 // itemHeight: 14,
-                // width: 50,       
+                // width: 50,
                 // textStyle: {
                 //     fontFamily: 'Arial',
                 //     lineHeight: 16,
@@ -794,7 +793,7 @@ const getDisplayAgeChart = async (data, task) => {
         // render chart
         let myChart = document.getElementsByClassName('getDisplayAgeChart');
         let option = {
-            // color:  ["#910BFE", "#1075F1", "#F29016", "#5452CF", "#37A5D3", "#4FD266", "#FFB0E3"],            
+            // color:  ["#910BFE", "#1075F1", "#F29016", "#5452CF", "#37A5D3", "#4FD266", "#FFB0E3"],
             color: ['#646c9a', '#48465b', '#0abb87', '#ffb822', '#fd397a', '#5d78ff'],
             legend: {
                 // top: "0%",
@@ -989,8 +988,8 @@ const getAllImageTable = async (data, task) => {
                     render: (data, type, row) => `
                        <div class="big-cover-image">
                          <div class="image-big-ads">
-                            <img src="${row.mediaUrl}"" width="100%" height="auto">  
-                         </div> 
+                            <img src="${row.mediaUrl}"" width="100%" height="auto">
+                         </div>
                        </div>
                     `,
                     width: '40%'
@@ -1115,11 +1114,11 @@ const getAllHTMLTable = async (data, task) => {
                     title: "HTML Ad",
                     className: 'pr-0',
                     render: (data, type, row) => `
-                    <div class="image-media image-media-table">                   
+                    <div class="image-media image-media-table">
                         <div class="image-sample image-sample-table">
-                        <iframe title="${row.id}" src="${row.documentUrl}?id=${row.id}" scrolling="no" loading="lazy" class="-HtmlItemStyles-item_html-B4E3Yn- hvtb" style="min-width: 800px;min-height: 400px;transform: scale(0.32);transform-origin: center center;border:none"></iframe>   
+                        <iframe title="${row.id}" src="${row.documentUrl}?id=${row.id}" scrolling="no" loading="lazy" class="-HtmlItemStyles-item_html-B4E3Yn- hvtb" style="min-width: 800px;min-height: 400px;transform: scale(0.32);transform-origin: center center;border:none"></iframe>
                         </div>
-                    
+
                 </div>
                     `,
                     width: '40%'
@@ -1171,7 +1170,7 @@ const getAllHTMLTable = async (data, task) => {
             sorting: true,
             //   scrollY: '350px',
             scrollCollapse: false,
-            // scrollX: true,            
+            // scrollX: true,
             paging: true,
             pageLength: 5,
             processing: false,
@@ -1251,20 +1250,20 @@ const getAllTextTable = async (data, task) => {
                     data: data => {
                         return `
                          <div class="box-text-table">
-                            <div class="title-text-table  text-decoration-none font-gg">     
-                                ${data.title}                                     
+                            <div class="title-text-table  text-decoration-none font-gg">
+                                ${data.title}
                             </div>
-                            <div class="content-text-table pt-5 font-12">  
-                                <span class="content-small-text-table">  
-                                ${data.text}                           
+                            <div class="content-text-table pt-5 font-12">
+                                <span class="content-small-text-table">
+                                ${data.text}
                                 </span>
-                               <span> <a href="${data.targetUrl}" target="_blank" class="text-break text-truncate-2"><i class="fal fa-external-link"></i></a></span>                                                    
-                                <div class="text-wh-table font-12"> 
-                                  ${data.width}<small>x</small>${data.height}                                                                       
+                               <span> <a href="${data.targetUrl}" target="_blank" class="text-break text-truncate-2"><i class="fal fa-external-link"></i></a></span>
+                                <div class="text-wh-table font-12">
+                                  ${data.width}<small>x</small>${data.height}
                                 </div>
-                                <div class="pb-1"></div>  
+                                <div class="pb-1"></div>
                             </div>
-                           
+
                         </div>
                     `
                     },
@@ -1399,11 +1398,11 @@ const PublicSherTable = async (data, task) => {
                 },
                 {
                     title: "Image-HTML-Text",
-                    render: (data, type, row) => ` 
+                    render: (data, type, row) => `
                     <span class= "${row.media > 0 ? 'text-info':'' }"> ${row.media > 0 ? row.media+'%' :row.media}</span ><span class="pl-1">-</span>
                     <span class= "${row.html > 0 ? 'text-info':'' }"> ${row.html > 0 ? row.html+'%' : row.html}</span><span class="pl-1">-</span>
                     <span class="${row.text > 0 ? 'text-info':'' }"> ${row.text > 0 ? row.text+'%' :row.text} </span>
-                   
+
                     `,
                     class: 'align-middle text-left font-12 ml-1',
                     width: '14%'
@@ -1460,7 +1459,7 @@ const getWebsiteAdsVisitsOverview = async (task, data, domain) => {
             </svg>
         </div>
         <div class="col-auto pl-0">
-            <div class="text-capitalize font-weight-bold">Truy cập quảng cáo hiển thị 
+            <div class="text-capitalize font-weight-bold">Truy cập quảng cáo hiển thị
             </div>
             <div class="text-muted similarDates font-10">03/2019 - 02/2020</div>
         </div>
@@ -1533,7 +1532,7 @@ const getTrafficDisplayAdvertisingAds = async (task, data) => {
                 dataChart.push(itemOther);
             }
 
-            // render chart            
+            // render chart
 
             let myChart = document.getElementsByClassName('getTrafficDisplayAdvertisingAds')
 
@@ -1542,7 +1541,7 @@ const getTrafficDisplayAdvertisingAds = async (task, data) => {
                 legend: {
                     bottom: '5',
                     orient: 'horizontal',
-                    left: '5%',                  
+                    left: '5%',
                 },
                 series: [{
                     type: 'pie',
@@ -1664,7 +1663,7 @@ const getTrafficDestinationAds = async (task, data) => {
       {
         ajax: {
           url: `https://localapi.trazk.com/webdata/v3.1.php?task=getTrafficDestinationAds&domain=${domain}&userToken=${userToken}`,
-          dataSrc: json => {                   
+          dataSrc: json => {
               if(!json.data || !json.data.data){
               $('.parent-getTrafficDestinationAds .dataTables_wrapper').css('min-height','299px');
               $('.parent-getTrafficDestinationAds .dataTables_wrapper').addClass('empty-state')
@@ -1674,7 +1673,7 @@ const getTrafficDestinationAds = async (task, data) => {
               else{
                 return json.data.data.data;
               }
-             
+
           }
         },
         drawCallback: function (settings) {
@@ -1683,13 +1682,13 @@ const getTrafficDestinationAds = async (task, data) => {
           $('table.getTrafficDestinationAds tbody tr td.dataTables_empty').addClass('d-none')
         },
         columns: [
-          { 
-            title: 'Website', 
+          {
+            title: 'Website',
             data: data => `<div>
                     <img src="${data.Favicon}" class="mr-1"/>
                     <a data-type="website" class="changeURL" data-input="${data.Domain}" href="?view=traffic-website&action=result&domain=${data.Domain}">${data.Domain}</a>
                   </div>`,
-             className:'text-left' 
+             className:'text-left'
             }
            ,
           {
@@ -1698,21 +1697,21 @@ const getTrafficDestinationAds = async (task, data) => {
               const share = numeral(data.Share).format('0.00%');
               return `<div class="">
                           ${share}
-                        </div>                        
+                        </div>
                      `;
             },
-            className:'text-left' 
+            className:'text-left'
           },
           {
             title: 'Tỉ lệ',
             data: data => {
               const share = numeral(data.Share).format('0.00%');
-              return `                       
-                       
+              return `
+
                           <div class="progress border">
                             <div class="progress-bar bg-success" style="width: ${share}; height:7px;" role="progressbar"></div>
                           </div>
-                        
+
                      `;
             }
           }
@@ -1738,32 +1737,32 @@ const getTrafficDestinationAds = async (task, data) => {
     )
 }
 
-const getTrafficDisplayAdvertisingWebsitesTable = async(task,data,domain) => {  
+const getTrafficDisplayAdvertisingWebsitesTable = async(task,data,domain) => {
     $('.widget-getTrafficDisplayAdvertisingWebsitesTable .widgetHeader').append(`<div class="ml-auto d-flex no-block align-items-center pr-3">
     <span class="similarReloadTask" data-task="getTrafficDisplayAdvertisingWebsitesTable"><i class="fal fa-sync"></i></span>
 </div>`)
     initDatatableClass(
-      'getTrafficDisplayAdvertisingWebsitesTable', 
+      'getTrafficDisplayAdvertisingWebsitesTable',
       {
         ajax: {
           url: `//localapi.trazk.com/webdata/v3.1.php?task=getTrafficDisplayAdvertisingWebsitesTable&domain=${domain}&userToken=${userToken}`,
-          dataSrc: (json) => { 
-               lockedModule('getTrafficDisplayAdvertisingWebsitesTable', json.userData.member);  
+          dataSrc: (json) => {
+               lockedModule('getTrafficDisplayAdvertisingWebsitesTable', json.userData.member);
         if (json.data.data.Data == null ) {
                 $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper').css('min-height','268px');
                 $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper').addClass('empty-state')
                 $('table.getTrafficDisplayAdvertisingWebsitesTable tbody tr td.dataTables_empty').addClass('d-none')
                 $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_processing').addClass('d-none')
-              }     
+              }
           if (json.data.data.Data.Records.length<=0) {
             $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper').css('min-height','268px');
             $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_wrapper').addClass('empty-state')
             $('table.getTrafficDisplayAdvertisingWebsitesTable tbody tr td.dataTables_empty').addClass('d-none')
             $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_processing').addClass('d-none')
           }
-          
+
             if (json && json.data && json.data.data && json.data.data.Data) {
-               
+
               let { Data: newData } = json.data.data;
               if (newData.Records.length > 0) {
                 $('.parent-getTrafficDisplayAdvertisingWebsitesTable .dataTables_processing').removeClass('d-none')
@@ -1774,8 +1773,8 @@ const getTrafficDisplayAdvertisingWebsitesTable = async(task,data,domain) => {
               }
               // return (newData.Records)
             }
-    
-            else {        
+
+            else {
                 $('.parent-getTrafficDisplayAdvertisingWebsitesTable #DataTables_Table_1_wrapper').css('min-height','268px');
                 $('.parent-getTrafficDisplayAdvertisingWebsitesTable #DataTables_Table_1_wrapper').addClass('empty-state')
                 $('table.getTrafficDisplayAdvertisingWebsitesTable tbody tr td.dataTables_empty').addClass('d-none')
@@ -1803,7 +1802,7 @@ const getTrafficDisplayAdvertisingWebsitesTable = async(task,data,domain) => {
               <div class="col-4">${numeral(data.Share).format('0.00%')}</div>
               <div class="col">
                 <div class="progress progress-style border">
-                    <div class="progress-bar bg-info" style="width: ${numeral(data.Share).format('0%')}; height:14px;" role="progressbar"></div> 
+                    <div class="progress-bar bg-info" style="width: ${numeral(data.Share).format('0%')}; height:14px;" role="progressbar"></div>
                 </div>
               </div>
               <div class="col-4">
@@ -1825,7 +1824,7 @@ const getTrafficDisplayAdvertisingWebsitesTable = async(task,data,domain) => {
         initComplete: function (settings, json) {
           $(`.dataTables_scrollBody`).perfectScrollbar();
           $(`#getTrafficDisplayAdvertisingWebsitesTable_wrapper .dataTables_scrollBody`).perfectScrollbar();
-          $(`#getTrafficDisplayAdvertisingWebsitesTable_wrapper .dataTables_scrollHead table.dataTable`).attr('style', 'margin-top:0!important')         
+          $(`#getTrafficDisplayAdvertisingWebsitesTable_wrapper .dataTables_scrollHead table.dataTable`).attr('style', 'margin-top:0!important')
             .find('th').each(function (i) { $(this).addClass('border-top-0 border-bottom') });
           $('.getTrafficDisplayAdvertisingWebsitesTable-container').removeClass('is-loading');
           $('#getTrafficDisplayAdvertisingWebsitesTable .dataTables_empty').text("").addClass('empty-state');
@@ -1835,10 +1834,10 @@ const getTrafficDisplayAdvertisingWebsitesTable = async(task,data,domain) => {
 }
 
 
-$(document).ready(function () {                            
+$(document).ready(function () {
     $('#Tabsample a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         var target = $(e.target).attr("href") // activated tab
-       
+
         if (target == "#sample_html") {
             $('#btn-view-html').removeClass('d-none');
         }
