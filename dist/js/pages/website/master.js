@@ -125,8 +125,8 @@ $(document).ready(() => {
         return true;
     }
     window.lockedModule = function lockedModule(boxWidgetName, level) {
-        var freeModule = [  "getAdvertisingSearchDetail", "getSimilarSites", "organicPositions","getTrafficSocialTableDetail","banckLinksOverview","getKeywords","getWebsiteGeography"];
-        var VIPModule = ["topBackLinks", "getTrafficDisplayAdvertisingWebsitesTable", "organicCompetitors", "getOrganicKeywordsNonBrandedTable", "organicPositions", "TopPaidKeyword", "MainCompetitor", "PaidPageTable", "PublicSherTable", "getTrafficDestinationAds","getTrafficSourcesSocial","getTrafficSocial","referringDomains","getDataZones","getDataContry","getSubdomains","getOrganicKeywordsBrandedTable"];
+        var freeModule = [  "getAdvertisingSearchDetail", "getSimilarSites", "organicPositions","getTrafficSocialTableDetail","banckLinksOverview","getKeywords","getWebsiteGeography","getOrganicKeywordsBrandedTable"];
+        var VIPModule = ["topBackLinks", "getTrafficDisplayAdvertisingWebsitesTable", "organicCompetitors", "getOrganicKeywordsNonBrandedTable", "organicPositions", "TopPaidKeyword", "MainCompetitor", "PaidPageTable", "PublicSherTable", "getTrafficDestinationAds","getTrafficSourcesSocial","getTrafficSocial","referringDomains","getDataZones","getDataContry","getSubdomains"];
         if (level == 'demo') {
             if (freeModule.includes(boxWidgetName) || VIPModule.includes(boxWidgetName)) {
                 $(".parent-" + boxWidgetName).addClass("locked");
