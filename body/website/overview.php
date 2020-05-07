@@ -24,7 +24,7 @@
 
 
             <div class="topbox"><?require_once(__DIR__."/modules/master.topbox.php")?></div>
-            
+
             <div class="row pt-5">
                 <div class="col-12 navBarBox">
                     <?php require_once(__DIR__."/modules/master.navbar.php")?>
@@ -45,7 +45,7 @@
                         <?require_once(__DIR__."/modules/overview.widgetTimeMobileDestop.php")?>
                     </div>
             </div>
-            
+
             <!--
             <div class="row">
                 <div class="col-12">
@@ -63,9 +63,9 @@
                     <div class="widget-getTrafficOverviewCustomerResources"></div>
                 </div>
             </div>
-            
-            
-           
+
+
+
           <!--
             <div class="row">
                     <div class="col-12">
@@ -73,7 +73,7 @@
                     </div>
             </div>
         -->
-            
+
             <div class="row">
                     <div class="col-12 col-lg-4">
                         <div class="widget-getDesktopVsMobileVisits"></div>
@@ -85,21 +85,21 @@
                         <div class="widget-getWebDemographicsAge"></div>
                     </div>
             </div>
-          
+
             <div class="row">
                 <div class="col-12 ">
                     <div class="widget-getTrafficOverviewCustomerSourceAnalysis"></div>
                 </div>
             </div>
-           
-           
+
+
             <!-- GOOGLE ADS -->
             <div class="row rowGroup">
                 <div class="col-12">
-                    <div class="alert-secondary mb-2 pl-4 pt-3 pb-3 pr-4 d-flex"> 
+                    <div class="alert-secondary mb-2 pl-4 pt-3 pb-3 pr-4 d-flex">
                         <div class="adsYoutube font-gg font-14 text-dark">
                             <h4 class="text-left font-weight-bold fontSize-16 text-info">Google Organic Search</h4>
-                            <div>Báo cáo Google Search Ads cung cấp thông tin mẫu quảng cáo, từ khóa, đối thủ cạnh tranh của website</div>
+                            <div>Báo cáo tìm kiếm tự nhiên, cung cấp thông tin lượt truy cập vào website từ tìm kiếm tự nhiên và các từ khoá dẫn đến trang web.</div>
                         </div>
                         <div class=" px-md-0 pb-md-0 pt-3 pt-md-0  no-block ml-auto d-flex align-items-center">
                             <a  class="font-gg font-13 font-weight-500 bagInfo ml-auto ml-md-0 w-100 text-center" href="<?=$rootURL?>/index.php?view=website&action=organic&domain=<?=$_GET['domain']?>" >Chi tiết <i class="fal fa-angle-right"></i></a>
@@ -110,14 +110,14 @@
                    <div class="row">
                         <div class="col-12 col-lg-5">
                             <div class="widget-getTrafficSourcesSearch"></div>
-                            
+
                         </div>
                         <div class="col-12 col-lg-7">
                             <div style="height:100%" class="widget-getOrganicKeywordsBrandedTable"></div>
                         </div>
                     </div>
                    <!-- Organic -->
-                    <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
+                    <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
                         <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
                             <h4 style="    text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện SEO</h4>
                             <div>Theo dõi và cải thiện chất lượng chiến dịch SEO (tối ưu Google Search) chỉ 199,000 vnd/tháng </div>
@@ -128,12 +128,12 @@
                     </div>
                 </div>
             </div>
-          
+
 
             <!-- GOOGLE ADS -->
             <div class="row rowGroup">
                 <div class="col-12">
-                    <div class="alert-secondary mb-2 pl-4 pt-3 pb-3 pr-4 d-flex"> 
+                    <div class="alert-secondary mb-2 pl-4 pt-3 pb-3 pr-4 d-flex">
                         <div class="adsYoutube font-gg font-14 text-dark">
                             <h4 class="text-left font-weight-bold fontSize-16 text-success">Google Search Ads - Adwords</h4>
                             <div>Báo cáo Google Search Ads cung cấp thông tin mẫu quảng cáo, từ khóa, đối thủ cạnh tranh của website</div>
@@ -145,14 +145,14 @@
 
                     <div class="row">
                         <div class="col-12 col-lg-6">
-                                <?php require_once(__DIR__ . "/modules/overview.widgetgetScrapedSearchAds.php")?>               
-                        </div>    
+                                <?php require_once(__DIR__ . "/modules/overview.widgetgetScrapedSearchAds.php")?>
+                        </div>
                         <div class="col-12 col-lg-6">
-                                <div style="height:100%" class="widget-getListGoogleAdsCompetitor"></div>        
-                                 
+                                <div style="height:100%" class="widget-getListGoogleAdsCompetitor"></div>
+
                         </div>
                     </div>
-                    <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
+                    <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
                         <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
                             <h4 style="    text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện Google Ads</h4>
                             <div class="description-goads"></div>
@@ -160,15 +160,15 @@
                         <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4 btn-noads">
                             <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-ads" data-toggle="tooltip" data-placement="top" title="" href="">Dùng ngay</a>
                         </div>
-                    </div>    
-                    
+                    </div>
+
                 </div>
             </div>
-          
+
             <!--HẾT GOOGLE ADS -->
             <div class="row rowGroup">
                 <div class="col-12">
-                     <div class="alert-secondary mb-2 pl-4 pt-3 pb-3 pr-4 d-flex"> 
+                     <div class="alert-secondary mb-2 pl-4 pt-3 pb-3 pr-4 d-flex">
                         <div class="adsYoutube font-gg font-14 text-dark font-weight-500">
                             <h4 class="text-left font-weight-bold fontSize-16 text-danger">Google Display Ads</h4>
                             <div>Google Display Ads - hình thức quảng cáo hiển thị banner (hoặc text) lên các website khác</div>
@@ -178,8 +178,8 @@
                         </div>
                     </div>
                     <div class="row">
-                      <?php require_once(__DIR__ . "/modules/overview.widgetDisplayAds.php")?>               
-                      <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded wapper-display  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
+                      <?php require_once(__DIR__ . "/modules/overview.widgetDisplayAds.php")?>
+                      <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded wapper-display  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
                           <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
                               <h4 style="text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện Google Display Ads</h4>
                               <div class="desciption-display"></div>
@@ -187,16 +187,16 @@
                           <div class="px-4 px-md-0 pb-2 pb-md-0 no-block ml-auto d-flex align-items-center pr-4 btn-noads">
                               <a class="font-gg font-13 font-weight-500 bagSuccess ml-auto ml-md-0 link-a-display" data-toggle="tooltip" data-placement="top" title="" href="">Dùng ngay</a>
                           </div>
-                      </div> 
+                      </div>
                     </div>
                 </div>
             </div>
             <!-- DISPLAY ADS -->
-           
+
             <!--HẾT DISPLAY ADS -->
             <div class="row rowGroup">
                 <div class="col-12">
-                    <div class="alert-secondary mb-2 pl-4 pt-3 pb-3 pr-4 d-flex"> 
+                    <div class="alert-secondary mb-2 pl-4 pt-3 pb-3 pr-4 d-flex">
                         <div class="adsYoutube font-gg font-14 text-dark font-weight-500">
                             <h4 class="text-left font-weight-bold fontSize-16 text-success">Social Ads & Hoạt động fanpage</h4>
                             <div>Social Ads - ghi nhận quảng cáo từ các kênh Social như: facebook, youtube, linkedin ...</div>
@@ -217,7 +217,7 @@
                         </div>
                     </div>
                     <!--HẾT SOCIAL -->
-                    <!-- <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded wapper-display  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
+                    <!-- <div class="bg-white pl-4 pt-3 pb-3 pr-4 alert alert-success alert-rounded wapper-display  d-flex" style="margin:25px 0 0;border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
                           <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
                               <h4 style="text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện Google Display Ads</h4>
                               <div class="desciption-facebook"></div>
@@ -230,11 +230,11 @@
             </div>
 
 
-            
-           
+
+
             <div class="row rowGroup">
                 <div class="col-12">
-                    <div class="alert-secondary mb-2 pl-4 pt-3 pb-3 pr-4 d-flex"> 
+                    <div class="alert-secondary mb-2 pl-4 pt-3 pb-3 pr-4 d-flex">
                         <div class="adsYoutube font-gg font-14 text-dark font-weight-500">
                             <h4 class="text-left font-weight-bold fontSize-16 text-success">Backlink - Hoạt động SEO</h4>
                             <div>Backlink - báo cáo link từ website khác trỏ về website của bạn</div>
@@ -253,7 +253,7 @@
                         </div>
                     </div>
                         <!-- backlink-->
-                    <div class="bg-white pl-4 pt-3 pb-3 pr-4 mb-0 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;"> 
+                    <div class="bg-white pl-4 pt-3 pb-3 pr-4 mb-0 alert alert-success alert-rounded  d-flex" style="border-top: 3px solid #0abb87; border-color: #0abb87 !important;">
                         <div class="adsSearch font-gg font-14 text-dark font-weight-500" style="max-width: 900px;">
                             <h4 style="text-transform: capitalize;" class="text-left font-15 font-weight-bold">Cải thiện Backlink - SEO</h4>
                             <div class="">Theo dõi và cải thiện chất lượng chiến dịch SEO (tối ưu Google Search) chỉ 199,000 vnd/tháng</div>
@@ -300,4 +300,3 @@
 <script type="module" src="<?=$rootURL?>/dist/js/pages/website/master.js?v=<?=$version?>"></script>
 <script type="module" src="<?=$rootURL?>/dist/js/pages/website/overview/index.js?v=<?=$version?>"></script>
 <script type="module" src="<?=$rootURL?>/dist/js/pages/website/overview/tableFunction.js?v=<?=$version?>"></script>
- 
