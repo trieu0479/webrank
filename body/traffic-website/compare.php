@@ -963,262 +963,27 @@ if (!$checkDomain1 || !$checkDomain2) echo "<script>window.parent.location ='htt
                                     </div>
                                     <div class="text-muted similarDates font-10"></div>
                                 </div>
-                                <div class="ml-auto d-flex no-block align-items-center pr-3" id="TimeChartMarket">
-                                    <fieldset>
-                                        <input id="setgetMarketingMixOverviewDaily" class="radio-inline__input"
-                                            type="radio" name="getMarketingMixOverview"
-                                            value="setgetMarketingMixOverviewDaily" />
-                                        <label class="radio-inline__label" for="setgetMarketingMixOverviewDaily">
-                                            Ngày
-                                        </label>
-                                        <input id="setgetMarketingMixOverviewWeekly" class="radio-inline__input"
-                                            type="radio" name="getMarketingMixOverview"
-                                            value="setgetMarketingMixOverviewWeekly" checked="checked" />
-                                        <label class="radio-inline__label" for="setgetMarketingMixOverviewWeekly">
-                                            Tuần
-                                        </label>
-                                        <input id="setgetMarketingMixOverviewMonthly" class="radio-inline__input"
-                                            type="radio" name="getMarketingMixOverview"
-                                            value="setgetMarketingMixOverviewMonthly" />
-                                        <label class="radio-inline__label" for="setgetMarketingMixOverviewMonthly">
-                                            Tháng
-                                        </label>
-                                    </fieldset>
-                                </div>
                             </div>
-                            <div id="Parent-getMarketingMixOverview">
-                                <div id="getMarketingMixOverview">
-                                    <ul class="nav nav-tabs customtab" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab"
-                                                data-task="TrafficShare" href="#getMarketingMixOverview--TrafficShare"
-                                                role="tab"><span class=""><i
-                                                        class="fal fa-chart-pie-alt fa-1x"></i></span>
-                                                <span class="d-none d-md-inline">Truy cập</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab"
-                                                data-task="AverageDuration"
-                                                href="#getMarketingMixOverview--AverageDuration" role="tab"><span
-                                                    class=""><i class="fal fa-stopwatch fa-1x"></i></span>
-                                                <span class="d-none d-md-inline">Trung bình thời lượng truy
-                                                    cập</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab"
-                                                data-task="PagesPerVisit" href="#getMarketingMixOverview--PagesPerVisit"
-                                                role="tab"><span class=""><i class="fal fa-copy fa-1x"></i></span>
-                                                <span class="d-none d-md-inline">Số trang/Lượt truy cập</span></a>
-                                        </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab"
-                                                data-task="BounceRate" href="#getMarketingMixOverview--BounceRate"
-                                                role="tab"><span class=""><i class="fal fa-sign-out fa-1x"></i></span>
-                                                <span class="d-none d-md-inline">Tỷ lệ thoát</span></a> </li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div class="tab-pane px-4 active" role="tabpanel" style="height:auto"
-                                            id="getMarketingMixOverview--TrafficShare">
-                                            <div class="row">
-                                                <div class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
-                                                    <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                        <div class="similarHeaderLeft flex-grow-1">
-                                                            <div
-                                                                class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                <div class="similarIcon"></div>
-                                                                <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                    style="color: #57606f">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="<?= $idDomain1 ?>getMarketingMixOverview--TrafficShare"
-                                                        class="rounded is-loading" style="min-height:400px">
-                                                    </div>
-                                                </div>
-                                                <div class="<?= $idDomain2 ?> col-12 col-md-6">
-                                                    <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                        <div class="similarHeaderLeft flex-grow-1">
-                                                            <div
-                                                                class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                <div class="similarIcon"></div>
-                                                                <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                    style="color: #4b7bec">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="<?= $idDomain2 ?>getMarketingMixOverview--TrafficShare"
-                                                        class="rounded is-loading" style="min-height:400px">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane px-4" role="tabpanel" style="height:auto"
-                                            id="getMarketingMixOverview--AverageDuration">
-                                            <div class="row">
-                                                <div class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
-                                                    <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                        <div class="similarHeaderLeft flex-grow-1">
-                                                            <div
-                                                                class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                <div class="similarIcon"></div>
-                                                                <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                    style="color: #57606f">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="<?= $idDomain1 ?>getMarketingMixOverview--AverageDuration"
-                                                        class="rounded is-loading" style="min-height:400px">
-                                                    </div>
-                                                </div>
-                                                <div class="<?= $idDomain2 ?> col-12 col-md-6">
-                                                    <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                        <div class="similarHeaderLeft flex-grow-1">
-                                                            <div
-                                                                class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                <div class="similarIcon"></div>
-                                                                <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                    style="color: #4b7bec">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="<?= $idDomain2 ?>getMarketingMixOverview--AverageDuration"
-                                                        class="rounded is-loading" style="min-height:400px">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane px-4" id="getMarketingMixOverview--PagesPerVisit"
-                                            role="tabpanel" style="height:auto">
-                                            <div class="row">
-                                                <div class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
-                                                    <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                        <div class="similarHeaderLeft flex-grow-1">
-                                                            <div
-                                                                class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                <div class="similarIcon"></div>
-                                                                <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                    style="color: #57606f">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="<?= $idDomain1 ?>getMarketingMixOverview--PagesPerVisit"
-                                                        class="rounded is-loading" style="min-height:400px">
-                                                    </div>
-                                                </div>
-                                                <div class="<?= $idDomain2 ?> col-12 col-md-6">
-                                                    <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                        <div class="similarHeaderLeft flex-grow-1">
-                                                            <div
-                                                                class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                <div class="similarIcon"></div>
-                                                                <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                    style="color: #4b7bec">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="<?= $idDomain2 ?>getMarketingMixOverview--PagesPerVisit"
-                                                        class="rounded is-loading" style="min-height:400px">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane px-4" id="getMarketingMixOverview--BounceRate"
-                                            role="tabpanel" style="height:auto">
-                                            <div class="row">
-                                                <div class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
-                                                    <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                        <div class="similarHeaderLeft flex-grow-1">
-                                                            <div
-                                                                class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                <div class="similarIcon"></div>
-                                                                <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                    style="color: #57606f">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="<?= $idDomain1 ?>getMarketingMixOverview--BounceRate"
-                                                        class="rounded is-loading" style="min-height:400px">
-                                                    </div>
-                                                </div>
-
-                                                <div class="<?= $idDomain2 ?> col-12 col-md-6">
-                                                    <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                        <div class="similarHeaderLeft flex-grow-1">
-                                                            <div
-                                                                class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                <div class="similarIcon"></div>
-                                                                <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                    style="color: #4b7bec">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="<?= $idDomain2 ?>getMarketingMixOverview--BounceRate"
-                                                        class="rounded is-loading" style="min-height:400px">
-
-                                                    </div>
+                            <div class="row" id="Parent-getMarketingMixOverview">
+                                <div class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
+                                    <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                        <div class="similarHeaderLeft flex-grow-1">
+                                            <div
+                                                class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                <div class="similarIcon"></div>
+                                                <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                    style="color: #57606f">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!---đóng phân tích nguồn KH -->
-
-                <!--tỉ lệ truy cập từ tìm kiếm -->
-                <div class="row">
-                    <div class="col-12 mb-5">
-                        <div class="bg-white shadow-sm rounded h-100">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24" />
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <rect id="Rectangle-9" fill="#000000" x="11" y="10" width="2" height="7"
-                                                rx="1" />
-                                            <rect id="Rectangle-9-Copy" fill="#000000" x="11" y="7" width="2" height="2"
-                                                rx="1" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold"><?=_(" Tỉ lệ truy cập từ tìm kiếm")?>
+                                    <div class="col-12">
+                                        <div id="<?= $idDomain1 ?>getMarketingMixOverview"
+                                            style="width: 100%; height: 300px"></div>
                                     </div>
-                                    <div class="text-muted similarDates font-10"></div>
                                 </div>
-                            </div>
-
-                            <div id="Parent-getTrafficSourcesSearch">
-                                <div class="row" id="getTrafficSourcesSearch">
-                                    <div class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
-                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #57606f">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="<?= $idDomain1 ?>getTrafficSourcesSearch" class="mb-5 is-loading"
-                                            style="height: 200px;">
-                                        </div>
-                                    </div>
-
-                                    <div class="<?= $idDomain2 ?> col-12 col-md-6">
+                                <div class="<?= $idDomain2 ?> col-12 col-md-6 border-right dashed">
+                                    
                                         <div class="similarHeader d-flex flex-column p-4 p-lg-3">
                                             <div class="similarHeaderLeft flex-grow-1">
                                                 <div
@@ -1230,216 +995,296 @@ if (!$checkDomain1 || !$checkDomain2) echo "<script>window.parent.location ='htt
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="<?= $idDomain2 ?>getTrafficSourcesSearch" class="mb-5 is-loading"
-                                            style="height: 200px;">
+                                        <div class="col-12 ">
+                                            <div id="<?= $idDomain2 ?>getMarketingMixOverview"
+                                                style="width: 100%; height: 300px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!---đóng phân tích nguồn KH -->
+
+                    <!--tỉ lệ truy cập từ tìm kiếm -->
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <div class="bg-white shadow-sm rounded h-100">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24" />
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12"
+                                                    r="10" />
+                                                <rect id="Rectangle-9" fill="#000000" x="11" y="10" width="2" height="7"
+                                                    rx="1" />
+                                                <rect id="Rectangle-9-Copy" fill="#000000" x="11" y="7" width="2"
+                                                    height="2" rx="1" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold">
+                                            <?=_(" Tỉ lệ truy cập từ tìm kiếm")?>
+                                        </div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
+                                </div>
+
+                                <div id="Parent-getTrafficSourcesSearch">
+                                    <div class="row" id="getTrafficSourcesSearch">
+                                        <div class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
+                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #57606f">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="<?= $idDomain1 ?>getTrafficSourcesSearch" class="mb-5 is-loading"
+                                                style="height: 200px;">
+                                            </div>
+                                        </div>
+
+                                        <div class="<?= $idDomain2 ?> col-12 col-md-6">
+                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #4b7bec">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="<?= $idDomain2 ?>getTrafficSourcesSearch" class="mb-5 is-loading"
+                                                style="height: 200px;">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- ĐÓNG tỉ lệ truy cập từ tìm kiếm -->
+                    <!-- ĐÓNG tỉ lệ truy cập từ tìm kiếm -->
 
-                <!--Chi Tiết Truy Cập Từ Tìm Kiếm -->
-                <div class="row">
-                    <div class="col-12 mb-5">
-                        <div class="bg-white shadow-sm rounded">
-                            <div class="row m-0 pt-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24" />
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <path
-                                                d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
-                                                id="Path-92" fill="#000000" fill-rule="nonzero" />
-                                        </g>
-                                    </svg>
+                    <!--Chi Tiết Truy Cập Từ Tìm Kiếm -->
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <div class="bg-white shadow-sm rounded">
+                                <div class="row m-0 pt-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24" />
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12"
+                                                    r="10" />
+                                                <path
+                                                    d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
+                                                    id="Path-92" fill="#000000" fill-rule="nonzero" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold">
+                                            <?=_(" Chi tiết truy cập từ tìm kiếm")?></div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
                                 </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold">
-                                        <?=_(" Chi tiết truy cập từ tìm kiếm")?></div>
-                                    <div class="text-muted similarDates font-10"></div>
-                                </div>
-                            </div>
-                            <div id="Parent-getSearchOrganicPaidOverview">
-                                <div id="getSearchOrganicPaidOverview" class="rounded" style="min-height:250px">
-                                    <ul class="nav nav-tabs customtab" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab"
-                                                data-task="TrafficShare"
-                                                href="#getSearchOrganicPaidOverview--TrafficShare" role="tab"><span
-                                                    class=""><i class="fal fa-chart-pie-alt fa-1x"></i></span>
-                                                <span class="d-none d-md-inline">Lượng Truy Cập</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab"
-                                                data-task="AverageDuration"
-                                                href="#getSearchOrganicPaidOverview--AverageDuration" role="tab"><span
-                                                    class=""><i class="fal fa-stopwatch fa-1x"></i></span> <span
-                                                    class="d-none d-md-inline">Thời Gian Trung Bình</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab"
-                                                data-task="PagesPerVisit"
-                                                href="#getSearchOrganicPaidOverview--PagesPerVisit" role="tab"><span
-                                                    class=""><i class="fal fa-copy fa-1x"></i></span> <span
-                                                    class="d-none d-md-inline">Số Trang / Lượt Truy Cập</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab"
-                                                data-task="BounceRate" href="#getSearchOrganicPaidOverview--BounceRate"
-                                                role="tab"><span class=""><i class="fal fa-sign-out fa-1x"></i></span>
-                                                <span class="d-none d-md-inline">Tỉ Lệ Thoát Trang</span></a> </li>
-                                    </ul>
-                                    <!-- Tab panes -->
-                                    <div class="row">
-                                        <!-- <div class="col-12 col-md-3 pt-5 pt-md-0">
+                                <div id="Parent-getSearchOrganicPaidOverview">
+                                    <div id="getSearchOrganicPaidOverview" class="rounded" style="min-height:250px">
+                                        <ul class="nav nav-tabs customtab" role="tablist">
+                                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab"
+                                                    data-task="TrafficShare"
+                                                    href="#getSearchOrganicPaidOverview--TrafficShare" role="tab"><span
+                                                        class=""><i class="fal fa-chart-pie-alt fa-1x"></i></span>
+                                                    <span class="d-none d-md-inline">Lượng Truy Cập</span></a> </li>
+                                            <li class="nav-item"> <a class="nav-link" data-toggle="tab"
+                                                    data-task="AverageDuration"
+                                                    href="#getSearchOrganicPaidOverview--AverageDuration"
+                                                    role="tab"><span class=""><i
+                                                            class="fal fa-stopwatch fa-1x"></i></span> <span
+                                                        class="d-none d-md-inline">Thời Gian Trung Bình</span></a> </li>
+                                            <li class="nav-item"> <a class="nav-link" data-toggle="tab"
+                                                    data-task="PagesPerVisit"
+                                                    href="#getSearchOrganicPaidOverview--PagesPerVisit" role="tab"><span
+                                                        class=""><i class="fal fa-copy fa-1x"></i></span> <span
+                                                        class="d-none d-md-inline">Số Trang / Lượt Truy Cập</span></a>
+                                            </li>
+                                            <li class="nav-item"> <a class="nav-link" data-toggle="tab"
+                                                    data-task="BounceRate"
+                                                    href="#getSearchOrganicPaidOverview--BounceRate" role="tab"><span
+                                                        class=""><i class="fal fa-sign-out fa-1x"></i></span>
+                                                    <span class="d-none d-md-inline">Tỉ Lệ Thoát Trang</span></a> </li>
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="row">
+                                            <!-- <div class="col-12 col-md-3 pt-5 pt-md-0">
                                             <div id="getSearchOrganicPaidOverview--totalTraffic" class="d-flex no-block flex-column justify-content-center h-100"></div>
                                         </div> -->
-                                        <div class="col-12 tab-content mt-1 mt-md-3">
-                                            <div class="tab-pane px-4 active"
-                                                id="getSearchOrganicPaidOverview--TrafficShare" role="tabpanel"
-                                                style="height: auto">
-                                                <div class="row">
-                                                    <div class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
-                                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                            <div class="similarHeaderLeft flex-grow-1">
-                                                                <div
-                                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                    <div class="similarIcon"></div>
-                                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                        style="color: #57606f">
+                                            <div class="col-12 tab-content mt-1 mt-md-3">
+                                                <div class="tab-pane px-4 active"
+                                                    id="getSearchOrganicPaidOverview--TrafficShare" role="tabpanel"
+                                                    style="height: auto">
+                                                    <div class="row">
+                                                        <div
+                                                            class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
+                                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                                <div class="similarHeaderLeft flex-grow-1">
+                                                                    <div
+                                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                                        <div class="similarIcon"></div>
+                                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                                            style="color: #57606f">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div id="<?= $idDomain1 ?>getSearchOrganicPaidOverview--TrafficShare"
+                                                                class="rounded is-loading" style="min-height:400px">
+                                                            </div>
                                                         </div>
-                                                        <div id="<?= $idDomain1 ?>getSearchOrganicPaidOverview--TrafficShare"
-                                                            class="rounded is-loading" style="min-height:400px">
-                                                        </div>
-                                                    </div>
-                                                    <div class="<?= $idDomain2 ?> col-12 col-md-6">
-                                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                            <div class="similarHeaderLeft flex-grow-1">
-                                                                <div
-                                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                    <div class="similarIcon"></div>
-                                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                        style="color: #4b7bec">
+                                                        <div class="<?= $idDomain2 ?> col-12 col-md-6">
+                                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                                <div class="similarHeaderLeft flex-grow-1">
+                                                                    <div
+                                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                                        <div class="similarIcon"></div>
+                                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                                            style="color: #4b7bec">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div id="<?= $idDomain2 ?>getSearchOrganicPaidOverview--TrafficShare"
-                                                            class="rounded is-loading" style="min-height:400px">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane px-4"
-                                                id="getSearchOrganicPaidOverview--AverageDuration" role="tabpanel"
-                                                style="height: auto">
-                                                <div class="row">
-                                                    <div class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
-                                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                            <div class="similarHeaderLeft flex-grow-1">
-                                                                <div
-                                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                    <div class="similarIcon"></div>
-                                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                        style="color: #57606f">
-                                                                    </div>
-                                                                </div>
+                                                            <div id="<?= $idDomain2 ?>getSearchOrganicPaidOverview--TrafficShare"
+                                                                class="rounded is-loading" style="min-height:400px">
                                                             </div>
-                                                        </div>
-                                                        <div id="<?= $idDomain1 ?>getSearchOrganicPaidOverview--AverageDuration"
-                                                            class="rounded is-loading" style="min-height:400px">
-                                                        </div>
-                                                    </div>
-                                                    <div class="<?= $idDomain2 ?> col-12 col-md-6">
-                                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                            <div class="similarHeaderLeft flex-grow-1">
-                                                                <div
-                                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                    <div class="similarIcon"></div>
-                                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                        style="color: #4b7bec">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div id="<?= $idDomain2 ?>getSearchOrganicPaidOverview--AverageDuration"
-                                                            class="rounded is-loading" style="min-height:400px">
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="tab-pane px-4" id="getSearchOrganicPaidOverview--PagesPerVisit"
-                                                role="tabpanel" style="height: auto">
-                                                <div class="row">
-                                                    <div class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
-                                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                            <div class="similarHeaderLeft flex-grow-1">
-                                                                <div
-                                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                    <div class="similarIcon"></div>
-                                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                        style="color: #57606f">
+                                                <div class="tab-pane px-4"
+                                                    id="getSearchOrganicPaidOverview--AverageDuration" role="tabpanel"
+                                                    style="height: auto">
+                                                    <div class="row">
+                                                        <div
+                                                            class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
+                                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                                <div class="similarHeaderLeft flex-grow-1">
+                                                                    <div
+                                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                                        <div class="similarIcon"></div>
+                                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                                            style="color: #57606f">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div id="<?= $idDomain1 ?>getSearchOrganicPaidOverview--AverageDuration"
+                                                                class="rounded is-loading" style="min-height:400px">
+                                                            </div>
                                                         </div>
-                                                        <div id="<?= $idDomain1 ?>getSearchOrganicPaidOverview--PagesPerVisit"
-                                                            class="rounded is-loading" style="min-height:400px">
-                                                        </div>
-                                                    </div>
-                                                    <div class="<?= $idDomain2 ?> col-12 col-md-6">
-                                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                            <div class="similarHeaderLeft flex-grow-1">
-                                                                <div
-                                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                    <div class="similarIcon"></div>
-                                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                        style="color: #4b7bec">
+                                                        <div class="<?= $idDomain2 ?> col-12 col-md-6">
+                                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                                <div class="similarHeaderLeft flex-grow-1">
+                                                                    <div
+                                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                                        <div class="similarIcon"></div>
+                                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                                            style="color: #4b7bec">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div id="<?= $idDomain2 ?>getSearchOrganicPaidOverview--PagesPerVisit"
-                                                            class="rounded is-loading" style="min-height:400px">
+                                                            <div id="<?= $idDomain2 ?>getSearchOrganicPaidOverview--AverageDuration"
+                                                                class="rounded is-loading" style="min-height:400px">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="tab-pane px-4" id="getSearchOrganicPaidOverview--BounceRate"
-                                                role="tabpanel" style="height: auto">
-                                                <div class="row">
-                                                    <div class="<?= $idDomain1 ?> col-12 col-md-6 border-dashed">
-                                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                            <div class="similarHeaderLeft flex-grow-1">
-                                                                <div
-                                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                    <div class="similarIcon"></div>
-                                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                        style="color: #57606f">
+                                                <div class="tab-pane px-4"
+                                                    id="getSearchOrganicPaidOverview--PagesPerVisit" role="tabpanel"
+                                                    style="height: auto">
+                                                    <div class="row">
+                                                        <div
+                                                            class="<?= $idDomain1 ?> col-12 col-md-6 border-right dashed">
+                                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                                <div class="similarHeaderLeft flex-grow-1">
+                                                                    <div
+                                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                                        <div class="similarIcon"></div>
+                                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                                            style="color: #57606f">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div id="<?= $idDomain1 ?>getSearchOrganicPaidOverview--PagesPerVisit"
+                                                                class="rounded is-loading" style="min-height:400px">
+                                                            </div>
                                                         </div>
-                                                        <div id="<?= $idDomain1 ?>getSearchOrganicPaidOverview--BounceRate"
-                                                            class="rounded is-loading" style="min-height:400px">
+                                                        <div class="<?= $idDomain2 ?> col-12 col-md-6">
+                                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                                <div class="similarHeaderLeft flex-grow-1">
+                                                                    <div
+                                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                                        <div class="similarIcon"></div>
+                                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                                            style="color: #4b7bec">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="<?= $idDomain2 ?>getSearchOrganicPaidOverview--PagesPerVisit"
+                                                                class="rounded is-loading" style="min-height:400px">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="<?= $idDomain2 ?> col-12 col-md-6">
-                                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                                            <div class="similarHeaderLeft flex-grow-1">
-                                                                <div
-                                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                                    <div class="similarIcon"></div>
-                                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                                        style="color: #4b7bec">
+                                                </div>
+                                                <div class="tab-pane px-4" id="getSearchOrganicPaidOverview--BounceRate"
+                                                    role="tabpanel" style="height: auto">
+                                                    <div class="row">
+                                                        <div class="<?= $idDomain1 ?> col-12 col-md-6 border-dashed">
+                                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                                <div class="similarHeaderLeft flex-grow-1">
+                                                                    <div
+                                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                                        <div class="similarIcon"></div>
+                                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                                            style="color: #57606f">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div id="<?= $idDomain1 ?>getSearchOrganicPaidOverview--BounceRate"
+                                                                class="rounded is-loading" style="min-height:400px">
+                                                            </div>
                                                         </div>
-                                                        <div id="<?= $idDomain2 ?>getSearchOrganicPaidOverview--BounceRate"
-                                                            class="rounded is-loading" style="min-height:400px">
+                                                        <div class="<?= $idDomain2 ?> col-12 col-md-6">
+                                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                                <div class="similarHeaderLeft flex-grow-1">
+                                                                    <div
+                                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                                        <div class="similarIcon"></div>
+                                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                                            style="color: #4b7bec">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="<?= $idDomain2 ?>getSearchOrganicPaidOverview--BounceRate"
+                                                                class="rounded is-loading" style="min-height:400px">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1450,836 +1295,854 @@ if (!$checkDomain1 || !$checkDomain2) echo "<script>window.parent.location ='htt
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--ĐÓNG Chi Tiết Truy Cập Từ Tìm Kiếm-->
+                    <!--ĐÓNG Chi Tiết Truy Cập Từ Tìm Kiếm-->
 
-                <!--Tỉ Lệ Truy Cập Theo Từ Khoá Tự Nhiên -->
-                <div class="row">
-                    <div class="col-12 mb-5">
-                        <div class="h-100 bg-white shadow-sm rounded">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24" />
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <rect id="Rectangle-9" fill="#000000" x="11" y="10" width="2" height="7"
-                                                rx="1" />
-                                            <rect id="Rectangle-9-Copy" fill="#000000" x="11" y="7" width="2" height="2"
-                                                rx="1" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold">
-                                        <?=_(" Tỉ lệ truy cập theo từ khoá tự nhiên")?></div>
-                                    <div class="text-muted similarDates font-10"></div>
-                                </div>
-                            </div>
-                            <div id="Parent-getSearchBrandedKeywords">
-                                <div class="row" id="getSearchBrandedKeywords">
-                                    <div class="<?= $idDomain1?> col-12 col-md-6 border-right dashed">
-                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #57606f">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="<?= $idDomain1?>getSearchBrandedKeywords" class="mb-5 is-loading"
-                                            style="height: 200px;">
-                                        </div>
+                    <!--Tỉ Lệ Truy Cập Theo Từ Khoá Tự Nhiên -->
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <div class="h-100 bg-white shadow-sm rounded">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24" />
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12"
+                                                    r="10" />
+                                                <rect id="Rectangle-9" fill="#000000" x="11" y="10" width="2" height="7"
+                                                    rx="1" />
+                                                <rect id="Rectangle-9-Copy" fill="#000000" x="11" y="7" width="2"
+                                                    height="2" rx="1" />
+                                            </g>
+                                        </svg>
                                     </div>
-                                    <div class="<?= $idDomain2?> col-12 col-md-6">
-                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #4b7bec">
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold">
+                                            <?=_(" Tỉ lệ truy cập theo từ khoá tự nhiên")?></div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
+                                </div>
+                                <div id="Parent-getSearchBrandedKeywords">
+                                    <div class="row" id="getSearchBrandedKeywords">
+                                        <div class="<?= $idDomain1?> col-12 col-md-6 border-right dashed">
+                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #57606f">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div id="<?= $idDomain1?>getSearchBrandedKeywords" class="mb-5 is-loading"
+                                                style="height: 200px;">
+                                            </div>
                                         </div>
-                                        <div id="<?= $idDomain2?>getSearchBrandedKeywords" class="mb-5 is-loading"
-                                            style="height: 200px;">
+                                        <div class="<?= $idDomain2?> col-12 col-md-6">
+                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #4b7bec">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="<?= $idDomain2?>getSearchBrandedKeywords" class="mb-5 is-loading"
+                                                style="height: 200px;">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--ĐÓNG Tỉ Lệ Truy Cập Theo Từ Khoá Tự Nhiên -->
+                    <!--ĐÓNG Tỉ Lệ Truy Cập Theo Từ Khoá Tự Nhiên -->
 
-                <!--mẫu quảng cáo tìm kiếm trả phí-->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="bg-white shadow-sm rounded mb-5" id="getScrapedSearchAds">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24" />
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <path
-                                                d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
-                                                id="Path-92" fill="#000000" fill-rule="nonzero" />
-                                        </g>
-                                    </svg>
+                    <!--mẫu quảng cáo tìm kiếm trả phí-->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="bg-white shadow-sm rounded mb-5" id="getScrapedSearchAds">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24" />
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12"
+                                                    r="10" />
+                                                <path
+                                                    d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
+                                                    id="Path-92" fill="#000000" fill-rule="nonzero" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold">
+                                            <?=_(" Mẫu quảng cáo tìm kiếm trả phí")?></div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
                                 </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold">
-                                        <?=_(" Mẫu quảng cáo tìm kiếm trả phí")?></div>
-                                    <div class="text-muted similarDates font-10"></div>
-                                </div>
-                            </div>
-                            <div id="Parent-getScrapedSearchAds">
-                                <div class="row" id="getScrapedSearchAds">
-                                    <div class="<?= $idDomain1?> col-12 col-md-6 border-right dashed">
-                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #57606f">
+                                <div id="Parent-getScrapedSearchAds">
+                                    <div class="row" id="getScrapedSearchAds">
+                                        <div class="<?= $idDomain1?> col-12 col-md-6 border-right dashed">
+                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #57606f">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="<?= $idDomain1?>getScrapedSearchAds" class="carousel slide"
-                                            data-interval="false">
-                                            <ol class="carousel-indicators">
-                                            </ol>
-                                            <div class="carousel-inner rounded-bottom is-loading" role="listbox"
-                                                style="height: 370px">
+                                            <div id="<?= $idDomain1?>getScrapedSearchAds" class="carousel slide"
+                                                data-interval="false">
+                                                <ol class="carousel-indicators">
+                                                </ol>
+                                                <div class="carousel-inner rounded-bottom is-loading" role="listbox"
+                                                    style="height: 370px">
+                                                </div>
+                                                <a class="carousel-control-prev"
+                                                    href="#<?= $idDomain1?>getScrapedSearchAds" role="button"
+                                                    data-slide="prev">
+                                                    <i
+                                                        class="fas fa-angle-left font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
+                                                </a>
+                                                <a class="carousel-control-next"
+                                                    href="#<?= $idDomain1?>getScrapedSearchAds" role="button"
+                                                    data-slide="next">
+                                                    <i
+                                                        class="fas fa-angle-right font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
+                                                </a>
                                             </div>
-                                            <a class="carousel-control-prev" href="#<?= $idDomain1?>getScrapedSearchAds"
-                                                role="button" data-slide="prev">
-                                                <i
-                                                    class="fas fa-angle-left font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
-                                            </a>
-                                            <a class="carousel-control-next" href="#<?= $idDomain1?>getScrapedSearchAds"
-                                                role="button" data-slide="next">
-                                                <i
-                                                    class="fas fa-angle-right font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
-                                            </a>
                                         </div>
-                                    </div>
 
-                                    <div class="<?= $idDomain2?> col-12 col-md-6">
-                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #4b7bec">
+                                        <div class="<?= $idDomain2?> col-12 col-md-6">
+                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #4b7bec">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="<?= $idDomain2?>getScrapedSearchAds" class="carousel slide"
-                                            data-interval="false">
-                                            <ol class="carousel-indicators">
-                                            </ol>
-                                            <div class="carousel-inner rounded-bottom is-loading" role="listbox"
-                                                style="height: 370px">
-                                            </div>
-                                            <a class="carousel-control-prev" href="#<?= $idDomain2?>getScrapedSearchAds"
-                                                role="button" data-slide="prev">
-                                                <i
-                                                    class="fas fa-angle-left font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
-                                            </a>
-                                            <a class="carousel-control-next" href="#<?= $idDomain2?>getScrapedSearchAds"
-                                                role="button" data-slide="next">
-                                                <i
-                                                    class="fas fa-angle-right font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- ĐÓNG mẫu quảng cáo tìm kiếm trả phí-->
-
-                <!--Truy Cập Quảng Cáo Hiển Thị-->
-                <div class="row">
-                    <div class="col-12 mb-5" id="getWebsiteAdsVisitsOverview">
-                        <div class="bg-white shadow-sm rounded h-100">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24" />
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <path
-                                                d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
-                                                id="Path-92" fill="#000000" fill-rule="nonzero" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold"><?=_("Truy cập quảng cáo hiển thị")?>
-                                    </div>
-                                    <div class="text-muted similarDates font-10"></div>
-                                </div>
-                            </div>
-
-                            <div id="Parent-getWebsiteAdsVisitsOverview">
-                                <div class="row" style="height: 270px" id="getWebsiteAdsVisitsOverview">
-                                    <div class="<?= $idDomain1?> col-6 border-right dashed">
-                                        <div class="similarHeader d-flex flex-column p-3 p-lg-2">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #57606f">
-                                                    </div>
+                                            <div id="<?= $idDomain2?>getScrapedSearchAds" class="carousel slide"
+                                                data-interval="false">
+                                                <ol class="carousel-indicators">
+                                                </ol>
+                                                <div class="carousel-inner rounded-bottom is-loading" role="listbox"
+                                                    style="height: 370px">
                                                 </div>
+                                                <a class="carousel-control-prev"
+                                                    href="#<?= $idDomain2?>getScrapedSearchAds" role="button"
+                                                    data-slide="prev">
+                                                    <i
+                                                        class="fas fa-angle-left font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
+                                                </a>
+                                                <a class="carousel-control-next"
+                                                    href="#<?= $idDomain2?>getScrapedSearchAds" role="button"
+                                                    data-slide="next">
+                                                    <i
+                                                        class="fas fa-angle-right font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
+                                                </a>
                                             </div>
-                                        </div>
-                                        <div class="py-5 is-loading font-number h1 text-center" style="color: #57606f"
-                                            id="<?= $idDomain1?>getWebsiteAdsVisitsOverview">
-                                        </div>
-                                    </div>
-
-                                    <div class="<?= $idDomain2?> col-6">
-                                        <div class="similarHeader d-flex flex-column p-3 p-lg-2">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #4b7bec">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="py-5 is-loading font-number h1 text-center" style="color: #4b7bec"
-                                            id="<?= $idDomain2?>getWebsiteAdsVisitsOverview">
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--ĐÓNG Truy Cập Quảng Cáo Hiển Thị -->
+                    <!-- ĐÓNG mẫu quảng cáo tìm kiếm trả phí-->
 
-                <!-- kênh quảng cáo -->
-                <div class="row">
-                    <div class="col-12 mb-5 getTrafficDisplayAdvertisingAds">
-                        <div class="bg-white shadow-sm rounded h-100">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24"></rect>
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10">
-                                            </circle>
-                                            <path
-                                                d="M12.4208204,17.1583592 L15.4572949,11.0854102 C15.6425368,10.7149263 15.4923686,10.2644215 15.1218847,10.0791796 C15.0177431,10.0271088 14.9029083,10 14.7864745,10 L12,10 L12,7.17705098 C12,6.76283742 11.6642136,6.42705098 11.25,6.42705098 C10.965921,6.42705098 10.7062236,6.58755277 10.5791796,6.84164079 L7.5427051,12.9145898 C7.35746316,13.2850737 7.50763142,13.7355785 7.87811529,13.9208204 C7.98225687,13.9728912 8.09709167,14 8.21352549,14 L11,14 L11,16.822949 C11,17.2371626 11.3357864,17.572949 11.75,17.572949 C12.034079,17.572949 12.2937764,17.4124472 12.4208204,17.1583592 Z"
-                                                id="Path-3" fill="#000000"></path>
-                                        </g>
-                                    </svg>
-                                </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold"> <?=_("Kênh quảng cáo")?></div>
-                                    <div class="text-muted similarDates font-10"></div>
-                                </div>
-                            </div>
-                            <div id="Parent-getTrafficDisplayAdvertisingAds">
-                                <div class="row" id="getTrafficDisplayAdvertisingAds">
-                                    <div class="<?= $idDomain1 ?> col-12 col-md-6 p-3 border-right dashed">
-                                        <div class="similarHeader d-flex flex-column p-3 p-lg-2">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #57606f">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="<?= $idDomain1 ?>getTrafficDisplayAdvertisingAds"
-                                            class="mb-3 is-loading" style="height: 200px"></div>
+                    <!--Truy Cập Quảng Cáo Hiển Thị-->
+                    <div class="row">
+                        <div class="col-12 mb-5" id="getWebsiteAdsVisitsOverview">
+                            <div class="bg-white shadow-sm rounded h-100">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24" />
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12"
+                                                    r="10" />
+                                                <path
+                                                    d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
+                                                    id="Path-92" fill="#000000" fill-rule="nonzero" />
+                                            </g>
+                                        </svg>
                                     </div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold">
+                                            <?=_("Truy cập quảng cáo hiển thị")?>
+                                        </div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
+                                </div>
 
-                                    <div class="<?= $idDomain2 ?> col-12 col-md-6 p-3">
-                                        <div class="similarHeader d-flex flex-column p-3 p-lg-2">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #4b7bec">
+                                <div id="Parent-getWebsiteAdsVisitsOverview">
+                                    <div class="row" style="height: 270px" id="getWebsiteAdsVisitsOverview">
+                                        <div class="<?= $idDomain1?> col-6 border-right dashed">
+                                            <div class="similarHeader d-flex flex-column p-3 p-lg-2">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #57606f">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="py-5 is-loading font-number h1 text-center"
+                                                style="color: #57606f" id="<?= $idDomain1?>getWebsiteAdsVisitsOverview">
+                                            </div>
                                         </div>
-                                        <div id="<?= $idDomain2 ?>getTrafficDisplayAdvertisingAds"
-                                            class="mb-3 is-loading" style="height: 200px"></div>
+
+                                        <div class="<?= $idDomain2?> col-6">
+                                            <div class="similarHeader d-flex flex-column p-3 p-lg-2">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #4b7bec">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="py-5 is-loading font-number h1 text-center"
+                                                style="color: #4b7bec" id="<?= $idDomain2?>getWebsiteAdsVisitsOverview">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Đóng kênh quảng cáo -->
+                    <!--ĐÓNG Truy Cập Quảng Cáo Hiển Thị -->
 
-                <!--Mẫu Quảng Cáo Hiển Thị-->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="bg-white shadow-sm rounded mb-5" id="getWebsiteAdsIntelDisplay">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24" />
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <path
-                                                d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
-                                                id="Path-92" fill="#000000" fill-rule="nonzero" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold">
-                                        <?=_(" Mẫu Quảng Cáo Hiển Thị")?></div>
-                                    <div class="text-muted similarDates font-10"></div>
-                                </div>
-                            </div>
-                            <div id="Parent-getWebsiteAdsIntelDisplay">
-                                <div class="row" id="getWebsiteAdsIntelDisplay">
-                                    <div class="<?= $idDomain1?> col-12 col-md-6 border-right dashed">
-                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #57606f">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="<?= $idDomain1?>getWebsiteAdsIntelDisplay" class="carousel slide"
-                                            data-interval="false">
-                                            <ol class="carousel-indicators">
-                                            </ol>
-                                            <div class="carousel-inner rounded-bottom is-loading" role="listbox"
-                                                style="height: 370px">
-                                            </div>
-                                            <a class="carousel-control-prev"
-                                                href="#<?= $idDomain1?>getWebsiteAdsIntelDisplay" role="button"
-                                                data-slide="prev">
-                                                <i
-                                                    class="fas fa-angle-left font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
-                                            </a>
-                                            <a class="carousel-control-next"
-                                                href="#<?= $idDomain1?>getWebsiteAdsIntelDisplay" role="button"
-                                                data-slide="next">
-                                                <i
-                                                    class="fas fa-angle-right font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
-                                            </a>
-                                        </div>
+                    <!-- kênh quảng cáo -->
+                    <div class="row">
+                        <div class="col-12 mb-5 getTrafficDisplayAdvertisingAds">
+                            <div class="bg-white shadow-sm rounded h-100">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10">
+                                                </circle>
+                                                <path
+                                                    d="M12.4208204,17.1583592 L15.4572949,11.0854102 C15.6425368,10.7149263 15.4923686,10.2644215 15.1218847,10.0791796 C15.0177431,10.0271088 14.9029083,10 14.7864745,10 L12,10 L12,7.17705098 C12,6.76283742 11.6642136,6.42705098 11.25,6.42705098 C10.965921,6.42705098 10.7062236,6.58755277 10.5791796,6.84164079 L7.5427051,12.9145898 C7.35746316,13.2850737 7.50763142,13.7355785 7.87811529,13.9208204 C7.98225687,13.9728912 8.09709167,14 8.21352549,14 L11,14 L11,16.822949 C11,17.2371626 11.3357864,17.572949 11.75,17.572949 C12.034079,17.572949 12.2937764,17.4124472 12.4208204,17.1583592 Z"
+                                                    id="Path-3" fill="#000000"></path>
+                                            </g>
+                                        </svg>
                                     </div>
-
-                                    <div class="<?= $idDomain2?> col-12 col-md-6">
-                                        <div class="similarHeader d-flex flex-column p-4 p-lg-3">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #4b7bec">
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold"> <?=_("Kênh quảng cáo")?></div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
+                                </div>
+                                <div id="Parent-getTrafficDisplayAdvertisingAds">
+                                    <div class="row" id="getTrafficDisplayAdvertisingAds">
+                                        <div class="<?= $idDomain1 ?> col-12 col-md-6 p-3 border-right dashed">
+                                            <div class="similarHeader d-flex flex-column p-3 p-lg-2">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #57606f">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div id="<?= $idDomain1 ?>getTrafficDisplayAdvertisingAds"
+                                                class="mb-3 is-loading" style="height: 200px"></div>
                                         </div>
-                                        <div id="<?= $idDomain2?>getWebsiteAdsIntelDisplay" class="carousel slide"
-                                            data-interval="false">
-                                            <ol class="carousel-indicators">
-                                            </ol>
-                                            <div class="carousel-inner rounded-bottom is-loading" role="listbox"
-                                                style="height: 370px">
+
+                                        <div class="<?= $idDomain2 ?> col-12 col-md-6 p-3">
+                                            <div class="similarHeader d-flex flex-column p-3 p-lg-2">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #4b7bec">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <a class="carousel-control-prev"
-                                                href="#<?= $idDomain2?>getWebsiteAdsIntelDisplay" role="button"
-                                                data-slide="prev">
-                                                <i
-                                                    class="fas fa-angle-left font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
-                                            </a>
-                                            <a class="carousel-control-next"
-                                                href="#<?= $idDomain2?>getWebsiteAdsIntelDisplay" role="button"
-                                                data-slide="next">
-                                                <i
-                                                    class="fas fa-angle-right font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
-                                            </a>
+                                            <div id="<?= $idDomain2 ?>getTrafficDisplayAdvertisingAds"
+                                                class="mb-3 is-loading" style="height: 200px"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
-                <!-- ĐÓNG Mẫu Quảng Cáo Hiển Thị-->
+                    <!-- Đóng kênh quảng cáo -->
 
-                <!-- Lượt Truy Cập Xã Hội -->
-                <div class="row">
-                    <div class="col-12 mb-5">
-                        <div class="bg-white shadow-sm rounded">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24" />
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <path
-                                                d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
-                                                id="Path-92" fill="#000000" fill-rule="nonzero" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold"><?=_("Lượt truy cập mạng xã hội")?>
+                    <!--Mẫu Quảng Cáo Hiển Thị-->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="bg-white shadow-sm rounded mb-5" id="getWebsiteAdsIntelDisplay">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24" />
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12"
+                                                    r="10" />
+                                                <path
+                                                    d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
+                                                    id="Path-92" fill="#000000" fill-rule="nonzero" />
+                                            </g>
+                                        </svg>
                                     </div>
-                                    <div class="text-muted similarDates font-10"></div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-12 pt-2">
-                                    <div id="Parent-getSocialVisits">
-                                        <div id="getSocialVisits" class="is-loading" style="height: 270px">
-                                        </div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold">
+                                            <?=_(" Mẫu Quảng Cáo Hiển Thị")?></div>
+                                        <div class="text-muted similarDates font-10"></div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div id="Parent-SocialVisits">
-                                <div class="row" id="SocialVisits">
-                                    <div class="<?= $idDomain1 ?> col-6 border-right dashed">
-                                        <div class="similarHeader d-flex flex-column">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #57606f">
+                                <div id="Parent-getWebsiteAdsIntelDisplay">
+                                    <div class="row" id="getWebsiteAdsIntelDisplay">
+                                        <div class="<?= $idDomain1?> col-12 col-md-6 border-right dashed">
+                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #57606f">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div id="<?= $idDomain1?>getWebsiteAdsIntelDisplay" class="carousel slide"
+                                                data-interval="false">
+                                                <ol class="carousel-indicators">
+                                                </ol>
+                                                <div class="carousel-inner rounded-bottom is-loading" role="listbox"
+                                                    style="height: 370px">
+                                                </div>
+                                                <a class="carousel-control-prev"
+                                                    href="#<?= $idDomain1?>getWebsiteAdsIntelDisplay" role="button"
+                                                    data-slide="prev">
+                                                    <i
+                                                        class="fas fa-angle-left font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
+                                                </a>
+                                                <a class="carousel-control-next"
+                                                    href="#<?= $idDomain1?>getWebsiteAdsIntelDisplay" role="button"
+                                                    data-slide="next">
+                                                    <i
+                                                        class="fas fa-angle-right font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div class="pt-0 pt-lg-4 pb-4 pb-lg-0">
-                                            <div id="<?= $idDomain1 ?>TotalSocialVisits"
-                                                class="d-none d-lg-block h4 text-center font-bold text-muted"> </div>
-                                            <div id="<?= $idDomain1 ?>getTotalSocialVisits" class="is-loading mb-5"
+
+                                        <div class="<?= $idDomain2?> col-12 col-md-6">
+                                            <div class="similarHeader d-flex flex-column p-4 p-lg-3">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #4b7bec">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="<?= $idDomain2?>getWebsiteAdsIntelDisplay" class="carousel slide"
+                                                data-interval="false">
+                                                <ol class="carousel-indicators">
+                                                </ol>
+                                                <div class="carousel-inner rounded-bottom is-loading" role="listbox"
+                                                    style="height: 370px">
+                                                </div>
+                                                <a class="carousel-control-prev"
+                                                    href="#<?= $idDomain2?>getWebsiteAdsIntelDisplay" role="button"
+                                                    data-slide="prev">
+                                                    <i
+                                                        class="fas fa-angle-left font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
+                                                </a>
+                                                <a class="carousel-control-next"
+                                                    href="#<?= $idDomain2?>getWebsiteAdsIntelDisplay" role="button"
+                                                    data-slide="next">
+                                                    <i
+                                                        class="fas fa-angle-right font-20 text-dark rounded-circle bg-white shadow p-15 p-l-20 p-r-20"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ĐÓNG Mẫu Quảng Cáo Hiển Thị-->
+
+                    <!-- Lượt Truy Cập Xã Hội -->
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <div class="bg-white shadow-sm rounded">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24" />
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12"
+                                                    r="10" />
+                                                <path
+                                                    d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
+                                                    id="Path-92" fill="#000000" fill-rule="nonzero" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold">
+                                            <?=_("Lượt truy cập mạng xã hội")?>
+                                        </div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-12 pt-2">
+                                        <div id="Parent-getSocialVisits">
+                                            <div id="getSocialVisits" class="is-loading" style="height: 270px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="Parent-SocialVisits">
+                                    <div class="row" id="SocialVisits">
+                                        <div class="<?= $idDomain1 ?> col-6 border-right dashed">
+                                            <div class="similarHeader d-flex flex-column">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #57606f">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="pt-0 pt-lg-4 pb-4 pb-lg-0">
+                                                <div id="<?= $idDomain1 ?>TotalSocialVisits"
+                                                    class="d-none d-lg-block h4 text-center font-bold text-muted">
+                                                </div>
+                                                <div id="<?= $idDomain1 ?>getTotalSocialVisits" class="is-loading mb-5"
+                                                    style="height: 200px"> </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="<?= $idDomain2 ?> col-6">
+                                            <div class="similarHeader d-flex flex-column">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #4b7bec">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="pt-0 pt-lg-4 pb-4 pb-lg-3">
+                                                <div id="<?= $idDomain2?>TotalSocialVisits"
+                                                    class="d-none d-lg-block h4 text-center font-bold text-muted">
+                                                </div>
+                                                <div id="<?= $idDomain2 ?>getTotalSocialVisits" class="is-loading"
+                                                    style="height: 200px"> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--ĐÓNG Lượt Truy Cập Xã Hội -->
+
+                    <!--Kênh Mạng Xã Hội-->
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <div class="bg-white shadow-sm rounded h-100">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10">
+                                                </circle>
+                                                <path
+                                                    d="M12.4208204,17.1583592 L15.4572949,11.0854102 C15.6425368,10.7149263 15.4923686,10.2644215 15.1218847,10.0791796 C15.0177431,10.0271088 14.9029083,10 14.7864745,10 L12,10 L12,7.17705098 C12,6.76283742 11.6642136,6.42705098 11.25,6.42705098 C10.965921,6.42705098 10.7062236,6.58755277 10.5791796,6.84164079 L7.5427051,12.9145898 C7.35746316,13.2850737 7.50763142,13.7355785 7.87811529,13.9208204 C7.98225687,13.9728912 8.09709167,14 8.21352549,14 L11,14 L11,16.822949 C11,17.2371626 11.3357864,17.572949 11.75,17.572949 C12.034079,17.572949 12.2937764,17.4124472 12.4208204,17.1583592 Z"
+                                                    id="Path-3" fill="#000000"></path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold"> Kênh mạng xã hội</div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
+                                </div>
+                                <div id="Parent-getTrafficSourcesSocial">
+                                    <div class="row" id="getTrafficSourcesSocial">
+                                        <div class="<?= $idDomain1?> col-12 col-md-6 border-right dashed">
+                                            <div class="similarHeader d-flex flex-column pt-3">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #57606f">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="<?= $idDomain1?>getTrafficSourcesSocial" class="mb-4 is-loading"
                                                 style="height: 200px"> </div>
                                         </div>
-                                    </div>
 
-                                    <div class="<?= $idDomain2 ?> col-6">
-                                        <div class="similarHeader d-flex flex-column">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #4b7bec">
+                                        <div class="<?= $idDomain2?> col-12 col-md-6">
+                                            <div class="similarHeader d-flex flex-column pt-3">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #4b7bec">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="pt-0 pt-lg-4 pb-4 pb-lg-3">
-                                            <div id="<?= $idDomain2?>TotalSocialVisits"
-                                                class="d-none d-lg-block h4 text-center font-bold text-muted"> </div>
-                                            <div id="<?= $idDomain2 ?>getTotalSocialVisits" class="is-loading"
+                                            <div id="<?= $idDomain2?>getTrafficSourcesSocial" class="mb-4 is-loading"
                                                 style="height: 200px"> </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--ĐÓNG Lượt Truy Cập Xã Hội -->
+                    <!--ĐÓNG Kênh Mạng Xã Hội-->
 
-                <!--Kênh Mạng Xã Hội-->
-                <div class="row">
-                    <div class="col-12 mb-5">
-                        <div class="bg-white shadow-sm rounded h-100">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24"></rect>
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10">
-                                            </circle>
-                                            <path
-                                                d="M12.4208204,17.1583592 L15.4572949,11.0854102 C15.6425368,10.7149263 15.4923686,10.2644215 15.1218847,10.0791796 C15.0177431,10.0271088 14.9029083,10 14.7864745,10 L12,10 L12,7.17705098 C12,6.76283742 11.6642136,6.42705098 11.25,6.42705098 C10.965921,6.42705098 10.7062236,6.58755277 10.5791796,6.84164079 L7.5427051,12.9145898 C7.35746316,13.2850737 7.50763142,13.7355785 7.87811529,13.9208204 C7.98225687,13.9728912 8.09709167,14 8.21352549,14 L11,14 L11,16.822949 C11,17.2371626 11.3357864,17.572949 11.75,17.572949 C12.034079,17.572949 12.2937764,17.4124472 12.4208204,17.1583592 Z"
-                                                id="Path-3" fill="#000000"></path>
-                                        </g>
-                                    </svg>
+                    <!--Truy Cập Từ Giới Thiệu-->
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <div class="bg-white shadow-sm rounded">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24" />
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12"
+                                                    r="10" />
+                                                <path
+                                                    d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
+                                                    id="Path-92" fill="#000000" fill-rule="nonzero" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold"><?=_(" Truy cập từ giới thiệu")?>
+                                        </div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
                                 </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold"> Kênh mạng xã hội</div>
-                                    <div class="text-muted similarDates font-10"></div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div id="Parent-getReferralVisits">
+                                            <div id="getReferralVisits" class="is-loading" style="height: 270px">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div id="Parent-getTrafficSourcesSocial">
-                                <div class="row" id="getTrafficSourcesSocial">
-                                    <div class="<?= $idDomain1?> col-12 col-md-6 border-right dashed">
-                                        <div class="similarHeader d-flex flex-column pt-3">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #57606f">
+                                <div id="Parent-ReferralVisits">
+                                    <div class="row pb-4" id="ReferralVisits">
+                                        <div class="<?= $idDomain1 ?> col-6 border-right dashed">
+                                            <div class="similarHeader d-flex flex-column">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #57606f">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="pt-0 pt-lg-4 pb-4 pb-lg-0">
+                                                <div id="<?= $idDomain1 ?>TotalReferrals"
+                                                    class="d-none d-lg-block text-center h4 font-bold text-muted">
+                                                </div>
+                                                <div id="<?= $idDomain1 ?>getTotalReferrals" class="is-loading mb-5"
+                                                    style="height: 200px"></div>
+                                            </div>
                                         </div>
-                                        <div id="<?= $idDomain1?>getTrafficSourcesSocial" class="mb-4 is-loading"
-                                            style="height: 200px"> </div>
-                                    </div>
 
-                                    <div class="<?= $idDomain2?> col-12 col-md-6">
-                                        <div class="similarHeader d-flex flex-column pt-3">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #4b7bec">
+                                        <div class="<?= $idDomain2 ?> col-6">
+                                            <div class="similarHeader d-flex flex-column">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #4b7bec">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="<?= $idDomain2?>getTrafficSourcesSocial" class="mb-4 is-loading"
-                                            style="height: 200px"> </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--ĐÓNG Kênh Mạng Xã Hội-->
-
-                <!--Truy Cập Từ Giới Thiệu-->
-                <div class="row">
-                    <div class="col-12 mb-5">
-                        <div class="bg-white shadow-sm rounded">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24" />
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <path
-                                                d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
-                                                id="Path-92" fill="#000000" fill-rule="nonzero" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold"><?=_(" Truy cập từ giới thiệu")?>
-                                    </div>
-                                    <div class="text-muted similarDates font-10"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div id="Parent-getReferralVisits">
-                                        <div id="getReferralVisits" class="is-loading" style="height: 270px">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="Parent-ReferralVisits">
-                                <div class="row pb-4" id="ReferralVisits">
-                                    <div class="<?= $idDomain1 ?> col-6 border-right dashed">
-                                        <div class="similarHeader d-flex flex-column">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #57606f">
-                                                    </div>
+                                            <div class="pt-0 pt-lg-4 pb-4 pb-lg-0">
+                                                <div id="<?= $idDomain2 ?>TotalReferrals"
+                                                    class="d-none d-lg-block text-center h4 font-bold text-muted">
                                                 </div>
+                                                <div id="<?= $idDomain2 ?>getTotalReferrals" class="is-loading"
+                                                    style="height: 200px"></div>
                                             </div>
-                                        </div>
-                                        <div class="pt-0 pt-lg-4 pb-4 pb-lg-0">
-                                            <div id="<?= $idDomain1 ?>TotalReferrals"
-                                                class="d-none d-lg-block text-center h4 font-bold text-muted"> </div>
-                                            <div id="<?= $idDomain1 ?>getTotalReferrals" class="is-loading mb-5"
-                                                style="height: 200px"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="<?= $idDomain2 ?> col-6">
-                                        <div class="similarHeader d-flex flex-column">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #4b7bec">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pt-0 pt-lg-4 pb-4 pb-lg-0">
-                                            <div id="<?= $idDomain2 ?>TotalReferrals"
-                                                class="d-none d-lg-block text-center h4 font-bold text-muted"> </div>
-                                            <div id="<?= $idDomain2 ?>getTotalReferrals" class="is-loading"
-                                                style="height: 200px"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--ĐÓNG Truy Cập Từ Giới Thiệu-->
+                    <!--ĐÓNG Truy Cập Từ Giới Thiệu-->
 
-                <!-- lượng khách bấm vào quảng cáo + domain -->
-                <div class="row getOutgoingAds">
-                    <div class="col-12 mb-5">
-                        <div class="bg-white shadow-sm rounded">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24" />
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <path
-                                                d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
-                                                id="Path-92" fill="#000000" fill-rule="nonzero" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold">
-                                        <?=_("Lượng khách bấm vào quảng cáo trên $domain1 và $domain2")?></div>
-                                    <div class="text-muted similarDates font-10"></div>
-                                </div>
-                            </div>
-                            <div id="Parent-getOutgoingAds" id="getOutgoingAds">
-                                <div id="getOutgoingAds" class="row rounded m-0 p-b-10 is-loading"
-                                    style="height: 270px">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ĐÓNG lượng khách bấm vào quảng cáo + domain -->
-
-                <!-- Kênh Quảng Cáo cho + domain -->
-                <div class="row getTrafficDisplayPaidOutgoingAdsTable">
-                    <div class="col-12 mb-5">
-                        <div class="bg-white shadow-sm rounded h-100">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24"></rect>
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10">
-                                            </circle>
-                                            <path
-                                                d="M12.4208204,17.1583592 L15.4572949,11.0854102 C15.6425368,10.7149263 15.4923686,10.2644215 15.1218847,10.0791796 C15.0177431,10.0271088 14.9029083,10 14.7864745,10 L12,10 L12,7.17705098 C12,6.76283742 11.6642136,6.42705098 11.25,6.42705098 C10.965921,6.42705098 10.7062236,6.58755277 10.5791796,6.84164079 L7.5427051,12.9145898 C7.35746316,13.2850737 7.50763142,13.7355785 7.87811529,13.9208204 C7.98225687,13.9728912 8.09709167,14 8.21352549,14 L11,14 L11,16.822949 C11,17.2371626 11.3357864,17.572949 11.75,17.572949 C12.034079,17.572949 12.2937764,17.4124472 12.4208204,17.1583592 Z"
-                                                id="Path-3" fill="#000000"></path>
-                                        </g>
-                                    </svg>
-                                </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold">
-                                        <?=_("Kênh quảng cáo cho $domain1 và $domain2")?></div>
-                                    <div class="text-muted similarDates font-10"></div>
-                                </div>
-                            </div>
-                            <div id="Parent-getTrafficDisplayPaidOutgoingAdsTable">
-                                <div class="row" id="getTrafficDisplayPaidOutgoingAdsTable">
-                                    <div class="<?= $idDomain1?> col-12 col-md-6 pb-3 border-right dashed">
-                                        <div class="similarHeader d-flex flex-column">
-                                            <div class="similarHeaderLeft flex-grow-1 mt-3">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #57606f">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="<?= $idDomain1?>getTrafficDisplayPaidOutgoingAdsTable"
-                                            class="mb-3 is-loading" style="height: 200px"></div>
+                    <!-- lượng khách bấm vào quảng cáo + domain -->
+                    <div class="row getOutgoingAds">
+                        <div class="col-12 mb-5">
+                            <div class="bg-white shadow-sm rounded">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24" />
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12"
+                                                    r="10" />
+                                                <path
+                                                    d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
+                                                    id="Path-92" fill="#000000" fill-rule="nonzero" />
+                                            </g>
+                                        </svg>
                                     </div>
-
-                                    <div class="<?= $idDomain2?> col-12 col-md-6 pb-3">
-                                        <div class="similarHeader d-flex flex-column">
-                                            <div class="similarHeaderLeft flex-grow-1 mt-3">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #4b7bec">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="<?= $idDomain2?>getTrafficDisplayPaidOutgoingAdsTable"
-                                            class="mb-3 is-loading" style="height: 200px"></div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold">
+                                            <?=_("Lượng khách bấm vào quảng cáo trên $domain1 và $domain2")?></div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
+                                </div>
+                                <div id="Parent-getOutgoingAds" id="getOutgoingAds">
+                                    <div id="getOutgoingAds" class="row rounded m-0 p-b-10 is-loading"
+                                        style="height: 270px">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- ĐÓNG Kênh Quảng Cáo cho + domain -->
+                    <!-- ĐÓNG lượng khách bấm vào quảng cáo + domain -->
 
-                <!--Tổng Lượng Khách Rời Bỏ Trang-->
-                <div class="row getTotalOutgoingAdVisits">
-                    <div class="col-12 mb-5">
-                        <div class="bg-white shadow-sm rounded h-100">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24" />
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <path
-                                                d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
-                                                id="Path-92" fill="#000000" fill-rule="nonzero" />
-                                        </g>
-                                    </svg>
+                    <!-- Kênh Quảng Cáo cho + domain -->
+                    <div class="row getTrafficDisplayPaidOutgoingAdsTable">
+                        <div class="col-12 mb-5">
+                            <div class="bg-white shadow-sm rounded h-100">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10">
+                                                </circle>
+                                                <path
+                                                    d="M12.4208204,17.1583592 L15.4572949,11.0854102 C15.6425368,10.7149263 15.4923686,10.2644215 15.1218847,10.0791796 C15.0177431,10.0271088 14.9029083,10 14.7864745,10 L12,10 L12,7.17705098 C12,6.76283742 11.6642136,6.42705098 11.25,6.42705098 C10.965921,6.42705098 10.7062236,6.58755277 10.5791796,6.84164079 L7.5427051,12.9145898 C7.35746316,13.2850737 7.50763142,13.7355785 7.87811529,13.9208204 C7.98225687,13.9728912 8.09709167,14 8.21352549,14 L11,14 L11,16.822949 C11,17.2371626 11.3357864,17.572949 11.75,17.572949 C12.034079,17.572949 12.2937764,17.4124472 12.4208204,17.1583592 Z"
+                                                    id="Path-3" fill="#000000"></path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold">
+                                            <?=_("Kênh quảng cáo cho $domain1 và $domain2")?></div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
                                 </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold">
-                                        <?=_("Tổng Lượng Khách Rời Bỏ Trang")?></div>
-                                    <div class="text-muted similarDates font-10"></div>
+                                <div id="Parent-getTrafficDisplayPaidOutgoingAdsTable">
+                                    <div class="row" id="getTrafficDisplayPaidOutgoingAdsTable">
+                                        <div class="<?= $idDomain1?> col-12 col-md-6 pb-3 border-right dashed">
+                                            <div class="similarHeader d-flex flex-column">
+                                                <div class="similarHeaderLeft flex-grow-1 mt-3">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #57606f">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="<?= $idDomain1?>getTrafficDisplayPaidOutgoingAdsTable"
+                                                class="mb-3 is-loading" style="height: 200px"></div>
+                                        </div>
+
+                                        <div class="<?= $idDomain2?> col-12 col-md-6 pb-3">
+                                            <div class="similarHeader d-flex flex-column">
+                                                <div class="similarHeaderLeft flex-grow-1 mt-3">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #4b7bec">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="<?= $idDomain2?>getTrafficDisplayPaidOutgoingAdsTable"
+                                                class="mb-3 is-loading" style="height: 200px"></div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- <div class="ml-auto d-flex no-block align-items-center pr-3">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ĐÓNG Kênh Quảng Cáo cho + domain -->
+
+                    <!--Tổng Lượng Khách Rời Bỏ Trang-->
+                    <div class="row getTotalOutgoingAdVisits">
+                        <div class="col-12 mb-5">
+                            <div class="bg-white shadow-sm rounded h-100">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24" />
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12"
+                                                    r="10" />
+                                                <path
+                                                    d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
+                                                    id="Path-92" fill="#000000" fill-rule="nonzero" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold">
+                                            <?=_("Tổng Lượng Khách Rời Bỏ Trang")?></div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
+                                    <!-- <div class="ml-auto d-flex no-block align-items-center pr-3">
                                     <a class="similarReloadTask text-muted" data-task="getWebsiteAdsVisitsOverview"
                                         href="javascript:;"><i class="fal fa-sync"></i></a>
                                 </div> -->
-                            </div>
-                            <div id="Parent-getTotalOutgoingAdVisits">
-                                <div class="row m-0" style="height: 250px" id="getTotalOutgoingAdVisits">
-                                    <div class="<?= $idDomain1?> col-6 border-right dashed">
-                                        <div class="similarHeader d-flex flex-column p-3 p-lg-2">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #57606f">
+                                </div>
+                                <div id="Parent-getTotalOutgoingAdVisits">
+                                    <div class="row m-0" style="height: 250px" id="getTotalOutgoingAdVisits">
+                                        <div class="<?= $idDomain1?> col-6 border-right dashed">
+                                            <div class="similarHeader d-flex flex-column p-3 p-lg-2">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #57606f">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="py-5 is-loading font-number h1 text-center"
+                                                style="color: #57606f" id="<?= $idDomain1?>getTotalOutgoingAdVisits">
+                                            </div>
                                         </div>
-                                        <div class="py-5 is-loading font-number h1 text-center" style="color: #57606f"
-                                            id="<?= $idDomain1?>getTotalOutgoingAdVisits">
-                                        </div>
-                                    </div>
 
-                                    <div class="<?= $idDomain2?> col-6">
-                                        <div class="similarHeader d-flex flex-column p-3 p-lg-2">
-                                            <div class="similarHeaderLeft flex-grow-1">
-                                                <div
-                                                    class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
-                                                    <div class="similarIcon"></div>
-                                                    <div class="similarDomain font-weight-500 font-20 font-weight-bold"
-                                                        style="color: #4b7bec">
+                                        <div class="<?= $idDomain2?> col-6">
+                                            <div class="similarHeader d-flex flex-column p-3 p-lg-2">
+                                                <div class="similarHeaderLeft flex-grow-1">
+                                                    <div
+                                                        class="similarDomainWrapper placeholder-loading d-flex no-block flex-row align-items-center mb-3 justify-content-center">
+                                                        <div class="similarIcon"></div>
+                                                        <div class="similarDomain font-weight-500 font-20 font-weight-bold"
+                                                            style="color: #4b7bec">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="py-5 is-loading font-number h1 text-center" style="color: #4b7bec;"
-                                            id="<?= $idDomain2?>getTotalOutgoingAdVisits">
+                                            <div class="py-5 is-loading font-number h1 text-center"
+                                                style="color: #4b7bec;" id="<?= $idDomain2?>getTotalOutgoingAdVisits">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--ĐÓNG Tổng Lượng Khách Rời Bỏ Trang -->
+                    <!--ĐÓNG Tổng Lượng Khách Rời Bỏ Trang -->
 
-                <!-- Website đối thủ -->
-                <div class="row">
-                    <div class="col-12 mb-5">
-                        <div class="bg-white shadow-sm rounded">
-                            <div class="row border-bottom m-0 py-2">
-                                <div class="col-auto d-flex no-block align-items-center mx-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20" height="20" viewBox="0 0 24 24" version="1.1"
-                                        class="svg-icon text-primary mb-1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect id="bound" x="0" y="0" width="24" height="24" />
-                                            <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <path
-                                                d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
-                                                id="Path-92" fill="#000000" fill-rule="nonzero" />
-                                        </g>
-                                    </svg>
+                    <!-- Website đối thủ -->
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <div class="bg-white shadow-sm rounded">
+                                <div class="row border-bottom m-0 py-2">
+                                    <div class="col-auto d-flex no-block align-items-center mx-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+                                            viewBox="0 0 24 24" version="1.1" class="svg-icon text-primary mb-1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24" />
+                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12"
+                                                    r="10" />
+                                                <path
+                                                    d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z"
+                                                    id="Path-92" fill="#000000" fill-rule="nonzero" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="col-auto pl-0">
+                                        <div class="text-capitalize font-weight-bold"><?=_(" Website khác")?></div>
+                                        <div class="text-muted similarDates font-10"></div>
+                                    </div>
+                                    <div class="ml-auto d-flex no-block align-items-center pr-3">
+                                        <a class="similarReloadTask text-muted" data-task="getSimilarSites"
+                                            href="javascript:;"><i class="fal fa-sync"></i></a>
+                                    </div>
                                 </div>
-                                <div class="col-auto pl-0">
-                                    <div class="text-capitalize font-weight-bold"><?=_(" Website khác")?></div>
-                                    <div class="text-muted similarDates font-10"></div>
+                                <div id="getSimilarSites" class="row rounded m-0 p-b-10 is-loading">
                                 </div>
-                                <div class="ml-auto d-flex no-block align-items-center pr-3">
-                                    <a class="similarReloadTask text-muted" data-task="getSimilarSites"
-                                        href="javascript:;"><i class="fal fa-sync"></i></a>
-                                </div>
-                            </div>
-                            <div id="getSimilarSites" class="row rounded m-0 p-b-10 is-loading">
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- ĐÓNG website đối thủ -->
+                    <!-- ĐÓNG website đối thủ -->
 
-                <!-- <div class="row">
+                    <!-- <div class="row">
                     <div class="col-12 mb-5">
                         <div class="bg-white shadow-sm rounded">
                             <div class="row border-bottom m-0 py-2">
@@ -2312,28 +2175,28 @@ if (!$checkDomain1 || !$checkDomain2) echo "<script>window.parent.location ='htt
                         </div>
                     </div>
                 </div> -->
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script>
-$(document).ready(() => {  
-      setTimeout(() => {
-        $.ajax({
-            url: `//f.trazk.com/compare.php?domain1=<?=$domain1?>&domain2=<?=$domain2?>`,
-            type: "GET"
-        }).then(() => {  
+    <script>
+    $(document).ready(() => {
+        setTimeout(() => {
+            $.ajax({
+                url: `//f.trazk.com/compare.php?domain1=<?=$domain1?>&domain2=<?=$domain2?>`,
+                type: "GET"
+            }).then(() => {
                 // console.log('buildFeatureImage-success');
-                return; 
-            }) 
+                return;
+            })
         });
-    }, 5000); 
-</script>
+    }, 5000);
+    </script>
 
-<script src="<?=$rootURL?>/assets/js/wordcloud2.js?v=<?=$version?>"></script>
-<script src="<?=$rootURL?>/assets/js/ResizeSensor.js?v=<?=$version?>"></script>
-<script>
-var isLogin = '<?=$isLogin?>';
-</script>
-<!-- <script src="dist/js/pages/changeURL.js?v=1.8"></script> -->
-<script type="module" src="<?=$rootURL?>/dist/js/pages/traffic-website/compare-backup.js?v=<?=$version?>"></script>
+    <script src="<?=$rootURL?>/assets/js/wordcloud2.js?v=<?=$version?>"></script>
+    <script src="<?=$rootURL?>/assets/js/ResizeSensor.js?v=<?=$version?>"></script>
+    <script>
+    var isLogin = '<?=$isLogin?>';
+    </script>
+    <!-- <script src="dist/js/pages/changeURL.js?v=1.8"></script> -->
+    <script type="module" src="<?=$rootURL?>/dist/js/pages/traffic-website/compare-backup.js?v=<?=$version?>"></script>
