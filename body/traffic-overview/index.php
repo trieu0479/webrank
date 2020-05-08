@@ -13,37 +13,37 @@
             </div>
             <!-- sub menu -->
             <div class="row justify-content-center">
-                <!-- <div class="col-12 text-center maxWidthPc-800"> -->
-                <div class="col-12 text-center" style="max-width: 900px">
-                    <div class="py-3 py-md-5 h-100 px-3 px-md-5">
-                        <div class="font-gg font-weight-400 fontsize-32 text-center">
-                            Công Cụ Tăng Traffic
-                        </div>
-
-                        <div class="font-gg text-muted font-14 text-center mt-3 font-weight-400">
-                            Giúp bạn tăng lượng truy cập <span
-                                class="font-gg font-14 font-weight-500 text-info">Website</span> - tăng lượt view, like,
-                            share, subscribers trên <span
-                                class="font-gg font-14 font-weight-500 text-danger">Youtube</span> - tăng view, like,
-                            follow trên <span class="font-gg font-14 font-weight-500 text-dark">Tiktok</span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
                 <div class="col-12 text-center" style="max-width: 900px">
                     <div class="pb-5">
                         <div class="row mb-5">
+                            <div class="col-12 text-center" style="max-width: 900px">
+                                <div class="py-3 py-md-5 px-3 px-md-5">
+                                    <div class="font-gg font-weight-400 fontsize-32 text-center">
+                                        Công Cụ Tăng Traffic
+                                    </div>
+
+                                    <div class="font-gg text-muted font-14 text-center mt-3 font-weight-400">
+                                        Giúp bạn tăng lượng truy cập <span
+                                            class="font-gg font-14 font-weight-500 text-info">Website</span> - tăng lượt
+                                        view, like,
+                                        share, subscribers trên <span
+                                            class="font-gg font-14 font-weight-500 text-danger">Youtube</span> - tăng
+                                        view, like,
+                                        follow trên <span
+                                            class="font-gg font-14 font-weight-500 text-dark">Tiktok</span>
+                                    </div>
+
+                                </div>
+                            </div>
                             <div class="col-12 col-md-4 mb-5 mb-md-0">
                                 <div class="px-4 py-3">
                                     <div class="m-auto d-flex no-block justify-content-center align-items-center"
                                         style="width: 100px; height: 100px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65"
                                             viewBox="0 0 24 24" style="fill: #5578eb">
                                             <path
                                                 d="M2.897 4.181c2.43-2.828 5.763-4.181 9.072-4.181 4.288 0 8.535 2.273 10.717 6.554-2.722.001-6.984 0-9.293 0-1.674.001-2.755-.037-3.926.579-1.376.724-2.415 2.067-2.777 3.644l-3.793-6.596zm5.11 7.819c0 2.2 1.789 3.99 3.988 3.99s3.988-1.79 3.988-3.99-1.789-3.991-3.988-3.991-3.988 1.791-3.988 3.991zm5.536 5.223c-2.238.666-4.858-.073-6.293-2.549-1.095-1.891-3.989-6.933-5.305-9.225-1.33 2.04-1.945 4.294-1.945 6.507 0 5.448 3.726 10.65 9.673 11.818l3.87-6.551zm2.158-9.214c1.864 1.734 2.271 4.542 1.007 6.719-.951 1.641-3.988 6.766-5.46 9.248 7.189.443 12.752-5.36 12.752-11.972 0-1.313-.22-2.66-.69-3.995h-7.609z" />
-                                            </svg>
+                                        </svg>
                                     </div>
                                     <div class="mt-3 text-info fontsize-18 font-weight-500">
                                         Website
@@ -100,30 +100,87 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-5">
-                            <div class="col-12">
-                                <div class="text-left rounded px-4 py-3">
-                                    <div class="font-gg font-weight-500 font-16">
-                                        Lưu ý :
+                        <hr class="mb-5" width="50%">
+                        <div class="row">
+                            <div class="col-12 mb-5">
+                                <div class="bg-info-2 text-left d-flex no-block px-4 py-4 rounded shadow-sm">
+                                    <div class="" style="height: 250px">
+                                        <img class="h-100" src="https://static.wixstatic.com/media/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.png/v1/fill/w_318,h_338,al_c,lg_1,q_85/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.webp"
+                                            alt="">
                                     </div>
-                                    <div class="ml-3">
-                                        <div class="font-gg font-13 font-weight-500 text-muted">
-                                            - Số lượng visitor khi chạy thực tế có thể nhiều hơn (hoặc ít hơn) 1 chút so
-                                            với số lượng bạn mua
+                                    <div class="ml-3 d-flex flex-column"> 
+                                        <div class="mt-4 text-info font-gg font-weight-500 fontSize-30">
+                                            Website
                                         </div>
-                                        <div class="font-gg font-13 font-weight-500 text-muted">
-                                            - Bạn có thể điều chỉnh số lượng visitor theo từng URL riêng lẻ <a
-                                                href="https://help.fff.com.vn/cong-cu-seo/cong-cu-tang-traffic-website-youtube"
-                                                class="font-weight-500">hướng dẫn sử dụng</a>
-                                        </div>
+                                        <div class="mt-4 font-gg font-13 text-muted">
+                                            Tôi là một đoạn văn. Nhấn vào đây để thêm văn bản của riêng bạn và chỉnh sửa
+                                            tôi. Dễ thôi. Chỉ cần nhấp vào Chỉnh sửa văn bản Quảng cáo hoặc nhấp đúp vào
+                                            tôi
+                                            để thêm nội dung của riêng bạn và thay đổi phông chữ. Tôi là một nơi tuyệt
+                                            vời
+                                            để bạn kể một câu chuyện và cho người dùng của bạn biết thêm một chút về
+                                            bạn.
 
+                                        </div> 
+                                        <div class="mt-auto text-right pb-3">
+                                            <button type="button" class="btn btn-info font-gg font-14 font-weight-500 px-4">Trải nghiệm</button>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-12 mb-5">
+                                <div class="bg-danger-2 text-left d-flex no-block px-4 py-4 rounded shadow-sm">
+                                    <div class="mr-3 d-flex flex-column"> 
+                                        <div class="mt-4 text-danger font-gg font-weight-500 fontSize-30">
+                                            Youtube
+                                        </div>
+                                        <div class="mt-4 font-gg font-13 text-muted">
+                                            Tôi là một đoạn văn. Nhấn vào đây để thêm văn bản của riêng bạn và chỉnh sửa
+                                            tôi. Dễ thôi. Chỉ cần nhấp vào Chỉnh sửa văn bản Quảng cáo hoặc nhấp đúp vào
+                                            tôi
+                                            để thêm nội dung của riêng bạn và thay đổi phông chữ. Tôi là một nơi tuyệt
+                                            vời
+                                            để bạn kể một câu chuyện và cho người dùng của bạn biết thêm một chút về
+                                            bạn.
 
-                                <hr width="50%">
+                                        </div> 
+                                        <div class="mt-auto text-left pb-3">
+                                            <button type="button" class="btn btn-danger font-gg font-14 font-weight-500 px-4">Trải nghiệm</button>
+                                        </div>
+                                    </div>
+                                    <div class="" style="height: 250px">
+                                        <img style="filter: hue-rotate(45deg);" class="h-100" src="https://static.wixstatic.com/media/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.png/v1/fill/w_318,h_338,al_c,lg_1,q_85/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.webp"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-5">
+                                <div class="bg-dark-2 text-left d-flex no-block px-4 py-4 rounded shadow-sm">
+                                    <div class="" style="height: 250px">
+                                        <img style="filter: grayscale(1);" class="h-100" src="https://static.wixstatic.com/media/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.png/v1/fill/w_318,h_338,al_c,lg_1,q_85/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.webp"
+                                            alt="">
+                                    </div>
+                                    <div class="ml-3 d-flex flex-column"> 
+                                        <div class="mt-4 text-dark font-gg font-weight-500 fontSize-30">
+                                            Tiktok
+                                        </div>
+                                        <div class="mt-4 font-gg font-13 text-muted">
+                                            Tôi là một đoạn văn. Nhấn vào đây để thêm văn bản của riêng bạn và chỉnh sửa
+                                            tôi. Dễ thôi. Chỉ cần nhấp vào Chỉnh sửa văn bản Quảng cáo hoặc nhấp đúp vào
+                                            tôi
+                                            để thêm nội dung của riêng bạn và thay đổi phông chữ. Tôi là một nơi tuyệt
+                                            vời
+                                            để bạn kể một câu chuyện và cho người dùng của bạn biết thêm một chút về
+                                            bạn.
+
+                                        </div> 
+                                        <div class="mt-auto text-right pb-3">
+                                            <button type="button" class="btn btn-dark font-gg font-14 font-weight-500 px-4">Trải nghiệm</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
