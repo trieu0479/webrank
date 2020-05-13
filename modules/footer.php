@@ -24,25 +24,25 @@
 <script src="<?=$rootURL?>/assets/js/ion.rangeSlider.min.js"></script>
 <script src="<?=$rootURL?>/assets/js/jquery.dataTables.min.js"></script>
 
-<script src='<?=$rootURL?>/assets/js/ResizeSensor.js' type="text/javascript"></script> 
+<script src='<?=$rootURL?>/assets/js/ResizeSensor.js' type="text/javascript"></script>
 <script src="<?=$rootURL?>/dist/js/perfect-scrollbar.jquery.min.js"></script>
 <script src="<?=$rootURL?>/dist/js/jquery.multi-select.js"></script>
-<script src="<?=$rootURL?>/dist/js/bootstrap-select.min.js"></script> 
+<script src="<?=$rootURL?>/dist/js/bootstrap-select.min.js"></script>
 
 
-<script src="<?=$rootURL?>/dist/js/dataTables.buttons.min.js"></script> 
-<script src="<?=$rootURL?>/dist/js/jszip.min.js"></script>  
-<script src="<?=$rootURL?>/dist/js/jspdf.min.js"></script>  
-<script src="<?=$rootURL?>/dist/js/buttons.html5.min.js"></script> 
+<script src="<?=$rootURL?>/dist/js/dataTables.buttons.min.js"></script>
+<script src="<?=$rootURL?>/dist/js/jszip.min.js"></script>
+<script src="<?=$rootURL?>/dist/js/jspdf.min.js"></script>
+<script src="<?=$rootURL?>/dist/js/buttons.html5.min.js"></script>
 
 
-<script src="<?=$rootURL?>/dist/js/toastr.min.js"></script> 
+<script src="<?=$rootURL?>/dist/js/toastr.min.js"></script>
 
 <script src="<?=$rootURL?>/dist/js/owl.carousel.min.js"></script>
 
 <!-- intro -->
 <script src="<?=$rootURL?>/dist/js/anno.js" type="text/javascript"></script>
-<script src="<?=$rootURL?>/dist/js/jquery.scrollintoview.js" type="text/javascript"></script> 
+<script src="<?=$rootURL?>/dist/js/jquery.scrollintoview.js" type="text/javascript"></script>
 
 <script src="<?=$rootURL?>/dist/js/flatpickr.js"></script>
 <script src="<?=$rootURL?>/dist/js/flatpickr_vn.js"></script>
@@ -61,9 +61,9 @@
 
 <script src="<?=$rootURL?>/assets/js/jquery.sparkline.min.js"></script>
 
-<script src="<?=$rootURL?>/dist/js/es6-promise.auto.min.js"></script> 
+<script src="<?=$rootURL?>/dist/js/es6-promise.auto.min.js"></script>
 <script src="<?=$rootURL?>/dist/js/jspdf.min.js"></script>
-<script src="<?=$rootURL?>/dist/js/html2canvas.min.js"></script> 
+<script src="<?=$rootURL?>/dist/js/html2canvas.min.js"></script>
 <script src="<?=$rootURL?>/dist/js/html2pdf.bundle.min.js"></script>
 
 
@@ -72,15 +72,19 @@
 <script type="text/javascript" src='<?=$rootURL?>/dist/dist/js/pages/jquery-ui.js'></script>
 <script type="text/javascript" src='<?=$rootURL?>/dist/js/default/accountManagement.js?v<?=$version?>'></script>
 <script type="text/javascript" src='<?=$rootURL?>/assets/js/bootstrap.min.js'></script>
+<!-- Trung -->
+
+
+
 
 <!-- <script src="<?=$rootURL?>/dist/js/default/html2canvas.js"></script>
 <script src="<?=$rootURL?>/dist/js/default/html2canvas.min.js"></script> -->
 <?if (is_file(__DIR__.'/'.$view.'/footer.php')) require_once(__DIR__.'/'.$view.'/footer.php');?>
 <!-- Hotjar Tracking Code for cla.fff.blue -->
 
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFS4FQC"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFS4FQC" height="0" width="0"
+        style="display:none;visibility:hidden"></iframe></noscript>
 </body>
 
 </html>
