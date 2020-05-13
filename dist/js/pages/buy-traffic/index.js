@@ -307,7 +307,7 @@ function appendSelectTraffic(dailyTraffic, urlid = "") {
 
     $('.select-traffic').select2(); 
 
-    if(urlid != "") { 
+    if(urlid != "" && dailyTraffic < 500) { 
         $(".select-traffic").prop("disabled", true);
     }
 }
@@ -606,12 +606,12 @@ function showModalRate(this_) {
     $(this_).removeClass("show-modal-rate");
 }
 
-function htmlCost(data,timeToRun) {
+function htmlCost(obj_data,data,timeToRun) {
     let vndPrice = parseInt(data.data.vndPrice);
     let yourBank = parseInt(data.data.yourBank);
     let day = parseInt(timeToRun);
     let sumPrice = vndPrice*day;     
-
+    console.log(obj_data);
     return `<div class="text-left mt-2 d-flex align-items-center px-4 py-3 mb-5"> 
                 <div class="w-100">
                     <div class="row">
@@ -657,7 +657,11 @@ function htmlCost(data,timeToRun) {
                         </div>
                         <div class="col-12">
                             <div class="font-gg font-weight-500 text-muted font-13">
-                            ${(yourBank >= sumPrice) ? "(*) sau khi thực hiện thanh toán nếu không thể thực hiện tăng traffic hệ thống sẽ bồi hoàn trả lại phí cho bạn !"
+                            ${(yourBank >= sumPrice) ? (obj_data.area.length == 1 && obj_data.area[0] == "Vietnam" && obj_data.dailyTraffic > 500)
+                            ? `*Thông báo:<br/>
+                                - Nguồn traffic từ Việt Nam không đủ cung cấp cho đơn hàng này.<br/>
+                                - Bạn nên tạo nhiều chiến dịch với cùng URL hoặc chọn thêm quốc gia.`
+                            : "(*) sau khi thực hiện thanh toán nếu không thể thực hiện tăng traffic hệ thống sẽ bồi hoàn trả lại phí cho bạn !"
                             : "(*) số dư tài khoản không đủ. Vui lòng <a class='refill-money font-gg font-weight-bold font-14' href='javascript: void(0);'>nạp thêm tiền</a> để sử dụng dịch vụ này !"}</div>
                         </div>
                     </div>
@@ -667,7 +671,7 @@ function htmlCost(data,timeToRun) {
                 <div class="d-flex justify-content-between px-4 py-4">
                     <a href="#" class="btn-back align-self-center btn btn-secondary font-14 font-weight-500 font-gg px-4">Quay
                         lại</a> 
-                    <button type="button" ${(yourBank < sumPrice) ? "disabled" : ""} class="ml-auto btn-next btn-next-text align-self-center btn btn-primary font-14 font-weight-500 font-gg px-4">Thanh toán</button>
+                    <button type="button" ${((yourBank < sumPrice) || (obj_data.area.length == 1 && obj_data.area[0] == "Vietnam" && obj_data.dailyTraffic > 500)) ? "disabled" : ""} class="ml-auto btn-next btn-next-text align-self-center btn btn-primary font-14 font-weight-500 font-gg px-4">Thanh toán</button>
                 </div>
             </div> `
 }
@@ -755,7 +759,7 @@ function showPopupActionError(task) {
 function showPopupCost(obj_data,data,timeToRun) {
     Swal.fire({ 
         title: `<div class="px-4 py-3 w-100 text-left font-gg font-weight-bold font-15 border-bottom">Chi Phí Mua Traffic</div>`,
-        html: htmlCost(data,timeToRun),
+        html: htmlCost(obj_data,data,timeToRun),
         showConfirmButton: false,
         showCloseButton: true,
         allowOutsideClick: false,
