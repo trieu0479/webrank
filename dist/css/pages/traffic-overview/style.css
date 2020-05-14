@@ -2,6 +2,18 @@
     font-size: 58px;
 }
 
+.font-24 {
+    font-size: 24px;
+}
+
+.font-26 {
+    font-size: 26px;
+}
+
+.font-22 {
+    font-size: 22px;
+}
+
 .bg-redlight {
     background-color: rgba(249, 2, 2, 0.1)!important;
 }
@@ -29,9 +41,9 @@
     font-size: 40px;
     margin-bottom: 30px;
     color: #ffffff;
-    height: 80px;
-    width: 80px;
-    line-height: 80px;
+    height: 50px;
+    width: 50px;
+    line-height: 45px;
     border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
     background: #59d59f;
     text-align: center;
@@ -57,9 +69,9 @@
     font-size: 40px;
     margin-bottom: 30px;
     color: #ffffff;
-    height: 80px;
-    width: 80px;
-    line-height: 80px;
+    height: 50px;
+    width: 50px;
+    line-height: 45px;
     border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
     background: #FF0000;
     text-align: center;
@@ -85,9 +97,9 @@
     font-size: 40px;
     margin-bottom: 30px;
     color: #ffffff;
-    height: 80px;
-    width: 80px;
-    line-height: 80px;
+    height: 50px;
+    width: 50px;
+    line-height: 45px;
     border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
     background: #0887EF;
     text-align: center;
@@ -113,9 +125,9 @@
     font-size: 40px;
     margin-bottom: 30px;
     color: #ffffff;
-    height: 80px;
-    width: 80px;
-    line-height: 80px;
+    height: 50px;
+    width: 50px;
+    line-height: 45px;
     border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
     background: #010101;
     text-align: center;
@@ -317,4 +329,18 @@ ul {
 
 .button-price {
     text-decoration: none;
+}
+
+.bg-line {
+    background: url(//v.fastcdn.co/u/6898befc/45161130-0-chart-bg-3.png) no-repeat #0984e3 50% 50% / auto;
+    height: 9.375rem;
+    background-size: contain;
+}
+
+.bg-dark-primary {
+    background-color: #0064C6;
+}
+
+.bg-light-primary {
+    background-color: #13a1ff;
 }
