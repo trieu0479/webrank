@@ -1,0 +1,346 @@
+.fontSize-58 {
+    font-size: 58px;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+
+.font-26 {
+    font-size: 26px;
+}
+
+.font-22 {
+    font-size: 22px;
+}
+
+.bg-redlight {
+    background-color: rgba(249, 2, 2, 0.1)!important;
+}
+
+.btn-red {
+    color: #fff;
+    background-color: #d80000;
+    border-color: #d80000;
+}
+
+.color-custom {
+    color: #012359
+}
+
+.bg-grey {
+    background-color: #f5f5ff;
+}
+
+.p-5 {
+    padding: 2rem!important;
+}
+
+.bg-social-website {
+    display: inline-block;
+    font-size: 40px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    height: 50px;
+    width: 50px;
+    line-height: 45px;
+    border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
+    background: #59d59f;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.bg-social-website::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    height: 110%;
+    width: 110%;
+    background: #59d59f;
+    z-index: -1;
+    border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
+    opacity: 0.3;
+}
+
+.bg-social-youtube {
+    display: inline-block;
+    font-size: 40px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    height: 50px;
+    width: 50px;
+    line-height: 45px;
+    border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
+    background: #FF0000;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.bg-social-youtube::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    height: 110%;
+    width: 110%;
+    background: #FF0000;
+    z-index: -1;
+    border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
+    opacity: 0.3;
+}
+
+.bg-social-facebook {
+    display: inline-block;
+    font-size: 40px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    height: 50px;
+    width: 50px;
+    line-height: 45px;
+    border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
+    background: #0887EF;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.bg-social-facebook::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    height: 110%;
+    width: 110%;
+    background: #0887EF;
+    z-index: -1;
+    border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
+    opacity: 0.3;
+}
+
+.bg-social-tiktok {
+    display: inline-block;
+    font-size: 40px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    height: 50px;
+    width: 50px;
+    line-height: 45px;
+    border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
+    background: #010101;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.bg-social-tiktok::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    height: 110%;
+    width: 110%;
+    background: #010101;
+    z-index: -1;
+    border-radius: 37% 63% 70% 30% / 42% 42% 58% 58%;
+    opacity: 0.3;
+}
+
+.section-price::after {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    content: "";
+    height: 150%;
+    width: 200%;
+    background: #f9f9f9;
+    z-index: -1;
+    transform: translate3d(-50%, -50%, 0);
+    border-radius: 50%;
+}
+
+.section-price {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.font-25 {
+    font-size: 25px!important;
+}
+
+.decoration-line {
+    position: relative;
+}
+
+.decoration-line::after {
+    content: "";
+    width: 100px;
+    height: 3px;
+    background-color: #000;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+}
+
+.icon-price-youtube {
+    display: inline-block;
+    font-size: 50px;
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.fab {
+    font-family: "Font Awesome 5 Brands";
+}
+
+.fal {
+    font-family: "Font Awesome 5 Pro";
+}
+
+.icon-price-youtube::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: url("../../../../assets/images/traffic-tonghop/icon-shape.png");
+    z-index: -1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.2;
+}
+
+.icon-price-youtube::before {
+    content: "\f167";
+}
+
+.icon-price-website {
+    display: inline-block;
+    font-size: 50px;
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.icon-price-website::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: url("../../../../assets/images/traffic-tonghop/icon-shape.png");
+    z-index: -1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.2;
+}
+
+.icon-price-website::before {
+    content: "\f0ac";
+}
+
+.icon-price-tiktok {
+    display: inline-block;
+    font-size: 50px;
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.icon-price-tiktok::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: url("../../../../assets/images/traffic-tonghop/icon-shape.png");
+    z-index: -1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.2;
+}
+
+.icon-price-facebook {
+    display: inline-block;
+    font-size: 50px;
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.icon-price-facebook::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: url("../../../../assets/images/traffic-tonghop/icon-shape.png");
+    z-index: -1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.2;
+}
+
+.icon-price-facebook::before {
+    content: "\f39e";
+}
+
+.color-white {
+    color: #fff!important;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.button-price {
+    text-decoration: none;
+}
+
+.bg-line {
+    background: url(//v.fastcdn.co/u/6898befc/45161130-0-chart-bg-3.png) no-repeat #0984e3 50% 50% / auto;
+    height: 9.375rem;
+    background-size: contain;
+}
+
+.bg-dark-primary {
+    background-color: #0064C6;
+}
+
+.bg-light-primary {
+    background-color: #13a1ff;
+}

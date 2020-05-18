@@ -1,190 +1,583 @@
-<div class="page-wrapper">
+<div class="page-wrapper font-gg">
     <div class="container-fluid p-0 pt-0">
         <div class="page-content pt-0">
-            <!-- sub menu -->
-            <div class="sub-header border-bottom pl-4 pt-3 pb-3 bg-white">
-                <div class="d-flex no-block">
-                    <div class="align-self-center font-14 mr-3" style="color: rgba(79,80,80,.7);">
-                        <a href="./?view=traffic-overview" class="">Tổng quan</a>
+            <!-- Giao diện mới -->
+            <div class="row justify-content-center">
+                <div class="col-12 position-relative" style="height: 100%">
+                    <div class="row bg-primary" style="height: 680px">
+                        <div class="col-12 d-flex justify-content-center align-items-center mx-auto "
+                            style="max-width: 60rem">
+                            <div class="d-flex flex-column" style="height: 350px">
+                                <div class="mb-5 color-white text-center">
+                                    <div class="font-gg font-24">Công cụ</div>
+                                    <div class="font-gg font-22">Tăng traffic website, Youtube, Facebook</div>
+                                    <div class="font-gg">Nguồn traffic <strong>chất lượng</strong>, chi phí hợp lý, chỉ
+                                        <strong>3.000 vnđ</strong> cho <strong>100 visitors</strong></div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-12 text-center" style="max-width: 700px">
+                                        <div class="pb-5">
+                                            <div class="row mb-5">
+                                                <div class="col-12">
+                                                    <div class="d-flex px-3 px-md-0">
+                                                        <div class="w-100 w-md-80">
+                                                            <input style="height: 45px" type="text"
+                                                                class="input-submit text-muted form-control p-10 font-12 font-gg w-100 border mb-3"
+                                                                autocomplete="off"
+                                                                placeholder="Nhập URL Website, Youtube, Tiktok, Facebook..."
+                                                                value="">
+                                                        </div>
+                                                        <div class="w-100 w-md-20">
+                                                            <button style="height: 45px"
+                                                                class="btn-submit ml-md-3 w-100 font-gg font-12 font-weight-500 px-3 btn btn-success">Thử
+                                                                ngay</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="position-absolute" style="right: 120px; bottom: 240px">
+                                    <img src=../../../../assets/images/traffic-tonghop/super-traffic.png alt=""
+                                        style="width:110px">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row position-absolute bg-line" style="width: 100%;bottom: -10px">
+                        <img class="position-absolute" data-at="image" alt=""
+                            src="//v.fastcdn.co/u/6898befc/45157895-0-leaf-one.svg"
+                            style="height: 200px;left: 323px;bottom: 42px;">
+                        <img class="position-absolute" data-at="image" alt=""
+                            src="assets/images/traffic-tonghop/give-price.png"
+                            style="width: 130px;right: 376px;bottom: 70px;">
+                        <img class="position-absolute" data-at="image" alt=""
+                            src="assets/images/traffic-tonghop/price-tshirt.png"
+                            style="width: 90px;left: 446px;bottom: 41px;">
                     </div>
 
+                </div>
+            </div>
+            <div class="col-12 bg-dark-primary position-relative" style="width: 100%; height: 800px">
+                <div class="row h-100 mx-auto" style="max-width: 60rem">
+                    <div class="col-5 h-100 d-flex align-items-center">
+                        <img src="assets/images/traffic-tonghop/bg-section-traffic.png" alt="" style="width: 100%">
+                    </div>
+                    <div class="col-7 h-100 d-flex align-items-center">
+
+                        <div class="mb-5 d-flex flex-column">
+                            <div class="px-4 bg-white mb-4 shadow rounded" style="width: 100%">
+                                <div class="bg-social-website mt-4">
+                                    <i class="fal fa-globe font-26"></i>
+                                </div>
+                                <div class="font-gg text-muted font-12 mb-3">situation perpetual allowance
+                                    offending as principle satisfied. Improved carriage securing.</div>
+                                <div class="font-weight-bold font-16 mb-4">Tăng traffic website</div>
+                            </div>
+                            <div class="px-4 bg-white shadow rounded" style="width: 100%">
+
+
+                                <div class="bg-social-tiktok mt-4">
+                                    <img src="assets/images/traffic-tonghop/logotiktok.svg" alt=""
+                                        style="width:45%; height:45%">
+                                </div>
+                                <div class="font-gg text-muted font-12 mb-3">situation perpetual allowance
+                                    offending as principle satisfied. Improved carriage securing.</div>
+                                <div class="font-weight-bold font-16 mb-4">Tăng traffic Tik Tok</div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column mt-5">
+                            <div class="px-4 bg-white shadow rounded ml-4" style="width: 100%">
+                                <div class="bg-social-youtube mt-4">
+                                    <i class="fab fa-youtube font-26"></i>
+                                </div>
+                                <div class="font-gg text-muted font-12 mb-3">situation perpetual allowance
+                                    offending as principle satisfied. Improved carriage securing.</div>
+                                <div class="font-weight-bold font-16 mb-4">Tăng traffic Youtube</div>
+                            </div>
+                            <div class="px-4 bg-white shadow rounded mt-4 ml-4" style="width: 100%">
+                                <div class="bg-social-facebook mt-4">
+                                    <i class="fab fa-facebook-f font-26"></i>
+                                </div>
+                                <div class="font-gg text-muted font-12 mb-3">situation perpetual allowance
+                                    offending as principle satisfied. Improved carriage securing.</div>
+                                <div class="font-weight-bold font-16 mb-4">Tăng traffic Facebook</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="row bg-light-primary mx-auto position-absolute rounded p-2"
+                    style="width: 40rem;min-height: 100px;bottom: -50px;z-index: 999;left: 50%;transform: translateX(-50%);">
+                    <div class="col-2">
+                        <div>
+                            <img src="assets/images/traffic-tonghop/treeding.png" alt="" style="height: 100px">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex flex-column align-items-center h-100">
+                            <div class="my-auto color-white">
+                                <div class="font-14">Khởi động chỉ 3.000 vnđ</div>
+                                <div class="font-12">Nhận 100 traffic với chi phí chỉ 3,000vnđ. Trải nghiệm công cụ tăng
+                                    traffic đa nền tảng ngay hôm nay</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-flex flex-column align-items-center h-100">
+                            <button type="button" class="btn btn-primary font-12 my-auto">Khởi động ngay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12" style="height: 398px">
+                <div class="d-flex justify-content-center align-items-center mx-auto mt-6" style="max-width: 60rem">
+                    <div class="d-flex flex-column">
+                        <div class="mb-5 color-white text-center">
+                            <div class="font-gg font-22 text-dark">Traffic Đến Từ Đâu</div>
+
+                            <div class="font-gg text-dark">Chúng tôi cung cấp nhiều nguồn traffic cho bạn chọn lựa, phù
+                                hợp với hầu hết yêu cầu của bạn</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row mx-auto text-center" style="max-width: 60rem">
+                    <div class="col-4">
+                        <div>
+                            <img src="assets/images/traffic-tonghop/logo.png" alt="" style="height: 90px">
+                        </div>
+                        <div class="text-dark font-16 mb-2 mt-2">Quảng cáo Google Ads</div>
+                        <div class="font-14 text-dark">Phù hợp với các chiến dịch tăng View Youtube, tăng view website,
+                            cải thiện số khách hàng truy cập website</div>
+                    </div>
+                    <div class="col-4">
+                        <div>
+                            <img src="assets/images/traffic-tonghop/currency.png" alt="" style="height: 90px">
+                        </div>
+                        <div class="text-dark font-16 mb-2 mt-2">Các dối tác Exchange</div>
+                        <div class="font-14 text-dark">Phù hợp với các chiến dịch SEO, tăng số người xem trong google
+                            analytics, tăng chỉ số alexa, similarweb</div>
+                    </div>
+                    <div class="col-4">
+                        <div>
+                            <img src="assets/images/traffic-tonghop/people.png" alt="" style="height: 90px">
+                        </div>
+                        <div class="text-dark font-16 mb-2 mt-2">Từ quảng cáo Facebook</div>
+                        <div class="font-14 text-dark">Phù hợp với các chiến dịch tăng View Youtube, tăng view website,
+                            cải thiện số khách hàng truy cập website</div>
+                    </div>
                 </div>
 
             </div>
-            <!-- sub menu -->
-            <div class="row justify-content-center">
-                <div class="col-12 text-center" style="max-width: 900px">
-                    <div class="pb-5">
-                        <div class="row mb-5">
-                            <div class="col-12 text-center" style="max-width: 900px">
-                                <div class="py-3 py-md-5 px-3 px-md-5">
-                                    <div class="font-gg font-weight-400 fontsize-32 text-center">
-                                        Công Cụ Tăng Traffic
-                                    </div>
+            <div class="col-12 bg-primary text-center pt-5" style="width: 100%; min-height: 418px">
 
-                                    <div class="font-gg text-muted font-14 text-center mt-3 font-weight-400">
-                                        Giúp bạn tăng lượng truy cập <span
-                                            class="font-gg font-14 font-weight-500 text-info">Website</span> - tăng lượt
-                                        view, like,
-                                        share, subscribers trên <span
-                                            class="font-gg font-14 font-weight-500 text-danger">Youtube</span> - tăng
-                                        view, like,
-                                        follow trên <span
-                                            class="font-gg font-14 font-weight-500 text-dark">Tiktok</span>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-4 mb-5 mb-md-0">
-                                <div class="px-4 py-3">
-                                    <div class="m-auto d-flex no-block justify-content-center align-items-center"
-                                        style="width: 100px; height: 100px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65"
-                                            viewBox="0 0 24 24" style="fill: #5578eb">
-                                            <path
-                                                d="M2.897 4.181c2.43-2.828 5.763-4.181 9.072-4.181 4.288 0 8.535 2.273 10.717 6.554-2.722.001-6.984 0-9.293 0-1.674.001-2.755-.037-3.926.579-1.376.724-2.415 2.067-2.777 3.644l-3.793-6.596zm5.11 7.819c0 2.2 1.789 3.99 3.988 3.99s3.988-1.79 3.988-3.99-1.789-3.991-3.988-3.991-3.988 1.791-3.988 3.991zm5.536 5.223c-2.238.666-4.858-.073-6.293-2.549-1.095-1.891-3.989-6.933-5.305-9.225-1.33 2.04-1.945 4.294-1.945 6.507 0 5.448 3.726 10.65 9.673 11.818l3.87-6.551zm2.158-9.214c1.864 1.734 2.271 4.542 1.007 6.719-.951 1.641-3.988 6.766-5.46 9.248 7.189.443 12.752-5.36 12.752-11.972 0-1.313-.22-2.66-.69-3.995h-7.609z" />
-                                        </svg>
-                                    </div>
-                                    <div class="mt-3 text-info fontsize-18 font-weight-500">
-                                        Website
-                                    </div>
-                                    <div class="mt-3 font-gg font-13 text-muted">
-                                        Tăng truy cập cho website giúp cải thiện thứ hạng SEO bằng cách tăng Visitor
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-4 mb-5 mb-md-0">
-                                <div class="px-4 py-3">
-                                    <div class="m-auto d-flex no-block justify-content-center align-items-center"
-                                        style="width: 100px; height: 100px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70"
-                                            viewBox="0 0 24 24" style="fill: #fd397a">
-                                            <path
-                                                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                                        </svg>
-                                    </div>
-                                    <div class="mt-3 text-danger fontsize-18 font-weight-500">
-                                        Youtube
-                                    </div>
-                                    <div class="mt-3 font-gg font-13 text-muted">
-                                        Tăng truy cập cho website giúp cải thiện thứ hạng SEO bằng cách tăng Visitor
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <div class="px-4 py-3">
-                                    <div class="m-auto d-flex no-block justify-content-center align-items-center"
-                                        style="width: 100px; height: 100px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="80" height="80"
-                                            viewBox="0 0 48 48" style=" fill:#000000;">
-                                            <path fill="#212121" fill-rule="evenodd"
-                                                d="M10.904,6h26.191C39.804,6,42,8.196,42,10.904v26.191 C42,39.804,39.804,42,37.096,42H10.904C8.196,42,6,39.804,6,37.096V10.904C6,8.196,8.196,6,10.904,6z"
-                                                clip-rule="evenodd"></path>
-                                            <path fill="#ec407a" fill-rule="evenodd"
-                                                d="M29.208,20.607c1.576,1.126,3.507,1.788,5.592,1.788v-4.011 c-0.395,0-0.788-0.041-1.174-0.123v3.157c-2.085,0-4.015-0.663-5.592-1.788v8.184c0,4.094-3.321,7.413-7.417,7.413 c-1.528,0-2.949-0.462-4.129-1.254c1.347,1.376,3.225,2.23,5.303,2.23c4.096,0,7.417-3.319,7.417-7.413L29.208,20.607L29.208,20.607 z M30.657,16.561c-0.805-0.879-1.334-2.016-1.449-3.273v-0.516h-1.113C28.375,14.369,29.331,15.734,30.657,16.561L30.657,16.561z M19.079,30.832c-0.45-0.59-0.693-1.311-0.692-2.053c0-1.873,1.519-3.391,3.393-3.391c0.349,0,0.696,0.053,1.029,0.159v-4.1 c-0.389-0.053-0.781-0.076-1.174-0.068v3.191c-0.333-0.106-0.68-0.159-1.03-0.159c-1.874,0-3.393,1.518-3.393,3.391 C17.213,29.127,17.972,30.274,19.079,30.832z"
-                                                clip-rule="evenodd"></path>
-                                            <path fill="#fff" fill-rule="evenodd"
-                                                d="M28.034,19.63c1.576,1.126,3.507,1.788,5.592,1.788v-3.157 c-1.164-0.248-2.194-0.856-2.969-1.701c-1.326-0.827-2.281-2.191-2.561-3.788h-2.923v16.018c-0.007,1.867-1.523,3.379-3.393,3.379 c-1.102,0-2.081-0.525-2.701-1.338c-1.107-0.558-1.866-1.705-1.866-3.029c0-1.873,1.519-3.391,3.393-3.391 c0.359,0,0.705,0.056,1.03,0.159V21.38c-4.024,0.083-7.26,3.369-7.26,7.411c0,2.018,0.806,3.847,2.114,5.183 c1.18,0.792,2.601,1.254,4.129,1.254c4.096,0,7.417-3.319,7.417-7.413L28.034,19.63L28.034,19.63z"
-                                                clip-rule="evenodd"></path>
-                                            <path fill="#81d4fa" fill-rule="evenodd"
-                                                d="M33.626,18.262v-0.854c-1.05,0.002-2.078-0.292-2.969-0.848 C31.445,17.423,32.483,18.018,33.626,18.262z M28.095,12.772c-0.027-0.153-0.047-0.306-0.061-0.461v-0.516h-4.036v16.019 c-0.006,1.867-1.523,3.379-3.393,3.379c-0.549,0-1.067-0.13-1.526-0.362c0.62,0.813,1.599,1.338,2.701,1.338 c1.87,0,3.386-1.512,3.393-3.379V12.772H28.095z M21.635,21.38v-0.909c-0.337-0.046-0.677-0.069-1.018-0.069 c-4.097,0-7.417,3.319-7.417,7.413c0,2.567,1.305,4.829,3.288,6.159c-1.308-1.336-2.114-3.165-2.114-5.183 C14.374,24.749,17.611,21.463,21.635,21.38z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </div>
-                                    <div class="mt-3 text-dark fontsize-18 font-weight-500">
-                                        Tiktok
-                                    </div>
-                                    <div class="mt-3 font-gg font-13 text-muted">
-                                        Tăng truy cập cho website giúp cải thiện thứ hạng SEO bằng cách tăng Visitor
-                                    </div>
-                                </div>
+                <div>
+                    <div class="d-flex justify-content-center align-items-center mx-auto" style="max-width: 60rem">
+                        <div class="d-flex flex-column">
+                            <div class="mb-5 color-white text-center">
+                                <div class="font-gg font-22 text-light">Công cụ</div>
+                                <div class="font-gg font-22 text-light">Tăng traffic website, Youtube, Facebook</div>
+                                <div class="font-gg text-light">Nguồn traffic <strong>chất lượng</strong>, chi phí hợp
+                                    lý, chỉ
+                                    <strong>3.000 vnđ</strong> cho <strong>100 visitors</strong></div>
                             </div>
                         </div>
-                        <hr class="mb-5" width="50%">
-                        <div class="row">
-                            <div class="col-12 mb-5">
-                                <div class="bg-info-2 text-left d-flex no-block px-4 py-4 rounded shadow-sm">
-                                    <div class="" style="height: 250px">
-                                        <img class="h-100" src="https://static.wixstatic.com/media/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.png/v1/fill/w_318,h_338,al_c,lg_1,q_85/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.webp"
-                                            alt="">
-                                    </div>
-                                    <div class="ml-3 d-flex flex-column"> 
-                                        <div class="mt-4 text-info font-gg font-weight-500 fontSize-30">
-                                            Website
-                                        </div>
-                                        <div class="mt-4 font-gg font-13 text-muted">
-                                            Tôi là một đoạn văn. Nhấn vào đây để thêm văn bản của riêng bạn và chỉnh sửa
-                                            tôi. Dễ thôi. Chỉ cần nhấp vào Chỉnh sửa văn bản Quảng cáo hoặc nhấp đúp vào
-                                            tôi
-                                            để thêm nội dung của riêng bạn và thay đổi phông chữ. Tôi là một nơi tuyệt
-                                            vời
-                                            để bạn kể một câu chuyện và cho người dùng của bạn biết thêm một chút về
-                                            bạn.
 
-                                        </div> 
-                                        <div class="mt-auto text-right pb-3">
-                                            <button type="button" class="btn btn-info font-gg font-14 font-weight-500 px-4">Trải nghiệm</button>
+                    </div>
+                    <div class="mx-auto">
+                        <div class="row mx-auto px-5" style="max-width: 60rem">
+                            <div class="col-6">
+                                <div class="p-4 d-flex">
+                                    <div class="mr-4">
+                                        <i class="fas fa-flag font-36 text-light"></i>
+                                    </div>
+                                    <div class="font-12">
+                                        <div class="font-weight-bold mb-2 font-14 text-light text-left">Nhiều quốc gia
+                                        </div>
+                                        <div class="font-14 text-light text-left">Dễ dang chọn lựa nguồn traffic phù hợp
+                                            với chi
+                                            phí và kết
+                                            quả của bạn</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-4 d-flex">
+                                    <div class="mr-4">
+                                        <i class="fas fa-tablet-alt font-36 text-light"></i>
+                                    </div>
+                                    <div class="font-12">
+                                        <div class="font-weight-bold mb-2 font-14 text-light text-left">Nhiều thiết bị
+                                        </div>
+                                        <div class="font-14 text-light text-left">Dễ dang chọn lựa thiết bị từ PC,
+                                            Mobile đến
+                                            Tablet</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-4 d-flex">
+                                    <div class="mr-4">
+                                        <i class="fas fa-eye font-36 text-light"></i>
+                                    </div>
+                                    <div class="font-12">
+                                        <div class="font-weight-bold mb-2 font-14 text-light text-left">Dễ theo dõi
+                                        </div>
+                                        <div class="font-14 text-light text-left">Dễ dang theo dõi traffic bằng công cụ
+                                            báo cáo
+                                            tích hợp sẵn
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 mb-5">
-                                <div class="bg-danger-2 text-left d-flex no-block px-4 py-4 rounded shadow-sm">
-                                    <div class="mr-3 d-flex flex-column"> 
-                                        <div class="mt-4 text-danger font-gg font-weight-500 fontSize-30">
-                                            Youtube
-                                        </div>
-                                        <div class="mt-4 font-gg font-13 text-muted">
-                                            Tôi là một đoạn văn. Nhấn vào đây để thêm văn bản của riêng bạn và chỉnh sửa
-                                            tôi. Dễ thôi. Chỉ cần nhấp vào Chỉnh sửa văn bản Quảng cáo hoặc nhấp đúp vào
-                                            tôi
-                                            để thêm nội dung của riêng bạn và thay đổi phông chữ. Tôi là một nơi tuyệt
-                                            vời
-                                            để bạn kể một câu chuyện và cho người dùng của bạn biết thêm một chút về
-                                            bạn.
-
-                                        </div> 
-                                        <div class="mt-auto text-left pb-3">
-                                            <button type="button" class="btn btn-danger font-gg font-14 font-weight-500 px-4">Trải nghiệm</button>
-                                        </div>
+                            <div class="col-6">
+                                <div class="p-4 d-flex">
+                                    <div class="mr-4">
+                                        <i class="fas fa-adjust font-36 text-light"></i>
                                     </div>
-                                    <div class="" style="height: 250px">
-                                        <img style="filter: hue-rotate(45deg);" class="h-100" src="https://static.wixstatic.com/media/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.png/v1/fill/w_318,h_338,al_c,lg_1,q_85/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.webp"
-                                            alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 mb-5">
-                                <div class="bg-dark-2 text-left d-flex no-block px-4 py-4 rounded shadow-sm">
-                                    <div class="" style="height: 250px">
-                                        <img style="filter: grayscale(1);" class="h-100" src="https://static.wixstatic.com/media/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.png/v1/fill/w_318,h_338,al_c,lg_1,q_85/d0220c_e3bf6981882c401eb9faabbc11062691~mv2.webp"
-                                            alt="">
-                                    </div>
-                                    <div class="ml-3 d-flex flex-column"> 
-                                        <div class="mt-4 text-dark font-gg font-weight-500 fontSize-30">
-                                            Tiktok
+                                    <div class="font-12">
+                                        <div class="font-weight-bold mb-2 font-14 text-light text-left">Tương thích
                                         </div>
-                                        <div class="mt-4 font-gg font-13 text-muted">
-                                            Tôi là một đoạn văn. Nhấn vào đây để thêm văn bản của riêng bạn và chỉnh sửa
-                                            tôi. Dễ thôi. Chỉ cần nhấp vào Chỉnh sửa văn bản Quảng cáo hoặc nhấp đúp vào
-                                            tôi
-                                            để thêm nội dung của riêng bạn và thay đổi phông chữ. Tôi là một nơi tuyệt
-                                            vời
-                                            để bạn kể một câu chuyện và cho người dùng của bạn biết thêm một chút về
-                                            bạn.
-
-                                        </div> 
-                                        <div class="mt-auto text-right pb-3">
-                                            <button type="button" class="btn btn-dark font-gg font-14 font-weight-500 px-4">Trải nghiệm</button>
-                                        </div>
+                                        <div class="font-14 text-light text-left">Tường thích với các công cụ báo cáo
+                                            như Google
+                                            Analytics,
+                                            Bit.ly</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-12 bg-dark-primary" style="width: 100%; min-height: 1058px">
+                <div class="mx-auto position-relative" style="max-width: 60rem">
+                    <div class="text-center pt-5">
+                        <div class="font-22 text-light font-gg">Bảng giá dịch vụ</div>
+                        <div class="font-gg text-light">Bảng giá tất cả các dịch vụ phía trên</strong></div>
+                    </div>
+                    <img class="position-absolute" src="assets/images/traffic-tonghop/banggia.png" alt=""
+                        style="height: 100px; right: 230px; bottom: -61px">
+                </div>
+                <div class="mx-auto mt-5" style="max-width: 45rem">
+                    <div class="bg-white">
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                    Traffic Web
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 100 traffic</div>
+                            </div>
 
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        3,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 100 traffic
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                    Traffic Web - SEO keywords
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 100 traffic</div>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        3,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 100 traffic
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                    Traffic Web - Social Refer
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 100 traffic</div>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        3,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 100 traffic
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                    Traffic Web - Tùy chỉnh quốc gia
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 100 traffic</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        3,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 100 traffic
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                Google Ads - Traffic Web - Global
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 1000 traffic</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        250,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 1000 traffic
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                Google Ads - Traffic Web - Việt Nam
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 1000 traffic</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        300,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 1000 traffic
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                Youtube View - Global
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 1000 view</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        100,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 1000 view
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                Youtube View - Global - Tăng chậm
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 1000 view</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        150,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 1000 view
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                Youtube Channel - 4k giờ xem
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 1 gói</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        2,500,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 1 gói 4,000h xem
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                YouTube SEO View - Xem theo từ khóa
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 500 view</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        300,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 500 view
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                YouTube SEO View - Xem theo đề xuất
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 500 view</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        300,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 500 view
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                Google Ads - Youtube View - Việt Nam 
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 1000 view</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        100,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 1000 view
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                Facebook Video View
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 1000 view</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        30,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 1000 view
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between px-4 py-2">
+                            <div>
+                                <div class="font-gg font-18 text-primary">
+                                Tiktok View
+                                </div>
+                                <div class="text-muted font-12">mua tối thiểu 1000 view</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-5">
+                                    <div class="font-gg font-18 text-primary">
+                                        30,000 vnđ
+                                    </div>
+                                    <div class="text-muted font-12">
+                                        cho 1000 view
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary font-12 py-2">Mua gói</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+
     </div>
 </div>
+</div>
+<script src="dist/js/pages/traffic-overview/index.js"></script>
