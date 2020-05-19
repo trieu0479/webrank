@@ -30,16 +30,16 @@ export default class Core extends Popup{
     checkTypeAndShowPopupOrder(url) { 
         url = url.toLowerCase(); 
         if (url.indexOf("youtube") != -1) {
-            this.showPopupOrder("Youtube");
+            this.showPopupOrder("youtube");
             
         } else if (url.indexOf("facebook") != -1) { 
-            this.showPopupOrder("Facebook");
+            this.showPopupOrder("facebook");
 
         } else if (url.indexOf("tiktok") != -1) {
-            this.showPopupOrder("Tiktok");
+            this.showPopupOrder("tiktok");
 
         } else {
-            this.showPopupOrder("Website");
+            this.showPopupOrder("website");
         }
     } 
 }
