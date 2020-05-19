@@ -39,7 +39,17 @@ export default class Core extends Popup{
             this.showPopupOrder("tiktok");
 
         } else {
-            this.showPopupOrder("website");
+
+            if(this.checkWebsite(url)) {
+                this.showPopupOrder("website");
+            } else {
+                this.showPopupAlert("error","Url không hợp lệ !")
+            }
         }
     } 
+
+    checkWebsite(website) {
+        var reg = new RegExp(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
+        return website.match(reg);
+    }
 }
