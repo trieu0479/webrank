@@ -9,30 +9,31 @@
                         <div class="col-12 text-center" style="max-width: 800px">
                             <div class="py-3 py-md-5 h-100 px-3 px-md-5">
                                 <div class="font-gg font-weight-500 fontsize-16 text-success  text-center">
-                                    Buy Website Traffic
+                                    Buy Traffic
                                 </div>
                                 <div class="font-gg font-weight-400 fontsize-32 text-center">
-                                    Công Cụ Tăng Truy Cập Website
+                                    Công Cụ Tăng Truy Cập
                                 </div>
 
                                 <div class="font-gg text-muted font-14 text-center mt-3 font-weight-400">
-                                    Tăng truy cập cho website giúp cải thiện thứ hạng <span
-                                        class="text-danger font-14 font-weight-500">SEO</span> bằng cách tăng <span
-                                        class="text-success font-14 font-weight-500">Visitor</span>
+                                    Nguồn traffic chất lượng, chi phí hợp lý, chỉ <span
+                                        class="text-danger font-14 font-weight-500">3.000</span> vnđ cho <span
+                                        class="text-success font-14 font-weight-500">100</span> visitors
                                 </div>
                                 <div class="text-center mt-3 mt-md-5 px-3 px-md-0">
                                     <div class="input-group w-100">
                                         <div class="d-flex w-100">
-                                            <div class="d-flex no-block w-100">
-
+                                            <div class="w-100">
                                                 <input id="input-submit" type="text"
-                                                    class="p-10 font-14 font-gg w-100 border border-left-0"
-                                                    autocomplete="off"
-                                                    placeholder="Nhập tên Url website, Youtube, Tik tok, Facebook của bạn vào đây">
+                                                    class="p-10 font-14 font-gg w-100 form-control" autocomplete="off"
+                                                    placeholder="Nhập tên Url website, Youtube, Tik tok, Facebook của bạn vào đây"
+                                                    style="height: 42px">
                                             </div>
-                                            <a href="javascript:void(0);" id="btn-submit"
-                                                class="mt-3 mt-md-0 btn-submit w-100 w-md-20 btn btn-success font-gg font-weight-500 rounded shadow-sm"><i
-                                                    class="far fa-layer-plus mr-2 font-13"></i>Tiếp tục</a>
+                                            <div class="mt-3 mt-md-0 w-100 w-md-30">
+                                                <a href="javascript:void(0);" id="btn-submit"
+                                                    class="btn-submit btn btn-success font-gg font-weight-500"><i
+                                                        class="far fa-layer-plus mr-2 font-13"></i>Tạo chiến dịch</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -41,8 +42,9 @@
                         </div>
 
                     </div>
+                    <hr class="w-50 mt-5 pb-5">
                     <div class="text-left bg-white rounded mt-5">
-                        <div class="d-flex no-block border-bottom">
+                        <div class="d-flex no-block border-bottom py-2 px-3">
                             <ul class="nav nav-tabs border-0" id="tab-traffic" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#all" role="tab"
@@ -61,7 +63,7 @@
                                         aria-controls="contact" aria-selected="false">Lỗi thực thi</a>
                                 </li>
                             </ul>
-                            <div class="ml-auto align-self-center font-gg font-weight-500 font-13 mr-3">
+                            <div class="ml-auto align-self-center font-gg font-weight-500 font-13">
                                 Ngân sách: <span class="budget font-gg font-weight-500 font-16 ">0</span>
                                 <sup>vnd</sup>
                                 <span
@@ -122,8 +124,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show " id="progress" role="tabpanel"
-                                aria-labelledby="home-tab">
+                            <div class="tab-pane fade show " id="progress" role="tabpanel" aria-labelledby="home-tab">
 
                                 <div class="table-responsive">
                                     <table class="table table-striped">
@@ -174,8 +175,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show " id="complete" role="tabpanel"
-                                aria-labelledby="home-tab">
+                            <div class="tab-pane fade show " id="complete" role="tabpanel" aria-labelledby="home-tab">
 
                                 <div class="table-responsive">
                                     <table class="table table-striped">
@@ -226,8 +226,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show " id="error" role="tabpanel"
-                                aria-labelledby="home-tab">
+                            <div class="tab-pane fade show " id="error" role="tabpanel" aria-labelledby="home-tab">
 
                                 <div class="table-responsive">
                                     <table class="table table-striped">
