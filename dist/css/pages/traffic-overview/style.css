@@ -348,3 +348,29 @@ ul {
 .bg-light-primary {
     background-color: #13a1ff;
 }
+
+#tab-traffic .nav-item,
+.nav-link.active {
+    color: #0abb87;
+    border-bottom: 2px solid #0abb87;
+    background: transparent!important;
+    border: none;
+}
+
+#tab-traffic .nav-item .nav-link:hover {
+    color: #0abb87!important;
+    background: #44ffa024!important;
+}
+
+#tab-traffic .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    color: #0abb87;
+    /* border-bottom: 1px solid #0abb87; */
+    background: transparent!important;
+    border: none!important
+}
+
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+    border-color: transparent!important;
+}
