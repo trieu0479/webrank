@@ -27,7 +27,7 @@
                                                                 class="input-submit text-muted form-control p-10 font-12 font-gg w-100 border mb-3"
                                                                 autocomplete="off"
                                                                 placeholder="Nhập URL Website, Youtube, Tiktok, Facebook..."
-                                                                value="">
+                                                                value="" type="text">
                                                         </div>
                                                         <div class="w-100 w-md-20">
                                                             <a href="javascript:void(0)" style="height: 45px"

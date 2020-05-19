@@ -1,20 +1,22 @@
-import Core from "./core.js"; 
+import Core from "./core.js";
 
 
-$(document).ready(function() { 
+$(document).ready(function() {
 
     const core = new Core();
 
-    $("#btnSubmitUrl").click(() => { 
+    $("#btnSubmitUrl").click(() => {
         let val = $("#inputUrl").val();
 
-        if(val != "") { 
-            core.checkTypeAndShowPopupOrder(val);  
+        if (val != "") {
+            core.checkTypeAndShowPopupOrder(val);
         } else {
-            core.showPopupAlert("error","Vui lòng nhập url !");
+            core.showPopupAlert("error", "Vui lòng nhập url !");
         }
 
     })
+
+    $("#inputUrl").on('keydown', func)
 
 
 
