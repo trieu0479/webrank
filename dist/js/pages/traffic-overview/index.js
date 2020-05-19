@@ -302,9 +302,11 @@ function htmlOrderYoutube(obj_data, urlid = "") {
     // <div class="align-self-center font-gg text-muted font-12 ml-2">*Nếu bạn cần thêm <span class="font-gg font-weight-bold font-13 text-muted">Traffic</span> mỗi ngày, vui lòng <a href="#">liên hệ</a></div>
     return `<div class="text-left mb-3"> 
                 <div class="mt-2 px-4 py-3"> 
-                    <div class="text-left d-flex no-block flex-column">
-                        <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">URL (dường dẫn 1 trang video bạn muốn tăng lượt xem(View))</div>
-                        <input disabled id="input-url" value="${Url}" type="text" class="font-13 text-muted form-control" placeholder="Url đường dẫn video trên Youtube"/>
+                    <div class="d-flex no-block flex-column"> 
+                        <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">Nền tảng</div> 
+                        <div class="w-100 d-flex no-block mb-2">    
+                            <select class="select-servicepack" style="width: 100%"></select>
+                        </div>
                     </div>
                     <div class="d-flex no-block flex-column mt-4"> 
                         <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">Gói dịch vụ Youtube</div> 
@@ -317,10 +319,14 @@ function htmlOrderYoutube(obj_data, urlid = "") {
                             </div>
                         </div>
                     </div>
-                    <div class="edit-youtube mt-4">
+                        <div class="edit-youtube mt-4">
+                            <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">URL (dường dẫn 1 trang video bạn muốn tăng lượt xem(View))</div>
+                            <input id="input-quality" value="" type="text" class="font-13 text-muted form-control" placeholder="Nhập vào ít nhất 1000 View"/>
+                            <div class="font-gg d-flex no-block mt-1"><p class="text-warning font-12 mr-2">Ít nhất: 1000</p> | <p class="text-danger font-12 mx-2">Nhiều nhất: 20000</p> | <p class="text-success font-12 ml-2">Lợi tức thì: 1000</p></div>
+                        </div>
+                        <div class="text-left d-flex no-block flex-column">
                         <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">URL (dường dẫn 1 trang video bạn muốn tăng lượt xem(View))</div>
-                        <input id="input-quality" value="" type="text" class="font-13 text-muted form-control" placeholder="Nhập vào ít nhất 1000 View"/>
-                        <div class="font-gg d-flex no-block mt-1"><p class="text-warning font-12 mr-2">Ít nhất: 1000</p> | <p class="text-danger font-12 mx-2">Nhiều nhất: 20000</p> | <p class="text-success font-12 ml-2">Lợi tức thì: 1000</p></div>
+                        <input id="input-url" value="${Url}" type="text" class="font-13 text-muted form-control" placeholder="Url đường dẫn video trên Youtube"/>
                     </div>
                     <div class="d-flex no-block flex-column mt-0"> 
                         <div class="align-self-center font-gg font-weight-bold font-13 w-100 mb-2">Quốc gia</div> 
@@ -682,79 +688,79 @@ function modalRate(array) {
 
 function showModalRate(this_) {
     let array = arrayChecked("input[type=checkbox][name=source]");
-    $(this_).after(modalRate(array)); 
+    $(this_).after(modalRate(array));
     $(this_).removeClass("show-modal-rate");
 }
 
-function eventCheckbox(this_,arr_keywords_google) { 
+function eventCheckbox(this_, arr_keywords_google) {
     let val = $(this_).val();
     let array_checked = arrayChecked("input[type=checkbox][name=source]");
-    
 
-    if($(this_).prop("checked")) {
 
-        if(val == "Google") {
-            $(".config-rate").css("z-index","0");
-            $(this_).parent().addClass("bg-white").css("z-index","2");
+    if ($(this_).prop("checked")) {
+
+        if (val == "Google") {
+            $(".config-rate").css("z-index", "0");
+            $(this_).parent().addClass("bg-white").css("z-index", "2");
             $(this_).closest("div").append(htmlConfigGoogle(arr_keywords_google));
-            $(this_).closest("div").find(".show-modal-config").css("opacity","1"); 
+            $(this_).closest("div").find(".show-modal-config").css("opacity", "1");
 
         } else {
-            $(this_).parent().find(".ratio").css("opacity","1");
-        } 
+            $(this_).parent().find(".ratio").css("opacity", "1");
+        }
 
     } else {
-        if(val == "Google") { 
-            $(".config-rate").css("z-index","6");
+        if (val == "Google") {
+            $(".config-rate").css("z-index", "6");
             $(this_).closest("div").find("div").remove();
-            $(this_).parent().removeClass("bg-white").css("z-index","0");
-            $(this_).closest("div").find(".show-modal-config").css("opacity","0");
+            $(this_).parent().removeClass("bg-white").css("z-index", "0");
+            $(this_).closest("div").find(".show-modal-config").css("opacity", "0");
 
-        } else { 
-            $(this_).parent().find(".ratio").css("opacity","0");
-        } 
+        } else {
+            $(this_).parent().find(".ratio").css("opacity", "0");
+        }
 
-        $(this_).parent().find(`.ratio${val}`).text("").css("opacity","0");
-    }   
+        $(this_).parent().find(`.ratio${val}`).text("").css("opacity", "0");
+    }
 
-    if(array_checked.length >= 2) { 
-        if(array_checked.length == 2) {
-            for (let i = 0; i < array_checked.length; i++) { 
-                $(`.ratio${array_checked[i]}`).text("(50%)").css("opacity","1");
+    if (array_checked.length >= 2) {
+        if (array_checked.length == 2) {
+            for (let i = 0; i < array_checked.length; i++) {
+                $(`.ratio${array_checked[i]}`).text("(50%)").css("opacity", "1");
             }
         } else {
-            for (let i = 0; i < array_checked.length; i++) { 
+            for (let i = 0; i < array_checked.length; i++) {
                 let value = (array_checked[i] == "Google") ? "(40%)" : "(30%)";
 
-                $(`.ratio${array_checked[i]}`).text(value).css("opacity","1");
+                $(`.ratio${array_checked[i]}`).text(value).css("opacity", "1");
             }
         }
 
         $(".show-modal-rate").removeClass("d-none");
     } else {
-        $(`.ratio${array_checked[0]}`).text("(100%)").css("opacity","1");
+        $(`.ratio${array_checked[0]}`).text("(100%)").css("opacity", "1");
         $(".show-modal-rate").addClass("d-none");
     }
 }
 
 function arrayChecked(selector) {
     let arr = [];
-    $(selector).each(function() {
-        if($(this).prop("checked")) {
+    $(selector).each(function () {
+        if ($(this).prop("checked")) {
             arr.push($(this).val());
         }
     })
     return arr;
 }
 
-function htmlConfigGoogle(array_keywords) {   
+function htmlConfigGoogle(array_keywords) {
     let content = "";
-    if(array_keywords.length > 0) {
-        for(let i = 0; i < array_keywords.length; i++) {
+    if (array_keywords.length > 0) {
+        for (let i = 0; i < array_keywords.length; i++) {
             content += `<span class="font-11 px-2 py-1 text-box-catelog text-white bg-info">
                             ${array_keywords[i]}<i class="position-relative delete-keywords ml-3 cursor-pointer far fa-times"></i>
                         </span>`
-        } 
+        }
     }
 
     return `

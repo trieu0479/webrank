@@ -42,7 +42,6 @@
                         </div>
 
                     </div>
-                    <hr class="w-50 mt-5 pb-5">
                     <div class="text-left bg-white rounded mt-5">
                         <div class="d-flex no-block border-bottom py-2 px-3">
                             <ul class="nav nav-tabs border-0" id="tab-traffic" role="tablist">
