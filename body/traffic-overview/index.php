@@ -1,6 +1,6 @@
 <div class="page-wrapper font-gg">
     <div class="container-fluid p-0 pt-0">
-        <div class="page-content pt-0">
+        <div class="page-content pt-0 ">
             <!-- Giao diện mới -->
             <div class="row justify-content-center">
                 <div class="col-12 position-relative" style="height: 100%">
@@ -22,16 +22,17 @@
                                                 <div class="col-12">
                                                     <div class="d-flex px-3 px-md-0">
                                                         <div class="w-100 w-md-80">
-                                                            <input style="height: 45px" type="text"
+                                                            <input id="inputUrl" style="height: 45px" type="text"
                                                                 class="input-submit text-muted form-control p-10 font-12 font-gg w-100 border mb-3"
                                                                 autocomplete="off"
                                                                 placeholder="Nhập URL Website, Youtube, Tiktok, Facebook..."
                                                                 value="">
                                                         </div>
                                                         <div class="w-100 w-md-20">
-                                                            <button style="height: 45px"
-                                                                class="btn-submit ml-md-3 w-100 font-gg font-12 font-weight-500 px-3 btn btn-success">Thử
-                                                                ngay</button>
+                                                            <a href="javascript:void(0)" style="height: 45px"
+                                                                class="btn-submit ml-md-3 w-100 font-gg font-12 font-weight-500 px-3 btn btn-success"
+                                                                id="btnSubmitUrl">Thử
+                                                                ngay</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -254,7 +255,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 bg-dark-primary" style="width: 100%; min-height: 1058px">
+            <div id="priceService" class="col-12 bg-dark-primary" style="width: 100%; min-height: 1058px">
                 <div class="mx-auto position-relative" style="max-width: 60rem">
                     <div class="text-center pt-5">
                         <div class="font-22 text-light font-gg">Bảng giá dịch vụ</div>
@@ -264,8 +265,8 @@
                         style="height: 100px; right: 230px; bottom: -61px">
                 </div>
                 <div class="mx-auto mt-5" style="max-width: 45rem">
-                    <div class="bg-white">
-                        <div class="d-flex justify-content-between px-4 py-2">
+                    <div class="bg-white rounded">
+                        <div class="d-flex justify-content-between px-4 py-2 pt-4">
                             <div>
                                 <div class="font-gg font-18 text-primary">
                                     Traffic Web
@@ -364,7 +365,7 @@
                         <div class="d-flex justify-content-between px-4 py-2">
                             <div>
                                 <div class="font-gg font-18 text-primary">
-                                Google Ads - Traffic Web - Global
+                                    Google Ads - Traffic Web - Global
                                 </div>
                                 <div class="text-muted font-12">mua tối thiểu 1000 traffic</div>
                             </div>
@@ -385,7 +386,7 @@
                         <div class="d-flex justify-content-between px-4 py-2">
                             <div>
                                 <div class="font-gg font-18 text-primary">
-                                Google Ads - Traffic Web - Việt Nam
+                                    Google Ads - Traffic Web - Việt Nam
                                 </div>
                                 <div class="text-muted font-12">mua tối thiểu 1000 traffic</div>
                             </div>
@@ -406,7 +407,7 @@
                         <div class="d-flex justify-content-between px-4 py-2">
                             <div>
                                 <div class="font-gg font-18 text-primary">
-                                Youtube View - Global
+                                    Youtube View - Global
                                 </div>
                                 <div class="text-muted font-12">mua tối thiểu 1000 view</div>
                             </div>
@@ -427,7 +428,7 @@
                         <div class="d-flex justify-content-between px-4 py-2">
                             <div>
                                 <div class="font-gg font-18 text-primary">
-                                Youtube View - Global - Tăng chậm
+                                    Youtube View - Global - Tăng chậm
                                 </div>
                                 <div class="text-muted font-12">mua tối thiểu 1000 view</div>
                             </div>
@@ -448,7 +449,7 @@
                         <div class="d-flex justify-content-between px-4 py-2">
                             <div>
                                 <div class="font-gg font-18 text-primary">
-                                Youtube Channel - 4k giờ xem
+                                    Youtube Channel - 4k giờ xem
                                 </div>
                                 <div class="text-muted font-12">mua tối thiểu 1 gói</div>
                             </div>
@@ -469,7 +470,7 @@
                         <div class="d-flex justify-content-between px-4 py-2">
                             <div>
                                 <div class="font-gg font-18 text-primary">
-                                YouTube SEO View - Xem theo từ khóa
+                                    YouTube SEO View - Xem theo từ khóa
                                 </div>
                                 <div class="text-muted font-12">mua tối thiểu 500 view</div>
                             </div>
@@ -490,7 +491,7 @@
                         <div class="d-flex justify-content-between px-4 py-2">
                             <div>
                                 <div class="font-gg font-18 text-primary">
-                                YouTube SEO View - Xem theo đề xuất
+                                    YouTube SEO View - Xem theo đề xuất
                                 </div>
                                 <div class="text-muted font-12">mua tối thiểu 500 view</div>
                             </div>
@@ -511,7 +512,7 @@
                         <div class="d-flex justify-content-between px-4 py-2">
                             <div>
                                 <div class="font-gg font-18 text-primary">
-                                Google Ads - Youtube View - Việt Nam 
+                                    Google Ads - Youtube View - Việt Nam
                                 </div>
                                 <div class="text-muted font-12">mua tối thiểu 1000 view</div>
                             </div>
@@ -532,7 +533,7 @@
                         <div class="d-flex justify-content-between px-4 py-2">
                             <div>
                                 <div class="font-gg font-18 text-primary">
-                                Facebook Video View
+                                    Facebook Video View
                                 </div>
                                 <div class="text-muted font-12">mua tối thiểu 1000 view</div>
                             </div>
@@ -550,10 +551,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between px-4 py-2">
+                        <div class="d-flex justify-content-between px-4 py-2 pb-4">
                             <div>
                                 <div class="font-gg font-18 text-primary">
-                                Tiktok View
+                                    Tiktok View
                                 </div>
                                 <div class="text-muted font-12">mua tối thiểu 1000 view</div>
                             </div>
