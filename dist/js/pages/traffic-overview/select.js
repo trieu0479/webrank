@@ -39,7 +39,7 @@ export default class Select {
             $('.select-service').on('select2:select', function(e) {
                 let val = e.params.data.id;
                 $('.des').addClass("d-none");
-                $(`#${val}`).removeClass("d-none");
+                $(`#${val}`).removeClass("d-none"); 
             });
         }
     }
