@@ -4,60 +4,282 @@
             <!-- Giao diện mới -->
             <div class="row justify-content-center">
                 <div class="col-12" style="max-width: 1100px">
+                    <div class="row justify-content-center">
+                        <!-- <div class="col-12 text-center maxWidthPc-800"> -->
+                        <div class="col-12 text-center" style="max-width: 800px">
+                            <div class="py-3 py-md-5 h-100 px-3 px-md-5">
+                                <div class="font-gg font-weight-500 fontsize-16 text-success  text-center">
+                                    Buy Website Traffic
+                                </div>
+                                <div class="font-gg font-weight-400 fontsize-32 text-center">
+                                    Công Cụ Tăng Truy Cập Website
+                                </div>
+
+                                <div class="font-gg text-muted font-14 text-center mt-3 font-weight-400">
+                                    Tăng truy cập cho website giúp cải thiện thứ hạng <span
+                                        class="text-danger font-14 font-weight-500">SEO</span> bằng cách tăng <span
+                                        class="text-success font-14 font-weight-500">Visitor</span>
+                                </div>
+                                <div class="text-center mt-3 mt-md-5 px-3 px-md-0">
+                                    <div class="input-group w-100">
+                                        <div class="d-flex w-100">
+                                            <div class="d-flex no-block w-100">
+
+                                                <input id="input-submit" type="text"
+                                                    class="p-10 font-14 font-gg w-100 border border-left-0"
+                                                    autocomplete="off"
+                                                    placeholder="Nhập tên Url website, Youtube, Tik tok, Facebook của bạn vào đây">
+                                            </div>
+                                            <a href="javascript:void(0);" id="btn-submit"
+                                                class="mt-3 mt-md-0 btn-submit w-100 w-md-20 btn btn-success font-gg font-weight-500 rounded shadow-sm"><i
+                                                    class="far fa-layer-plus mr-2 font-13"></i>Tiếp tục</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
                     <div class="text-left bg-white rounded mt-5">
-                        <div class="px-4 py-2 border-bottom d-flex no-block">
-                            <div class="align-self-center font-gg font-weight-500 font-16">
+                        <div class="d-flex no-block border-bottom">
+                            <ul class="nav nav-tabs border-0" id="tab-traffic" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#all" role="tab"
+                                        aria-controls="home" aria-selected="true">Tất cả</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#progress" role="tab"
+                                        aria-controls="profile" aria-selected="false">Đang chạy</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#complete" role="tab"
+                                        aria-controls="contact" aria-selected="false">Hoàn thành</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#error" role="tab"
+                                        aria-controls="contact" aria-selected="false">Lỗi thực thi</a>
+                                </li>
+                            </ul>
+                            <div class="ml-auto align-self-center font-gg font-weight-500 font-13 mr-3">
                                 Ngân sách: <span class="budget font-gg font-weight-500 font-16 ">0</span>
                                 <sup>vnd</sup>
                                 <span
                                     class="recharge px-2 py-1 font-gg font-11 bg-warning rounded-pill font-weight-500 cursor-pointer">Nạp
                                     tiền</span>
                             </div>
-                            <div class="ml-auto">
-                                <button class="btn-submitOrder btn btn-outline-info font-gg font-13 d-flex no-block"><i
-                                        class="align-self-center fad fa-plus-circle font-16 mr-2"></i>Tạo chiến
-                                    dịch</button>
+                        </div>
+
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="home-tab">
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Ngày
+                                                    chạy</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Gói
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Chi
+                                                    phí/ngày</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    URL
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Traffic hôm
+                                                    nay</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Tình
+                                                    trạng
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Ngày
+                                                    kết thúc</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Tác
+                                                    vụ</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Cấu
+                                                    hình
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tableTraffic">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show " id="progress" role="tabpanel"
+                                aria-labelledby="home-tab">
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Ngày
+                                                    chạy</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Gói
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Chi
+                                                    phí/ngày</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    URL
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Traffic hôm
+                                                    nay</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Tình
+                                                    trạng
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Ngày
+                                                    kết thúc</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Tác
+                                                    vụ</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Cấu
+                                                    hình
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tableTraffic">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show " id="complete" role="tabpanel"
+                                aria-labelledby="home-tab">
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Ngày
+                                                    chạy</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Gói
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Chi
+                                                    phí/ngày</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    URL
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Traffic hôm
+                                                    nay</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Tình
+                                                    trạng
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Ngày
+                                                    kết thúc</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Tác
+                                                    vụ</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Cấu
+                                                    hình
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tableTraffic">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show " id="error" role="tabpanel"
+                                aria-labelledby="home-tab">
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Ngày
+                                                    chạy</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Gói
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Chi
+                                                    phí/ngày</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    URL
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Traffic hôm
+                                                    nay</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Tình
+                                                    trạng
+                                                </th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Ngày
+                                                    kết thúc</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Tác
+                                                    vụ</th>
+                                                <th class="font-gg font-13 font-weight-bold white-space-nowrap"
+                                                    scope="col">
+                                                    Cấu
+                                                    hình
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tableTraffic">
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">
-                                            Ngày
-                                            chạy</th>
-                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">
-                                            Gói
-                                        </th>
-                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">
-                                            Chi
-                                            phí/ngày</th>
-                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">
-                                            URL
-                                        </th>
-                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">
-                                            Traffic hôm
-                                            nay</th>
-                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">
-                                            Tình
-                                            trạng
-                                        </th>
-                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">
-                                            Ngày
-                                            kết thúc</th>
-                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">
-                                            Tác
-                                            vụ</th>
-                                        <th class="font-gg font-13 font-weight-bold white-space-nowrap" scope="col">
-                                            Cấu
-                                            hình
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableTraffic">
-                                </tbody>
-                            </table>
-                        </div>
+
                     </div>
 
                 </div>
