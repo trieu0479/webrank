@@ -1,7 +1,10 @@
-export default class Core {   
+import Popup from "./popup.js"; 
 
-    constructor() {
-        this.order = {}; 
+export default class Core extends Popup{   
+
+    constructor() { 
+        super();
+        this.order = {};  
     }
 
     setOrder(obj) {
@@ -24,18 +27,19 @@ export default class Core {
 
     }
 
-    checkType(url) { 
-        url = url.toLowerCase();
-        console.log(url);
+    checkTypeAndShowPopupOrder(url) { 
+        url = url.toLowerCase(); 
         if (url.indexOf("youtube") != -1) {
-            return "youtube";        
+            this.showPopupOrder("Youtube");
+            
         } else if (url.indexOf("facebook") != -1) { 
-            return "facebook";
-        } else if (url.indexOf("tiktok") != -1) {
-            return "tiktok";
-        } else {
-            return "website";
-        }
-    }
+            this.showPopupOrder("Facebook");
 
+        } else if (url.indexOf("tiktok") != -1) {
+            this.showPopupOrder("Tiktok");
+
+        } else {
+            this.showPopupOrder("Website");
+        }
+    } 
 }

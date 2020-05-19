@@ -582,4 +582,4 @@
     </div>
 </div>
 </div>
-<script src="dist/js/pages/traffic-overview/index.js"></script>
+<script type="module" src="dist/js/pages/traffic-overview/index1.js"></script>
