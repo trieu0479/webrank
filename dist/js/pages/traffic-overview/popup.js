@@ -69,10 +69,10 @@ export default class Popup extends Select {
             width: 700,
             position: "top",
             onOpen: () => {
-                this.selectService();
-                this.selectCountry();
-                this.selectPlatform();
-
+                this.selectPlatform(type);
+                this.selectService(type);
+                this.selectCountry();  
+                
                 $(".select2-selection").addClass("border").css("height", "38px");
                 $(".select2-dropdown.select2-dropdown--below").addClass("border");
                 $(".swal2-popup").addClass("px-0 py-0");
