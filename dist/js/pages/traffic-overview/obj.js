@@ -1,6 +1,7 @@
 const obj = {
     service: [{
             name: "Gói tăng lượt xem thường",
+            type: 'youtube',
             value: "YTNORMAL",
             html: `
                 <div class="font-gg font-13">Tình trạng dịch vụ: Đang làm việc</div>
@@ -16,6 +17,7 @@ const obj = {
         },
         {
             name: "Gói tăng lượt xem thường - Tăng chậm",
+            type: 'youtube',
             value: "YTSLOW",
             html: `
                 <div class="font-gg font-13">Tình trạng dịch vụ: Đang làm việc</div>
@@ -30,6 +32,7 @@ const obj = {
         },
         {
             name: "Gói tăng lượt xem theo giờ - 4.000 giờ xem",
+            type: 'youtube',
             value: "YT4KSEEN",
             html: `
                 <div class="font-gg font-13">Tình trạng dịch vụ: Đang làm việc</div>
@@ -42,6 +45,7 @@ const obj = {
         },
         {
             name: "Gói SEO Youtube View - Xem theo từ khóa",
+            type: 'youtube',
             value: "YTVIEWKEY",
             html: `
                 <div class="font-gg font-13">Tình trạng dịch vụ: Đang làm việc</div>
@@ -56,6 +60,7 @@ const obj = {
         },
         {
             name: "Gói SEO Youtube View - Xem theo đề xuất",
+            type: 'youtube',
             value: "YTVIEWOFFER",
             html: `
                 <div class="font-gg font-13">Tình trạng dịch vụ: Đang làm việc</div>
@@ -73,6 +78,7 @@ const obj = {
         },
         {
             name: "Google Ads - Youtube View - Việt Nam",
+            type: 'youtube',
             value: "GGYTVN",
             html: `
                 <div class="font-gg font-13">Tình trạng dịch vụ: Đang làm việc</div>
@@ -88,6 +94,84 @@ const obj = {
                 <div class="font-gg font-13">- Không có hình ảnh trần trụi</div>
                 <div class="font-gg font-13">- Không có video tiếng Ba Tư</div>
                 <div class="font-gg font-13">- Không súng / Ma túy / Máu / Chính trị</div>
+            `
+        },
+        {
+            name: "Website Traffic",
+            type: 'website',
+            value: "WSTF",
+            html: `
+                
+            `
+        },
+        {
+            name: "Traffic Web - SEO keywords",
+            type: 'website',
+            value: "WSTFSEO",
+            html: `
+                
+            `
+        },
+        {
+            name: "Traffic Web - Social Refer",
+            type: 'website',
+            value: "WSTFSRE",
+            html: `
+                <div class="font-gg font-13">💡 Sử dụng liên kết bit.ly để theo dõi lưu lượng truy cập</div>
+                <br>
+                <div class="font-gg font-13">✅ 100% khách truy cập thực và độc đáo</div>
+                <div class="font-gg font-13">✅ Google Analytics được hỗ trợ</div>
+                <br>
+                <div class="font-gg font-13">🕒 Thời lượng phiên: 40-60 giây mỗi lần truy cập</div>
+                <div class="font-gg font-13">⬇️ Tỷ lệ thoát: Thấp</div>
+                <div class="font-gg font-13">⚡️ Tốc độ: 10.000 khách truy cập mỗi ngày</div>
+                <div class="font-gg font-13">🏁 Thời gian bắt đầu: 0-12h (chúng tôi kiểm tra tất cả các liên kết để tuân thủ)</div>
+                <br>
+                <div class="font-gg font-13">🖥️ Lưu lượng truy cập trên 90%</div>
+                <div class="font-gg font-13">📱 Lưu lượng truy cập di động dưới 10%</div>
+                <br>
+                <div class="font-gg font-13">⚠️  Không cho phép trang web dành cho người lớn, ma túy hoặc tấn công</div>
+                <div class="font-gg font-13">🔗 Format Định dạng liên kết: Nhập URL trang web đầy đủ</div>
+               
+            `
+        },
+        {
+            name: "Traffic Web - Tùy chỉnh quốc gia",
+            type: 'website',
+            value: "WSTFAREA",
+            html: `
+                
+            `
+        },
+        {
+            name: "Google Ads - Traffic Web - Global",
+            type: 'website',
+            value: "WSTFGGGL",
+            html: `
+                
+            `
+        },
+        {
+            name: "Google Ads - Traffic Web - Việt Nam",
+            type: 'website',
+            value: "WSTFVN",
+            html: `
+                
+            `
+        },
+        {
+            name: "Tiktok - View",
+            type: 'tiktok',
+            value: "TTV",
+            html: `
+                <div class="font-gg font-13">Tình trạng dịch vụ: Đang làm việc</div>
+                <div class="font-gg font-13">Chất lượng dịch vụ: Chất lượng cao</div>
+                <div class="font-gg font-13">Thời gian bắt đầu: Bắt đầu tức thì</div>
+                <div class="font-gg font-13">Tốc độ: 100K mỗi ngày</div>
+                <div class="font-gg font-13">Đảm bảo:</div>
+                <div class="font-gg font-13">Các nút lệnh: Không</div>
+                <div class="font-gg font-13">Thông tin bổ sung :</div>
+                
             `
         },
     ],

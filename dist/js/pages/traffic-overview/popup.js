@@ -1,4 +1,4 @@
-import Select from "./select.js"; 
+import Select from "./select.js";
 
 
 export default class Popup extends Select {
@@ -7,7 +7,7 @@ export default class Popup extends Select {
         super();
     }
 
-    showPopupAlert(type,text) {
+    showPopupAlert(type, text) {
         // type : success, error, warning, info, question !
         Swal.fire({
             type,
@@ -16,7 +16,7 @@ export default class Popup extends Select {
         })
     }
 
-    htmlOrder() {  
+    htmlOrder() {
         return `<div class="text-left mb-3"> 
                     <div class="mt-2 px-4 py-3"> 
                         <div class="d-flex no-block flex-column"> 
@@ -38,7 +38,7 @@ export default class Popup extends Select {
                             </div>
                         </div>
                         <div class="edit-youtube mt-4">
-                            <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">URL (dường dẫn 1 trang video bạn muốn tăng lượt xem(View))</div>
+                            <div class="align-self-center font-gg font-weight-bold mb-2 font-13 w-100">Số lượng traffic bạn muốn mua</div>
                                 <input id="input-quality" value="" type="text" class="font-13 text-muted form-control" placeholder="Nhập vào ít nhất 1000 View"/>
                                 <div class="font-gg d-flex no-block mt-1"><p class="text-warning font-12 mr-2">Ít nhất: 1000</p> | <p class="text-danger font-12 mx-2">Nhiều nhất: 20000</p> | <p class="text-success font-12 ml-2">Lợi tức thì: 1000</p></div>
                             </div>
@@ -71,13 +71,13 @@ export default class Popup extends Select {
             onOpen: () => {
                 this.selectPlatform(type);
                 this.selectService(type);
-                this.selectCountry();  
-                
+                this.selectCountry();
+
                 $(".select2-selection").addClass("border").css("height", "38px");
                 $(".select2-dropdown.select2-dropdown--below").addClass("border");
                 $(".swal2-popup").addClass("px-0 py-0");
                 $(".swal2-title").addClass("mb-0 w-100");
-    
+
             },
         })
     }

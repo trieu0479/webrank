@@ -16,7 +16,11 @@ $(document).ready(function() {
 
     })
 
-    $("#inputUrl").on('keydown', func)
+    $("#inputUrl").keypress(e => {
+        if (e.keyCode == 13) {
+            $("#btnSubmitUrl").click();
+        }
+    })
 
 
 
