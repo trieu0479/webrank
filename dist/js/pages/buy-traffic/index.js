@@ -988,40 +988,40 @@ function renderTable() {
                 }
 
                 $("#tableTraffic").append(`<tr data-urlids="${val.urlids}">
-                                            <td class="font-gg font-14 font-weight-500 white-space-nowrap">${moment(val.startTime).format("H:mm DD/MM/YYYY")}</td>
-                                            <td class="font-gg font-14 font-weight-bold white-space-nowrap">${numeral(val.dailyTraffic).format("0,0")} IP</td>
+                                            <td class="font-gg font-12 font-weight-500 white-space-nowrap">${moment(val.startTime).format("H:mm DD/MM/YYYY")}</td>
+                                            <td class="font-gg font-12 font-weight-bold white-space-nowrap">${numeral(val.dailyTraffic).format("0,0")} IP</td>
                                             <td class="">
-                                                <span class="position-relative text-dark font-gg font-15 font-weight-bold white-space-nowrap">                                        
+                                                <span class="position-relative text-dark font-gg font-12 font-weight-bold white-space-nowrap">                                        
                                                     ${numeral(val.vndPrice).format("0,0")}
                                                     <span class="position-absolute text-dark font-gg font-10 font-weight-500" style="top: -5px">
                                                         vnd
                                                     </span>
                                                 </span>
                                             </td>
-                                            <td class="font-gg font-15">
+                                            <td class="font-gg font-12">
                                                 <div class="white-space-nowrap font-gg text-dark font-weight-500">
                                                     <a target="blank" href="${(websiteURL.indexOf("http") < 0) ? "https://" + websiteURL : websiteURL}">
-                                                    <img class="mr-2" src="https://www.google.com/s2/favicons?domain=${websiteURLreplace}">
+                                                    <img class="mr-1" src="https://www.google.com/s2/favicons?domain=${websiteURLreplace}">
                                                     ${websiteURLreplace}
                                                     </a>
                                                     <a target="blank" href="${(websiteURL.indexOf("http") < 0) ? "https://" + websiteURL : websiteURL}"><i class="fal text-muted fa-external-link-square-alt ml-1"></i></a>
 
                                                 </div>
                                             </td>
-                                            <td class="font-gg font-15 text-center d-flex no-block white-space-nowrap">
-                                                <span class="traffic-today rounded text-dark text-center font-14 font-weight-bold">
+                                            <td class="font-gg font-12 text-center d-flex no-block white-space-nowrap">
+                                                <span class="traffic-today rounded text-dark text-center font-12 font-weight-bold">
                                                     0
                                                 </span>
-                                                <a class="history font-gg font-14 ml-5" href="javascript: void(0);">Lịch sử</a>
+                                                <a class="history font-gg font-12 ml-5" href="javascript: void(0);">Lịch sử</a>
                                             </td>
                                             <td class="white-space-nowrap">
                                                 <span class="${(val.status == "INACTIVE") ? "bg-info" : (val.status == "EXPIRED") ? "bg-warning" : "bg-success"} px-2 py-1 rounded-pill font-gg font-10 font-weight-bold"> ${(val.status == "INACTIVE") ? "Chưa Chạy" : (val.status == "EXPIRED") ? "Hết Hạn" : "Đang Chạy"}</span>
                                             </td>
-                                            <td class="font-gg font-14 font-weight-500 white-space-nowrap">${moment(val.endTime).format("H:mm DD/MM/YYYY")}</td>
-                                            <td class="font-gg font-15">
+                                            <td class="font-gg font-12 font-weight-500 white-space-nowrap">${moment(val.endTime).format("H:mm DD/MM/YYYY")}</td>
+                                            <td class="font-gg font-12">
                                                 ${(val.status == "INACTIVE") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 active fad fa-play-circle font-20 text-info cursor-pointer"></i> ` : (val.status == "EXPIRED") ? `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}" class="ml-2 delete fad fa-trash-alt font-16 text-danger cursor-pointer"></i>` : `<i data-urlids="${val.urlids}" data-timetorun="${val.timeToRun}"  class="ml-2 pause fad fa-pause-circle font-20 text-success cursor-pointer"></i>`}
                                             </td> 
-                                            <td class="font-gg font-15">
+                                            <td class="font-gg font-12">
                                                 <button type="buttom" data-urlids="${val.urlids}" class="edit btn btn-info py-1 px-2 font-13 font-weight-500 rounded "><i class="fad fa-edit mr-2"></i>Thay đổi</button>
                                             </td>
                                         </tr>`);
@@ -1073,14 +1073,12 @@ function renderTable() {
 }
 
 function getTrafficToday(table) {
-    getData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=getListOrderTrafficReal&userToken=${userToken}`).then(data => {
+    getData(`//localapi.trazk.com/2020/api/buytraffic/index.php?task=getListOrderTrafficRealV1&userToken=${userToken}`).then(data => {
         data.data.urls.forEach(i => {
            $(table).find("tr").each(function() {
                if(i.urlid == $(this).data("urlids")) {
-                   let traffic = 0;
-                   i.tds.am.forEach(val => {
-                        traffic +=val;
-                   })
+                   var traffic = 0;
+                   traffic = i.totalClick;
                    $(this).find(".traffic-today").text(traffic)
                }
            })

@@ -159,7 +159,7 @@
                 
             </div>
             <div class="row justify-content-center">
-                <div class="col-12"  style="max-width: 1100px">
+                <div class="col-12"  style="max-width: 1200px">
                     <div class="text-left bg-white rounded">
                         <div class="px-4 py-2 border-bottom d-flex no-block">
                             <div class="align-self-center font-gg font-weight-500 font-16">
