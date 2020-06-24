@@ -3665,7 +3665,14 @@ span.sub-tilte-content,
     vertical-align: middle;
 }
  
+.payments-vietcombank:hover,
+.payments-vietcombank.active {
+    filter: drop-shadow(0 0 3px green);
+}
 
-
+.payments-momo:hover,
+.payments-momo.active {
+    filter: drop-shadow(0 0 3px #b0006d);
+}
 
 /* end view=projects */
