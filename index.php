@@ -45,7 +45,7 @@ switch ($action) {
             $meta['title'] = "Công cụ tăng traffic website & youtube";
             $meta['description'] = "Công cụ tăng traffic website, traffic youtube miễn phí. Traffic Việt Nam và hoàn toàn từ người dùng thật. Thử ngay";
             $meta['image'] = "https://webrank.vn/assets/images/social/cong-cu-tang-traffic.png";
-
+            header ("Location: https://ffftraffic.com/?userToken=".$userToken);
 
 
     }
